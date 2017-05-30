@@ -75,7 +75,7 @@ class Controller extends StrictObject
         if (array_key_exists($name, $_GET)) {
             return $_GET[$name];
         }
-        if (array_key_exists($name, $_COOKIE[$name]) && $this->cookieHistoryIsValid()) {
+        if (array_key_exists($name, $_COOKIE) && $this->cookieHistoryIsValid()) {
             return $_COOKIE[$name];
         }
 
