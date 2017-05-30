@@ -109,6 +109,24 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             Obranné číslo se štítem: <?= $rangedFightProperties->getDefenseNumberWithShield() ?>
         </div>
     </div>
+    <h3>Vlastnosti</h3>
+    <label>Síla <input type="number" name="strength" min="-40" max="40"
+                       value="<?= $controller->getSelectedStrength()->getValue() ?>"></label>
+    <label>Obratnost <input type="number" name="agility" min="-40" max="40"
+                            value="<?= $controller->getSelectedAgility()->getValue() ?>"></label>
+    <label>Zručnost <input type="number" name="knack" min="-40" max="40"
+                           value="<?= $controller->getSelectedKnack()->getValue() ?>"></label>
+    <label>Vůle <input type="number" name="will" min="-40" max="40"
+                       value="<?= $controller->getSelectedWill()->getValue() ?>"></label>
+    <label>Inteligence <input type="number" name="intelligence" min="-40" max="40"
+                              value="<?= $controller->getSelectedIntelligence()->getValue() ?>"></label>
+    <label>Charisma <input type="number" name="charisma" min="-40" max="40"
+                           value="<?= $controller->getSelectedCharisma()->getValue() ?>"></label>
+    <label>Výška v cm <input type="number" name="height-in-cm" min="110" max="290"
+                             value="<?= $controller->getSelectedHeightInCm()->getValue() ?>"></label>
+    <label>Velikost <input type="number" name="size" min="-10" max="10"
+                           value="<?= $controller->getSelectedSize()->getValue() ?>"></label>
+    <input type="submit" value="OK">
 </form>
 </body>
 </html>

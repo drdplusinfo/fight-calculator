@@ -46,7 +46,9 @@ class Controller extends StrictObject
     public function __construct()
     {
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
-        $parameters = ['meleeWeapon', 'rangedWeapon'];
+        $parameters = ['meleeWeapon', 'rangedWeapon', 'string', 'agility', 'knack', 'will', 'intelligence', 'charisma',
+            'size', 'height-in-cm',
+        ];
         if (!empty($_GET)) {
             foreach ($parameters as $name) {
                 $this->setCookie($name, $_GET[$name] ?? null, $afterYear);
@@ -144,6 +146,46 @@ class Controller extends StrictObject
         return RangedWeaponCode::getIt($rangedWeaponValue);
     }
 
+    public function getSelectedStrength(): Strength
+    {
+        return Strength::getIt((int)$this->getValueFromRequest('strength'));
+    }
+
+    public function getSelectedAgility(): Agility
+    {
+        return Agility::getIt((int)$this->getValueFromRequest('agility'));
+    }
+
+    public function getSelectedKnack(): Knack
+    {
+        return Knack::getIt((int)$this->getValueFromRequest('knack'));
+    }
+
+    public function getSelectedWill(): Will
+    {
+        return Will::getIt((int)$this->getValueFromRequest('will'));
+    }
+
+    public function getSelectedIntelligence(): Intelligence
+    {
+        return Intelligence::getIt((int)$this->getValueFromRequest('intelligence'));
+    }
+
+    public function getSelectedCharisma(): Charisma
+    {
+        return Charisma::getIt((int)$this->getValueFromRequest('charisma'));
+    }
+
+    public function getSelectedSize(): Size
+    {
+        return Size::getIt((int)$this->getValueFromRequest('size'));
+    }
+
+    public function getSelectedHeightInCm(): HeightInCm
+    {
+        return HeightInCm::getIt($this->getValueFromRequest('height-in-cm') ?? 150);
+    }
+
     public function getMeleeFightProperties(): FightProperties
     {
         return $this->getFightProperties($this->getSelectedMeleeWeapon());
@@ -153,16 +195,16 @@ class Controller extends StrictObject
     {
         return new FightProperties(
             new BodyPropertiesForFight(
-                $strength = Strength::getIt(0),
-                Strength::getIt(0),
-                Strength::getIt(0),
-                $agility = Agility::getIt(0),
-                Knack::getIt(0),
-                Will::getIt(0),
-                Intelligence::getIt(0),
-                Charisma::getIt(0),
-                Size::getIt(0),
-                $height = Height::getIt(HeightInCm::getIt(150), Tables::getIt()),
+                $strength = $this->getSelectedStrength(),
+                $strength,
+                $strength,
+                $agility = $this->getSelectedAgility(),
+                $this->getSelectedKnack(),
+                $this->getSelectedWill(),
+                $this->getSelectedIntelligence(),
+                $this->getSelectedCharisma(),
+                $this->getSelectedSize(),
+                $height = Height::getIt($this->getSelectedHeightInCm(), Tables::getIt()),
                 Speed::getIt($strength, $agility, $height)
             ),
             new CombatActions([], Tables::getIt()),
