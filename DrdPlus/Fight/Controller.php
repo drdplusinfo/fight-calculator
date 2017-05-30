@@ -34,10 +34,18 @@ class Controller extends StrictObject
     public function __construct()
     {
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
-        foreach (['meleeWeapon', 'rangedWeapon'] as $name) {
-            $this->setCookie($name, $_GET[$name] ?? null, $afterYear);
+        $parameters = ['meleeWeapon', 'rangedWeapon'];
+        if (!empty($_GET)) {
+            foreach ($parameters as $name) {
+                $this->setCookie($name, $_GET[$name] ?? null, $afterYear);
+            }
+            setcookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
+        } elseif (!$this->cookieHistoryIsValid()) {
+            setcookie(self::HISTORY_TOKEN, null);
+            foreach ($parameters as $parameter) {
+                setcookie($parameter, null);
+            }
         }
-        setcookie(self::HISTORY_TOKEN, md5(__FILE__), $afterYear);
     }
 
     private function setCookie(string $name, $value, int $expire = 0)
