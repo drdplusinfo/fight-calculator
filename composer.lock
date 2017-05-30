@@ -1057,12 +1057,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-background.git",
-                "reference": "697f153e4542d1ac83583f54878def39114d0060"
+                "reference": "1a7bb14bcbc76016c034b0afc04bde2df086c15d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/697f153e4542d1ac83583f54878def39114d0060",
-                "reference": "697f153e4542d1ac83583f54878def39114d0060",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/1a7bb14bcbc76016c034b0afc04bde2df086c15d",
+                "reference": "1a7bb14bcbc76016c034b0afc04bde2df086c15d",
                 "shasum": ""
             },
             "require": {
@@ -1090,7 +1090,7 @@
                 "MIT"
             ],
             "description": "Background of a person for Drd+",
-            "time": "2017-02-20 06:31:31"
+            "time": "2017-05-30 17:23:07"
         },
         {
             "name": "drd-plus/calculations",
@@ -1680,12 +1680,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "b6b4c96c2fccbc9390f554c6105ddf57ae6cbd37"
+                "reference": "90daf9704fc576a7815ff8743d2b91602ad12807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/b6b4c96c2fccbc9390f554c6105ddf57ae6cbd37",
-                "reference": "b6b4c96c2fccbc9390f554c6105ddf57ae6cbd37",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/90daf9704fc576a7815ff8743d2b91602ad12807",
+                "reference": "90daf9704fc576a7815ff8743d2b91602ad12807",
                 "shasum": ""
             },
             "require": {
@@ -1718,7 +1718,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-03-05 06:06:16"
+            "time": "2017-05-30 17:47:06"
         },
         {
             "name": "drd-plus/tables",

@@ -2,7 +2,7 @@
 namespace DrdPlus\Fight;
 
 use DrdPlus\Background\BackgroundParts\Ancestry;
-use DrdPlus\Background\BackgroundParts\SkillsFromBackground;
+use DrdPlus\Background\BackgroundParts\SkillPointsFromBackground;
 use DrdPlus\Codes\Armaments\BodyArmorCode;
 use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
@@ -228,7 +228,7 @@ class Controller extends StrictObject
                     ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
                     $firstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($this->getSelectedProfessionCode()))
                 ),
-                SkillsFromBackground::getIt(
+                SkillPointsFromBackground::getIt(
                     new PositiveIntegerObject(0),
                     Ancestry::getIt(new PositiveIntegerObject(0), Tables::getIt()),
                     Tables::getIt()
