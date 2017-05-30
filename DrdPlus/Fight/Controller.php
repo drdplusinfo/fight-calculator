@@ -47,7 +47,7 @@ class Controller extends StrictObject
     {
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
         $parameters = ['meleeWeapon', 'rangedWeapon', 'string', 'agility', 'knack', 'will', 'intelligence', 'charisma',
-            'size', 'height-in-cm',
+            'size', 'height-in-cm', 'melee-holding', 'ranged-two-handed',
         ];
         if (!empty($_GET)) {
             foreach ($parameters as $name) {
@@ -73,6 +73,7 @@ class Controller extends StrictObject
             !empty($_SERVER['HTTPS']), // secure only ?
             true // http only
         );
+        $_COOKIE[$name] = $value;
     }
 
     public function getMeleeWeaponCodes(): array
@@ -188,16 +189,14 @@ class Controller extends StrictObject
 
     public function getMeleeFightProperties(): FightProperties
     {
-        return $this->getFightProperties($this->getSelectedMeleeWeapon());
+        return $this->getFightProperties($this->getSelectedMeleeWeapon(), $this->getSelectedMeleeHolding());
     }
 
-    private function getFightProperties(WeaponCode $weaponCode): FightProperties
+    private function getFightProperties(WeaponCode $weaponCode, ItemHoldingCode $weaponHolding): FightProperties
     {
         return new FightProperties(
             new BodyPropertiesForFight(
                 $strength = $this->getSelectedStrength(),
-                $strength,
-                $strength,
                 $agility = $this->getSelectedAgility(),
                 $this->getSelectedKnack(),
                 $this->getSelectedWill(),
@@ -228,11 +227,7 @@ class Controller extends StrictObject
             ProfessionCode::getIt(ProfessionCode::COMMONER),
             Tables::getIt(),
             $weaponCode,
-            ItemHoldingCode::getIt(
-                Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponCode)
-                    ? ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS)
-                    : ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND)
-            ),
+            $weaponHolding,
             false, // does not fight with two weapons
             ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
             false, // enemy is not faster
@@ -240,9 +235,40 @@ class Controller extends StrictObject
         );
     }
 
+    public function isTwoHandedOnly(WeaponCode $weaponCode): bool
+    {
+        return Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponCode);
+    }
+
+    public function getSelectedMeleeHolding(): ItemHoldingCode
+    {
+        if ($this->isTwoHandedOnly($this->getSelectedMeleeWeapon())) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+        }
+        $meleeHolding = $this->getValueFromRequest('melee-holding');
+        if (!$meleeHolding) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return ItemHoldingCode::getIt($meleeHolding);
+    }
+
     public function getRangedFightProperties(): FightProperties
     {
-        return $this->getFightProperties($this->getSelectedRangedWeapon());
+        return $this->getFightProperties($this->getSelectedRangedWeapon(), $this->getSelectedRangedHolding());
+    }
+
+    public function getSelectedRangedHolding(): ItemHoldingCode
+    {
+        if ($this->isTwoHandedOnly($this->getSelectedRangedWeapon())) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+        }
+        $meleeHolding = $this->getValueFromRequest('ranged-holding');
+        if (!$meleeHolding) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return ItemHoldingCode::getIt($meleeHolding);
     }
 
 }

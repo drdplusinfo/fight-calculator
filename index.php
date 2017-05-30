@@ -10,6 +10,7 @@ use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Codes\DistanceUnitCode;
+use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Properties\Body\Size;
 use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Tables;
@@ -41,6 +42,16 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             </optgroup>
         <?php } ?>
     </select>
+    <label><input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="melee-holding"
+                  <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+        v dominantní ruce</label>
+    <label><input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="melee-holding"
+                  <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+        v druhé
+        ruce</label>
+    <label><input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="melee-holding"
+                  <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+        obouručně</label>
     <input type="submit" value="OK">
     <div>
         <?php $meleeFightProperties = $controller->getMeleeFightProperties(); ?>
@@ -84,6 +95,16 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             </optgroup>
         <?php } ?>
     </select>
+    <label><input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="ranged-holding"
+                  <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+        v dominantní ruce</label>
+    <label><input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="ranged-holding"
+                  <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+        v druhé
+        ruce</label>
+    <label><input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="ranged-holding"
+                  <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+        obouručně</label>
     <input type="submit" value="OK">
     <div>
         <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
