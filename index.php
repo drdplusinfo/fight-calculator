@@ -23,6 +23,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 <html>
 <body>
 <form action="" method="get">
+    <h2>Na blízko</h2>
     <select name="meleeWeapon" title="Melee weapon">
         <?php foreach ($controller->getMeleeWeaponCodes() as $weaponCategory => $meleeWeaponCategory) {
             ?>
@@ -40,6 +41,32 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             </optgroup>
         <?php } ?>
     </select>
+    <input type="submit" value="OK">
+    <div>
+        <?php $meleeFightProperties = $controller->getMeleeFightProperties(); ?>
+        <div>Boj: <?= $meleeFightProperties->getFight() ?></div>
+        <div>Bojové číslo: <?= $meleeFightProperties->getFightNumber() ?></div>
+        <div>Útok: <?= $meleeFightProperties->getAttack() ?></div>
+        <div>
+            ÚČ: <?= $meleeFightProperties->getAttackNumber(new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()), Size::getIt(0)) ?>
+        </div>
+        <div>
+            ZZ: <?= $meleeFightProperties->getBaseOfWounds() ?>
+        </div>
+        <div>
+            Obrana: <?= $meleeFightProperties->getDefense() ?>
+        </div>
+        <div>
+            Obranné číslo: <?= $meleeFightProperties->getDefenseNumber() ?>
+        </div>
+        <div>
+            Obranné číslo se zbraní: <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
+        </div>
+        <div>
+            Obranné číslo se štítem: <?= $meleeFightProperties->getDefenseNumberWithShield() ?>
+        </div>
+    </div>
+    <h2>Na dálku</h2>
     <select name="rangedWeapon" title="Ranged weapon">
         <?php foreach ($controller->getRangedWeaponCodes() as $weaponCategory => $rangedWeaponCategory) {
             ?>
@@ -58,30 +85,30 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         <?php } ?>
     </select>
     <input type="submit" value="OK">
+    <div>
+        <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
+        <div>Boj: <?= $rangedFightProperties->getFight() ?></div>
+        <div>Bojové číslo: <?= $rangedFightProperties->getFightNumber() ?></div>
+        <div>Útok: <?= $rangedFightProperties->getAttack() ?></div>
+        <div>
+            ÚČ: <?= $rangedFightProperties->getAttackNumber(new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()), Size::getIt(0)) ?>
+        </div>
+        <div>
+            ZZ: <?= $rangedFightProperties->getBaseOfWounds() ?>
+        </div>
+        <div>
+            Obrana: <?= $rangedFightProperties->getDefense() ?>
+        </div>
+        <div>
+            Obranné číslo: <?= $rangedFightProperties->getDefenseNumber() ?>
+        </div>
+        <div>
+            Obranné číslo se zbraní: <?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?>
+        </div>
+        <div>
+            Obranné číslo se štítem: <?= $rangedFightProperties->getDefenseNumberWithShield() ?>
+        </div>
+    </div>
 </form>
-<div>
-    <?php $meleeFightProperties = $controller->getMeleeFightProperties(); ?>
-    <div>Boj: <?= $meleeFightProperties->getFight() ?></div>
-    <div>Bojové číslo: <?= $meleeFightProperties->getFightNumber() ?></div>
-    <div>Útok: <?= $meleeFightProperties->getAttack() ?></div>
-    <div>
-        ÚČ: <?= $meleeFightProperties->getAttackNumber(new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()), Size::getIt(0)) ?>
-    </div>
-    <div>
-        ZZ: <?= $meleeFightProperties->getBaseOfWounds() ?>
-    </div>
-    <div>
-        Obrana: <?= $meleeFightProperties->getDefense() ?>
-    </div>
-    <div>
-        Obranné číslo: <?= $meleeFightProperties->getDefenseNumber() ?>
-    </div>
-    <div>
-        Obranné číslo se zbraní: <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
-    </div>
-    <div>
-        Obranné číslo se štítem: <?= $meleeFightProperties->getDefenseNumberWithShield() ?>
-    </div>
-</div>
 </body>
 </html>

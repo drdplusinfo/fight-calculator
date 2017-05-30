@@ -9,6 +9,7 @@ use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\ShieldCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
+use DrdPlus\Codes\Armaments\WeaponCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\CombatActions\CombatActions;
@@ -72,6 +73,30 @@ class Controller extends StrictObject
         );
     }
 
+    public function getMeleeWeaponCodes(): array
+    {
+        return [
+            WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeCodes(),
+            WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerCodes(),
+            WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubCodes(),
+            WeaponCategoryCode::MORNINGSTAR_AND_MORGENSTERN => MeleeWeaponCode::getMorningstarAndMorgensternCodes(),
+            WeaponCategoryCode::SABER_AND_BOWIE_KNIFE => MeleeWeaponCode::getSaberAndBowieKnifeCodes(),
+            WeaponCategoryCode::STAFF_AND_SPEAR => MeleeWeaponCode::getStaffAndSpearCodes(),
+            WeaponCategoryCode::SWORD => MeleeWeaponCode::getSwordCodes(),
+            WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentCodes(),
+            WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedCodes(),
+        ];
+    }
+
+    public function getRangedWeaponCodes(): array
+    {
+        return [
+            WeaponCategoryCode::THROWING_WEAPON => RangedWeaponCode::getThrowingWeaponValues(),
+            WeaponCategoryCode::BOW => RangedWeaponCode::getBowValues(),
+            WeaponCategoryCode::CROSSBOW => RangedWeaponCode::getCrossbowValues(),
+        ];
+    }
+
     /**
      * @return MeleeWeaponCode
      */
@@ -107,19 +132,24 @@ class Controller extends StrictObject
     }
 
     /**
-     * @return RangedWeaponCode|null
+     * @return RangedWeaponCode
      */
-    public function getSelectedRangedWeapon()
+    public function getSelectedRangedWeapon(): RangedWeaponCode
     {
         $rangedWeaponValue = $this->getValueFromRequest('rangedWeapon');
         if (!$rangedWeaponValue) {
-            return null;
+            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
 
         return RangedWeaponCode::getIt($rangedWeaponValue);
     }
 
     public function getMeleeFightProperties(): FightProperties
+    {
+        return $this->getFightProperties($this->getSelectedMeleeWeapon());
+    }
+
+    private function getFightProperties(WeaponCode $weaponCode): FightProperties
     {
         return new FightProperties(
             new BodyPropertiesForFight(
@@ -155,9 +185,9 @@ class Controller extends StrictObject
             HelmCode::getIt(HelmCode::WITHOUT_HELM),
             ProfessionCode::getIt(ProfessionCode::COMMONER),
             Tables::getIt(),
-            $this->getSelectedMeleeWeapon(),
+            $weaponCode,
             ItemHoldingCode::getIt(
-                Tables::getIt()->getArmourer()->isTwoHandedOnly($this->getSelectedMeleeWeapon())
+                Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponCode)
                     ? ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS)
                     : ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND)
             ),
@@ -168,26 +198,9 @@ class Controller extends StrictObject
         );
     }
 
-    public function getMeleeWeaponCodes(): array
+    public function getRangedFightProperties(): FightProperties
     {
-        return [
-            WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeCodes(),
-            WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerCodes(),
-            WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubCodes(),
-            WeaponCategoryCode::MORNINGSTAR_AND_MORGENSTERN => MeleeWeaponCode::getMorningstarAndMorgensternCodes(),
-            WeaponCategoryCode::SABER_AND_BOWIE_KNIFE => MeleeWeaponCode::getSaberAndBowieKnifeCodes(),
-            WeaponCategoryCode::STAFF_AND_SPEAR => MeleeWeaponCode::getStaffAndSpearCodes(),
-            WeaponCategoryCode::SWORD => MeleeWeaponCode::getSwordCodes(),
-            WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentCodes(),
-            WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedCodes(),
-        ];
+        return $this->getFightProperties($this->getSelectedRangedWeapon());
     }
 
-    public function getRangedWeaponCodes(): array
-    {
-        return [
-            WeaponCategoryCode::BOW => RangedWeaponCode::getBowValues(),
-            WeaponCategoryCode::CROSSBOW => RangedWeaponCode::getCrossbowValues(),
-        ];
-    }
 }
