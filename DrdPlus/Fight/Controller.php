@@ -8,6 +8,7 @@ use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\ShieldCode;
+use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\CombatActions\CombatActions;
@@ -19,6 +20,16 @@ use DrdPlus\Person\ProfessionLevels\ProfessionFirstLevel;
 use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Person\ProfessionLevels\ProfessionZeroLevel;
 use DrdPlus\Professions\Commoner;
+use DrdPlus\Properties\Base\Agility;
+use DrdPlus\Properties\Base\Charisma;
+use DrdPlus\Properties\Base\Intelligence;
+use DrdPlus\Properties\Base\Knack;
+use DrdPlus\Properties\Base\Strength;
+use DrdPlus\Properties\Base\Will;
+use DrdPlus\Properties\Body\Height;
+use DrdPlus\Properties\Body\HeightInCm;
+use DrdPlus\Properties\Body\Size;
+use DrdPlus\Properties\Derived\Speed;
 use DrdPlus\Skills\Combined\CombinedSkills;
 use DrdPlus\Skills\Physical\PhysicalSkills;
 use DrdPlus\Skills\Psychical\PsychicalSkills;
@@ -108,10 +119,22 @@ class Controller extends StrictObject
         return RangedWeaponCode::getIt($rangedWeaponValue);
     }
 
-    public function getFightProperties(): FightProperties
+    public function getMeleeFightProperties(): FightProperties
     {
         return new FightProperties(
-            new BodyPropertiesForFight(),
+            new BodyPropertiesForFight(
+                $strength = Strength::getIt(0),
+                Strength::getIt(0),
+                Strength::getIt(0),
+                $agility = Agility::getIt(0),
+                Knack::getIt(0),
+                Will::getIt(0),
+                Intelligence::getIt(0),
+                Charisma::getIt(0),
+                Size::getIt(0),
+                $height = Height::getIt(HeightInCm::getIt(150), Tables::getIt()),
+                Speed::getIt($strength, $agility, $height)
+            ),
             new CombatActions([], Tables::getIt()),
             Skills::createSkills(
                 new ProfessionLevels(
@@ -143,5 +166,28 @@ class Controller extends StrictObject
             false, // enemy is not faster
             Glared::createWithoutGlare(new Health())
         );
+    }
+
+    public function getMeleeWeaponCodes(): array
+    {
+        return [
+            WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeCodes(),
+            WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerCodes(),
+            WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubCodes(),
+            WeaponCategoryCode::MORNINGSTAR_AND_MORGENSTERN => MeleeWeaponCode::getMorningstarAndMorgensternCodes(),
+            WeaponCategoryCode::SABER_AND_BOWIE_KNIFE => MeleeWeaponCode::getSaberAndBowieKnifeCodes(),
+            WeaponCategoryCode::STAFF_AND_SPEAR => MeleeWeaponCode::getStaffAndSpearCodes(),
+            WeaponCategoryCode::SWORD => MeleeWeaponCode::getSwordCodes(),
+            WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentCodes(),
+            WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedCodes(),
+        ];
+    }
+
+    public function getRangedWeaponCodes(): array
+    {
+        return [
+            WeaponCategoryCode::BOW => RangedWeaponCode::getBowValues(),
+            WeaponCategoryCode::CROSSBOW => RangedWeaponCode::getCrossbowValues(),
+        ];
     }
 }
