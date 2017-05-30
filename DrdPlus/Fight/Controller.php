@@ -12,6 +12,7 @@ use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Codes\Armaments\WeaponCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\ProfessionCode;
+use DrdPlus\Codes\Properties\PropertyCode;
 use DrdPlus\CombatActions\CombatActions;
 use DrdPlus\FightProperties\BodyPropertiesForFight;
 use DrdPlus\FightProperties\FightProperties;
@@ -21,6 +22,7 @@ use DrdPlus\Person\ProfessionLevels\ProfessionFirstLevel;
 use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Person\ProfessionLevels\ProfessionZeroLevel;
 use DrdPlus\Professions\Commoner;
+use DrdPlus\Professions\Profession;
 use DrdPlus\Properties\Base\Agility;
 use DrdPlus\Properties\Base\Charisma;
 use DrdPlus\Properties\Base\Intelligence;
@@ -42,12 +44,26 @@ use Granam\Strict\Object\StrictObject;
 class Controller extends StrictObject
 {
     const HISTORY_TOKEN = 'historyToken';
+    const MELEE_WEAPON = 'meleeWeapon';
+    const RANGED_WEAPON = 'rangedWeapon';
+    const STRENGTH = PropertyCode::STRENGTH;
+    const AGILITY = PropertyCode::AGILITY;
+    const KNACK = PropertyCode::KNACK;
+    const WILL = PropertyCode::WILL;
+    const INTELLIGENCE = PropertyCode::INTELLIGENCE;
+    const CHARISMA = PropertyCode::CHARISMA;
+    const SIZE = PropertyCode::SIZE;
+    const HEIGHT_IN_CM = PropertyCode::HEIGHT_IN_CM;
+    const MELEE_HOLDING = 'melee-holding';
+    const RANGED_HOLDING = 'ranged-holding';
+    const PROFESSION = 'profession';
 
     public function __construct()
     {
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
-        $parameters = ['meleeWeapon', 'rangedWeapon', 'string', 'agility', 'knack', 'will', 'intelligence', 'charisma',
-            'size', 'height-in-cm', 'melee-holding', 'ranged-two-handed',
+        $parameters = [self::MELEE_HOLDING, self::RANGED_WEAPON, self::STRENGTH, self::AGILITY, self::KNACK,
+            self::WILL, self::INTELLIGENCE, self::CHARISMA, self::SIZE, self::HEIGHT_IN_CM, self::MELEE_HOLDING,
+            self::RANGED_HOLDING, self::PROFESSION,
         ];
         if (!empty($_GET)) {
             foreach ($parameters as $name) {
@@ -131,7 +147,7 @@ class Controller extends StrictObject
 
     private function cookieHistoryIsValid(): bool
     {
-        return !empty($_COOKIE['historyToken']) && $_COOKIE['historyToken'] === md5_file(__FILE__);
+        return !empty($_COOKIE[self::HISTORY_TOKEN]) && $_COOKIE[self::HISTORY_TOKEN] === md5_file(__FILE__);
     }
 
     /**
@@ -139,7 +155,7 @@ class Controller extends StrictObject
      */
     public function getSelectedRangedWeapon(): RangedWeaponCode
     {
-        $rangedWeaponValue = $this->getValueFromRequest('rangedWeapon');
+        $rangedWeaponValue = $this->getValueFromRequest(self::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
             return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
@@ -149,42 +165,42 @@ class Controller extends StrictObject
 
     public function getSelectedStrength(): Strength
     {
-        return Strength::getIt((int)$this->getValueFromRequest('strength'));
+        return Strength::getIt((int)$this->getValueFromRequest(self::STRENGTH));
     }
 
     public function getSelectedAgility(): Agility
     {
-        return Agility::getIt((int)$this->getValueFromRequest('agility'));
+        return Agility::getIt((int)$this->getValueFromRequest(self::AGILITY));
     }
 
     public function getSelectedKnack(): Knack
     {
-        return Knack::getIt((int)$this->getValueFromRequest('knack'));
+        return Knack::getIt((int)$this->getValueFromRequest(self::KNACK));
     }
 
     public function getSelectedWill(): Will
     {
-        return Will::getIt((int)$this->getValueFromRequest('will'));
+        return Will::getIt((int)$this->getValueFromRequest(self::WILL));
     }
 
     public function getSelectedIntelligence(): Intelligence
     {
-        return Intelligence::getIt((int)$this->getValueFromRequest('intelligence'));
+        return Intelligence::getIt((int)$this->getValueFromRequest(self::INTELLIGENCE));
     }
 
     public function getSelectedCharisma(): Charisma
     {
-        return Charisma::getIt((int)$this->getValueFromRequest('charisma'));
+        return Charisma::getIt((int)$this->getValueFromRequest(self::CHARISMA));
     }
 
     public function getSelectedSize(): Size
     {
-        return Size::getIt((int)$this->getValueFromRequest('size'));
+        return Size::getIt((int)$this->getValueFromRequest(self::SIZE));
     }
 
     public function getSelectedHeightInCm(): HeightInCm
     {
-        return HeightInCm::getIt($this->getValueFromRequest('height-in-cm') ?? 150);
+        return HeightInCm::getIt($this->getValueFromRequest(self::HEIGHT_IN_CM) ?? 150);
     }
 
     public function getMeleeFightProperties(): FightProperties
@@ -210,7 +226,7 @@ class Controller extends StrictObject
             Skills::createSkills(
                 new ProfessionLevels(
                     ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
-                    $firstLevel = ProfessionFirstLevel::createFirstLevel(Commoner::getIt())
+                    $firstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($this->getSelectedProfessionCode()))
                 ),
                 SkillsFromBackground::getIt(
                     new PositiveIntegerObject(0),
@@ -224,7 +240,7 @@ class Controller extends StrictObject
             ),
             BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR),
             HelmCode::getIt(HelmCode::WITHOUT_HELM),
-            ProfessionCode::getIt(ProfessionCode::COMMONER),
+            $this->getSelectedProfessionCode(),
             Tables::getIt(),
             $weaponCode,
             $weaponHolding,
@@ -245,7 +261,7 @@ class Controller extends StrictObject
         if ($this->isTwoHandedOnly($this->getSelectedMeleeWeapon())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        $meleeHolding = $this->getValueFromRequest('melee-holding');
+        $meleeHolding = $this->getValueFromRequest(self::MELEE_HOLDING);
         if (!$meleeHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
@@ -263,12 +279,22 @@ class Controller extends StrictObject
         if ($this->isTwoHandedOnly($this->getSelectedRangedWeapon())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        $meleeHolding = $this->getValueFromRequest('ranged-holding');
+        $meleeHolding = $this->getValueFromRequest(self::RANGED_HOLDING);
         if (!$meleeHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
 
         return ItemHoldingCode::getIt($meleeHolding);
+    }
+
+    public function getSelectedProfessionCode(): ProfessionCode
+    {
+        $professionName = $this->getValueFromRequest(self::PROFESSION);
+        if (!$professionName) {
+            return ProfessionCode::getIt(ProfessionCode::COMMONER);
+        }
+
+        return ProfessionCode::getIt($professionName);
     }
 
 }
