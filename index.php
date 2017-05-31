@@ -24,6 +24,10 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 ?>
 <html>
 <body>
+<form action="" method="post">
+    <input type="hidden" name="deleteHistory" value="1">
+    <input type="submit" value="Vymazat historii">
+</form>
 <form action="" method="get">
     <h2>Na blízko</h2>
     <select name="<?= $controller::MELEE_WEAPON ?>" title="Melee weapon">
@@ -58,13 +62,20 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         obouručně
     </label>
     <div>
-        <label><select name="<?= $controller::MELEE_FIGHT_SKILLS ?>">
-                <?php foreach ($controller->getPossibleSkillsForMelee() as $skillCode) {
+        <label><select name="<?= $controller::MELEE_FIGHT_SKILL ?>">
+                <?php
+                $selectedSkillForMelee = $controller->getSelectedMeleeSkillCode();
+                foreach ($controller->getPossibleSkillsForMelee() as $skillCode) {
                     ?>
-                    <option name="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
+                    <option value="<?= $skillCode->getValue() ?>"
+                            <?php if ($selectedSkillForMelee === $skillCode) { ?>selected<?php } ?>>
+                        <?= $skillCode->translateTo('cs') ?>
+                    </option>
                 <?php } ?>
             </select></label>
-        <label>Stupeň dovednosti <input type="number" min="0" max="3"></select></label>
+        <label>Stupeň dovednosti <input type="number" min="0" max="3"
+                                        value="<?= $controller->getSelectedMeleeSkillRankValue() ?>"
+                                        name="<?= $controller::MELEE_FIGHT_SKILL_VALUE ?>"></label>
     </div>
     <input type="submit" value="OK">
     <div>
@@ -123,13 +134,15 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         obouručně
     </label>
     <div>
-        <label><select name="<?= $controller::RANGED_FIGHT_SKILLS ?>">
+        <label><select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
                 <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
                     ?>
-                    <option name="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
+                    <option value="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
                 <?php } ?>
             </select></label>
-        <label>Stupeň dovednosti <input type="number" min="0" max="3"></select></label>
+        <label>Stupeň dovednosti <input type="number" min="0" max="3"
+                                        value="<?= $controller->getSelectedRangedSkillRankValue() ?>"
+                                        name="<?= $controller::RANGED_FIGHT_SKILL_VALUE ?>"></label>
     </div>
     <input type="submit" value="OK">
     <div>

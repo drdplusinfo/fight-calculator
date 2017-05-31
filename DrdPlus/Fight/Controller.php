@@ -37,8 +37,14 @@ use DrdPlus\Properties\Body\Height;
 use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\Size;
 use DrdPlus\Properties\Derived\Speed;
+use DrdPlus\Skills\Combined\CombinedSkill;
+use DrdPlus\Skills\Combined\CombinedSkillPoint;
 use DrdPlus\Skills\Combined\CombinedSkills;
+use DrdPlus\Skills\Physical\PhysicalSkill;
+use DrdPlus\Skills\Physical\PhysicalSkillPoint;
 use DrdPlus\Skills\Physical\PhysicalSkills;
+use DrdPlus\Skills\Psychical\PsychicalSkill;
+use DrdPlus\Skills\Psychical\PsychicalSkillPoint;
 use DrdPlus\Skills\Psychical\PsychicalSkills;
 use DrdPlus\Skills\Skills;
 use DrdPlus\Tables\Tables;
@@ -62,26 +68,31 @@ class Controller extends StrictObject
     const MELEE_HOLDING = 'melee-holding';
     const RANGED_HOLDING = 'ranged-holding';
     const PROFESSION = 'profession';
-    const MELEE_FIGHT_SKILLS = 'melee_fight_skills';
-    const RANGED_FIGHT_SKILLS = 'ranged_fight_skills';
+    const MELEE_FIGHT_SKILL = 'melee_fight_skill';
+    const MELEE_FIGHT_SKILL_VALUE = 'melee_fight_skill_value';
+    const RANGED_FIGHT_SKILL = 'ranged_fight_skill';
+    const RANGED_FIGHT_SKILL_VALUE = 'ranged_fight_skill_value';
+    private static $PARAMETERS = [self::MELEE_HOLDING, self::RANGED_WEAPON, self::STRENGTH, self::AGILITY, self::KNACK,
+        self::WILL, self::INTELLIGENCE, self::CHARISMA, self::SIZE, self::HEIGHT_IN_CM, self::MELEE_HOLDING,
+        self::RANGED_HOLDING, self::PROFESSION, self::MELEE_FIGHT_SKILL, self::MELEE_FIGHT_SKILL_VALUE,
+        self::RANGED_FIGHT_SKILL, self::RANGED_FIGHT_SKILL_VALUE,
+    ];
 
     public function __construct()
     {
+        if (!empty($_POST['deleteHistory'])) {
+            $this->deleteHistory();
+            header('Location: /', true, 301);
+            exit;
+        }
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
-        $parameters = [self::MELEE_HOLDING, self::RANGED_WEAPON, self::STRENGTH, self::AGILITY, self::KNACK,
-            self::WILL, self::INTELLIGENCE, self::CHARISMA, self::SIZE, self::HEIGHT_IN_CM, self::MELEE_HOLDING,
-            self::RANGED_HOLDING, self::PROFESSION,
-        ];
         if (!empty($_GET)) {
-            foreach ($parameters as $name) {
+            foreach (self::$PARAMETERS as $name) {
                 $this->setCookie($name, $_GET[$name] ?? null, $afterYear);
             }
             setcookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
         } elseif (!$this->cookieHistoryIsValid()) {
-            setcookie(self::HISTORY_TOKEN, null);
-            foreach ($parameters as $parameter) {
-                setcookie($parameter, null);
-            }
+            $this->deleteHistory();
         }
     }
 
@@ -97,6 +108,14 @@ class Controller extends StrictObject
             true // http only
         );
         $_COOKIE[$name] = $value;
+    }
+
+    private function deleteHistory()
+    {
+        setcookie(self::HISTORY_TOKEN, null);
+        foreach (self::$PARAMETERS as $parameter) {
+            setcookie($parameter, null);
+        }
     }
 
     public function getMeleeWeaponCodes(): array
@@ -212,10 +231,20 @@ class Controller extends StrictObject
 
     public function getMeleeFightProperties(): FightProperties
     {
-        return $this->getFightProperties($this->getSelectedMeleeWeapon(), $this->getSelectedMeleeHolding());
+        return $this->getFightProperties(
+            $this->getSelectedMeleeWeapon(),
+            $this->getSelectedMeleeHolding(),
+            $this->getSelectedMeleeSkillCode(),
+            $this->getSelectedMeleeSkillRankValue()
+        );
     }
 
-    private function getFightProperties(WeaponCode $weaponCode, ItemHoldingCode $weaponHolding): FightProperties
+    private function getFightProperties(
+        WeaponCode $weaponCode,
+        ItemHoldingCode $weaponHolding,
+        SkillCode $skillWithWeapon,
+        int $skillRankWithWeapon
+    ): FightProperties
     {
         return new FightProperties(
             new BodyPropertiesForFight(
@@ -230,7 +259,7 @@ class Controller extends StrictObject
                 Speed::getIt($strength, $agility, $height)
             ),
             new CombatActions([], Tables::getIt()),
-            $this->createSkills(),
+            $this->createSkills($skillWithWeapon, $skillRankWithWeapon),
             BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR),
             HelmCode::getIt(HelmCode::WITHOUT_HELM),
             $this->getSelectedProfessionCode(),
@@ -244,25 +273,65 @@ class Controller extends StrictObject
         );
     }
 
-    private function createSkills(): Skills
+    private function createSkills(SkillCode $skillWithWeapon, int $skillRankWithWeapon): Skills
     {
         $firstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($this->getSelectedProfessionCode()));
-
-        return Skills::createSkills(
+        $skills = Skills::createSkills(
             new ProfessionLevels(
                 ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
                 $firstLevel
             ),
-            SkillPointsFromBackground::getIt(
-                new PositiveIntegerObject(0),
-                Ancestry::getIt(new PositiveIntegerObject(0), Tables::getIt()),
+            $skillPointsFromBackground = SkillPointsFromBackground::getIt(
+                new PositiveIntegerObject(8), // just a maximum
+                Ancestry::getIt(new PositiveIntegerObject(8), Tables::getIt()),
                 Tables::getIt()
             ),
-            new PhysicalSkills($firstLevel),
-            new PsychicalSkills($firstLevel),
-            new CombinedSkills($firstLevel),
+            $physicalSkills = new PhysicalSkills($firstLevel),
+            $psychicalSkills = new PsychicalSkills($firstLevel),
+            $combinedSkills = new CombinedSkills($firstLevel),
             Tables::getIt()
         );
+        if ($skillRankWithWeapon > 0) {
+            if (in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
+                $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
+                /** @var PhysicalSkill $skill */
+                $skill = $physicalSkills->$getSkill();
+                $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                    $firstLevel,
+                    $skillPointsFromBackground,
+                    Tables::getIt()
+                );
+                while ($skillRankWithWeapon-- > 0) {
+                    $skill->increaseSkillRank($physicalSkillPoint);
+                }
+            } elseif (in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
+                $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
+                /** @var PsychicalSkill $skill */
+                $skill = $psychicalSkills->$getSkill();
+                $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                    $firstLevel,
+                    $skillPointsFromBackground,
+                    Tables::getIt()
+                );
+                while ($skillRankWithWeapon-- > 0) {
+                    $skill->increaseSkillRank($psychicalSkillPoint);
+                }
+            } elseif (in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
+                $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
+                /** @var CombinedSkill $skill */
+                $skill = $combinedSkills->$getSkill();
+                $combinedSkillPoint = CombinedSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                    $firstLevel,
+                    $skillPointsFromBackground,
+                    Tables::getIt()
+                );
+                while ($skillRankWithWeapon-- > 0) {
+                    $skill->increaseSkillRank($combinedSkillPoint);
+                }
+            }
+        }
+
+        return $skills;
     }
 
     public function isTwoHandedOnly(WeaponCode $weaponCode): bool
@@ -285,7 +354,12 @@ class Controller extends StrictObject
 
     public function getRangedFightProperties(): FightProperties
     {
-        return $this->getFightProperties($this->getSelectedRangedWeapon(), $this->getSelectedRangedHolding());
+        return $this->getFightProperties(
+            $this->getSelectedRangedWeapon(),
+            $this->getSelectedRangedHolding(),
+            $this->getSelectedRangedSkillCode(),
+            $this->getSelectedRangedSkillRankValue()
+        );
     }
 
     public function getSelectedRangedHolding(): ItemHoldingCode
@@ -381,4 +455,44 @@ class Controller extends StrictObject
         return $this->getPossibleSkillsForCategories(WeaponCategoryCode::getRangedWeaponCategoryValues());
     }
 
+    public function getSelectedMeleeSkillCode(): SkillCode
+    {
+        return $this->getSelectedSkill(self::MELEE_FIGHT_SKILL);
+    }
+
+    private function getSelectedSkill(string $skillInputName): SkillCode
+    {
+        $skillValue = $this->getValueFromRequest($skillInputName);
+        if (!$skillValue) {
+            return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED);
+        }
+
+        if (in_array($skillValue, PhysicalSkillCode::getPossibleValues(), true)) {
+            return PhysicalSkillCode::getIt($skillValue);
+        }
+
+        if (in_array($skillValue, PsychicalSkillCode::getPossibleValues(), true)) {
+            return PsychicalSkillCode::getIt($skillValue);
+        }
+        if (in_array($skillValue, CombinedSkillCode::getPossibleValues(), true)) {
+            return CombinedSkillCode::getIt($skillValue);
+        }
+
+        throw new \LogicException('Unexpected skill value ' . var_export($skillValue, true));
+    }
+
+    public function getSelectedRangedSkillCode(): SkillCode
+    {
+        return $this->getSelectedSkill(self::RANGED_FIGHT_SKILL);
+    }
+
+    public function getSelectedMeleeSkillRankValue(): int
+    {
+        return (int)$this->getValueFromRequest(self::MELEE_FIGHT_SKILL_VALUE);
+    }
+
+    public function getSelectedRangedSkillRankValue(): int
+    {
+        return (int)$this->getValueFromRequest(self::RANGED_FIGHT_SKILL_VALUE);
+    }
 }
