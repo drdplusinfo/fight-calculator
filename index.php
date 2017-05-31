@@ -23,6 +23,9 @@ $selectedRangedWeapon = $controller->getSelectedRangedWeapon();
 $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getValue() : null;
 ?>
 <html>
+<head>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
 <body>
 <form action="" method="post">
     <input type="hidden" name="deleteHistory" value="1">
