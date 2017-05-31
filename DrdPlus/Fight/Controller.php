@@ -264,14 +264,14 @@ class Controller extends StrictObject
             ),
             new CombatActions([], Tables::getIt()),
             $this->createSkills($skillWithWeapon, $skillRankWithWeapon),
-            BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR),
-            HelmCode::getIt(HelmCode::WITHOUT_HELM),
+            $this->getSelectedBodyArmor(),
+            $this->getSelectedHelm(),
             $this->getSelectedProfessionCode(),
             Tables::getIt(),
             $weaponCode,
             $weaponHolding,
             false, // does not fight with two weapons
-            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
+            $this->getSelectedShield(),
             false, // enemy is not faster
             Glared::createWithoutGlare(new Health())
         );
