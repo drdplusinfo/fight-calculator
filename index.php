@@ -43,16 +43,29 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             </optgroup>
         <?php } ?>
     </select>
-    <label><input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::MELEE_HOLDING ?>"
-                  <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+    <label>
+        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::MELEE_HOLDING ?>"
+               <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
         v dominantní ruce</label>
-    <label><input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::MELEE_HOLDING ?>"
-                  <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+    <label>
+        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::MELEE_HOLDING ?>"
+               <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
         v druhé
         ruce</label>
-    <label><input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::MELEE_HOLDING ?>"
-                  <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
-        obouručně</label>
+    <label>
+        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::MELEE_HOLDING ?>"
+               <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+        obouručně
+    </label>
+    <div>
+        <label><select name="melee-fight-skill">
+                <?php foreach ($controller->getPossibleSkillsForMelee() as $skillCode) {
+                    ?>
+                    <option name="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
+                <?php } ?>
+            </select></label>
+        <label>Stupeň dovednosti <input type="number" min="0" max="3"></select></label>
+    </div>
     <input type="submit" value="OK">
     <div>
         <?php $meleeFightProperties = $controller->getMeleeFightProperties(); ?>
@@ -96,16 +109,28 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             </optgroup>
         <?php } ?>
     </select>
-    <label><input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::RANGED_HOLDING ?>"
-                  <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+    <label>
+        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::RANGED_HOLDING ?>"
+               <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
         v dominantní ruce</label>
-    <label><input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::RANGED_HOLDING ?>"
-                  <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
-        v druhé
-        ruce</label>
-    <label><input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::RANGED_HOLDING ?>"
-                  <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
-        obouručně</label>
+    <label>
+        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::RANGED_HOLDING ?>"
+               <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+        v druhé ruce</label>
+    <label>
+        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::RANGED_HOLDING ?>"
+               <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+        obouručně
+    </label>
+    <div>
+        <label><select name="ranged-fight-skill">
+                <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
+                    ?>
+                    <option name="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
+                <?php } ?>
+            </select></label>
+        <label>Stupeň dovednosti <input type="number" min="0" max="3"></select></label>
+    </div>
     <input type="submit" value="OK">
     <div>
         <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
@@ -132,32 +157,34 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         </div>
     </div>
     <h3>Vlastnosti</h3>
-    <label>Povolání <select name="<?= $controller::PROFESSION ?>">
-            <?php foreach (ProfessionCode::getPossibleValues() as $professionValue) {
-                ?>
-                <option value="<?= $professionValue ?>"
-                 <?php if ($controller->getSelectedProfessionCode()->getValue() === $professionValue) { ?>selected<?php } ?>>
-                    <?= ProfessionCode::getIt($professionValue)->translateTo('cs') ?>
-                </option>
-            <?php } ?>
-        </select>
-    </label>
-    <label>Síla <input type="number" name="<?= $controller::STRENGTH ?>" min="-40" max="40"
-                       value="<?= $controller->getSelectedStrength()->getValue() ?>"></label>
-    <label>Obratnost <input type="number" name="<?= $controller::AGILITY ?>" min="-40" max="40"
-                            value="<?= $controller->getSelectedAgility()->getValue() ?>"></label>
-    <label>Zručnost <input type="number" name="<?= $controller::KNACK ?>" min="-40" max="40"
-                           value="<?= $controller->getSelectedKnack()->getValue() ?>"></label>
-    <label>Vůle <input type="number" name="<?= $controller::WILL ?>" min="-40" max="40"
-                       value="<?= $controller->getSelectedWill()->getValue() ?>"></label>
-    <label>Inteligence <input type="number" name="<?= $controller::INTELLIGENCE ?>" min="-40" max="40"
-                              value="<?= $controller->getSelectedIntelligence()->getValue() ?>"></label>
-    <label>Charisma <input type="number" name="<?= $controller::CHARISMA ?>" min="-40" max="40"
-                           value="<?= $controller->getSelectedCharisma()->getValue() ?>"></label>
-    <label>Výška v cm <input type="number" name="<?= $controller::HEIGHT_IN_CM ?>" min="110" max="290"
-                             value="<?= $controller->getSelectedHeightInCm()->getValue() ?>"></label>
-    <label>Velikost <input type="number" name="<?= $controller::SIZE ?>" min="-10" max="10"
-                           value="<?= $controller->getSelectedSize()->getValue() ?>"></label>
+    <div>
+        <label>Povolání <select name="<?= $controller::PROFESSION ?>">
+                <?php foreach (ProfessionCode::getPossibleValues() as $professionValue) {
+                    ?>
+                    <option value="<?= $professionValue ?>"
+                            <?php if ($controller->getSelectedProfessionCode()->getValue() === $professionValue) { ?>selected<?php } ?>>
+                        <?= ProfessionCode::getIt($professionValue)->translateTo('cs') ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </label>
+        <label>Síla <input type="number" name="<?= $controller::STRENGTH ?>" min="-40" max="40"
+                           value="<?= $controller->getSelectedStrength()->getValue() ?>"></label>
+        <label>Obratnost <input type="number" name="<?= $controller::AGILITY ?>" min="-40" max="40"
+                                value="<?= $controller->getSelectedAgility()->getValue() ?>"></label>
+        <label>Zručnost <input type="number" name="<?= $controller::KNACK ?>" min="-40" max="40"
+                               value="<?= $controller->getSelectedKnack()->getValue() ?>"></label>
+        <label>Vůle <input type="number" name="<?= $controller::WILL ?>" min="-40" max="40"
+                           value="<?= $controller->getSelectedWill()->getValue() ?>"></label>
+        <label>Inteligence <input type="number" name="<?= $controller::INTELLIGENCE ?>" min="-40" max="40"
+                                  value="<?= $controller->getSelectedIntelligence()->getValue() ?>"></label>
+        <label>Charisma <input type="number" name="<?= $controller::CHARISMA ?>" min="-40" max="40"
+                               value="<?= $controller->getSelectedCharisma()->getValue() ?>"></label>
+        <label>Výška v cm <input type="number" name="<?= $controller::HEIGHT_IN_CM ?>" min="110" max="290"
+                                 value="<?= $controller->getSelectedHeightInCm()->getValue() ?>"></label>
+        <label>Velikost <input type="number" name="<?= $controller::SIZE ?>" min="-10" max="10"
+                               value="<?= $controller->getSelectedSize()->getValue() ?>"></label>
+    </div>
     <input type="submit" value="OK">
 </form>
 </body>

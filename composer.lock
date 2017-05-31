@@ -1057,12 +1057,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-background.git",
-                "reference": "1a7bb14bcbc76016c034b0afc04bde2df086c15d"
+                "reference": "fdc7691ea6b169bc2b4033c86106d3d17ac39771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/1a7bb14bcbc76016c034b0afc04bde2df086c15d",
-                "reference": "1a7bb14bcbc76016c034b0afc04bde2df086c15d",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/fdc7691ea6b169bc2b4033c86106d3d17ac39771",
+                "reference": "fdc7691ea6b169bc2b4033c86106d3d17ac39771",
                 "shasum": ""
             },
             "require": {
@@ -1090,7 +1090,7 @@
                 "MIT"
             ],
             "description": "Background of a person for Drd+",
-            "time": "2017-05-30 17:23:07"
+            "time": "2017-05-31 05:47:32"
         },
         {
             "name": "drd-plus/calculations",
@@ -1140,12 +1140,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "db23c20709726298d2b6595633aa726004f5922b"
+                "reference": "12fc2676184be57b54cd2addee40dfc62bd4db39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/db23c20709726298d2b6595633aa726004f5922b",
-                "reference": "db23c20709726298d2b6595633aa726004f5922b",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/12fc2676184be57b54cd2addee40dfc62bd4db39",
+                "reference": "12fc2676184be57b54cd2addee40dfc62bd4db39",
                 "shasum": ""
             },
             "require": {
@@ -1171,7 +1171,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-05-30 15:16:40"
+            "time": "2017-05-31 07:10:17"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1461,12 +1461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "bd5099de393a842a4d8a01c735c2463e32eddbd9"
+                "reference": "f16fa8987513f9f97528030f6becf60a4abb9bc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/bd5099de393a842a4d8a01c735c2463e32eddbd9",
-                "reference": "bd5099de393a842a4d8a01c735c2463e32eddbd9",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/f16fa8987513f9f97528030f6becf60a4abb9bc3",
+                "reference": "f16fa8987513f9f97528030f6becf60a4abb9bc3",
                 "shasum": ""
             },
             "require": {
@@ -1497,7 +1497,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2017-05-30 10:33:00"
+            "time": "2017-05-31 05:26:00"
         },
         {
             "name": "drd-plus/properties-by-fate",

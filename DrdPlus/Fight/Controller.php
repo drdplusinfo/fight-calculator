@@ -13,6 +13,10 @@ use DrdPlus\Codes\Armaments\WeaponCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\Codes\Properties\PropertyCode;
+use DrdPlus\Codes\Skills\CombinedSkillCode;
+use DrdPlus\Codes\Skills\PhysicalSkillCode;
+use DrdPlus\Codes\Skills\PsychicalSkillCode;
+use DrdPlus\Codes\Skills\SkillCode;
 use DrdPlus\CombatActions\CombatActions;
 use DrdPlus\FightProperties\BodyPropertiesForFight;
 use DrdPlus\FightProperties\FightProperties;
@@ -40,6 +44,7 @@ use DrdPlus\Skills\Skills;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\PositiveIntegerObject;
 use Granam\Strict\Object\StrictObject;
+use Granam\String\StringTools;
 
 class Controller extends StrictObject
 {
@@ -295,6 +300,76 @@ class Controller extends StrictObject
         }
 
         return ProfessionCode::getIt($professionName);
+    }
+
+    /**
+     * @return array|SkillCode[]
+     */
+    public function getPossibleSkillsForMelee(): array
+    {
+        return $this->getPossibleSkillsForCategories(WeaponCategoryCode::getMeleeWeaponCategoryValues());
+    }
+
+    /**
+     * @param array|string $weaponCategoryValues
+     * @return array|SkillCode[]
+     */
+    private function getPossibleSkillsForCategories(array $weaponCategoryValues): array
+    {
+        $fightWithCategories = [];
+        $fightWithPhysical = array_map(
+            function (string $skillName) {
+                return PhysicalSkillCode::getIt($skillName);
+            },
+            $this->filterForCategories(PhysicalSkillCode::getPossibleValues(), $weaponCategoryValues)
+        );
+        $fightWithCategories = array_merge($fightWithCategories, $fightWithPhysical);
+        $fightWithPsychical = array_map(
+            function (string $skillName) {
+                return PsychicalSkillCode::getIt($skillName);
+            },
+            $this->filterForCategories(PsychicalSkillCode::getPossibleValues(), $weaponCategoryValues)
+        );
+        $fightWithCategories = array_merge($fightWithCategories, $fightWithPsychical);
+        $fightWithCombined = array_map(
+            function (string $skillName) {
+                return CombinedSkillCode::getIt($skillName);
+            },
+            $this->filterForCategories(CombinedSkillCode::getPossibleValues(), $weaponCategoryValues)
+        );
+        $fightWithCategories = array_merge($fightWithCategories, $fightWithCombined);
+
+        return $fightWithCategories;
+    }
+
+    private function filterForCategories(array $skillCodeValues, array $weaponCategoryValues): array
+    {
+        $fightWith = array_filter(
+            $skillCodeValues,
+            function (string $skillName) {
+                return strpos($skillName, 'fight_') === 0;
+            }
+        );
+        $categoryNames = array_map(
+            function (string $categoryName) {
+                return StringTools::toConstant(WeaponCategoryCode::getIt($categoryName)->translateTo('en', 4));
+            },
+            $weaponCategoryValues
+        );
+
+        return array_filter($fightWith, function (string $skillName) use ($categoryNames) {
+            $categoryFromSkill = str_replace(['fight_with_', 'fight_' /*without weapon */], '', $skillName);
+
+            return in_array($categoryFromSkill, $categoryNames, true);
+        });
+    }
+
+    /**
+     * @return array|SkillCode[]
+     */
+    public function getPossibleSkillsForRanged(): array
+    {
+        return $this->getPossibleSkillsForCategories(WeaponCategoryCode::getRangedWeaponCategoryValues());
     }
 
 }
