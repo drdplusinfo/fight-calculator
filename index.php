@@ -188,6 +188,14 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         </label>
     </div>
     <div class="panel">
+        <label>
+            Stupeň dovednosti <?= $controller->getPossibleSkillForShield()->translateTo('cs') ?> <input
+                    type="number" min="0" max="3"
+                    name="<?= $controller::SHIELD_SKILL_VALUE ?>"
+                    value="<?= $controller->getSelectedShieldSkillRank() ?>">
+        </label>
+    </div>
+    <div class="panel">
         <label>Zbroj <select
                     name="<?= $controller::BODY_ARMOR ?>"><?php foreach ($controller->getPossibleBodyArmors() as $bodyArmor) {
                     ?>
@@ -206,6 +214,14 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
                         <?= $helm->translateTo('cs') ?></option>
                 <?php } ?>
             </select>
+        </label>
+    </div>
+    <div class="panel">
+        <label>
+            Stupeň dovednosti <?= $controller->getPossibleSkillForArmor()->translateTo('cs') ?> <input
+                    type="number" min="0" max="3"
+                    name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+                    value="<?= $controller->getSelectedArmorSkillRank() ?>">
         </label>
     </div>
     <div class="panel">

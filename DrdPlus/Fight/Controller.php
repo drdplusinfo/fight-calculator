@@ -73,7 +73,9 @@ class Controller extends StrictObject
     const RANGED_FIGHT_SKILL = 'ranged_fight_skill';
     const RANGED_FIGHT_SKILL_VALUE = 'ranged_fight_skill_value';
     const SHIELD = 'shield';
+    const SHIELD_SKILL_VALUE = 'shield_skill_value';
     const BODY_ARMOR = 'body_armor';
+    const ARMOR_SKILL_VALUE = 'armor_skill_value';
     const HELM = 'helm';
 
     private static $PARAMETERS = [self::MELEE_HOLDING, self::RANGED_WEAPON, self::STRENGTH, self::AGILITY, self::KNACK,
@@ -312,13 +314,13 @@ class Controller extends StrictObject
                 $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
                 /** @var PsychicalSkill $skill */
                 $skill = $psychicalSkills->$getSkill();
-                $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $physicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                     $firstLevel,
                     $skillPointsFromBackground,
                     Tables::getIt()
                 );
                 while ($skillRankWithWeapon-- > 0) {
-                    $skill->increaseSkillRank($psychicalSkillPoint);
+                    $skill->increaseSkillRank($physicalSkillPoint);
                 }
             } elseif (in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
                 $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
@@ -332,6 +334,29 @@ class Controller extends StrictObject
                 while ($skillRankWithWeapon-- > 0) {
                     $skill->increaseSkillRank($combinedSkillPoint);
                 }
+            }
+        }
+
+        $skillRankWithArmor = $this->getSelectedArmorSkillRank();
+        if ($skillRankWithArmor > 0) {
+            $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $firstLevel,
+                $skillPointsFromBackground,
+                Tables::getIt()
+            );
+            while ($skillRankWithArmor-- > 0) {
+                $physicalSkills->getArmorWearing()->increaseSkillRank($physicalSkillPoint);
+            }
+        }
+        $selectedShieldSkillRank = $this->getSelectedShieldSkillRank();
+        if ($selectedShieldSkillRank > 0) {
+            $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $firstLevel,
+                $skillPointsFromBackground,
+                Tables::getIt()
+            );
+            while ($selectedShieldSkillRank-- > 0) {
+                $physicalSkills->getShieldUsage()->increaseSkillRank($physicalSkillPoint);
             }
         }
 
@@ -521,6 +546,19 @@ class Controller extends StrictObject
     }
 
     /**
+     * @return PhysicalSkillCode
+     */
+    public function getPossibleSkillForShield(): PhysicalSkillCode
+    {
+        return PhysicalSkillCode::getIt(PhysicalSkillCode::SHIELD_USAGE);
+    }
+
+    public function getSelectedShieldSkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::SHIELD_SKILL_VALUE);
+    }
+
+    /**
      * @return array|BodyArmorCode[]
      */
     public function getPossibleBodyArmors(): array
@@ -538,6 +576,19 @@ class Controller extends StrictObject
         }
 
         return BodyArmorCode::getIt($shield);
+    }
+
+    public function getSelectedArmorSkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::ARMOR_SKILL_VALUE);
+    }
+
+    /**
+     * @return PhysicalSkillCode
+     */
+    public function getPossibleSkillForArmor(): PhysicalSkillCode
+    {
+        return PhysicalSkillCode::getIt(PhysicalSkillCode::ARMOR_WEARING);
     }
 
     /**
