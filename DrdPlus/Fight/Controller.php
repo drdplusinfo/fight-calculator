@@ -72,10 +72,14 @@ class Controller extends StrictObject
     const MELEE_FIGHT_SKILL_VALUE = 'melee_fight_skill_value';
     const RANGED_FIGHT_SKILL = 'ranged_fight_skill';
     const RANGED_FIGHT_SKILL_VALUE = 'ranged_fight_skill_value';
+    const SHIELD = 'shield';
+    const BODY_ARMOR = 'body_armor';
+    const HELM = 'helm';
+
     private static $PARAMETERS = [self::MELEE_HOLDING, self::RANGED_WEAPON, self::STRENGTH, self::AGILITY, self::KNACK,
         self::WILL, self::INTELLIGENCE, self::CHARISMA, self::SIZE, self::HEIGHT_IN_CM, self::MELEE_HOLDING,
         self::RANGED_HOLDING, self::PROFESSION, self::MELEE_FIGHT_SKILL, self::MELEE_FIGHT_SKILL_VALUE,
-        self::RANGED_FIGHT_SKILL, self::RANGED_FIGHT_SKILL_VALUE,
+        self::RANGED_FIGHT_SKILL, self::RANGED_FIGHT_SKILL_VALUE, self::SHIELD, self::BODY_ARMOR, self::HELM,
     ];
 
     public function __construct()
@@ -494,5 +498,65 @@ class Controller extends StrictObject
     public function getSelectedRangedSkillRankValue(): int
     {
         return (int)$this->getValueFromRequest(self::RANGED_FIGHT_SKILL_VALUE);
+    }
+
+    /**
+     * @return array|ShieldCode[]
+     */
+    public function getPossibleShields(): array
+    {
+        return array_map(function (string $armorValue) {
+            return ShieldCode::getIt($armorValue);
+        }, ShieldCode::getPossibleValues());
+    }
+
+    public function getSelectedShield(): ShieldCode
+    {
+        $shield = $this->getValueFromRequest(self::SHIELD);
+        if (!$shield) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+
+        return ShieldCode::getIt($shield);
+    }
+
+    /**
+     * @return array|BodyArmorCode[]
+     */
+    public function getPossibleBodyArmors(): array
+    {
+        return array_map(function (string $armorValue) {
+            return BodyArmorCode::getIt($armorValue);
+        }, BodyArmorCode::getPossibleValues());
+    }
+
+    public function getSelectedBodyArmor(): BodyArmorCode
+    {
+        $shield = $this->getValueFromRequest(self::BODY_ARMOR);
+        if (!$shield) {
+            return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
+        }
+
+        return BodyArmorCode::getIt($shield);
+    }
+
+    /**
+     * @return array|HelmCode[]
+     */
+    public function getPossibleHelms(): array
+    {
+        return array_map(function (string $helmValue) {
+            return HelmCode::getIt($helmValue);
+        }, HelmCode::getPossibleValues());
+    }
+
+    public function getSelectedHelm(): HelmCode
+    {
+        $shield = $this->getValueFromRequest(self::HELM);
+        if (!$shield) {
+            return HelmCode::getIt(HelmCode::WITHOUT_HELM);
+        }
+
+        return HelmCode::getIt($shield);
     }
 }

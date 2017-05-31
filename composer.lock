@@ -1140,12 +1140,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "12fc2676184be57b54cd2addee40dfc62bd4db39"
+                "reference": "92d05b42eabfb1202b976ad53476f0d36cf5cfa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/12fc2676184be57b54cd2addee40dfc62bd4db39",
-                "reference": "12fc2676184be57b54cd2addee40dfc62bd4db39",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/92d05b42eabfb1202b976ad53476f0d36cf5cfa5",
+                "reference": "92d05b42eabfb1202b976ad53476f0d36cf5cfa5",
                 "shasum": ""
             },
             "require": {
@@ -1171,7 +1171,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-05-31 07:10:17"
+            "time": "2017-05-31 16:53:17"
         },
         {
             "name": "drd-plus/combat-actions",
