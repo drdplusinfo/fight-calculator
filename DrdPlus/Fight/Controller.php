@@ -62,6 +62,8 @@ class Controller extends StrictObject
     const MELEE_HOLDING = 'melee-holding';
     const RANGED_HOLDING = 'ranged-holding';
     const PROFESSION = 'profession';
+    const MELEE_FIGHT_SKILLS = 'melee_fight_skills';
+    const RANGED_FIGHT_SKILLS = 'ranged_fight_skills';
 
     public function __construct()
     {
@@ -228,21 +230,7 @@ class Controller extends StrictObject
                 Speed::getIt($strength, $agility, $height)
             ),
             new CombatActions([], Tables::getIt()),
-            Skills::createSkills(
-                new ProfessionLevels(
-                    ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
-                    $firstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($this->getSelectedProfessionCode()))
-                ),
-                SkillPointsFromBackground::getIt(
-                    new PositiveIntegerObject(0),
-                    Ancestry::getIt(new PositiveIntegerObject(0), Tables::getIt()),
-                    Tables::getIt()
-                ),
-                new PhysicalSkills($firstLevel),
-                new PsychicalSkills($firstLevel),
-                new CombinedSkills($firstLevel),
-                Tables::getIt()
-            ),
+            $this->createSkills(),
             BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR),
             HelmCode::getIt(HelmCode::WITHOUT_HELM),
             $this->getSelectedProfessionCode(),
@@ -253,6 +241,27 @@ class Controller extends StrictObject
             ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
             false, // enemy is not faster
             Glared::createWithoutGlare(new Health())
+        );
+    }
+
+    private function createSkills(): Skills
+    {
+        $firstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($this->getSelectedProfessionCode()));
+
+        return Skills::createSkills(
+            new ProfessionLevels(
+                ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
+                $firstLevel
+            ),
+            SkillPointsFromBackground::getIt(
+                new PositiveIntegerObject(0),
+                Ancestry::getIt(new PositiveIntegerObject(0), Tables::getIt()),
+                Tables::getIt()
+            ),
+            new PhysicalSkills($firstLevel),
+            new PsychicalSkills($firstLevel),
+            new CombinedSkills($firstLevel),
+            Tables::getIt()
         );
     }
 

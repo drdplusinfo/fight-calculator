@@ -58,7 +58,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         obouručně
     </label>
     <div>
-        <label><select name="melee-fight-skill">
+        <label><select name="<?= $controller::MELEE_FIGHT_SKILLS ?>">
                 <?php foreach ($controller->getPossibleSkillsForMelee() as $skillCode) {
                     ?>
                     <option name="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
@@ -123,7 +123,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         obouručně
     </label>
     <div>
-        <label><select name="ranged-fight-skill">
+        <label><select name="<?= $controller::RANGED_FIGHT_SKILLS ?>">
                 <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
                     ?>
                     <option name="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
