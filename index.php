@@ -36,13 +36,16 @@ $controller = new Controller();
             <?php include __DIR__ . '/melee_weapon.php' ?>
         </div>
         <div class="panel">
-            <?php include __DIR__ . '/shield.php'; ?>
+            <?php include __DIR__ . '/shield_with_melee_weapon.php'; ?>
         </div>
     </div>
     <div class="block">
         <h2> Na dálku </h2>
         <div class="panel">
             <?php include __DIR__ . '/ranged_weapon.php'; ?>
+        </div>
+        <div class="panel">
+            <?php include __DIR__ . '/shield_with_ranged_weapon.php'; ?>
         </div>
     </div>
     <div class="block">

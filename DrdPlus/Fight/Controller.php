@@ -56,6 +56,7 @@ use Granam\String\StringTools;
 class Controller extends StrictObject
 {
     const HISTORY_TOKEN = 'history_token';
+    const HISTORY = 'history';
     const DELETE_HISTORY = 'delete_history';
     // fields to remember
     const MELEE_WEAPON = 'melee_weapon';
@@ -75,19 +76,20 @@ class Controller extends StrictObject
     const MELEE_FIGHT_SKILL_RANK = 'melee_fight_skill_rank';
     const RANGED_FIGHT_SKILL = 'ranged_fight_skill';
     const RANGED_FIGHT_SKILL_RANK = 'ranged_fight_skill_rank';
-    const SHIELD = 'shield';
-    const SHIELD_USAGE_SKILL_RANK = 'shield_usage_skill_rank';
-    const FIGHT_WITH_SHIELDS_SKILL_RANK = 'fight_with_shields_skill_rank';
+    const MELEE_SHIELD = 'melee_shield';
+    const MELEE_SHIELD_USAGE_SKILL_RANK = 'melee_shield_usage_skill_rank';
+    const MELEE_FIGHT_WITH_SHIELDS_SKILL_RANK = 'melee_fight_with_shields_skill_rank';
+    const RANGED_SHIELD = 'ranged_shield';
+    const RANGED_SHIELD_USAGE_SKILL_RANK = 'ranged_shield_usage_skill_rank';
+    const RANGED_FIGHT_WITH_SHIELDS_SKILL_RANK = 'ranged_fight_with_shields_skill_rank';
     const BODY_ARMOR = 'body_armor';
     const ARMOR_SKILL_VALUE = 'armor_skill_value';
     const HELM = 'helm';
 
-    private static $PARAMETERS = [self::MELEE_HOLDING, self::RANGED_WEAPON, self::STRENGTH, self::AGILITY, self::KNACK,
-        self::WILL, self::INTELLIGENCE, self::CHARISMA, self::SIZE, self::HEIGHT_IN_CM, self::MELEE_HOLDING,
-        self::RANGED_HOLDING, self::PROFESSION, self::MELEE_FIGHT_SKILL, self::MELEE_FIGHT_SKILL_RANK,
-        self::RANGED_FIGHT_SKILL, self::RANGED_FIGHT_SKILL_RANK, self::SHIELD, self::SHIELD_USAGE_SKILL_RANK,
-        self::FIGHT_WITH_SHIELDS_SKILL_RANK, self::BODY_ARMOR, self::ARMOR_SKILL_VALUE, self::HELM,
-    ];
+    /**
+     * @var array
+     */
+    private $history;
 
     public function __construct()
     {
@@ -98,12 +100,17 @@ class Controller extends StrictObject
         }
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
         if (!empty($_GET)) {
-            foreach (self::$PARAMETERS as $name) {
-                $this->setCookie($name, $_GET[$name] ?? null, $afterYear);
-            }
-            setcookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
+            $this->setCookie(self::HISTORY, serialize($_GET), $afterYear);
+            $this->setCookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
         } elseif (!$this->cookieHistoryIsValid()) {
             $this->deleteHistory();
+        }
+        $this->history = [];
+        if (!empty($_COOKIE[self::HISTORY])) {
+            $this->history = unserialize($_COOKIE[self::HISTORY], ['allowed_classes' => []]);
+            if (!is_array($this->history)) {
+                $this->history = [];
+            }
         }
     }
 
@@ -123,10 +130,8 @@ class Controller extends StrictObject
 
     private function deleteHistory()
     {
-        setcookie(self::HISTORY_TOKEN, null);
-        foreach (self::$PARAMETERS as $parameter) {
-            setcookie($parameter, null);
-        }
+        $this->setCookie(self::HISTORY_TOKEN, null);
+        $this->setCookie(self::HISTORY, null);
     }
 
     public function getMeleeWeaponCodes(): array
@@ -175,8 +180,8 @@ class Controller extends StrictObject
         if (array_key_exists($name, $_GET)) {
             return $_GET[$name];
         }
-        if (array_key_exists($name, $_COOKIE) && $this->cookieHistoryIsValid()) {
-            return $_COOKIE[$name];
+        if (array_key_exists($name, $this->history) && $this->cookieHistoryIsValid()) {
+            return $this->history[$name];
         }
 
         return null;
@@ -246,7 +251,8 @@ class Controller extends StrictObject
             $this->getSelectedMeleeWeapon(),
             $this->getSelectedMeleeHolding(),
             $this->getSelectedMeleeSkillCode(),
-            $this->getSelectedMeleeSkillRankValue()
+            $this->getSelectedMeleeSkillRank(),
+            $this->getSelectedMeleeShield()
         );
     }
 
@@ -254,7 +260,8 @@ class Controller extends StrictObject
         WeaponlikeCode $weaponlikeCode,
         ItemHoldingCode $weaponHolding,
         SkillCode $skillWithWeapon,
-        int $skillRankWithWeapon
+        int $skillRankWithWeapon,
+        ShieldCode $usedShield
     ): FightProperties
     {
         return new FightProperties(
@@ -278,7 +285,7 @@ class Controller extends StrictObject
             $weaponlikeCode,
             $weaponHolding,
             false, // does not fight with two weapons
-            $this->getSelectedShield(),
+            $usedShield,
             false, // enemy is not faster
             Glared::createWithoutGlare(new Health())
         );
@@ -353,7 +360,7 @@ class Controller extends StrictObject
                 $physicalSkills->getArmorWearing()->increaseSkillRank($physicalSkillPoint);
             }
         }
-        $selectedShieldSkillRank = $this->getSelectedShieldUsageSkillRank();
+        $selectedShieldSkillRank = $this->getSelectedMeleeShieldUsageSkillRank();
         if ($selectedShieldSkillRank > 0) {
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $firstLevel,
@@ -386,13 +393,25 @@ class Controller extends StrictObject
         return ItemHoldingCode::getIt($meleeHolding);
     }
 
-    public function getShieldFightProperties(): FightProperties
+    public function getMeleeShieldFightProperties(): FightProperties
     {
         return $this->getFightProperties(
-            $this->getSelectedShield(),
-            $this->getShieldHolding(),
+            $this->getSelectedMeleeShield(),
+            $this->getMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getSelectedFightWithShieldSkillRankValue()
+            $this->getSelectedMeleeFightWithShieldSkillRank(),
+            $this->getSelectedMeleeShield()
+        );
+    }
+
+    public function getRangedShieldFightProperties(): FightProperties
+    {
+        return $this->getFightProperties(
+            $this->getSelectedRangedShield(),
+            $this->getRangedShieldHolding(),
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
+            $this->getSelectedRangedFightWithShieldsSkillRank(),
+            $this->getSelectedRangedShield()
         );
     }
 
@@ -400,11 +419,11 @@ class Controller extends StrictObject
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getShieldHolding(): ItemHoldingCode
+    public function getMeleeShieldHolding(): ItemHoldingCode
     {
         if ($this->getSelectedMeleeHolding()->holdsByTwoHands()) {
             /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
+            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedMeleeShield())) {
                 // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
                 return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
             }
@@ -415,9 +434,28 @@ class Controller extends StrictObject
         return $this->getSelectedMeleeHolding()->getOpposite();
     }
 
-    private function getSelectedFightWithShieldSkillRankValue(): int
+    /**
+     * @return ItemHoldingCode
+     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
+     */
+    public function getRangedShieldHolding(): ItemHoldingCode
     {
-        return (int)$this->getValueFromRequest(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
+        if ($this->getSelectedRangedHolding()->holdsByTwoHands()) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedRangedShield())) {
+                // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
+                return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+            }
+
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return $this->getSelectedRangedHolding()->getOpposite();
+    }
+
+    private function getSelectedMeleeFightWithShieldSkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::MELEE_FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     public function getRangedFightProperties(): FightProperties
@@ -426,7 +464,8 @@ class Controller extends StrictObject
             $this->getSelectedRangedWeapon(),
             $this->getSelectedRangedHolding(),
             $this->getSelectedRangedSkillCode(),
-            $this->getSelectedRangedSkillRankValue()
+            $this->getSelectedRangedSkillRank(),
+            $this->getSelectedRangedShield()
         );
     }
 
@@ -554,12 +593,12 @@ class Controller extends StrictObject
         return $this->getSelectedSkill(self::RANGED_FIGHT_SKILL);
     }
 
-    public function getSelectedMeleeSkillRankValue(): int
+    public function getSelectedMeleeSkillRank(): int
     {
         return (int)$this->getValueFromRequest(self::MELEE_FIGHT_SKILL_RANK);
     }
 
-    public function getSelectedRangedSkillRankValue(): int
+    public function getSelectedRangedSkillRank(): int
     {
         return (int)$this->getValueFromRequest(self::RANGED_FIGHT_SKILL_RANK);
     }
@@ -574,9 +613,9 @@ class Controller extends StrictObject
         }, ShieldCode::getPossibleValues());
     }
 
-    public function getSelectedShield(): ShieldCode
+    public function getSelectedMeleeShield(): ShieldCode
     {
-        $shield = $this->getValueFromRequest(self::SHIELD);
+        $shield = $this->getValueFromRequest(self::MELEE_SHIELD);
         if (!$shield) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
@@ -592,9 +631,9 @@ class Controller extends StrictObject
         return PhysicalSkillCode::getIt(PhysicalSkillCode::SHIELD_USAGE);
     }
 
-    public function getSelectedShieldUsageSkillRank(): int
+    public function getSelectedMeleeShieldUsageSkillRank(): int
     {
-        return (int)$this->getValueFromRequest(self::SHIELD_USAGE_SKILL_RANK);
+        return (int)$this->getValueFromRequest(self::MELEE_SHIELD_USAGE_SKILL_RANK);
     }
 
     /**
@@ -605,9 +644,29 @@ class Controller extends StrictObject
         return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS);
     }
 
-    public function getSelectedFightWithShieldsSkillRank(): int
+    public function getSelectedMeleeFightWithShieldsSkillRank(): int
     {
-        return (int)$this->getValueFromRequest(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
+        return (int)$this->getValueFromRequest(self::MELEE_FIGHT_WITH_SHIELDS_SKILL_RANK);
+    }
+
+    public function getSelectedRangedShield(): ShieldCode
+    {
+        $shield = $this->getValueFromRequest(self::RANGED_SHIELD);
+        if (!$shield) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+
+        return ShieldCode::getIt($shield);
+    }
+
+    public function getSelectedRangedShieldUsageSkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::RANGED_SHIELD_USAGE_SKILL_RANK);
+    }
+
+    public function getSelectedRangedFightWithShieldsSkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::RANGED_FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     /**
