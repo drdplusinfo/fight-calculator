@@ -1,16 +1,37 @@
 body {
     background: url("/images/background.png") no-repeat center fixed;
     background-size: contain;
+    font-family: "Times New Roman", Times, serif;
+    font-size: medium;
+}
+
+input, select {
+    margin: 0.2em 0;
 }
 
 .block {
     clear: left;
+    float: left;
+    max-width: 100%;
 }
 
 .panel {
     float: left;
+    margin-right: 1em;
 }
 
-.panel:not(:last-child) {
-    margin-left: 1em;
+h2 {
+    margin: 0.4em 0;
+}
+
+h4 {
+    margin: 0.1em 0;
+}
+
+.keyword {
+    font-style: italic;
+}
+
+.hint {
+    font-size: small;
 }

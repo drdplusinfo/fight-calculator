@@ -1140,12 +1140,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "92d05b42eabfb1202b976ad53476f0d36cf5cfa5"
+                "reference": "4ea094d07dae436d4579a66608e6e35877b1d4c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/92d05b42eabfb1202b976ad53476f0d36cf5cfa5",
-                "reference": "92d05b42eabfb1202b976ad53476f0d36cf5cfa5",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/4ea094d07dae436d4579a66608e6e35877b1d4c2",
+                "reference": "4ea094d07dae436d4579a66608e6e35877b1d4c2",
                 "shasum": ""
             },
             "require": {
@@ -1171,7 +1171,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-05-31 16:53:17"
+            "time": "2017-06-01 04:32:31"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1680,12 +1680,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "90daf9704fc576a7815ff8743d2b91602ad12807"
+                "reference": "a5f9b2b12dc2697eb1ef387b95e8edf70e968896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/90daf9704fc576a7815ff8743d2b91602ad12807",
-                "reference": "90daf9704fc576a7815ff8743d2b91602ad12807",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/a5f9b2b12dc2697eb1ef387b95e8edf70e968896",
+                "reference": "a5f9b2b12dc2697eb1ef387b95e8edf70e968896",
                 "shasum": ""
             },
             "require": {
@@ -1718,7 +1718,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-05-30 17:47:06"
+            "time": "2017-06-01 05:58:53"
         },
         {
             "name": "drd-plus/tables",
