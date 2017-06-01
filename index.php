@@ -11,6 +11,8 @@ $controller = new Controller();
 ?>
 <html>
 <head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
