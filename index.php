@@ -14,8 +14,11 @@ $controller = new Controller();
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/socials.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/facebook.js" async></script>
 </head>
 <body>
+<div id="fb-root"></div>
 <form action="" method="post">
     <input type="hidden" name="<?= $controller::DELETE_HISTORY ?>" value="1">
     <input type="submit" value="Vymazat historii">
@@ -51,5 +54,13 @@ $controller = new Controller();
     </div>
     <div class="block"><?php include __DIR__ . '/properties.php'; ?></div>
 </form>
+<div class="block">
+    <div class="fb-like facebook"
+         data-href="https://boj.drdplus.info/<?= $_SERVER['QUERY_STRING'] ? ('?' . $_SERVER['QUERY_STRING']) : '' ?>"
+         data-layout="button" data-action="recommend"
+         data-size="small" data-show-faces="false" data-share="true"></div>
+    <a href="https://github.com/jaroslavtyc/drd-plus-fight/"
+       title="Fork me on GitHub"><img class="github" src="/images/GitHub-Mark-64px.png"></a>
+</div>
 </body>
 </html>
