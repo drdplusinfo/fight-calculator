@@ -53,25 +53,29 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </label>
 </div>
 <div class="panel">
-    <label>dovednost <select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
-            <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
-                ?>
-                <option value="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
-            <?php } ?>
-        </select>
-    </label>
-    <label>na stupni <input type="radio" value="0" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
-                              <?php if ($controller->getSelectedRangedSkillRank() === 0) { ?>checked<?php } ?>> 0,
-    </label>
-    <label><input type="radio" value="1" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
-                    <?php if ($controller->getSelectedRangedSkillRank() === 1) { ?>checked<?php } ?>> 1,
-    </label>
-    <label><input type="radio" value="2" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
-                    <?php if ($controller->getSelectedRangedSkillRank() === 2) { ?>checked<?php } ?>> 2,
-    </label>
-    <label><input type="radio" value="3" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
-                    <?php if ($controller->getSelectedRangedSkillRank() === 3) { ?>checked<?php } ?>> 3
-    </label>
+    <div class="panel">
+        <label>dovednost <select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
+                <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
+                    ?>
+                    <option value="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
+                <?php } ?>
+            </select>
+        </label>
+    </div>
+    <div class="panel">
+        <label>na stupni <input type="radio" value="0" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+                                <?php if ($controller->getSelectedRangedSkillRank() === 0) { ?>checked<?php } ?>> 0,
+        </label>
+        <label><input type="radio" value="1" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+                      <?php if ($controller->getSelectedRangedSkillRank() === 1) { ?>checked<?php } ?>> 1,
+        </label>
+        <label><input type="radio" value="2" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+                      <?php if ($controller->getSelectedRangedSkillRank() === 2) { ?>checked<?php } ?>> 2,
+        </label>
+        <label><input type="radio" value="3" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+                      <?php if ($controller->getSelectedRangedSkillRank() === 3) { ?>checked<?php } ?>> 3
+        </label>
+    </div>
 </div>
 <div><input type="submit" value="OK"></div>
 <div class="panel">

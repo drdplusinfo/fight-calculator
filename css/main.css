@@ -6,7 +6,8 @@ body {
 }
 
 input, select {
-    margin: 0.2em 0;
+    margin: 0;
+    padding: 0;
 }
 
 .block {
@@ -17,7 +18,7 @@ input, select {
 
 .panel {
     float: left;
-    margin-right: 1em;
+    margin-right: 0.3em;
 }
 
 h2 {
