@@ -54,6 +54,9 @@ $controller = new Controller();
     </div>
     <div class="block"><?php include __DIR__ . '/properties.php'; ?></div>
 </form>
+<div class="block issues">
+    <a href="https://github.com/jaroslavtyc/drd-plus-fight/issues">Máš nápad 😀? Vidíš chybu  😱?️ Sem s tím !</a>
+</div>
 <div class="block">
     <div class="fb-like facebook"
          data-href="https://boj.drdplus.info/<?= $_SERVER['QUERY_STRING'] ? ('?' . $_SERVER['QUERY_STRING']) : '' ?>"
