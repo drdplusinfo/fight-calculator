@@ -27,17 +27,17 @@ namespace DrdPlus\Fight;
     <label>
         dovednost <span class="keyword"><?= $controller->getPossibleSkillForArmor()->translateTo('cs') ?></span>
     </label>
-    <label>na stupni 0 <input type="radio" value="0" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                              <?php if ($controller->getSelectedArmorSkillRank() === 0) { ?>checked<?php } ?>>
+    <label>na stupni <input type="radio" value="0" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+                              <?php if ($controller->getSelectedArmorSkillRank() === 0) { ?>checked<?php } ?>> 0,
     </label>
-    <label>1 <input type="radio" value="1" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                    <?php if ($controller->getSelectedArmorSkillRank() === 1) { ?>checked<?php } ?>>
+    <label><input type="radio" value="1" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+                    <?php if ($controller->getSelectedArmorSkillRank() === 1) { ?>checked<?php } ?>> 1,
     </label>
-    <label>2 <input type="radio" value="2" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                    <?php if ($controller->getSelectedArmorSkillRank() === 2) { ?>checked<?php } ?>>
+    <label><input type="radio" value="2" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+                    <?php if ($controller->getSelectedArmorSkillRank() === 2) { ?>checked<?php } ?>> 2,
     </label>
-    <label>3 <input type="radio" value="3" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                    <?php if ($controller->getSelectedArmorSkillRank() === 3) { ?>checked<?php } ?>>
+    <label><input type="radio" value="3" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+                    <?php if ($controller->getSelectedArmorSkillRank() === 3) { ?>checked<?php } ?>> 3
     </label>
 </div>
 <div class="block"><input type="submit" value="OK"></div>
