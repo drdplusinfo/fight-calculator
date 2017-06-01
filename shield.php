@@ -59,25 +59,45 @@ use DrdPlus\Tables\Tables;
 
 <div class="block">
     <div class="panel">
-        <?php $shieldFightProperties = $controller->getShieldFightProperties(); ?>
+        <h4>štít se zbraní na blízko</h4>
+        <?php $meleeShieldFightProperties = $controller->getMeleeShieldFightProperties(); ?>
         <div>Bojové číslo <span
-                    class="hint">se štítem jako zbraň</span>: <?= $shieldFightProperties->getFightNumber() ?>
+                    class="hint">se štítem jako zbraň</span>: <?= $meleeShieldFightProperties->getFightNumber() ?>
         </div>
         <div>
-            ÚČ <span class="hint">se štítem jako zbraň</span>: <?= $shieldFightProperties->getAttackNumber(
+            ÚČ <span class="hint">se štítem jako zbraň</span>: <?= $meleeShieldFightProperties->getAttackNumber(
                 new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
                 Size::getIt(0)
             ) ?>
         </div>
         <div>
-            ZZ <span class="hint">se štítem jako zbraň</span>: <?= $shieldFightProperties->getBaseOfWounds() ?>
+            ZZ <span class="hint">se štítem jako zbraň</span>: <?= $meleeShieldFightProperties->getBaseOfWounds() ?>
         </div>
         <div>Obranné číslo <span
-                    class="hint">se štítem</span>: <?= $shieldFightProperties->getDefenseNumberWithShield() ?>
+                    class="hint">se štítem</span>: <?= $meleeShieldFightProperties->getDefenseNumberWithShield() ?>
         </div>
-        <div>se zbraní na blízko držen <span
+        <div>držen <span
                     class="keyword"><?= $controller->getMeleeShieldHolding()->translateTo('cs') ?></span></div>
-        <div>se zbraní na dálku držen <span
+    </div>
+    <div class="panel">
+        <h4>štít se zbraní na dálku</h4>
+        <?php $rangedShieldFightProperties = $controller->getRangedShieldFightProperties(); ?>
+        <div>Bojové číslo <span
+                    class="hint">se štítem jako zbraň</span>: <?= $rangedShieldFightProperties->getFightNumber() ?>
+        </div>
+        <div>
+            ÚČ <span class="hint">se štítem jako zbraň</span>: <?= $rangedShieldFightProperties->getAttackNumber(
+                new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+                Size::getIt(0)
+            ) ?>
+        </div>
+        <div>
+            ZZ <span class="hint">se štítem jako zbraň</span>: <?= $rangedShieldFightProperties->getBaseOfWounds() ?>
+        </div>
+        <div>Obranné číslo <span
+                    class="hint">se štítem</span>: <?= $rangedShieldFightProperties->getDefenseNumberWithShield() ?>
+        </div>
+        <div>držen <span
                     class="keyword"><?= $controller->getRangedShieldHolding()->translateTo('cs') ?></span></div>
     </div>
 </div>

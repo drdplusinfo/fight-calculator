@@ -390,11 +390,22 @@ class Controller extends StrictObject
         return ItemHoldingCode::getIt($meleeHolding);
     }
 
-    public function getShieldFightProperties(): FightProperties
+    public function getMeleeShieldFightProperties(): FightProperties
     {
         return $this->getFightProperties(
             $this->getSelectedShield(),
             $this->getMeleeShieldHolding(),
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
+            $this->getSelectedFightWithShieldSkillRank(),
+            $this->getSelectedShield()
+        );
+    }
+
+    public function getRangedShieldFightProperties(): FightProperties
+    {
+        return $this->getFightProperties(
+            $this->getSelectedShield(),
+            $this->getRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShield()
@@ -437,6 +448,11 @@ class Controller extends StrictObject
         }
 
         return $this->getSelectedRangedHolding()->getOpposite();
+    }
+
+    private function getSelectedFightWithShieldSkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     public function getRangedFightProperties(): FightProperties
