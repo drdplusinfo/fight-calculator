@@ -400,8 +400,18 @@ class Controller extends StrictObject
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    private function getShieldHolding(): ItemHoldingCode
+    public function getShieldHolding(): ItemHoldingCode
     {
+        if ($this->getSelectedMeleeHolding()->holdsByTwoHands()) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
+                // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
+                return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+            }
+
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
         return $this->getSelectedMeleeHolding()->getOpposite();
     }
 
