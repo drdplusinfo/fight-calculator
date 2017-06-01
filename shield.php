@@ -23,28 +23,40 @@ use DrdPlus\Tables\Tables;
     </label>
 </div>
 <div class="panel">
-    <label>
-        dovednost <span class="keyword"><?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></span>
-        na stupni
-        <input
-                type="number" min="0" max="3"
-                name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
-                value="<?= $controller->getSelectedShieldSkillRank() ?>">
+    dovednost <span class="keyword"><?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></span>
+    <label>na stupni 0 <input type="radio" value="0" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
+                              <?php if ($controller->getSelectedShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
+    </label>
+    <label>1 <input type="radio" value="1" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedShieldUsageSkillRank() === 1) { ?>checked<?php } ?>>
+    </label>
+    <label>2 <input type="radio" value="2" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedShieldUsageSkillRank() === 2) { ?>checked<?php } ?>>
+    </label>
+    <label>3 <input type="radio" value="3" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedShieldUsageSkillRank() === 3) { ?>checked<?php } ?>>
     </label>
 </div>
 <div class="panel">
     <label>
         dovednost <span
                 class="keyword"><?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?></span>
-        na stupni
-        <input
-                type="number" min="0" max="3"
-                name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                value="<?= $controller->getSelectedFightWithShieldsSkillRank() ?>">
+    </label>
+    <label>na stupni 0 <input type="radio" value="0" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+                              <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
+    </label>
+    <label>1 <input type="radio" value="1" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 1) { ?>checked<?php } ?>>
+    </label>
+    <label>2 <input type="radio" value="2" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 2) { ?>checked<?php } ?>>
+    </label>
+    <label>3 <input type="radio" value="3" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 3) { ?>checked<?php } ?>>
     </label>
 </div>
-<div><input type="submit" value="OK"></div>
-<div class="panel">
+<div class="block"><input type="submit" value="OK"></div>
+<div class="block">
     <?php $rangedFightProperties = $controller->getShieldFightProperties(); ?>
     <div>Bojové číslo <span class="hint">se štítem jako zbraň</span>: <?= $rangedFightProperties->getFightNumber() ?>
     </div>

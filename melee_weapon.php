@@ -68,9 +68,17 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
             <?php } ?>
         </select>
     </label>
-    <label>na stupni <input type="number" min="0" max="3"
-                            value="<?= $controller->getSelectedMeleeSkillRankValue() ?>"
-                            name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>">
+    <label>na stupni 0 <input type="radio" value="0" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
+                              <?php if ($controller->getSelectedMeleeSkillRankValue() === 0) { ?>checked<?php } ?>>
+    </label>
+    <label>1 <input type="radio" value="1" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedMeleeSkillRankValue() === 1) { ?>checked<?php } ?>>
+    </label>
+    <label>2 <input type="radio" value="2" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedMeleeSkillRankValue() === 2) { ?>checked<?php } ?>>
+    </label>
+    <label>3 <input type="radio" value="3" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
+                    <?php if ($controller->getSelectedMeleeSkillRankValue() === 3) { ?>checked<?php } ?>>
     </label>
 </div>
 <div><input type="submit" value="OK"></div>

@@ -353,7 +353,7 @@ class Controller extends StrictObject
                 $physicalSkills->getArmorWearing()->increaseSkillRank($physicalSkillPoint);
             }
         }
-        $selectedShieldSkillRank = $this->getSelectedShieldSkillRank();
+        $selectedShieldSkillRank = $this->getSelectedShieldUsageSkillRank();
         if ($selectedShieldSkillRank > 0) {
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $firstLevel,
@@ -582,7 +582,7 @@ class Controller extends StrictObject
         return PhysicalSkillCode::getIt(PhysicalSkillCode::SHIELD_USAGE);
     }
 
-    public function getSelectedShieldSkillRank(): int
+    public function getSelectedShieldUsageSkillRank(): int
     {
         return (int)$this->getValueFromRequest(self::SHIELD_USAGE_SKILL_RANK);
     }
