@@ -22,11 +22,10 @@ $controller = new Controller();
 </form>
 <div class="block">
     <?php $fightProperties = $controller->getRangedFightProperties() ?>
-    <div>Boj <span class="hint">(není ovlivněn výzbrojí)</span>: <?= $fightProperties->getFight() ?></div>
-    <div>Útok <span class="hint">(není ovlivněn výzbrojí)</span>: <?= $fightProperties->getAttack() ?></div>
-    <div>Obrana <span class="hint">(není ovlivněna výzbrojí)</span>: <?= $fightProperties->getDefense() ?></div>
-    <div>Obranné číslo <span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span>:
-        <?= $fightProperties->getDefenseNumber() ?>
+    <div>Boj: <?= $fightProperties->getFight() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
+    <div>Útok: <?= $fightProperties->getAttack() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
+    <div>Obrana: <?= $fightProperties->getDefense() ?> <span class="hint">(není ovlivněna výzbrojí)</span></div>
+    <div>Obranné číslo: <?= $fightProperties->getDefenseNumber() ?> <span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span>
     </div>
 </div>
 <form class="block" action="" method="get">
