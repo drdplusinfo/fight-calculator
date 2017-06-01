@@ -13,7 +13,6 @@ use DrdPlus\Tables\Tables;
 $selectedMeleeWeapon = $controller->getSelectedMeleeWeapon();
 $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValue() : null;
 ?>
-<h4>Zbraň</h4>
 <div class="panel">
     <label>
         <select name="<?= $controller::MELEE_WEAPON ?>" title="Melee weapon">
