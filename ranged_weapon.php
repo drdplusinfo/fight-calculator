@@ -35,20 +35,20 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::RANGED_HOLDING ?>"
-               <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::RANGED_WEAPON_HOLDING ?>"
+               <?php if ($controller->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
         v dominantní ruce</label>
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::RANGED_HOLDING ?>"
-               <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::RANGED_WEAPON_HOLDING ?>"
+               <?php if ($controller->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
         v druhé ruce</label>
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::RANGED_HOLDING ?>"
-               <?php if ($controller->getSelectedRangedHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::RANGED_WEAPON_HOLDING ?>"
+               <?php if ($controller->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
         obouručně
     </label>
 </div>

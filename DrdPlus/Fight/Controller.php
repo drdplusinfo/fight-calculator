@@ -69,8 +69,8 @@ class Controller extends StrictObject
     const CHARISMA = PropertyCode::CHARISMA;
     const SIZE = PropertyCode::SIZE;
     const HEIGHT_IN_CM = PropertyCode::HEIGHT_IN_CM;
-    const MELEE_HOLDING = 'melee_holding';
-    const RANGED_HOLDING = 'ranged_holding';
+    const MELEE_WEAPON_HOLDING = 'melee_weapon_holding';
+    const RANGED_WEAPON_HOLDING = 'ranged_weapon_holding';
     const PROFESSION = 'profession';
     const MELEE_FIGHT_SKILL = 'melee_fight_skill';
     const MELEE_FIGHT_SKILL_RANK = 'melee_fight_skill_rank';
@@ -246,7 +246,7 @@ class Controller extends StrictObject
     {
         return $this->getFightProperties(
             $this->getSelectedMeleeWeapon(),
-            $this->getSelectedMeleeHolding(),
+            $this->getSelectedMeleeWeaponHolding(),
             $this->getSelectedMeleeSkillCode(),
             $this->getSelectedMeleeSkillRank(),
             $this->getSelectedShield()
@@ -377,12 +377,12 @@ class Controller extends StrictObject
         return Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponCode);
     }
 
-    public function getSelectedMeleeHolding(): ItemHoldingCode
+    public function getSelectedMeleeWeaponHolding(): ItemHoldingCode
     {
         if ($this->isTwoHandedOnly($this->getSelectedMeleeWeapon())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        $meleeHolding = $this->getValueFromRequest(self::MELEE_HOLDING);
+        $meleeHolding = $this->getValueFromRequest(self::MELEE_WEAPON_HOLDING);
         if (!$meleeHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
@@ -418,7 +418,18 @@ class Controller extends StrictObject
      */
     public function getMeleeShieldHolding(): ItemHoldingCode
     {
-        if ($this->getSelectedMeleeHolding()->holdsByTwoHands()) {
+        return $this->getShieldHolding($this->getSelectedMeleeWeaponHolding(), $this->getSelectedMeleeWeapon());
+    }
+
+    /**
+     * @param ItemHoldingCode $weaponHolding
+     * @param WeaponlikeCode $weaponlikeCode
+     * @return ItemHoldingCode
+     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
+     */
+    private function getShieldHolding(ItemHoldingCode $weaponHolding, WeaponlikeCode $weaponlikeCode): ItemHoldingCode
+    {
+        if ($weaponHolding->holdsByTwoHands()) {
             /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
                 // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
@@ -427,8 +438,12 @@ class Controller extends StrictObject
 
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        if ($weaponlikeCode->isUnarmed() && Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+        }
 
-        return $this->getSelectedMeleeHolding()->getOpposite();
+        return $weaponHolding->getOpposite();
     }
 
     /**
@@ -437,17 +452,7 @@ class Controller extends StrictObject
      */
     public function getRangedShieldHolding(): ItemHoldingCode
     {
-        if ($this->getSelectedRangedHolding()->holdsByTwoHands()) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
-                // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
-                return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
-            }
-
-            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
-        }
-
-        return $this->getSelectedRangedHolding()->getOpposite();
+        return $this->getShieldHolding($this->getSelectedRangedWeaponHolding(), $this->getSelectedRangedWeapon());
     }
 
     private function getSelectedFightWithShieldSkillRank(): int
@@ -459,19 +464,19 @@ class Controller extends StrictObject
     {
         return $this->getFightProperties(
             $this->getSelectedRangedWeapon(),
-            $this->getSelectedRangedHolding(),
+            $this->getSelectedRangedWeaponHolding(),
             $this->getSelectedRangedSkillCode(),
             $this->getSelectedRangedSkillRank(),
             $this->getSelectedShield()
         );
     }
 
-    public function getSelectedRangedHolding(): ItemHoldingCode
+    public function getSelectedRangedWeaponHolding(): ItemHoldingCode
     {
         if ($this->isTwoHandedOnly($this->getSelectedRangedWeapon())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        $meleeHolding = $this->getValueFromRequest(self::RANGED_HOLDING);
+        $meleeHolding = $this->getValueFromRequest(self::RANGED_WEAPON_HOLDING);
         if (!$meleeHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }

@@ -37,21 +37,21 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::MELEE_HOLDING ?>"
-               <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::MELEE_WEAPON_HOLDING ?>"
+               <?php if ($controller->getSelectedMeleeWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
         v dominantní ruce</label>
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::MELEE_HOLDING ?>"
-               <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::MELEE_WEAPON_HOLDING ?>"
+               <?php if ($controller->getSelectedMeleeWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
         v druhé
         ruce</label>
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::MELEE_HOLDING ?>"
-               <?php if ($controller->getSelectedMeleeHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::MELEE_WEAPON_HOLDING ?>"
+               <?php if ($controller->getSelectedMeleeWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
         obouručně
     </label>
 </div>
