@@ -19,9 +19,9 @@ $controller = new Controller();
 </head>
 <body>
 <div id="fb-root"></div>
-<form action="" method="post">
-    <input type="hidden" name="<?= $controller::DELETE_HISTORY ?>" value="1">
-    <input type="submit" value="Vymazat historii">
+<form action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
+    <input type="submit" value="Smazat" name="<?= $controller::DELETE_HISTORY ?>">
+    <span class="hint">(včetně paměti uložené v cookies)</span>
 </form>
 <div class="block">
     <?php $fightProperties = $controller->getRangedFightProperties() ?>

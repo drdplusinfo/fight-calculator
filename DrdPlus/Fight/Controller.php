@@ -86,7 +86,7 @@ class Controller extends StrictObject
     /**
      * @var array
      */
-    private $history;
+    private $history = [];
 
     public function __construct()
     {
@@ -102,13 +102,18 @@ class Controller extends StrictObject
         } elseif (!$this->cookieHistoryIsValid()) {
             $this->deleteHistory();
         }
-        $this->history = [];
         if (!empty($_COOKIE[self::HISTORY])) {
             $this->history = unserialize($_COOKIE[self::HISTORY], ['allowed_classes' => []]);
             if (!is_array($this->history)) {
                 $this->history = [];
             }
         }
+    }
+
+    private function deleteHistory()
+    {
+        $this->setCookie(self::HISTORY_TOKEN, null);
+        $this->setCookie(self::HISTORY, null);
     }
 
     private function setCookie(string $name, $value, int $expire = 0)
@@ -125,10 +130,9 @@ class Controller extends StrictObject
         $_COOKIE[$name] = $value;
     }
 
-    private function deleteHistory()
+    private function cookieHistoryIsValid(): bool
     {
-        $this->setCookie(self::HISTORY_TOKEN, null);
-        $this->setCookie(self::HISTORY, null);
+        return !empty($_COOKIE[self::HISTORY_TOKEN]) && $_COOKIE[self::HISTORY_TOKEN] === md5_file(__FILE__);
     }
 
     public function getMeleeWeaponCodes(): array
@@ -182,11 +186,6 @@ class Controller extends StrictObject
         }
 
         return null;
-    }
-
-    private function cookieHistoryIsValid(): bool
-    {
-        return !empty($_COOKIE[self::HISTORY_TOKEN]) && $_COOKIE[self::HISTORY_TOKEN] === md5_file(__FILE__);
     }
 
     /**
