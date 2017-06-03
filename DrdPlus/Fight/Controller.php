@@ -55,12 +55,11 @@ use Granam\String\StringTools;
 
 class Controller extends StrictObject
 {
-    const HISTORY_TOKEN = 'history_token';
-    const HISTORY = 'history';
-    const DELETE_HISTORY = 'delete_history';
+    const DELETE_FIGHT_HISTORY = 'delete_fight_history';
+    const FIGHT_HISTORY_TOKEN = 'fight_history_token';
+    const FIGHT_HISTORY = 'fight_history';
     const REMEMBER = 'remember';
-    const FORGOT = 'forgot';
-    // fields to remember
+    const FORGOT_FIGHT = 'forgot_fight';
     const MELEE_WEAPON = 'melee_weapon';
     const RANGED_WEAPON = 'ranged_weapon';
     const STRENGTH = PropertyCode::STRENGTH;
@@ -92,7 +91,7 @@ class Controller extends StrictObject
 
     public function __construct()
     {
-        if (!empty($_POST[self::DELETE_HISTORY])) {
+        if (!empty($_POST[self::DELETE_FIGHT_HISTORY])) {
             $this->deleteHistory();
             header('Location: /', true, 301);
             exit;
@@ -100,18 +99,18 @@ class Controller extends StrictObject
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
         if (!empty($_GET)) {
             if (!empty($_GET[self::REMEMBER])) {
-                $this->setCookie(self::FORGOT, null, $afterYear);
-                $this->setCookie(self::HISTORY, serialize($_GET), $afterYear);
-                $this->setCookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
+                $this->setCookie(self::FORGOT_FIGHT, null, $afterYear);
+                $this->setCookie(self::FIGHT_HISTORY, serialize($_GET), $afterYear);
+                $this->setCookie(self::FIGHT_HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
             } else {
                 $this->deleteHistory();
-                $this->setCookie(self::FORGOT, 1, $afterYear);
+                $this->setCookie(self::FORGOT_FIGHT, 1, $afterYear);
             }
         } elseif (!$this->cookieHistoryIsValid()) {
             $this->deleteHistory();
         }
-        if (!empty($_COOKIE[self::HISTORY])) {
-            $this->history = unserialize($_COOKIE[self::HISTORY], ['allowed_classes' => []]);
+        if (!empty($_COOKIE[self::FIGHT_HISTORY])) {
+            $this->history = unserialize($_COOKIE[self::FIGHT_HISTORY], ['allowed_classes' => []]);
             if (!is_array($this->history)) {
                 $this->history = [];
             }
@@ -120,8 +119,8 @@ class Controller extends StrictObject
 
     private function deleteHistory()
     {
-        $this->setCookie(self::HISTORY_TOKEN, null);
-        $this->setCookie(self::HISTORY, null);
+        $this->setCookie(self::FIGHT_HISTORY_TOKEN, null);
+        $this->setCookie(self::FIGHT_HISTORY, null);
     }
 
     private function setCookie(string $name, $value, int $expire = 0)
@@ -140,12 +139,12 @@ class Controller extends StrictObject
 
     private function cookieHistoryIsValid(): bool
     {
-        return !empty($_COOKIE[self::HISTORY_TOKEN]) && $_COOKIE[self::HISTORY_TOKEN] === md5_file(__FILE__);
+        return !empty($_COOKIE[self::FIGHT_HISTORY_TOKEN]) && $_COOKIE[self::FIGHT_HISTORY_TOKEN] === md5_file(__FILE__);
     }
 
     public function shouldRemember(): bool
     {
-        return empty($_COOKIE[self::FORGOT]);
+        return empty($_COOKIE[self::FORGOT_FIGHT]);
     }
 
     public function getMeleeWeaponCodes(): array

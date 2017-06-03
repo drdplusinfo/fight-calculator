@@ -19,14 +19,12 @@ $controller = new Controller();
 </head>
 <body>
 <div id="fb-root"></div>
-<div class="block delete">
-    <form action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
-        <label>
-            <input type="submit" value="Smazat" name="<?= $controller::DELETE_HISTORY ?>">
-            <span class="hint">(včetně dlouhodobé paměti)</span>
-        </label>
-    </form>
-</div>
+<form class="block delete" action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
+    <label>
+        <input type="submit" value="Smazat" name="<?= $controller::DELETE_FIGHT_HISTORY ?>">
+        <span class="hint">(včetně dlouhodobé paměti)</span>
+    </label>
+</form>
 <form class="block" action="" method="get">
     <div class="block remember">
         <label><input type="checkbox" name="<?= $controller::REMEMBER ?>" value="1"
