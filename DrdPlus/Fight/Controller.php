@@ -58,6 +58,8 @@ class Controller extends StrictObject
     const HISTORY_TOKEN = 'history_token';
     const HISTORY = 'history';
     const DELETE_HISTORY = 'delete_history';
+    const REMEMBER = 'remember';
+    const FORGOT = 'forgot';
     // fields to remember
     const MELEE_WEAPON = 'melee_weapon';
     const RANGED_WEAPON = 'ranged_weapon';
@@ -97,8 +99,14 @@ class Controller extends StrictObject
         }
         $afterYear = (new \DateTime('+ 1 year'))->getTimestamp();
         if (!empty($_GET)) {
-            $this->setCookie(self::HISTORY, serialize($_GET), $afterYear);
-            $this->setCookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
+            if (!empty($_GET[self::REMEMBER])) {
+                $this->setCookie(self::FORGOT, null, $afterYear);
+                $this->setCookie(self::HISTORY, serialize($_GET), $afterYear);
+                $this->setCookie(self::HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
+            } else {
+                $this->deleteHistory();
+                $this->setCookie(self::FORGOT, 1, $afterYear);
+            }
         } elseif (!$this->cookieHistoryIsValid()) {
             $this->deleteHistory();
         }
@@ -133,6 +141,11 @@ class Controller extends StrictObject
     private function cookieHistoryIsValid(): bool
     {
         return !empty($_COOKIE[self::HISTORY_TOKEN]) && $_COOKIE[self::HISTORY_TOKEN] === md5_file(__FILE__);
+    }
+
+    public function shouldRemember(): bool
+    {
+        return empty($_COOKIE[self::FORGOT]);
     }
 
     public function getMeleeWeaponCodes(): array

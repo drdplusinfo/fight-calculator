@@ -19,19 +19,28 @@ $controller = new Controller();
 </head>
 <body>
 <div id="fb-root"></div>
-<form action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
-    <input type="submit" value="Smazat" name="<?= $controller::DELETE_HISTORY ?>">
-    <span class="hint">(včetně paměti uložené v cookies)</span>
-</form>
-<div class="block">
-    <?php $fightProperties = $controller->getRangedFightProperties() ?>
-    <div>Boj: <?= $fightProperties->getFight() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
-    <div>Útok: <?= $fightProperties->getAttack() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
-    <div>Obrana: <?= $fightProperties->getDefense() ?> <span class="hint">(není ovlivněna výzbrojí)</span></div>
-    <div>Obranné číslo: <?= $fightProperties->getDefenseNumber() ?> <span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span>
-    </div>
+<div class="block delete">
+    <form action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
+        <label>
+            <input type="submit" value="Smazat" name="<?= $controller::DELETE_HISTORY ?>">
+            <span class="hint">(včetně dlouhodobé paměti)</span>
+        </label>
+    </form>
 </div>
 <form class="block" action="" method="get">
+    <div class="block remember">
+        <label><input type="checkbox" name="<?= $controller::REMEMBER ?>" value="1"
+                      <?php if ($controller->shouldRemember()) { ?>checked="checked"<?php } ?>>
+            Pamatovat <span class="hint">(i při zavření prohlížeče)</span></label>
+    </div>
+    <div class="block">
+        <?php $fightProperties = $controller->getRangedFightProperties() ?>
+        <div>Boj: <?= $fightProperties->getFight() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
+        <div>Útok: <?= $fightProperties->getAttack() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
+        <div>Obrana: <?= $fightProperties->getDefense() ?> <span class="hint">(není ovlivněna výzbrojí)</span></div>
+        <div>Obranné číslo: <?= $fightProperties->getDefenseNumber() ?> <span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span>
+        </div>
+    </div>
     <div class="block">
         <h2>Na blízko</h2>
         <div class="panel">
@@ -55,7 +64,7 @@ $controller = new Controller();
     <div class="block"><?php include __DIR__ . '/properties.php'; ?></div>
 </form>
 <div class="block issues">
-    <a href="https://github.com/jaroslavtyc/drd-plus-fight/issues">Máš nápad 😀? Vidíš chybu  😱?️ Sem s tím !</a>
+    <a href="https://github.com/jaroslavtyc/drd-plus-fight/issues">Máš nápad 😀? Vidíš chybu 😱?️ Sem s tím!</a>
 </div>
 <div class="block">
     <div class="fb-like facebook"
