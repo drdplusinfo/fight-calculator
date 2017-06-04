@@ -14,11 +14,13 @@ $controller = new Controller();
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/socials.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/facebook.js" async></script>
 </head>
 <body>
 <div id="fb-root"></div>
+<div class="background"></div>
 <form class="block delete" action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
     <label>
         <input type="submit" value="Smazat" name="<?= $controller::DELETE_FIGHT_HISTORY ?>">

@@ -1,6 +1,4 @@
 body {
-    background: url("/images/background.png") no-repeat center fixed;
-    background-size: contain;
     font-family: "Times New Roman", Times, serif;
     font-size: 16px;
 }
