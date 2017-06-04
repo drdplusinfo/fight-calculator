@@ -6,7 +6,7 @@ use DrdPlus\Codes\ProfessionCode;
 /** @var Controller $controller */
 ?>
 <div class="panel">
-    <h2>Vlastnosti</h2>
+    <h2 id="Vlastnosti"><a href="#Vlastnosti" class="inner">Vlastnosti</a></h2>
     <div class="panel">
         <label>Povolání <select name="<?= $controller::PROFESSION ?>">
                 <?php foreach (ProfessionCode::getPossibleValues() as $professionValue) {

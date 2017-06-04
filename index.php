@@ -40,23 +40,23 @@ $controller = new Controller();
         </div>
     </div>
     <div class="block">
-        <h2>Na blízko</h2>
+        <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
         <div class="panel">
             <?php include __DIR__ . '/melee_weapon.php' ?>
         </div>
     </div>
     <div class="block">
-        <h2> Na dálku </h2>
+        <h2 id="Na dálku"><a href="#Na dálku" class="inner">Na dálku</a></h2>
         <div class="panel">
             <?php include __DIR__ . '/ranged_weapon.php'; ?>
         </div>
     </div>
     <div class="block">
-        <h2>Štít</h2>
+        <h2 id="Štít"><a href="#Štít" class="inner">Štít</a></h2>
         <?php include __DIR__ . '/shield.php'; ?>
     </div>
     <div class="block">
-        <h2>Zbroj</h2>
+        <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
         <div class="block"><?php include __DIR__ . '/armor.php'; ?></div>
     </div>
     <div class="block"><?php include __DIR__ . '/properties.php'; ?></div>
