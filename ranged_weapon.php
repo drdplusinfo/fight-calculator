@@ -93,6 +93,6 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </div>
     <div>
         Obranné číslo <span
-                class="hint">se zbraní na dálku</span>: <?= $rangedFightProperties->getDefenseNumberWithShield() ?>
+                class="hint">se zbraní na dálku</span>: <?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?>
     </div>
 </div>

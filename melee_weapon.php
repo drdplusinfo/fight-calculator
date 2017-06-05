@@ -101,7 +101,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         </div>
         <div>
             Obranné číslo <span
-                    class="hint">se zbraní</span>: <?= $meleeFightProperties->getDefenseNumberWithShield() ?>
+                    class="hint">se zbraní</span>: <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
         </div>
     </div>
 </div>
