@@ -45,4 +45,4 @@ namespace DrdPlus\Fight;
         </label>
     </div>
 </div>
-<div class="block"><input type="submit" value="OK"></div>
+<div class="block"><input type="submit" value="Přepočítat"></div>

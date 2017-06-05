@@ -77,22 +77,28 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         </label>
     </div>
 </div>
-<div><input type="submit" value="OK"></div>
-<div class="panel">
+<table class="block result">
     <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
-    <div>Bojové číslo <span class="hint">se zbraní na dálku</span>: <?= $rangedFightProperties->getFightNumber() ?>
-    </div>
-    <div>
-        ÚČ <span class="hint">se zbraní na dálku</span>: <?= $rangedFightProperties->getAttackNumber(
-            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-            Size::getIt(0)
-        ) ?>
-    </div>
-    <div>
-        ZZ <span class="hint">se zbraní na dálku</span>: <?= $rangedFightProperties->getBaseOfWounds() ?>
-    </div>
-    <div>
-        Obranné číslo <span
-                class="hint">se zbraní na dálku</span>: <?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?>
-    </div>
-</div>
+    <tbody>
+    <tr>
+        <td>BČ <img class="line-sized" src="images/emojione/fight-2694.png"></td>
+        <td><?= $rangedFightProperties->getFightNumber() ?></td>
+    </tr>
+    <tr>
+        <td>ÚČ <img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
+        <td><?= $rangedFightProperties->getAttackNumber(
+                new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+                Size::getIt(0)
+            ) ?></td>
+    </tr>
+    <tr>
+        <td>ZZ <img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
+        <td><?= $rangedFightProperties->getBaseOfWounds() ?></td>
+    </tr>
+    <tr>
+        <td>OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
+        <td><?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?></td>
+    </tr>
+    </tbody>
+</table>
+<div class="block"><input type="submit" value="Přepočítat"></div>

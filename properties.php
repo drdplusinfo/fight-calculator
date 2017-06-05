@@ -44,5 +44,5 @@ use DrdPlus\Codes\ProfessionCode;
     <div class="panel"><label>Velikost <input type="number" name="<?= $controller::SIZE ?>" min="-10" max="10"
                                               value="<?= $controller->getSelectedSize()->getValue() ?>"></label>
     </div>
-    <div class="block"><input type="submit" value="OK"></div>
+    <div class="block"><input type="submit" value="Přepočítat"></div>
 </div>

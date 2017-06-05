@@ -84,24 +84,28 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         </label>
     </div>
 </div>
-<div class="block"><input type="submit" value="OK"></div>
-<div class="block">
-    <div>
-        <?php $meleeFightProperties = $controller->getMeleeWeaponFightProperties(); ?>
-        <div>Bojové číslo <span class="hint">se zbraní</span>: <?= $meleeFightProperties->getFightNumber() ?>
-        </div>
-        <div>
-            ÚČ <span class="hint">se zbraní</span>: <?= $meleeFightProperties->getAttackNumber(
+<table class="block result">
+    <?php $meleeFightProperties = $controller->getMeleeWeaponFightProperties(); ?>
+    <tbody>
+    <tr>
+        <td>BČ <img class="line-sized" src="images/emojione/fight-2694.png"></td>
+        <td><?= $meleeFightProperties->getFightNumber() ?></td>
+    </tr>
+    <tr>
+        <td>ÚČ <img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
+        <td><?= $meleeFightProperties->getAttackNumber(
                 new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
                 Size::getIt(0)
-            ) ?>
-        </div>
-        <div>
-            ZZ <span class="hint">se zbraní</span>: <?= $meleeFightProperties->getBaseOfWounds() ?>
-        </div>
-        <div>
-            Obranné číslo <span
-                    class="hint">se zbraní</span>: <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
-        </div>
-    </div>
-</div>
+            ) ?></td>
+    </tr>
+    <tr>
+        <td>ZZ <img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
+        <td><?= $meleeFightProperties->getBaseOfWounds() ?></td>
+    </tr>
+    <tr>
+        <td>OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
+        <td><?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?></td>
+    </tr>
+    </tbody>
+</table>
+<div class="block"><input type="submit" value="Přepočítat"></div>

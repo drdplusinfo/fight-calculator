@@ -47,3 +47,7 @@ a.inner {
     color: #1f1f1f;
     text-decoration: none;
 }
+
+.result td:last-child {
+    text-align: right;
+}
