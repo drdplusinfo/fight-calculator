@@ -62,7 +62,7 @@ table.result {
 }
 
 .result.shortened td:nth-child(2) {
-    text-align: inherit;
+    text-align: right;
 }
 
 .result.shortened td:nth-child(3) {
