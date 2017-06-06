@@ -34,29 +34,31 @@ $controller = new Controller();
             Pamatovat <span class="hint">(i při zavření prohlížeče)</span></label>
     </div>
     <div class="block">
-        <?php include __DIR__ . '/basic_fight_properties.php' ?>
-    </div>
-    <div class="block">
-        <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
         <div class="panel">
-            <?php include __DIR__ . '/melee_weapon.php' ?>
+            <?php include __DIR__ . '/basic_fight_properties.php' ?>
         </div>
-    </div>
-    <div class="block">
-        <h2 id="Na dálku"><a href="#Na dálku" class="inner">Na dálku</a></h2>
         <div class="panel">
-            <?php include __DIR__ . '/ranged_weapon.php'; ?>
+            <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
+            <div class="panel">
+                <?php include __DIR__ . '/melee_weapon.php' ?>
+            </div>
         </div>
+        <div class="panel">
+            <h2 id="Na dálku"><a href="#Na dálku" class="inner">Na dálku</a></h2>
+            <div class="panel">
+                <?php include __DIR__ . '/ranged_weapon.php'; ?>
+            </div>
+        </div>
+        <div class="panel">
+            <h2 id="Štít"><a href="#Štít" class="inner">Štít</a></h2>
+            <?php include __DIR__ . '/shield.php'; ?>
+        </div>
+        <div class="panel">
+            <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
+            <div class="block"><?php include __DIR__ . '/armor.php'; ?></div>
+        </div>
+        <div class="panel"><?php include __DIR__ . '/profession_and_body_properties.php'; ?></div>
     </div>
-    <div class="block">
-        <h2 id="Štít"><a href="#Štít" class="inner">Štít</a></h2>
-        <?php include __DIR__ . '/shield.php'; ?>
-    </div>
-    <div class="block">
-        <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
-        <div class="block"><?php include __DIR__ . '/armor.php'; ?></div>
-    </div>
-    <div class="block"><?php include __DIR__ . '/profession_and_body_properties.php'; ?></div>
 </form>
 <div class="block issues">
     <a href="https://github.com/jaroslavtyc/drd-plus-fight/issues">Máš nápad 😀? Vidíš chybu 😱?️ Sem s tím!</a>
