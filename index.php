@@ -34,32 +34,7 @@ $controller = new Controller();
             Pamatovat <span class="hint">(i při zavření prohlížeče)</span></label>
     </div>
     <div class="block">
-        <h2 id="Obecně"><a class="inner" href="#Obecně">Obecně</a></h2>
-        <table class="block result">
-            <?php $fightProperties = $controller->getGenericFightProperties() ?>
-            <tbody>
-            <tr>
-                <td>Boj</td>
-                <td><?= $fightProperties->getFight() ?></td>
-                <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
-            </tr>
-            <tr>
-                <td>Útok</td>
-                <td><?= $fightProperties->getAttack() ?></td>
-                <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
-            </tr>
-            <tr>
-                <td>Obrana</td>
-                <td><?= $fightProperties->getDefense() ?></td>
-                <td><span class="hint">(není ovlivněna výzbrojí)</span></td>
-            </tr>
-            <tr>
-                <td>Obranné číslo</td>
-                <td><?= $fightProperties->getDefenseNumber() ?></td>
-                <td><span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span></td>
-            </tr>
-            </tbody>
-        </table>
+        <?php include __DIR__ . '/basic_fight_properties.php' ?>
     </div>
     <div class="block">
         <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
@@ -81,7 +56,7 @@ $controller = new Controller();
         <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
         <div class="block"><?php include __DIR__ . '/armor.php'; ?></div>
     </div>
-    <div class="block"><?php include __DIR__ . '/properties.php'; ?></div>
+    <div class="block"><?php include __DIR__ . '/profession_and_body_properties.php'; ?></div>
 </form>
 <div class="block issues">
     <a href="https://github.com/jaroslavtyc/drd-plus-fight/issues">Máš nápad 😀? Vidíš chybu 😱?️ Sem s tím!</a>
