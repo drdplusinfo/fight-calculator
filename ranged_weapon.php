@@ -77,7 +77,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         </label>
     </div>
 </div>
-<table class="block result with-image">
+<table class="block result">
     <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
     <tbody>
     <tr>

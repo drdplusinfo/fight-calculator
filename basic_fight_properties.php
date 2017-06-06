@@ -1,5 +1,5 @@
 <h2 id="Obecně"><a class="inner" href="#Obecně">Obecně</a></h2>
-<table class="block result">
+<table class="block result shortened">
     <?php $fightProperties = $controller->getGenericFightProperties() ?>
     <tbody>
     <tr>
@@ -18,9 +18,9 @@
         <td><span class="hint">(není ovlivněna výzbrojí)</span></td>
     </tr>
     <tr>
-        <td>Obranné číslo</td>
+        <td>OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
         <td><?= $fightProperties->getDefenseNumber() ?></td>
-        <td><span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span></td>
+        <td><span class="hint">(ovlivněno pouze akcí, oslněním a Převahou)</span></td>
     </tr>
     </tbody>
 </table>

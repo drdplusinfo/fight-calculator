@@ -84,7 +84,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         </label>
     </div>
 </div>
-<table class="block result with-image">
+<table class="block result">
     <?php $meleeFightProperties = $controller->getMeleeWeaponFightProperties(); ?>
     <tbody>
     <tr>

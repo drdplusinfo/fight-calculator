@@ -109,7 +109,7 @@ use DrdPlus\Tables\Tables;
         </tr>
         </tfoot>
     </table>
-    <table class="panel result with-image">
+    <table class="panel result">
         <?php $rangedShieldFightProperties = $controller->getRangedShieldFightProperties(); ?>
         <thead>
         <tr>

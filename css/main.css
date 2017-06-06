@@ -54,15 +54,19 @@ table.result {
 }
 
 .result td:nth-child(2) {
-    text-align: right;
-}
-
-.result.with-image td:nth-child(2) {
     text-align: center;
 }
 
-.result.with-image td:nth-child(3) {
+.result td:nth-child(3) {
     text-align: right;
+}
+
+.result.shortened td:nth-child(2) {
+    text-align: inherit;
+}
+
+.result.shortened td:nth-child(3) {
+    text-align: left;
 }
 
 .skill {
