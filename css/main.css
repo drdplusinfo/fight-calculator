@@ -20,7 +20,7 @@ input, select {
 }
 
 h2 {
-    margin: 0.4em 0;
+    margin: 0.3em 0 0.1em;
 }
 
 h4 {
@@ -48,6 +48,23 @@ a.inner {
     text-decoration: none;
 }
 
-.result td:last-child {
+table.result {
+    margin: 0;
+    padding: 0;
+}
+
+.result td:nth-child(2) {
     text-align: right;
+}
+
+.result.with-image td:nth-child(2) {
+    text-align: center;
+}
+
+.result.with-image td:nth-child(3) {
+    text-align: right;
+}
+
+.skill {
+    margin: 0.2em 0;
 }

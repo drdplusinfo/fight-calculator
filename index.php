@@ -34,12 +34,32 @@ $controller = new Controller();
             Pamatovat <span class="hint">(i při zavření prohlížeče)</span></label>
     </div>
     <div class="block">
-        <?php $fightProperties = $controller->getRangedFightProperties() ?>
-        <div>Boj: <?= $fightProperties->getFight() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
-        <div>Útok: <?= $fightProperties->getAttack() ?> <span class="hint">(není ovlivněn výzbrojí)</span></div>
-        <div>Obrana: <?= $fightProperties->getDefense() ?> <span class="hint">(není ovlivněna výzbrojí)</span></div>
-        <div>Obranné číslo: <?= $fightProperties->getDefenseNumber() ?> <span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span>
-        </div>
+        <h2 id="Obecně"><a class="inner" href="#Obecně">Obecně</a></h2>
+        <table class="block result">
+            <?php $fightProperties = $controller->getGenericFightProperties() ?>
+            <tbody>
+            <tr>
+                <td>Boj</td>
+                <td><?= $fightProperties->getFight() ?></td>
+                <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
+            </tr>
+            <tr>
+                <td>Útok</td>
+                <td><?= $fightProperties->getAttack() ?></td>
+                <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
+            </tr>
+            <tr>
+                <td>Obrana</td>
+                <td><?= $fightProperties->getDefense() ?></td>
+                <td><span class="hint">(není ovlivněna výzbrojí)</span></td>
+            </tr>
+            <tr>
+                <td>Obranné číslo</td>
+                <td><?= $fightProperties->getDefenseNumber() ?></td>
+                <td><span class="hint">(je ovlivněno pouze akcí, oslněním a chybějící Převahou)</span></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <div class="block">
         <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>

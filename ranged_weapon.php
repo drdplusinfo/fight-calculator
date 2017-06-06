@@ -52,9 +52,9 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         obouručně
     </label>
 </div>
-<div class="panel">
+<div class="block skill">
     <div class="panel">
-        <label>dovednost <select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
+        <label><select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
                 <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
                     ?>
                     <option value="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
@@ -77,26 +77,30 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         </label>
     </div>
 </div>
-<table class="block result">
+<table class="block result with-image">
     <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
     <tbody>
     <tr>
-        <td>BČ <img class="line-sized" src="images/emojione/fight-2694.png"></td>
+        <td>BČ</td>
+        <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
         <td><?= $rangedFightProperties->getFightNumber() ?></td>
     </tr>
     <tr>
-        <td>ÚČ <img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
+        <td>ÚČ</td>
+        <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
         <td><?= $rangedFightProperties->getAttackNumber(
                 new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
                 Size::getIt(0)
             ) ?></td>
     </tr>
     <tr>
-        <td>ZZ <img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
+        <td>ZZ</td>
+        <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
         <td><?= $rangedFightProperties->getBaseOfWounds() ?></td>
     </tr>
     <tr>
-        <td>OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
+        <td>OČ</td>
+        <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
         <td><?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?></td>
     </tr>
     </tbody>

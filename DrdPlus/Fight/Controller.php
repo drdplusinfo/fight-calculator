@@ -401,6 +401,17 @@ class Controller extends StrictObject
         return ItemHoldingCode::getIt($meleeHolding);
     }
 
+    public function getGenericFightProperties(): FightProperties
+    {
+        return $this->getFightProperties(
+            MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),
+            ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
+            PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
+            0, // zero skill rank
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
+        );
+    }
+
     public function getMeleeShieldFightProperties(): FightProperties
     {
         return $this->getFightProperties(

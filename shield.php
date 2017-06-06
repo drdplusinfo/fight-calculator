@@ -41,11 +41,10 @@ use DrdPlus\Tables\Tables;
         </label>
     </div>
 </div>
-<div class="panel">
+<div class="block skill">
     <div class="panel">
         <label>
-            dovednost <span
-                    class="keyword"><?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?></span>
+            <span class="keyword"><?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?></span>
         </label>
     </div>
     <div class="panel">
@@ -75,35 +74,42 @@ use DrdPlus\Tables\Tables;
         </thead>
         <tbody>
         <tr>
-            <td>BČ <span class="hint">se štítem jako zbraň</span><img class="line-sized"
-                                                                      src="images/emojione/fight-2694.png"></td>
+            <td>BČ</td>
+            <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
             <td><?= $meleeShieldFightProperties->getFightNumber() ?></td>
+            <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
-            <td>ÚČ <span class="hint">se štítem jako zbraň</span><img class="line-sized"
-                                                                      src="images/emojione/fight-number-1f624.png"></td>
+            <td>ÚČ</td>
+            <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
             <td><?= $meleeShieldFightProperties->getAttackNumber(
                     new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
                     Size::getIt(0)
-                ) ?></td>
-        </tr>
-        <tr>
-            <td>ZZ <span class="hint">se štítem jako zbraň</span><img class="line-sized"
-                                                                      src="images/emojione/base-of-wounds-1f480.png">
+                ) ?>
             </td>
+            <td><span class="hint">se štítem jako zbraň</span></td>
+        </tr>
+        <tr>
+            <td>ZZ</td>
+            <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
             <td><?= $meleeShieldFightProperties->getBaseOfWounds() ?></td>
+            <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
-            <td>OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
+            <td>OČ</td>
+            <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
             <td><?= $meleeShieldFightProperties->getDefenseNumberWithShield() ?></td>
-        </tr>
-        <tr>
-            <td>držen <span class="keyword"><?= $controller->getMeleeShieldHolding()->translateTo('cs') ?></span></td>
             <td></td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="100%">držen <span
+                        class="keyword"><?= $controller->getMeleeShieldHolding()->translateTo('cs') ?></span></td>
+        </tr>
+        </tfoot>
     </table>
-    <table class="panel result">
+    <table class="panel result with-image">
         <?php $rangedShieldFightProperties = $controller->getRangedShieldFightProperties(); ?>
         <thead>
         <tr>
@@ -112,33 +118,39 @@ use DrdPlus\Tables\Tables;
         </thead>
         <tbody>
         <tr>
-            <td>BČ <span class="hint">se štítem jako zbraň</span><img class="line-sized"
-                                                                      src="images/emojione/fight-2694.png"></td>
+            <td>BČ</td>
+            <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
             <td><?= $rangedShieldFightProperties->getFightNumber() ?></td>
+            <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
-            <td>ÚČ <span class="hint">se štítem jako zbraň</span><img class="line-sized"
-                                                                      src="images/emojione/fight-number-1f624.png"></td>
+            <td>ÚČ</td>
+            <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
             <td><?= $rangedShieldFightProperties->getAttackNumber(
                     new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
                     Size::getIt(0)
-                ) ?></td>
-        </tr>
-        <tr>
-            <td>ZZ <span class="hint">se štítem jako zbraň</span><img class="line-sized"
-                                                                      src="images/emojione/base-of-wounds-1f480.png">
+                ) ?>
             </td>
+            <td><span class="hint">se štítem jako zbraň</span></td>
+        </tr>
+        <tr>
+            <td>ZZ</td>
+            <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
             <td><?= $rangedShieldFightProperties->getBaseOfWounds() ?></td>
+            <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
-            <td>OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
+            <td>OČ</td>
+            <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
             <td><?= $rangedShieldFightProperties->getDefenseNumberWithShield() ?></td>
-        </tr>
-        <tr>
-            <td>držen <span class="keyword"><?= $controller->getRangedShieldHolding()->translateTo('cs') ?></span></td>
             <td></td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="100%">držen <span class="keyword"><?= $controller->getRangedShieldHolding()->translateTo('cs') ?></span></td>
+        </tr>
+        </tfoot>
     </table>
 </div>
 <div class="block"><input type="submit" value="Přepočítat"></div>

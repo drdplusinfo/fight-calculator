@@ -24,10 +24,10 @@ namespace DrdPlus\Fight;
         </select>
     </label>
 </div>
-<div class="panel">
+<div class="block skill">
     <div class="panel">
         <label>
-            dovednost <span class="keyword"><?= $controller->getPossibleSkillForArmor()->translateTo('cs') ?></span>
+            <span class="keyword"><?= $controller->getPossibleSkillForArmor()->translateTo('cs') ?></span>
         </label>
     </div>
     <div class="panel">
