@@ -1140,12 +1140,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "e6bf8f68ce6c09b51535a72a9ad66a72354236aa"
+                "reference": "8dc6baab34769630ed67d684a414f235a41b7497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/e6bf8f68ce6c09b51535a72a9ad66a72354236aa",
-                "reference": "e6bf8f68ce6c09b51535a72a9ad66a72354236aa",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/8dc6baab34769630ed67d684a414f235a41b7497",
+                "reference": "8dc6baab34769630ed67d684a414f235a41b7497",
                 "shasum": ""
             },
             "require": {
@@ -1171,7 +1171,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-06-01 10:17:46"
+            "time": "2017-06-05 06:25:52"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1303,15 +1303,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-hunting-and-fishing.git",
-                "reference": "9210320b434ab450b82ec097180f4bc435497d25"
+                "reference": "c70c7bcd077487f86b3abeec17040dad76dd1674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-hunting-and-fishing/zipball/9210320b434ab450b82ec097180f4bc435497d25",
-                "reference": "9210320b434ab450b82ec097180f4bc435497d25",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-hunting-and-fishing/zipball/c70c7bcd077487f86b3abeec17040dad76dd1674",
+                "reference": "c70c7bcd077487f86b3abeec17040dad76dd1674",
                 "shasum": ""
             },
             "require": {
+                "drd-plus/rolls-on": "dev-master",
                 "drd-plus/tables": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=7.0",
@@ -1333,7 +1334,7 @@
                 "MIT"
             ],
             "description": "Catch from hunting and fishing for Drd+",
-            "time": "2017-04-22 13:30:18"
+            "time": "2017-06-07 07:25:42"
         },
         {
             "name": "drd-plus/lighting",
@@ -1680,12 +1681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "602b7a297c03a9face4002b2e8b25add997fe09a"
+                "reference": "93ba327dbf3d55f199779472ea3ea8d0bed9c63c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/602b7a297c03a9face4002b2e8b25add997fe09a",
-                "reference": "602b7a297c03a9face4002b2e8b25add997fe09a",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/93ba327dbf3d55f199779472ea3ea8d0bed9c63c",
+                "reference": "93ba327dbf3d55f199779472ea3ea8d0bed9c63c",
                 "shasum": ""
             },
             "require": {
@@ -1718,7 +1719,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-06-01 06:05:15"
+            "time": "2017-06-07 07:36:33"
         },
         {
             "name": "drd-plus/tables",
@@ -2457,16 +2458,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.0",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c80e63f3f5e3a331bfc25e6e9332b10422eb9b05"
+                "reference": "70d2a29b2911cbdc91a7e268046c395278238b2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c80e63f3f5e3a331bfc25e6e9332b10422eb9b05",
-                "reference": "c80e63f3f5e3a331bfc25e6e9332b10422eb9b05",
+                "url": "https://api.github.com/repos/symfony/console/zipball/70d2a29b2911cbdc91a7e268046c395278238b2e",
+                "reference": "70d2a29b2911cbdc91a7e268046c395278238b2e",
                 "shasum": ""
             },
             "require": {
@@ -2479,6 +2480,7 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
+                "symfony/config": "~3.3",
                 "symfony/dependency-injection": "~3.3",
                 "symfony/event-dispatcher": "~2.8|~3.0",
                 "symfony/filesystem": "~2.8|~3.0",
@@ -2521,20 +2523,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-28T14:08:56+00:00"
+            "time": "2017-06-02T19:24:58+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.0",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "ef5f19a7a68075a0bd05969a329ead3b0776fb7a"
+                "reference": "e9c50482841ef696e8fa1470d950a79c8921f45d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/ef5f19a7a68075a0bd05969a329ead3b0776fb7a",
-                "reference": "ef5f19a7a68075a0bd05969a329ead3b0776fb7a",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/e9c50482841ef696e8fa1470d950a79c8921f45d",
+                "reference": "e9c50482841ef696e8fa1470d950a79c8921f45d",
                 "shasum": ""
             },
             "require": {
@@ -2577,7 +2579,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-27T16:02:27+00:00"
+            "time": "2017-06-01T21:01:25+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",

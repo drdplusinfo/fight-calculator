@@ -12,6 +12,7 @@ input, select {
     clear: left;
     float: left;
     max-width: 100%;
+    margin-bottom: 0.3em;
 }
 
 .panel {
@@ -71,4 +72,8 @@ table.result {
 
 .skill {
     margin: 0.2em 0;
+}
+
+.body-properties > .panel {
+    min-width: 5em;
 }
