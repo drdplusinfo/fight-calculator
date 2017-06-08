@@ -54,13 +54,13 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         obouručně
     </label>
 </div>
-<div class="block skill">
+<div class="block skill with-skill-ranks">
     <div class="panel">
-        <label><select name="<?= $controller::MELEE_FIGHT_SKILL ?>">
+        <label>
+            <select name="<?= $controller::MELEE_FIGHT_SKILL ?>">
                 <?php
                 $selectedSkillForMelee = $controller->getSelectedMeleeSkillCode();
-                foreach ($controller->getPossibleSkillsForMelee() as $skillCode) {
-                    ?>
+                foreach ($controller->getPossibleSkillsForMelee() as $skillCode) { ?>
                     <option value="<?= $skillCode->getValue() ?>"
                             <?php if ($selectedSkillForMelee->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>
                         <?= $skillCode->translateTo('cs') ?>
@@ -69,18 +69,19 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
             </select>
         </label>
     </div>
-    <div class="panel">
+    <div class="panel skill-ranks"
+         data-previous-skill-ranks="<?= htmlspecialchars($controller->getPreviousMeleeSkillRanksJson()) ?>">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                                <?php if ($controller->getSelectedMeleeSkillRank() === 0) { ?>checked<?php } ?>> 0,
+                                <?php if ($controller->getSelectedMeleeSkillRank() === 0) { ?>checked<?php } ?>>0,
         </label>
         <label><input type="radio" value="1" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedMeleeSkillRank() === 1) { ?>checked<?php } ?>> 1,
+                      <?php if ($controller->getSelectedMeleeSkillRank() === 1) { ?>checked<?php } ?>>1,
         </label>
         <label><input type="radio" value="2" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedMeleeSkillRank() === 2) { ?>checked<?php } ?>> 2,
+                      <?php if ($controller->getSelectedMeleeSkillRank() === 2) { ?>checked<?php } ?>>2,
         </label>
         <label><input type="radio" value="3" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedMeleeSkillRank() === 3) { ?>checked<?php } ?>> 3
+                      <?php if ($controller->getSelectedMeleeSkillRank() === 3) { ?>checked<?php } ?>>3
         </label>
     </div>
 </div>

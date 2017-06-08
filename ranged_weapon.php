@@ -52,7 +52,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         obouručně
     </label>
 </div>
-<div class="block skill">
+<div class="block skill with-skill-ranks">
     <div class="panel">
         <label><select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
                 <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
@@ -62,7 +62,8 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
             </select>
         </label>
     </div>
-    <div class="panel">
+    <div class="panel skill-ranks"
+         data-previous-skill-ranks="<?= htmlspecialchars($controller->getPreviousRangedSkillRanksJson()) ?>">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
                                 <?php if ($controller->getSelectedRangedSkillRank() === 0) { ?>checked<?php } ?>> 0,
         </label>

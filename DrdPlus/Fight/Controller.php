@@ -58,6 +58,7 @@ class Controller extends StrictObject
     const DELETE_FIGHT_HISTORY = 'delete_fight_history';
     const FIGHT_HISTORY_TOKEN = 'fight_history_token';
     const FIGHT_HISTORY = 'fight_history';
+    const RANKS_HISTORY = 'ranks_history';
     const REMEMBER = 'remember';
     const FORGOT_FIGHT = 'forgot_fight';
     const MELEE_WEAPON = 'melee_weapon';
@@ -102,6 +103,7 @@ class Controller extends StrictObject
                 $this->setCookie(self::FORGOT_FIGHT, null, $afterYear);
                 $this->setCookie(self::FIGHT_HISTORY, serialize($_GET), $afterYear);
                 $this->setCookie(self::FIGHT_HISTORY_TOKEN, md5_file(__FILE__), $afterYear);
+                $this->addSelectedSkillsToHistory($_GET);
             } else {
                 $this->deleteHistory();
                 $this->setCookie(self::FORGOT_FIGHT, 1, $afterYear);
@@ -121,6 +123,7 @@ class Controller extends StrictObject
     {
         $this->setCookie(self::FIGHT_HISTORY_TOKEN, null);
         $this->setCookie(self::FIGHT_HISTORY, null);
+        $this->setCookie(self::RANKS_HISTORY, null);
     }
 
     private function setCookie(string $name, $value, int $expire = 0)
@@ -140,6 +143,36 @@ class Controller extends StrictObject
     private function cookieHistoryIsValid(): bool
     {
         return !empty($_COOKIE[self::FIGHT_HISTORY_TOKEN]) && $_COOKIE[self::FIGHT_HISTORY_TOKEN] === md5_file(__FILE__);
+    }
+
+    private function addSelectedSkillsToHistory(array $request)
+    {
+        $skillsToSave = [];
+        foreach ([self::MELEE_FIGHT_SKILL => self::MELEE_FIGHT_SKILL_RANK,
+                     self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
+                     self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
+                 ] as $skillName => $rankName
+        ) {
+            if (array_key_exists($rankName, $request) && !empty($request[$skillName])) {
+                // like melee_fight_skill => fight_unarmed => 0
+                $skillsToSave[$rankName][$request[$skillName]] = $request[$rankName];
+            }
+        }
+        if (count($skillsToSave) === 0) {
+            return;
+        }
+        $ranksHistory = $this->getRanksHistory();
+        foreach ($skillsToSave as $rankName => $rankValues) {
+            // changed values are replaced because of string keys
+            $ranksHistory[$rankName] = array_merge($ranksHistory[$rankName] ?? [], $rankValues);
+        }
+        $serialized = serialize($ranksHistory);
+        $this->setCookie(self::RANKS_HISTORY, $serialized);
+    }
+
+    private function getRanksHistory(): array
+    {
+        return unserialize($_COOKIE[self::RANKS_HISTORY] ?? '', ['allowed_classes' => false]) ?: [];
     }
 
     public function shouldRemember(): bool
@@ -620,6 +653,24 @@ class Controller extends StrictObject
     public function getSelectedMeleeSkillRank(): int
     {
         return (int)$this->getValueFromRequest(self::MELEE_FIGHT_SKILL_RANK);
+    }
+
+    public function getPreviousMeleeSkillRanksJson(): string
+    {
+        return $this->getPreviousSkillRanksJson(self::MELEE_FIGHT_SKILL_RANK);
+    }
+
+    private function getPreviousSkillRanksJson(string $skillRankInputName): string
+    {
+        return json_encode(
+            $this->getRanksHistory()[$skillRankInputName] ?? [],
+            JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE
+        );
+    }
+
+    public function getPreviousRangedSkillRanksJson(): string
+    {
+        return $this->getPreviousSkillRanksJson(self::RANGED_FIGHT_SKILL_RANK);
     }
 
     public function getSelectedRangedSkillRank(): int

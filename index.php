@@ -16,6 +16,7 @@ $controller = new Controller();
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/socials.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/main.js" async></script>
     <script type="text/javascript" src="js/facebook.js" async></script>
 </head>
 <body>
