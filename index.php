@@ -6,7 +6,6 @@ include_once __DIR__ . '/vendor/autoload.php';
 error_reporting(-1);
 ini_set('display_errors', '1');
 
-/** @noinspection PhpUnusedLocalVariableInspection */
 $controller = new Controller();
 ?>
 <html>
@@ -29,6 +28,7 @@ $controller = new Controller();
     </label>
 </form>
 <form class="block" action="" method="get">
+    <input type="hidden" name="scroll-from-top" id="scrollFromTop" value="<?= $controller->getSelectedScrollFromTop() ?>">
     <div class="block remember">
         <label><input type="checkbox" name="<?= $controller::REMEMBER ?>" value="1"
                       <?php if ($controller->shouldRemember()) { ?>checked="checked"<?php } ?>>

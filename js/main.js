@@ -1,4 +1,5 @@
 window.addEventListener('load', function () {
+        // on change of skill change its related skill rank also
         let withSkillRanksNodes = document.getElementsByClassName('with-skill-ranks');
         for (let nodeIndex = 0, nodesLength = withSkillRanksNodes.length; nodeIndex < nodesLength; nodeIndex++) {
             let withSkillRanksNode = withSkillRanksNodes[nodeIndex];
@@ -23,6 +24,7 @@ window.addEventListener('load', function () {
                     }
                 }
             });
+            // on direct change of skill rank remember that value for current skill for current session
             for (let rankIndex = 0, ranksLength = skillRankInputs.length; rankIndex < ranksLength; rankIndex++) {
                 let skillRankInput = skillRankInputs[rankIndex];
                 skillRankInput.addEventListener('change', function (event) {
@@ -35,3 +37,20 @@ window.addEventListener('load', function () {
         }
     }
 );
+
+window.addEventListener('load', function () {
+    // scroll to previous position on page reload
+    let scrollFromTopNode = document.getElementById('scrollFromTop');
+    let body = document.getElementsByTagName('body')[0];
+    if (scrollFromTopNode.value > 0) {
+        body.scrollTop = scrollFromTopNode.value;
+    }
+    // remember scroll position on submit to restore it after page reload
+    let forms = document.getElementsByTagName('form');
+    for (let formIndex = 0, formsLength = forms.length; formIndex < formsLength; formIndex++) {
+        let form = forms[formIndex];
+        form.addEventListener('submit', function () {
+            scrollFromTopNode.value = body.scrollTop;
+        });
+    }
+});

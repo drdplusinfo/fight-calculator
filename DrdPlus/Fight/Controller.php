@@ -180,6 +180,11 @@ class Controller extends StrictObject
         return empty($_COOKIE[self::FORGOT_FIGHT]);
     }
 
+    public function getSelectedScrollFromTop(): int
+    {
+        return (int)$this->getValueFromRequest('scroll-from-top');
+    }
+
     public function getMeleeWeaponCodes(): array
     {
         return [
