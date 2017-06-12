@@ -1256,12 +1256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-health.git",
-                "reference": "9df6aaa84994b44ca28c49ca29059995264d1bfc"
+                "reference": "4b88bdc153b4273b5adb039efd2c864c1a75e013"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/9df6aaa84994b44ca28c49ca29059995264d1bfc",
-                "reference": "9df6aaa84994b44ca28c49ca29059995264d1bfc",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/4b88bdc153b4273b5adb039efd2c864c1a75e013",
+                "reference": "4b88bdc153b4273b5adb039efd2c864c1a75e013",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1295,7 @@
                 "MIT"
             ],
             "description": "Body and soul harms, afflictions and their treatment of a being for Drd+",
-            "time": "2017-04-22 13:18:30"
+            "time": "2017-06-07 11:56:14"
         },
         {
             "name": "drd-plus/hunting-and-fishing",
@@ -1681,12 +1681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "93ba327dbf3d55f199779472ea3ea8d0bed9c63c"
+                "reference": "19569bab538c81f013f9b5831e429d0bd45973cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/93ba327dbf3d55f199779472ea3ea8d0bed9c63c",
-                "reference": "93ba327dbf3d55f199779472ea3ea8d0bed9c63c",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/19569bab538c81f013f9b5831e429d0bd45973cd",
+                "reference": "19569bab538c81f013f9b5831e429d0bd45973cd",
                 "shasum": ""
             },
             "require": {
@@ -1719,7 +1719,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-06-07 07:36:33"
+            "time": "2017-06-12 08:51:01"
         },
         {
             "name": "drd-plus/tables",
@@ -2327,12 +2327,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ccffea64be8575eaa7ad09cd16dfeedfa4711607"
+                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ccffea64be8575eaa7ad09cd16dfeedfa4711607",
-                "reference": "ccffea64be8575eaa7ad09cd16dfeedfa4711607",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
+                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
                 "shasum": ""
             },
             "conflict": {
@@ -2374,6 +2374,7 @@
                 "magento/magento2ce": ">=2,<2.2",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
+                "onelogin/php-saml": "<2.10.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
                 "phpmailer/phpmailer": ">=5,<5.2.22",
@@ -2454,7 +2455,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-05-13T14:02:28+00:00"
+            "time": "2017-06-07T12:12:03+00:00"
         },
         {
             "name": "symfony/console",
@@ -2583,16 +2584,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4"
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e79d363049d1c2128f133a2667e4f4190904f7f4",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f29dca382a6485c3cbe6379f0c61230167681937",
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937",
                 "shasum": ""
             },
             "require": {
@@ -2604,7 +2605,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2638,7 +2639,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T14:24:12+00:00"
         }
     ],
     "packages-dev": [
