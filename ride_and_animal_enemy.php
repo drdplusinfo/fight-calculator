@@ -7,12 +7,13 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
 ?>
 
 <div class="block"><label><input type="checkbox" value="1"
-                                 name="<?= $controller::FIGHT_ANIMAL ?>"
-                                 <?php if ($controller->fightAnimal()) { ?>checked="checked" <?php } ?>>
-        Bojuješ se zvířetem</label>
+                                 name="<?= $controller::FIGHT_FREE_WILL_ANIMAL ?>"
+                                 <?php if ($controller->fightFreeWillAnimal()) { ?>checked="checked" <?php } ?>>
+        Bojuješ se zvířetem s vlastní vůlí</label>
 </div>
 <div class="block">
-    Dovednost <?= PsychicalSkillCode::getIt(PsychicalSkillCode::ZOOLOGY)->translateTo('cs') ?>
+    Dovednost <span
+            class="keyword"><?= PsychicalSkillCode::getIt(PsychicalSkillCode::ZOOLOGY)->translateTo('cs') ?></span>
     <label>na stupni <input type="radio" value="0" name="<?= $controller::ZOOLOGY_SKILL_RANK ?>"
                             <?php if ($controller->getSelectedZoologySkillRank() === 0) { ?>checked<?php } ?>>
         0,

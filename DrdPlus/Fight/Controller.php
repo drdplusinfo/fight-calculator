@@ -84,7 +84,7 @@ class Controller extends StrictObject
     const BODY_ARMOR = 'body_armor';
     const ARMOR_SKILL_VALUE = 'armor_skill_value';
     const HELM = 'helm';
-    const FIGHT_ANIMAL = 'fight_animal';
+    const FIGHT_FREE_WILL_ANIMAL = 'fight_free_will_animal';
     const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
 
     /**
@@ -335,7 +335,8 @@ class Controller extends StrictObject
             false, // does not fight with two weapons
             $usedShield,
             false, // enemy is not faster
-            Glared::createWithoutGlare(new Health())
+            Glared::createWithoutGlare(new Health()),
+            $this->fightFreeWillAnimal()
         );
     }
 
@@ -391,18 +392,16 @@ class Controller extends StrictObject
                 $shieldUsage->increaseSkillRank($physicalSkillPoint);
             }
         }
-        if ($this->fightAnimal()) {
-            $zoologySkillRank = $this->getSelectedZoologySkillRank();
-            if ($zoologySkillRank > 0) {
-                $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
-                    $professionFirstLevel,
-                    $skillPointsFromBackground,
-                    Tables::getIt()
-                );
-                $zoology = $skills->getPsychicalSkills()->getZoology();
-                while ($skillRankWithArmor-- > 0) {
-                    $zoology->increaseSkillRank($psychicalSkillPoint);
-                }
+        $zoologySkillRank = $this->getSelectedZoologySkillRank();
+        if ($zoologySkillRank > 0) {
+            $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $professionFirstLevel,
+                $skillPointsFromBackground,
+                Tables::getIt()
+            );
+            $zoology = $skills->getPsychicalSkills()->getZoology();
+            while ($zoologySkillRank-- > 0) {
+                $zoology->increaseSkillRank($psychicalSkillPoint);
             }
         }
 
@@ -827,9 +826,9 @@ class Controller extends StrictObject
         return HelmCode::getIt($shield);
     }
 
-    public function fightAnimal(): bool
+    public function fightFreeWillAnimal(): bool
     {
-        return (bool)$this->getValueFromRequest(self::FIGHT_ANIMAL);
+        return (bool)$this->getValueFromRequest(self::FIGHT_FREE_WILL_ANIMAL);
     }
 
     public function getSelectedZoologySkillRank(): int

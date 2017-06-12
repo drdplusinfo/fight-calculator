@@ -1217,12 +1217,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-fight-properties.git",
-                "reference": "837df0f9bdc195d83f696a8add000ca33dcfe48e"
+                "reference": "f5a9bec6a007b190f26ff72c2f3fa4d7cca11a81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/837df0f9bdc195d83f696a8add000ca33dcfe48e",
-                "reference": "837df0f9bdc195d83f696a8add000ca33dcfe48e",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/f5a9bec6a007b190f26ff72c2f3fa4d7cca11a81",
+                "reference": "f5a9bec6a007b190f26ff72c2f3fa4d7cca11a81",
                 "shasum": ""
             },
             "require": {
@@ -1248,7 +1248,7 @@
                 "MIT"
             ],
             "description": "Final properties including battle statistics, current afflictions and boosts and by first and next levels of them for Drd+",
-            "time": "2017-05-30 13:39:25"
+            "time": "2017-06-12 12:47:26"
         },
         {
             "name": "drd-plus/health",
@@ -1681,12 +1681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "19569bab538c81f013f9b5831e429d0bd45973cd"
+                "reference": "3ab1aa38ccf95555b756abfb39132149a3d01f6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/19569bab538c81f013f9b5831e429d0bd45973cd",
-                "reference": "19569bab538c81f013f9b5831e429d0bd45973cd",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/3ab1aa38ccf95555b756abfb39132149a3d01f6f",
+                "reference": "3ab1aa38ccf95555b756abfb39132149a3d01f6f",
                 "shasum": ""
             },
             "require": {
@@ -1719,7 +1719,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-06-12 08:51:01"
+            "time": "2017-06-12 12:37:52"
         },
         {
             "name": "drd-plus/tables",
