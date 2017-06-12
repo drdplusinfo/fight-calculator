@@ -28,7 +28,8 @@ $controller = new Controller();
     </label>
 </form>
 <form class="block" action="" method="get">
-    <input type="hidden" name="scroll-from-top" id="scrollFromTop" value="<?= $controller->getSelectedScrollFromTop() ?>">
+    <input type="hidden" name="scroll-from-top" id="scrollFromTop"
+           value="<?= $controller->getSelectedScrollFromTop() ?>">
     <div class="block remember">
         <label><input type="checkbox" name="<?= $controller::REMEMBER ?>" value="1"
                       <?php if ($controller->shouldRemember()) { ?>checked="checked"<?php } ?>>
@@ -59,6 +60,7 @@ $controller = new Controller();
             <div class="block"><?php include __DIR__ . '/armor.php'; ?></div>
         </div>
         <div class="panel"><?php include __DIR__ . '/profession_and_body_properties.php'; ?></div>
+        <div class="panel"><?php include __DIR__ . '/ride_and_animal_enemy.php'; ?></div>
     </div>
 </form>
 <div class="block issues">

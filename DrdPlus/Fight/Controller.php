@@ -84,6 +84,8 @@ class Controller extends StrictObject
     const BODY_ARMOR = 'body_armor';
     const ARMOR_SKILL_VALUE = 'armor_skill_value';
     const HELM = 'helm';
+    const FIGHT_ANIMAL = 'fight_animal';
+    const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
 
     /**
      * @var array
@@ -339,86 +341,129 @@ class Controller extends StrictObject
 
     private function createSkills(SkillCode $skillWithWeapon, int $skillRankWithWeapon): Skills
     {
-        $firstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($this->getSelectedProfessionCode()));
+        $professionFirstLevel = ProfessionFirstLevel::createFirstLevel(
+            Profession::getItByCode($this->getSelectedProfessionCode())
+        );
         $skills = Skills::createSkills(
             new ProfessionLevels(
                 ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
-                $firstLevel
+                $professionFirstLevel
             ),
             $skillPointsFromBackground = SkillPointsFromBackground::getIt(
                 new PositiveIntegerObject(8), // just a maximum
                 Ancestry::getIt(new PositiveIntegerObject(8), Tables::getIt()),
                 Tables::getIt()
             ),
-            $physicalSkills = new PhysicalSkills($firstLevel),
-            $psychicalSkills = new PsychicalSkills($firstLevel),
-            $combinedSkills = new CombinedSkills($firstLevel),
+            new PhysicalSkills($professionFirstLevel),
+            new PsychicalSkills($professionFirstLevel),
+            new CombinedSkills($professionFirstLevel),
             Tables::getIt()
         );
-        if ($skillRankWithWeapon > 0) {
-            if (in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
-                $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
-                /** @var PhysicalSkill $skill */
-                $skill = $physicalSkills->$getSkill();
-                $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
-                    $firstLevel,
-                    $skillPointsFromBackground,
-                    Tables::getIt()
-                );
-                while ($skillRankWithWeapon-- > 0) {
-                    $skill->increaseSkillRank($physicalSkillPoint);
-                }
-            } elseif (in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
-                $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
-                /** @var PsychicalSkill $skill */
-                $skill = $psychicalSkills->$getSkill();
-                $physicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
-                    $firstLevel,
-                    $skillPointsFromBackground,
-                    Tables::getIt()
-                );
-                while ($skillRankWithWeapon-- > 0) {
-                    $skill->increaseSkillRank($physicalSkillPoint);
-                }
-            } elseif (in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
-                $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
-                /** @var CombinedSkill $skill */
-                $skill = $combinedSkills->$getSkill();
-                $combinedSkillPoint = CombinedSkillPoint::createFromFirstLevelSkillPointsFromBackground(
-                    $firstLevel,
-                    $skillPointsFromBackground,
-                    Tables::getIt()
-                );
-                while ($skillRankWithWeapon-- > 0) {
-                    $skill->increaseSkillRank($combinedSkillPoint);
-                }
-            }
-        }
+        $this->addSkillWithWeapon(
+            $skillWithWeapon,
+            $skillRankWithWeapon,
+            $skills,
+            $professionFirstLevel,
+            $skillPointsFromBackground
+        );
 
         $skillRankWithArmor = $this->getSelectedArmorSkillRank();
         if ($skillRankWithArmor > 0) {
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
-                $firstLevel,
+                $professionFirstLevel,
                 $skillPointsFromBackground,
                 Tables::getIt()
             );
+            $armorWearing = $skills->getPhysicalSkills()->getArmorWearing();
             while ($skillRankWithArmor-- > 0) {
-                $physicalSkills->getArmorWearing()->increaseSkillRank($physicalSkillPoint);
+                $armorWearing->increaseSkillRank($physicalSkillPoint);
             }
         }
         $selectedShieldSkillRank = $this->getSelectedShieldUsageSkillRank();
         if ($selectedShieldSkillRank > 0) {
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
-                $firstLevel,
+                $professionFirstLevel,
                 $skillPointsFromBackground,
                 Tables::getIt()
             );
+            $shieldUsage = $skills->getPhysicalSkills()->getShieldUsage();
             while ($selectedShieldSkillRank-- > 0) {
-                $physicalSkills->getShieldUsage()->increaseSkillRank($physicalSkillPoint);
+                $shieldUsage->increaseSkillRank($physicalSkillPoint);
+            }
+        }
+        if ($this->fightAnimal()) {
+            $zoologySkillRank = $this->getSelectedZoologySkillRank();
+            if ($zoologySkillRank > 0) {
+                $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                    $professionFirstLevel,
+                    $skillPointsFromBackground,
+                    Tables::getIt()
+                );
+                $zoology = $skills->getPsychicalSkills()->getZoology();
+                while ($skillRankWithArmor-- > 0) {
+                    $zoology->increaseSkillRank($psychicalSkillPoint);
+                }
             }
         }
 
         return $skills;
+    }
+
+    private function addSkillWithWeapon(
+        SkillCode $skillWithWeapon,
+        int $skillRankWithWeapon,
+        Skills $skills,
+        ProfessionFirstLevel $professionFirstLevel,
+        SkillPointsFromBackground $skillPointsFromBackground
+    )
+    {
+        if ($skillRankWithWeapon === 0) {
+            return;
+        }
+        if (in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
+            $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
+            /** @var PhysicalSkill $skill */
+            $skill = $skills->getPhysicalSkills()->$getSkill();
+            $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $professionFirstLevel,
+                $skillPointsFromBackground,
+                Tables::getIt()
+            );
+            while ($skillRankWithWeapon-- > 0) {
+                $skill->increaseSkillRank($physicalSkillPoint);
+            }
+
+            return;
+        }
+        if (in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
+            $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
+            /** @var PsychicalSkill $skill */
+            $skill = $skills->getPsychicalSkills()->$getSkill();
+            $physicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $professionFirstLevel,
+                $skillPointsFromBackground,
+                Tables::getIt()
+            );
+            while ($skillRankWithWeapon-- > 0) {
+                $skill->increaseSkillRank($physicalSkillPoint);
+            }
+
+            return;
+        }
+        if (in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
+            $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
+            /** @var CombinedSkill $skill */
+            $skill = $skills->getCombinedSkills()->$getSkill();
+            $combinedSkillPoint = CombinedSkillPoint::createFromFirstLevelSkillPointsFromBackground(
+                $professionFirstLevel,
+                $skillPointsFromBackground,
+                Tables::getIt()
+            );
+            while ($skillRankWithWeapon-- > 0) {
+                $skill->increaseSkillRank($combinedSkillPoint);
+            }
+        }
+        throw new \LogicException("Given skill with a weapon '{$skillWithWeapon}' does not belong to any skill group");
     }
 
     public function isTwoHandedOnly(WeaponCode $weaponCode): bool
@@ -780,5 +825,15 @@ class Controller extends StrictObject
         }
 
         return HelmCode::getIt($shield);
+    }
+
+    public function fightAnimal(): bool
+    {
+        return (bool)$this->getValueFromRequest(self::FIGHT_ANIMAL);
+    }
+
+    public function getSelectedZoologySkillRank(): int
+    {
+        return (int)$this->getValueFromRequest(self::ZOOLOGY_SKILL_RANK);
     }
 }
