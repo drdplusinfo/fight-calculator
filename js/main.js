@@ -4,21 +4,21 @@ window.addEventListener('load', function () {
         for (let nodeIndex = 0, nodesLength = withSkillRanksNodes.length; nodeIndex < nodesLength; nodeIndex++) {
             let withSkillRanksNode = withSkillRanksNodes[nodeIndex];
             let select = withSkillRanksNode.getElementsByTagName('select')[0];
-            let previousSkillRanksNode = withSkillRanksNode.getElementsByClassName('skill-ranks')[0];
-            let previousSkillRanks = JSON.parse(previousSkillRanksNode.dataset.previousSkillRanks);
+            let historySkillRanksNode = withSkillRanksNode.getElementsByClassName('skill-ranks')[0];
+            let historySkillRanks = JSON.parse(historySkillRanksNode.dataset.historySkillRanks);
             let skillRankInputs = withSkillRanksNode.getElementsByTagName('input');
             select.addEventListener('change', function (event) {
                 let selectedValue = event.target.value;
-                let previousSkillRankValue = null;
-                if (previousSkillRanks.hasOwnProperty(selectedValue)) {
-                    previousSkillRankValue = previousSkillRanks[selectedValue].toString();
+                let historySkillRankValue = null;
+                if (historySkillRanks.hasOwnProperty(selectedValue)) {
+                    historySkillRankValue = historySkillRanks[selectedValue].toString();
                 }
-                if (previousSkillRankValue === null) {
-                    previousSkillRankValue = '0';
+                if (historySkillRankValue === null) {
+                    historySkillRankValue = '0';
                 }
                 for (let rankIndex = 0, ranksLength = skillRankInputs.length; rankIndex < ranksLength; rankIndex++) {
                     let skillRankInput = skillRankInputs[rankIndex];
-                    if (skillRankInput.value === previousSkillRankValue) {
+                    if (skillRankInput.value === historySkillRankValue) {
                         skillRankInput.checked = true;
                         return;
                     }
@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
                     if (!event.target.checked) {
                         return;
                     }
-                    previousSkillRanks[select.value] = event.target.value;
+                    historySkillRanks[select.value] = event.target.value;
                 });
             }
         }

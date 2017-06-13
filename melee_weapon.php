@@ -70,7 +70,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         </label>
     </div>
     <div class="panel skill-ranks"
-         data-previous-skill-ranks="<?= htmlspecialchars($controller->getPreviousMeleeSkillRanksJson()) ?>">
+         data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryMeleeSkillRanksJson()) ?>">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
                                 <?php if ($controller->getSelectedMeleeSkillRank() === 0) { ?>checked<?php } ?>>0,
         </label>
@@ -86,30 +86,46 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
     </div>
 </div>
 <table class="block result">
-    <?php $meleeFightProperties = $controller->getMeleeWeaponFightProperties(); ?>
+    <?php
+    $meleeFightProperties = $controller->getMeleeWeaponFightProperties();
+    $previousMeleeWeaponFightProperties = $controller->getPreviousMeleeWeaponFightProperties();
+    $previousAttackNumber = $previousMeleeWeaponFightProperties->getAttackNumber(
+        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+        Size::getIt(0)
+    );
+    $currentAttackNumber = $meleeFightProperties->getAttackNumber(
+        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+        Size::getIt(0)
+    );
+    ?>
     <tbody>
     <tr>
         <td>BČ</td>
         <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-        <td><?= $meleeFightProperties->getFightNumber() ?></td>
+        <td <?php if ($previousMeleeWeaponFightProperties->getFightNumber()->getValue() !== $meleeFightProperties->getFightNumber()->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $meleeFightProperties->getFightNumber() ?>
+        </td>
     </tr>
     <tr>
         <td>ÚČ</td>
         <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-        <td><?= $meleeFightProperties->getAttackNumber(
-                new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-                Size::getIt(0)
-            ) ?></td>
+        <td <?php if ($previousAttackNumber->getValue() !== $currentAttackNumber->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $currentAttackNumber ?>
+        </td>
     </tr>
     <tr>
         <td>ZZ</td>
         <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-        <td><?= $meleeFightProperties->getBaseOfWounds() ?></td>
+        <td <?php if ($previousMeleeWeaponFightProperties->getBaseOfWounds()->getValue() !== $meleeFightProperties->getBaseOfWounds()->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $meleeFightProperties->getBaseOfWounds() ?>
+        </td>
     </tr>
     <tr>
         <td>OČ</td>
         <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td><?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?></td>
+        <td <?php if ($previousMeleeWeaponFightProperties->getDefenseNumberWithWeaponlike()->getValue() !== $meleeFightProperties->getDefenseNumberWithWeaponlike()->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
+        </td>
     </tr>
     </tbody>
 </table>

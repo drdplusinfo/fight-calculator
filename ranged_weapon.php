@@ -63,7 +63,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         </label>
     </div>
     <div class="panel skill-ranks"
-         data-previous-skill-ranks="<?= htmlspecialchars($controller->getPreviousRangedSkillRanksJson()) ?>">
+         data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryRangedSkillRanksJson()) ?>">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
                                 <?php if ($controller->getSelectedRangedSkillRank() === 0) { ?>checked<?php } ?>> 0,
         </label>
