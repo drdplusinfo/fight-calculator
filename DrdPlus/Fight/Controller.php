@@ -65,6 +65,8 @@ class Controller extends StrictObject
     private $history;
     /** @var CurrentValues */
     private $currentValues;
+    /** @var PreviousValues */
+    private $previousValues;
 
     public function __construct()
     {
@@ -79,6 +81,7 @@ class Controller extends StrictObject
             !empty($_GET[self::REMEMBER]) // should remember given values
         );
         $this->currentValues = new CurrentValues($_GET, $this->history);
+        $this->previousValues = new PreviousValues($_GET);
     }
 
     public function shouldRemember(): bool
@@ -146,9 +149,19 @@ class Controller extends StrictObject
         return Strength::getIt((int)$this->currentValues->getValue(self::STRENGTH));
     }
 
+    public function getPreviousStrength(): Strength
+    {
+        return Strength::getIt((int)$this->previousValues->getValue(self::STRENGTH));
+    }
+
     public function getSelectedAgility(): Agility
     {
         return Agility::getIt((int)$this->currentValues->getValue(self::AGILITY));
+    }
+
+    public function getPreviousAgility(): Agility
+    {
+        return Agility::getIt((int)$this->previousValues->getValue(self::AGILITY));
     }
 
     public function getSelectedKnack(): Knack
@@ -156,9 +169,19 @@ class Controller extends StrictObject
         return Knack::getIt((int)$this->currentValues->getValue(self::KNACK));
     }
 
+    public function getPreviousKnack(): Knack
+    {
+        return Knack::getIt((int)$this->previousValues->getValue(self::KNACK));
+    }
+
     public function getSelectedWill(): Will
     {
         return Will::getIt((int)$this->currentValues->getValue(self::WILL));
+    }
+
+    public function getPreviousWill(): Will
+    {
+        return Will::getIt((int)$this->previousValues->getValue(self::WILL));
     }
 
     public function getSelectedIntelligence(): Intelligence
@@ -166,9 +189,19 @@ class Controller extends StrictObject
         return Intelligence::getIt((int)$this->currentValues->getValue(self::INTELLIGENCE));
     }
 
+    public function getPreviousIntelligence(): Intelligence
+    {
+        return Intelligence::getIt((int)$this->previousValues->getValue(self::INTELLIGENCE));
+    }
+
     public function getSelectedCharisma(): Charisma
     {
         return Charisma::getIt((int)$this->currentValues->getValue(self::CHARISMA));
+    }
+
+    public function getPreviousCharisma(): Charisma
+    {
+        return Charisma::getIt((int)$this->previousValues->getValue(self::CHARISMA));
     }
 
     public function getSelectedSize(): Size
@@ -176,9 +209,19 @@ class Controller extends StrictObject
         return Size::getIt((int)$this->currentValues->getValue(self::SIZE));
     }
 
+    public function getPreviousSize(): Size
+    {
+        return Size::getIt((int)$this->previousValues->getValue(self::SIZE));
+    }
+
     public function getSelectedHeightInCm(): HeightInCm
     {
         return HeightInCm::getIt($this->currentValues->getValue(self::HEIGHT_IN_CM) ?? 150);
+    }
+
+    public function getPreviousHeightInCm(): HeightInCm
+    {
+        return HeightInCm::getIt($this->previousValues->getValue(self::HEIGHT_IN_CM) ?? 150);
     }
 
     public function getMeleeWeaponFightProperties(): FightProperties
@@ -219,8 +262,40 @@ class Controller extends StrictObject
             $this->getSelectedHelm(),
             $this->getSelectedArmorSkillRank(),
             $this->getSelectedProfessionCode(),
-            $this->fightFreeWillAnimal(),
+            $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
+        );
+    }
+
+    private function getPreviousFightProperties(
+        WeaponlikeCode $weaponlikeCode,
+        ItemHoldingCode $weaponHoldingCode,
+        SkillCode $fightWithWeaponSkillCode,
+        int $skillRank,
+        ShieldCode $shieldCode
+    ): FightProperties
+    {
+        return $this->currentValues->getFightProperties(
+            $this->getPreviousStrength(),
+            $this->getPreviousAgility(),
+            $this->getPreviousKnack(),
+            $this->getPreviousWill(),
+            $this->getPreviousIntelligence(),
+            $this->getPreviousCharisma(),
+            $this->getPreviousSize(),
+            $this->getPreviousHeightInCm(),
+            $weaponlikeCode,
+            $weaponHoldingCode,
+            $fightWithWeaponSkillCode,
+            $skillRank,
+            $shieldCode,
+            $this->getPreviousShieldUsageSkillRank(),
+            $this->getPreviousBodyArmor(),
+            $this->getPreviousHelm(),
+            $this->getPreviousArmorSkillRank(),
+            $this->getPreviousProfessionCode(),
+            $this->getPreviousFightFreeWillAnimal(),
+            $this->getPreviousZoologySkillRank()
         );
     }
 
@@ -245,6 +320,17 @@ class Controller extends StrictObject
     public function getGenericFightProperties(): FightProperties
     {
         return $this->getFightProperties(
+            MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),
+            ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
+            PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
+            0, // zero skill rank
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
+        );
+    }
+
+    public function getPreviousGenericFightProperties(): FightProperties
+    {
+        return $this->getPreviousFightProperties(
             MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),
             ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
@@ -352,6 +438,16 @@ class Controller extends StrictObject
         $professionName = $this->currentValues->getValue(self::PROFESSION);
         if (!$professionName) {
             return ProfessionCode::getIt(ProfessionCode::COMMONER);
+        }
+
+        return ProfessionCode::getIt($professionName);
+    }
+
+    public function getPreviousProfessionCode(): ProfessionCode
+    {
+        $professionName = $this->previousValues->getValue(self::PROFESSION);
+        if (!$professionName) {
+            return $this->getSelectedProfessionCode();
         }
 
         return ProfessionCode::getIt($professionName);
@@ -516,6 +612,11 @@ class Controller extends StrictObject
         return (int)$this->currentValues->getValue(self::SHIELD_USAGE_SKILL_RANK);
     }
 
+    public function getPreviousShieldUsageSkillRank(): int
+    {
+        return (int)$this->previousValues->getValue(self::SHIELD_USAGE_SKILL_RANK);
+    }
+
     /**
      * @return PhysicalSkillCode
      */
@@ -549,9 +650,29 @@ class Controller extends StrictObject
         return BodyArmorCode::getIt($shield);
     }
 
+    public function getProtectionOfSelectedBodyArmor(): int
+    {
+        return Tables::getIt()->getBodyArmorsTable()->getProtectionOf($this->getSelectedBodyArmor());
+    }
+
+    public function getPreviousBodyArmor(): BodyArmorCode
+    {
+        $shield = $this->previousValues->getValue(self::BODY_ARMOR);
+        if (!$shield) {
+            return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
+        }
+
+        return BodyArmorCode::getIt($shield);
+    }
+
     public function getSelectedArmorSkillRank(): int
     {
         return (int)$this->currentValues->getValue(self::ARMOR_SKILL_VALUE);
+    }
+
+    public function getPreviousArmorSkillRank(): int
+    {
+        return (int)$this->previousValues->getValue(self::ARMOR_SKILL_VALUE);
     }
 
     /**
@@ -582,12 +703,42 @@ class Controller extends StrictObject
         return HelmCode::getIt($shield);
     }
 
-    public function fightFreeWillAnimal(): bool
+    public function getProtectionOfSelectedHelm(): int
+    {
+        return Tables::getIt()->getHelmsTable()->getProtectionOf($this->getSelectedHelm());
+    }
+
+    public function getPreviousHelm(): HelmCode
+    {
+        $shield = $this->previousValues->getValue(self::HELM);
+        if (!$shield) {
+            return HelmCode::getIt(HelmCode::WITHOUT_HELM);
+        }
+
+        return HelmCode::getIt($shield);
+    }
+
+    public function getProtectionOfPreviousHelm(): int
+    {
+        return Tables::getIt()->getHelmsTable()->getProtectionOf($this->getPreviousHelm());
+    }
+
+    public function getSelectedFightFreeWillAnimal(): bool
     {
         return (bool)$this->currentValues->getValue(self::FIGHT_FREE_WILL_ANIMAL);
     }
 
+    public function getPreviousFightFreeWillAnimal(): bool
+    {
+        return (bool)$this->previousValues->getValue(self::FIGHT_FREE_WILL_ANIMAL);
+    }
+
     public function getSelectedZoologySkillRank(): int
+    {
+        return (int)$this->currentValues->getValue(self::ZOOLOGY_SKILL_RANK);
+    }
+
+    public function getPreviousZoologySkillRank(): int
     {
         return (int)$this->currentValues->getValue(self::ZOOLOGY_SKILL_RANK);
     }

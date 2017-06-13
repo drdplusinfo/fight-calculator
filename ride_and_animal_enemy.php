@@ -8,7 +8,7 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
 
 <div class="block"><label><input type="checkbox" value="1"
                                  name="<?= $controller::FIGHT_FREE_WILL_ANIMAL ?>"
-                                 <?php if ($controller->fightFreeWillAnimal()) { ?>checked="checked" <?php } ?>>
+                                 <?php if ($controller->getSelectedFightFreeWillAnimal()) { ?>checked="checked" <?php } ?>>
         Bojuješ se zvířetem s vlastní vůlí</label>
 </div>
 <div class="block">

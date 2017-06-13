@@ -62,11 +62,11 @@ table.result {
     text-align: right;
 }
 
-.result.shortened td:nth-child(2) {
+.result.shortened td:nth-child(3) {
     text-align: right;
 }
 
-.result.shortened td:nth-child(3) {
+.result.shortened td:nth-child(4) {
     text-align: left;
 }
 
@@ -76,4 +76,8 @@ table.result {
 
 .body-properties > .panel {
     min-width: 5em;
+}
+
+.changed {
+    font-weight: bold;
 }

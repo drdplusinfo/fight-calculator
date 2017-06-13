@@ -8,6 +8,15 @@
     z-index: -2;
 }
 
+td.line-sized {
+    text-align: center;
+}
+
+td.line-sized img {
+    height: 1em;
+    vertical-align: top;
+}
+
 img.line-sized {
     height: 1em;
     vertical-align: top;
