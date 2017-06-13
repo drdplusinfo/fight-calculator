@@ -1217,12 +1217,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-fight-properties.git",
-                "reference": "f5a9bec6a007b190f26ff72c2f3fa4d7cca11a81"
+                "reference": "a8f461d67a383494f343b8e78847e232703b0d29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/f5a9bec6a007b190f26ff72c2f3fa4d7cca11a81",
-                "reference": "f5a9bec6a007b190f26ff72c2f3fa4d7cca11a81",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/a8f461d67a383494f343b8e78847e232703b0d29",
+                "reference": "a8f461d67a383494f343b8e78847e232703b0d29",
                 "shasum": ""
             },
             "require": {
@@ -1248,7 +1248,7 @@
                 "MIT"
             ],
             "description": "Final properties including battle statistics, current afflictions and boosts and by first and next levels of them for Drd+",
-            "time": "2017-06-12 12:47:26"
+            "time": "2017-06-13 15:48:35"
         },
         {
             "name": "drd-plus/health",
@@ -1681,12 +1681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "3ab1aa38ccf95555b756abfb39132149a3d01f6f"
+                "reference": "7b9bde96d0ecaec7871ebe27355e0d0837235df1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/3ab1aa38ccf95555b756abfb39132149a3d01f6f",
-                "reference": "3ab1aa38ccf95555b756abfb39132149a3d01f6f",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/7b9bde96d0ecaec7871ebe27355e0d0837235df1",
+                "reference": "7b9bde96d0ecaec7871ebe27355e0d0837235df1",
                 "shasum": ""
             },
             "require": {
@@ -1719,7 +1719,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-06-12 12:37:52"
+            "time": "2017-06-13 13:27:38"
         },
         {
             "name": "drd-plus/tables",
@@ -3399,16 +3399,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.2.1",
+            "version": "6.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "16999a1e9a8a25d68f0ab8cc8ab818b043ad5374"
+                "reference": "f2786490399836d2a544a34785c4a8d3ab32cf0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/16999a1e9a8a25d68f0ab8cc8ab818b043ad5374",
-                "reference": "16999a1e9a8a25d68f0ab8cc8ab818b043ad5374",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f2786490399836d2a544a34785c4a8d3ab32cf0e",
+                "reference": "f2786490399836d2a544a34785c4a8d3ab32cf0e",
                 "shasum": ""
             },
             "require": {
@@ -3479,7 +3479,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-06-02T12:24:37+00:00"
+            "time": "2017-06-13T14:07:07+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
