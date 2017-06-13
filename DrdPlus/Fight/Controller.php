@@ -343,28 +343,30 @@ class Controller extends StrictObject
 
     public function getSelectedMeleeWeaponHolding(): ItemHoldingCode
     {
-        if ($this->isTwoHandedOnly($this->getSelectedMeleeWeapon())) {
+        return $this->getWeaponHolding(
+            $this->getSelectedMeleeWeapon(),
+            $this->currentValues->getValue(self::MELEE_WEAPON_HOLDING)
+        );
+    }
+
+    private function getWeaponHolding(WeaponCode $weaponCode, $weaponHolding): ItemHoldingCode
+    {
+        if ($this->isTwoHandedOnly($weaponCode)) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        $meleeHolding = $this->currentValues->getValue(self::MELEE_WEAPON_HOLDING);
-        if (!$meleeHolding) {
+        if (!$weaponHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
 
-        return ItemHoldingCode::getIt($meleeHolding);
+        return ItemHoldingCode::getIt($weaponHolding);
     }
 
     public function getPreviousMeleeWeaponHolding(): ItemHoldingCode
     {
-        if ($this->isTwoHandedOnly($this->getPreviousMeleeWeapon())) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
-        }
-        $meleeHolding = $this->previousValues->getValue(self::MELEE_WEAPON_HOLDING);
-        if (!$meleeHolding) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
-        }
-
-        return ItemHoldingCode::getIt($meleeHolding);
+        return $this->getWeaponHolding(
+            $this->getPreviousMeleeWeapon(),
+            $this->previousValues->getValue(self::MELEE_WEAPON_HOLDING)
+        );
     }
 
     public function getGenericFightProperties(): FightProperties
@@ -393,10 +395,21 @@ class Controller extends StrictObject
     {
         return $this->getCurrentFightProperties(
             $this->getSelectedShield(),
-            $this->getMeleeShieldHolding(),
+            $this->getCurrentMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getSelectedFightWithShieldSkillRank(),
+            $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShield()
+        );
+    }
+
+    public function getPreviousMeleeShieldFightProperties(): FightProperties
+    {
+        return $this->getPreviousFightProperties(
+            $this->getPreviousShield(),
+            $this->getPreviousMeleeShieldHolding(),
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
+            $this->getPreviousFightWithShieldsSkillRank(),
+            $this->getPreviousShield()
         );
     }
 
@@ -404,10 +417,21 @@ class Controller extends StrictObject
     {
         return $this->getCurrentFightProperties(
             $this->getSelectedShield(),
-            $this->getRangedShieldHolding(),
+            $this->getCurrentRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShield()
+        );
+    }
+
+    public function getPreviousRangedShieldFightProperties(): FightProperties
+    {
+        return $this->getPreviousFightProperties(
+            $this->getPreviousShield(),
+            $this->getPreviousRangedShieldHolding(),
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
+            $this->getPreviousFightWithShieldsSkillRank(),
+            $this->getPreviousShield()
         );
     }
 
@@ -415,9 +439,18 @@ class Controller extends StrictObject
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getMeleeShieldHolding(): ItemHoldingCode
+    public function getCurrentMeleeShieldHolding(): ItemHoldingCode
     {
         return $this->getShieldHolding($this->getSelectedMeleeWeaponHolding(), $this->getSelectedMeleeWeapon());
+    }
+
+    /**
+     * @return ItemHoldingCode
+     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
+     */
+    public function getPreviousMeleeShieldHolding(): ItemHoldingCode
+    {
+        return $this->getShieldHolding($this->getPreviousMeleeWeaponHolding(), $this->getPreviousMeleeWeapon());
     }
 
     /**
@@ -449,14 +482,18 @@ class Controller extends StrictObject
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getRangedShieldHolding(): ItemHoldingCode
+    public function getCurrentRangedShieldHolding(): ItemHoldingCode
     {
         return $this->getShieldHolding($this->getSelectedRangedWeaponHolding(), $this->getSelectedRangedWeapon());
     }
 
-    private function getSelectedFightWithShieldSkillRank(): int
+    /**
+     * @return ItemHoldingCode
+     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
+     */
+    public function getPreviousRangedShieldHolding(): ItemHoldingCode
     {
-        return (int)$this->currentValues->getValue(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
+        return $this->getShieldHolding($this->getPreviousRangedWeaponHolding(), $this->getPreviousRangedWeapon());
     }
 
     public function getRangedFightProperties(): FightProperties
@@ -731,6 +768,11 @@ class Controller extends StrictObject
     public function getSelectedFightWithShieldsSkillRank(): int
     {
         return (int)$this->currentValues->getValue(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
+    }
+
+    public function getPreviousFightWithShieldsSkillRank(): int
+    {
+        return (int)$this->previousValues->getValue(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     /**

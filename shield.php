@@ -66,7 +66,18 @@ use DrdPlus\Tables\Tables;
 
 <div class="block">
     <table class="panel result">
-        <?php $meleeShieldFightProperties = $controller->getMeleeShieldFightProperties(); ?>
+        <?php
+        $meleeShieldFightProperties = $controller->getMeleeShieldFightProperties();
+        $previousMeleeShieldFightProperties = $controller->getPreviousMeleeShieldFightProperties();
+        $currentAttackNumber = $meleeShieldFightProperties->getAttackNumber(
+            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+            Size::getIt(0)
+        );
+        $previousAttackNumber = $previousMeleeShieldFightProperties->getAttackNumber(
+            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+            Size::getIt(0)
+        );
+        ?>
         <thead>
         <tr>
             <th colspan="100%"><h4>štít se zbraní na blízko</h4></th>
@@ -76,41 +87,60 @@ use DrdPlus\Tables\Tables;
         <tr>
             <td>BČ</td>
             <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-            <td><?= $meleeShieldFightProperties->getFightNumber() ?></td>
+            <td <?php if ($previousMeleeShieldFightProperties->getFightNumber()->getValue() !== $meleeShieldFightProperties->getFightNumber()->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $meleeShieldFightProperties->getFightNumber() ?>
+            </td>
             <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
             <td>ÚČ</td>
             <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-            <td><?= $meleeShieldFightProperties->getAttackNumber(
-                    new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-                    Size::getIt(0)
-                ) ?>
+            <td <?php if ($previousAttackNumber->getValue() !== $currentAttackNumber->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $currentAttackNumber ?>
             </td>
             <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
             <td>ZZ</td>
             <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-            <td><?= $meleeShieldFightProperties->getBaseOfWounds() ?></td>
+            <td <?php if ($previousMeleeShieldFightProperties->getBaseOfWounds()->getValue() !== $meleeShieldFightProperties->getBaseOfWounds()->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $meleeShieldFightProperties->getBaseOfWounds() ?>
+            </td>
             <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
             <td>OČ</td>
             <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-            <td><?= $meleeShieldFightProperties->getDefenseNumberWithShield() ?></td>
+            <td <?php if ($previousMeleeShieldFightProperties->getDefenseNumberWithShield()->getValue() !== $meleeShieldFightProperties->getDefenseNumberWithShield()->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $meleeShieldFightProperties->getDefenseNumberWithShield() ?>
+            </td>
             <td></td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="100%">držen <span
-                        class="keyword"><?= $controller->getMeleeShieldHolding()->translateTo('cs') ?></span></td>
+            <td colspan="100%">
+                držen <span
+                        class="keyword <?php if ($controller->getPreviousMeleeShieldHolding()->getValue() !== $controller->getCurrentMeleeShieldHolding()->getValue()) { ?> changed<?php } ?>">
+                    <?= $controller->getCurrentMeleeShieldHolding()->translateTo('cs') ?>
+                </span>
+            </td>
         </tr>
         </tfoot>
     </table>
     <table class="panel result">
-        <?php $rangedShieldFightProperties = $controller->getRangedShieldFightProperties(); ?>
+        <?php
+        $rangedShieldFightProperties = $controller->getRangedShieldFightProperties();
+        $previousRangedShieldFightProperties = $controller->getPreviousRangedShieldFightProperties();
+        $currentAttackNumber = $rangedShieldFightProperties->getAttackNumber(
+            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+            Size::getIt(0)
+        );
+        $previousAttackNumber = $previousRangedShieldFightProperties->getAttackNumber(
+            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+            Size::getIt(0)
+        )
+        ?>
         <thead>
         <tr>
             <th colspan="100%"><h4>štít se zbraní na dálku</h4></th>
@@ -120,35 +150,44 @@ use DrdPlus\Tables\Tables;
         <tr>
             <td>BČ</td>
             <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-            <td><?= $rangedShieldFightProperties->getFightNumber() ?></td>
+            <td <?php if ($previousRangedShieldFightProperties->getFightNumber()->getValue() !== $rangedShieldFightProperties->getFightNumber()->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $rangedShieldFightProperties->getFightNumber() ?>
+            </td>
             <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
             <td>ÚČ</td>
             <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-            <td><?= $rangedShieldFightProperties->getAttackNumber(
-                    new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-                    Size::getIt(0)
-                ) ?>
+            <td <?php if ($previousAttackNumber->getValue() !== $currentAttackNumber->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $currentAttackNumber ?>
             </td>
             <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
             <td>ZZ</td>
             <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-            <td><?= $rangedShieldFightProperties->getBaseOfWounds() ?></td>
+            <td <?php if ($previousRangedShieldFightProperties->getBaseOfWounds()->getValue() !== $rangedShieldFightProperties->getBaseOfWounds()->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $rangedShieldFightProperties->getBaseOfWounds() ?>
+            </td>
             <td><span class="hint">se štítem jako zbraň</span></td>
         </tr>
         <tr>
             <td>OČ</td>
             <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-            <td><?= $rangedShieldFightProperties->getDefenseNumberWithShield() ?></td>
+            <td <?php if ($previousRangedShieldFightProperties->getDefenseNumberWithShield()->getValue() !== $rangedShieldFightProperties->getDefenseNumberWithShield()->getValue()) { ?>class="changed" <?php } ?>>
+                <?= $rangedShieldFightProperties->getDefenseNumberWithShield() ?>
+            </td>
             <td></td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="100%">držen <span class="keyword"><?= $controller->getRangedShieldHolding()->translateTo('cs') ?></span></td>
+            <td colspan="100%">
+                držen <span
+                        class="keyword <?php if ($controller->getPreviousRangedShieldHolding()->getValue() !== $controller->getCurrentRangedShieldHolding()->getValue()) { ?> changed<?php } ?>">
+                    <?= $controller->getCurrentRangedShieldHolding()->translateTo('cs') ?>
+                </span>
+            </td>
         </tr>
         </tfoot>
     </table>
