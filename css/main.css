@@ -78,7 +78,17 @@ table.result {
     min-width: 5em;
 }
 
-.changed {
+.decreased {
     font-weight: bold;
     text-shadow: 1px 1px 3px #b34705;
+}
+
+.increased {
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #4db322;
+}
+
+.changed {
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #0089b3;
 }

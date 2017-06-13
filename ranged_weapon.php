@@ -95,28 +95,28 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     <tr>
         <td>BČ</td>
         <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-        <td <?php if ($previousRangedFightProperties->getFightNumber()->getValue() !== $rangedFightProperties->getFightNumber()->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousRangedFightProperties->getFightNumber(), $rangedFightProperties->getFightNumber()) ?>">
             <?= $rangedFightProperties->getFightNumber() ?>
         </td>
     </tr>
     <tr>
         <td>ÚČ</td>
         <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-        <td <?php if ($previousAttackNumber->getValue() !== $currentAttackNumber->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
             <?= $currentAttackNumber ?>
         </td>
     </tr>
     <tr>
         <td>ZZ</td>
         <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-        <td <?php if ($previousRangedFightProperties->getBaseOfWounds()->getValue() !== $rangedFightProperties->getBaseOfWounds()->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousRangedFightProperties->getBaseOfWounds(), $rangedFightProperties->getBaseOfWounds()) ?>">
             <?= $rangedFightProperties->getBaseOfWounds() ?>
         </td>
     </tr>
     <tr>
         <td>OČ</td>
         <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td <?php if ($previousRangedFightProperties->getDefenseNumberWithWeaponlike()->getValue() !== $rangedFightProperties->getDefenseNumberWithWeaponlike()->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousRangedFightProperties->getDefenseNumberWithWeaponlike(), $rangedFightProperties->getDefenseNumberWithWeaponlike()) ?>">
             <?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?>
         </td>
     </tr>

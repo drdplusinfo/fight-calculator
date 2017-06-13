@@ -26,6 +26,8 @@ use DrdPlus\Properties\Base\Will;
 use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\Size;
 use DrdPlus\Tables\Tables;
+use Granam\Integer\IntegerInterface;
+use Granam\Integer\Tools\ToInteger;
 use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
@@ -927,5 +929,24 @@ class Controller extends StrictObject
     public function getPreviousZoologySkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::ZOOLOGY_SKILL_RANK);
+    }
+
+    /**
+     * @param int|IntegerInterface $previous
+     * @param int|IntegerInterface $current
+     * @return string
+     */
+    public function getClassForChangedValue($previous, $current): string
+    {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        if (ToInteger::toInteger($previous) < ToInteger::toInteger($current)) {
+            return 'increased';
+        }
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        if (ToInteger::toInteger($previous) > ToInteger::toInteger($current)) {
+            return 'decreased';
+        }
+
+        return '';
     }
 }

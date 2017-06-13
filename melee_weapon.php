@@ -102,28 +102,28 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
     <tr>
         <td>BČ</td>
         <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-        <td <?php if ($previousMeleeWeaponFightProperties->getFightNumber()->getValue() !== $meleeFightProperties->getFightNumber()->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousMeleeWeaponFightProperties->getFightNumber(), $meleeFightProperties->getFightNumber()) ?>">
             <?= $meleeFightProperties->getFightNumber() ?>
         </td>
     </tr>
     <tr>
         <td>ÚČ</td>
         <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-        <td <?php if ($previousAttackNumber->getValue() !== $currentAttackNumber->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
             <?= $currentAttackNumber ?>
         </td>
     </tr>
     <tr>
         <td>ZZ</td>
         <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-        <td <?php if ($previousMeleeWeaponFightProperties->getBaseOfWounds()->getValue() !== $meleeFightProperties->getBaseOfWounds()->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousMeleeWeaponFightProperties->getBaseOfWounds(), $meleeFightProperties->getBaseOfWounds()) ?>">
             <?= $meleeFightProperties->getBaseOfWounds() ?>
         </td>
     </tr>
     <tr>
         <td>OČ</td>
         <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td <?php if ($previousMeleeWeaponFightProperties->getDefenseNumberWithWeaponlike()->getValue() !== $meleeFightProperties->getDefenseNumberWithWeaponlike()->getValue()) { ?>class="changed"<?php } ?>>
+        <td class="<?= $controller->getClassForChangedValue($previousMeleeWeaponFightProperties->getDefenseNumberWithWeaponlike(), $meleeFightProperties->getDefenseNumberWithWeaponlike()) ?>">
             <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
         </td>
     </tr>
