@@ -57,6 +57,8 @@ class Controller extends StrictObject
     const BODY_ARMOR = 'body_armor';
     const ARMOR_SKILL_VALUE = 'armor_skill_value';
     const HELM = 'helm';
+    const ON_HORSEBACK = 'on_horseback';
+    const RIDING_SKILL_RANK = 'riding_skill_rank';
     const FIGHT_FREE_WILL_ANIMAL = 'fight_free_will_animal';
     const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
     const SCROLL_FROM_TOP = 'scroll_from_top';
@@ -288,6 +290,8 @@ class Controller extends StrictObject
             $this->getSelectedHelm(),
             $this->getSelectedArmorSkillRank(),
             $this->getSelectedProfessionCode(),
+            $this->getSelectedOnHorseback(),
+            $this->getSelectedRidingSkillRank(),
             $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
         );
@@ -312,7 +316,7 @@ class Controller extends StrictObject
         ShieldCode $shieldCode
     ): FightProperties
     {
-        return $this->currentValues->getFightProperties(
+        return $this->previousValues->getFightProperties(
             $this->getPreviousStrength(),
             $this->getPreviousAgility(),
             $this->getPreviousKnack(),
@@ -331,6 +335,8 @@ class Controller extends StrictObject
             $this->getPreviousHelm(),
             $this->getPreviousArmorSkillRank(),
             $this->getPreviousProfessionCode(),
+            $this->getPreviousOnHorseback(),
+            $this->getPreviousRidingSkillRank(),
             $this->getPreviousFightFreeWillAnimal(),
             $this->getPreviousZoologySkillRank()
         );
@@ -883,6 +889,26 @@ class Controller extends StrictObject
         return Tables::getIt()->getHelmsTable()->getProtectionOf($this->getPreviousHelm());
     }
 
+    public function getSelectedOnHorseback(): bool
+    {
+        return (bool)$this->currentValues->getValue(self::ON_HORSEBACK);
+    }
+
+    public function getPreviousOnHorseback(): bool
+    {
+        return (bool)$this->previousValues->getValue(self::ON_HORSEBACK);
+    }
+
+    public function getSelectedRidingSkillRank(): int
+    {
+        return (int)$this->currentValues->getValue(self::RIDING_SKILL_RANK);
+    }
+
+    public function getPreviousRidingSkillRank(): int
+    {
+        return (int)$this->previousValues->getValue(self::RIDING_SKILL_RANK);
+    }
+
     public function getSelectedFightFreeWillAnimal(): bool
     {
         return (bool)$this->currentValues->getValue(self::FIGHT_FREE_WILL_ANIMAL);
@@ -900,6 +926,6 @@ class Controller extends StrictObject
 
     public function getPreviousZoologySkillRank(): int
     {
-        return (int)$this->currentValues->getValue(self::ZOOLOGY_SKILL_RANK);
+        return (int)$this->previousValues->getValue(self::ZOOLOGY_SKILL_RANK);
     }
 }
