@@ -79,30 +79,46 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </div>
 </div>
 <table class="block result">
-    <?php $rangedFightProperties = $controller->getRangedFightProperties(); ?>
+    <?php
+    $rangedFightProperties = $controller->getRangedFightProperties();
+    $previousRangedFightProperties = $controller->getPreviousRangedFightProperties();
+    $currentAttackNumber = $rangedFightProperties->getAttackNumber(
+        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+        Size::getIt(0)
+    );
+    $previousAttackNumber = $previousRangedFightProperties->getAttackNumber(
+        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+        Size::getIt(0)
+    );
+    ?>
     <tbody>
     <tr>
         <td>BČ</td>
         <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-        <td><?= $rangedFightProperties->getFightNumber() ?></td>
+        <td <?php if ($previousRangedFightProperties->getFightNumber()->getValue() !== $rangedFightProperties->getFightNumber()->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $rangedFightProperties->getFightNumber() ?>
+        </td>
     </tr>
     <tr>
         <td>ÚČ</td>
         <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-        <td><?= $rangedFightProperties->getAttackNumber(
-                new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-                Size::getIt(0)
-            ) ?></td>
+        <td <?php if ($previousAttackNumber->getValue() !== $currentAttackNumber->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $currentAttackNumber ?>
+        </td>
     </tr>
     <tr>
         <td>ZZ</td>
         <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-        <td><?= $rangedFightProperties->getBaseOfWounds() ?></td>
+        <td <?php if ($previousRangedFightProperties->getBaseOfWounds()->getValue() !== $rangedFightProperties->getBaseOfWounds()->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $rangedFightProperties->getBaseOfWounds() ?>
+        </td>
     </tr>
     <tr>
         <td>OČ</td>
         <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td><?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?></td>
+        <td <?php if ($previousRangedFightProperties->getDefenseNumberWithWeaponlike()->getValue() !== $rangedFightProperties->getDefenseNumberWithWeaponlike()->getValue()) { ?>class="changed"<?php } ?>>
+            <?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -157,6 +157,19 @@ class Controller extends StrictObject
         return RangedWeaponCode::getIt($rangedWeaponValue);
     }
 
+    /**
+     * @return RangedWeaponCode
+     */
+    public function getPreviousRangedWeapon(): RangedWeaponCode
+    {
+        $rangedWeaponValue = $this->previousValues->getValue(self::RANGED_WEAPON);
+        if (!$rangedWeaponValue) {
+            return $this->getSelectedRangedWeapon();
+        }
+
+        return RangedWeaponCode::getIt($rangedWeaponValue);
+    }
+
     public function getSelectedStrength(): Strength
     {
         return Strength::getIt((int)$this->currentValues->getValue(self::STRENGTH));
@@ -457,12 +470,36 @@ class Controller extends StrictObject
         );
     }
 
+    public function getPreviousRangedFightProperties(): FightProperties
+    {
+        return $this->getPreviousFightProperties(
+            $this->getPreviousRangedWeapon(),
+            $this->getPreviousRangedWeaponHolding(),
+            $this->getPreviousRangedSkillCode(),
+            $this->getPreviousRangedSkillRank(),
+            $this->getPreviousShield()
+        );
+    }
+
     public function getSelectedRangedWeaponHolding(): ItemHoldingCode
     {
         if ($this->isTwoHandedOnly($this->getSelectedRangedWeapon())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
         $meleeHolding = $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING);
+        if (!$meleeHolding) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return ItemHoldingCode::getIt($meleeHolding);
+    }
+
+    public function getPreviousRangedWeaponHolding(): ItemHoldingCode
+    {
+        if ($this->isTwoHandedOnly($this->getPreviousRangedWeapon())) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+        }
+        $meleeHolding = $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING);
         if (!$meleeHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
@@ -595,6 +632,11 @@ class Controller extends StrictObject
         return $this->getSelectedSkill($this->currentValues->getValue(self::RANGED_FIGHT_SKILL));
     }
 
+    public function getPreviousRangedSkillCode(): SkillCode
+    {
+        return $this->getSelectedSkill($this->previousValues->getValue(self::RANGED_FIGHT_SKILL));
+    }
+
     public function getSelectedMeleeSkillRank(): int
     {
         return (int)$this->currentValues->getValue(self::MELEE_FIGHT_SKILL_RANK);
@@ -623,6 +665,11 @@ class Controller extends StrictObject
     public function getSelectedRangedSkillRank(): int
     {
         return (int)$this->currentValues->getValue(self::RANGED_FIGHT_SKILL_RANK);
+    }
+
+    public function getPreviousRangedSkillRank(): int
+    {
+        return (int)$this->previousValues->getValue(self::RANGED_FIGHT_SKILL_RANK);
     }
 
     /**
