@@ -49,7 +49,10 @@ namespace DrdPlus\Fight;
     <tr>
         <td>Zbroj</td>
         <td><img class="line-sized" src="images/armor-icon.png"></td>
-        <td><?= $controller->getProtectionOfSelectedBodyArmor() ?></td>
+        <td <?php if ($controller->getProtectionOfPreviousBodyArmor() !== $controller->getProtectionOfSelectedBodyArmor()) { ?>
+            class="changed" <?php } ?>>
+            <?= $controller->getProtectionOfSelectedBodyArmor() ?>
+        </td>
         <td></td>
     </tr>
     <tr>

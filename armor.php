@@ -3,23 +3,24 @@ namespace DrdPlus\Fight;
 /** @var Controller $controller */
 ?>
 <div class="panel">
-    <label><select
-                name="<?= $controller::BODY_ARMOR ?>"><?php foreach ($controller->getPossibleBodyArmors() as $bodyArmor) {
-                ?>
-            <option value="<?= $bodyArmor->getValue() ?>"
-                    <?php if ($controller->getSelectedBodyArmor()->getValue() === $bodyArmor->getValue()){ ?>selected<?php } ?>>
-                <?= $bodyArmor->translateTo('cs') ?></option><?php
-            } ?>
+    <label><select name="<?= $controller::BODY_ARMOR ?>">
+            <?php foreach ($controller->getPossibleBodyArmors() as $bodyArmor) { ?>
+                <option value="<?= $bodyArmor->getValue() ?>"
+                        <?php if ($controller->getSelectedBodyArmor()->getValue() === $bodyArmor->getValue()){ ?>selected<?php } ?>>
+                    <?= $bodyArmor->translateTo('cs') . ' ' . ($controller->getProtectionOfBodyArmor($bodyArmor) > 0 ? ('+' . $controller->getProtectionOfBodyArmor($bodyArmor)) : '') ?>
+                </option>
+            <?php } ?>
         </select>
     </label>
 </div>
 <div class="panel">
     <label>
-        <select
-                name="<?= $controller::HELM ?>"><?php foreach ($controller->getPossibleHelms() as $helm) { ?>
+        <select name="<?= $controller::HELM ?>">
+            <?php foreach ($controller->getPossibleHelms() as $helm) { ?>
                 <option value="<?= $helm->getValue() ?>"
                         <?php if ($controller->getSelectedHelm()->getValue() === $helm->getValue()){ ?>selected<?php } ?>>
-                    <?= $helm->translateTo('cs') ?></option>
+                    <?= $helm->translateTo('cs') . ' ' . ($controller->getProtectionOfHelm($helm) > 0 ? ('+' . $controller->getProtectionOfHelm($helm)) : '') ?>
+                </option>
             <?php } ?>
         </select>
     </label>

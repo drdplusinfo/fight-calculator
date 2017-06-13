@@ -795,9 +795,19 @@ class Controller extends StrictObject
         return BodyArmorCode::getIt($shield);
     }
 
+    public function getProtectionOfBodyArmor(BodyArmorCode $bodyArmorCode): int
+    {
+        return Tables::getIt()->getBodyArmorsTable()->getProtectionOf($bodyArmorCode);
+    }
+
     public function getProtectionOfSelectedBodyArmor(): int
     {
-        return Tables::getIt()->getBodyArmorsTable()->getProtectionOf($this->getSelectedBodyArmor());
+        return $this->getProtectionOfBodyArmor($this->getSelectedBodyArmor());
+    }
+
+    public function getProtectionOfPreviousBodyArmor(): int
+    {
+        return Tables::getIt()->getBodyArmorsTable()->getProtectionOf($this->getPreviousBodyArmor());
     }
 
     public function getPreviousBodyArmor(): BodyArmorCode
@@ -848,9 +858,14 @@ class Controller extends StrictObject
         return HelmCode::getIt($shield);
     }
 
+    public function getProtectionOfHelm(HelmCode $helmCode): int
+    {
+        return Tables::getIt()->getHelmsTable()->getProtectionOf($helmCode);
+    }
+
     public function getProtectionOfSelectedHelm(): int
     {
-        return Tables::getIt()->getHelmsTable()->getProtectionOf($this->getSelectedHelm());
+        return $this->getProtectionOfHelm($this->getSelectedHelm());
     }
 
     public function getPreviousHelm(): HelmCode
