@@ -28,7 +28,7 @@ $controller = new Controller();
     </label>
 </form>
 <form class="block" action="" method="get">
-    <input type="hidden" name="scroll-from-top" id="scrollFromTop"
+    <input type="hidden" name="<?= $controller::SCROLL_FROM_TOP ?>" id="scrollFromTop"
            value="<?= $controller->getSelectedScrollFromTop() ?>">
     <div class="block remember">
         <label><input type="checkbox" name="<?= $controller::REMEMBER ?>" value="1"
