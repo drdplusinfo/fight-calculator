@@ -21,6 +21,9 @@ use DrdPlus\Tables\Tables;
         </select>
     </label>
 </div>
+<?php if ($controller->getSelectedShield()->isUnarmed()) {
+    return; // we will not show details about shield if no has been picked
+} ?>
 <div class="panel">
     <div class="panel">
         dovednost <span class="keyword"><?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></span>

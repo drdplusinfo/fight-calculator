@@ -22,7 +22,6 @@ $currentAttackNumber = $fightProperties->getAttackNumber(
     Size::getIt(0)
 );
 ?>
-?>
 <tr>
     <td>BČ</td>
     <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
