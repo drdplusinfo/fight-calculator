@@ -1,11 +1,6 @@
 <?php
 namespace DrdPlus\Fight;
 
-use DrdPlus\Codes\DistanceUnitCode;
-use DrdPlus\Properties\Body\Size;
-use DrdPlus\Tables\Measurements\Distance\Distance;
-use DrdPlus\Tables\Tables;
-
 /** @var Controller $controller */
 ?>
 
@@ -70,16 +65,10 @@ use DrdPlus\Tables\Tables;
 <div class="block">
     <table class="panel result">
         <?php
-        $meleeShieldFightProperties = $controller->getMeleeShieldFightProperties();
-        $previousMeleeShieldFightProperties = $controller->getPreviousMeleeShieldFightProperties();
-        $currentAttackNumber = $meleeShieldFightProperties->getAttackNumber(
-            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-            Size::getIt(0)
-        );
-        $previousAttackNumber = $previousMeleeShieldFightProperties->getAttackNumber(
-            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-            Size::getIt(0)
-        );
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $fightProperties = $controller->getMeleeShieldFightProperties();
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $previousFightProperties = $controller->getPreviousMeleeShieldFightProperties();
         ?>
         <thead>
         <tr>
@@ -87,38 +76,7 @@ use DrdPlus\Tables\Tables;
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>BČ</td>
-            <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousMeleeShieldFightProperties->getFightNumber(), $meleeShieldFightProperties->getFightNumber()) ?>">
-                <?= $meleeShieldFightProperties->getFightNumber() ?>
-            </td>
-            <td><span class="hint">se štítem jako zbraň</span></td>
-        </tr>
-        <tr>
-            <td>ÚČ</td>
-            <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
-                <?= $currentAttackNumber ?>
-            </td>
-            <td><span class="hint">se štítem jako zbraň</span></td>
-        </tr>
-        <tr>
-            <td>ZZ</td>
-            <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousMeleeShieldFightProperties->getBaseOfWounds(), $meleeShieldFightProperties->getBaseOfWounds()) ?>">
-                <?= $meleeShieldFightProperties->getBaseOfWounds() ?>
-            </td>
-            <td><span class="hint">se štítem jako zbraň</span></td>
-        </tr>
-        <tr>
-            <td>OČ</td>
-            <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousMeleeShieldFightProperties->getDefenseNumberWithShield(), $meleeShieldFightProperties->getDefenseNumberWithShield()) ?>">
-                <?= $meleeShieldFightProperties->getDefenseNumberWithShield() ?>
-            </td>
-            <td></td>
-        </tr>
+        <?php include __DIR__ . '/shield_fight_properties_trait.php' ?>
         </tbody>
         <tfoot>
         <tr>
@@ -133,16 +91,10 @@ use DrdPlus\Tables\Tables;
     </table>
     <table class="panel result">
         <?php
-        $rangedShieldFightProperties = $controller->getRangedShieldFightProperties();
-        $previousRangedShieldFightProperties = $controller->getPreviousRangedShieldFightProperties();
-        $currentAttackNumber = $rangedShieldFightProperties->getAttackNumber(
-            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-            Size::getIt(0)
-        );
-        $previousAttackNumber = $previousRangedShieldFightProperties->getAttackNumber(
-            new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-            Size::getIt(0)
-        )
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $fightProperties = $controller->getRangedShieldFightProperties();
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $previousFightProperties = $controller->getPreviousRangedShieldFightProperties();
         ?>
         <thead>
         <tr>
@@ -150,38 +102,7 @@ use DrdPlus\Tables\Tables;
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>BČ</td>
-            <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousRangedShieldFightProperties->getFightNumber(), $rangedShieldFightProperties->getFightNumber()) ?>">
-                <?= $rangedShieldFightProperties->getFightNumber() ?>
-            </td>
-            <td><span class="hint">se štítem jako zbraň</span></td>
-        </tr>
-        <tr>
-            <td>ÚČ</td>
-            <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
-                <?= $currentAttackNumber ?>
-            </td>
-            <td><span class="hint">se štítem jako zbraň</span></td>
-        </tr>
-        <tr>
-            <td>ZZ</td>
-            <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousRangedShieldFightProperties->getBaseOfWounds(), $rangedShieldFightProperties->getBaseOfWounds()) ?>">
-                <?= $rangedShieldFightProperties->getBaseOfWounds() ?>
-            </td>
-            <td><span class="hint">se štítem jako zbraň</span></td>
-        </tr>
-        <tr>
-            <td>OČ</td>
-            <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-            <td class="<?= $controller->getClassForChangedValue($previousRangedShieldFightProperties->getDefenseNumberWithShield(), $rangedShieldFightProperties->getDefenseNumberWithShield()) ?>">
-                <?= $rangedShieldFightProperties->getDefenseNumberWithShield() ?>
-            </td>
-            <td></td>
-        </tr>
+        <?php include __DIR__ . '/shield_fight_properties_trait.php' ?>
         </tbody>
         <tfoot>
         <tr>
