@@ -3,11 +3,7 @@ namespace DrdPlus\Fight;
 
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
-use DrdPlus\Codes\DistanceUnitCode;
 use DrdPlus\Codes\ItemHoldingCode;
-use DrdPlus\Properties\Body\Size;
-use DrdPlus\Tables\Measurements\Distance\Distance;
-use DrdPlus\Tables\Tables;
 
 /** @var Controller $controller */
 $selectedMeleeWeapon = $controller->getSelectedMeleeWeapon();
@@ -24,8 +20,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
                     foreach ($meleeWeaponCategory as $meleeWeaponValue) {
                         ?>
                         <option value="<?= $meleeWeaponValue ?>"
-                                <?php if ($selectedMeleeWeaponValue === $meleeWeaponValue) { ?>selected<?php } ?>
-                        >
+                                <?php if ($selectedMeleeWeaponValue === $meleeWeaponValue) { ?>selected<?php } ?>>
                             <?= MeleeWeaponCode::getIt($meleeWeaponValue)->translateTo('cs') ?>
                         </option>
                     <?php } ?>
@@ -87,46 +82,13 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
 </div>
 <table class="block result">
     <?php
-    $meleeFightProperties = $controller->getMeleeWeaponFightProperties();
-    $previousMeleeWeaponFightProperties = $controller->getPreviousMeleeWeaponFightProperties();
-    $previousAttackNumber = $previousMeleeWeaponFightProperties->getAttackNumber(
-        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-        Size::getIt(0)
-    );
-    $currentAttackNumber = $meleeFightProperties->getAttackNumber(
-        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-        Size::getIt(0)
-    );
+    /** @noinspection PhpUnusedLocalVariableInspection */
+    $fightProperties = $controller->getMeleeWeaponFightProperties();
+    /** @noinspection PhpUnusedLocalVariableInspection */
+    $previousFightProperties = $controller->getPreviousMeleeWeaponFightProperties();
     ?>
     <tbody>
-    <tr>
-        <td>BČ</td>
-        <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousMeleeWeaponFightProperties->getFightNumber(), $meleeFightProperties->getFightNumber()) ?>">
-            <?= $meleeFightProperties->getFightNumber() ?>
-        </td>
-    </tr>
-    <tr>
-        <td>ÚČ</td>
-        <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
-            <?= $currentAttackNumber ?>
-        </td>
-    </tr>
-    <tr>
-        <td>ZZ</td>
-        <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousMeleeWeaponFightProperties->getBaseOfWounds(), $meleeFightProperties->getBaseOfWounds()) ?>">
-            <?= $meleeFightProperties->getBaseOfWounds() ?>
-        </td>
-    </tr>
-    <tr>
-        <td>OČ</td>
-        <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousMeleeWeaponFightProperties->getDefenseNumberWithWeaponlike(), $meleeFightProperties->getDefenseNumberWithWeaponlike()) ?>">
-            <?= $meleeFightProperties->getDefenseNumberWithWeaponlike() ?>
-        </td>
-    </tr>
+    <?php include __DIR__ . '/fight_properties_trait.php'; ?>
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>

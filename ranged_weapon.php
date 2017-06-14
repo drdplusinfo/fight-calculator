@@ -3,11 +3,7 @@ namespace DrdPlus\Fight;
 
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
-use DrdPlus\Codes\DistanceUnitCode;
 use DrdPlus\Codes\ItemHoldingCode;
-use DrdPlus\Properties\Body\Size;
-use DrdPlus\Tables\Measurements\Distance\Distance;
-use DrdPlus\Tables\Tables;
 
 /** @var Controller $controller */
 $selectedRangedWeapon = $controller->getSelectedRangedWeapon();
@@ -80,46 +76,13 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 </div>
 <table class="block result">
     <?php
-    $rangedFightProperties = $controller->getRangedFightProperties();
-    $previousRangedFightProperties = $controller->getPreviousRangedFightProperties();
-    $currentAttackNumber = $rangedFightProperties->getAttackNumber(
-        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-        Size::getIt(0)
-    );
-    $previousAttackNumber = $previousRangedFightProperties->getAttackNumber(
-        new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-        Size::getIt(0)
-    );
+    /** @noinspection PhpUnusedLocalVariableInspection */
+    $fightProperties = $controller->getRangedFightProperties();
+    /** @noinspection PhpUnusedLocalVariableInspection */
+    $previousFightProperties = $controller->getPreviousRangedFightProperties();
     ?>
     <tbody>
-    <tr>
-        <td>BČ</td>
-        <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousRangedFightProperties->getFightNumber(), $rangedFightProperties->getFightNumber()) ?>">
-            <?= $rangedFightProperties->getFightNumber() ?>
-        </td>
-    </tr>
-    <tr>
-        <td>ÚČ</td>
-        <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
-            <?= $currentAttackNumber ?>
-        </td>
-    </tr>
-    <tr>
-        <td>ZZ</td>
-        <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousRangedFightProperties->getBaseOfWounds(), $rangedFightProperties->getBaseOfWounds()) ?>">
-            <?= $rangedFightProperties->getBaseOfWounds() ?>
-        </td>
-    </tr>
-    <tr>
-        <td>OČ</td>
-        <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousRangedFightProperties->getDefenseNumberWithWeaponlike(), $rangedFightProperties->getDefenseNumberWithWeaponlike()) ?>">
-            <?= $rangedFightProperties->getDefenseNumberWithWeaponlike() ?>
-        </td>
-    </tr>
+    <?php include __DIR__ . '/fight_properties_trait.php'; ?>
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>
