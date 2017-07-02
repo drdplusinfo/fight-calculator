@@ -27,6 +27,14 @@ namespace DrdPlus\Fight;
         <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
     </tr>
     <tr>
+        <td>Střelba</td>
+        <td></td>
+        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getShooting(), $fightProperties->getShooting()) ?>">
+            <?= $fightProperties->getShooting() ?>
+        </td>
+        <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
+    </tr>
+    <tr>
         <td>Obrana</td>
         <td></td>
         <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getDefense(), $fightProperties->getDefense()) ?>">
