@@ -4,8 +4,10 @@ namespace DrdPlus\Fight;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Codes\ItemHoldingCode;
+use DrdPlus\Tables\Tables;
 
 /** @var Controller $controller */
+/** @var Tables $tables */
 $selectedRangedWeapon = $controller->getSelectedRangedWeapon();
 $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getValue() : null;
 
@@ -88,6 +90,20 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     ?>
     <tbody>
     <?php include __DIR__ . '/fight_properties_trait.php'; ?>
+    <tr>
+        <td>Soubojový dostřel</td>
+        <td><img class="line-sized" src="images/emojione/bow-and-arrow-1f3f9.png"></td>
+        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getEncounterRange(), $fightProperties->getEncounterRange()) ?>">
+            <?= "{$fightProperties->getEncounterRange()} ({$fightProperties->getEncounterRange()->getInMeters(Tables::getIt())} m)" ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Maximální dostřel</td>
+        <td><img class="line-sized" src="images/emojione/bow-and-arrow-1f3f9.png"></td>
+        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getMaximalRange(), $fightProperties->getMaximalRange()) ?>">
+            <?= "{$fightProperties->getMaximalRange()} ({$fightProperties->getMaximalRange()->getInMeters(Tables::getIt())} m)" ?>
+        </td>
+    </tr>
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>
