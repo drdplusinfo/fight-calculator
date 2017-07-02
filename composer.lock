@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "230488d33b7e837b80e88dfb27c5f890",
+    "content-hash": "26e23bba77c4b02e3c45262267316132",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -658,12 +658,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-date-interval.git",
-                "reference": "b3de54705357fb4ea5e109b6e81e7030cea905eb"
+                "reference": "8aafc64fa725645fd745b25c3375bb37741e517a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-date-interval/zipball/b3de54705357fb4ea5e109b6e81e7030cea905eb",
-                "reference": "b3de54705357fb4ea5e109b6e81e7030cea905eb",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-date-interval/zipball/8aafc64fa725645fd745b25c3375bb37741e517a",
+                "reference": "8aafc64fa725645fd745b25c3375bb37741e517a",
                 "shasum": ""
             },
             "require": {
@@ -697,7 +697,7 @@
                 "doctrine",
                 "interval"
             ],
-            "time": "2017-02-19 12:48:05"
+            "time": "2017-06-15 12:37:39"
         },
         {
             "name": "doctrineum/datetime-immutable",
@@ -1212,6 +1212,28 @@
             "time": "2017-05-30 05:50:42"
         },
         {
+            "name": "drd-plus/configurator-skeleton",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-configurator-skeleton.git",
+                "reference": "0d1bda7c2b5867af600f4e992ce67b13a83be95f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-configurator-skeleton/zipball/0d1bda7c2b5867af600f4e992ce67b13a83be95f",
+                "reference": "0d1bda7c2b5867af600f4e992ce67b13a83be95f",
+                "shasum": ""
+            },
+            "type": "project",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Style and functionality helper of a configurator Drd+",
+            "time": "2017-06-15 04:35:59"
+        },
+        {
             "name": "drd-plus/fight-properties",
             "version": "dev-master",
             "source": {
@@ -1382,12 +1404,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-profession-levels.git",
-                "reference": "cdeab0384094818d1e1343853c2110915a72d616"
+                "reference": "df4da160bf43442d46a82779c0c9a05789d1d7b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-profession-levels/zipball/cdeab0384094818d1e1343853c2110915a72d616",
-                "reference": "cdeab0384094818d1e1343853c2110915a72d616",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-profession-levels/zipball/df4da160bf43442d46a82779c0c9a05789d1d7b1",
+                "reference": "df4da160bf43442d46a82779c0c9a05789d1d7b1",
                 "shasum": ""
             },
             "require": {
@@ -1397,7 +1419,8 @@
                 "drd-plus/codes": "dev-master",
                 "drd-plus/professions": "dev-master",
                 "drd-plus/properties": "dev-master",
-                "php": ">=7.0"
+                "php": ">=7.1",
+                "roave/security-advisories": "dev-master"
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
@@ -1415,7 +1438,7 @@
                 "MIT"
             ],
             "description": "Levels of professions for Drd+",
-            "time": "2017-02-20 06:58:52"
+            "time": "2017-06-20 09:49:11"
         },
         {
             "name": "drd-plus/professions",
@@ -1557,12 +1580,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties-by-levels.git",
-                "reference": "41b862e436b4bb5835d56b6050c54cf55cafdcf1"
+                "reference": "74d30946de525a8a9cdc8e5e705d8f15869ca8aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-levels/zipball/41b862e436b4bb5835d56b6050c54cf55cafdcf1",
-                "reference": "41b862e436b4bb5835d56b6050c54cf55cafdcf1",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-levels/zipball/74d30946de525a8a9cdc8e5e705d8f15869ca8aa",
+                "reference": "74d30946de525a8a9cdc8e5e705d8f15869ca8aa",
                 "shasum": ""
             },
             "require": {
@@ -1592,7 +1615,7 @@
                 "MIT"
             ],
             "description": "Total properties and by first and next levels of them for Drd+",
-            "time": "2017-02-20 07:12:48"
+            "time": "2017-06-22 20:37:01"
         },
         {
             "name": "drd-plus/races",
@@ -1681,12 +1704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "7b9bde96d0ecaec7871ebe27355e0d0837235df1"
+                "reference": "1827edb7c65665598ee565831c857c132df93c8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/7b9bde96d0ecaec7871ebe27355e0d0837235df1",
-                "reference": "7b9bde96d0ecaec7871ebe27355e0d0837235df1",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/1827edb7c65665598ee565831c857c132df93c8a",
+                "reference": "1827edb7c65665598ee565831c857c132df93c8a",
                 "shasum": ""
             },
             "require": {
@@ -1719,7 +1742,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-06-13 13:27:38"
+            "time": "2017-06-22 20:35:58"
         },
         {
             "name": "drd-plus/tables",
@@ -2327,12 +2350,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c"
+                "reference": "0b18b6bbeed070fb900ad78e81ffa1182a57a752"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
-                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0b18b6bbeed070fb900ad78e81ffa1182a57a752",
+                "reference": "0b18b6bbeed070fb900ad78e81ffa1182a57a752",
                 "shasum": ""
             },
             "conflict": {
@@ -2357,8 +2380,8 @@
                 "doctrine/mongodb-odm-bundle": ">=2,<3.0.1",
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=8,<8.2.8|>=8.3,<8.3.1",
-                "drupal/drupal": ">=8,<8.2.8|>=8.3,<8.3.1",
+                "drupal/core": ">=8,<8.3.4",
+                "drupal/drupal": ">=8,<8.3.4",
                 "firebase/php-jwt": "<2",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
@@ -2455,7 +2478,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-06-07T12:12:03+00:00"
+            "time": "2017-06-22T16:43:17+00:00"
         },
         {
             "name": "symfony/console",
@@ -3483,16 +3506,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "eabce450df194817a7d7e27e19013569a903a2bf"
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/eabce450df194817a7d7e27e19013569a903a2bf",
-                "reference": "eabce450df194817a7d7e27e19013569a903a2bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
                 "shasum": ""
             },
             "require": {
@@ -3538,7 +3561,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-03-03T06:30:20+00:00"
+            "time": "2017-06-30T08:15:21+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -3703,16 +3726,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3"
+                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
+                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
                 "shasum": ""
             },
             "require": {
@@ -3724,7 +3747,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -3749,7 +3772,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2017-05-18T10:10:00+00:00"
+            "time": "2017-07-01T08:51:00+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -4196,7 +4219,8 @@
         "roave/security-advisories": 20,
         "granam/strict-object": 20,
         "drd-plus/tables": 20,
-        "drd-plus/fight-properties": 20
+        "drd-plus/fight-properties": 20,
+        "drd-plus/configurator-skeleton": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

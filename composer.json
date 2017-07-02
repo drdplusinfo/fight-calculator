@@ -20,7 +20,8 @@
     "roave/security-advisories": "dev-master",
     "granam/strict-object": "dev-master",
     "drd-plus/tables": "dev-master",
-    "drd-plus/fight-properties": "dev-master"
+    "drd-plus/fight-properties": "dev-master",
+    "drd-plus/configurator-skeleton": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "~6.0",

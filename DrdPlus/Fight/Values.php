@@ -249,6 +249,8 @@ abstract class Values extends StrictObject
             while ($skillRankWithWeapon-- > 0) {
                 $skill->increaseSkillRank($combinedSkillPoint);
             }
+
+            return;
         }
         throw new \LogicException("Given skill with a weapon '{$skillWithWeapon}' does not belong to any skill group");
     }
