@@ -51,9 +51,14 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 <div class="block skill with-skill-ranks">
     <div class="panel">
         <label><select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
-                <?php foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
+                <?php
+                $selectedSkillForRanged = $controller->getSelectedRangedSkillCode();
+                foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
                     ?>
-                    <option value="<?= $skillCode->getValue() ?>"><?= $skillCode->translateTo('cs') ?></option>
+                    <option value="<?= $skillCode->getValue() ?>"
+                            <?php if ($selectedSkillForRanged->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>
+                        <?= $skillCode->translateTo('cs') ?>
+                    </option>
                 <?php } ?>
             </select>
         </label>

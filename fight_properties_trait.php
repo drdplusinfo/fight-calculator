@@ -14,11 +14,11 @@ use DrdPlus\Tables\Tables;
  */
 
 $previousAttackNumber = $previousFightProperties->getAttackNumber(
-    new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+    new Distance(18 /* zero */, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
     Size::getIt(0)
 );
 $currentAttackNumber = $fightProperties->getAttackNumber(
-    new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
+    new Distance(18 /* zero */, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
     Size::getIt(0)
 );
 ?>
