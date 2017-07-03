@@ -12,11 +12,13 @@ $controller = new Controller();
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/generic/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/graphics.css" rel="stylesheet" type="text/css">
-    <link href="css/socials.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/facebook.js" async></script>
+    <link href="css/generic/main.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/generic/socials.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/generic/main.js"></script>
+    <script type="text/javascript" src="js/generic/facebook.js" async></script>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -72,7 +74,7 @@ $controller = new Controller();
          data-layout="button" data-action="recommend"
          data-size="small" data-show-faces="false" data-share="true"></div>
     <a href="https://github.com/jaroslavtyc/drd-plus-fight/"
-       title="Fork me on GitHub"><img class="github" src="/images/GitHub-Mark-64px.png"></a>
+       title="Fork me on GitHub"><img class="github" src="/images/generic/GitHub-Mark-64px.png"></a>
 </div>
 </body>
 </html>

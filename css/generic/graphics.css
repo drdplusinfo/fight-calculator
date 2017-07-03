@@ -1,6 +1,5 @@
 .background {
-    background-image: url(/images/background.png);
-    background-repeat: no-repeat;
+    background: url(/images/background.png) no-repeat;
     background-position-x: center;
     position: fixed;
     width: 100%;

@@ -29,5 +29,15 @@
     "granam/exceptions-hierarchy": "~4.0"
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "scripts": {
+    "pre-autoload-dump": [
+      "mkdir -p $PWD/css/generic",
+      "cp -r --no-clobber $PWD/vendor/drd-plus/configurator-skeleton/css/generic/* $PWD/css/generic",
+      "mkdir -p $PWD/js/generic",
+      "cp -r --no-clobber $PWD/vendor/drd-plus/configurator-skeleton/js/generic/* $PWD/js/generic",
+      "mkdir -p $PWD/images/generic",
+      "cp -r --no-clobber $PWD/vendor/drd-plus/configurator-skeleton/images/generic/* $PWD/images/generic"
+    ]
+  }
 }
