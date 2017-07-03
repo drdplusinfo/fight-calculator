@@ -19,6 +19,9 @@ $controller = new Controller();
     <link href="css/generic/socials.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/generic/main.js"></script>
     <script type="text/javascript" src="js/generic/facebook.js" async></script>
+    <noscript>
+        <link rel="stylesheet" type="text/css" href="css/generic/no_script.css">
+    </noscript>
 </head>
 <body>
 <div id="fb-root"></div>
