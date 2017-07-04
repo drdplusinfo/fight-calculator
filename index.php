@@ -8,6 +8,7 @@ ini_set('display_errors', '1');
 
 $controller = new Controller();
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
@@ -27,7 +28,7 @@ $controller = new Controller();
 <div class="background"></div>
 <form class="block delete" action="" method="post" onsubmit="return window.confirm('Opravdu smazat?')">
     <label>
-        <input type="submit" value="Smazat" name="<?= $controller::DELETE_FIGHT_HISTORY ?>">
+        <input type="submit" value="Smazat" name="<?= $controller::DELETE_HISTORY ?>">
         <span class="hint">(včetně dlouhodobé paměti)</span>
     </label>
 </form>
@@ -35,7 +36,7 @@ $controller = new Controller();
     <input type="hidden" name="<?= $controller::SCROLL_FROM_TOP ?>" id="scrollFromTop"
            value="<?= $controller->getSelectedScrollFromTop() ?>">
     <div class="block remember">
-        <label><input type="checkbox" name="<?= $controller::REMEMBER ?>" value="1"
+        <label><input type="checkbox" name="<?= $controller::REMEMBER_HISTORY ?>" value="1"
                       <?php if ($controller->shouldRemember()) { ?>checked="checked"<?php } ?>>
             Pamatovat <span class="hint">(i při zavření prohlížeče)</span></label>
     </div>

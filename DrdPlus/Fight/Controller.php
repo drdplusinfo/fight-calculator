@@ -16,6 +16,7 @@ use DrdPlus\Codes\Skills\CombinedSkillCode;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Codes\Skills\PsychicalSkillCode;
 use DrdPlus\Codes\Skills\SkillCode;
+use DrdPlus\Configurator\Skeleton\History;
 use DrdPlus\FightProperties\FightProperties;
 use DrdPlus\Properties\Base\Agility;
 use DrdPlus\Properties\Base\Charisma;
@@ -28,14 +29,10 @@ use DrdPlus\Properties\Body\Size;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
-use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
-class Controller extends StrictObject
+class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 {
-    const REMEMBER = 'remember';
-    const DELETE_FIGHT_HISTORY = 'delete_fight_history';
-
     const MELEE_WEAPON = 'melee_weapon';
     const RANGED_WEAPON = 'ranged_weapon';
     const STRENGTH = PropertyCode::STRENGTH;
@@ -65,8 +62,6 @@ class Controller extends StrictObject
     const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
     const SCROLL_FROM_TOP = 'scroll_from_top';
 
-    /** @var History */
-    private $history;
     /** @var CurrentValues */
     private $currentValues;
     /** @var PreviousValues */
@@ -74,23 +69,35 @@ class Controller extends StrictObject
 
     public function __construct()
     {
-        $this->history = new History(
+        parent::__construct('fight' /* cookies postfix */);
+        $this->currentValues = new CurrentValues($_GET, $this->getHistoryWithSkillRanks());
+        $this->previousValues = new PreviousValues($_GET);
+    }
+
+    protected function createHistory(string $cookiesPostfix, int $cookiesTtl = null): History
+    {
+        return new HistoryWithSkillRanks(
             [
                 self::MELEE_FIGHT_SKILL => self::MELEE_FIGHT_SKILL_RANK,
                 self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
                 self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
             ],
-            !empty($_POST[self::DELETE_FIGHT_HISTORY]), // clear history?
+            !empty($_POST[self::DELETE_HISTORY]), // clear history?
             $_GET, // values to remember
-            !empty($_GET[self::REMEMBER]) // should remember given values
+            !empty($_GET[self::REMEMBER_HISTORY]), // should remember given values
+            $cookiesPostfix,
+            $cookiesTtl
         );
-        $this->currentValues = new CurrentValues($_GET, $this->history);
-        $this->previousValues = new PreviousValues($_GET);
+    }
+
+    private function getHistoryWithSkillRanks(): HistoryWithSkillRanks
+    {
+        return $this->getHistory();
     }
 
     public function shouldRemember(): bool
     {
-        return $this->history->shouldRemember();
+        return $this->getHistory()->shouldRemember();
     }
 
     public function getSelectedScrollFromTop(): int
@@ -694,7 +701,7 @@ class Controller extends StrictObject
 
     public function getHistoryMeleeSkillRanksJson(): string
     {
-        return $this->arrayToJson($this->history->getPreviousSkillRanks(self::MELEE_FIGHT_SKILL_RANK));
+        return $this->arrayToJson($this->getHistoryWithSkillRanks()->getPreviousSkillRanks(self::MELEE_FIGHT_SKILL_RANK));
     }
 
     private function arrayToJson(array $values): string
@@ -704,7 +711,7 @@ class Controller extends StrictObject
 
     public function getHistoryRangedSkillRanksJson(): string
     {
-        return $this->arrayToJson($this->history->getPreviousSkillRanks(self::RANGED_FIGHT_SKILL_RANK));
+        return $this->arrayToJson($this->getHistoryWithSkillRanks()->getPreviousSkillRanks(self::RANGED_FIGHT_SKILL_RANK));
     }
 
     public function getSelectedRangedSkillRank(): int

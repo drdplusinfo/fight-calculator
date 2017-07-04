@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Fight;
 
+use DrdPlus\Configurator\Skeleton\Cookie;
+
 class PreviousValues extends Values
 {
     const NEXT_PREVIOUS_VALUES = 'next_previous_values';

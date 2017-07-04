@@ -6,15 +6,15 @@ class CurrentValues extends Values
     /** @var array */
     private $valuesFromInput;
     /**
-     * @var History
+     * @var HistoryWithSkillRanks
      */
     private $historyValues;
 
     /**
      * @param array $valuesFromInput
-     * @param History $historyValues
+     * @param HistoryWithSkillRanks $historyValues
      */
-    public function __construct(array $valuesFromInput, History $historyValues)
+    public function __construct(array $valuesFromInput, HistoryWithSkillRanks $historyValues)
     {
         $this->valuesFromInput = $valuesFromInput;
         $this->historyValues = $historyValues;

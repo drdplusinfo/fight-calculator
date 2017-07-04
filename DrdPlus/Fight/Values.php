@@ -48,7 +48,6 @@ use Granam\Integer\PositiveIntegerObject;
 use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
-
 abstract class Values extends StrictObject
 {
 
