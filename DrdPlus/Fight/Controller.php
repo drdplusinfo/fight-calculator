@@ -561,22 +561,22 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getSelectedProfessionCode(): ProfessionCode
     {
-        $professionName = $this->currentValues->getValue(self::PROFESSION);
-        if (!$professionName) {
+        $selectedProfession = $this->currentValues->getValue(self::PROFESSION);
+        if (!$selectedProfession) {
             return ProfessionCode::getIt(ProfessionCode::COMMONER);
         }
 
-        return ProfessionCode::getIt($professionName);
+        return ProfessionCode::getIt($selectedProfession);
     }
 
     public function getPreviousProfessionCode(): ProfessionCode
     {
-        $professionName = $this->previousValues->getValue(self::PROFESSION);
-        if (!$professionName) {
+        $previousProfession = $this->previousValues->getValue(self::PROFESSION);
+        if (!$previousProfession) {
             return $this->getSelectedProfessionCode();
         }
 
-        return ProfessionCode::getIt($professionName);
+        return ProfessionCode::getIt($previousProfession);
     }
 
     /**
@@ -729,29 +729,29 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
      */
     public function getPossibleShields(): array
     {
-        return array_map(function (string $armorValue) {
-            return ShieldCode::getIt($armorValue);
+        return array_map(function (string $shieldValue) {
+            return ShieldCode::getIt($shieldValue);
         }, ShieldCode::getPossibleValues());
     }
 
     public function getSelectedShield(): ShieldCode
     {
-        $shield = $this->currentValues->getValue(self::SHIELD);
-        if (!$shield) {
+        $selectedShield = $this->currentValues->getValue(self::SHIELD);
+        if (!$selectedShield) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
 
-        return ShieldCode::getIt($shield);
+        return ShieldCode::getIt($selectedShield);
     }
 
     public function getPreviousShield(): ShieldCode
     {
-        $shield = $this->previousValues->getValue(self::SHIELD);
-        if (!$shield) {
+        $previousShield = $this->previousValues->getValue(self::SHIELD);
+        if (!$previousShield) {
             return $this->getSelectedShield();
         }
 
-        return ShieldCode::getIt($shield);
+        return ShieldCode::getIt($previousShield);
     }
 
     /**
@@ -802,12 +802,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getSelectedBodyArmor(): BodyArmorCode
     {
-        $shield = $this->currentValues->getValue(self::BODY_ARMOR);
-        if (!$shield) {
+        $selectedBodyArmor = $this->currentValues->getValue(self::BODY_ARMOR);
+        if (!$selectedBodyArmor) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
-        return BodyArmorCode::getIt($shield);
+        return BodyArmorCode::getIt($selectedBodyArmor);
     }
 
     public function getProtectionOfBodyArmor(BodyArmorCode $bodyArmorCode): int
@@ -827,12 +827,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getPreviousBodyArmor(): BodyArmorCode
     {
-        $shield = $this->previousValues->getValue(self::BODY_ARMOR);
-        if (!$shield) {
+        $previousBodyArmor = $this->previousValues->getValue(self::BODY_ARMOR);
+        if (!$previousBodyArmor) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
-        return BodyArmorCode::getIt($shield);
+        return BodyArmorCode::getIt($previousBodyArmor);
     }
 
     public function getSelectedArmorSkillRank(): int
@@ -865,12 +865,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getSelectedHelm(): HelmCode
     {
-        $shield = $this->currentValues->getValue(self::HELM);
-        if (!$shield) {
+        $selectedHelm = $this->currentValues->getValue(self::HELM);
+        if (!$selectedHelm) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
-        return HelmCode::getIt($shield);
+        return HelmCode::getIt($selectedHelm);
     }
 
     public function getProtectionOfHelm(HelmCode $helmCode): int
@@ -885,12 +885,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getPreviousHelm(): HelmCode
     {
-        $shield = $this->previousValues->getValue(self::HELM);
-        if (!$shield) {
+        $previousHelm = $this->previousValues->getValue(self::HELM);
+        if (!$previousHelm) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
-        return HelmCode::getIt($shield);
+        return HelmCode::getIt($previousHelm);
     }
 
     public function getProtectionOfPreviousHelm(): int
