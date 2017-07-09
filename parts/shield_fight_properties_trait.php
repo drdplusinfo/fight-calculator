@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Fight;
 
-use DrdPlus\Codes\DistanceUnitCode;
+use DrdPlus\Codes\Units\DistanceUnitCode;
 use DrdPlus\FightProperties\FightProperties;
 use DrdPlus\Properties\Body\Size;
 use DrdPlus\Tables\Measurements\Distance\Distance;

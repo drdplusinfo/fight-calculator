@@ -612,12 +612,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-boolean.git",
-                "reference": "b045615252071132d52dd4eb8a379427929eb8fd"
+                "reference": "d62e808413db64e8dbe978387fe00c229f5bd356"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-boolean/zipball/b045615252071132d52dd4eb8a379427929eb8fd",
-                "reference": "b045615252071132d52dd4eb8a379427929eb8fd",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-boolean/zipball/d62e808413db64e8dbe978387fe00c229f5bd356",
+                "reference": "d62e808413db64e8dbe978387fe00c229f5bd356",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +650,7 @@
                 }
             ],
             "description": "Enumeration type for Doctrine - booleans only",
-            "time": "2017-02-19 12:26:24"
+            "time": "2017-07-06 08:13:01"
         },
         {
             "name": "doctrineum/date-interval",
@@ -1140,12 +1140,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "f536215bec72f8d25659f19834e692b3de4fa33e"
+                "reference": "d6174889bbac847e32d96de79809665607530534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/f536215bec72f8d25659f19834e692b3de4fa33e",
-                "reference": "f536215bec72f8d25659f19834e692b3de4fa33e",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/d6174889bbac847e32d96de79809665607530534",
+                "reference": "d6174889bbac847e32d96de79809665607530534",
                 "shasum": ""
             },
             "require": {
@@ -1171,7 +1171,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-07-04 08:18:11"
+            "time": "2017-07-09 05:59:11"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1456,19 +1456,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-professions.git",
-                "reference": "9be113e96208031863215980cc7ed4c344db0b95"
+                "reference": "a4066332b96ba26a1672a76f3a49c7082b0dc0d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-professions/zipball/9be113e96208031863215980cc7ed4c344db0b95",
-                "reference": "9be113e96208031863215980cc7ed4c344db0b95",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-professions/zipball/a4066332b96ba26a1672a76f3a49c7082b0dc0d9",
+                "reference": "a4066332b96ba26a1672a76f3a49c7082b0dc0d9",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "2.*",
                 "drd-plus/codes": "dev-master",
                 "drd-plus/properties": "dev-master",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "doctrineum/entity": "dev-master",
@@ -1487,7 +1487,7 @@
                 "MIT"
             ],
             "description": "Professions of Drd+",
-            "time": "2017-02-20 07:05:30"
+            "time": "2017-07-08 09:26:16"
         },
         {
             "name": "drd-plus/properties",
@@ -1495,12 +1495,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "f16fa8987513f9f97528030f6becf60a4abb9bc3"
+                "reference": "e5d079bd0d26893f4f4bbb6c83b60fc706dfce7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/f16fa8987513f9f97528030f6becf60a4abb9bc3",
-                "reference": "f16fa8987513f9f97528030f6becf60a4abb9bc3",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/e5d079bd0d26893f4f4bbb6c83b60fc706dfce7c",
+                "reference": "e5d079bd0d26893f4f4bbb6c83b60fc706dfce7c",
                 "shasum": ""
             },
             "require": {
@@ -1512,7 +1512,7 @@
                 "drd-plus/tables": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/string": "dev-master",
-                "php": ">=7.0",
+                "php": ">=7.1",
                 "roave/security-advisories": "dev-master"
             },
             "require-dev": {
@@ -1531,7 +1531,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2017-05-31 05:26:00"
+            "time": "2017-07-09 06:09:27"
         },
         {
             "name": "drd-plus/properties-by-fate",
@@ -1714,12 +1714,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "1827edb7c65665598ee565831c857c132df93c8a"
+                "reference": "b503c3ca9d35bb50b543cacd3f7daefe22b02236"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/1827edb7c65665598ee565831c857c132df93c8a",
-                "reference": "1827edb7c65665598ee565831c857c132df93c8a",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/b503c3ca9d35bb50b543cacd3f7daefe22b02236",
+                "reference": "b503c3ca9d35bb50b543cacd3f7daefe22b02236",
                 "shasum": ""
             },
             "require": {
@@ -1731,7 +1731,7 @@
                 "drd-plus/lighting": "dev-master",
                 "granam/integer": "dev-master",
                 "granam/strict-object": "dev-master",
-                "php": ">=7.0",
+                "php": ">=7.1",
                 "roave/security-advisories": "dev-master"
             },
             "require-dev": {
@@ -1752,7 +1752,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-06-22 20:35:58"
+            "time": "2017-07-08 09:25:34"
         },
         {
             "name": "drd-plus/tables",
@@ -1760,12 +1760,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "42e2135839d30e349a6331df50764282cfc88b2e"
+                "reference": "082972a00597bbf2056b5f14a5aa6cdf3e947a5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/42e2135839d30e349a6331df50764282cfc88b2e",
-                "reference": "42e2135839d30e349a6331df50764282cfc88b2e",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/082972a00597bbf2056b5f14a5aa6cdf3e947a5c",
+                "reference": "082972a00597bbf2056b5f14a5aa6cdf3e947a5c",
                 "shasum": ""
             },
             "require": {
@@ -1778,7 +1778,7 @@
                 "granam/integer": "dev-master",
                 "granam/number": "dev-master",
                 "granam/strict-object": "dev-master",
-                "php": ">=7.0",
+                "php": ">=7.1",
                 "roave/security-advisories": "dev-master"
             },
             "require-dev": {
@@ -1797,7 +1797,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-07-03 06:26:28"
+            "time": "2017-07-09 06:35:21"
         },
         {
             "name": "drd/dice-rolls",
@@ -2010,17 +2010,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-integer.git",
-                "reference": "c0d65103db025f7aeafa5bf26f00995e70869880"
+                "reference": "c67cd25718147ce2d91b9db7bff83363b2c65bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/c0d65103db025f7aeafa5bf26f00995e70869880",
-                "reference": "c0d65103db025f7aeafa5bf26f00995e70869880",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/c67cd25718147ce2d91b9db7bff83363b2c65bed",
+                "reference": "c67cd25718147ce2d91b9db7bff83363b2c65bed",
                 "shasum": ""
             },
             "require": {
                 "granam/number": "dev-master",
-                "php": ">=7.0"
+                "granam/object-history": "dev-master",
+                "php": ">=7.1"
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
@@ -2051,7 +2052,7 @@
                 "integer",
                 "php"
             ],
-            "time": "2017-02-23 17:44:59"
+            "time": "2017-07-08 09:27:38"
         },
         {
             "name": "granam/number",
@@ -2102,6 +2103,42 @@
                 "php"
             ],
             "time": "2017-02-19 12:17:52"
+        },
+        {
+            "name": "granam/object-history",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/granam-object-history.git",
+                "reference": "6b6c6472d005fe2d904af980c7e0b0f5002c241f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-object-history/zipball/6b6c6472d005fe2d904af980c7e0b0f5002c241f",
+                "reference": "6b6c6472d005fe2d904af980c7e0b0f5002c241f",
+                "shasum": ""
+            },
+            "require": {
+                "granam/tools": "dev-master",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "granam/exceptions-hierarchy": "~4.0",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Changes of an object fetched from debug_backtrace",
+            "time": "2017-07-06 19:52:25"
         },
         {
             "name": "granam/scalar",
@@ -2263,12 +2300,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-tools.git",
-                "reference": "9c948c2525556dd9cab90ae78bbc5114c2bd1057"
+                "reference": "697cf8867b1e6c9c78eca8eaaa719e3805e6f3d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-tools/zipball/9c948c2525556dd9cab90ae78bbc5114c2bd1057",
-                "reference": "9c948c2525556dd9cab90ae78bbc5114c2bd1057",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-tools/zipball/697cf8867b1e6c9c78eca8eaaa719e3805e6f3d2",
+                "reference": "697cf8867b1e6c9c78eca8eaaa719e3805e6f3d2",
                 "shasum": ""
             },
             "require": {
@@ -2305,7 +2342,7 @@
                 "php",
                 "string"
             ],
-            "time": "2017-07-04 14:36:42"
+            "time": "2017-07-04 14:50:24"
         },
         {
             "name": "psr/log",
@@ -2492,7 +2529,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.3",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -2561,16 +2598,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.3",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "bcfd02728d9b776e5c2195a4750c813fe440402f"
+                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/bcfd02728d9b776e5c2195a4750c813fe440402f",
-                "reference": "bcfd02728d9b776e5c2195a4750c813fe440402f",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/63b85a968486d95ff9542228dc2e4247f16f9743",
+                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743",
                 "shasum": ""
             },
             "require": {
@@ -2613,7 +2650,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-06T14:51:55+00:00"
+            "time": "2017-07-05T13:02:37+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4174,7 +4211,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.2.10",
+            "version": "v3.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",

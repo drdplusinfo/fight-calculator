@@ -42,30 +42,30 @@ $controller = new Controller();
     </div>
     <div class="block">
         <div class="panel">
-            <?php include __DIR__ . '/basic_fight_properties.php' ?>
+            <?php include __DIR__ . '/parts/basic_fight_properties.php' ?>
         </div>
         <div class="panel">
             <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
             <div class="panel">
-                <?php include __DIR__ . '/melee_weapon.php' ?>
+                <?php include __DIR__ . '/parts/melee_weapon.php' ?>
             </div>
         </div>
         <div class="panel">
             <h2 id="Na dálku"><a href="#Na dálku" class="inner">Na dálku</a></h2>
             <div class="panel">
-                <?php include __DIR__ . '/ranged_weapon.php'; ?>
+                <?php include __DIR__ . '/parts/ranged_weapon.php'; ?>
             </div>
         </div>
         <div class="panel">
             <h2 id="Štít"><a href="#Štít" class="inner">Štít</a></h2>
-            <?php include __DIR__ . '/shield.php'; ?>
+            <?php include __DIR__ . '/parts/shield.php'; ?>
         </div>
         <div class="panel">
             <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
-            <div class="block"><?php include __DIR__ . '/armor.php'; ?></div>
+            <div class="block"><?php include __DIR__ . '/parts/armor.php'; ?></div>
         </div>
-        <div class="panel"><?php include __DIR__ . '/profession_and_body_properties.php'; ?></div>
-        <div class="panel"><?php include __DIR__ . '/ride_and_animal_enemy.php'; ?></div>
+        <div class="panel"><?php include __DIR__ . '/parts/profession_and_body_properties.php'; ?></div>
+        <div class="panel"><?php include __DIR__ . '/parts/ride_and_animal_enemy.php'; ?></div>
     </div>
 </form>
 <div class="block issues">
