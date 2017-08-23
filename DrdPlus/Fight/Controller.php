@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Fight;
 
+use DrdPlus\Codes\Armaments\ArmamentCode;
 use DrdPlus\Codes\Armaments\BodyArmorCode;
 use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
@@ -90,6 +91,9 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         );
     }
 
+    /**
+     * @return HistoryWithSkillRanks|History
+     */
     private function getHistoryWithSkillRanks(): HistoryWithSkillRanks
     {
         return $this->getHistory();
@@ -107,7 +111,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getMeleeWeaponCodes(): array
     {
-        return [
+        $weaponCodes = [
             WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeCodes(),
             WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerCodes(),
             WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubCodes(),
@@ -118,15 +122,76 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentCodes(),
             WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedCodes(),
         ];
+        foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
+            $weaponCodesOfSameCategory = $this->addUsabilityToMeleeWeapons($weaponCodesOfSameCategory);
+        }
+
+        return $weaponCodes;
+    }
+
+    /**
+     * @param array|string[] $meleeWeaponCodeValues
+     * @return array
+     */
+    private function addUsabilityToMeleeWeapons(array $meleeWeaponCodeValues): array
+    {
+        $meleeWeaponCodes = [];
+        foreach ($meleeWeaponCodeValues as $meleeWeaponCodeValue) {
+            $meleeWeaponCodes[] = MeleeWeaponCode::getIt($meleeWeaponCodeValue);
+        }
+
+        return $this->addUsability($meleeWeaponCodes);
+    }
+
+    /**
+     * @param array|ArmamentCode[] $codes
+     * @return array
+     */
+    private function addUsability(array $codes): array
+    {
+        $withUsagePossibility = [];
+        foreach ($codes as $code) {
+            $withUsagePossibility[] = [
+                'code' => $code,
+                'canUseIt' => $this->canUseArmament($code),
+            ];
+        }
+
+        return $withUsagePossibility;
+    }
+
+    private function canUseArmament(ArmamentCode $armamentCode): bool
+    {
+        return Tables::getIt()->getArmourer()
+            ->canUseArmament($armamentCode, $this->getSelectedStrength(), $this->getSelectedSize());
     }
 
     public function getRangedWeaponCodes(): array
     {
-        return [
+        $weaponCodes = [
             WeaponCategoryCode::THROWING_WEAPON => RangedWeaponCode::getThrowingWeaponValues(),
             WeaponCategoryCode::BOW => RangedWeaponCode::getBowValues(),
             WeaponCategoryCode::CROSSBOW => RangedWeaponCode::getCrossbowValues(),
         ];
+        foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
+            $weaponCodesOfSameCategory = $this->addUsabilityToRangedWeapons($weaponCodesOfSameCategory);
+        }
+
+        return $weaponCodes;
+    }
+
+    /**
+     * @param array|string[] $rangedWeaponCodeValues
+     * @return array
+     */
+    private function addUsabilityToRangedWeapons(array $rangedWeaponCodeValues): array
+    {
+        $meleeWeaponCodes = [];
+        foreach ($rangedWeaponCodeValues as $rangedWeaponCodeValue) {
+            $meleeWeaponCodes[] = RangedWeaponCode::getIt($rangedWeaponCodeValue);
+        }
+
+        return $this->addUsability($meleeWeaponCodes);
     }
 
     /**
@@ -139,7 +204,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
 
-        return MeleeWeaponCode::getIt($meleeWeaponValue);
+        $meleeWeapon = MeleeWeaponCode::getIt($meleeWeaponValue);
+        if (!$this->canUseArmament($meleeWeapon)) {
+            return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
+        }
+
+        return $meleeWeapon;
     }
 
     /**
@@ -165,7 +235,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
 
-        return RangedWeaponCode::getIt($rangedWeaponValue);
+        $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
+        if (!$this->canUseArmament($rangedWeapon)) {
+            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
+        }
+
+        return $rangedWeapon;
     }
 
     /**

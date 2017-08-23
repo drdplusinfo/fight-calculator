@@ -2,8 +2,9 @@
 namespace DrdPlus\Fight;
 
 use DrdPlus\Configurator\Skeleton\Cookie;
+use DrdPlus\Configurator\Skeleton\History;
 
-class HistoryWithSkillRanks extends \DrdPlus\Configurator\Skeleton\History
+class HistoryWithSkillRanks extends History
 {
     const RANKS_HISTORY = 'ranks_history';
 
@@ -16,17 +17,19 @@ class HistoryWithSkillRanks extends \DrdPlus\Configurator\Skeleton\History
      * @param array $valuesToRemember
      * @param bool $remember
      * @param string $cookiesPostfix
+     * @param int $cookiesTtl = null
      */
     public function __construct(
         array $skillNamesToSkillRankNames,
         bool $deleteFightHistory,
         array $valuesToRemember,
         bool $remember,
-        string $cookiesPostfix
+        string $cookiesPostfix,
+        int $cookiesTtl = null
     )
     {
         $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
-        parent::__construct($valuesToRemember, $deleteFightHistory, $remember, $cookiesPostfix);
+        parent::__construct($valuesToRemember, $deleteFightHistory, $remember, $cookiesPostfix, $cookiesTtl);
     }
 
     protected function remember(array $valuesToRemember, int $cookiesTtl): void

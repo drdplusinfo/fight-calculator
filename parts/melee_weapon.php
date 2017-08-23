@@ -12,16 +12,19 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
 <div class="panel">
     <label>
         <select name="<?= $controller::MELEE_WEAPON ?>" title="Melee weapon">
-            <?php foreach ($controller->getMeleeWeaponCodes() as $weaponCategory => $meleeWeaponCategory) {
+            <?php /** @var array $meleeWeaponsFromCategory */
+            foreach ($controller->getMeleeWeaponCodes() as $weaponCategory => $meleeWeaponsFromCategory) {
                 ?>
                 <optgroup label="<?= WeaponCategoryCode::getIt($weaponCategory)->translateTo('cs', 2) ?>">
-                    <?php
-                    /** @var string[] $meleeWeaponCategory */
-                    foreach ($meleeWeaponCategory as $meleeWeaponValue) {
+                    <?php /** @var array $meleeWeapon */
+                    foreach ($meleeWeaponsFromCategory as $meleeWeapon) {
+                        /** @var MeleeWeaponCode $meleeWeaponCode */
+                        $meleeWeaponCode = $meleeWeapon['code'];
                         ?>
-                        <option value="<?= $meleeWeaponValue ?>"
-                                <?php if ($selectedMeleeWeaponValue === $meleeWeaponValue) { ?>selected<?php } ?>>
-                            <?= MeleeWeaponCode::getIt($meleeWeaponValue)->translateTo('cs') ?>
+                        <option value="<?= $meleeWeaponCode->getValue() ?>"
+                                <?php if ($selectedMeleeWeaponValue === $meleeWeaponCode->getValue()) { ?>selected<?php }
+                                if (!$meleeWeapon['canUseIt']) { ?>disabled<?php } ?>>
+                            <?= $meleeWeaponCode->translateTo('cs') ?>
                         </option>
                     <?php } ?>
                 </optgroup>

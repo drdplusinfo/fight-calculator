@@ -14,17 +14,18 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 ?>
 <div class="panel">
     <select name="<?= $controller::RANGED_WEAPON ?>" title="Ranged weapon">
-        <?php foreach ($controller->getRangedWeaponCodes() as $weaponCategory => $rangedWeaponCategory) {
+        <?php /** @var string[] $rangedWeaponsFromCategory */
+        foreach ($controller->getRangedWeaponCodes() as $weaponCategory => $rangedWeaponsFromCategory) {
             ?>
             <optgroup label="<?= WeaponCategoryCode::getIt($weaponCategory)->translateTo('cs', 2) ?>">
-                <?php
-                /** @var string[] $rangedWeaponCategory */
-                foreach ($rangedWeaponCategory as $rangedWeaponValue) {
-                    ?>
-                    <option value="<?= $rangedWeaponValue ?>"
-                            <?php if ($selectedRangedWeaponValue && $selectedRangedWeaponValue === $rangedWeaponValue) { ?>selected<?php } ?>
-                    >
-                        <?= RangedWeaponCode::getIt($rangedWeaponValue)->translateTo('cs') ?>
+                <?php /** @var array $rangedWeapon */
+                foreach ($rangedWeaponsFromCategory as $rangedWeapon) {
+                    /** @var RangedWeaponCode $rangedWeaponCode */
+                    $rangedWeaponCode = $rangedWeapon['code']; ?>
+                    <option value="<?= $rangedWeaponCode->getValue() ?>"
+                            <?php if ($selectedRangedWeaponValue && $selectedRangedWeaponValue === $rangedWeaponCode->getValue()) { ?>selected<?php }
+                            if (!$rangedWeapon['canUseIt']) { ?>disabled<?php } ?>>
+                        <?= $rangedWeaponCode->translateTo('cs') ?>
                     </option>
                 <?php } ?>
             </optgroup>
