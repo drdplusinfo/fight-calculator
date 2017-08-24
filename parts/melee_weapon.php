@@ -13,7 +13,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
     <label>
         <select name="<?= $controller::MELEE_WEAPON ?>" title="Melee weapon">
             <?php /** @var array $meleeWeaponsFromCategory */
-            foreach ($controller->getMeleeWeaponCodes() as $weaponCategory => $meleeWeaponsFromCategory) {
+            foreach ($controller->getMeleeWeapons() as $weaponCategory => $meleeWeaponsFromCategory) {
                 ?>
                 <optgroup label="<?= WeaponCategoryCode::getIt($weaponCategory)->translateTo('cs', 2) ?>">
                     <?php /** @var array $meleeWeapon */
@@ -95,3 +95,8 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>
+<div class="block info-messages">
+    <?php foreach ($controller->getMessagesAboutMelee() as $messageAboutMelee) { ?>
+        <div class="info-message"><?= $messageAboutMelee ?></div>
+    <?php } ?>
+</div>

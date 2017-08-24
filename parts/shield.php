@@ -5,11 +5,10 @@ namespace DrdPlus\Fight;
 ?>
 
 <div class="panel">
-    <label>
+    <label class="block">
         <select name="<?= $controller::SHIELD ?>"><?php
             /** @var array $shield */
             foreach ($controller->getShields() as $shield) {
-
                 $shieldCode = $shield['code']; ?>
                 <option value="<?= $shieldCode->getValue() ?>"
                         <?php if ($controller->getSelectedShield()->getValue() === $shieldCode->getValue()) { ?>selected<?php }
@@ -19,6 +18,11 @@ namespace DrdPlus\Fight;
             <?php } ?>
         </select>
     </label>
+    <div class="block info-messages">
+        <?php foreach ($controller->getMessagesAboutShields() as $messageAboutShield) { ?>
+            <div class="info-message"><?= $messageAboutShield ?></div>
+        <?php } ?>
+    </div>
 </div>
 <?php if ($controller->getSelectedShield()->isUnarmed()) {
     return; // we will not show details about shield if no has been picked

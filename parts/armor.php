@@ -53,3 +53,8 @@ namespace DrdPlus\Fight;
     </div>
 </div>
 <div class="block"><input type="submit" value="Přepočítat"></div>
+<div class="block info-messages">
+    <?php foreach ($controller->getMessagesAboutArmors() as $messageAboutArmor) { ?>
+        <div class="info-message"><?= $messageAboutArmor ?></div>
+    <?php } ?>
+</div>

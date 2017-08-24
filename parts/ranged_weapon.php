@@ -15,7 +15,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 <div class="panel">
     <select name="<?= $controller::RANGED_WEAPON ?>" title="Ranged weapon">
         <?php /** @var string[] $rangedWeaponsFromCategory */
-        foreach ($controller->getRangedWeaponCodes() as $weaponCategory => $rangedWeaponsFromCategory) {
+        foreach ($controller->getRangedWeapons() as $weaponCategory => $rangedWeaponsFromCategory) {
             ?>
             <optgroup label="<?= WeaponCategoryCode::getIt($weaponCategory)->translateTo('cs', 2) ?>">
                 <?php /** @var array $rangedWeapon */
@@ -108,3 +108,8 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>
+<div class="block info-messages">
+    <?php foreach ($controller->getMessagesAboutRanged() as $messageAboutRanged) { ?>
+        <div class="info-message"><?= $messageAboutRanged ?></div>
+    <?php } ?>
+</div>

@@ -66,6 +66,8 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     private $currentValues;
     /** @var PreviousValues */
     private $previousValues;
+    /** @var array|string[] */
+    private $messagesAbout = [];
 
     public function __construct()
     {
@@ -108,7 +110,10 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::SCROLL_FROM_TOP);
     }
 
-    public function getMeleeWeaponCodes(): array
+    /**
+     * @return array|MeleeWeaponCode[][][]
+     */
+    public function getMeleeWeapons(): array
     {
         $weaponCodes = [
             WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeCodes(),
@@ -121,8 +126,20 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentCodes(),
             WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedCodes(),
         ];
+        $countOfUnusable = 0;
         foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
             $weaponCodesOfSameCategory = $this->addUsabilityToMeleeWeapons($weaponCodesOfSameCategory);
+            $countOfUnusable += $this->countUnusable($weaponCodesOfSameCategory);
+        }
+        unset($weaponCodesOfSameCategory);
+        if ($countOfUnusable > 0) {
+            $weaponWord = 'zbraň';
+            if ($countOfUnusable >= 5) {
+                $weaponWord = 'zbraní';
+            } elseif ($countOfUnusable >= 2) {
+                $weaponWord = 'zbraně';
+            }
+            $this->messagesAbout['melee']['unusable'] = "Kvůli chybějící síle nemůžeš použít $countOfUnusable $weaponWord na blízko.";
         }
 
         return $weaponCodes;
@@ -140,6 +157,22 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         }
 
         return $this->addWeaponlikeUsability($meleeWeaponCodes, $this->getSelectedMeleeWeaponHolding());
+    }
+
+    /**
+     * @param array|bool[][] $items
+     * @return int
+     */
+    private function countUnusable(array $items): int
+    {
+        $count = 0;
+        foreach ($items as $item) {
+            if (!$item['canUseIt']) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 
     /**
@@ -221,15 +254,30 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             );
     }
 
-    public function getRangedWeaponCodes(): array
+    /**
+     * @return array|RangedWeaponCode[][][]
+     */
+    public function getRangedWeapons(): array
     {
         $weaponCodes = [
             WeaponCategoryCode::THROWING_WEAPON => RangedWeaponCode::getThrowingWeaponValues(),
             WeaponCategoryCode::BOW => RangedWeaponCode::getBowValues(),
             WeaponCategoryCode::CROSSBOW => RangedWeaponCode::getCrossbowValues(),
         ];
+        $countOfUnusable = 0;
         foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
             $weaponCodesOfSameCategory = $this->addUsabilityToRangedWeapons($weaponCodesOfSameCategory);
+            $countOfUnusable += $this->countUnusable($weaponCodesOfSameCategory);
+        }
+        unset($weaponCodesOfSameCategory);
+        if ($countOfUnusable > 0) {
+            $weaponWord = 'zbraň';
+            if ($countOfUnusable >= 5) {
+                $weaponWord = 'zbraní';
+            } elseif ($countOfUnusable >= 2) {
+                $weaponWord = 'zbraně';
+            }
+            $this->messagesAbout['ranged']['unusable'] = "Kvůli chybějící síle nemůžeš použít $countOfUnusable $weaponWord na dálku.";
         }
 
         return $weaponCodes;
@@ -904,7 +952,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
-     * @return array
+     * @return array|ShieldCode[][][]
      */
     public function getShields(): array
     {
@@ -912,7 +960,19 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ShieldCode::getIt($shieldValue);
         }, ShieldCode::getPossibleValues());
 
-        return $this->addNonWeaponArmamentUsability($shieldCodes);
+        $withUsability = $this->addNonWeaponArmamentUsability($shieldCodes);
+        $countOfUnusable = $this->countUnusable($withUsability);
+        if ($countOfUnusable > 0) {
+            $shieldWord = 'štít';
+            if ($countOfUnusable >= 5) {
+                $shieldWord = 'štítů';
+            } elseif ($countOfUnusable >= 2) {
+                $shieldWord = 'štíty';
+            }
+            $this->messagesAbout['shields']['unusable'] = "Kvůli chybějící síle nemůžeš použít $countOfUnusable $shieldWord.";
+        }
+
+        return $withUsability;
     }
 
     /**
@@ -1047,7 +1107,19 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return BodyArmorCode::getIt($armorValue);
         }, BodyArmorCode::getPossibleValues());
 
-        return $this->addNonWeaponArmamentUsability($bodyArmors);
+        $withUsability = $this->addNonWeaponArmamentUsability($bodyArmors);
+        $countOfUnusable = $this->countUnusable($withUsability);
+        if ($countOfUnusable > 0) {
+            $armorWord = 'zbroj';
+            if ($countOfUnusable >= 5) {
+                $armorWord = 'zbrojí';
+            } elseif ($countOfUnusable >= 2) {
+                $armorWord = 'zbroje';
+            }
+            $this->messagesAbout['armors']['unusable'] = "Kvůli chybějící síle nemůžeš použít $countOfUnusable $armorWord.";
+        }
+
+        return $withUsability;
     }
 
     public function getSelectedBodyArmor(): BodyArmorCode
@@ -1228,5 +1300,25 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         }
 
         return '';
+    }
+
+    public function getMessagesAboutMelee(): array
+    {
+        return $this->messagesAbout['melee'] ?? [];
+    }
+
+    public function getMessagesAboutRanged(): array
+    {
+        return $this->messagesAbout['ranged'] ?? [];
+    }
+
+    public function getMessagesAboutShields(): array
+    {
+        return $this->messagesAbout['shields'] ?? [];
+    }
+
+    public function getMessagesAboutArmors(): array
+    {
+        return $this->messagesAbout['armors'] ?? [];
     }
 }

@@ -71,3 +71,19 @@ table.result {
 .line-sized {
     height: 1em;
 }
+
+.info-messages {
+    margin: auto;
+    display: block;
+}
+
+.info-message {
+    margin: 1px;
+    background-color: rgba(255, 165, 0, 0.4);
+    color: darkred;
+    font-size: smaller;
+    font-style: italic;
+    display: inline-block;
+    padding: 1px 1em;
+    border-radius: 2px;
+}
