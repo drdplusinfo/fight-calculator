@@ -8,7 +8,6 @@ use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\ShieldCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
-use DrdPlus\Codes\Armaments\WeaponCode;
 use DrdPlus\Codes\Armaments\WeaponlikeCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\ProfessionCode;
@@ -140,36 +139,86 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $meleeWeaponCodes[] = MeleeWeaponCode::getIt($meleeWeaponCodeValue);
         }
 
-        return $this->addUsability($meleeWeaponCodes);
+        return $this->addWeaponlikeUsability($meleeWeaponCodes, $this->getSelectedMeleeWeaponHolding());
     }
 
     /**
-     * @param array|ArmamentCode[] $codes
+     * @param array|WeaponlikeCode[] $weaponLikeCode
+     * @param ItemHoldingCode $itemHoldingCode
      * @return array
      */
-    private function addUsability(array $codes): array
+    private function addWeaponlikeUsability(array $weaponLikeCode, ItemHoldingCode $itemHoldingCode): array
     {
         $withUsagePossibility = [];
-        foreach ($codes as $code) {
+        foreach ($weaponLikeCode as $code) {
             $withUsagePossibility[] = [
                 'code' => $code,
-                'canUseIt' => $this->canUseArmament($code),
+                'canUseIt' => $this->canUseWeaponlike($code, $itemHoldingCode),
             ];
         }
 
         return $withUsagePossibility;
     }
 
-    private function canUseArmament(ArmamentCode $armamentCode): bool
+    private function canUseWeaponlike(WeaponlikeCode $weaponlikeCode, ItemHoldingCode $itemHoldingCode): bool
     {
-        return Tables::getIt()->getArmourer()
-            ->canUseArmament($armamentCode, $this->getSelectedStrength(), $this->getSelectedSize());
+        return $this->canUseArmament(
+            $weaponlikeCode,
+            Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
+                $weaponlikeCode,
+                $this->getWeaponHolding($weaponlikeCode, $itemHoldingCode->getValue()),
+                $this->getSelectedStrength()
+            )
+        );
     }
 
-    private function couldUseArmament(ArmamentCode $armamentCode): bool
+    /**
+     * @param array|ArmamentCode[] $armamentCodes
+     * @return array
+     */
+    private function addNonWeaponArmamentUsability(array $armamentCodes): array
+    {
+        $withUsagePossibility = [];
+        foreach ($armamentCodes as $armamentCode) {
+            $withUsagePossibility[] = [
+                'code' => $armamentCode,
+                'canUseIt' => $this->canUseArmament($armamentCode, $this->getSelectedStrength()),
+            ];
+        }
+
+        return $withUsagePossibility;
+    }
+
+    private function canUseArmament(ArmamentCode $armamentCode, Strength $strengthForArmament): bool
     {
         return Tables::getIt()->getArmourer()
-            ->canUseArmament($armamentCode, $this->getPreviousStrength(), $this->getPreviousSize());
+            ->canUseArmament(
+                $armamentCode,
+                $strengthForArmament,
+                $this->getSelectedSize()
+            );
+    }
+
+    private function couldUseWeaponlike(WeaponlikeCode $weaponlikeCode, ItemHoldingCode $itemHoldingCode): bool
+    {
+        return $this->couldUseArmament(
+            $weaponlikeCode,
+            Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
+                $weaponlikeCode,
+                $this->getWeaponHolding($weaponlikeCode, $itemHoldingCode->getValue()),
+                $this->getPreviousStrength()
+            )
+        );
+    }
+
+    private function couldUseArmament(ArmamentCode $armamentCode, Strength $strengthForArmament): bool
+    {
+        return Tables::getIt()->getArmourer()
+            ->canUseArmament(
+                $armamentCode,
+                $strengthForArmament,
+                $this->getPreviousSize()
+            );
     }
 
     public function getRangedWeaponCodes(): array
@@ -197,7 +246,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $meleeWeaponCodes[] = RangedWeaponCode::getIt($rangedWeaponCodeValue);
         }
 
-        return $this->addUsability($meleeWeaponCodes);
+        return $this->addWeaponlikeUsability($meleeWeaponCodes, $this->getSelectedRangedWeaponHolding());
     }
 
     /**
@@ -209,9 +258,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         if (!$meleeWeaponValue) {
             return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
-
         $meleeWeapon = MeleeWeaponCode::getIt($meleeWeaponValue);
-        if (!$this->canUseArmament($meleeWeapon)) {
+        $weaponHolding = $this->getWeaponHolding(
+            $meleeWeapon,
+            $this->currentValues->getValue(self::MELEE_WEAPON_HOLDING)
+        );
+        if (!$this->canUseWeaponlike($meleeWeapon, $weaponHolding)) {
             return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
 
@@ -225,11 +277,14 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $meleeWeaponValue = $this->previousValues->getValue(self::MELEE_WEAPON);
         if (!$meleeWeaponValue) {
-            $meleeWeapon = $this->getSelectedMeleeWeapon();
-        } else {
-            $meleeWeapon = MeleeWeaponCode::getIt($meleeWeaponValue);
+            return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
-        if (!$this->couldUseArmament($meleeWeapon)) {
+        $meleeWeapon = MeleeWeaponCode::getIt($meleeWeaponValue);
+        $weaponHolding = $this->getWeaponHolding(
+            $meleeWeapon,
+            $this->previousValues->getValue(self::MELEE_WEAPON_HOLDING)
+        );
+        if (!$this->couldUseWeaponlike($meleeWeapon, $weaponHolding)) {
             return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
 
@@ -245,9 +300,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         if (!$rangedWeaponValue) {
             return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
-
         $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
-        if (!$this->canUseArmament($rangedWeapon)) {
+        $weaponHolding = $this->getWeaponHolding(
+            $rangedWeapon,
+            $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING)
+        );
+        if (!$this->canUseWeaponlike($rangedWeapon, $weaponHolding)) {
             return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
 
@@ -261,11 +319,14 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $rangedWeaponValue = $this->previousValues->getValue(self::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
-            $rangedWeapon = $this->getSelectedRangedWeapon();
-        } else {
-            $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
+            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
-        if (!$this->couldUseArmament($rangedWeapon)) {
+        $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
+        $weaponHolding = $this->getWeaponHolding(
+            $rangedWeapon,
+            $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING)
+        );
+        if (!$this->couldUseWeaponlike($rangedWeapon, $weaponHolding)) {
             return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
 
@@ -442,30 +503,32 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         );
     }
 
-    public function isTwoHandedOnly(WeaponCode $weaponCode): bool
+    public function isTwoHandedOnly(WeaponlikeCode $weaponlikeCode): bool
     {
-        return Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponCode);
+        return Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponlikeCode);
     }
 
-    public function isOneHandedOnly(WeaponCode $weaponCode): bool
+    public function isOneHandedOnly(WeaponlikeCode $weaponlikeCode): bool
     {
-        return Tables::getIt()->getArmourer()->isOneHandedOnly($weaponCode);
+        return Tables::getIt()->getArmourer()->isOneHandedOnly($weaponlikeCode);
     }
 
     public function getSelectedMeleeWeaponHolding(): ItemHoldingCode
     {
-        return $this->getWeaponHolding(
-            $this->getSelectedMeleeWeapon(),
-            $this->currentValues->getValue(self::MELEE_WEAPON_HOLDING)
-        );
+        $meleeWeaponHoldingValue = $this->currentValues->getValue(self::MELEE_WEAPON_HOLDING);
+        if ($meleeWeaponHoldingValue === null) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return $this->getWeaponHolding($this->getSelectedMeleeWeapon(), $meleeWeaponHoldingValue);
     }
 
-    private function getWeaponHolding(WeaponCode $weaponCode, string $weaponHolding): ItemHoldingCode
+    private function getWeaponHolding(WeaponlikeCode $weaponlikeCode, string $weaponHolding): ItemHoldingCode
     {
-        if ($this->isTwoHandedOnly($weaponCode)) {
+        if ($this->isTwoHandedOnly($weaponlikeCode)) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        if ($this->isOneHandedOnly($weaponCode)) {
+        if ($this->isOneHandedOnly($weaponlikeCode)) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
         if (!$weaponHolding) {
@@ -477,10 +540,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     private function getPreviousMeleeWeaponHolding(): ItemHoldingCode
     {
-        return $this->getWeaponHolding(
-            $this->getPreviousMeleeWeapon(),
-            $this->previousValues->getValue(self::MELEE_WEAPON_HOLDING)
-        );
+        $previousMeleeWeaponHoldingValue = $this->previousValues->getValue(self::MELEE_WEAPON_HOLDING);
+        if ($previousMeleeWeaponHoldingValue === null) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return $this->getWeaponHolding($this->getPreviousMeleeWeapon(), $previousMeleeWeaponHoldingValue);
     }
 
     public function getGenericFightProperties(): FightProperties
@@ -509,7 +574,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         return $this->getCurrentFightProperties(
             $this->getSelectedShield(),
-            $this->getCurrentMeleeShieldHolding(),
+            $this->getSelectedMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShield()
@@ -531,7 +596,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         return $this->getCurrentFightProperties(
             $this->getSelectedShield(),
-            $this->getCurrentRangedShieldHolding(),
+            $this->getSelectedRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShield()
@@ -550,12 +615,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
+     * @param ShieldCode|null $selectedShield
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getCurrentMeleeShieldHolding(): ItemHoldingCode
+    public function getSelectedMeleeShieldHolding(ShieldCode $selectedShield = null): ItemHoldingCode
     {
-        return $this->getShieldHolding($this->getSelectedMeleeWeaponHolding(), $this->getSelectedMeleeWeapon());
+        return $this->getShieldHolding(
+            $this->getSelectedMeleeWeaponHolding(),
+            $this->getSelectedMeleeWeapon(),
+            $selectedShield
+        );
     }
 
     /**
@@ -570,14 +640,15 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @param ItemHoldingCode $weaponHolding
      * @param WeaponlikeCode $weaponlikeCode
+     * @param ShieldCode|null $shield = null
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    private function getShieldHolding(ItemHoldingCode $weaponHolding, WeaponlikeCode $weaponlikeCode): ItemHoldingCode
+    private function getShieldHolding(ItemHoldingCode $weaponHolding, WeaponlikeCode $weaponlikeCode, ShieldCode $shield = null): ItemHoldingCode
     {
         if ($weaponHolding->holdsByTwoHands()) {
             /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
+            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($shield ?? $this->getSelectedShield())) {
                 // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
                 return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
             }
@@ -585,7 +656,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        if ($weaponlikeCode->isUnarmed() && Tables::getIt()->getArmourer()->canHoldItByTwoHands($this->getSelectedShield())) {
+        if ($weaponlikeCode->isUnarmed() && Tables::getIt()->getArmourer()->canHoldItByTwoHands($shield ?? $this->getSelectedShield())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
 
@@ -593,12 +664,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
+     * @param ShieldCode|null $shield = null
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getCurrentRangedShieldHolding(): ItemHoldingCode
+    public function getSelectedRangedShieldHolding(ShieldCode $shield = null): ItemHoldingCode
     {
-        return $this->getShieldHolding($this->getSelectedRangedWeaponHolding(), $this->getSelectedRangedWeapon());
+        return $this->getShieldHolding(
+            $this->getSelectedRangedWeaponHolding(),
+            $this->getSelectedRangedWeapon(),
+            $shield
+        );
     }
 
     /**
@@ -634,18 +710,22 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getSelectedRangedWeaponHolding(): ItemHoldingCode
     {
-        return $this->getWeaponHolding(
-            $this->getSelectedRangedWeapon(),
-            $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING)
-        );
+        $rangedWeaponHoldingValue = $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING);
+        if ($rangedWeaponHoldingValue === null) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return $this->getWeaponHolding($this->getSelectedRangedWeapon(), $rangedWeaponHoldingValue);
     }
 
     private function getPreviousRangedWeaponHolding(): ItemHoldingCode
     {
-        return $this->getWeaponHolding(
-            $this->getPreviousRangedWeapon(),
-            $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING)
-        );
+        $rangedWeaponHoldingValue = $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING);
+        if ($rangedWeaponHoldingValue === null) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
+        }
+
+        return $this->getWeaponHolding($this->getPreviousRangedWeapon(), $rangedWeaponHoldingValue);
     }
 
     public function getSelectedProfessionCode(): ProfessionCode
@@ -822,7 +902,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ShieldCode::getIt($shieldValue);
         }, ShieldCode::getPossibleValues());
 
-        return $this->addUsability($shieldCodes);
+        return $this->addNonWeaponArmamentUsability($shieldCodes);
     }
 
     public function getSelectedShield(): ShieldCode
@@ -832,11 +912,25 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
         $selectedShield = ShieldCode::getIt($selectedShieldValue);
-        if (!$this->canUseArmament($selectedShield)) {
+        if (!$this->canUseShield($selectedShield, $this->getSelectedMeleeShieldHolding($selectedShield))
+            || !$this->canUseShield($selectedShield, $this->getSelectedRangedShieldHolding($selectedShield))
+        ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
 
         return $selectedShield;
+    }
+
+    private function canUseShield(ShieldCode $shieldCode, ItemHoldingCode $itemHoldingCode): bool
+    {
+        return $this->canUseArmament(
+            $shieldCode,
+            Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
+                $shieldCode,
+                $itemHoldingCode,
+                $this->getSelectedStrength()
+            )
+        );
     }
 
     private function getPreviousShield(): ShieldCode
@@ -846,11 +940,25 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
         $previousShield = ShieldCode::getIt($previousShieldValue);
-        if (!$this->canUseArmament($previousShield)) {
+        if (!$this->couldUseShield($previousShield, $this->getPreviousMeleeShieldHolding())
+            || !$this->couldUseShield($previousShield, $this->getPreviousRangedShieldHolding())
+        ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
 
         return $previousShield;
+    }
+
+    private function couldUseShield(ShieldCode $shieldCode, ItemHoldingCode $itemHoldingCode): bool
+    {
+        return $this->canUseArmament(
+            $shieldCode,
+            Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
+                $shieldCode,
+                $itemHoldingCode,
+                $this->getPreviousStrength()
+            )
+        );
     }
 
     /**
@@ -898,7 +1006,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return BodyArmorCode::getIt($armorValue);
         }, BodyArmorCode::getPossibleValues());
 
-        return $this->addUsability($bodyArmors);
+        return $this->addNonWeaponArmamentUsability($bodyArmors);
     }
 
     public function getSelectedBodyArmor(): BodyArmorCode
@@ -908,7 +1016,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
         $selectedBodyArmor = BodyArmorCode::getIt($selectedBodyArmorValue);
-        if (!$this->canUseArmament($selectedBodyArmor)) {
+        if (!$this->canUseArmament($selectedBodyArmor, $this->getSelectedStrength())) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
@@ -937,7 +1045,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
         $previousBodyArmor = BodyArmorCode::getIt($previousBodyArmorValue);
-        if (!$this->canUseArmament($previousBodyArmor)) {
+        if (!$this->canUseArmament($previousBodyArmor, $this->getPreviousStrength())) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
@@ -971,7 +1079,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return HelmCode::getIt($helmValue);
         }, HelmCode::getPossibleValues());
 
-        return $this->addUsability($helmCodes);
+        return $this->addNonWeaponArmamentUsability($helmCodes);
     }
 
     public function getSelectedHelm(): HelmCode
@@ -981,7 +1089,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
         $selectedHelm = HelmCode::getIt($selectedHelmValue);
-        if (!$this->canUseArmament($selectedHelm)) {
+        if (!$this->canUseArmament($selectedHelm, $this->getSelectedStrength())) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
@@ -1010,7 +1118,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
         $previousHelm = HelmCode::getIt($previousHelmValue);
-        if (!$this->canUseArmament($previousHelm)) {
+        if (!$this->canUseArmament($previousHelm, $this->getPreviousStrength())) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 

@@ -1259,12 +1259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-fight-properties.git",
-                "reference": "0a813e730c7f878c774b4d37de6288a0557d9239"
+                "reference": "3a5a47c8960805fe6e158e868d5543cb6c9b1536"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/0a813e730c7f878c774b4d37de6288a0557d9239",
-                "reference": "0a813e730c7f878c774b4d37de6288a0557d9239",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/3a5a47c8960805fe6e158e868d5543cb6c9b1536",
+                "reference": "3a5a47c8960805fe6e158e868d5543cb6c9b1536",
                 "shasum": ""
             },
             "require": {
@@ -1290,7 +1290,7 @@
                 "MIT"
             ],
             "description": "Final properties including battle statistics, current afflictions and boosts and by first and next levels of them for Drd+",
-            "time": "2017-07-25 10:56:18"
+            "time": "2017-08-24 12:30:31"
         },
         {
             "name": "drd-plus/health",
@@ -1770,12 +1770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "68382f2f722844094519540a25e0b64628a5e217"
+                "reference": "ed89df7988a161f2d1c7284484d139b6c645ea46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/68382f2f722844094519540a25e0b64628a5e217",
-                "reference": "68382f2f722844094519540a25e0b64628a5e217",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/ed89df7988a161f2d1c7284484d139b6c645ea46",
+                "reference": "ed89df7988a161f2d1c7284484d139b6c645ea46",
                 "shasum": ""
             },
             "require": {
@@ -1807,7 +1807,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-07-13 07:29:36"
+            "time": "2017-08-24 12:27:30"
         },
         {
             "name": "drd/dice-rolls",
