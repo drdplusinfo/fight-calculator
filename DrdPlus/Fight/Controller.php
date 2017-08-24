@@ -420,7 +420,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $this->getSelectedMeleeWeaponHolding(),
             $this->getSelectedMeleeSkillCode(),
             $this->getSelectedMeleeSkillRank(),
-            $this->getSelectedShield()
+            $this->getSelectedShieldForMelee()
         );
     }
 
@@ -573,11 +573,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     public function getMeleeShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getSelectedShield(),
+            $this->getSelectedShieldForMelee(),
             $this->getSelectedMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
-            $this->getSelectedShield()
+            $this->getSelectedShieldForMelee()
         );
     }
 
@@ -595,11 +595,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     public function getRangedShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getSelectedShield(),
+            $this->getSelectedShieldForRanged(),
             $this->getSelectedRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
-            $this->getSelectedShield()
+            $this->getSelectedShieldForRanged()
         );
     }
 
@@ -653,7 +653,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         if ($weaponHolding->holdsByTwoHands()) {
             /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($shield ?? $this->getSelectedShield())) {
+            if (Tables::getIt()->getArmourer()->canHoldItByTwoHands($shield ?? $this->getSelectedShieldForMelee())) {
                 // because two-handed weapon has to be dropped to use shield and then both hands can be used for shield
                 return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
             }
@@ -661,7 +661,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        if ($weaponlikeCode->isUnarmed() && Tables::getIt()->getArmourer()->canHoldItByTwoHands($shield ?? $this->getSelectedShield())) {
+        if ($weaponlikeCode->isUnarmed() && Tables::getIt()->getArmourer()->canHoldItByTwoHands($shield ?? $this->getSelectedShieldForMelee())) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
 
@@ -703,7 +703,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $this->getSelectedRangedWeaponHolding(),
             $this->getSelectedRangedSkillCode(),
             $this->getSelectedRangedSkillRank(),
-            $this->getSelectedShield()
+            $this->getSelectedShieldForRanged()
         );
     }
 
@@ -915,17 +915,29 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return $this->addNonWeaponArmamentUsability($shieldCodes);
     }
 
+    /**
+     * WITHOUT usability check
+     *
+     * @return ShieldCode
+     */
     public function getSelectedShield(): ShieldCode
     {
         $selectedShieldValue = $this->currentValues->getValue(self::SHIELD);
         if (!$selectedShieldValue) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
-        $selectedShield = ShieldCode::getIt($selectedShieldValue);
+
+        return ShieldCode::getIt($selectedShieldValue);
+    }
+
+    public function getSelectedShieldForMelee(): ShieldCode
+    {
+        $selectedShield = $this->getSelectedShield();
+        if ($selectedShield->isUnarmed()) {
+            return $selectedShield;
+        }
         if ($this->getSelectedMeleeWeaponHolding()->holdsByTwoHands()
-            || $this->getSelectedRangedWeaponHolding()->holdsByTwoHands()
             || !$this->canUseShield($selectedShield, $this->getSelectedMeleeShieldHolding($selectedShield))
-            || !$this->canUseShield($selectedShield, $this->getSelectedRangedShieldHolding($selectedShield))
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
@@ -973,6 +985,21 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
                 $this->getPreviousStrength()
             )
         );
+    }
+
+    public function getSelectedShieldForRanged(): ShieldCode
+    {
+        $selectedShield = $this->getSelectedShield();
+        if ($selectedShield->isUnarmed()) {
+            return $selectedShield;
+        }
+        if ($this->getSelectedRangedWeaponHolding()->holdsByTwoHands()
+            || !$this->canUseShield($selectedShield, $this->getSelectedRangedShieldHolding($selectedShield))
+        ) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+
+        return $selectedShield;
     }
 
     /**
