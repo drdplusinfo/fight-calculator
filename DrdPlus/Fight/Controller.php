@@ -629,12 +629,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
+     * @param ShieldCode|null $shieldCode = null
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getPreviousMeleeShieldHolding(): ItemHoldingCode
+    public function getPreviousMeleeShieldHolding(ShieldCode $shieldCode = null): ItemHoldingCode
     {
-        return $this->getShieldHolding($this->getPreviousMeleeWeaponHolding(), $this->getPreviousMeleeWeapon());
+        return $this->getShieldHolding(
+            $this->getPreviousMeleeWeaponHolding(),
+            $this->getPreviousMeleeWeapon(),
+            $shieldCode
+        );
     }
 
     /**
@@ -678,12 +683,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
+     * @param ShieldCode $shieldCode = null
      * @return ItemHoldingCode
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getPreviousRangedShieldHolding(): ItemHoldingCode
+    public function getPreviousRangedShieldHolding(ShieldCode $shieldCode = null): ItemHoldingCode
     {
-        return $this->getShieldHolding($this->getPreviousRangedWeaponHolding(), $this->getPreviousRangedWeapon());
+        return $this->getShieldHolding(
+            $this->getPreviousRangedWeaponHolding(),
+            $this->getPreviousRangedWeapon(),
+            $shieldCode
+        );
     }
 
     public function getRangedFightProperties(): FightProperties
@@ -912,7 +922,9 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
         $selectedShield = ShieldCode::getIt($selectedShieldValue);
-        if (!$this->canUseShield($selectedShield, $this->getSelectedMeleeShieldHolding($selectedShield))
+        if ($this->getSelectedMeleeWeaponHolding()->holdsByTwoHands()
+            || $this->getSelectedRangedWeaponHolding()->holdsByTwoHands()
+            || !$this->canUseShield($selectedShield, $this->getSelectedMeleeShieldHolding($selectedShield))
             || !$this->canUseShield($selectedShield, $this->getSelectedRangedShieldHolding($selectedShield))
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
@@ -940,8 +952,10 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
         $previousShield = ShieldCode::getIt($previousShieldValue);
-        if (!$this->couldUseShield($previousShield, $this->getPreviousMeleeShieldHolding())
-            || !$this->couldUseShield($previousShield, $this->getPreviousRangedShieldHolding())
+        if ($this->getPreviousMeleeWeaponHolding()->holdsByTwoHands()
+            || $this->getPreviousRangedWeaponHolding()->holdsByTwoHands()
+            || !$this->couldUseShield($previousShield, $this->getPreviousMeleeShieldHolding($previousShield))
+            || !$this->couldUseShield($previousShield, $this->getPreviousRangedShieldHolding($previousShield))
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
