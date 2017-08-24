@@ -4,10 +4,13 @@ namespace DrdPlus\Fight;
 ?>
 <div class="panel">
     <label><select name="<?= $controller::BODY_ARMOR ?>">
-            <?php foreach ($controller->getPossibleBodyArmors() as $bodyArmor) { ?>
-                <option value="<?= $bodyArmor->getValue() ?>"
-                        <?php if ($controller->getSelectedBodyArmor()->getValue() === $bodyArmor->getValue()){ ?>selected<?php } ?>>
-                    <?= $bodyArmor->translateTo('cs') . ' ' . ($controller->getProtectionOfBodyArmor($bodyArmor) > 0 ? ('+' . $controller->getProtectionOfBodyArmor($bodyArmor)) : '') ?>
+            <?php /** @var array $bodyArmor */
+            foreach ($controller->getPossibleBodyArmors() as $bodyArmor) {
+                $bodyArmorCode = $bodyArmor['code']; ?>
+                <option value="<?= $bodyArmorCode->getValue() ?>"
+                        <?php if ($controller->getSelectedBodyArmor()->getValue() === $bodyArmorCode->getValue()) { ?>selected<?php }
+                        if (!$bodyArmor['canUseIt']) { ?>disabled<?php } ?>>
+                    <?= $bodyArmorCode->translateTo('cs') . ($controller->getProtectionOfBodyArmor($bodyArmorCode) > 0 ? (' +' . $controller->getProtectionOfBodyArmor($bodyArmorCode)) : '') ?>
                 </option>
             <?php } ?>
         </select>
@@ -16,10 +19,13 @@ namespace DrdPlus\Fight;
 <div class="panel">
     <label>
         <select name="<?= $controller::HELM ?>">
-            <?php foreach ($controller->getPossibleHelms() as $helm) { ?>
-                <option value="<?= $helm->getValue() ?>"
-                        <?php if ($controller->getSelectedHelm()->getValue() === $helm->getValue()){ ?>selected<?php } ?>>
-                    <?= $helm->translateTo('cs') . ' ' . ($controller->getProtectionOfHelm($helm) > 0 ? ('+' . $controller->getProtectionOfHelm($helm)) : '') ?>
+            <?php /** @var array $helm */
+            foreach ($controller->getPossibleHelms() as $helm) {
+                $helmCode = $helm['code']; ?>
+                <option value="<?= $helmCode->getValue() ?>"
+                        <?php if ($controller->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
+                        if (!$helm['canUseIt']) { ?>disabled<?php } ?>>
+                    <?= $helmCode->translateTo('cs') . ($controller->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getProtectionOfHelm($helmCode)) : '') ?>
                 </option>
             <?php } ?>
         </select>

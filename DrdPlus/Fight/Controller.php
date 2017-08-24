@@ -814,12 +814,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
-     * @return array|ShieldCode[]
+     * @return array
      */
     public function getPossibleShields(): array
     {
         return array_map(function (string $shieldValue) {
-            return ShieldCode::getIt($shieldValue);
+            $shieldCode = ShieldCode::getIt($shieldValue);
+
+            return [
+                'code' => $shieldCode,
+                'canUseIt' => $this->canUseArmament($shieldCode),
+            ];
         }, ShieldCode::getPossibleValues());
     }
 
@@ -839,12 +844,16 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     private function getPreviousShield(): ShieldCode
     {
-        $previousShield = $this->previousValues->getValue(self::SHIELD);
-        if (!$previousShield) {
-            return $this->getSelectedShield();
+        $previousShieldValue = $this->previousValues->getValue(self::SHIELD);
+        if (!$previousShieldValue) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+        $previousShield = ShieldCode::getIt($previousShieldValue);
+        if (!$this->canUseArmament($previousShield)) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
 
-        return ShieldCode::getIt($previousShield);
+        return $previousShield;
     }
 
     /**
@@ -884,23 +893,32 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
-     * @return array|BodyArmorCode[]
+     * @return array
      */
     public function getPossibleBodyArmors(): array
     {
         return array_map(function (string $armorValue) {
-            return BodyArmorCode::getIt($armorValue);
+            $bodyArmor = BodyArmorCode::getIt($armorValue);
+
+            return [
+                'code' => $bodyArmor,
+                'canUseIt' => $this->canUseArmament($bodyArmor),
+            ];
         }, BodyArmorCode::getPossibleValues());
     }
 
     public function getSelectedBodyArmor(): BodyArmorCode
     {
-        $selectedBodyArmor = $this->currentValues->getValue(self::BODY_ARMOR);
-        if (!$selectedBodyArmor) {
+        $selectedBodyArmorValue = $this->currentValues->getValue(self::BODY_ARMOR);
+        if (!$selectedBodyArmorValue) {
+            return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
+        }
+        $selectedBodyArmor = BodyArmorCode::getIt($selectedBodyArmorValue);
+        if (!$this->canUseArmament($selectedBodyArmor)) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
-        return BodyArmorCode::getIt($selectedBodyArmor);
+        return BodyArmorCode::getIt($selectedBodyArmorValue);
     }
 
     public function getProtectionOfBodyArmor(BodyArmorCode $bodyArmorCode): int
@@ -920,12 +938,16 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     private function getPreviousBodyArmor(): BodyArmorCode
     {
-        $previousBodyArmor = $this->previousValues->getValue(self::BODY_ARMOR);
-        if (!$previousBodyArmor) {
+        $previousBodyArmorValue = $this->previousValues->getValue(self::BODY_ARMOR);
+        if (!$previousBodyArmorValue) {
+            return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
+        }
+        $previousBodyArmor = BodyArmorCode::getIt($previousBodyArmorValue);
+        if (!$this->canUseArmament($previousBodyArmor)) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
-        return BodyArmorCode::getIt($previousBodyArmor);
+        return $previousBodyArmor;
     }
 
     public function getSelectedArmorSkillRank(): int
@@ -947,23 +969,37 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
-     * @return array|HelmCode[]
+     * @return array
      */
     public function getPossibleHelms(): array
     {
         return array_map(function (string $helmValue) {
-            return HelmCode::getIt($helmValue);
+            $helmCode = HelmCode::getIt($helmValue);
+
+            return [
+                'code' => $helmCode,
+                'canUseIt' => $this->canUseArmament($helmCode),
+            ];
         }, HelmCode::getPossibleValues());
     }
 
     public function getSelectedHelm(): HelmCode
     {
-        $selectedHelm = $this->currentValues->getValue(self::HELM);
-        if (!$selectedHelm) {
+        $selectedHelmValue = $this->currentValues->getValue(self::HELM);
+        if (!$selectedHelmValue) {
+            return HelmCode::getIt(HelmCode::WITHOUT_HELM);
+        }
+        $selectedHelm = HelmCode::getIt($selectedHelmValue);
+        if (!$this->canUseArmament($selectedHelm)) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
-        return HelmCode::getIt($selectedHelm);
+        return HelmCode::getIt($selectedHelmValue);
+    }
+
+    public function getCoverOfShield(ShieldCode $shieldCode): int
+    {
+        return Tables::getIt()->getShieldsTable()->getCoverOf($shieldCode);
     }
 
     public function getProtectionOfHelm(HelmCode $helmCode): int
@@ -978,12 +1014,16 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     private function getPreviousHelm(): HelmCode
     {
-        $previousHelm = $this->previousValues->getValue(self::HELM);
-        if (!$previousHelm) {
+        $previousHelmValue = $this->previousValues->getValue(self::HELM);
+        if (!$previousHelmValue) {
+            return HelmCode::getIt(HelmCode::WITHOUT_HELM);
+        }
+        $previousHelm = HelmCode::getIt($previousHelmValue);
+        if (!$this->canUseArmament($previousHelm)) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
-        return HelmCode::getIt($previousHelm);
+        return $previousHelm;
     }
 
     public function getPreviousHelmProtection(): int

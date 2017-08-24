@@ -6,11 +6,15 @@ namespace DrdPlus\Fight;
 
 <div class="panel">
     <label>
-        <select
-                name="<?= $controller::SHIELD ?>"><?php foreach ($controller->getPossibleShields() as $shield) { ?>
-                <option value="<?= $shield->getValue() ?>"
-                        <?php if ($controller->getSelectedShield()->getValue() === $shield->getValue()){ ?>selected<?php } ?>>
-                    <?= $shield->translateTo('cs') ?>
+        <select name="<?= $controller::SHIELD ?>"><?php
+            /** @var array $shield */
+            foreach ($controller->getPossibleShields() as $shield) {
+
+                $shieldCode = $shield['code']; ?>
+                <option value="<?= $shieldCode->getValue() ?>"
+                        <?php if ($controller->getSelectedShield()->getValue() === $shieldCode->getValue()) { ?>selected<?php }
+                        if (!$shield['canUseIt']) { ?>disabled<?php } ?>>
+                    <?= $shieldCode->translateTo('cs') . ($controller->getCoverOfShield($shieldCode) > 0 ? (' +' . $controller->getCoverOfShield($shieldCode)) : '') ?>
                 </option>
             <?php } ?>
         </select>
