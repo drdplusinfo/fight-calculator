@@ -166,6 +166,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             ->canUseArmament($armamentCode, $this->getSelectedStrength(), $this->getSelectedSize());
     }
 
+    private function couldUseArmament(ArmamentCode $armamentCode): bool
+    {
+        return Tables::getIt()->getArmourer()
+            ->canUseArmament($armamentCode, $this->getPreviousStrength(), $this->getPreviousSize());
+    }
+
     public function getRangedWeaponCodes(): array
     {
         $weaponCodes = [
@@ -219,10 +225,15 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $meleeWeaponValue = $this->previousValues->getValue(self::MELEE_WEAPON);
         if (!$meleeWeaponValue) {
-            return $this->getSelectedMeleeWeapon();
+            $meleeWeapon = $this->getSelectedMeleeWeapon();
+        } else {
+            $meleeWeapon = MeleeWeaponCode::getIt($meleeWeaponValue);
+        }
+        if (!$this->couldUseArmament($meleeWeapon)) {
+            return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
 
-        return MeleeWeaponCode::getIt($meleeWeaponValue);
+        return $meleeWeapon;
     }
 
     /**
@@ -250,10 +261,15 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $rangedWeaponValue = $this->previousValues->getValue(self::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
-            return $this->getSelectedRangedWeapon();
+            $rangedWeapon = $this->getSelectedRangedWeapon();
+        } else {
+            $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
+        }
+        if (!$this->couldUseArmament($rangedWeapon)) {
+            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
         }
 
-        return RangedWeaponCode::getIt($rangedWeaponValue);
+        return $rangedWeapon;
     }
 
     public function getSelectedStrength(): Strength
@@ -431,6 +447,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponCode);
     }
 
+    public function isOneHandedOnly(WeaponCode $weaponCode): bool
+    {
+        return Tables::getIt()->getArmourer()->isOneHandedOnly($weaponCode);
+    }
+
     public function getSelectedMeleeWeaponHolding(): ItemHoldingCode
     {
         return $this->getWeaponHolding(
@@ -439,10 +460,13 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         );
     }
 
-    private function getWeaponHolding(WeaponCode $weaponCode, $weaponHolding): ItemHoldingCode
+    private function getWeaponHolding(WeaponCode $weaponCode, string $weaponHolding): ItemHoldingCode
     {
         if ($this->isTwoHandedOnly($weaponCode)) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
+        }
+        if ($this->isOneHandedOnly($weaponCode)) {
+            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
         if (!$weaponHolding) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
@@ -610,28 +634,18 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getSelectedRangedWeaponHolding(): ItemHoldingCode
     {
-        if ($this->isTwoHandedOnly($this->getSelectedRangedWeapon())) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
-        }
-        $meleeHolding = $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING);
-        if (!$meleeHolding) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
-        }
-
-        return ItemHoldingCode::getIt($meleeHolding);
+        return $this->getWeaponHolding(
+            $this->getSelectedRangedWeapon(),
+            $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING)
+        );
     }
 
     public function getPreviousRangedWeaponHolding(): ItemHoldingCode
     {
-        if ($this->isTwoHandedOnly($this->getPreviousRangedWeapon())) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
-        }
-        $meleeHolding = $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING);
-        if (!$meleeHolding) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
-        }
-
-        return ItemHoldingCode::getIt($meleeHolding);
+        return $this->getWeaponHolding(
+            $this->getPreviousRangedWeapon(),
+            $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING)
+        );
     }
 
     public function getSelectedProfessionCode(): ProfessionCode

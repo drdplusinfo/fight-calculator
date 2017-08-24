@@ -34,7 +34,7 @@ table.result {
 }
 
 .result td:nth-child(3) {
-    text-align: right;
+    text-align: left;
 }
 
 .result.shortened td:nth-child(3) {
@@ -66,4 +66,8 @@ table.result {
 .changed {
     font-weight: bold;
     text-shadow: 1px 1px 3px #0089b3;
+}
+
+.line-sized {
+    height: 1em;
 }

@@ -60,7 +60,7 @@ namespace DrdPlus\Fight;
     </tr>
     <tr>
         <td>Helma</td>
-        <td class="line-sized"><img src="images/helm-icon.png"></td>
+        <td><img class="line-sized" src="images/helm-icon.png"></td>
         <td class="<?= $controller->getClassForChangedValue($controller->getProtectionOfPreviousHelm(), $controller->getProtectionOfSelectedHelm()) ?>">
             <?= $controller->getProtectionOfSelectedHelm() ?>
         </td>

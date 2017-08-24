@@ -22,9 +22,9 @@ class CurrentValues extends Values
 
     /**
      * @param string $name
-     * @return mixed
+     * @return string|null
      */
-    public function getValue(string $name)
+    public function getValue(string $name):? string
     {
         if (array_key_exists($name, $this->valuesFromInput)) {
             return $this->valuesFromInput[$name];
