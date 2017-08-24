@@ -221,7 +221,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return MeleeWeaponCode
      */
-    public function getPreviousMeleeWeapon(): MeleeWeaponCode
+    private function getPreviousMeleeWeapon(): MeleeWeaponCode
     {
         $meleeWeaponValue = $this->previousValues->getValue(self::MELEE_WEAPON);
         if (!$meleeWeaponValue) {
@@ -257,7 +257,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return RangedWeaponCode
      */
-    public function getPreviousRangedWeapon(): RangedWeaponCode
+    private function getPreviousRangedWeapon(): RangedWeaponCode
     {
         $rangedWeaponValue = $this->previousValues->getValue(self::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
@@ -277,7 +277,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Strength::getIt((int)$this->currentValues->getValue(self::STRENGTH));
     }
 
-    public function getPreviousStrength(): Strength
+    private function getPreviousStrength(): Strength
     {
         return Strength::getIt((int)$this->previousValues->getValue(self::STRENGTH));
     }
@@ -287,7 +287,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Agility::getIt((int)$this->currentValues->getValue(self::AGILITY));
     }
 
-    public function getPreviousAgility(): Agility
+    private function getPreviousAgility(): Agility
     {
         return Agility::getIt((int)$this->previousValues->getValue(self::AGILITY));
     }
@@ -297,7 +297,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Knack::getIt((int)$this->currentValues->getValue(self::KNACK));
     }
 
-    public function getPreviousKnack(): Knack
+    private function getPreviousKnack(): Knack
     {
         return Knack::getIt((int)$this->previousValues->getValue(self::KNACK));
     }
@@ -307,7 +307,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Will::getIt((int)$this->currentValues->getValue(self::WILL));
     }
 
-    public function getPreviousWill(): Will
+    private function getPreviousWill(): Will
     {
         return Will::getIt((int)$this->previousValues->getValue(self::WILL));
     }
@@ -317,7 +317,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Intelligence::getIt((int)$this->currentValues->getValue(self::INTELLIGENCE));
     }
 
-    public function getPreviousIntelligence(): Intelligence
+    private function getPreviousIntelligence(): Intelligence
     {
         return Intelligence::getIt((int)$this->previousValues->getValue(self::INTELLIGENCE));
     }
@@ -327,7 +327,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Charisma::getIt((int)$this->currentValues->getValue(self::CHARISMA));
     }
 
-    public function getPreviousCharisma(): Charisma
+    private function getPreviousCharisma(): Charisma
     {
         return Charisma::getIt((int)$this->previousValues->getValue(self::CHARISMA));
     }
@@ -337,7 +337,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Size::getIt((int)$this->currentValues->getValue(self::SIZE));
     }
 
-    public function getPreviousSize(): Size
+    private function getPreviousSize(): Size
     {
         return Size::getIt((int)$this->previousValues->getValue(self::SIZE));
     }
@@ -347,7 +347,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return HeightInCm::getIt($this->currentValues->getValue(self::HEIGHT_IN_CM) ?? 150);
     }
 
-    public function getPreviousHeightInCm(): HeightInCm
+    private function getPreviousHeightInCm(): HeightInCm
     {
         return HeightInCm::getIt($this->previousValues->getValue(self::HEIGHT_IN_CM) ?? 150);
     }
@@ -475,7 +475,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return ItemHoldingCode::getIt($weaponHolding);
     }
 
-    public function getPreviousMeleeWeaponHolding(): ItemHoldingCode
+    private function getPreviousMeleeWeaponHolding(): ItemHoldingCode
     {
         return $this->getWeaponHolding(
             $this->getPreviousMeleeWeapon(),
@@ -640,7 +640,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         );
     }
 
-    public function getPreviousRangedWeaponHolding(): ItemHoldingCode
+    private function getPreviousRangedWeaponHolding(): ItemHoldingCode
     {
         return $this->getWeaponHolding(
             $this->getPreviousRangedWeapon(),
@@ -658,7 +658,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return ProfessionCode::getIt($selectedProfession);
     }
 
-    public function getPreviousProfessionCode(): ProfessionCode
+    private function getPreviousProfessionCode(): ProfessionCode
     {
         $previousProfession = $this->previousValues->getValue(self::PROFESSION);
         if (!$previousProfession) {
@@ -763,7 +763,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         throw new \LogicException('Unexpected skill value ' . var_export($skillName, true));
     }
 
-    public function getPreviousMeleeSkillCode(): SkillCode
+    private function getPreviousMeleeSkillCode(): SkillCode
     {
         return $this->getSelectedSkill($this->previousValues->getValue(self::MELEE_FIGHT_SKILL));
     }
@@ -773,7 +773,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return $this->getSelectedSkill($this->currentValues->getValue(self::RANGED_FIGHT_SKILL));
     }
 
-    public function getPreviousRangedSkillCode(): SkillCode
+    private function getPreviousRangedSkillCode(): SkillCode
     {
         return $this->getSelectedSkill($this->previousValues->getValue(self::RANGED_FIGHT_SKILL));
     }
@@ -783,7 +783,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::MELEE_FIGHT_SKILL_RANK);
     }
 
-    public function getPreviousMeleeSkillRank(): int
+    private function getPreviousMeleeSkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::MELEE_FIGHT_SKILL_RANK);
     }
@@ -808,7 +808,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::RANGED_FIGHT_SKILL_RANK);
     }
 
-    public function getPreviousRangedSkillRank(): int
+    private function getPreviousRangedSkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::RANGED_FIGHT_SKILL_RANK);
     }
@@ -825,15 +825,19 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getSelectedShield(): ShieldCode
     {
-        $selectedShield = $this->currentValues->getValue(self::SHIELD);
-        if (!$selectedShield) {
+        $selectedShieldValue = $this->currentValues->getValue(self::SHIELD);
+        if (!$selectedShieldValue) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+        $selectedShield = ShieldCode::getIt($selectedShieldValue);
+        if (!$this->canUseArmament($selectedShield)) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
 
-        return ShieldCode::getIt($selectedShield);
+        return $selectedShield;
     }
 
-    public function getPreviousShield(): ShieldCode
+    private function getPreviousShield(): ShieldCode
     {
         $previousShield = $this->previousValues->getValue(self::SHIELD);
         if (!$previousShield) {
@@ -856,7 +860,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::SHIELD_USAGE_SKILL_RANK);
     }
 
-    public function getPreviousShieldUsageSkillRank(): int
+    private function getPreviousShieldUsageSkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::SHIELD_USAGE_SKILL_RANK);
     }
@@ -874,7 +878,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
-    public function getPreviousFightWithShieldsSkillRank(): int
+    private function getPreviousFightWithShieldsSkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
@@ -914,7 +918,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Tables::getIt()->getBodyArmorsTable()->getProtectionOf($this->getPreviousBodyArmor());
     }
 
-    public function getPreviousBodyArmor(): BodyArmorCode
+    private function getPreviousBodyArmor(): BodyArmorCode
     {
         $previousBodyArmor = $this->previousValues->getValue(self::BODY_ARMOR);
         if (!$previousBodyArmor) {
@@ -929,7 +933,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::ARMOR_SKILL_VALUE);
     }
 
-    public function getPreviousArmorSkillRank(): int
+    private function getPreviousArmorSkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::ARMOR_SKILL_VALUE);
     }
@@ -967,12 +971,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Tables::getIt()->getHelmsTable()->getProtectionOf($helmCode);
     }
 
-    public function getProtectionOfSelectedHelm(): int
+    public function getSelectedHelmProtection(): int
     {
         return $this->getProtectionOfHelm($this->getSelectedHelm());
     }
 
-    public function getPreviousHelm(): HelmCode
+    private function getPreviousHelm(): HelmCode
     {
         $previousHelm = $this->previousValues->getValue(self::HELM);
         if (!$previousHelm) {
@@ -982,7 +986,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return HelmCode::getIt($previousHelm);
     }
 
-    public function getProtectionOfPreviousHelm(): int
+    public function getPreviousHelmProtection(): int
     {
         return Tables::getIt()->getHelmsTable()->getProtectionOf($this->getPreviousHelm());
     }
@@ -992,7 +996,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (bool)$this->currentValues->getValue(self::ON_HORSEBACK);
     }
 
-    public function getPreviousOnHorseback(): bool
+    private function getPreviousOnHorseback(): bool
     {
         return (bool)$this->previousValues->getValue(self::ON_HORSEBACK);
     }
@@ -1002,7 +1006,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::RIDING_SKILL_RANK);
     }
 
-    public function getPreviousRidingSkillRank(): int
+    private function getPreviousRidingSkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::RIDING_SKILL_RANK);
     }
@@ -1012,7 +1016,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (bool)$this->currentValues->getValue(self::FIGHT_FREE_WILL_ANIMAL);
     }
 
-    public function getPreviousFightFreeWillAnimal(): bool
+    private function getPreviousFightFreeWillAnimal(): bool
     {
         return (bool)$this->previousValues->getValue(self::FIGHT_FREE_WILL_ANIMAL);
     }
@@ -1022,7 +1026,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return (int)$this->currentValues->getValue(self::ZOOLOGY_SKILL_RANK);
     }
 
-    public function getPreviousZoologySkillRank(): int
+    private function getPreviousZoologySkillRank(): int
     {
         return (int)$this->previousValues->getValue(self::ZOOLOGY_SKILL_RANK);
     }
