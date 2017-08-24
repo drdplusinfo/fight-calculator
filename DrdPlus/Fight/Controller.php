@@ -761,16 +761,16 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return array|SkillCode[]
      */
-    public function getPossibleSkillsForMelee(): array
+    public function getSkillsForMelee(): array
     {
-        return $this->getPossibleSkillsForCategories(WeaponCategoryCode::getMeleeWeaponCategoryValues());
+        return $this->getSkillsForCategories(WeaponCategoryCode::getMeleeWeaponCategoryValues());
     }
 
     /**
      * @param array|string $weaponCategoryValues
      * @return array|SkillCode[]
      */
-    private function getPossibleSkillsForCategories(array $weaponCategoryValues): array
+    private function getSkillsForCategories(array $weaponCategoryValues): array
     {
         $fightWithCategories = [];
         $fightWithPhysical = array_map(
@@ -823,9 +823,9 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return array|SkillCode[]
      */
-    public function getPossibleSkillsForRanged(): array
+    public function getSkillsForRanged(): array
     {
-        return $this->getPossibleSkillsForCategories(WeaponCategoryCode::getRangedWeaponCategoryValues());
+        return $this->getSkillsForCategories(WeaponCategoryCode::getRangedWeaponCategoryValues());
     }
 
     public function getSelectedMeleeSkillCode(): SkillCode
@@ -906,7 +906,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return array
      */
-    public function getPossibleShields(): array
+    public function getShields(): array
     {
         $shieldCodes = array_map(function (string $shieldValue) {
             return ShieldCode::getIt($shieldValue);
@@ -1014,7 +1014,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return array
      */
-    public function getPossibleBodyArmors(): array
+    public function getBodyArmors(): array
     {
         $bodyArmors = array_map(function (string $armorValue) {
             return BodyArmorCode::getIt($armorValue);
@@ -1079,7 +1079,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return PhysicalSkillCode
      */
-    public function getPossibleSkillForArmor(): PhysicalSkillCode
+    public function getSkillForArmor(): PhysicalSkillCode
     {
         return PhysicalSkillCode::getIt(PhysicalSkillCode::ARMOR_WEARING);
     }
@@ -1087,7 +1087,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return array
      */
-    public function getPossibleHelms(): array
+    public function getHelms(): array
     {
         $helmCodes = array_map(function (string $helmValue) {
             return HelmCode::getIt($helmValue);

@@ -58,7 +58,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
             <select name="<?= $controller::MELEE_FIGHT_SKILL ?>">
                 <?php
                 $selectedSkillForMelee = $controller->getSelectedMeleeSkillCode();
-                foreach ($controller->getPossibleSkillsForMelee() as $skillCode) { ?>
+                foreach ($controller->getSkillsForMelee() as $skillCode) { ?>
                     <option value="<?= $skillCode->getValue() ?>"
                             <?php if ($selectedSkillForMelee->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>
                         <?= $skillCode->translateTo('cs') ?>

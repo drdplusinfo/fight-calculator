@@ -5,7 +5,7 @@ namespace DrdPlus\Fight;
 <div class="panel">
     <label><select name="<?= $controller::BODY_ARMOR ?>">
             <?php /** @var array $bodyArmor */
-            foreach ($controller->getPossibleBodyArmors() as $bodyArmor) {
+            foreach ($controller->getBodyArmors() as $bodyArmor) {
                 $bodyArmorCode = $bodyArmor['code']; ?>
                 <option value="<?= $bodyArmorCode->getValue() ?>"
                         <?php if ($controller->getSelectedBodyArmor()->getValue() === $bodyArmorCode->getValue()) { ?>selected<?php }
@@ -20,7 +20,7 @@ namespace DrdPlus\Fight;
     <label>
         <select name="<?= $controller::HELM ?>">
             <?php /** @var array $helm */
-            foreach ($controller->getPossibleHelms() as $helm) {
+            foreach ($controller->getHelms() as $helm) {
                 $helmCode = $helm['code']; ?>
                 <option value="<?= $helmCode->getValue() ?>"
                         <?php if ($controller->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
@@ -34,7 +34,7 @@ namespace DrdPlus\Fight;
 <div class="block skill">
     <div class="panel">
         <label>
-            <span class="keyword"><?= $controller->getPossibleSkillForArmor()->translateTo('cs') ?></span>
+            <span class="keyword"><?= $controller->getSkillForArmor()->translateTo('cs') ?></span>
         </label>
     </div>
     <div class="panel">

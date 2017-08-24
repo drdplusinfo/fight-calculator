@@ -56,7 +56,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
         <label><select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
                 <?php
                 $selectedSkillForRanged = $controller->getSelectedRangedSkillCode();
-                foreach ($controller->getPossibleSkillsForRanged() as $skillCode) {
+                foreach ($controller->getSkillsForRanged() as $skillCode) {
                     ?>
                     <option value="<?= $skillCode->getValue() ?>"
                             <?php if ($selectedSkillForRanged->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>

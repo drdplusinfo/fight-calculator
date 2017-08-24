@@ -8,7 +8,7 @@ namespace DrdPlus\Fight;
     <label>
         <select name="<?= $controller::SHIELD ?>"><?php
             /** @var array $shield */
-            foreach ($controller->getPossibleShields() as $shield) {
+            foreach ($controller->getShields() as $shield) {
 
                 $shieldCode = $shield['code']; ?>
                 <option value="<?= $shieldCode->getValue() ?>"
