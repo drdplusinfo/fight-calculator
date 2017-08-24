@@ -104,7 +104,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return $this->getHistory()->shouldRemember();
     }
 
-    public function getSelectedScrollFromTop(): int
+    public function getScrollFromTop(): int
     {
         return (int)$this->currentValues->getValue(self::SCROLL_FROM_TOP);
     }
@@ -818,14 +818,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
      */
     public function getPossibleShields(): array
     {
-        return array_map(function (string $shieldValue) {
-            $shieldCode = ShieldCode::getIt($shieldValue);
-
-            return [
-                'code' => $shieldCode,
-                'canUseIt' => $this->canUseArmament($shieldCode),
-            ];
+        $shieldCodes = array_map(function (string $shieldValue) {
+            return ShieldCode::getIt($shieldValue);
         }, ShieldCode::getPossibleValues());
+
+        return $this->addUsability($shieldCodes);
     }
 
     public function getSelectedShield(): ShieldCode
@@ -897,14 +894,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
      */
     public function getPossibleBodyArmors(): array
     {
-        return array_map(function (string $armorValue) {
-            $bodyArmor = BodyArmorCode::getIt($armorValue);
-
-            return [
-                'code' => $bodyArmor,
-                'canUseIt' => $this->canUseArmament($bodyArmor),
-            ];
+        $bodyArmors = array_map(function (string $armorValue) {
+            return BodyArmorCode::getIt($armorValue);
         }, BodyArmorCode::getPossibleValues());
+
+        return $this->addUsability($bodyArmors);
     }
 
     public function getSelectedBodyArmor(): BodyArmorCode
@@ -973,14 +967,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
      */
     public function getPossibleHelms(): array
     {
-        return array_map(function (string $helmValue) {
-            $helmCode = HelmCode::getIt($helmValue);
-
-            return [
-                'code' => $helmCode,
-                'canUseIt' => $this->canUseArmament($helmCode),
-            ];
+        $helmCodes = array_map(function (string $helmValue) {
+            return HelmCode::getIt($helmValue);
         }, HelmCode::getPossibleValues());
+
+        return $this->addUsability($helmCodes);
     }
 
     public function getSelectedHelm(): HelmCode

@@ -34,7 +34,7 @@ $controller = new Controller();
 </form>
 <form class="block" action="" method="get">
     <input type="hidden" name="<?= $controller::SCROLL_FROM_TOP ?>" id="scrollFromTop"
-           value="<?= $controller->getSelectedScrollFromTop() ?>">
+           value="<?= $controller->getScrollFromTop() ?>">
     <div class="block remember">
         <label><input type="checkbox" name="<?= $controller::REMEMBER_HISTORY ?>" value="1"
                       <?php if ($controller->shouldRemember()) { ?>checked="checked"<?php } ?>>
