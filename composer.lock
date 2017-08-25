@@ -1770,12 +1770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "ed89df7988a161f2d1c7284484d139b6c645ea46"
+                "reference": "bb80b798a52d5eb0ba2042af584064c909862bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/ed89df7988a161f2d1c7284484d139b6c645ea46",
-                "reference": "ed89df7988a161f2d1c7284484d139b6c645ea46",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/bb80b798a52d5eb0ba2042af584064c909862bca",
+                "reference": "bb80b798a52d5eb0ba2042af584064c909862bca",
                 "shasum": ""
             },
             "require": {
@@ -1807,7 +1807,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-08-24 12:27:30"
+            "time": "2017-08-25 05:05:27"
         },
         {
             "name": "drd/dice-rolls",
