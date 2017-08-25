@@ -76,16 +76,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "53d9518ffeb019c51d542ff60cb578f076d3ff16"
+                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/53d9518ffeb019c51d542ff60cb578f076d3ff16",
-                "reference": "53d9518ffeb019c51d542ff60cb578f076d3ff16",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/b3217d58609e9c8e661cd41357a54d926c4a2a1a",
+                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a",
                 "shasum": ""
             },
             "require": {
@@ -146,7 +146,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-07-22T13:00:15+00:00"
+            "time": "2017-08-25T07:02:50+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -1146,12 +1146,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "d6174889bbac847e32d96de79809665607530534"
+                "reference": "514bda0ad427497dd84dd4261c6d775782963347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/d6174889bbac847e32d96de79809665607530534",
-                "reference": "d6174889bbac847e32d96de79809665607530534",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/514bda0ad427497dd84dd4261c6d775782963347",
+                "reference": "514bda0ad427497dd84dd4261c6d775782963347",
                 "shasum": ""
             },
             "require": {
@@ -1177,7 +1177,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-07-09 05:59:11"
+            "time": "2017-08-25 15:31:40"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1259,12 +1259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-fight-properties.git",
-                "reference": "3a5a47c8960805fe6e158e868d5543cb6c9b1536"
+                "reference": "697b71fab089d750eef7830e2465b9fa1c82662d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/3a5a47c8960805fe6e158e868d5543cb6c9b1536",
-                "reference": "3a5a47c8960805fe6e158e868d5543cb6c9b1536",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/697b71fab089d750eef7830e2465b9fa1c82662d",
+                "reference": "697b71fab089d750eef7830e2465b9fa1c82662d",
                 "shasum": ""
             },
             "require": {
@@ -1290,7 +1290,7 @@
                 "MIT"
             ],
             "description": "Final properties including battle statistics, current afflictions and boosts and by first and next levels of them for Drd+",
-            "time": "2017-08-24 12:30:31"
+            "time": "2017-08-25 09:07:23"
         },
         {
             "name": "drd-plus/health",
@@ -1770,12 +1770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "bb80b798a52d5eb0ba2042af584064c909862bca"
+                "reference": "d9fe5e1f3e67e9c1fab58a826a9ba05919a4b79f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/bb80b798a52d5eb0ba2042af584064c909862bca",
-                "reference": "bb80b798a52d5eb0ba2042af584064c909862bca",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/d9fe5e1f3e67e9c1fab58a826a9ba05919a4b79f",
+                "reference": "d9fe5e1f3e67e9c1fab58a826a9ba05919a4b79f",
                 "shasum": ""
             },
             "require": {
@@ -1807,7 +1807,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-08-25 05:05:27"
+            "time": "2017-08-25 15:36:57"
         },
         {
             "name": "drd/dice-rolls",

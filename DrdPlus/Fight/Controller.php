@@ -346,7 +346,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $rangedWeaponValue = $this->currentValues->getValue(self::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
-            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
+            return RangedWeaponCode::getIt(RangedWeaponCode::SAND);
         }
         $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
         $weaponHolding = $this->getWeaponHolding(
@@ -354,7 +354,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $this->currentValues->getValue(self::RANGED_WEAPON_HOLDING)
         );
         if (!$this->canUseWeaponlike($rangedWeapon, $weaponHolding)) {
-            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
+            return RangedWeaponCode::getIt(RangedWeaponCode::SAND);
         }
 
         return $rangedWeapon;
@@ -367,7 +367,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $rangedWeaponValue = $this->previousValues->getValue(self::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
-            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
+            return RangedWeaponCode::getIt(RangedWeaponCode::SAND);
         }
         $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
         $weaponHolding = $this->getWeaponHolding(
@@ -375,7 +375,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $this->previousValues->getValue(self::RANGED_WEAPON_HOLDING)
         );
         if (!$this->couldUseWeaponlike($rangedWeapon, $weaponHolding)) {
-            return RangedWeaponCode::getIt(RangedWeaponCode::ROCK);
+            return RangedWeaponCode::getIt(RangedWeaponCode::SAND);
         }
 
         return $rangedWeapon;
