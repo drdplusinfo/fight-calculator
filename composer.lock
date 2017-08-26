@@ -1505,12 +1505,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "fe90d51f900e113e3866165341d1d97dae79e7c4"
+                "reference": "ae1752beb48a237f70707e1b9f024d60eff122d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/fe90d51f900e113e3866165341d1d97dae79e7c4",
-                "reference": "fe90d51f900e113e3866165341d1d97dae79e7c4",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/ae1752beb48a237f70707e1b9f024d60eff122d8",
+                "reference": "ae1752beb48a237f70707e1b9f024d60eff122d8",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1541,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2017-07-10 06:22:01"
+            "time": "2017-08-26 11:50:04"
         },
         {
             "name": "drd-plus/properties-by-fate",
@@ -1770,12 +1770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "d9fe5e1f3e67e9c1fab58a826a9ba05919a4b79f"
+                "reference": "f1a33fa80e3cb2dfe3aae06e59547a67919acaf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/d9fe5e1f3e67e9c1fab58a826a9ba05919a4b79f",
-                "reference": "d9fe5e1f3e67e9c1fab58a826a9ba05919a4b79f",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/f1a33fa80e3cb2dfe3aae06e59547a67919acaf7",
+                "reference": "f1a33fa80e3cb2dfe3aae06e59547a67919acaf7",
                 "shasum": ""
             },
             "require": {
@@ -1807,7 +1807,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-08-25 15:36:57"
+            "time": "2017-08-26 11:37:50"
         },
         {
             "name": "drd/dice-rolls",
