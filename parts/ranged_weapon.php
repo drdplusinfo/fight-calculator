@@ -83,7 +83,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </div>
     <div class="block">
         <label>vzdálenost cíle <span class="hint">v metrech</span>
-            <input type="number" name="<?= $controller::RANGED_TARGET_DISTANCE ?>"
+            <input type="number" name="<?= $controller::RANGED_TARGET_DISTANCE ?>" min="1" max="900"
                    value="<?= $controller->getCurrentTargetDistance()->getMeters() ?>">
         </label>
         <label>velikost cíle <span class="hint">(Vel)</span>
@@ -95,7 +95,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 <table class="block result">
     <?php
     /** @noinspection PhpUnusedLocalVariableInspection */
-    $fightProperties = $controller->getRangedFightProperties();
+    $fightProperties = $controller->getCurrentRangedFightProperties();
     /** @noinspection PhpUnusedLocalVariableInspection */
     $previousFightProperties = $controller->getPreviousRangedFightProperties();
     ?>

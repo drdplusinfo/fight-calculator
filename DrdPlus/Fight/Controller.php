@@ -27,6 +27,7 @@ use DrdPlus\Properties\Base\Strength;
 use DrdPlus\Properties\Base\Will;
 use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\Size;
+use DrdPlus\Tables\Combat\Attacks\AttackNumberByContinuousDistanceTable;
 use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
@@ -748,7 +749,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         );
     }
 
-    public function getRangedFightProperties(): FightProperties
+    public function getCurrentRangedFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
             $this->getSelectedRangedWeapon(),
@@ -1330,10 +1331,16 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $distanceValue = $this->currentValues->getValue(self::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
-            return new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+            $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
+        $distanceValue = min($distanceValue, $this->getCurrentRangedWeaponMaximalRange());
 
         return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+    }
+
+    private function getCurrentRangedWeaponMaximalRange(): float
+    {
+        return $this->getCurrentRangedFightProperties()->getMaximalRange()->getInMeters(Tables::getIt());
     }
 
     public function getCurrentTargetSize(): Size
@@ -1350,10 +1357,16 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         $distanceValue = $this->previousValues->getValue(self::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
-            return new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+            $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
+        $distanceValue = min($distanceValue, $this->getPreviousRangedWeaponMaximalRange());
 
         return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+    }
+
+    private function getPreviousRangedWeaponMaximalRange(): float
+    {
+        return $this->getPreviousRangedFightProperties()->getMaximalRange()->getInMeters(Tables::getIt());
     }
 
     public function getPreviousTargetSize(): Size
