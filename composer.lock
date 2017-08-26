@@ -1259,12 +1259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-fight-properties.git",
-                "reference": "697b71fab089d750eef7830e2465b9fa1c82662d"
+                "reference": "8e2b8270815c94e0d7b885196dee392b74a59d73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/697b71fab089d750eef7830e2465b9fa1c82662d",
-                "reference": "697b71fab089d750eef7830e2465b9fa1c82662d",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/8e2b8270815c94e0d7b885196dee392b74a59d73",
+                "reference": "8e2b8270815c94e0d7b885196dee392b74a59d73",
                 "shasum": ""
             },
             "require": {
@@ -1290,7 +1290,7 @@
                 "MIT"
             ],
             "description": "Final properties including battle statistics, current afflictions and boosts and by first and next levels of them for Drd+",
-            "time": "2017-08-25 09:07:23"
+            "time": "2017-08-26 12:06:12"
         },
         {
             "name": "drd-plus/health",

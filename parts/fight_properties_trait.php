@@ -1,11 +1,7 @@
 <?php
 namespace DrdPlus\Fight;
 
-use DrdPlus\Codes\Units\DistanceUnitCode;
 use DrdPlus\FightProperties\FightProperties;
-use DrdPlus\Properties\Body\Size;
-use DrdPlus\Tables\Measurements\Distance\Distance;
-use DrdPlus\Tables\Tables;
 
 /**
  * @var Controller $controller
@@ -14,12 +10,12 @@ use DrdPlus\Tables\Tables;
  */
 
 $previousAttackNumber = $previousFightProperties->getAttackNumber(
-    new Distance(1.4, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-    Size::getIt(0)
+    $controller->getPreviousTargetDistance(), // melee attack is not affected by this
+    $controller->getPreviousTargetSize() // melee attack is not affected by this
 );
 $currentAttackNumber = $fightProperties->getAttackNumber(
-    new Distance(1.4, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable()),
-    Size::getIt(0)
+    $controller->getCurrentTargetDistance(), // melee attack is not affected by this
+    $controller->getCurrentTargetSize() // melee attack is not affected by this
 );
 ?>
 <tr>

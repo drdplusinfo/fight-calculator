@@ -16,6 +16,7 @@ use DrdPlus\Codes\Skills\CombinedSkillCode;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Codes\Skills\PsychicalSkillCode;
 use DrdPlus\Codes\Skills\SkillCode;
+use DrdPlus\Codes\Units\DistanceUnitCode;
 use DrdPlus\Configurator\Skeleton\History;
 use DrdPlus\FightProperties\FightProperties;
 use DrdPlus\Properties\Base\Agility;
@@ -26,6 +27,7 @@ use DrdPlus\Properties\Base\Strength;
 use DrdPlus\Properties\Base\Will;
 use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\Size;
+use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
@@ -61,6 +63,8 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     const FIGHT_FREE_WILL_ANIMAL = 'fight_free_will_animal';
     const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
     const SCROLL_FROM_TOP = 'scroll_from_top';
+    const RANGED_TARGET_DISTANCE = 'ranged_target_distance';
+    const RANGED_TARGET_SIZE = 'ranged_target_size';
 
     /** @var CurrentValues */
     private $currentValues;
@@ -1321,4 +1325,45 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         return $this->messagesAbout['armors'] ?? [];
     }
+
+    public function getCurrentTargetDistance(): Distance
+    {
+        $distanceValue = $this->currentValues->getValue(self::RANGED_TARGET_DISTANCE);
+        if ($distanceValue === null) {
+            return new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+        }
+
+        return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+    }
+
+    public function getCurrentTargetSize(): Size
+    {
+        $distanceValue = $this->currentValues->getValue(self::RANGED_TARGET_SIZE);
+        if ($distanceValue === null) {
+            return Size::getIt(1);
+        }
+
+        return Size::getIt($distanceValue);
+    }
+
+    public function getPreviousTargetDistance(): Distance
+    {
+        $distanceValue = $this->previousValues->getValue(self::RANGED_TARGET_DISTANCE);
+        if ($distanceValue === null) {
+            return new Distance(1, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+        }
+
+        return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+    }
+
+    public function getPreviousTargetSize(): Size
+    {
+        $distanceValue = $this->previousValues->getValue(self::RANGED_TARGET_SIZE);
+        if ($distanceValue === null) {
+            return Size::getIt(1);
+        }
+
+        return Size::getIt($distanceValue);
+    }
+
 }

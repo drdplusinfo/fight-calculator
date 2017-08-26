@@ -81,6 +81,16 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
                       <?php if ($controller->getSelectedRangedSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
+    <div class="block">
+        <label>vzdálenost cíle <span class="hint">v metrech</span>
+            <input type="number" name="<?= $controller::RANGED_TARGET_DISTANCE ?>"
+                   value="<?= $controller->getCurrentTargetDistance()->getMeters() ?>">
+        </label>
+        <label>velikost cíle <span class="hint">(Vel)</span>
+            <input type="number" name="<?= $controller::RANGED_TARGET_SIZE ?>"
+                   value="<?= $controller->getCurrentTargetSize() ?>">
+        </label>
+    </div>
 </div>
 <table class="block result">
     <?php
