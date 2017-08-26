@@ -18,15 +18,7 @@ namespace DrdPlus\Fight;
             <?php } ?>
         </select>
     </label>
-    <div class="block info-messages">
-        <?php foreach ($controller->getMessagesAboutShields() as $messageAboutShield) { ?>
-            <div class="info-message"><?= $messageAboutShield ?></div>
-        <?php } ?>
-    </div>
 </div>
-<?php if ($controller->getSelectedShield()->isUnarmed()) {
-    return; // we will not show details about shield if no has been picked
-} ?>
 <div class="panel">
     <div class="panel">
         dovednost <span class="keyword"><?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></span>
@@ -46,6 +38,11 @@ namespace DrdPlus\Fight;
                       <?php if ($controller->getSelectedShieldUsageSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
+</div>
+<div class="block info-messages">
+    <?php foreach ($controller->getMessagesAboutShields() as $messageAboutShield) { ?>
+        <div class="info-message"><?= $messageAboutShield ?></div>
+    <?php } ?>
 </div>
 <div class="block skill">
     <div class="panel">
@@ -69,7 +66,9 @@ namespace DrdPlus\Fight;
         </label>
     </div>
 </div>
-
+<?php if ($controller->getSelectedShield()->isUnarmed()) {
+    return; // we will not show combat parameters about shield if no has been picked
+} ?>
 <div class="block">
     <table class="panel result">
         <?php
