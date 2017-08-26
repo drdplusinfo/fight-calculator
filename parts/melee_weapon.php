@@ -10,7 +10,7 @@ $selectedMeleeWeapon = $controller->getSelectedMeleeWeapon();
 $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValue() : null;
 ?>
 <div class="panel">
-    <label>
+    <label class="block">
         <select name="<?= $controller::MELEE_WEAPON ?>" title="Melee weapon">
             <?php /** @var array $meleeWeaponsFromCategory */
             foreach ($controller->getMeleeWeapons() as $weaponCategory => $meleeWeaponsFromCategory) {
@@ -51,6 +51,11 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
                <?php if ($controller->getSelectedMeleeWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
         obouručně
     </label>
+</div>
+<div class="block info-messages">
+    <?php foreach ($controller->getMessagesAboutMelee() as $messageAboutMelee) { ?>
+        <div class="info-message"><?= $messageAboutMelee ?></div>
+    <?php } ?>
 </div>
 <div class="block skill with-skill-ranks">
     <div class="panel">
@@ -95,8 +100,3 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>
-<div class="block info-messages">
-    <?php foreach ($controller->getMessagesAboutMelee() as $messageAboutMelee) { ?>
-        <div class="info-message"><?= $messageAboutMelee ?></div>
-    <?php } ?>
-</div>

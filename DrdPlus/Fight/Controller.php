@@ -1189,15 +1189,32 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
-     * @return array
+     * @return array|HelmCode[][]
      */
     public function getHelms(): array
     {
         $helmCodes = array_map(function (string $helmValue) {
             return HelmCode::getIt($helmValue);
         }, HelmCode::getPossibleValues());
+        $helmsWithUsability = $this->addNonWeaponArmamentUsability($helmCodes);
+        $countOfUnusable = $this->countUnusable($helmsWithUsability);
+        $this->addUnusableMessage($countOfUnusable, 'helms', 'helmu', 'helmy', 'helem');
 
-        return $this->addNonWeaponArmamentUsability($helmCodes);
+        return $helmsWithUsability;
+    }
+
+    private function addUnusableMessage(int $countOfUnusable, string $key, string $single, string $few, string $many)
+    {
+        if ($countOfUnusable > 0) {
+            $word = $single;
+            if ($countOfUnusable >= 5) {
+                $word = $many;
+            } elseif ($countOfUnusable >= 2) {
+                $word = $few;
+            }
+
+            $this->messagesAbout[$key]['unusable'] = "Kvůli chybějící síle nemůžeš použít $countOfUnusable $word.";
+        }
     }
 
     public function getSelectedHelm(): HelmCode
@@ -1320,6 +1337,11 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     public function getMessagesAboutShields(): array
     {
         return $this->messagesAbout['shields'] ?? [];
+    }
+
+    public function getMessagesAboutHelms(): array
+    {
+        return $this->messagesAbout['helms'] ?? [];
     }
 
     public function getMessagesAboutArmors(): array

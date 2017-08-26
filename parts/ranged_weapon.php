@@ -13,24 +13,26 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 
 ?>
 <div class="panel">
-    <select name="<?= $controller::RANGED_WEAPON ?>" title="Ranged weapon">
-        <?php /** @var string[] $rangedWeaponsFromCategory */
-        foreach ($controller->getRangedWeapons() as $weaponCategory => $rangedWeaponsFromCategory) {
-            ?>
-            <optgroup label="<?= WeaponCategoryCode::getIt($weaponCategory)->translateTo('cs', 2) ?>">
-                <?php /** @var array $rangedWeapon */
-                foreach ($rangedWeaponsFromCategory as $rangedWeapon) {
-                    /** @var RangedWeaponCode $rangedWeaponCode */
-                    $rangedWeaponCode = $rangedWeapon['code']; ?>
-                    <option value="<?= $rangedWeaponCode->getValue() ?>"
-                            <?php if ($selectedRangedWeaponValue && $selectedRangedWeaponValue === $rangedWeaponCode->getValue()) { ?>selected<?php }
-                            if (!$rangedWeapon['canUseIt']) { ?>disabled<?php } ?>>
-                        <?= $rangedWeaponCode->translateTo('cs') ?>
-                    </option>
-                <?php } ?>
-            </optgroup>
-        <?php } ?>
-    </select>
+    <label class="block">
+        <select name="<?= $controller::RANGED_WEAPON ?>" title="Ranged weapon">
+            <?php /** @var string[] $rangedWeaponsFromCategory */
+            foreach ($controller->getRangedWeapons() as $weaponCategory => $rangedWeaponsFromCategory) {
+                ?>
+                <optgroup label="<?= WeaponCategoryCode::getIt($weaponCategory)->translateTo('cs', 2) ?>">
+                    <?php /** @var array $rangedWeapon */
+                    foreach ($rangedWeaponsFromCategory as $rangedWeapon) {
+                        /** @var RangedWeaponCode $rangedWeaponCode */
+                        $rangedWeaponCode = $rangedWeapon['code']; ?>
+                        <option value="<?= $rangedWeaponCode->getValue() ?>"
+                                <?php if ($selectedRangedWeaponValue && $selectedRangedWeaponValue === $rangedWeaponCode->getValue()) { ?>selected<?php }
+                                if (!$rangedWeapon['canUseIt']) { ?>disabled<?php } ?>>
+                            <?= $rangedWeaponCode->translateTo('cs') ?>
+                        </option>
+                    <?php } ?>
+                </optgroup>
+            <?php } ?>
+        </select>
+    </label>
 </div>
 <div class="panel">
     <label>
@@ -50,6 +52,11 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
                <?php if ($controller->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
         obouručně
     </label>
+</div>
+<div class="block info-messages">
+    <?php foreach ($controller->getMessagesAboutRanged() as $messageAboutRanged) { ?>
+        <div class="info-message"><?= $messageAboutRanged ?></div>
+    <?php } ?>
 </div>
 <div class="block skill with-skill-ranks">
     <div class="panel">
@@ -118,8 +125,3 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </tbody>
 </table>
 <div class="block"><input type="submit" value="Přepočítat"></div>
-<div class="block info-messages">
-    <?php foreach ($controller->getMessagesAboutRanged() as $messageAboutRanged) { ?>
-        <div class="info-message"><?= $messageAboutRanged ?></div>
-    <?php } ?>
-</div>

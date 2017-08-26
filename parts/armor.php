@@ -3,7 +3,8 @@ namespace DrdPlus\Fight;
 /** @var Controller $controller */
 ?>
 <div class="panel">
-    <label><select name="<?= $controller::BODY_ARMOR ?>">
+    <label class="block">
+        <select name="<?= $controller::BODY_ARMOR ?>">
             <?php /** @var array $bodyArmor */
             foreach ($controller->getBodyArmors() as $bodyArmor) {
                 $bodyArmorCode = $bodyArmor['code']; ?>
@@ -15,9 +16,14 @@ namespace DrdPlus\Fight;
             <?php } ?>
         </select>
     </label>
+    <div class="block info-messages">
+        <?php foreach ($controller->getMessagesAboutArmors() as $messageAboutArmor) { ?>
+            <div class="info-message"><?= $messageAboutArmor ?></div>
+        <?php } ?>
+    </div>
 </div>
 <div class="panel">
-    <label>
+    <label class="block">
         <select name="<?= $controller::HELM ?>">
             <?php /** @var array $helm */
             foreach ($controller->getHelms() as $helm) {
@@ -30,6 +36,11 @@ namespace DrdPlus\Fight;
             <?php } ?>
         </select>
     </label>
+    <div class="block info-messages">
+        <?php foreach ($controller->getMessagesAboutHelms() as $messageAboutHelm) { ?>
+            <div class="info-message"><?= $messageAboutHelm ?></div>
+        <?php } ?>
+    </div>
 </div>
 <div class="block skill">
     <div class="panel">
@@ -53,8 +64,3 @@ namespace DrdPlus\Fight;
     </div>
 </div>
 <div class="block"><input type="submit" value="Přepočítat"></div>
-<div class="block info-messages">
-    <?php foreach ($controller->getMessagesAboutArmors() as $messageAboutArmor) { ?>
-        <div class="info-message"><?= $messageAboutArmor ?></div>
-    <?php } ?>
-</div>
