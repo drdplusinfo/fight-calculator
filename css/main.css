@@ -87,3 +87,15 @@ table.result {
     padding: 1px 1em;
     border-radius: 2px;
 }
+
+.button {
+    display: inline-block;
+    text-align: center;
+    color: black;
+    height: 1em;
+    min-width: 1em;
+    text-decoration: none;
+    border: 1px solid grey;
+    border-radius: 2px;
+    vertical-align: text-bottom;
+}

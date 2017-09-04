@@ -11,6 +11,8 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
 ?>
 <div class="panel">
     <label class="block">
+        <a href="<?= $controller->getCurrentUrlWithQuery(['action' => $controller::ADD_MELEE_WEAPON_ACTION]) ?>"
+           class="button">+</a>
         <select name="<?= $controller::MELEE_WEAPON ?>" title="Melee weapon">
             <?php /** @var array $meleeWeaponsFromCategory */
             foreach ($controller->getMeleeWeapons() as $weaponCategory => $meleeWeaponsFromCategory) {

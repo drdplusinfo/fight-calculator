@@ -66,6 +66,8 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     const SCROLL_FROM_TOP = 'scroll_from_top';
     const RANGED_TARGET_DISTANCE = 'ranged_target_distance';
     const RANGED_TARGET_SIZE = 'ranged_target_size';
+    // special actions
+    const ADD_MELEE_WEAPON_ACTION = 'add_melee_weapon_action';
 
     /** @var CurrentValues */
     private $currentValues;
@@ -1401,4 +1403,24 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Size::getIt($distanceValue);
     }
 
+    public function getCurrentUrlWithQuery(array $additionalParameters = []): string
+    {
+        $query = $_SERVER['QUERY_STRING'] ?? '';
+        if ($additionalParameters) {
+            $newParts = [];
+            foreach ($additionalParameters as $name => $value) {
+                $newParts[] = "$name=$value";
+            }
+            $newPart = implode('&', $newParts);
+            if ($query !== '') {
+                $query .= '&';
+            }
+            $query .= $newPart;
+        }
+        if ($query !== '') {
+            $query = '?' . $query;
+        }
+
+        return $query;
+    }
 }
