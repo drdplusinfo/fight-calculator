@@ -32,4 +32,13 @@ class CurrentValues extends Values
 
         return $this->historyValues->getValue($name);
     }
+
+    /**
+     * @param string $name
+     * @return null|string
+     */
+    public function getCurrentOnlyValue(string $name):? string
+    {
+        return $this->valuesFromInput[$name] ?? null;
+    }
 }

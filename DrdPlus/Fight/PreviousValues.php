@@ -16,14 +16,17 @@ class PreviousValues extends Values
     public function __construct(array $currentValues)
     {
         $this->previousValues = unserialize(
-                $_COOKIE[self::NEXT_PREVIOUS_VALUES]
-                ??
-                '',
+                $_COOKIE[self::NEXT_PREVIOUS_VALUES] ?? '',
                 ['allowed_classes' => false]
-            ) ?? [];
+            )
+            ?? [];
         Cookie::setCookie(self::NEXT_PREVIOUS_VALUES, serialize($currentValues));
     }
 
+    /**
+     * @param string $name
+     * @return mixed|null
+     */
     public function getValue(string $name)
     {
         return $this->previousValues[$name] ?? null;

@@ -32,7 +32,6 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
                       <?php if ($controller->getSelectedRidingSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
-    <div class="block"><input type="submit" value="Přepočítat"></div>
 </div>
 <div class="panel">
     <div class="block">
@@ -58,5 +57,5 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
                       <?php if ($controller->getSelectedZoologySkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
-    <div class="block"><input type="submit" value="Přepočítat"></div>
 </div>
+<div class="block"><input type="submit" value="Přepočítat"></div>

@@ -46,26 +46,38 @@ $controller = new Controller();
         </div>
         <div class="panel">
             <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
-            <div class="panel">
+            <fieldset class="panel">
                 <?php include __DIR__ . '/parts/melee_weapon.php' ?>
-            </div>
+            </fieldset>
         </div>
         <div class="panel">
             <h2 id="Na dálku"><a href="#Na dálku" class="inner">Na dálku</a></h2>
-            <div class="panel">
+            <fieldset class="panel">
                 <?php include __DIR__ . '/parts/ranged_weapon.php'; ?>
-            </div>
+            </fieldset>
         </div>
         <div class="panel">
             <h2 id="Štít"><a href="#Štít" class="inner">Štít</a></h2>
-            <?php include __DIR__ . '/parts/shield.php'; ?>
+            <fieldset class="panel">
+                <?php include __DIR__ . '/parts/shield.php'; ?>
+            </fieldset>
         </div>
         <div class="panel">
             <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
-            <div class="block"><?php include __DIR__ . '/parts/armor.php'; ?></div>
+            <fieldset class="panel"><?php include __DIR__ . '/parts/armor.php'; ?></fieldset>
         </div>
-        <div class="panel"><?php include __DIR__ . '/parts/profession_and_body_properties.php'; ?></div>
-        <div class="panel"><?php include __DIR__ . '/parts/ride_and_animal_enemy.php'; ?></div>
+        <div class="panel">
+            <h2 id="Vlastnosti"><a href="#Vlastnosti" class="inner">Vlastnosti</a></h2>
+            <fieldset class="panel">
+                <?php include __DIR__ . '/parts/profession_and_body_properties.php'; ?>
+            </fieldset>
+        </div>
+        <div class="panel">
+            <h2 id="Prostředí"><a href="#Prostředí" class="inner">Prostředí</a></h2>
+            <fieldset class="panel">
+                <?php include __DIR__ . '/parts/ride_and_animal_enemy.php'; ?>
+            </fieldset>
+        </div>
     </div>
 </form>
 <div class="block issues">

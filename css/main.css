@@ -1,6 +1,19 @@
-input, select {
+body {
+    font-size: 16px;
+    font-family: serif;
+}
+
+input, select, button {
     margin: 0;
     padding: 0;
+}
+
+input[type=number] {
+    width: 5em;
+}
+
+input[type=submit], button {
+    cursor: pointer;
 }
 
 .panel {
@@ -92,10 +105,16 @@ table.result {
     display: inline-block;
     text-align: center;
     color: black;
-    height: 1em;
-    min-width: 1em;
+    height: 1.3em;
+    min-width: 1.3em;
     text-decoration: none;
     border: 1px solid grey;
     border-radius: 2px;
-    vertical-align: text-bottom;
+    cursor: pointer;
+}
+
+.cancel {
+    padding: 2px;
+    background-color: rgba(211, 76, 4, 0.35);
+    font-size: 12px;
 }

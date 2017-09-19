@@ -19,13 +19,7 @@ use DrdPlus\Codes\Skills\SkillCode;
 use DrdPlus\Codes\Units\DistanceUnitCode;
 use DrdPlus\Configurator\Skeleton\History;
 use DrdPlus\FightProperties\FightProperties;
-use DrdPlus\Properties\Base\Agility;
-use DrdPlus\Properties\Base\Charisma;
-use DrdPlus\Properties\Base\Intelligence;
-use DrdPlus\Properties\Base\Knack;
 use DrdPlus\Properties\Base\Strength;
-use DrdPlus\Properties\Base\Will;
-use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\Size;
 use DrdPlus\Tables\Combat\Attacks\AttackNumberByContinuousDistanceTable;
 use DrdPlus\Tables\Measurements\Distance\Distance;
@@ -67,12 +61,25 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     const RANGED_TARGET_DISTANCE = 'ranged_target_distance';
     const RANGED_TARGET_SIZE = 'ranged_target_size';
     // special actions
-    const ADD_MELEE_WEAPON_ACTION = 'add_melee_weapon_action';
+    const ACTION = 'action';
+    const ADD_NEW_MELEE_WEAPON_ACTION = 'add_new_melee_weapon_action';
+    const NEW_MELEE_WEAPON_NAME = 'new_melee_weapon_name';
+    const NEW_MELEE_WEAPON_REQUIRED_STRENGTH = 'new_melee_weapon_required_strength';
+    const NEW_MELEE_WEAPON_LENGTH = 'new_melee_weapon_length';
+    const NEW_MELEE_WEAPON_ATTACK = 'new_melee_weapon_attack';
+    const NEW_MELEE_WEAPON_WOUNDS = 'new_melee_weapon_wounds';
+    const NEW_MELEE_WEAPON_WOUND_TYPE = 'new_melee_weapon_wound_type';
 
     /** @var CurrentValues */
     private $currentValues;
+    /** @var CurrentProperties */
+    private $currentProperties;
     /** @var PreviousValues */
     private $previousValues;
+    /** @var PreviousProperties */
+    private $previousProperties;
+    /** @var Fight */
+    private $fight;
     /** @var array|string[] */
     private $messagesAbout = [];
 
@@ -80,7 +87,10 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     {
         parent::__construct('fight' /* cookies postfix */);
         $this->currentValues = new CurrentValues($_GET, $this->getHistoryWithSkillRanks());
+        $this->currentProperties = new CurrentProperties($this->currentValues);
         $this->previousValues = new PreviousValues($_GET);
+        $this->previousProperties = new PreviousProperties($this->previousValues);
+        $this->fight = new Fight($this->currentProperties, $this->previousProperties);
     }
 
     protected function createHistory(string $cookiesPostfix, int $cookiesTtl = null): History
@@ -100,11 +110,27 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
+     * @return Fight
+     */
+    public function getFight(): Fight
+    {
+        return $this->fight;
+    }
+
+    /**
      * @return HistoryWithSkillRanks|History
      */
     private function getHistoryWithSkillRanks(): HistoryWithSkillRanks
     {
         return $this->getHistory();
+    }
+
+    /**
+     * @return CurrentProperties
+     */
+    public function getCurrentProperties(): CurrentProperties
+    {
+        return $this->currentProperties;
     }
 
     public function shouldRemember(): bool
@@ -123,15 +149,15 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     public function getMeleeWeapons(): array
     {
         $weaponCodes = [
-            WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeCodes(),
-            WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerCodes(),
-            WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubCodes(),
-            WeaponCategoryCode::MORNINGSTAR_AND_MORGENSTERN => MeleeWeaponCode::getMorningstarAndMorgensternCodes(),
-            WeaponCategoryCode::SABER_AND_BOWIE_KNIFE => MeleeWeaponCode::getSaberAndBowieKnifeCodes(),
-            WeaponCategoryCode::STAFF_AND_SPEAR => MeleeWeaponCode::getStaffAndSpearCodes(),
-            WeaponCategoryCode::SWORD => MeleeWeaponCode::getSwordCodes(),
-            WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentCodes(),
-            WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedCodes(),
+            WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeValues(),
+            WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerValues(),
+            WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubValues(),
+            WeaponCategoryCode::MORNINGSTAR_AND_MORGENSTERN => MeleeWeaponCode::getMorningstarAndMorgensternValues(),
+            WeaponCategoryCode::SABER_AND_BOWIE_KNIFE => MeleeWeaponCode::getSaberAndBowieKnifeValues(),
+            WeaponCategoryCode::STAFF_AND_SPEAR => MeleeWeaponCode::getStaffAndSpearValues(),
+            WeaponCategoryCode::SWORD => MeleeWeaponCode::getSwordValues(),
+            WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentValues(),
+            WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedValues(),
         ];
         $countOfUnusable = 0;
         foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
@@ -163,7 +189,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $meleeWeaponCodes[] = MeleeWeaponCode::getIt($meleeWeaponCodeValue);
         }
 
-        return $this->addWeaponlikeUsability($meleeWeaponCodes, $this->getSelectedMeleeWeaponHolding());
+        return $this->addWeaponlikeUsability($meleeWeaponCodes, $this->getCurrentMeleeWeaponHolding());
     }
 
     /**
@@ -207,7 +233,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
                 $weaponlikeCode,
                 $this->getWeaponHolding($weaponlikeCode, $itemHoldingCode->getValue()),
-                $this->getSelectedStrength()
+                $this->currentProperties->getCurrentStrength()
             )
         );
     }
@@ -222,7 +248,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         foreach ($armamentCodes as $armamentCode) {
             $withUsagePossibility[] = [
                 'code' => $armamentCode,
-                'canUseIt' => $this->canUseArmament($armamentCode, $this->getSelectedStrength()),
+                'canUseIt' => $this->canUseArmament($armamentCode, $this->currentProperties->getCurrentStrength()),
             ];
         }
 
@@ -235,7 +261,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             ->canUseArmament(
                 $armamentCode,
                 $strengthForArmament,
-                $this->getSelectedSize()
+                $this->currentProperties->getCurrentSize()
             );
     }
 
@@ -246,7 +272,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
                 $weaponlikeCode,
                 $this->getWeaponHolding($weaponlikeCode, $itemHoldingCode->getValue()),
-                $this->getPreviousStrength()
+                $this->previousProperties->getPreviousStrength()
             )
         );
     }
@@ -257,7 +283,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             ->canUseArmament(
                 $armamentCode,
                 $strengthForArmament,
-                $this->getPreviousSize()
+                $this->previousProperties->getPreviousSize()
             );
     }
 
@@ -307,7 +333,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     /**
      * @return MeleeWeaponCode
      */
-    public function getSelectedMeleeWeapon(): MeleeWeaponCode
+    public function getCurrentMeleeWeapon(): MeleeWeaponCode
     {
         $meleeWeaponValue = $this->currentValues->getValue(self::MELEE_WEAPON);
         if (!$meleeWeaponValue) {
@@ -388,119 +414,14 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return $rangedWeapon;
     }
 
-    public function getSelectedStrength(): Strength
-    {
-        return Strength::getIt((int)$this->currentValues->getValue(self::STRENGTH));
-    }
-
-    private function getPreviousStrength(): Strength
-    {
-        return Strength::getIt((int)$this->previousValues->getValue(self::STRENGTH));
-    }
-
-    public function getSelectedAgility(): Agility
-    {
-        return Agility::getIt((int)$this->currentValues->getValue(self::AGILITY));
-    }
-
-    private function getPreviousAgility(): Agility
-    {
-        return Agility::getIt((int)$this->previousValues->getValue(self::AGILITY));
-    }
-
-    public function getSelectedKnack(): Knack
-    {
-        return Knack::getIt((int)$this->currentValues->getValue(self::KNACK));
-    }
-
-    private function getPreviousKnack(): Knack
-    {
-        return Knack::getIt((int)$this->previousValues->getValue(self::KNACK));
-    }
-
-    public function getSelectedWill(): Will
-    {
-        return Will::getIt((int)$this->currentValues->getValue(self::WILL));
-    }
-
-    private function getPreviousWill(): Will
-    {
-        return Will::getIt((int)$this->previousValues->getValue(self::WILL));
-    }
-
-    public function getSelectedIntelligence(): Intelligence
-    {
-        return Intelligence::getIt((int)$this->currentValues->getValue(self::INTELLIGENCE));
-    }
-
-    private function getPreviousIntelligence(): Intelligence
-    {
-        return Intelligence::getIt((int)$this->previousValues->getValue(self::INTELLIGENCE));
-    }
-
-    public function getSelectedCharisma(): Charisma
-    {
-        return Charisma::getIt((int)$this->currentValues->getValue(self::CHARISMA));
-    }
-
-    private function getPreviousCharisma(): Charisma
-    {
-        return Charisma::getIt((int)$this->previousValues->getValue(self::CHARISMA));
-    }
-
-    public function getSelectedSize(): Size
-    {
-        return Size::getIt((int)$this->currentValues->getValue(self::SIZE));
-    }
-
-    private function getPreviousSize(): Size
-    {
-        return Size::getIt((int)$this->previousValues->getValue(self::SIZE));
-    }
-
-    public function getSelectedHeightInCm(): HeightInCm
-    {
-        return HeightInCm::getIt($this->currentValues->getValue(self::HEIGHT_IN_CM) ?? 150);
-    }
-
-    private function getPreviousHeightInCm(): HeightInCm
-    {
-        return HeightInCm::getIt($this->previousValues->getValue(self::HEIGHT_IN_CM) ?? 150);
-    }
-
     public function getMeleeWeaponFightProperties(): FightProperties
     {
-        return $this->getCurrentFightProperties(
-            $this->getSelectedMeleeWeapon(),
-            $this->getSelectedMeleeWeaponHolding(),
+        return $this->fight->getCurrentFightProperties(
+            $this->getCurrentMeleeWeapon(),
+            $this->getCurrentMeleeWeaponHolding(),
             $this->getSelectedMeleeSkillCode(),
             $this->getSelectedMeleeSkillRank(),
-            $this->getSelectedShieldForMelee()
-        );
-    }
-
-    private function getCurrentFightProperties(
-        WeaponlikeCode $weaponlikeCode,
-        ItemHoldingCode $weaponHoldingCode,
-        SkillCode $fightWithWeaponSkillCode,
-        int $skillRank,
-        ShieldCode $shieldCode
-    ): FightProperties
-    {
-        return $this->currentValues->getFightProperties(
-            $this->getSelectedStrength(),
-            $this->getSelectedAgility(),
-            $this->getSelectedKnack(),
-            $this->getSelectedWill(),
-            $this->getSelectedIntelligence(),
-            $this->getSelectedCharisma(),
-            $this->getSelectedSize(),
-            $this->getSelectedHeightInCm(),
-            $weaponlikeCode,
-            $weaponHoldingCode,
-            $fightWithWeaponSkillCode,
-            $skillRank,
-            $shieldCode,
+            $this->getSelectedShieldForMelee(),
             $this->getSelectedShieldUsageSkillRank(),
             $this->getSelectedBodyArmor(),
             $this->getSelectedHelm(),
@@ -515,37 +436,12 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getPreviousMeleeWeaponFightProperties(): FightProperties
     {
-        return $this->getPreviousFightProperties(
+        return $this->fight->getPreviousFightProperties(
             $this->getPreviousMeleeWeapon(),
             $this->getPreviousMeleeWeaponHolding(),
             $this->getPreviousMeleeSkillCode(),
             $this->getPreviousMeleeSkillRank(),
-            $this->getPreviousShield()
-        );
-    }
-
-    private function getPreviousFightProperties(
-        WeaponlikeCode $weaponlikeCode,
-        ItemHoldingCode $weaponHoldingCode,
-        SkillCode $fightWithWeaponSkillCode,
-        int $skillRank,
-        ShieldCode $shieldCode
-    ): FightProperties
-    {
-        return $this->previousValues->getFightProperties(
-            $this->getPreviousStrength(),
-            $this->getPreviousAgility(),
-            $this->getPreviousKnack(),
-            $this->getPreviousWill(),
-            $this->getPreviousIntelligence(),
-            $this->getPreviousCharisma(),
-            $this->getPreviousSize(),
-            $this->getPreviousHeightInCm(),
-            $weaponlikeCode,
-            $weaponHoldingCode,
-            $fightWithWeaponSkillCode,
-            $skillRank,
-            $shieldCode,
+            $this->getPreviousShield(),
             $this->getPreviousShieldUsageSkillRank(),
             $this->getPreviousBodyArmor(),
             $this->getPreviousHelm(),
@@ -563,19 +459,19 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return Tables::getIt()->getArmourer()->isTwoHandedOnly($weaponlikeCode);
     }
 
-    public function isOneHandedOnly(WeaponlikeCode $weaponlikeCode): bool
+    private function isOneHandedOnly(WeaponlikeCode $weaponlikeCode): bool
     {
         return Tables::getIt()->getArmourer()->isOneHandedOnly($weaponlikeCode);
     }
 
-    public function getSelectedMeleeWeaponHolding(): ItemHoldingCode
+    public function getCurrentMeleeWeaponHolding(): ItemHoldingCode
     {
         $meleeWeaponHoldingValue = $this->currentValues->getValue(self::MELEE_WEAPON_HOLDING);
         if ($meleeWeaponHoldingValue === null) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
 
-        return $this->getWeaponHolding($this->getSelectedMeleeWeapon(), $meleeWeaponHoldingValue);
+        return $this->getWeaponHolding($this->getCurrentMeleeWeapon(), $meleeWeaponHoldingValue);
     }
 
     private function getWeaponHolding(WeaponlikeCode $weaponlikeCode, string $weaponHolding): ItemHoldingCode
@@ -605,67 +501,121 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getGenericFightProperties(): FightProperties
     {
-        return $this->getCurrentFightProperties(
+        return $this->fight->getCurrentFightProperties(
             MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),
             ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
-            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
+            $this->getSelectedShieldUsageSkillRank(),
+            $this->getSelectedBodyArmor(),
+            $this->getSelectedHelm(),
+            $this->getSelectedArmorSkillRank(),
+            $this->getSelectedProfessionCode(),
+            $this->getSelectedOnHorseback(),
+            $this->getSelectedRidingSkillRank(),
+            $this->getSelectedFightFreeWillAnimal(),
+            $this->getSelectedZoologySkillRank()
         );
     }
 
     public function getPreviousGenericFightProperties(): FightProperties
     {
-        return $this->getPreviousFightProperties(
+        return $this->fight->getPreviousFightProperties(
             MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),
             ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
-            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
+            $this->getPreviousShieldUsageSkillRank(),
+            $this->getPreviousBodyArmor(),
+            $this->getPreviousHelm(),
+            $this->getPreviousArmorSkillRank(),
+            $this->getPreviousProfessionCode(),
+            $this->getPreviousOnHorseback(),
+            $this->getPreviousRidingSkillRank(),
+            $this->getPreviousFightFreeWillAnimal(),
+            $this->getPreviousZoologySkillRank()
         );
     }
 
     public function getMeleeShieldFightProperties(): FightProperties
     {
-        return $this->getCurrentFightProperties(
+        return $this->fight->getCurrentFightProperties(
             $this->getSelectedShieldForMelee(),
             $this->getSelectedMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
-            $this->getSelectedShieldForMelee()
+            $this->getSelectedShieldForMelee(),
+            $this->getSelectedShieldUsageSkillRank(),
+            $this->getSelectedBodyArmor(),
+            $this->getSelectedHelm(),
+            $this->getSelectedArmorSkillRank(),
+            $this->getSelectedProfessionCode(),
+            $this->getSelectedOnHorseback(),
+            $this->getSelectedRidingSkillRank(),
+            $this->getSelectedFightFreeWillAnimal(),
+            $this->getSelectedZoologySkillRank()
         );
     }
 
     public function getPreviousMeleeShieldFightProperties(): FightProperties
     {
-        return $this->getPreviousFightProperties(
+        return $this->fight->getPreviousFightProperties(
             $this->getPreviousShield(),
             $this->getPreviousMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getPreviousFightWithShieldsSkillRank(),
-            $this->getPreviousShield()
+            $this->getPreviousShield(),
+            $this->getPreviousShieldUsageSkillRank(),
+            $this->getPreviousBodyArmor(),
+            $this->getPreviousHelm(),
+            $this->getPreviousArmorSkillRank(),
+            $this->getPreviousProfessionCode(),
+            $this->getPreviousOnHorseback(),
+            $this->getPreviousRidingSkillRank(),
+            $this->getPreviousFightFreeWillAnimal(),
+            $this->getPreviousZoologySkillRank()
         );
     }
 
     public function getRangedShieldFightProperties(): FightProperties
     {
-        return $this->getCurrentFightProperties(
+        return $this->fight->getCurrentFightProperties(
             $this->getSelectedShieldForRanged(),
             $this->getSelectedRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
-            $this->getSelectedShieldForRanged()
+            $this->getSelectedShieldForRanged(),
+            $this->getSelectedShieldUsageSkillRank(),
+            $this->getSelectedBodyArmor(),
+            $this->getSelectedHelm(),
+            $this->getSelectedArmorSkillRank(),
+            $this->getSelectedProfessionCode(),
+            $this->getSelectedOnHorseback(),
+            $this->getSelectedRidingSkillRank(),
+            $this->getSelectedFightFreeWillAnimal(),
+            $this->getSelectedZoologySkillRank()
         );
     }
 
     public function getPreviousRangedShieldFightProperties(): FightProperties
     {
-        return $this->getPreviousFightProperties(
+        return $this->fight->getPreviousFightProperties(
             $this->getPreviousShield(),
             $this->getPreviousRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getPreviousFightWithShieldsSkillRank(),
-            $this->getPreviousShield()
+            $this->getPreviousShield(),
+            $this->getPreviousShieldUsageSkillRank(),
+            $this->getPreviousBodyArmor(),
+            $this->getPreviousHelm(),
+            $this->getPreviousArmorSkillRank(),
+            $this->getPreviousProfessionCode(),
+            $this->getPreviousOnHorseback(),
+            $this->getPreviousRidingSkillRank(),
+            $this->getPreviousFightFreeWillAnimal(),
+            $this->getPreviousZoologySkillRank()
         );
     }
 
@@ -677,8 +627,8 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     public function getSelectedMeleeShieldHolding(ShieldCode $selectedShield = null): ItemHoldingCode
     {
         return $this->getShieldHolding(
-            $this->getSelectedMeleeWeaponHolding(),
-            $this->getSelectedMeleeWeapon(),
+            $this->getCurrentMeleeWeaponHolding(),
+            $this->getCurrentMeleeWeapon(),
             $selectedShield
         );
     }
@@ -753,23 +703,41 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getCurrentRangedFightProperties(): FightProperties
     {
-        return $this->getCurrentFightProperties(
+        return $this->fight->getCurrentFightProperties(
             $this->getSelectedRangedWeapon(),
             $this->getSelectedRangedWeaponHolding(),
             $this->getSelectedRangedSkillCode(),
             $this->getSelectedRangedSkillRank(),
-            $this->getSelectedShieldForRanged()
+            $this->getSelectedShieldForRanged(),
+            $this->getSelectedShieldUsageSkillRank(),
+            $this->getSelectedBodyArmor(),
+            $this->getSelectedHelm(),
+            $this->getSelectedArmorSkillRank(),
+            $this->getSelectedProfessionCode(),
+            $this->getSelectedOnHorseback(),
+            $this->getSelectedRidingSkillRank(),
+            $this->getSelectedFightFreeWillAnimal(),
+            $this->getSelectedZoologySkillRank()
         );
     }
 
     public function getPreviousRangedFightProperties(): FightProperties
     {
-        return $this->getPreviousFightProperties(
+        return $this->fight->getPreviousFightProperties(
             $this->getPreviousRangedWeapon(),
             $this->getPreviousRangedWeaponHolding(),
             $this->getPreviousRangedSkillCode(),
             $this->getPreviousRangedSkillRank(),
-            $this->getPreviousShield()
+            $this->getPreviousShield(),
+            $this->getPreviousShieldUsageSkillRank(),
+            $this->getPreviousBodyArmor(),
+            $this->getPreviousHelm(),
+            $this->getPreviousArmorSkillRank(),
+            $this->getPreviousProfessionCode(),
+            $this->getPreviousOnHorseback(),
+            $this->getPreviousRidingSkillRank(),
+            $this->getPreviousFightFreeWillAnimal(),
+            $this->getPreviousZoologySkillRank()
         );
     }
 
@@ -1003,7 +971,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         if ($selectedShield->isUnarmed()) {
             return $selectedShield;
         }
-        if ($this->getSelectedMeleeWeaponHolding()->holdsByTwoHands()
+        if ($this->getCurrentMeleeWeaponHolding()->holdsByTwoHands()
             || !$this->canUseShield($selectedShield, $this->getSelectedMeleeShieldHolding($selectedShield))
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
@@ -1019,7 +987,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
                 $shieldCode,
                 $itemHoldingCode,
-                $this->getSelectedStrength()
+                $this->currentProperties->getCurrentStrength()
             )
         );
     }
@@ -1049,7 +1017,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
                 $shieldCode,
                 $itemHoldingCode,
-                $this->getPreviousStrength()
+                $this->previousProperties->getPreviousStrength()
             )
         );
     }
@@ -1136,7 +1104,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
         $selectedBodyArmor = BodyArmorCode::getIt($selectedBodyArmorValue);
-        if (!$this->canUseArmament($selectedBodyArmor, $this->getSelectedStrength())) {
+        if (!$this->canUseArmament($selectedBodyArmor, $this->currentProperties->getCurrentStrength())) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
@@ -1165,7 +1133,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
         $previousBodyArmor = BodyArmorCode::getIt($previousBodyArmorValue);
-        if (!$this->canUseArmament($previousBodyArmor, $this->getPreviousStrength())) {
+        if (!$this->canUseArmament($previousBodyArmor, $this->previousProperties->getPreviousStrength())) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 
@@ -1226,7 +1194,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
         $selectedHelm = HelmCode::getIt($selectedHelmValue);
-        if (!$this->canUseArmament($selectedHelm, $this->getSelectedStrength())) {
+        if (!$this->canUseArmament($selectedHelm, $this->currentProperties->getCurrentStrength())) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
@@ -1255,7 +1223,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
         $previousHelm = HelmCode::getIt($previousHelmValue);
-        if (!$this->canUseArmament($previousHelm, $this->getPreviousStrength())) {
+        if (!$this->canUseArmament($previousHelm, $this->previousProperties->getPreviousStrength())) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
@@ -1405,22 +1373,27 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function getCurrentUrlWithQuery(array $additionalParameters = []): string
     {
-        $query = $_SERVER['QUERY_STRING'] ?? '';
+        /** @var array $parameters */
+        $parameters = $_GET;
         if ($additionalParameters) {
-            $newParts = [];
             foreach ($additionalParameters as $name => $value) {
-                $newParts[] = "$name=$value";
+                $parameters[$name] = $value;
             }
-            $newPart = implode('&', $newParts);
-            if ($query !== '') {
-                $query .= '&';
-            }
-            $query .= $newPart;
         }
-        if ($query !== '') {
-            $query = '?' . $query;
+        $queryParts = [];
+        foreach ($parameters as $name => $value) {
+            $queryParts[] = urlencode($name) . '=' . urlencode($value);
+        }
+        $query = '';
+        if ($queryParts) {
+            $query = '?' . implode('&', $queryParts);
         }
 
         return $query;
+    }
+
+    public function addingNewMeleeWeapon(): bool
+    {
+        return $this->currentValues->getCurrentOnlyValue(self::ACTION) === self::ADD_NEW_MELEE_WEAPON_ACTION;
     }
 }

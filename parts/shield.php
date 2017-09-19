@@ -66,10 +66,7 @@ namespace DrdPlus\Fight;
         </label>
     </div>
 </div>
-<?php if ($controller->getSelectedShield()->isUnarmed()) {
-    return; // we will not show combat parameters about shield if no has been picked
-} ?>
-<div class="block">
+<div class="block <?php if ($controller->getSelectedShield()->isUnarmed()) { ?>hidden<?php } ?>">
     <table class="panel result">
         <?php
         /** @noinspection PhpUnusedLocalVariableInspection */
