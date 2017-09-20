@@ -6,7 +6,7 @@ use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Codes\ItemHoldingCode;
 
 /** @var Controller $controller */
-$selectedMeleeWeapon = $controller->getCurrentMeleeWeapon();
+$selectedMeleeWeapon = $controller->getFight()->getCurrentMeleeWeapon();
 $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValue() : null;
 ?>
 <div id="addMeleeWeapon" class="block <?php if (!$controller->addingNewMeleeWeapon()) { ?>hidden<?php } ?>">
@@ -43,13 +43,13 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         <label>
             <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>"
                    name="<?= $controller::MELEE_WEAPON_HOLDING ?>"
-                   <?php if ($controller->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
             v dominantní ruce</label>
     </div>
     <div class="panel">
         <label>
             <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::MELEE_WEAPON_HOLDING ?>"
-                   <?php if ($controller->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
             v druhé
             ruce</label>
     </div>
@@ -57,7 +57,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         <label>
             <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>"
                    name="<?= $controller::MELEE_WEAPON_HOLDING ?>"
-                   <?php if ($controller->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
             obouručně
         </label>
     </div>
@@ -71,8 +71,8 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
             <label>
                 <select name="<?= $controller::MELEE_FIGHT_SKILL ?>">
                     <?php
-                    $selectedSkillForMelee = $controller->getSelectedMeleeSkillCode();
-                    foreach ($controller->getSkillsForMelee() as $skillCode) { ?>
+                    $selectedSkillForMelee = $controller->getFight()->getSelectedMeleeSkillCode();
+                    foreach ($controller->getFight()->getPossibleSkillsForMelee() as $skillCode) { ?>
                         <option value="<?= $skillCode->getValue() ?>"
                                 <?php if ($selectedSkillForMelee->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>
                             <?= $skillCode->translateTo('cs') ?>
@@ -84,25 +84,25 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         <div class="panel skill-ranks"
              data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryMeleeSkillRanksJson()) ?>">
             <label>na stupni <input type="radio" value="0" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                                    <?php if ($controller->getSelectedMeleeSkillRank() === 0) { ?>checked<?php } ?>>0,
+                                    <?php if ($controller->getFight()->getSelectedMeleeSkillRank() === 0) { ?>checked<?php } ?>>0,
             </label>
             <label><input type="radio" value="1" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                          <?php if ($controller->getSelectedMeleeSkillRank() === 1) { ?>checked<?php } ?>>1,
+                          <?php if ($controller->getFight()->getSelectedMeleeSkillRank() === 1) { ?>checked<?php } ?>>1,
             </label>
             <label><input type="radio" value="2" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                          <?php if ($controller->getSelectedMeleeSkillRank() === 2) { ?>checked<?php } ?>>2,
+                          <?php if ($controller->getFight()->getSelectedMeleeSkillRank() === 2) { ?>checked<?php } ?>>2,
             </label>
             <label><input type="radio" value="3" name="<?= $controller::MELEE_FIGHT_SKILL_RANK ?>"
-                          <?php if ($controller->getSelectedMeleeSkillRank() === 3) { ?>checked<?php } ?>>3
+                          <?php if ($controller->getFight()->getSelectedMeleeSkillRank() === 3) { ?>checked<?php } ?>>3
             </label>
         </div>
     </div>
     <table class="block result">
         <?php
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $fightProperties = $controller->getMeleeWeaponFightProperties();
+        $fightProperties = $controller->getFight()->getMeleeWeaponFightProperties();
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $previousFightProperties = $controller->getPreviousMeleeWeaponFightProperties();
+        $previousFightProperties = $controller->getFight()->getPreviousMeleeWeaponFightProperties();
         ?>
         <tbody>
         <?php include __DIR__ . '/fight_properties_trait.php'; ?>

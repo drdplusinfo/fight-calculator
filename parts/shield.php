@@ -11,9 +11,9 @@ namespace DrdPlus\Fight;
             foreach ($controller->getShields() as $shield) {
                 $shieldCode = $shield['code']; ?>
                 <option value="<?= $shieldCode->getValue() ?>"
-                        <?php if ($controller->getSelectedShield()->getValue() === $shieldCode->getValue()) { ?>selected<?php }
+                        <?php if ($controller->getFight()->getSelectedShield()->getValue() === $shieldCode->getValue()) { ?>selected<?php }
                         if (!$shield['canUseIt']) { ?>disabled<?php } ?>>
-                    <?= $shieldCode->translateTo('cs') . ($controller->getCoverOfShield($shieldCode) > 0 ? (' +' . $controller->getCoverOfShield($shieldCode)) : '') ?>
+                    <?= $shieldCode->translateTo('cs') . ($controller->getFight()->getCoverOfShield($shieldCode) > 0 ? (' +' . $controller->getFight()->getCoverOfShield($shieldCode)) : '') ?>
                 </option>
             <?php } ?>
         </select>
@@ -25,17 +25,17 @@ namespace DrdPlus\Fight;
     </div>
     <div class="panel">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
-                                <?php if ($controller->getSelectedShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
+                                <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
             0,
         </label>
         <label><input type="radio" value="1" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedShieldUsageSkillRank() === 1) { ?>checked<?php } ?>> 1,
+                      <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
         <label><input type="radio" value="2" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedShieldUsageSkillRank() === 2) { ?>checked<?php } ?>> 2,
+                      <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
         <label><input type="radio" value="3" name="<?= $controller::SHIELD_USAGE_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedShieldUsageSkillRank() === 3) { ?>checked<?php } ?>> 3
+                      <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
 </div>
@@ -52,27 +52,27 @@ namespace DrdPlus\Fight;
     </div>
     <div class="panel">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                                <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
+                                <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
             0,
         </label>
         <label><input type="radio" value="1" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 1) { ?>checked<?php } ?>> 1,
+                      <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
         <label><input type="radio" value="2" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 2) { ?>checked<?php } ?>> 2,
+                      <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
         <label><input type="radio" value="3" name="<?= $controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                      <?php if ($controller->getSelectedFightWithShieldsSkillRank() === 3) { ?>checked<?php } ?>> 3
+                      <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
 </div>
-<div class="block <?php if ($controller->getSelectedShield()->isUnarmed()) { ?>hidden<?php } ?>">
+<div class="block <?php if ($controller->getFight()->getSelectedShield()->isUnarmed()) { ?>hidden<?php } ?>">
     <table class="panel result">
         <?php
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $fightProperties = $controller->getMeleeShieldFightProperties();
+        $fightProperties = $controller->getFight()->getMeleeShieldFightProperties();
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $previousFightProperties = $controller->getPreviousMeleeShieldFightProperties();
+        $previousFightProperties = $controller->getFight()->getPreviousMeleeShieldFightProperties();
         ?>
         <thead>
         <tr>
@@ -86,8 +86,8 @@ namespace DrdPlus\Fight;
         <tr>
             <td colspan="100%">
                 držen <span
-                        class="keyword <?php if ($controller->getPreviousMeleeShieldHolding()->getValue() !== $controller->getSelectedMeleeShieldHolding()->getValue()) { ?> changed <?php } ?>">
-                    <?= $controller->getSelectedMeleeShieldHolding()->translateTo('cs') ?>
+                        class="keyword <?php if ($controller->getFight()->getPreviousMeleeShieldHolding()->getValue() !== $controller->getFight()->getSelectedMeleeShieldHolding()->getValue()) { ?> changed <?php } ?>">
+                    <?= $controller->getFight()->getSelectedMeleeShieldHolding()->translateTo('cs') ?>
                 </span>
             </td>
         </tr>
@@ -96,9 +96,9 @@ namespace DrdPlus\Fight;
     <table class="panel result">
         <?php
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $fightProperties = $controller->getRangedShieldFightProperties();
+        $fightProperties = $controller->getFight()->getRangedShieldFightProperties();
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $previousFightProperties = $controller->getPreviousRangedShieldFightProperties();
+        $previousFightProperties = $controller->getFight()->getPreviousRangedShieldFightProperties();
         ?>
         <thead>
         <tr>
@@ -112,8 +112,8 @@ namespace DrdPlus\Fight;
         <tr>
             <td colspan="100%">
                 držen <span
-                        class="keyword <?php if ($controller->getPreviousRangedShieldHolding()->getValue() !== $controller->getSelectedRangedShieldHolding()->getValue()) { ?> changed <?php } ?>">
-                    <?= $controller->getSelectedRangedShieldHolding()->translateTo('cs') ?>
+                        class="keyword <?php if ($controller->getFight()->getPreviousRangedShieldHolding()->getValue() !== $controller->getFight()->getSelectedRangedShieldHolding()->getValue()) { ?> changed <?php } ?>">
+                    <?= $controller->getFight()->getSelectedRangedShieldHolding()->translateTo('cs') ?>
                 </span>
             </td>
         </tr>

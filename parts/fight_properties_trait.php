@@ -10,12 +10,12 @@ use DrdPlus\FightProperties\FightProperties;
  */
 
 $previousAttackNumber = $previousFightProperties->getAttackNumber(
-    $controller->getPreviousTargetDistance(), // melee attack is not affected by this
-    $controller->getPreviousTargetSize() // melee attack is not affected by this
+    $controller->getFight()->getPreviousTargetDistance(), // melee attack is not affected by this
+    $controller->getFight()->getPreviousTargetSize() // melee attack is not affected by this
 );
 $currentAttackNumber = $fightProperties->getAttackNumber(
-    $controller->getCurrentTargetDistance(), // melee attack is not affected by this
-    $controller->getCurrentTargetSize() // melee attack is not affected by this
+    $controller->getFight()->getCurrentTargetDistance(), // melee attack is not affected by this
+    $controller->getFight()->getCurrentTargetSize() // melee attack is not affected by this
 );
 ?>
 <tr>

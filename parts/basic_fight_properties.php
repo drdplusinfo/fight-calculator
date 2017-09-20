@@ -6,8 +6,8 @@ namespace DrdPlus\Fight;
 <h2 id="Obecně"><a class="inner" href="#Obecně">Obecně</a></h2>
 <table class="block result shortened">
     <?php
-    $fightProperties = $controller->getGenericFightProperties();
-    $previousFightProperties = $controller->getPreviousGenericFightProperties();
+    $fightProperties = $controller->getFight()->getGenericFightProperties();
+    $previousFightProperties = $controller->getFight()->getPreviousGenericFightProperties();
     ?>
     <tbody>
     <tr>
@@ -53,16 +53,16 @@ namespace DrdPlus\Fight;
     <tr>
         <td>Zbroj</td>
         <td><img class="line-sized" src="images/armor-icon.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($controller->getProtectionOfPreviousBodyArmor(), $controller->getProtectionOfSelectedBodyArmor()) ?>">
-            <?= $controller->getProtectionOfSelectedBodyArmor() ?>
+        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfSelectedBodyArmor()) ?>">
+            <?= $controller->getFight()->getProtectionOfSelectedBodyArmor() ?>
         </td>
         <td></td>
     </tr>
     <tr>
         <td>Helma</td>
         <td><img class="line-sized" src="images/helm-icon.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($controller->getPreviousHelmProtection(), $controller->getSelectedHelmProtection()) ?>">
-            <?= $controller->getSelectedHelmProtection() ?>
+        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getPreviousHelmProtection(), $controller->getFight()->getSelectedHelmProtection()) ?>">
+            <?= $controller->getFight()->getSelectedHelmProtection() ?>
         </td>
         <td></td>
     </tr>

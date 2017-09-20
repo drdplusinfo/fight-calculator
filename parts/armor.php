@@ -9,9 +9,9 @@ namespace DrdPlus\Fight;
             foreach ($controller->getBodyArmors() as $bodyArmor) {
                 $bodyArmorCode = $bodyArmor['code']; ?>
                 <option value="<?= $bodyArmorCode->getValue() ?>"
-                        <?php if ($controller->getSelectedBodyArmor()->getValue() === $bodyArmorCode->getValue()) { ?>selected<?php }
+                        <?php if ($controller->getFight()->getSelectedBodyArmor()->getValue() === $bodyArmorCode->getValue()) { ?>selected<?php }
                         if (!$bodyArmor['canUseIt']) { ?>disabled<?php } ?>>
-                    <?= $bodyArmorCode->translateTo('cs') . ($controller->getProtectionOfBodyArmor($bodyArmorCode) > 0 ? (' +' . $controller->getProtectionOfBodyArmor($bodyArmorCode)) : '') ?>
+                    <?= $bodyArmorCode->translateTo('cs') . ($controller->getFight()->getProtectionOfBodyArmor($bodyArmorCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfBodyArmor($bodyArmorCode)) : '') ?>
                 </option>
             <?php } ?>
         </select>
@@ -29,9 +29,9 @@ namespace DrdPlus\Fight;
             foreach ($controller->getHelms() as $helm) {
                 $helmCode = $helm['code']; ?>
                 <option value="<?= $helmCode->getValue() ?>"
-                        <?php if ($controller->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
+                        <?php if ($controller->getFight()->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
                         if (!$helm['canUseIt']) { ?>disabled<?php } ?>>
-                    <?= $helmCode->translateTo('cs') . ($controller->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getProtectionOfHelm($helmCode)) : '') ?>
+                    <?= $helmCode->translateTo('cs') . ($controller->getFight()->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfHelm($helmCode)) : '') ?>
                 </option>
             <?php } ?>
         </select>
@@ -45,21 +45,21 @@ namespace DrdPlus\Fight;
 <div class="block skill">
     <div class="panel">
         <label>
-            <span class="keyword"><?= $controller->getSkillForArmor()->translateTo('cs') ?></span>
+            <span class="keyword"><?= $controller->getFight()->getSkillForArmor()->translateTo('cs') ?></span>
         </label>
     </div>
     <div class="panel">
         <label>na stupni <input type="radio" value="0" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                                <?php if ($controller->getSelectedArmorSkillRank() === 0) { ?>checked<?php } ?>> 0,
+                                <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 0) { ?>checked<?php } ?>> 0,
         </label>
         <label><input type="radio" value="1" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                      <?php if ($controller->getSelectedArmorSkillRank() === 1) { ?>checked<?php } ?>> 1,
+                      <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
         <label><input type="radio" value="2" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                      <?php if ($controller->getSelectedArmorSkillRank() === 2) { ?>checked<?php } ?>> 2,
+                      <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
         <label><input type="radio" value="3" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
-                      <?php if ($controller->getSelectedArmorSkillRank() === 3) { ?>checked<?php } ?>> 3
+                      <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
 </div>
