@@ -139,7 +139,7 @@ class Fight extends StrictObject
         );
     }
 
-    public function getCurrentFightProperties(
+    private function getCurrentFightProperties(
         WeaponlikeCode $weaponlikeCode,
         ItemHoldingCode $weaponHoldingCode,
         SkillCode $weaponSkillCode,
@@ -402,7 +402,7 @@ class Fight extends StrictObject
         );
     }
 
-    public function getPreviousFightProperties(
+    private function getPreviousFightProperties(
         WeaponlikeCode $weaponlikeCode,
         ItemHoldingCode $weaponHoldingCode,
         SkillCode $fightWithWeaponSkillCode,
@@ -560,9 +560,6 @@ class Fight extends StrictObject
         return (int)$this->previousValues->getValue(Controller::MELEE_FIGHT_SKILL_RANK);
     }
 
-    /**
-     * @return MeleeWeaponCode
-     */
     private function getPreviousMeleeWeapon(): MeleeWeaponCode
     {
         $meleeWeaponValue = $this->previousValues->getValue(Controller::MELEE_WEAPON);
@@ -616,9 +613,6 @@ class Fight extends StrictObject
         return $this->getWeaponHolding($this->getPreviousMeleeWeapon(), $previousMeleeWeaponHoldingValue);
     }
 
-    /**
-     * @return MeleeWeaponCode
-     */
     public function getCurrentMeleeWeapon(): MeleeWeaponCode
     {
         $meleeWeaponValue = $this->currentValues->getValue(Controller::MELEE_WEAPON);
@@ -656,7 +650,7 @@ class Fight extends StrictObject
         return $this->getWeaponHolding($currentWeapon ?? $this->getCurrentMeleeWeapon(), $meleeWeaponHoldingValue);
     }
 
-    public function getSelectedShieldForMelee(): ShieldCode
+    private function getSelectedShieldForMelee(): ShieldCode
     {
         $selectedShield = $this->getSelectedShield();
         if ($selectedShield->isUnarmed()) {
@@ -697,9 +691,6 @@ class Fight extends StrictObject
         );
     }
 
-    /**
-     * @return RangedWeaponCode
-     */
     public function getSelectedRangedWeapon(): RangedWeaponCode
     {
         $rangedWeaponValue = $this->currentValues->getValue(Controller::RANGED_WEAPON);
@@ -728,9 +719,6 @@ class Fight extends StrictObject
         return $this->getWeaponHolding($this->getSelectedRangedWeapon(), $rangedWeaponHoldingValue);
     }
 
-    /**
-     * @return RangedWeaponCode
-     */
     private function getPreviousRangedWeapon(): RangedWeaponCode
     {
         $rangedWeaponValue = $this->previousValues->getValue(Controller::RANGED_WEAPON);
@@ -791,7 +779,7 @@ class Fight extends StrictObject
         return $this->getWeaponHolding($this->getPreviousRangedWeapon(), $rangedWeaponHoldingValue);
     }
 
-    public function getSelectedShieldForRanged(): ShieldCode
+    private function getSelectedShieldForRanged(): ShieldCode
     {
         $selectedShield = $this->getSelectedShield();
         if ($selectedShield->isUnarmed()) {
@@ -988,7 +976,7 @@ class Fight extends StrictObject
     }
 
     /**
-     * @return array|HelmCode[][]
+     * @return array|HelmCode[][][]
      */
     public function getPossibleHelms(): array
     {
