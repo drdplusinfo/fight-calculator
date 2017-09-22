@@ -11,16 +11,22 @@ class PreviousValues extends Values
     private $previousValues;
 
     /**
-     * @param array $currentValues
+     * @param array $currentValuesToRemember
+     * @param bool $reset
      */
-    public function __construct(array $currentValues)
+    public function __construct(array $currentValuesToRemember, bool $reset)
     {
-        $this->previousValues = unserialize(
-                $_COOKIE[self::NEXT_PREVIOUS_VALUES] ?? '',
-                ['allowed_classes' => false]
-            )
-            ?? [];
-        Cookie::setCookie(self::NEXT_PREVIOUS_VALUES, serialize($currentValues));
+        if ($reset) {
+            $this->previousValues = [];
+            Cookie::setCookie(self::NEXT_PREVIOUS_VALUES, null);
+        } else {
+            $this->previousValues = unserialize(
+                    $_COOKIE[self::NEXT_PREVIOUS_VALUES] ?? '',
+                    ['allowed_classes' => false]
+                )
+                ?? [];
+            Cookie::setCookie(self::NEXT_PREVIOUS_VALUES, serialize($currentValuesToRemember));
+        }
     }
 
     /**

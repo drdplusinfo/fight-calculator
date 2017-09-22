@@ -71,7 +71,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         parent::__construct('fight' /* cookies postfix */);
         $this->currentValues = new CurrentValues($_GET, $this->getHistoryWithSkillRanks());
         $this->currentProperties = new CurrentProperties($this->currentValues);
-        $previousValues = new PreviousValues($_GET);
+        $previousValues = new PreviousValues($_GET, $this->shouldDeleteHistory());
         $this->fight = new Fight(
             $this->currentValues,
             $this->currentProperties,
@@ -89,12 +89,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
                 self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
                 self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
             ],
-            !empty($_POST[self::DELETE_HISTORY]), // clear history?
+            $this->shouldDeleteHistory(),
             $_GET, // values to remember
             !empty($_GET[self::REMEMBER_HISTORY]), // should remember given values
             $cookiesPostfix,
             $cookiesTtl
         );
+    }
+
+    private function shouldDeleteHistory(): bool
+    {
+        return !empty($_POST[self::DELETE_HISTORY]);
     }
 
     /**
