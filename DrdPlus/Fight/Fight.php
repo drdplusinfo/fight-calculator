@@ -66,21 +66,21 @@ class Fight extends StrictObject
     /** @var CurrentProperties */
     private $currentProperties;
     /** @var PreviousValues */
-    private $previousValues;
+    private $historyWithSkillRanks;
     /** @var PreviousProperties */
     private $previousProperties;
 
     public function __construct(
         CurrentValues $currentValues,
         CurrentProperties $currentProperties,
-        PreviousValues $previousValues,
+        PreviousValues $historyWithSkillRanks,
         PreviousProperties $previousProperties,
         NewWeaponsService $newWeaponService
     )
     {
         $this->currentValues = $currentValues;
         $this->currentProperties = $currentProperties;
-        $this->previousValues = $previousValues;
+        $this->historyWithSkillRanks = $historyWithSkillRanks;
         $this->previousProperties = $previousProperties;
         $this->registerNewMeleeWeapons($currentValues, $newWeaponService);
     }
@@ -580,24 +580,24 @@ class Fight extends StrictObject
 
     private function getPreviousMeleeSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->previousValues->getValue(Controller::MELEE_FIGHT_SKILL));
+        return $this->getSelectedSkill($this->historyWithSkillRanks->getValue(Controller::MELEE_FIGHT_SKILL));
     }
 
     private function getPreviousMeleeSkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::MELEE_FIGHT_SKILL_RANK);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::MELEE_FIGHT_SKILL_RANK);
     }
 
     private function getPreviousMeleeWeapon(): MeleeWeaponCode
     {
-        $meleeWeaponValue = $this->previousValues->getValue(Controller::MELEE_WEAPON);
+        $meleeWeaponValue = $this->historyWithSkillRanks->getValue(Controller::MELEE_WEAPON);
         if (!$meleeWeaponValue) {
             return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         }
         $meleeWeapon = MeleeWeaponCode::getIt($meleeWeaponValue);
         $weaponHolding = $this->getWeaponHolding(
             $meleeWeapon,
-            $this->previousValues->getValue(Controller::MELEE_WEAPON_HOLDING)
+            $this->historyWithSkillRanks->getValue(Controller::MELEE_WEAPON_HOLDING)
         );
         if (!$this->couldUseWeaponlike($meleeWeapon, $weaponHolding)) {
             return MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
@@ -633,7 +633,7 @@ class Fight extends StrictObject
 
     private function getPreviousMeleeWeaponHolding(): ItemHoldingCode
     {
-        $previousMeleeWeaponHoldingValue = $this->previousValues->getValue(Controller::MELEE_WEAPON_HOLDING);
+        $previousMeleeWeaponHoldingValue = $this->historyWithSkillRanks->getValue(Controller::MELEE_WEAPON_HOLDING);
         if ($previousMeleeWeaponHoldingValue === null) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
@@ -749,14 +749,14 @@ class Fight extends StrictObject
 
     private function getPreviousRangedWeapon(): RangedWeaponCode
     {
-        $rangedWeaponValue = $this->previousValues->getValue(Controller::RANGED_WEAPON);
+        $rangedWeaponValue = $this->historyWithSkillRanks->getValue(Controller::RANGED_WEAPON);
         if (!$rangedWeaponValue) {
             return RangedWeaponCode::getIt(RangedWeaponCode::SAND);
         }
         $rangedWeapon = RangedWeaponCode::getIt($rangedWeaponValue);
         $weaponHolding = $this->getWeaponHolding(
             $rangedWeapon,
-            $this->previousValues->getValue(Controller::RANGED_WEAPON_HOLDING)
+            $this->historyWithSkillRanks->getValue(Controller::RANGED_WEAPON_HOLDING)
         );
         if (!$this->couldUseWeaponlike($rangedWeapon, $weaponHolding)) {
             return RangedWeaponCode::getIt(RangedWeaponCode::SAND);
@@ -799,7 +799,7 @@ class Fight extends StrictObject
 
     private function getPreviousRangedWeaponHolding(): ItemHoldingCode
     {
-        $rangedWeaponHoldingValue = $this->previousValues->getValue(Controller::RANGED_WEAPON_HOLDING);
+        $rangedWeaponHoldingValue = $this->historyWithSkillRanks->getValue(Controller::RANGED_WEAPON_HOLDING);
         if ($rangedWeaponHoldingValue === null) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
@@ -824,7 +824,7 @@ class Fight extends StrictObject
 
     private function getPreviousShield(): ShieldCode
     {
-        $previousShieldValue = $this->previousValues->getValue(Controller::SHIELD);
+        $previousShieldValue = $this->historyWithSkillRanks->getValue(Controller::SHIELD);
         if (!$previousShieldValue) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
@@ -1060,7 +1060,7 @@ class Fight extends StrictObject
 
     private function getPreviousBodyArmor(): BodyArmorCode
     {
-        $previousBodyArmorValue = $this->previousValues->getValue(Controller::BODY_ARMOR);
+        $previousBodyArmorValue = $this->historyWithSkillRanks->getValue(Controller::BODY_ARMOR);
         if (!$previousBodyArmorValue) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
@@ -1147,7 +1147,7 @@ class Fight extends StrictObject
 
     private function getPreviousHelm(): HelmCode
     {
-        $previousHelmValue = $this->previousValues->getValue(Controller::HELM);
+        $previousHelmValue = $this->historyWithSkillRanks->getValue(Controller::HELM);
         if (!$previousHelmValue) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
@@ -1279,7 +1279,7 @@ class Fight extends StrictObject
 
     private function getPreviousRangedSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->previousValues->getValue(Controller::RANGED_FIGHT_SKILL));
+        return $this->getSelectedSkill($this->historyWithSkillRanks->getValue(Controller::RANGED_FIGHT_SKILL));
     }
 
     public function getSelectedShieldUsageSkillRank(): int
@@ -1314,7 +1314,7 @@ class Fight extends StrictObject
 
     private function getPreviousProfessionCode(): ProfessionCode
     {
-        $previousProfession = $this->previousValues->getValue(Controller::PROFESSION);
+        $previousProfession = $this->historyWithSkillRanks->getValue(Controller::PROFESSION);
         if (!$previousProfession) {
             return $this->getSelectedProfessionCode();
         }
@@ -1324,7 +1324,7 @@ class Fight extends StrictObject
 
     private function getPreviousShieldUsageSkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::SHIELD_USAGE_SKILL_RANK);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::SHIELD_USAGE_SKILL_RANK);
     }
 
     public function getSelectedOnHorseback(): bool
@@ -1334,27 +1334,27 @@ class Fight extends StrictObject
 
     private function getPreviousArmorSkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::ARMOR_SKILL_VALUE);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::ARMOR_SKILL_VALUE);
     }
 
     private function getPreviousOnHorseback(): bool
     {
-        return (bool)$this->previousValues->getValue(Controller::ON_HORSEBACK);
+        return (bool)$this->historyWithSkillRanks->getValue(Controller::ON_HORSEBACK);
     }
 
     private function getPreviousRidingSkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::RIDING_SKILL_RANK);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::RIDING_SKILL_RANK);
     }
 
     private function getPreviousFightFreeWillAnimal(): bool
     {
-        return (bool)$this->previousValues->getValue(Controller::FIGHT_FREE_WILL_ANIMAL);
+        return (bool)$this->historyWithSkillRanks->getValue(Controller::FIGHT_FREE_WILL_ANIMAL);
     }
 
     private function getPreviousZoologySkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::ZOOLOGY_SKILL_RANK);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::ZOOLOGY_SKILL_RANK);
     }
 
     public function getSelectedRidingSkillRank(): int
@@ -1390,7 +1390,7 @@ class Fight extends StrictObject
 
     private function getPreviousFightWithShieldsSkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::FIGHT_WITH_SHIELDS_SKILL_RANK);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     public function getCurrentTargetSize(): Size
@@ -1405,7 +1405,7 @@ class Fight extends StrictObject
 
     public function getPreviousTargetDistance(): Distance
     {
-        $distanceValue = $this->previousValues->getValue(Controller::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->historyWithSkillRanks->getValue(Controller::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
@@ -1421,7 +1421,7 @@ class Fight extends StrictObject
 
     public function getPreviousTargetSize(): Size
     {
-        $distanceValue = $this->previousValues->getValue(Controller::RANGED_TARGET_SIZE);
+        $distanceValue = $this->historyWithSkillRanks->getValue(Controller::RANGED_TARGET_SIZE);
         if ($distanceValue === null) {
             return Size::getIt(1);
         }
@@ -1431,7 +1431,7 @@ class Fight extends StrictObject
 
     private function getPreviousRangedSkillRank(): int
     {
-        return (int)$this->previousValues->getValue(Controller::RANGED_FIGHT_SKILL_RANK);
+        return (int)$this->historyWithSkillRanks->getValue(Controller::RANGED_FIGHT_SKILL_RANK);
     }
 
 }

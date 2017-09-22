@@ -14,51 +14,51 @@ use Granam\Strict\Object\StrictObject;
 class PreviousProperties extends StrictObject
 {
     /** @var PreviousValues */
-    private $previousValues;
+    private $historyWithSkillRanks;
 
-    public function __construct(PreviousValues $previousValues)
+    public function __construct(PreviousValues $historyWithSkillRanks)
     {
-        $this->previousValues = $previousValues;
+        $this->historyWithSkillRanks = $historyWithSkillRanks;
     }
 
     public function getPreviousStrength(): Strength
     {
-        return Strength::getIt((int)$this->previousValues->getValue(Controller::STRENGTH));
+        return Strength::getIt((int)$this->historyWithSkillRanks->getValue(Controller::STRENGTH));
     }
 
     public function getPreviousAgility(): Agility
     {
-        return Agility::getIt((int)$this->previousValues->getValue(Controller::AGILITY));
+        return Agility::getIt((int)$this->historyWithSkillRanks->getValue(Controller::AGILITY));
     }
 
     public function getPreviousKnack(): Knack
     {
-        return Knack::getIt((int)$this->previousValues->getValue(Controller::KNACK));
+        return Knack::getIt((int)$this->historyWithSkillRanks->getValue(Controller::KNACK));
     }
 
     public function getPreviousWill(): Will
     {
-        return Will::getIt((int)$this->previousValues->getValue(Controller::WILL));
+        return Will::getIt((int)$this->historyWithSkillRanks->getValue(Controller::WILL));
     }
 
     public function getPreviousIntelligence(): Intelligence
     {
-        return Intelligence::getIt((int)$this->previousValues->getValue(Controller::INTELLIGENCE));
+        return Intelligence::getIt((int)$this->historyWithSkillRanks->getValue(Controller::INTELLIGENCE));
     }
 
     public function getPreviousCharisma(): Charisma
     {
-        return Charisma::getIt((int)$this->previousValues->getValue(Controller::CHARISMA));
+        return Charisma::getIt((int)$this->historyWithSkillRanks->getValue(Controller::CHARISMA));
     }
 
     public function getPreviousSize(): Size
     {
-        return Size::getIt((int)$this->previousValues->getValue(Controller::SIZE));
+        return Size::getIt((int)$this->historyWithSkillRanks->getValue(Controller::SIZE));
     }
 
     public function getPreviousHeightInCm(): HeightInCm
     {
-        return HeightInCm::getIt($this->previousValues->getValue(Controller::HEIGHT_IN_CM) ?? 150);
+        return HeightInCm::getIt($this->historyWithSkillRanks->getValue(Controller::HEIGHT_IN_CM) ?? 150);
     }
 
 }

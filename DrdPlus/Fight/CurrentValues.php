@@ -1,7 +1,9 @@
 <?php
 namespace DrdPlus\Fight;
 
-class CurrentValues extends Values
+use Granam\Strict\Object\StrictObject;
+
+class CurrentValues extends StrictObject
 {
     const CUSTOM_MELEE_WEAPON_NAME = 'custom_melee_weapon_name';
     const CUSTOM_MELEE_WEAPON_CATEGORY = 'custom_melee_weapon_category';
@@ -16,14 +18,14 @@ class CurrentValues extends Values
 
     /** @var array */
     private $valuesFromInput;
-    /** @var HistoryWithSkillRanks */
+    /** @var PreviousValues */
     private $historyValues;
 
     /**
      * @param array $valuesFromInput
-     * @param HistoryWithSkillRanks $historyValues
+     * @param PreviousValues $historyValues
      */
-    public function __construct(array $valuesFromInput, HistoryWithSkillRanks $historyValues)
+    public function __construct(array $valuesFromInput, PreviousValues $historyValues)
     {
         $this->valuesFromInput = $valuesFromInput;
         $this->historyValues = $historyValues;

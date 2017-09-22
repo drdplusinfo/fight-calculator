@@ -71,19 +71,18 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         parent::__construct('fight' /* cookies postfix */);
         $this->currentValues = new CurrentValues($_GET, $this->getHistoryWithSkillRanks());
         $this->currentProperties = new CurrentProperties($this->currentValues);
-        $previousValues = new PreviousValues($_GET, $this->shouldDeleteHistory());
         $this->fight = new Fight(
             $this->currentValues,
             $this->currentProperties,
-            $previousValues,
-            new PreviousProperties($previousValues),
+            $this->getHistoryWithSkillRanks(),
+            new PreviousProperties($this->getHistoryWithSkillRanks()),
             new NewWeaponsService()
         );
     }
 
     protected function createHistory(string $cookiesPostfix, int $cookiesTtl = null): History
     {
-        return new HistoryWithSkillRanks(
+        return new PreviousValues(
             [
                 self::MELEE_FIGHT_SKILL => self::MELEE_FIGHT_SKILL_RANK,
                 self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
@@ -111,9 +110,9 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     }
 
     /**
-     * @return HistoryWithSkillRanks|History
+     * @return PreviousValues|History
      */
-    private function getHistoryWithSkillRanks(): HistoryWithSkillRanks
+    private function getHistoryWithSkillRanks(): PreviousValues
     {
         return $this->getHistory();
     }

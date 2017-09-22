@@ -2,39 +2,84 @@
 namespace DrdPlus\Fight;
 
 use DrdPlus\Configurator\Skeleton\Cookie;
+use DrdPlus\Configurator\Skeleton\History;
 
-class PreviousValues extends Values
+class PreviousValues extends History
 {
-    const NEXT_PREVIOUS_VALUES = 'next_previous_values';
+    const RANKS_HISTORY = 'ranks_history';
 
-    /** @var array */
-    private $previousValues;
+    /** @var array|string[] */
+    private $skillToSkillRankNames;
 
     /**
-     * @param array $currentValuesToRemember
-     * @param bool $reset
+     * @param array|string[] $skillNamesToSkillRankNames
+     * @param bool $deleteFightHistory
+     * @param array $valuesToRemember
+     * @param bool $remember
+     * @param string $cookiesPostfix
+     * @param int $cookiesTtl = null
      */
-    public function __construct(array $currentValuesToRemember, bool $reset)
+    public function __construct(
+        array $skillNamesToSkillRankNames,
+        bool $deleteFightHistory,
+        array $valuesToRemember,
+        bool $remember,
+        string $cookiesPostfix,
+        int $cookiesTtl = null
+    )
     {
-        if ($reset) {
-            $this->previousValues = [];
-            Cookie::setCookie(self::NEXT_PREVIOUS_VALUES, null);
-        } else {
-            $this->previousValues = unserialize(
-                    $_COOKIE[self::NEXT_PREVIOUS_VALUES] ?? '',
-                    ['allowed_classes' => false]
-                )
-                ?? [];
-            Cookie::setCookie(self::NEXT_PREVIOUS_VALUES, serialize($currentValuesToRemember));
-        }
+        $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
+        parent::__construct($valuesToRemember, $deleteFightHistory, $remember, $cookiesPostfix, $cookiesTtl);
     }
 
-    /**
-     * @param string $name
-     * @return mixed|null
-     */
-    public function getValue(string $name)
+    protected function remember(array $valuesToRemember, int $cookiesTtl): void
     {
-        return $this->previousValues[$name] ?? null;
+        parent::remember($valuesToRemember, $cookiesTtl);
+        $this->addSelectedSkillsToHistory($valuesToRemember);
+    }
+
+    protected function deleteHistory(): void
+    {
+        parent::deleteHistory();
+        Cookie::setCookie(self::RANKS_HISTORY, null);
+    }
+
+    private function addSelectedSkillsToHistory(array $request): void
+    {
+        $skillsToSave = [];
+        foreach ($this->skillToSkillRankNames as $skillName => $rankName
+        ) {
+            if (array_key_exists($rankName, $request) && !empty($request[$skillName])) {
+                // like melee_fight_skill => fight_unarmed => 0
+                $skillsToSave[$rankName][$request[$skillName]] = $request[$rankName];
+            }
+        }
+        if (count($skillsToSave) === 0) {
+            return;
+        }
+        $ranksHistory = $this->getRanksHistory();
+        foreach ($skillsToSave as $rankName => $rankValues) {
+            // changed values are replaced because of string keys
+            $ranksHistory[$rankName] = array_merge($ranksHistory[$rankName] ?? [], $rankValues);
+        }
+        $serialized = serialize($ranksHistory);
+        Cookie::setCookie(self::RANKS_HISTORY, $serialized);
+    }
+
+    /** @var null|array */
+    private $ranksHistory;
+
+    private function getRanksHistory(): array
+    {
+        if ($this->ranksHistory === null) {
+            $this->ranksHistory = unserialize($_COOKIE[self::RANKS_HISTORY] ?? '', ['allowed_classes' => false]) ?: [];
+        }
+
+        return $this->ranksHistory;
+    }
+
+    public function getPreviousSkillRanks(string $skillRankInputName): array
+    {
+        return $this->getRanksHistory()[$skillRankInputName] ?? [];
     }
 }
