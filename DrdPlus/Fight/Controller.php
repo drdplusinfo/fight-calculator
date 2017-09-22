@@ -45,13 +45,17 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     const RANGED_TARGET_SIZE = 'ranged_target_size';
     // special actions
     const ACTION = 'action';
-    const ADD_NEW_MELEE_WEAPON_ACTION = 'add_new_melee_weapon_action';
-    const NEW_MELEE_WEAPON_NAME = 'new_melee_weapon_name';
-    const NEW_MELEE_WEAPON_REQUIRED_STRENGTH = 'new_melee_weapon_required_strength';
-    const NEW_MELEE_WEAPON_LENGTH = 'new_melee_weapon_length';
-    const NEW_MELEE_WEAPON_ATTACK = 'new_melee_weapon_attack';
-    const NEW_MELEE_WEAPON_WOUNDS = 'new_melee_weapon_wounds';
-    const NEW_MELEE_WEAPON_WOUND_TYPE = 'new_melee_weapon_wound_type';
+    const ADD_NEW_MELEE_WEAPON = 'add_new_melee_weapon';
+    const CUSTOM_MELEE_WEAPON_NAME = CurrentValues::CUSTOM_MELEE_WEAPON_NAME;
+    const CUSTOM_MELEE_WEAPON_CATEGORY = CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY;
+    const CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH = CurrentValues::CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH;
+    const CUSTOM_MELEE_WEAPON_LENGTH = CurrentValues::CUSTOM_MELEE_WEAPON_LENGTH;
+    const CUSTOM_MELEE_WEAPON_OFFENSIVENESS = CurrentValues::CUSTOM_MELEE_WEAPON_OFFENSIVENESS;
+    const CUSTOM_MELEE_WEAPON_WOUNDS = CurrentValues::CUSTOM_MELEE_WEAPON_WOUNDS;
+    const CUSTOM_MELEE_WEAPON_WOUND_TYPE = CurrentValues::CUSTOM_MELEE_WEAPON_WOUND_TYPE;
+    const CUSTOM_MELEE_WEAPON_COVER = CurrentValues::CUSTOM_MELEE_WEAPON_COVER;
+    const CUSTOM_MELEE_WEAPON_WEIGHT = CurrentValues::CUSTOM_MELEE_WEAPON_WEIGHT;
+    const CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY = CurrentValues::CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY;
 
     /** @var CurrentValues */
     private $currentValues;
@@ -72,7 +76,8 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $this->currentValues,
             $this->currentProperties,
             $previousValues,
-            new PreviousProperties($previousValues)
+            new PreviousProperties($previousValues),
+            new NewWeaponsService()
         );
     }
 
@@ -340,7 +345,14 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         }
         $queryParts = [];
         foreach ($parameters as $name => $value) {
-            $queryParts[] = urlencode($name) . '=' . urlencode($value);
+            if (is_array($value)) {
+                /** @var array $value */
+                foreach ($value as $index => $item) {
+                    $queryParts[] = urlencode("{$name}[{$index}]") . '=' . urlencode($item);
+                }
+            } else {
+                $queryParts[] = urlencode($name) . '=' . urlencode($value);
+            }
         }
         $query = '';
         if ($queryParts) {
@@ -352,6 +364,14 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function addingNewMeleeWeapon(): bool
     {
-        return $this->currentValues->getCurrentOnlyValue(self::ACTION) === self::ADD_NEW_MELEE_WEAPON_ACTION;
+        return $this->currentValues->getCurrentValue(self::ACTION) === self::ADD_NEW_MELEE_WEAPON;
+    }
+
+    /**
+     * @return array|string[][]
+     */
+    public function getCustomMeleeWeaponsValues(): array
+    {
+        return $this->currentValues->getCustomMeleeWeaponsValues();
     }
 }

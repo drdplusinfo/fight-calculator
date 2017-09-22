@@ -11,6 +11,7 @@ use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\ShieldCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Codes\Armaments\WeaponlikeCode;
+use DrdPlus\Codes\Body\WoundTypeCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\Codes\Skills\CombinedSkillCode;
@@ -50,8 +51,11 @@ use DrdPlus\Skills\Psychical\PsychicalSkills;
 use DrdPlus\Skills\Skills;
 use DrdPlus\Tables\Combat\Attacks\AttackNumberByContinuousDistanceTable;
 use DrdPlus\Tables\Measurements\Distance\Distance;
+use DrdPlus\Tables\Measurements\Weight\Weight;
 use DrdPlus\Tables\Tables;
+use Granam\Boolean\Tools\ToBoolean;
 use Granam\Integer\PositiveIntegerObject;
+use Granam\Integer\Tools\ToInteger;
 use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
@@ -70,13 +74,37 @@ class Fight extends StrictObject
         CurrentValues $currentValues,
         CurrentProperties $currentProperties,
         PreviousValues $previousValues,
-        PreviousProperties $previousProperties
+        PreviousProperties $previousProperties,
+        NewWeaponsService $newWeaponService
     )
     {
         $this->currentValues = $currentValues;
         $this->currentProperties = $currentProperties;
         $this->previousValues = $previousValues;
         $this->previousProperties = $previousProperties;
+        $this->registerNewMeleeWeapons($currentValues, $newWeaponService);
+    }
+
+    private function registerNewMeleeWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    {
+        foreach ($currentValues->getCustomMeleeWeaponsValues() as $currentMeleeWeaponValues) {
+            $newWeaponsService->addNewMeleeWeapon(
+                $currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_NAME],
+                WeaponCategoryCode::getIt($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY]),
+                Strength::getIt($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH]),
+                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_OFFENSIVENESS]),
+                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_LENGTH]),
+                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_WOUNDS]),
+                WoundTypeCode::getIt($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_WOUND_TYPE]),
+                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_COVER]),
+                new Weight(
+                    $currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_WEIGHT],
+                    Weight::KG,
+                    Tables::getIt()->getWeightTable()
+                ),
+                ToBoolean::toBoolean($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY])
+            );
+        }
     }
 
     public function getMeleeShieldFightProperties(): FightProperties

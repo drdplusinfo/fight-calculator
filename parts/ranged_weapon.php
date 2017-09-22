@@ -14,7 +14,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 ?>
 <div class="panel">
     <label class="block">
-        <select name="<?= $controller::RANGED_WEAPON ?>" title="Ranged weapon">
+        <select name="<?= Controller::RANGED_WEAPON ?>" title="Ranged weapon">
             <?php /** @var string[] $rangedWeaponsFromCategory */
             foreach ($controller->getRangedWeapons() as $weaponCategory => $rangedWeaponsFromCategory) {
                 ?>
@@ -36,19 +36,19 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= $controller::RANGED_WEAPON_HOLDING ?>"
+        <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>" name="<?= Controller::RANGED_WEAPON_HOLDING ?>"
                <?php if ($controller->getFight()->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
         v dominantní ruce</label>
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= $controller::RANGED_WEAPON_HOLDING ?>"
+        <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= Controller::RANGED_WEAPON_HOLDING ?>"
                <?php if ($controller->getFight()->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
         v druhé ruce</label>
 </div>
 <div class="panel">
     <label>
-        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= $controller::RANGED_WEAPON_HOLDING ?>"
+        <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>" name="<?= Controller::RANGED_WEAPON_HOLDING ?>"
                <?php if ($controller->getFight()->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
         obouručně
     </label>
@@ -60,7 +60,7 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
 </div>
 <div class="block skill with-skill-ranks">
     <div class="panel">
-        <label><select name="<?= $controller::RANGED_FIGHT_SKILL ?>">
+        <label><select name="<?= Controller::RANGED_FIGHT_SKILL ?>">
                 <?php
                 $selectedSkillForRanged = $controller->getFight()->getSelectedRangedSkillCode();
                 foreach ($controller->getFight()->getSkillsForRanged() as $skillCode) {
@@ -75,26 +75,26 @@ $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getV
     </div>
     <div class="panel skill-ranks"
          data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryRangedSkillRanksJson()) ?>">
-        <label>na stupni <input type="radio" value="0" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+        <label>na stupni <input type="radio" value="0" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
                                 <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 0) { ?>checked<?php } ?>> 0,
         </label>
-        <label><input type="radio" value="1" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+        <label><input type="radio" value="1" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
-        <label><input type="radio" value="2" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+        <label><input type="radio" value="2" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
-        <label><input type="radio" value="3" name="<?= $controller::RANGED_FIGHT_SKILL_RANK ?>"
+        <label><input type="radio" value="3" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
     <div class="block">
         <label>vzdálenost cíle <span class="hint">v metrech</span>
-            <input type="number" name="<?= $controller::RANGED_TARGET_DISTANCE ?>" min="1" max="900" step="0.1"
+            <input type="number" name="<?= Controller::RANGED_TARGET_DISTANCE ?>" min="1" max="900" step="0.1"
                    value="<?= $controller->getFight()->getCurrentTargetDistance()->getMeters() ?>">
         </label>
         <label>velikost cíle <span class="hint">(Vel)</span>
-            <input type="number" name="<?= $controller::RANGED_TARGET_SIZE ?>"
+            <input type="number" name="<?= Controller::RANGED_TARGET_SIZE ?>"
                    value="<?= $controller->getFight()->getCurrentTargetSize() ?>">
         </label>
     </div>

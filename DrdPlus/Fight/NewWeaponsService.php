@@ -12,7 +12,7 @@ use DrdPlus\Tables\Tables;
 use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
-class NewWeaponService extends StrictObject
+class NewWeaponsService extends StrictObject
 {
     /**
      * @param string $name

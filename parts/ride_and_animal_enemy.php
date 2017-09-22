@@ -10,7 +10,7 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
     <div class="block">
         <label>
             <input type="checkbox" value="1"
-                   name="<?= $controller::ON_HORSEBACK ?>"
+                   name="<?= Controller::ON_HORSEBACK ?>"
                    <?php if ($controller->getFight()->getSelectedOnHorseback()) { ?>checked="checked" <?php } ?>>
             Bojuješ ze sedla
         </label>
@@ -18,17 +18,17 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
     <div class="block">
         Dovednost <span
                 class="keyword"><?= PhysicalSkillCode::getIt(PhysicalSkillCode::RIDING)->translateTo('cs') ?></span>
-        <label>na stupni <input type="radio" value="0" name="<?= $controller::RIDING_SKILL_RANK ?>"
+        <label>na stupni <input type="radio" value="0" name="<?= Controller::RIDING_SKILL_RANK ?>"
                                 <?php if ($controller->getFight()->getSelectedRidingSkillRank() === 0) { ?>checked<?php } ?>>
             0,
         </label>
-        <label><input type="radio" value="1" name="<?= $controller::RIDING_SKILL_RANK ?>"
+        <label><input type="radio" value="1" name="<?= Controller::RIDING_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedRidingSkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
-        <label><input type="radio" value="2" name="<?= $controller::RIDING_SKILL_RANK ?>"
+        <label><input type="radio" value="2" name="<?= Controller::RIDING_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedRidingSkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
-        <label><input type="radio" value="3" name="<?= $controller::RIDING_SKILL_RANK ?>"
+        <label><input type="radio" value="3" name="<?= Controller::RIDING_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedRidingSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
@@ -36,24 +36,24 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
 <div class="panel">
     <div class="block">
         <label><input type="checkbox" value="1"
-                      name="<?= $controller::FIGHT_FREE_WILL_ANIMAL ?>"
+                      name="<?= Controller::FIGHT_FREE_WILL_ANIMAL ?>"
                       <?php if ($controller->getFight()->getSelectedFightFreeWillAnimal()) { ?>checked="checked" <?php } ?>>
             Bojuješ se zvířetem s vlastní vůlí</label>
     </div>
     <div class="block">
         Dovednost <span
                 class="keyword"><?= PsychicalSkillCode::getIt(PsychicalSkillCode::ZOOLOGY)->translateTo('cs') ?></span>
-        <label>na stupni <input type="radio" value="0" name="<?= $controller::ZOOLOGY_SKILL_RANK ?>"
+        <label>na stupni <input type="radio" value="0" name="<?= Controller::ZOOLOGY_SKILL_RANK ?>"
                                 <?php if ($controller->getFight()->getSelectedZoologySkillRank() === 0) { ?>checked<?php } ?>>
             0,
         </label>
-        <label><input type="radio" value="1" name="<?= $controller::ZOOLOGY_SKILL_RANK ?>"
+        <label><input type="radio" value="1" name="<?= Controller::ZOOLOGY_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedZoologySkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
-        <label><input type="radio" value="2" name="<?= $controller::ZOOLOGY_SKILL_RANK ?>"
+        <label><input type="radio" value="2" name="<?= Controller::ZOOLOGY_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedZoologySkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
-        <label><input type="radio" value="3" name="<?= $controller::ZOOLOGY_SKILL_RANK ?>"
+        <label><input type="radio" value="3" name="<?= Controller::ZOOLOGY_SKILL_RANK ?>"
                       <?php if ($controller->getFight()->getSelectedZoologySkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>

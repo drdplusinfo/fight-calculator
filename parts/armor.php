@@ -4,7 +4,7 @@ namespace DrdPlus\Fight;
 ?>
 <div class="panel">
     <label class="block">
-        <select name="<?= $controller::BODY_ARMOR ?>">
+        <select name="<?= Controller::BODY_ARMOR ?>">
             <?php /** @var array $bodyArmor */
             foreach ($controller->getBodyArmors() as $bodyArmor) {
                 $bodyArmorCode = $bodyArmor['code']; ?>
@@ -24,7 +24,7 @@ namespace DrdPlus\Fight;
 </div>
 <div class="panel">
     <label class="block">
-        <select name="<?= $controller::HELM ?>">
+        <select name="<?= Controller::HELM ?>">
             <?php /** @var array $helm */
             foreach ($controller->getHelms() as $helm) {
                 $helmCode = $helm['code']; ?>
@@ -49,16 +49,16 @@ namespace DrdPlus\Fight;
         </label>
     </div>
     <div class="panel">
-        <label>na stupni <input type="radio" value="0" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+        <label>na stupni <input type="radio" value="0" name="<?= Controller::ARMOR_SKILL_VALUE ?>"
                                 <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 0) { ?>checked<?php } ?>> 0,
         </label>
-        <label><input type="radio" value="1" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+        <label><input type="radio" value="1" name="<?= Controller::ARMOR_SKILL_VALUE ?>"
                       <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 1) { ?>checked<?php } ?>> 1,
         </label>
-        <label><input type="radio" value="2" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+        <label><input type="radio" value="2" name="<?= Controller::ARMOR_SKILL_VALUE ?>"
                       <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 2) { ?>checked<?php } ?>> 2,
         </label>
-        <label><input type="radio" value="3" name="<?= $controller::ARMOR_SKILL_VALUE ?>"
+        <label><input type="radio" value="3" name="<?= Controller::ARMOR_SKILL_VALUE ?>"
                       <?php if ($controller->getFight()->getCurrentArmorSkillRank() === 3) { ?>checked<?php } ?>> 3
         </label>
     </div>
