@@ -1305,12 +1305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-health.git",
-                "reference": "de0a3b05f6c19dabf32645aba27135ab939404b0"
+                "reference": "62917402c33bfe3d6c3e22191825d97d95933651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/de0a3b05f6c19dabf32645aba27135ab939404b0",
-                "reference": "de0a3b05f6c19dabf32645aba27135ab939404b0",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/62917402c33bfe3d6c3e22191825d97d95933651",
+                "reference": "62917402c33bfe3d6c3e22191825d97d95933651",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1325,7 @@
                 "drd-plus/rolls-on": "dev-master",
                 "drd-plus/skills": "dev-master",
                 "drd-plus/tables": "dev-master",
-                "php": ">=7.0",
+                "php": ">=7.1",
                 "roave/security-advisories": "dev-master"
             },
             "require-dev": {
@@ -1344,7 +1344,7 @@
                 "MIT"
             ],
             "description": "Body and soul harms, afflictions and their treatment of a being for Drd+",
-            "time": "2017-07-25 10:58:27"
+            "time": "2017-09-19 16:31:10"
         },
         {
             "name": "drd-plus/hunting-and-fishing",
