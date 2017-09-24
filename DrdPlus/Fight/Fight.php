@@ -82,27 +82,59 @@ class Fight extends StrictObject
         $this->currentProperties = $currentProperties;
         $this->historyWithSkillRanks = $historyWithSkillRanks;
         $this->previousProperties = $previousProperties;
-        $this->registerNewMeleeWeapons($currentValues, $newWeaponService);
+        $this->registerCustomWeapons($currentValues, $newWeaponService);
     }
 
-    private function registerNewMeleeWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    private function registerCustomWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
     {
-        foreach ($currentValues->getCustomMeleeWeaponsValues() as $currentMeleeWeaponValues) {
+        $this->registerCustomMeleeWeapons($currentValues, $newWeaponsService);
+        $this->registerCustomRangedWeapons($currentValues, $newWeaponsService);
+    }
+
+    private function registerCustomMeleeWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    {
+        foreach ($currentValues->getCustomMeleeWeaponsValues() as $customMeleeWeaponsValue) {
             $newWeaponsService->addNewMeleeWeapon(
-                $currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_NAME],
-                WeaponCategoryCode::getIt($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY]),
-                Strength::getIt($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH]),
-                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_OFFENSIVENESS]),
-                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_LENGTH]),
-                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_WOUNDS]),
-                WoundTypeCode::getIt($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_WOUND_TYPE]),
-                ToInteger::toInteger($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_COVER]),
+                $customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_NAME],
+                WeaponCategoryCode::getIt($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY]),
+                Strength::getIt($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH]),
+                ToInteger::toInteger($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_OFFENSIVENESS]),
+                ToInteger::toInteger($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_LENGTH]),
+                ToInteger::toInteger($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_WOUNDS]),
+                WoundTypeCode::getIt($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_WOUND_TYPE]),
+                ToInteger::toInteger($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_COVER]),
                 new Weight(
-                    $currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_WEIGHT],
+                    $customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_WEIGHT],
                     Weight::KG,
                     Tables::getIt()->getWeightTable()
                 ),
-                ToBoolean::toBoolean($currentMeleeWeaponValues[CurrentValues::CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY])
+                ToBoolean::toBoolean($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY])
+            );
+        }
+    }
+
+    private function registerCustomRangedWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    {
+        foreach ($currentValues->getCustomRangedWeaponsValues() as $customRangedWeaponsValue) {
+            $newWeaponsService->addNewRangedWeapon(
+                $customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_NAME],
+                WeaponCategoryCode::getIt($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_CATEGORY]),
+                Strength::getIt($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_REQUIRED_STRENGTH]),
+                ToInteger::toInteger($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_OFFENSIVENESS]),
+                (new Distance(
+                    $customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_RANGE_IN_M],
+                    Distance::METER,
+                    Tables::getIt()->getDistanceTable()
+                ))->getBonus(),
+                ToInteger::toInteger($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_WOUNDS]),
+                WoundTypeCode::getIt($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_WOUND_TYPE]),
+                ToInteger::toInteger($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_COVER]),
+                new Weight(
+                    $customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_WEIGHT],
+                    Weight::KG,
+                    Tables::getIt()->getWeightTable()
+                ),
+                ToBoolean::toBoolean($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY])
             );
         }
     }

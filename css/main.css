@@ -114,7 +114,10 @@ table.result {
 }
 
 .cancel {
-    padding: 2px;
     background-color: rgba(211, 76, 4, 0.35);
     font-size: 12px;
+}
+
+.add {
+    background-color: #dffddc;
 }

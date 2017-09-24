@@ -115,9 +115,9 @@ class NewWeaponsService extends StrictObject
         $rangedWeaponCodeValue = StringTools::toConstant($name);
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         RangedWeaponCode::addNewRangedWeaponCode($rangedWeaponCodeValue, $rangedWeaponCategoryCode, ['cs' => ['one' => $name]]);
-        $meleeWeaponCode = RangedWeaponCode::getIt($rangedWeaponCodeValue);
+        $rangedWeaponCode = RangedWeaponCode::getIt($rangedWeaponCodeValue);
         return Tables::getIt()->getArmourer()->addNewRangedWeapon(
-            $meleeWeaponCode,
+            $rangedWeaponCode,
             $rangedWeaponCategoryCode,
             $requiredStrength,
             $range,

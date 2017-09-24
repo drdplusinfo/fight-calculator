@@ -46,16 +46,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     // special actions
     const ACTION = 'action';
     const ADD_NEW_MELEE_WEAPON = 'add_new_melee_weapon';
-    const CUSTOM_MELEE_WEAPON_NAME = CurrentValues::CUSTOM_MELEE_WEAPON_NAME;
-    const CUSTOM_MELEE_WEAPON_CATEGORY = CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY;
-    const CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH = CurrentValues::CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH;
-    const CUSTOM_MELEE_WEAPON_LENGTH = CurrentValues::CUSTOM_MELEE_WEAPON_LENGTH;
-    const CUSTOM_MELEE_WEAPON_OFFENSIVENESS = CurrentValues::CUSTOM_MELEE_WEAPON_OFFENSIVENESS;
-    const CUSTOM_MELEE_WEAPON_WOUNDS = CurrentValues::CUSTOM_MELEE_WEAPON_WOUNDS;
-    const CUSTOM_MELEE_WEAPON_WOUND_TYPE = CurrentValues::CUSTOM_MELEE_WEAPON_WOUND_TYPE;
-    const CUSTOM_MELEE_WEAPON_COVER = CurrentValues::CUSTOM_MELEE_WEAPON_COVER;
-    const CUSTOM_MELEE_WEAPON_WEIGHT = CurrentValues::CUSTOM_MELEE_WEAPON_WEIGHT;
-    const CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY = CurrentValues::CUSTOM_MELEE_WEAPON_TWO_HANDED_ONLY;
+    const ADD_NEW_RANGED_WEAPON = 'add_new_ranged_weapon';
 
     /** @var CurrentValues */
     private $currentValues;
@@ -99,6 +90,14 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     private function shouldDeleteHistory(): bool
     {
         return !empty($_POST[self::DELETE_HISTORY]);
+    }
+
+    /**
+     * @return CurrentValues
+     */
+    public function getCurrentValues(): CurrentValues
+    {
+        return $this->currentValues;
     }
 
     /**
@@ -371,11 +370,8 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return $this->currentValues->getCurrentValue(self::ACTION) === self::ADD_NEW_MELEE_WEAPON;
     }
 
-    /**
-     * @return array|string[][]
-     */
-    public function getCustomMeleeWeaponsValues(): array
+    public function addingNewRangedWeapon(): bool
     {
-        return $this->currentValues->getCustomMeleeWeaponsValues();
+        return $this->currentValues->getCurrentValue(self::ACTION) === self::ADD_NEW_RANGED_WEAPON;
     }
 }

@@ -9,11 +9,11 @@ use DrdPlus\Codes\ItemHoldingCode;
 $selectedMeleeWeapon = $controller->getFight()->getCurrentMeleeWeapon();
 $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValue() : null;
 if ($controller->addingNewMeleeWeapon()) { ?>
-    <div id="addMeleeWeapon" class="block">
+    <div id="addMeleeWeapon" class="block add">
         <?php include __DIR__ . '/new_melee_weapon.php' ?>
     </div>
 <?php }
-foreach ($controller->getCustomMeleeWeaponsValues() as $weaponName => $weaponValues) {
+foreach ($controller->getCurrentValues()->getCustomMeleeWeaponsValues() as $weaponName => $weaponValues) {
     /** @var array|string[] $weaponValues */
     foreach ($weaponValues as $typeName => $weaponValue) { ?>
         <input type="hidden" name="<?= $typeName ?>[<?= $weaponName ?>]" value="<?= $weaponValue ?>">
@@ -23,7 +23,7 @@ foreach ($controller->getCustomMeleeWeaponsValues() as $weaponName => $weaponVal
     <div class="panel">
         <a title="Přidat vlastní zbraň na blízko"
            href="<?= $controller->getCurrentUrlWithQuery([Controller::ACTION => Controller::ADD_NEW_MELEE_WEAPON]) ?>"
-           class="button">+</a>
+           class="button add">+</a>
         <label>
             <select name="<?= Controller::MELEE_WEAPON ?>" title="Melee weapon">
                 <?php /** @var array $meleeWeaponsFromCategory */

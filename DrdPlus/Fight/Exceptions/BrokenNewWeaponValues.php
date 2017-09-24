@@ -3,7 +3,7 @@ declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types o
 
 namespace DrdPlus\Fight\Exceptions;
 
-class BrokenNewMeleeWeaponValues extends \RuntimeException implements Runtime
+class BrokenNewWeaponValues extends \RuntimeException implements Runtime
 {
 
 }
