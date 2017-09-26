@@ -943,14 +943,14 @@ class Fight extends StrictObject
     public function getPossibleMeleeWeapons(): array
     {
         $weaponCodes = [
-            WeaponCategoryCode::AXE => MeleeWeaponCode::getAxeValues(),
-            WeaponCategoryCode::KNIFE_AND_DAGGER => MeleeWeaponCode::getKnifeAndDaggerValues(),
-            WeaponCategoryCode::MACE_AND_CLUB => MeleeWeaponCode::getMaceAndClubValues(),
-            WeaponCategoryCode::MORNINGSTAR_AND_MORGENSTERN => MeleeWeaponCode::getMorningstarAndMorgensternValues(),
-            WeaponCategoryCode::SABER_AND_BOWIE_KNIFE => MeleeWeaponCode::getSaberAndBowieKnifeValues(),
-            WeaponCategoryCode::STAFF_AND_SPEAR => MeleeWeaponCode::getStaffAndSpearValues(),
-            WeaponCategoryCode::SWORD => MeleeWeaponCode::getSwordValues(),
-            WeaponCategoryCode::VOULGE_AND_TRIDENT => MeleeWeaponCode::getVoulgeAndTridentValues(),
+            WeaponCategoryCode::AXES => MeleeWeaponCode::getAxeValues(),
+            WeaponCategoryCode::KNIVES_AND_DAGGERS => MeleeWeaponCode::getKnifeAndDaggerValues(),
+            WeaponCategoryCode::MACES_AND_CLUBS=> MeleeWeaponCode::getMaceAndClubValues(),
+            WeaponCategoryCode::MORNINGSTARS_AND_MORGENSTERNS=> MeleeWeaponCode::getMorningstarAndMorgensternValues(),
+            WeaponCategoryCode::SABERS_AND_BOWIE_KNIVES=> MeleeWeaponCode::getSaberAndBowieKnifeValues(),
+            WeaponCategoryCode::STAFFS_AND_SPEARS=> MeleeWeaponCode::getStaffAndSpearValues(),
+            WeaponCategoryCode::SWORDS => MeleeWeaponCode::getSwordValues(),
+            WeaponCategoryCode::VOULGES_AND_TRIDENTS=> MeleeWeaponCode::getVoulgeAndTridentValues(),
             WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedValues(),
         ];
         foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
@@ -998,9 +998,9 @@ class Fight extends StrictObject
     public function getPossibleRangedWeapons(): array
     {
         $weaponCodes = [
-            WeaponCategoryCode::THROWING_WEAPON => RangedWeaponCode::getThrowingWeaponValues(),
-            WeaponCategoryCode::BOW => RangedWeaponCode::getBowValues(),
-            WeaponCategoryCode::CROSSBOW => RangedWeaponCode::getCrossbowValues(),
+            WeaponCategoryCode::THROWING_WEAPONS => RangedWeaponCode::getThrowingWeaponValues(),
+            WeaponCategoryCode::BOWS => RangedWeaponCode::getBowValues(),
+            WeaponCategoryCode::CROSSBOWS => RangedWeaponCode::getCrossbowValues(),
         ];
         foreach ($weaponCodes as &$weaponCodesOfSameCategory) {
             $weaponCodesOfSameCategory = $this->addUsabilityToRangedWeapons($weaponCodesOfSameCategory);
