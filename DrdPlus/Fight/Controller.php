@@ -47,6 +47,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     const ACTION = 'action';
     const ADD_NEW_MELEE_WEAPON = 'add_new_melee_weapon';
     const ADD_NEW_RANGED_WEAPON = 'add_new_ranged_weapon';
+    const ADD_NEW_BODY_ARMOR = 'add_new_body_armor';
 
     /** @var CurrentValues */
     private $currentValues;
@@ -67,7 +68,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             $this->currentProperties,
             $this->getHistoryWithSkillRanks(),
             new PreviousProperties($this->getHistoryWithSkillRanks()),
-            new NewWeaponsService()
+            new CustomWeaponsService()
         );
     }
 
@@ -373,5 +374,10 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
     public function addingNewRangedWeapon(): bool
     {
         return $this->currentValues->getCurrentValue(self::ACTION) === self::ADD_NEW_RANGED_WEAPON;
+    }
+
+    public function addingNewBodyArmor(): bool
+    {
+        return $this->currentValues->getCurrentValue(self::ACTION) === self::ADD_NEW_BODY_ARMOR;
     }
 }

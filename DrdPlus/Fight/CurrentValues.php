@@ -27,6 +27,12 @@ class CurrentValues extends StrictObject
     const CUSTOM_RANGED_WEAPON_COVER = 'custom_ranged_weapon_cover';
     const CUSTOM_RANGED_WEAPON_WEIGHT = 'custom_ranged_weapon_weight';
     const CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY = 'custom_ranged_weapon_two_handed_only';
+    // body armor
+    const CUSTOM_BODY_ARMOR_NAME = 'custom_body_armor_name';
+    const CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH = 'custom_body_armor_required_strength';
+    const CUSTOM_BODY_ARMOR_PROTECTION = 'custom_body_armor_protection';
+    const CUSTOM_BODY_ARMOR_WEIGHT = 'custom_body_armor_weight';
+    const CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON = 'custom_body_armor_rounds_to_put_on';
 
     /** @var array */
     private $valuesFromInput;
@@ -36,6 +42,8 @@ class CurrentValues extends StrictObject
     private $customRangedWeaponsValues;
     /** @var array */
     private $customMeleeWeaponsValues;
+    /** @var array */
+    private $customBodyArmorsValues;
 
     /**
      * @param array $valuesFromInput
@@ -84,7 +92,7 @@ class CurrentValues extends StrictObject
 
     private function assembleCustomMeleeWeaponsValues(): array
     {
-        return $this->assembleCustomWeaponsValues(
+        return $this->assembleCustomArmamentsValues(
             [
                 self::CUSTOM_MELEE_WEAPON_NAME,
                 self::CUSTOM_MELEE_WEAPON_CATEGORY,
@@ -102,7 +110,7 @@ class CurrentValues extends StrictObject
         );
     }
 
-    private function assembleCustomWeaponsValues(
+    private function assembleCustomArmamentsValues(
         array $customWeaponKeys,
         string $customWeaponNameKey,
         string $customWeaponTwoHandedOnlyKey
@@ -149,7 +157,7 @@ class CurrentValues extends StrictObject
 
     private function assembleCustomRangedWeaponsValues(): array
     {
-        return $this->assembleCustomWeaponsValues(
+        return $this->assembleCustomArmamentsValues(
             [
                 self::CUSTOM_RANGED_WEAPON_NAME,
                 self::CUSTOM_RANGED_WEAPON_CATEGORY,
@@ -164,6 +172,34 @@ class CurrentValues extends StrictObject
             ],
             self::CUSTOM_RANGED_WEAPON_NAME,
             self::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY
+        );
+    }
+
+    /**
+     * @return array|string[][]
+     */
+    public function getCustomBodyArmorsValues(): array
+    {
+        if ($this->customBodyArmorsValues !== null) {
+            return $this->customBodyArmorsValues;
+        }
+        $this->customBodyArmorsValues = $this->assembleCustomBodyArmorsValues();
+
+        return $this->customBodyArmorsValues;
+    }
+
+    private function assembleCustomBodyArmorsValues(): array
+    {
+        return $this->assembleCustomArmamentsValues(
+            [
+                self::CUSTOM_BODY_ARMOR_NAME,
+                self::CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH,
+                self::CUSTOM_BODY_ARMOR_PROTECTION,
+                self::CUSTOM_BODY_ARMOR_WEIGHT,
+                self::CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON,
+            ],
+            self::CUSTOM_BODY_ARMOR_NAME,
+            false /* no boolean parameter */
         );
     }
 }

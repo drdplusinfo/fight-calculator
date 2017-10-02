@@ -908,12 +908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-self-registering-type.git",
-                "reference": "f5a9fb10d66c7397c15ae92be0283344377295ac"
+                "reference": "fe45ef2754a2535d628bad083aeab6ad9ff4cdcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-self-registering-type/zipball/f5a9fb10d66c7397c15ae92be0283344377295ac",
-                "reference": "f5a9fb10d66c7397c15ae92be0283344377295ac",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-self-registering-type/zipball/fe45ef2754a2535d628bad083aeab6ad9ff4cdcf",
+                "reference": "fe45ef2754a2535d628bad083aeab6ad9ff4cdcf",
                 "shasum": ""
             },
             "require": {
@@ -951,7 +951,7 @@
                 "self-registering",
                 "type"
             ],
-            "time": "2017-09-11 06:06:27"
+            "time": "2017-09-13 06:56:42"
         },
         {
             "name": "doctrineum/string",
@@ -1095,12 +1095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "af0052a43541dc1d684b2296ba831ec8d0e99db5"
+                "reference": "6fcc6af1472655e82050bd916bc59033474d5883"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/af0052a43541dc1d684b2296ba831ec8d0e99db5",
-                "reference": "af0052a43541dc1d684b2296ba831ec8d0e99db5",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/6fcc6af1472655e82050bd916bc59033474d5883",
+                "reference": "6fcc6af1472655e82050bd916bc59033474d5883",
                 "shasum": ""
             },
             "require": {
@@ -1126,7 +1126,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-09-14 07:44:01"
+            "time": "2017-09-26 11:53:06"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1172,12 +1172,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-configurator-skeleton.git",
-                "reference": "0cdcd0109e839a829e601a07b224afbe2177abf6"
+                "reference": "51998a174468c2e0ab7d432c9af29fa0f6a042ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-configurator-skeleton/zipball/0cdcd0109e839a829e601a07b224afbe2177abf6",
-                "reference": "0cdcd0109e839a829e601a07b224afbe2177abf6",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-configurator-skeleton/zipball/51998a174468c2e0ab7d432c9af29fa0f6a042ed",
+                "reference": "51998a174468c2e0ab7d432c9af29fa0f6a042ed",
                 "shasum": ""
             },
             "require": {
@@ -1200,7 +1200,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a configurator Drd+",
-            "time": "2017-07-09 06:59:35"
+            "time": "2017-09-22 17:28:55"
         },
         {
             "name": "drd-plus/dice-rolls",
@@ -1555,12 +1555,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties-by-fate.git",
-                "reference": "b7e2cd524cd55efb7f99c3b2e9ca5290b90d45e7"
+                "reference": "6bbf7f56ce261cd5e67a304cf4764a644c5ecbb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-fate/zipball/b7e2cd524cd55efb7f99c3b2e9ca5290b90d45e7",
-                "reference": "b7e2cd524cd55efb7f99c3b2e9ca5290b90d45e7",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-fate/zipball/6bbf7f56ce261cd5e67a304cf4764a644c5ecbb6",
+                "reference": "6bbf7f56ce261cd5e67a304cf4764a644c5ecbb6",
                 "shasum": ""
             },
             "require": {
@@ -1598,7 +1598,7 @@
                 }
             ],
             "description": "Exceptional properties by choose or fortune for DrD+",
-            "time": "2017-09-24 14:58:18"
+            "time": "2017-09-26 11:57:33"
         },
         {
             "name": "drd-plus/properties-by-levels",
@@ -1606,12 +1606,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties-by-levels.git",
-                "reference": "7b14f481be983ccef9e1cec647611b625be1e618"
+                "reference": "58358ce70c7008e8d338208b286ca7a3025cd9c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-levels/zipball/7b14f481be983ccef9e1cec647611b625be1e618",
-                "reference": "7b14f481be983ccef9e1cec647611b625be1e618",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-levels/zipball/58358ce70c7008e8d338208b286ca7a3025cd9c8",
+                "reference": "58358ce70c7008e8d338208b286ca7a3025cd9c8",
                 "shasum": ""
             },
             "require": {
@@ -1641,7 +1641,7 @@
                 "MIT"
             ],
             "description": "Total properties and by first and next levels of them for Drd+",
-            "time": "2017-07-10 06:29:29"
+            "time": "2017-09-25 14:07:28"
         },
         {
             "name": "drd-plus/races",
@@ -1775,12 +1775,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "5affecd726f6389e07a12c7a3d56e307df79520b"
+                "reference": "de6896eb6f7e6ca3632381e43d3b6610919a998d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/5affecd726f6389e07a12c7a3d56e307df79520b",
-                "reference": "5affecd726f6389e07a12c7a3d56e307df79520b",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/de6896eb6f7e6ca3632381e43d3b6610919a998d",
+                "reference": "de6896eb6f7e6ca3632381e43d3b6610919a998d",
                 "shasum": ""
             },
             "require": {
@@ -1812,7 +1812,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-09-19 14:54:52"
+            "time": "2017-09-27 12:59:21"
         },
         {
             "name": "granam/boolean",
@@ -2103,12 +2103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-scalar.git",
-                "reference": "6424481f838ed9439547a8c603264647dda67bd5"
+                "reference": "ccbd29e3fc296c946ca064573e9b8e6a9baabcd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-scalar/zipball/6424481f838ed9439547a8c603264647dda67bd5",
-                "reference": "6424481f838ed9439547a8c603264647dda67bd5",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-scalar/zipball/ccbd29e3fc296c946ca064573e9b8e6a9baabcd9",
+                "reference": "ccbd29e3fc296c946ca064573e9b8e6a9baabcd9",
                 "shasum": ""
             },
             "require": {
@@ -2144,7 +2144,7 @@
                 "php",
                 "scalar"
             ],
-            "time": "2017-02-20 06:34:34"
+            "time": "2017-09-25 13:48:57"
         },
         {
             "name": "granam/strict-object",
@@ -2203,12 +2203,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-string.git",
-                "reference": "b1bcb24b9151c51a55a1873690d4e26dd50ba7ae"
+                "reference": "374661e87912c63eb025ac244e0d5d333d0ad0ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/b1bcb24b9151c51a55a1873690d4e26dd50ba7ae",
-                "reference": "b1bcb24b9151c51a55a1873690d4e26dd50ba7ae",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/374661e87912c63eb025ac244e0d5d333d0ad0ef",
+                "reference": "374661e87912c63eb025ac244e0d5d333d0ad0ef",
                 "shasum": ""
             },
             "require": {
@@ -2249,7 +2249,7 @@
                 "php",
                 "string"
             ],
-            "time": "2017-02-19 12:22:01"
+            "time": "2017-09-12 16:15:40"
         },
         {
             "name": "granam/tools",

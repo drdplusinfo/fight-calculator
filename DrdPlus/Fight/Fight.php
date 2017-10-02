@@ -75,26 +75,27 @@ class Fight extends StrictObject
         CurrentProperties $currentProperties,
         PreviousValues $historyWithSkillRanks,
         PreviousProperties $previousProperties,
-        NewWeaponsService $newWeaponService
+        CustomWeaponsService $newWeaponService
     )
     {
         $this->currentValues = $currentValues;
         $this->currentProperties = $currentProperties;
         $this->historyWithSkillRanks = $historyWithSkillRanks;
         $this->previousProperties = $previousProperties;
-        $this->registerCustomWeapons($currentValues, $newWeaponService);
+        $this->registerCustomArmaments($currentValues, $newWeaponService);
     }
 
-    private function registerCustomWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    private function registerCustomArmaments(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
     {
         $this->registerCustomMeleeWeapons($currentValues, $newWeaponsService);
         $this->registerCustomRangedWeapons($currentValues, $newWeaponsService);
+        $this->registerCustomBodyArmors($currentValues, $newWeaponsService);
     }
 
-    private function registerCustomMeleeWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    private function registerCustomMeleeWeapons(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
     {
         foreach ($currentValues->getCustomMeleeWeaponsValues() as $customMeleeWeaponsValue) {
-            $newWeaponsService->addNewMeleeWeapon(
+            $newWeaponsService->addCustomMeleeWeapon(
                 $customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_NAME],
                 WeaponCategoryCode::getIt($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY]),
                 Strength::getIt($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_REQUIRED_STRENGTH]),
@@ -113,10 +114,10 @@ class Fight extends StrictObject
         }
     }
 
-    private function registerCustomRangedWeapons(CurrentValues $currentValues, NewWeaponsService $newWeaponsService)
+    private function registerCustomRangedWeapons(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
     {
         foreach ($currentValues->getCustomRangedWeaponsValues() as $customRangedWeaponsValue) {
-            $newWeaponsService->addNewRangedWeapon(
+            $newWeaponsService->addCustomRangedWeapon(
                 $customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_NAME],
                 WeaponCategoryCode::getIt($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_CATEGORY]),
                 Strength::getIt($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_REQUIRED_STRENGTH]),
@@ -135,6 +136,23 @@ class Fight extends StrictObject
                     Tables::getIt()->getWeightTable()
                 ),
                 ToBoolean::toBoolean($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY])
+            );
+        }
+    }
+
+    private function registerCustomBodyArmors(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
+    {
+        foreach ($currentValues->getCustomBodyArmorsValues() as $customBodyArmorsValue) {
+            $newWeaponsService->addCustomBodyArmor(
+                $customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_NAME],
+                Strength::getIt($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH]),
+                ToInteger::toInteger($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_PROTECTION]),
+                new Weight(
+                    $customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_WEIGHT],
+                    Weight::KG,
+                    Tables::getIt()->getWeightTable()
+                ),
+                new PositiveIntegerObject($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON])
             );
         }
     }
@@ -945,12 +963,12 @@ class Fight extends StrictObject
         $weaponCodes = [
             WeaponCategoryCode::AXES => MeleeWeaponCode::getAxeValues(),
             WeaponCategoryCode::KNIVES_AND_DAGGERS => MeleeWeaponCode::getKnifeAndDaggerValues(),
-            WeaponCategoryCode::MACES_AND_CLUBS=> MeleeWeaponCode::getMaceAndClubValues(),
-            WeaponCategoryCode::MORNINGSTARS_AND_MORGENSTERNS=> MeleeWeaponCode::getMorningstarAndMorgensternValues(),
-            WeaponCategoryCode::SABERS_AND_BOWIE_KNIVES=> MeleeWeaponCode::getSaberAndBowieKnifeValues(),
-            WeaponCategoryCode::STAFFS_AND_SPEARS=> MeleeWeaponCode::getStaffAndSpearValues(),
+            WeaponCategoryCode::MACES_AND_CLUBS => MeleeWeaponCode::getMaceAndClubValues(),
+            WeaponCategoryCode::MORNINGSTARS_AND_MORGENSTERNS => MeleeWeaponCode::getMorningstarAndMorgensternValues(),
+            WeaponCategoryCode::SABERS_AND_BOWIE_KNIVES => MeleeWeaponCode::getSaberAndBowieKnifeValues(),
+            WeaponCategoryCode::STAFFS_AND_SPEARS => MeleeWeaponCode::getStaffAndSpearValues(),
             WeaponCategoryCode::SWORDS => MeleeWeaponCode::getSwordValues(),
-            WeaponCategoryCode::VOULGES_AND_TRIDENTS=> MeleeWeaponCode::getVoulgeAndTridentValues(),
+            WeaponCategoryCode::VOULGES_AND_TRIDENTS => MeleeWeaponCode::getVoulgeAndTridentValues(),
             WeaponCategoryCode::UNARMED => MeleeWeaponCode::getUnarmedValues(),
         ];
         foreach ($weaponCodes as &$weaponCodesOfSameCategory) {

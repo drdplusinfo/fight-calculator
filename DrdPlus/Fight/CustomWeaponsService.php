@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Fight;
 
+use DrdPlus\Codes\Armaments\BodyArmorCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
@@ -9,10 +10,11 @@ use DrdPlus\Properties\Base\Strength;
 use DrdPlus\Tables\Measurements\Distance\DistanceBonus;
 use DrdPlus\Tables\Measurements\Weight\Weight;
 use DrdPlus\Tables\Tables;
+use Granam\Integer\PositiveInteger;
 use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
-class NewWeaponsService extends StrictObject
+class CustomWeaponsService extends StrictObject
 {
     /**
      * @param string $name
@@ -26,14 +28,14 @@ class NewWeaponsService extends StrictObject
      * @param Weight $weight
      * @param bool $twoHandedOnly
      * @return bool if a weapon has been added or already exists
-     * @throws Exceptions\NewWeaponNameCanNotBeEmpty
+     * @throws Exceptions\NameOfCustomWeaponNameCanNotBeEmpty
      * @throws \DrdPlus\Codes\Armaments\Exceptions\InvalidWeaponCategoryForNewMeleeWeaponCode
      * @throws \DrdPlus\Codes\Armaments\Exceptions\MeleeWeaponIsAlreadyInDifferentWeaponCategory
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownMeleeWeapon
      * @throws \DrdPlus\Tables\Armaments\Weapons\Exceptions\NewWeaponIsNotOfRequiredType
      * @throws \DrdPlus\Tables\Armaments\Weapons\Exceptions\DifferentWeaponIsUnderSameName
      */
-    public function addNewMeleeWeapon(
+    public function addCustomMeleeWeapon(
         string $name,
         WeaponCategoryCode $meleeWeaponCategoryCode,
         Strength $requiredStrength,
@@ -47,7 +49,7 @@ class NewWeaponsService extends StrictObject
     ): bool
     {
         if ($name === '') {
-            throw new Exceptions\NewWeaponNameCanNotBeEmpty(
+            throw new Exceptions\NameOfCustomWeaponNameCanNotBeEmpty(
                 'Given name for a new melee weapon is empty. Other provided parameters are:'
                 . " weapon category $meleeWeaponCategoryCode, strength $requiredStrength,"
                 . " offensiveness $offensiveness, length $weaponLength, wounds $wounds, wound type $woundTypeCode"
@@ -58,6 +60,7 @@ class NewWeaponsService extends StrictObject
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         MeleeWeaponCode::addNewMeleeWeaponCode($meleeWeaponCodeValue, $meleeWeaponCategoryCode, ['cs' => ['one' => $name]]);
         $meleeWeaponCode = MeleeWeaponCode::getIt($meleeWeaponCodeValue);
+
         return Tables::getIt()->getArmourer()->addNewMeleeWeapon(
             $meleeWeaponCode,
             $meleeWeaponCategoryCode,
@@ -84,14 +87,14 @@ class NewWeaponsService extends StrictObject
      * @param Weight $weight
      * @param bool $twoHandedOnly
      * @return bool if a weapon has been added or already exists
-     * @throws Exceptions\NewWeaponNameCanNotBeEmpty
+     * @throws Exceptions\NameOfCustomWeaponNameCanNotBeEmpty
      * @throws \DrdPlus\Codes\Armaments\Exceptions\InvalidWeaponCategoryForNewRangedWeaponCode
      * @throws \DrdPlus\Codes\Armaments\Exceptions\RangedWeaponIsAlreadyInDifferentWeaponCategory
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownRangedWeapon
      * @throws \DrdPlus\Tables\Armaments\Weapons\Exceptions\NewWeaponIsNotOfRequiredType
      * @throws \DrdPlus\Tables\Armaments\Weapons\Exceptions\DifferentWeaponIsUnderSameName
      */
-    public function addNewRangedWeapon(
+    public function addCustomRangedWeapon(
         string $name,
         WeaponCategoryCode $rangedWeaponCategoryCode,
         Strength $requiredStrength,
@@ -105,7 +108,7 @@ class NewWeaponsService extends StrictObject
     ): bool
     {
         if ($name === '') {
-            throw new Exceptions\NewWeaponNameCanNotBeEmpty(
+            throw new Exceptions\NameOfCustomWeaponNameCanNotBeEmpty(
                 'Given name for a new ranged weapon is empty. Other provided parameters are:'
                 . " weapon category $rangedWeaponCategoryCode, strength $requiredStrength,"
                 . " offensiveness $offensiveness, range $range, wounds $wounds, wound type $woundTypeCode"
@@ -116,6 +119,7 @@ class NewWeaponsService extends StrictObject
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         RangedWeaponCode::addNewRangedWeaponCode($rangedWeaponCodeValue, $rangedWeaponCategoryCode, ['cs' => ['one' => $name]]);
         $rangedWeaponCode = RangedWeaponCode::getIt($rangedWeaponCodeValue);
+
         return Tables::getIt()->getArmourer()->addNewRangedWeapon(
             $rangedWeaponCode,
             $rangedWeaponCategoryCode,
@@ -127,6 +131,44 @@ class NewWeaponsService extends StrictObject
             $cover,
             $weight,
             $twoHandedOnly
+        );
+    }
+
+    /**
+     * @param string $name
+     * @param Strength $requiredStrength
+     * @param int $protection
+     * @param Weight $weight
+     * @param PositiveInteger $roundsToPutOn
+     * @return bool
+     * @throws \DrdPlus\Fight\Exceptions\NameOfCustomBodyArmorCanNotBeEmpty
+     * @throws \DrdPlus\Tables\Armaments\Armors\Exceptions\DifferentBodyArmorIsUnderSameName
+     */
+    public function addCustomBodyArmor(
+        string $name,
+        Strength $requiredStrength,
+        int $protection,
+        Weight $weight,
+        PositiveInteger $roundsToPutOn
+    ): bool
+    {
+        if ($name === '') {
+            throw new Exceptions\NameOfCustomBodyArmorCanNotBeEmpty(
+                'Given name for a custom body armor is empty. Other provided parameters are:'
+                . " required strength $requiredStrength, weight $weight"
+            );
+        }
+        $bodyArmorWeaponValue = StringTools::toConstant($name);
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        BodyArmorCode::addNewBodyArmorCode($bodyArmorWeaponValue, ['cs' => ['one' => $name]]);
+        $bodyArmorWeaponCode = BodyArmorCode::getIt($bodyArmorWeaponValue);
+
+        return Tables::getIt()->getArmourer()->addNewBodyArmor(
+            $bodyArmorWeaponCode,
+            $requiredStrength,
+            $protection,
+            $weight,
+            $roundsToPutOn
         );
     }
 }
