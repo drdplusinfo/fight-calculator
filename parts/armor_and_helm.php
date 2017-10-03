@@ -12,7 +12,8 @@ foreach ($controller->getCurrentValues()->getCustomBodyArmorsValues() as $armorN
         <input type="hidden" name="<?= $typeName ?>[<?= $armorName ?>]" value="<?= $armorValue ?>">
     <?php }
 } ?>
-<div class="block <?php if ($controller->addingNewBodyArmor()) { ?>hidden<?php } ?>" id="chooseBodyArmor">
+<div class="block <?php if ($controller->addingNewBodyArmor() || $controller->addingNewHelm()) { ?>hidden<?php } ?>"
+     id="chooseBodyArmor">
     <div class="panel">
         <a title="Přidat vlastní zbroj"
            href="<?= $controller->getCurrentUrlWithQuery([Controller::ACTION => Controller::ADD_NEW_BODY_ARMOR]) ?>"
