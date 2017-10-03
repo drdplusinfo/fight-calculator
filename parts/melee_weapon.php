@@ -10,7 +10,7 @@ $selectedMeleeWeapon = $controller->getFight()->getCurrentMeleeWeapon();
 $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValue() : null;
 if ($controller->addingNewMeleeWeapon()) { ?>
     <div id="addMeleeWeapon" class="block add">
-        <?php include __DIR__ . '/new_melee_weapon.php' ?>
+        <?php include __DIR__ . '/add_custom_melee_weapon.php' ?>
     </div>
 <?php }
 foreach ($controller->getCurrentValues()->getCustomMeleeWeaponsValues() as $weaponName => $weaponValues) {

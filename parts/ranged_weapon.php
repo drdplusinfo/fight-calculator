@@ -12,7 +12,7 @@ $selectedRangedWeapon = $controller->getFight()->getSelectedRangedWeapon();
 $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getValue() : null;
 if ($controller->addingNewRangedWeapon()) { ?>
     <div id="addRangedWeapon" class="block add">
-        <?php include __DIR__ . '/new_ranged_weapon.php' ?>
+        <?php include __DIR__ . '/add_custom_ranged_weapon.php' ?>
     </div>
 <?php }
 foreach ($controller->getCurrentValues()->getCustomRangedWeaponsValues() as $weaponName => $weaponValues) {

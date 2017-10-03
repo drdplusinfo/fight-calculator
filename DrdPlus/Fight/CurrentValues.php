@@ -30,9 +30,16 @@ class CurrentValues extends StrictObject
     // body armor
     const CUSTOM_BODY_ARMOR_NAME = 'custom_body_armor_name';
     const CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH = 'custom_body_armor_required_strength';
+    const CUSTOM_BODY_ARMOR_RESTRICTION = 'custom_body_armor_restriction';
     const CUSTOM_BODY_ARMOR_PROTECTION = 'custom_body_armor_protection';
     const CUSTOM_BODY_ARMOR_WEIGHT = 'custom_body_armor_weight';
     const CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON = 'custom_body_armor_rounds_to_put_on';
+    // helm
+    const CUSTOM_HELM_NAME = 'custom_helm_name';
+    const CUSTOM_HELM_REQUIRED_STRENGTH = 'custom_helm_required_strength';
+    const CUSTOM_HELM_RESTRICTION = 'custom_helm_restriction';
+    const CUSTOM_HELM_PROTECTION = 'custom_helm_protection';
+    const CUSTOM_HELM_WEIGHT = 'custom_helm_weight';
 
     /** @var array */
     private $valuesFromInput;
@@ -44,6 +51,8 @@ class CurrentValues extends StrictObject
     private $customMeleeWeaponsValues;
     /** @var array */
     private $customBodyArmorsValues;
+    /** @var array */
+    private $customHelmsValues;
 
     /**
      * @param array $valuesFromInput
@@ -194,11 +203,40 @@ class CurrentValues extends StrictObject
             [
                 self::CUSTOM_BODY_ARMOR_NAME,
                 self::CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH,
+                self::CUSTOM_BODY_ARMOR_RESTRICTION,
                 self::CUSTOM_BODY_ARMOR_PROTECTION,
                 self::CUSTOM_BODY_ARMOR_WEIGHT,
                 self::CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON,
             ],
             self::CUSTOM_BODY_ARMOR_NAME,
+            false /* no boolean parameter */
+        );
+    }
+
+    /**
+     * @return array|string[][]
+     */
+    public function getCustomHelmsValues(): array
+    {
+        if ($this->customHelmsValues !== null) {
+            return $this->customHelmsValues;
+        }
+        $this->customHelmsValues = $this->assembleCustomHelmsValues();
+
+        return $this->customHelmsValues;
+    }
+
+    private function assembleCustomHelmsValues(): array
+    {
+        return $this->assembleCustomArmamentsValues(
+            [
+                self::CUSTOM_HELM_NAME,
+                self::CUSTOM_HELM_REQUIRED_STRENGTH,
+                self::CUSTOM_HELM_RESTRICTION,
+                self::CUSTOM_HELM_PROTECTION,
+                self::CUSTOM_HELM_WEIGHT,
+            ],
+            self::CUSTOM_HELM_NAME,
             false /* no boolean parameter */
         );
     }

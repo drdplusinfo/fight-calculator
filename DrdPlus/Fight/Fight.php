@@ -75,7 +75,7 @@ class Fight extends StrictObject
         CurrentProperties $currentProperties,
         PreviousValues $historyWithSkillRanks,
         PreviousProperties $previousProperties,
-        CustomWeaponsService $newWeaponService
+        CustomArmamentsService $newWeaponService
     )
     {
         $this->currentValues = $currentValues;
@@ -85,14 +85,15 @@ class Fight extends StrictObject
         $this->registerCustomArmaments($currentValues, $newWeaponService);
     }
 
-    private function registerCustomArmaments(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
+    private function registerCustomArmaments(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
     {
         $this->registerCustomMeleeWeapons($currentValues, $newWeaponsService);
         $this->registerCustomRangedWeapons($currentValues, $newWeaponsService);
         $this->registerCustomBodyArmors($currentValues, $newWeaponsService);
+        $this->registerCustomHelms($currentValues, $newWeaponsService);
     }
 
-    private function registerCustomMeleeWeapons(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
+    private function registerCustomMeleeWeapons(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
     {
         foreach ($currentValues->getCustomMeleeWeaponsValues() as $customMeleeWeaponsValue) {
             $newWeaponsService->addCustomMeleeWeapon(
@@ -114,7 +115,7 @@ class Fight extends StrictObject
         }
     }
 
-    private function registerCustomRangedWeapons(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
+    private function registerCustomRangedWeapons(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
     {
         foreach ($currentValues->getCustomRangedWeaponsValues() as $customRangedWeaponsValue) {
             $newWeaponsService->addCustomRangedWeapon(
@@ -140,12 +141,13 @@ class Fight extends StrictObject
         }
     }
 
-    private function registerCustomBodyArmors(CurrentValues $currentValues, CustomWeaponsService $newWeaponsService)
+    private function registerCustomBodyArmors(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
     {
         foreach ($currentValues->getCustomBodyArmorsValues() as $customBodyArmorsValue) {
             $newWeaponsService->addCustomBodyArmor(
                 $customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_NAME],
                 Strength::getIt($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH]),
+                ToInteger::toInteger($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_RESTRICTION]),
                 ToInteger::toInteger($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_PROTECTION]),
                 new Weight(
                     $customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_WEIGHT],
@@ -153,6 +155,23 @@ class Fight extends StrictObject
                     Tables::getIt()->getWeightTable()
                 ),
                 new PositiveIntegerObject($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON])
+            );
+        }
+    }
+
+    private function registerCustomHelms(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
+    {
+        foreach ($currentValues->getCustomHelmsValues() as $customHelmsValue) {
+            $newWeaponsService->addCustomHelm(
+                $customHelmsValue[CurrentValues::CUSTOM_HELM_NAME],
+                Strength::getIt($customHelmsValue[CurrentValues::CUSTOM_HELM_REQUIRED_STRENGTH]),
+                ToInteger::toInteger($customHelmsValue[CurrentValues::CUSTOM_HELM_RESTRICTION]),
+                ToInteger::toInteger($customHelmsValue[CurrentValues::CUSTOM_HELM_PROTECTION]),
+                new Weight(
+                    $customHelmsValue[CurrentValues::CUSTOM_HELM_WEIGHT],
+                    Weight::KG,
+                    Tables::getIt()->getWeightTable()
+                )
             );
         }
     }

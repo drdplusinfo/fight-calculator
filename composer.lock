@@ -1775,12 +1775,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "de6896eb6f7e6ca3632381e43d3b6610919a998d"
+                "reference": "6f3a890badc232cddb77e10e9c398a95ec6febdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/de6896eb6f7e6ca3632381e43d3b6610919a998d",
-                "reference": "de6896eb6f7e6ca3632381e43d3b6610919a998d",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/6f3a890badc232cddb77e10e9c398a95ec6febdf",
+                "reference": "6f3a890badc232cddb77e10e9c398a95ec6febdf",
                 "shasum": ""
             },
             "require": {
@@ -1812,7 +1812,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-09-27 12:59:21"
+            "time": "2017-10-02 14:17:20"
         },
         {
             "name": "granam/boolean",

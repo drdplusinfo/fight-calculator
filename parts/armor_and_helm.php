@@ -3,7 +3,7 @@ namespace DrdPlus\Fight;
 /** @var Controller $controller */
 if ($controller->addingNewBodyArmor()) { ?>
     <div id="addBodyArmor" class="block add">
-        <?php include __DIR__ . '/new_body_armor.php' ?>
+        <?php include __DIR__ . '/add_custom_body_armor.php' ?>
     </div>
 <?php }
 foreach ($controller->getCurrentValues()->getCustomBodyArmorsValues() as $armorName => $armorValues) {
@@ -37,20 +37,38 @@ foreach ($controller->getCurrentValues()->getCustomBodyArmorsValues() as $armorN
         <?php } ?>
     </div>
 </div>
-<div class="panel">
-    <label class="block">
-        <select name="<?= Controller::HELM ?>">
-            <?php /** @var array $helm */
-            foreach ($controller->getHelms() as $helm) {
-                $helmCode = $helm['code']; ?>
-                <option value="<?= $helmCode->getValue() ?>"
-                        <?php if ($controller->getFight()->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
-                        if (!$helm['canUseIt']) { ?>disabled<?php } ?>>
-                    <?= $helmCode->translateTo('cs') . ($controller->getFight()->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfHelm($helmCode)) : '') ?>
-                </option>
-            <?php } ?>
-        </select>
-    </label>
+<?php
+if ($controller->addingNewHelm()) { ?>
+    <div id="addHelm" class="block add">
+        <?php include __DIR__ . '/add_custom_helm.php' ?>
+    </div>
+<?php }
+foreach ($controller->getCurrentValues()->getCustomHelmsValues() as $helmName => $helmValues) {
+    /** @var array|string[] $helmValues */
+    foreach ($helmValues as $typeName => $helmValue) { ?>
+        <input type="hidden" name="<?= $typeName ?>[<?= $helmName ?>]" value="<?= $helmValue ?>">
+    <?php }
+} ?>
+<div class="block <?php if ($controller->addingNewBodyArmor() || $controller->addingNewHelm()) { ?>hidden<?php } ?>"
+     id="chooseHelm">
+    <div class="panel">
+        <a title="Přidat vlastní helmu"
+           href="<?= $controller->getCurrentUrlWithQuery([Controller::ACTION => Controller::ADD_NEW_HELM]) ?>"
+           class="button add">+</a>
+        <label>
+            <select name="<?= Controller::HELM ?>">
+                <?php /** @var array $helm */
+                foreach ($controller->getHelms() as $helm) {
+                    $helmCode = $helm['code']; ?>
+                    <option value="<?= $helmCode->getValue() ?>"
+                            <?php if ($controller->getFight()->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
+                            if (!$helm['canUseIt']) { ?>disabled<?php } ?>>
+                        <?= $helmCode->translateTo('cs') . ($controller->getFight()->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfHelm($helmCode)) : '') ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </label>
+    </div>
     <div class="block info-messages">
         <?php foreach ($controller->getMessagesAboutHelms() as $messageAboutHelm) { ?>
             <div class="info-message"><?= $messageAboutHelm ?></div>

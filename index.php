@@ -63,9 +63,9 @@ $controller = new Controller();
             </fieldset>
         </div>
         <div class="panel">
-            <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj</a></h2>
+            <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj a helma</a></h2>
             <fieldset class="panel">
-                <?php include __DIR__ . '/parts/armor.php'; ?>
+                <?php include __DIR__ . '/parts/armor_and_helm.php'; ?>
             </fieldset>
         </div>
         <div class="panel">

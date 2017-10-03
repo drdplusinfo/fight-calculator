@@ -2,6 +2,7 @@
 namespace DrdPlus\Fight;
 
 use DrdPlus\Codes\Armaments\BodyArmorCode;
+use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
@@ -14,7 +15,7 @@ use Granam\Integer\PositiveInteger;
 use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
-class CustomWeaponsService extends StrictObject
+class CustomArmamentsService extends StrictObject
 {
     /**
      * @param string $name
@@ -137,6 +138,7 @@ class CustomWeaponsService extends StrictObject
     /**
      * @param string $name
      * @param Strength $requiredStrength
+     * @param int $restriction
      * @param int $protection
      * @param Weight $weight
      * @param PositiveInteger $roundsToPutOn
@@ -147,6 +149,7 @@ class CustomWeaponsService extends StrictObject
     public function addCustomBodyArmor(
         string $name,
         Strength $requiredStrength,
+        int $restriction,
         int $protection,
         Weight $weight,
         PositiveInteger $roundsToPutOn
@@ -155,7 +158,8 @@ class CustomWeaponsService extends StrictObject
         if ($name === '') {
             throw new Exceptions\NameOfCustomBodyArmorCanNotBeEmpty(
                 'Given name for a custom body armor is empty. Other provided parameters are:'
-                . " required strength $requiredStrength, weight $weight"
+                . " required strength $requiredStrength, restriction $restriction, protection $protection, weight $weight"
+                . ", rounds to put on $roundsToPutOn"
             );
         }
         $bodyArmorWeaponValue = StringTools::toConstant($name);
@@ -166,9 +170,48 @@ class CustomWeaponsService extends StrictObject
         return Tables::getIt()->getArmourer()->addNewBodyArmor(
             $bodyArmorWeaponCode,
             $requiredStrength,
+            $restriction,
             $protection,
             $weight,
             $roundsToPutOn
+        );
+    }
+
+    /**
+     * @param string $name
+     * @param Strength $requiredStrength
+     * @param int $restriction
+     * @param int $protection
+     * @param Weight $weight
+     * @return bool
+     * @throws \DrdPlus\Fight\Exceptions\NameOfCustomHelmCanNotBeEmpty
+     * @throws \DrdPlus\Tables\Armaments\Armors\Exceptions\DifferentBodyArmorIsUnderSameName
+     */
+    public function addCustomHelm(
+        string $name,
+        Strength $requiredStrength,
+        int $restriction,
+        int $protection,
+        Weight $weight
+    ): bool
+    {
+        if ($name === '') {
+            throw new Exceptions\NameOfCustomHelmCanNotBeEmpty(
+                'Given name for a custom helm is empty. Other provided parameters are:'
+                . " required strength $requiredStrength, protection $protection, weight $weight"
+            );
+        }
+        $helmCodeValue = StringTools::toConstant($name);
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        HelmCode::addNewHelmCode($helmCodeValue, ['cs' => ['one' => $name]]);
+        $helmCode = HelmCode::getIt($helmCodeValue);
+
+        return Tables::getIt()->getArmourer()->addNewHelm(
+            $helmCode,
+            $requiredStrength,
+            $restriction,
+            $protection,
+            $weight
         );
     }
 }
