@@ -1012,12 +1012,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-background.git",
-                "reference": "dcd7a06d823fda0978e658d9b0ee83c96e6a91f0"
+                "reference": "b43fd0c575eaed480a7c95c4d5e404f39d29e8fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/dcd7a06d823fda0978e658d9b0ee83c96e6a91f0",
-                "reference": "dcd7a06d823fda0978e658d9b0ee83c96e6a91f0",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/b43fd0c575eaed480a7c95c4d5e404f39d29e8fa",
+                "reference": "b43fd0c575eaed480a7c95c4d5e404f39d29e8fa",
                 "shasum": ""
             },
             "require": {
@@ -1031,7 +1031,7 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "~0.9",
+                "mockery/mockery": "1.0.x-dev",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "project",
@@ -1045,7 +1045,7 @@
                 "MIT"
             ],
             "description": "Background of a person for Drd+",
-            "time": "2017-09-11 13:08:37"
+            "time": "2017-10-05 14:19:11"
         },
         {
             "name": "drd-plus/calculations",
@@ -1095,12 +1095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "6fcc6af1472655e82050bd916bc59033474d5883"
+                "reference": "7024793aade847d92b39bd4a5e2caa3f61928458"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/6fcc6af1472655e82050bd916bc59033474d5883",
-                "reference": "6fcc6af1472655e82050bd916bc59033474d5883",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/7024793aade847d92b39bd4a5e2caa3f61928458",
+                "reference": "7024793aade847d92b39bd4a5e2caa3f61928458",
                 "shasum": ""
             },
             "require": {
@@ -1126,7 +1126,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2017-09-26 11:53:06"
+            "time": "2017-10-05 10:48:08"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1606,12 +1606,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties-by-levels.git",
-                "reference": "58358ce70c7008e8d338208b286ca7a3025cd9c8"
+                "reference": "e35a03e79e95c2d7d65cd6f17151096a8199d85a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-levels/zipball/58358ce70c7008e8d338208b286ca7a3025cd9c8",
-                "reference": "58358ce70c7008e8d338208b286ca7a3025cd9c8",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties-by-levels/zipball/e35a03e79e95c2d7d65cd6f17151096a8199d85a",
+                "reference": "e35a03e79e95c2d7d65cd6f17151096a8199d85a",
                 "shasum": ""
             },
             "require": {
@@ -1641,7 +1641,7 @@
                 "MIT"
             ],
             "description": "Total properties and by first and next levels of them for Drd+",
-            "time": "2017-09-25 14:07:28"
+            "time": "2017-10-03 13:31:16"
         },
         {
             "name": "drd-plus/races",
@@ -1730,12 +1730,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "327856c06bdfc1f4a1ee3e271b210adcb1622749"
+                "reference": "d6fbd9a39fe68736669a31579c9548dd91800599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/327856c06bdfc1f4a1ee3e271b210adcb1622749",
-                "reference": "327856c06bdfc1f4a1ee3e271b210adcb1622749",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/d6fbd9a39fe68736669a31579c9548dd91800599",
+                "reference": "d6fbd9a39fe68736669a31579c9548dd91800599",
                 "shasum": ""
             },
             "require": {
@@ -1767,7 +1767,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-09-13 13:33:35"
+            "time": "2017-10-03 15:00:32"
         },
         {
             "name": "drd-plus/tables",
@@ -1775,12 +1775,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "6f3a890badc232cddb77e10e9c398a95ec6febdf"
+                "reference": "1f6294e8a013d4c0d37e13b0f3f696f551be701c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/6f3a890badc232cddb77e10e9c398a95ec6febdf",
-                "reference": "6f3a890badc232cddb77e10e9c398a95ec6febdf",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/1f6294e8a013d4c0d37e13b0f3f696f551be701c",
+                "reference": "1f6294e8a013d4c0d37e13b0f3f696f551be701c",
                 "shasum": ""
             },
             "require": {
@@ -1812,7 +1812,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-10-02 14:17:20"
+            "time": "2017-10-05 12:02:06"
         },
         {
             "name": "granam/boolean",

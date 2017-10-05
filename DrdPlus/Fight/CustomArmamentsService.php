@@ -62,7 +62,7 @@ class CustomArmamentsService extends StrictObject
         MeleeWeaponCode::addNewMeleeWeaponCode($meleeWeaponCodeValue, $meleeWeaponCategoryCode, ['cs' => ['one' => $name]]);
         $meleeWeaponCode = MeleeWeaponCode::getIt($meleeWeaponCodeValue);
 
-        return Tables::getIt()->getArmourer()->addNewMeleeWeapon(
+        return Tables::getIt()->getArmourer()->addCustomMeleeWeapon(
             $meleeWeaponCode,
             $meleeWeaponCategoryCode,
             $requiredStrength,
@@ -121,7 +121,7 @@ class CustomArmamentsService extends StrictObject
         RangedWeaponCode::addNewRangedWeaponCode($rangedWeaponCodeValue, $rangedWeaponCategoryCode, ['cs' => ['one' => $name]]);
         $rangedWeaponCode = RangedWeaponCode::getIt($rangedWeaponCodeValue);
 
-        return Tables::getIt()->getArmourer()->addNewRangedWeapon(
+        return Tables::getIt()->getArmourer()->addCustomRangedWeapon(
             $rangedWeaponCode,
             $rangedWeaponCategoryCode,
             $requiredStrength,
@@ -167,7 +167,7 @@ class CustomArmamentsService extends StrictObject
         BodyArmorCode::addNewBodyArmorCode($bodyArmorWeaponValue, ['cs' => ['one' => $name]]);
         $bodyArmorWeaponCode = BodyArmorCode::getIt($bodyArmorWeaponValue);
 
-        return Tables::getIt()->getArmourer()->addNewBodyArmor(
+        return Tables::getIt()->getArmourer()->addCustomBodyArmor(
             $bodyArmorWeaponCode,
             $requiredStrength,
             $restriction,
@@ -185,7 +185,7 @@ class CustomArmamentsService extends StrictObject
      * @param Weight $weight
      * @return bool
      * @throws \DrdPlus\Fight\Exceptions\NameOfCustomHelmCanNotBeEmpty
-     * @throws \DrdPlus\Tables\Armaments\Armors\Exceptions\DifferentBodyArmorIsUnderSameName
+     * @throws \DrdPlus\Tables\Armaments\Armors\Exceptions\DifferentHelmIsUnderSameName
      */
     public function addCustomHelm(
         string $name,
@@ -206,7 +206,7 @@ class CustomArmamentsService extends StrictObject
         HelmCode::addNewHelmCode($helmCodeValue, ['cs' => ['one' => $name]]);
         $helmCode = HelmCode::getIt($helmCodeValue);
 
-        return Tables::getIt()->getArmourer()->addNewHelm(
+        return Tables::getIt()->getArmourer()->addCustomHelm(
             $helmCode,
             $requiredStrength,
             $restriction,
