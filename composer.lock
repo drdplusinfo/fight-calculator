@@ -1266,12 +1266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-fight-properties.git",
-                "reference": "8e2b8270815c94e0d7b885196dee392b74a59d73"
+                "reference": "f0072c5939a649ec24b3192ec781957052459ad7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/8e2b8270815c94e0d7b885196dee392b74a59d73",
-                "reference": "8e2b8270815c94e0d7b885196dee392b74a59d73",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-fight-properties/zipball/f0072c5939a649ec24b3192ec781957052459ad7",
+                "reference": "f0072c5939a649ec24b3192ec781957052459ad7",
                 "shasum": ""
             },
             "require": {
@@ -1283,7 +1283,7 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "~0.9",
+                "mockery/mockery": "1.0.x-dev",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "project",
@@ -1297,7 +1297,7 @@
                 "MIT"
             ],
             "description": "Final properties including battle statistics, current afflictions and boosts and by first and next levels of them for Drd+",
-            "time": "2017-08-26 12:06:12"
+            "time": "2017-10-07 14:42:06"
         },
         {
             "name": "drd-plus/health",
@@ -1511,12 +1511,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "adf0495b65d65e9739f223ee6ed6b706ec29d0a1"
+                "reference": "69b9cbc8d3378fb4ee7e4488c49dba7895cb42c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/adf0495b65d65e9739f223ee6ed6b706ec29d0a1",
-                "reference": "adf0495b65d65e9739f223ee6ed6b706ec29d0a1",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/69b9cbc8d3378fb4ee7e4488c49dba7895cb42c2",
+                "reference": "69b9cbc8d3378fb4ee7e4488c49dba7895cb42c2",
                 "shasum": ""
             },
             "require": {
@@ -1533,7 +1533,7 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "~0.9",
+                "mockery/mockery": "1.0.x-dev",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "project",
@@ -1547,7 +1547,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2017-09-24 14:50:58"
+            "time": "2017-10-05 14:24:54"
         },
         {
             "name": "drd-plus/properties-by-fate",
@@ -1730,12 +1730,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-skills.git",
-                "reference": "d6fbd9a39fe68736669a31579c9548dd91800599"
+                "reference": "4ce9158a7aff7a96cf33c4e1bf1cd4ea3691492b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/d6fbd9a39fe68736669a31579c9548dd91800599",
-                "reference": "d6fbd9a39fe68736669a31579c9548dd91800599",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-skills/zipball/4ce9158a7aff7a96cf33c4e1bf1cd4ea3691492b",
+                "reference": "4ce9158a7aff7a96cf33c4e1bf1cd4ea3691492b",
                 "shasum": ""
             },
             "require": {
@@ -1767,7 +1767,7 @@
                 "MIT"
             ],
             "description": "Skills for Drd+",
-            "time": "2017-10-03 15:00:32"
+            "time": "2017-10-07 14:33:09"
         },
         {
             "name": "drd-plus/tables",
@@ -1775,12 +1775,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "1f6294e8a013d4c0d37e13b0f3f696f551be701c"
+                "reference": "72b71dcadaa2e5579f55c305b6f4d6e48f597c6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/1f6294e8a013d4c0d37e13b0f3f696f551be701c",
-                "reference": "1f6294e8a013d4c0d37e13b0f3f696f551be701c",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/72b71dcadaa2e5579f55c305b6f4d6e48f597c6e",
+                "reference": "72b71dcadaa2e5579f55c305b6f4d6e48f597c6e",
                 "shasum": ""
             },
             "require": {
@@ -1798,7 +1798,7 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "~0.9",
+                "mockery/mockery": "1.0.x-dev",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "project",
@@ -1812,7 +1812,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2017-10-05 12:02:06"
+            "time": "2017-10-07 13:24:03"
         },
         {
             "name": "granam/boolean",
@@ -2488,16 +2488,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.9",
+            "version": "v3.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a1e1b01293a090cb9ae2ddd221a3251a4a7e4abf"
+                "reference": "116bc56e45a8e5572e51eb43ab58c769a352366c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a1e1b01293a090cb9ae2ddd221a3251a4a7e4abf",
-                "reference": "a1e1b01293a090cb9ae2ddd221a3251a4a7e4abf",
+                "url": "https://api.github.com/repos/symfony/console/zipball/116bc56e45a8e5572e51eb43ab58c769a352366c",
+                "reference": "116bc56e45a8e5572e51eb43ab58c769a352366c",
                 "shasum": ""
             },
             "require": {
@@ -2552,20 +2552,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-09-06T16:40:18+00:00"
+            "time": "2017-10-02T06:42:24+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.9",
+            "version": "v3.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "8beb24eec70b345c313640962df933499373a944"
+                "reference": "eb95d9ce8f18dcc1b3dfff00cb624c402be78ffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/8beb24eec70b345c313640962df933499373a944",
-                "reference": "8beb24eec70b345c313640962df933499373a944",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/eb95d9ce8f18dcc1b3dfff00cb624c402be78ffd",
+                "reference": "eb95d9ce8f18dcc1b3dfff00cb624c402be78ffd",
                 "shasum": ""
             },
             "require": {
@@ -2608,7 +2608,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-09-01T13:23:39+00:00"
+            "time": "2017-10-02T06:42:24+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3467,16 +3467,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.3.1",
+            "version": "6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c0ff817b36a827e64bf5f57bc72278150cf30a77"
+                "reference": "a1bcaca096998de32c29535fdd2dea0c475e8f61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c0ff817b36a827e64bf5f57bc72278150cf30a77",
-                "reference": "c0ff817b36a827e64bf5f57bc72278150cf30a77",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1bcaca096998de32c29535fdd2dea0c475e8f61",
+                "reference": "a1bcaca096998de32c29535fdd2dea0c475e8f61",
                 "shasum": ""
             },
             "require": {
@@ -3521,7 +3521,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.3.x-dev"
+                    "dev-master": "6.4.x-dev"
                 }
             },
             "autoload": {
@@ -3547,7 +3547,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-09-24T07:25:54+00:00"
+            "time": "2017-10-06T03:14:57+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
