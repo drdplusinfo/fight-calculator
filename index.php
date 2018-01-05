@@ -15,7 +15,7 @@ $controller = new Controller();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/generic/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/generic/main.css" rel="stylesheet" type="text/css">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/fight.css" rel="stylesheet" type="text/css">
     <link href="css/generic/socials.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/generic/main.js"></script>
     <script type="text/javascript" src="js/generic/facebook.js" async></script>
