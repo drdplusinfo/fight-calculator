@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 /** @var Controller $controller */
 ?>

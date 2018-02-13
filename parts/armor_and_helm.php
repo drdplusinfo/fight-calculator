@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 /** @var Controller $controller */
 if ($controller->addingNewBodyArmor()) { ?>
     <div id="addBodyArmor" class="block add">

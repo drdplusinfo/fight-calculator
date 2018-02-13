@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Codes\Armaments\BodyArmorCode;
 use DrdPlus\Codes\Armaments\HelmCode;
@@ -143,7 +143,7 @@ class CustomArmamentsService extends StrictObject
      * @param Weight $weight
      * @param PositiveInteger $roundsToPutOn
      * @return bool
-     * @throws \DrdPlus\Fight\Exceptions\NameOfCustomBodyArmorCanNotBeEmpty
+     * @throws \DrdPlus\Calculators\Fight\Exceptions\NameOfCustomBodyArmorCanNotBeEmpty
      * @throws \DrdPlus\Tables\Armaments\Armors\Exceptions\DifferentBodyArmorIsUnderSameName
      */
     public function addCustomBodyArmor(
@@ -184,7 +184,7 @@ class CustomArmamentsService extends StrictObject
      * @param int $protection
      * @param Weight $weight
      * @return bool
-     * @throws \DrdPlus\Fight\Exceptions\NameOfCustomHelmCanNotBeEmpty
+     * @throws \DrdPlus\Calculators\Fight\Exceptions\NameOfCustomHelmCanNotBeEmpty
      * @throws \DrdPlus\Tables\Armaments\Armors\Exceptions\DifferentHelmIsUnderSameName
      */
     public function addCustomHelm(

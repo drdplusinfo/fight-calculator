@@ -1,7 +1,7 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
-/** @var \DrdPlus\Fight\Controller $controller */
+/** @var \DrdPlus\Calculators\Fight\Controller $controller */
 ?>
 <label>Název <input type="text" name="<?= CurrentValues::CUSTOM_BODY_ARMOR_NAME ?>[0]"
                     required="required"></label>

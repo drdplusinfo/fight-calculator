@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Properties\Base\Agility;
 use DrdPlus\Properties\Base\Charisma;

@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Background\BackgroundParts\Ancestry;
 use DrdPlus\Background\BackgroundParts\SkillPointsFromBackground;
@@ -85,7 +85,7 @@ class Fight extends StrictObject
         $this->registerCustomArmaments($currentValues, $newWeaponService);
     }
 
-    private function registerCustomArmaments(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
+    private function registerCustomArmaments(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService): void
     {
         $this->registerCustomMeleeWeapons($currentValues, $newWeaponsService);
         $this->registerCustomRangedWeapons($currentValues, $newWeaponsService);
@@ -93,9 +93,10 @@ class Fight extends StrictObject
         $this->registerCustomHelms($currentValues, $newWeaponsService);
     }
 
-    private function registerCustomMeleeWeapons(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
+    private function registerCustomMeleeWeapons(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService): void
     {
         foreach ($currentValues->getCustomMeleeWeaponsValues() as $customMeleeWeaponsValue) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $newWeaponsService->addCustomMeleeWeapon(
                 $customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_NAME],
                 WeaponCategoryCode::getIt($customMeleeWeaponsValue[CurrentValues::CUSTOM_MELEE_WEAPON_CATEGORY]),
@@ -115,9 +116,10 @@ class Fight extends StrictObject
         }
     }
 
-    private function registerCustomRangedWeapons(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
+    private function registerCustomRangedWeapons(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService): void
     {
         foreach ($currentValues->getCustomRangedWeaponsValues() as $customRangedWeaponsValue) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $newWeaponsService->addCustomRangedWeapon(
                 $customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_NAME],
                 WeaponCategoryCode::getIt($customRangedWeaponsValue[CurrentValues::CUSTOM_RANGED_WEAPON_CATEGORY]),
@@ -141,9 +143,10 @@ class Fight extends StrictObject
         }
     }
 
-    private function registerCustomBodyArmors(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
+    private function registerCustomBodyArmors(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService): void
     {
         foreach ($currentValues->getCustomBodyArmorsValues() as $customBodyArmorsValue) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $newWeaponsService->addCustomBodyArmor(
                 $customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_NAME],
                 Strength::getIt($customBodyArmorsValue[CurrentValues::CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH]),
@@ -159,9 +162,10 @@ class Fight extends StrictObject
         }
     }
 
-    private function registerCustomHelms(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService)
+    private function registerCustomHelms(CurrentValues $currentValues, CustomArmamentsService $newWeaponsService): void
     {
         foreach ($currentValues->getCustomHelmsValues() as $customHelmsValue) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $newWeaponsService->addCustomHelm(
                 $customHelmsValue[CurrentValues::CUSTOM_HELM_NAME],
                 Strength::getIt($customHelmsValue[CurrentValues::CUSTOM_HELM_REQUIRED_STRENGTH]),
@@ -304,6 +308,7 @@ class Fight extends StrictObject
         int $zoologySkillRank
     ): FightProperties
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return new FightProperties(
             new BodyPropertiesForFight(
                 $strength,
@@ -352,6 +357,7 @@ class Fight extends StrictObject
     ): Skills
     {
         $professionFirstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($professionCode));
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         $skills = Skills::createSkills(
             new ProfessionLevels(
                 ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
@@ -367,6 +373,7 @@ class Fight extends StrictObject
             new CombinedSkills($professionFirstLevel),
             Tables::getIt()
         );
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         $this->addSkillWithWeapon(
             $skillWithWeapon,
             $skillRankWithWeapon,
@@ -376,6 +383,7 @@ class Fight extends StrictObject
         );
 
         if ($skillRankWithArmor > 0) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
@@ -383,10 +391,12 @@ class Fight extends StrictObject
             );
             $armorWearing = $skills->getPhysicalSkills()->getArmorWearing();
             while ($skillRankWithArmor-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $armorWearing->increaseSkillRank($physicalSkillPoint);
             }
         }
         if ($shieldUsageSkillRank > 0) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
@@ -394,10 +404,12 @@ class Fight extends StrictObject
             );
             $shieldUsage = $skills->getPhysicalSkills()->getShieldUsage();
             while ($shieldUsageSkillRank-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $shieldUsage->increaseSkillRank($physicalSkillPoint);
             }
         }
         if ($ridingSkillRank > 0) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
@@ -405,10 +417,12 @@ class Fight extends StrictObject
             );
             $riding = $skills->getPhysicalSkills()->getRiding();
             while ($ridingSkillRank-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $riding->increaseSkillRank($physicalSkillPoint);
             }
         }
         if ($zoologySkillRank > 0) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
@@ -416,6 +430,7 @@ class Fight extends StrictObject
             );
             $zoology = $skills->getPsychicalSkills()->getZoology();
             while ($zoologySkillRank-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $zoology->increaseSkillRank($psychicalSkillPoint);
             }
         }
@@ -429,51 +444,60 @@ class Fight extends StrictObject
         Skills $skills,
         ProfessionFirstLevel $professionFirstLevel,
         SkillPointsFromBackground $skillPointsFromBackground
-    )
+    ): void
     {
         if ($skillRankWithWeapon === 0) {
             return;
         }
-        if (in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
+        if (\in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var PhysicalSkill $skill */
             $skill = $skills->getPhysicalSkills()->$getSkill();
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
                 Tables::getIt()
             );
             while ($skillRankWithWeapon-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $skill->increaseSkillRank($physicalSkillPoint);
             }
 
             return;
         }
-        if (in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
+        if (\in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var PsychicalSkill $skill */
             $skill = $skills->getPsychicalSkills()->$getSkill();
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
                 Tables::getIt()
             );
             while ($skillRankWithWeapon-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $skill->increaseSkillRank($physicalSkillPoint);
             }
 
             return;
         }
-        if (in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
+        if (\in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var CombinedSkill $skill */
             $skill = $skills->getCombinedSkills()->$getSkill();
+            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $combinedSkillPoint = CombinedSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
                 Tables::getIt()
             );
             while ($skillRankWithWeapon-- > 0) {
+                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $skill->increaseSkillRank($combinedSkillPoint);
             }
 
@@ -764,6 +788,7 @@ class Fight extends StrictObject
 
     private function canUseShield(ShieldCode $shieldCode, ItemHoldingCode $itemHoldingCode): bool
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return $this->canUseArmament(
             $shieldCode,
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
@@ -836,6 +861,7 @@ class Fight extends StrictObject
 
     private function canUseArmament(ArmamentCode $armamentCode, Strength $strengthForArmament): bool
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return Tables::getIt()->getArmourer()
             ->canUseArmament(
                 $armamentCode,
@@ -846,6 +872,7 @@ class Fight extends StrictObject
 
     private function couldUseWeaponlike(WeaponlikeCode $weaponlikeCode, ItemHoldingCode $itemHoldingCode): bool
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return $this->couldUseArmament(
             $weaponlikeCode,
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
@@ -858,6 +885,7 @@ class Fight extends StrictObject
 
     private function couldUseArmament(ArmamentCode $armamentCode, Strength $strengthForArmament): bool
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return Tables::getIt()->getArmourer()
             ->canUseArmament(
                 $armamentCode,
@@ -911,6 +939,7 @@ class Fight extends StrictObject
 
     private function couldUseShield(ShieldCode $shieldCode, ItemHoldingCode $itemHoldingCode): bool
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return $this->canUseArmament(
             $shieldCode,
             Tables::getIt()->getArmourer()->getStrengthForWeaponOrShield(
@@ -1317,7 +1346,7 @@ class Fight extends StrictObject
         return array_filter($fightWith, function (string $skillName) use ($categoryNames) {
             $categoryFromSkill = str_replace(['fight_with_', 'fight_' /*without weapon */], '', $skillName);
 
-            return in_array($categoryFromSkill, $categoryNames, true);
+            return \in_array($categoryFromSkill, $categoryNames, true);
         });
     }
 
@@ -1332,14 +1361,14 @@ class Fight extends StrictObject
             return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED);
         }
 
-        if (in_array($skillName, PhysicalSkillCode::getPossibleValues(), true)) {
+        if (\in_array($skillName, PhysicalSkillCode::getPossibleValues(), true)) {
             return PhysicalSkillCode::getIt($skillName);
         }
 
-        if (in_array($skillName, PsychicalSkillCode::getPossibleValues(), true)) {
+        if (\in_array($skillName, PsychicalSkillCode::getPossibleValues(), true)) {
             return PsychicalSkillCode::getIt($skillName);
         }
-        if (in_array($skillName, CombinedSkillCode::getPossibleValues(), true)) {
+        if (\in_array($skillName, CombinedSkillCode::getPossibleValues(), true)) {
             return CombinedSkillCode::getIt($skillName);
         }
 

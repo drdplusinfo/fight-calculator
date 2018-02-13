@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
@@ -13,42 +13,42 @@ use Granam\Integer\Tools\ToInteger;
 
 class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 {
-    const MELEE_WEAPON = 'melee_weapon';
-    const RANGED_WEAPON = 'ranged_weapon';
-    const STRENGTH = PropertyCode::STRENGTH;
-    const AGILITY = PropertyCode::AGILITY;
-    const KNACK = PropertyCode::KNACK;
-    const WILL = PropertyCode::WILL;
-    const INTELLIGENCE = PropertyCode::INTELLIGENCE;
-    const CHARISMA = PropertyCode::CHARISMA;
-    const SIZE = PropertyCode::SIZE;
-    const HEIGHT_IN_CM = PropertyCode::HEIGHT_IN_CM;
-    const MELEE_WEAPON_HOLDING = 'melee_weapon_holding';
-    const RANGED_WEAPON_HOLDING = 'ranged_weapon_holding';
-    const PROFESSION = 'profession';
-    const MELEE_FIGHT_SKILL = 'melee_fight_skill';
-    const MELEE_FIGHT_SKILL_RANK = 'melee_fight_skill_rank';
-    const RANGED_FIGHT_SKILL = 'ranged_fight_skill';
-    const RANGED_FIGHT_SKILL_RANK = 'ranged_fight_skill_rank';
-    const SHIELD = 'shield';
-    const SHIELD_USAGE_SKILL_RANK = 'shield_usage_skill_rank';
-    const FIGHT_WITH_SHIELDS_SKILL_RANK = 'fight_with_shields_skill_rank';
-    const BODY_ARMOR = 'body_armor';
-    const ARMOR_SKILL_VALUE = 'armor_skill_value';
-    const HELM = 'helm';
-    const ON_HORSEBACK = 'on_horseback';
-    const RIDING_SKILL_RANK = 'riding_skill_rank';
-    const FIGHT_FREE_WILL_ANIMAL = 'fight_free_will_animal';
-    const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
-    const SCROLL_FROM_TOP = 'scroll_from_top';
-    const RANGED_TARGET_DISTANCE = 'ranged_target_distance';
-    const RANGED_TARGET_SIZE = 'ranged_target_size';
+    public const MELEE_WEAPON = 'melee_weapon';
+    public const RANGED_WEAPON = 'ranged_weapon';
+    public const STRENGTH = PropertyCode::STRENGTH;
+    public const AGILITY = PropertyCode::AGILITY;
+    public const KNACK = PropertyCode::KNACK;
+    public const WILL = PropertyCode::WILL;
+    public const INTELLIGENCE = PropertyCode::INTELLIGENCE;
+    public const CHARISMA = PropertyCode::CHARISMA;
+    public const SIZE = PropertyCode::SIZE;
+    public const HEIGHT_IN_CM = PropertyCode::HEIGHT_IN_CM;
+    public const MELEE_WEAPON_HOLDING = 'melee_weapon_holding';
+    public const RANGED_WEAPON_HOLDING = 'ranged_weapon_holding';
+    public const PROFESSION = 'profession';
+    public const MELEE_FIGHT_SKILL = 'melee_fight_skill';
+    public const MELEE_FIGHT_SKILL_RANK = 'melee_fight_skill_rank';
+    public const RANGED_FIGHT_SKILL = 'ranged_fight_skill';
+    public const RANGED_FIGHT_SKILL_RANK = 'ranged_fight_skill_rank';
+    public const SHIELD = 'shield';
+    public const SHIELD_USAGE_SKILL_RANK = 'shield_usage_skill_rank';
+    public const FIGHT_WITH_SHIELDS_SKILL_RANK = 'fight_with_shields_skill_rank';
+    public const BODY_ARMOR = 'body_armor';
+    public const ARMOR_SKILL_VALUE = 'armor_skill_value';
+    public const HELM = 'helm';
+    public const ON_HORSEBACK = 'on_horseback';
+    public const RIDING_SKILL_RANK = 'riding_skill_rank';
+    public const FIGHT_FREE_WILL_ANIMAL = 'fight_free_will_animal';
+    public const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
+    public const SCROLL_FROM_TOP = 'scroll_from_top';
+    public const RANGED_TARGET_DISTANCE = 'ranged_target_distance';
+    public const RANGED_TARGET_SIZE = 'ranged_target_size';
     // special actions
-    const ACTION = 'action';
-    const ADD_NEW_MELEE_WEAPON = 'add_new_melee_weapon';
-    const ADD_NEW_RANGED_WEAPON = 'add_new_ranged_weapon';
-    const ADD_NEW_BODY_ARMOR = 'add_new_body_armor';
-    const ADD_NEW_HELM = 'add_new_helm';
+    public const ACTION = 'action';
+    public const ADD_NEW_MELEE_WEAPON = 'add_new_melee_weapon';
+    public const ADD_NEW_RANGED_WEAPON = 'add_new_ranged_weapon';
+    public const ADD_NEW_BODY_ARMOR = 'add_new_body_armor';
+    public const ADD_NEW_HELM = 'add_new_helm';
 
     /** @var CurrentValues */
     private $currentValues;
@@ -350,7 +350,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         }
         $queryParts = [];
         foreach ($parameters as $name => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 /** @var array $value */
                 foreach ($value as $index => $item) {
                     $queryParts[] = urlencode("{$name}[{$index}]") . '=' . urlencode($item);

@@ -1,10 +1,10 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Codes\Body\WoundTypeCode;
 use \DrdPlus\Codes\Armaments\WeaponCategoryCode;
 
-/** @var \DrdPlus\Fight\Controller $controller */
+/** @var \DrdPlus\Calculators\Fight\Controller $controller */
 
 ?>
 <label>Název <input type="text" name="<?= CurrentValues::CUSTOM_RANGED_WEAPON_NAME ?>[0]"

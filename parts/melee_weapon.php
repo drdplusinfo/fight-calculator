@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;

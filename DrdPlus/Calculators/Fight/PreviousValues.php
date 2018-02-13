@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Configurator\Skeleton\Cookie;
 use DrdPlus\Configurator\Skeleton\History;

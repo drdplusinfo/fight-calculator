@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Fight;
+namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Codes\Units\DistanceUnitCode;
 use DrdPlus\FightProperties\FightProperties;
