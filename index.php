@@ -16,7 +16,7 @@ $controller = new Controller();
     <link href="css/generic/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/generic/main.css" rel="stylesheet" type="text/css">
     <link href="css/fight.css" rel="stylesheet" type="text/css">
-    <link href="css/generic/socials.css" rel="stylesheet" type="text/css">
+    <link href="css/generic/issues.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/generic/main.js"></script>
     <noscript>
         <link rel="stylesheet" type="text/css" href="css/generic/no_script.css">
@@ -81,11 +81,13 @@ $controller = new Controller();
         </div>
     </div>
 </form>
+
 <div class="block issues">
-    <a href="https://rpgforum.cz/forum/viewtopic.php?f=238&t=14870">Máš nápad 😀? Vidíš chybu 😱?️ Sem s tím!</a>
-</div>
-<div class="block">
-    <a href="https://github.com/jaroslavtyc/drd-plus-fight/"
+    <a href="https://rpgforum.cz/forum/viewtopic.php?f=238&t=14870">
+        <img src="images/generic/rpgforum-ico.png">
+        Máš nápad 😀? Vidíš chybu 😱?️ Sem s tím!
+    </a>
+    <a class="float-right" href="https://github.com/jaroslavtyc/drd-plus-fight/"
        title="Fork me on GitHub"><img class="github" src="/images/generic/GitHub-Mark-64px.png"></a>
 </div>
 </body>
