@@ -83,7 +83,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             ],
             $this->shouldDeleteHistory(),
             $_GET, // values to remember
-            !empty($_GET[self::REMEMBER_HISTORY]), // should remember given values
+            !empty($_GET[self::REMEMBER_CURRENT]), // should remember given values
             $cookiesPostfix,
             $cookiesTtl
         );
@@ -128,7 +128,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     public function shouldRemember(): bool
     {
-        return $this->getHistory()->shouldRemember();
+        return $this->getHistory()->shouldRememberCurrent();
     }
 
     public function getScrollFromTop(): int
@@ -205,7 +205,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
 
     private function arrayToJson(array $values): string
     {
-        return json_encode($values, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+        return \json_encode($values, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
     }
 
     public function getHistoryRangedSkillRanksJson(): string
@@ -281,7 +281,7 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
         return $helmCodes;
     }
 
-    private function addUnusableMessage(int $countOfUnusable, string $key, string $single, string $few, string $many)
+    private function addUnusableMessage(int $countOfUnusable, string $key, string $single, string $few, string $many): void
     {
         if ($countOfUnusable > 0) {
             $word = $single;
@@ -353,15 +353,15 @@ class Controller extends \DrdPlus\Configurator\Skeleton\Controller
             if (\is_array($value)) {
                 /** @var array $value */
                 foreach ($value as $index => $item) {
-                    $queryParts[] = urlencode("{$name}[{$index}]") . '=' . urlencode($item);
+                    $queryParts[] = \urlencode("{$name}[{$index}]") . '=' . \urlencode($item);
                 }
             } else {
-                $queryParts[] = urlencode($name) . '=' . urlencode($value);
+                $queryParts[] = \urlencode($name) . '=' . \urlencode($value);
             }
         }
         $query = '';
         if ($queryParts) {
-            $query = '?' . implode('&', $queryParts);
+            $query = '?' . \implode('&', $queryParts);
         }
 
         return $query;

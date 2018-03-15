@@ -6,7 +6,7 @@ use DrdPlus\Configurator\Skeleton\History;
 
 class PreviousValues extends History
 {
-    const RANKS_HISTORY = 'ranks_history';
+    private const RANKS_HISTORY = 'ranks_history';
 
     /** @var array|string[] */
     private $skillToSkillRankNames;
@@ -15,7 +15,7 @@ class PreviousValues extends History
      * @param array|string[] $skillNamesToSkillRankNames
      * @param bool $deleteFightHistory
      * @param array $valuesToRemember
-     * @param bool $remember
+     * @param bool $rememberCurrent
      * @param string $cookiesPostfix
      * @param int $cookiesTtl = null
      */
@@ -23,13 +23,13 @@ class PreviousValues extends History
         array $skillNamesToSkillRankNames,
         bool $deleteFightHistory,
         array $valuesToRemember,
-        bool $remember,
+        bool $rememberCurrent,
         string $cookiesPostfix,
         int $cookiesTtl = null
     )
     {
         $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
-        parent::__construct($valuesToRemember, $deleteFightHistory, $remember, $cookiesPostfix, $cookiesTtl);
+        parent::__construct($deleteFightHistory, $valuesToRemember, $rememberCurrent, $cookiesPostfix, $cookiesTtl);
     }
 
     protected function remember(array $valuesToRemember, int $cookiesTtl): void
@@ -49,20 +49,20 @@ class PreviousValues extends History
         $skillsToSave = [];
         foreach ($this->skillToSkillRankNames as $skillName => $rankName
         ) {
-            if (array_key_exists($rankName, $request) && !empty($request[$skillName])) {
+            if (\array_key_exists($rankName, $request) && !empty($request[$skillName])) {
                 // like melee_fight_skill => fight_unarmed => 0
                 $skillsToSave[$rankName][$request[$skillName]] = $request[$rankName];
             }
         }
-        if (count($skillsToSave) === 0) {
+        if (\count($skillsToSave) === 0) {
             return;
         }
         $ranksHistory = $this->getRanksHistory();
         foreach ($skillsToSave as $rankName => $rankValues) {
             // changed values are replaced because of string keys
-            $ranksHistory[$rankName] = array_merge($ranksHistory[$rankName] ?? [], $rankValues);
+            $ranksHistory[$rankName] = \array_merge($ranksHistory[$rankName] ?? [], $rankValues);
         }
-        $serialized = serialize($ranksHistory);
+        $serialized = \serialize($ranksHistory);
         Cookie::setCookie(self::RANKS_HISTORY, $serialized);
     }
 
@@ -72,7 +72,7 @@ class PreviousValues extends History
     private function getRanksHistory(): array
     {
         if ($this->ranksHistory === null) {
-            $this->ranksHistory = unserialize($_COOKIE[self::RANKS_HISTORY] ?? '', ['allowed_classes' => false]) ?: [];
+            $this->ranksHistory = \unserialize($_COOKIE[self::RANKS_HISTORY] ?? '', ['allowed_classes' => false]) ?: [];
         }
 
         return $this->ranksHistory;

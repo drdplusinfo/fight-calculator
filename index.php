@@ -17,9 +17,8 @@ $controller = new Controller();
     <link href="css/generic/main.css" rel="stylesheet" type="text/css">
     <link href="css/fight.css" rel="stylesheet" type="text/css">
     <link href="css/generic/issues.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/generic/main.js"></script>
     <noscript>
-        <link rel="stylesheet" type="text/css" href="css/generic/no_script.css">
+        <link href="css/generic/no_script.css" rel="stylesheet" type="text/css">
     </noscript>
 </head>
 <body>
@@ -35,7 +34,7 @@ $controller = new Controller();
     <input type="hidden" name="<?= $controller::SCROLL_FROM_TOP ?>" id="scrollFromTop"
            value="<?= $controller->getScrollFromTop() ?>">
     <div class="block remember">
-        <label><input type="checkbox" name="<?= $controller::REMEMBER_HISTORY ?>" value="1"
+        <label><input type="checkbox" name="<?= $controller::REMEMBER_CURRENT ?>" value="1"
                       <?php if ($controller->shouldRemember()) { ?>checked="checked"<?php } ?>>
             Pamatovat <span class="hint">(i při zavření prohlížeče)</span></label>
     </div>
@@ -90,5 +89,6 @@ $controller = new Controller();
     <a class="float-right" href="https://github.com/jaroslavtyc/drd-plus-fight/"
        title="Fork me on GitHub"><img class="github" src="/images/generic/GitHub-Mark-64px.png"></a>
 </div>
+<script type="text/javascript" src="js/generic/main.js"></script>
 </body>
 </html>
