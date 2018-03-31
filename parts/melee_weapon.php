@@ -38,7 +38,7 @@ foreach ($controller->getCurrentValues()->getCustomMeleeWeaponsValues() as $weap
                             <option value="<?= $meleeWeaponCode->getValue() ?>"
                                     <?php if ($selectedMeleeWeaponValue === $meleeWeaponCode->getValue()) { ?>selected<?php }
                                     if (!$meleeWeapon['canUseIt']) { ?>disabled<?php } ?>>
-                                <?= $meleeWeaponCode->translateTo('cs') ?>
+                                <?= (!$meleeWeapon['canUseIt'] ? '💪 ' : '') . $meleeWeaponCode->translateTo('cs') ?>
                             </option>
                         <?php } ?>
                     </optgroup>

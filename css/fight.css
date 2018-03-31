@@ -8,6 +8,11 @@ input, select, button {
     padding: 0;
 }
 
+select option:disabled {
+    color: gray;
+    font-style: italic;
+}
+
 input[type=number] {
     width: 5em;
 }

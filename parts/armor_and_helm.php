@@ -26,7 +26,7 @@ foreach ($controller->getCurrentValues()->getCustomBodyArmorsValues() as $armorN
                     <option value="<?= $bodyArmorCode->getValue() ?>"
                             <?php if ($controller->getFight()->getSelectedBodyArmor()->getValue() === $bodyArmorCode->getValue()) { ?>selected<?php }
                             if (!$bodyArmor['canUseIt']) { ?>disabled<?php } ?>>
-                        <?= $bodyArmorCode->translateTo('cs') . ($controller->getFight()->getProtectionOfBodyArmor($bodyArmorCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfBodyArmor($bodyArmorCode)) : '') ?>
+                        <?= (!$bodyArmor['canUseIt'] ? '💪 ' : '') . $bodyArmorCode->translateTo('cs') . ($controller->getFight()->getProtectionOfBodyArmor($bodyArmorCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfBodyArmor($bodyArmorCode)) : '') ?>
                     </option>
                 <?php } ?>
             </select>
@@ -64,7 +64,7 @@ foreach ($controller->getCurrentValues()->getCustomHelmsValues() as $helmName =>
                     <option value="<?= $helmCode->getValue() ?>"
                             <?php if ($controller->getFight()->getSelectedHelm()->getValue() === $helmCode->getValue()) { ?>selected<?php }
                             if (!$helm['canUseIt']) { ?>disabled<?php } ?>>
-                        <?= $helmCode->translateTo('cs') . ($controller->getFight()->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfHelm($helmCode)) : '') ?>
+                        <?= (!$helm['canUseIt'] ? '💪 ' : '') . $helmCode->translateTo('cs') . ($controller->getFight()->getProtectionOfHelm($helmCode) > 0 ? (' +' . $controller->getFight()->getProtectionOfHelm($helmCode)) : '') ?>
                     </option>
                 <?php } ?>
             </select>

@@ -40,7 +40,7 @@ foreach ($controller->getCurrentValues()->getCustomRangedWeaponsValues() as $wea
                             <option value="<?= $rangedWeaponCode->getValue() ?>"
                                     <?php if ($selectedRangedWeaponValue && $selectedRangedWeaponValue === $rangedWeaponCode->getValue()) { ?>selected<?php }
                                     if (!$rangedWeapon['canUseIt']) { ?>disabled<?php } ?>>
-                                <?= $rangedWeaponCode->translateTo('cs') ?>
+                                <?= (!$rangedWeapon['canUseIt'] ? '💪 ' : '') . $rangedWeaponCode->translateTo('cs') ?>
                             </option>
                         <?php } ?>
                     </optgroup>
