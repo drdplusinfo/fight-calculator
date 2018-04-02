@@ -16,8 +16,10 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
         </label>
     </div>
     <div class="block">
-        Dovednost <span
-                class="keyword"><?= PhysicalSkillCode::getIt(PhysicalSkillCode::RIDING)->translateTo('cs') ?></span>
+        Dovednost <span class="keyword">
+            <a href="https://pph.drdplus.info/#jezdectvi" target="_blank">
+                <?= PhysicalSkillCode::getIt(PhysicalSkillCode::RIDING)->translateTo('cs') ?></a>
+        </span>
         <label>na stupni <input type="radio" value="0" name="<?= Controller::RIDING_SKILL_RANK ?>"
                                 <?php if ($controller->getFight()->getSelectedRidingSkillRank() === 0) { ?>checked<?php } ?>>
             0,
@@ -41,8 +43,10 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
             Bojuješ se zvířetem s vlastní vůlí</label>
     </div>
     <div class="block">
-        Dovednost <span
-                class="keyword"><?= PsychicalSkillCode::getIt(PsychicalSkillCode::ZOOLOGY)->translateTo('cs') ?></span>
+        Dovednost <span class="keyword">
+            <a href="https://pph.drdplus.info/#zoologie" target="_blank">
+                <?= PsychicalSkillCode::getIt(PsychicalSkillCode::ZOOLOGY)->translateTo('cs') ?></a>
+        </span>
         <label>na stupni <input type="radio" value="0" name="<?= Controller::ZOOLOGY_SKILL_RANK ?>"
                                 <?php if ($controller->getFight()->getSelectedZoologySkillRank() === 0) { ?>checked<?php } ?>>
             0,

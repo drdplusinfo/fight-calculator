@@ -79,7 +79,9 @@ foreach ($controller->getCurrentValues()->getCustomHelmsValues() as $helmName =>
 <div class="block skill">
     <div class="panel">
         <label>
-            <span class="keyword"><?= $controller->getFight()->getSkillForArmor()->translateTo('cs') ?></span>
+            <span class="keyword"><a target="_blank" href="https://pph.drdplus.info/#noseni_zbroje">
+                    <?= $controller->getFight()->getSkillForArmor()->translateTo('cs') ?></a>
+            </span>
         </label>
     </div>
     <div class="panel">

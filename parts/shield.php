@@ -21,7 +21,9 @@ namespace DrdPlus\Calculators\Fight;
 </div>
 <div class="panel">
     <div class="panel">
-        dovednost <span class="keyword"><?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></span>
+        dovednost <span class="keyword"><a href="https://pph.drdplus.info/#pouzivani_stitu" target="_blank">
+            <?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></a>
+        </span>
     </div>
     <div class="panel">
         <label>na stupni <input type="radio" value="0" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
@@ -50,7 +52,9 @@ namespace DrdPlus\Calculators\Fight;
 <div class="block skill">
     <div class="panel">
         <label>
-            <span class="keyword"><?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?></span>
+            <span class="keyword"><a target="_blank"
+                        href="https://pph.drdplus.info/#boj_se_zbrani"><?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?></a>
+            </span>
         </label>
     </div>
     <div class="panel">
