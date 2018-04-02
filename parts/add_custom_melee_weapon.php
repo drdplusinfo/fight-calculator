@@ -2,7 +2,8 @@
 namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Codes\Body\WoundTypeCode;
-use \DrdPlus\Codes\Armaments\WeaponCategoryCode;
+use DrdPlus\Codes\Armaments\WeaponCategoryCode;
+use DrdPlus\Calculators\AttackSkeleton\CurrentValues;
 
 /** @var \DrdPlus\Calculators\Fight\Controller $controller */
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7adb936e87198aca0331316a45fa5d66",
-    "content-hash": "b7cb2971c75d7218d67fbaf064c88283",
+    "hash": "871bd18b3181659a723202f15709b6d9",
+    "content-hash": "b639f093ea91415a0450c234844a759d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1014,6 +1014,55 @@
             "time": "2017-09-24 14:52:11"
         },
         {
+            "name": "drd-plus/attack-skeleton",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-attack-skeleton.git",
+                "reference": "82e30697566e253b708356eb9e67fd01067678ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/82e30697566e253b708356eb9e67fd01067678ea",
+                "reference": "82e30697566e253b708356eb9e67fd01067678ea",
+                "shasum": ""
+            },
+            "require": {
+                "drd-plus/calculator-skeleton": "dev-master",
+                "drd-plus/fight-properties": "dev-master",
+                "drd-plus/tables": "dev-master",
+                "granam/strict-object": "dev-master",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "granam/exceptions-hierarchy": "~4.0",
+                "mockery/mockery": "~1.0",
+                "phpgt/dom": "^1.0",
+                "phpunit/phpunit": "~6.0",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "DrdPlus\\": "DrdPlus/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Configurator skeleton for those using weapons for DrD+",
+            "keywords": [
+                "Skeleton",
+                "attack",
+                "calculator",
+                "drd",
+                "drd plus",
+                "weapons"
+            ],
+            "time": "2018-04-02 14:04:35"
+        },
+        {
             "name": "drd-plus/background",
             "version": "dev-master",
             "source": {
@@ -1479,12 +1528,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-professions.git",
-                "reference": "fbcde6e9317ce475e82269431b375005131a583b"
+                "reference": "bdba46b1121e68ba08c01ef9cfab45bcfd89b5de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-professions/zipball/fbcde6e9317ce475e82269431b375005131a583b",
-                "reference": "fbcde6e9317ce475e82269431b375005131a583b",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-professions/zipball/bdba46b1121e68ba08c01ef9cfab45bcfd89b5de",
+                "reference": "bdba46b1121e68ba08c01ef9cfab45bcfd89b5de",
                 "shasum": ""
             },
             "require": {
@@ -1510,7 +1559,7 @@
                 "MIT"
             ],
             "description": "Professions of Drd+",
-            "time": "2017-09-24 14:13:20"
+            "time": "2018-04-01 13:39:37"
         },
         {
             "name": "drd-plus/properties",
@@ -2314,12 +2363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "2fcfe963d8a1310c2d42e5dce4df0789152bf681"
+                "reference": "c83f6aa0ed08f680c012656d411d1b7c94003012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2fcfe963d8a1310c2d42e5dce4df0789152bf681",
-                "reference": "2fcfe963d8a1310c2d42e5dce4df0789152bf681",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/c83f6aa0ed08f680c012656d411d1b7c94003012",
+                "reference": "c83f6aa0ed08f680c012656d411d1b7c94003012",
                 "shasum": ""
             },
             "conflict": {
@@ -2360,10 +2409,11 @@
                 "gree/jose": "<=2.2",
                 "gregwar/rst": "<1.0.3",
                 "guzzlehttp/guzzle": ">=6,<6.2.1|>=4.0.0-rc2,<4.2.4|>=5,<5.3.1",
-                "illuminate/auth": ">=4,<4.0.99|>=4.1,<4.1.26",
+                "illuminate/auth": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.10",
                 "illuminate/database": ">=4,<4.0.99|>=4.1,<4.1.29",
+                "illuminate/encryption": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
                 "joomla/session": "<1.3.1",
-                "laravel/framework": ">=4,<4.0.99|>=4.1,<4.1.29",
+                "laravel/framework": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
                 "laravel/socialite": ">=1,<1.0.99|>=2,<2.0.10",
                 "magento/magento1ce": ">=1.5.0.1,<1.9.3.2",
                 "magento/magento1ee": ">=1.9,<1.14.3.2",
@@ -2465,7 +2515,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2018-03-30 07:14:38"
+            "time": "2018-04-02 06:47:13"
         },
         {
             "name": "symfony/console",
@@ -4250,11 +4300,11 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "roave/security-advisories": 20,
         "granam/strict-object": 20,
         "drd-plus/tables": 20,
         "drd-plus/fight-properties": 20,
-        "drd-plus/calculator-skeleton": 20
+        "drd-plus/attack-skeleton": 20,
+        "roave/security-advisories": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

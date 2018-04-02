@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Calculators\Fight;
 
+use DrdPlus\Calculators\AttackSkeleton\CurrentValues;
+
 /** @var \DrdPlus\Calculators\Fight\Controller $controller */
 ?>
 <label>Název <input type="text" name="<?= CurrentValues::CUSTOM_BODY_ARMOR_NAME ?>[0]"

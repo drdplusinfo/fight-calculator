@@ -53,7 +53,7 @@ namespace DrdPlus\Calculators\Fight;
     <tr>
         <td>Zbroj</td>
         <td><img class="line-sized" src="images/armor-icon.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfSelectedBodyArmor()) ?>">
+        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfSelectedBodyArmor()) ?>">
             <?= $controller->getFight()->getProtectionOfSelectedBodyArmor() ?>
         </td>
         <td></td>
@@ -61,7 +61,7 @@ namespace DrdPlus\Calculators\Fight;
     <tr>
         <td>Helma</td>
         <td><img class="line-sized" src="images/helm-icon.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getPreviousHelmProtection(), $controller->getFight()->getSelectedHelmProtection()) ?>">
+        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getPreviousHelmProtection(), $controller->getFight()->getSelectedHelmProtection()) ?>">
             <?= $controller->getFight()->getSelectedHelmProtection() ?>
         </td>
         <td></td>

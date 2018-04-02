@@ -92,7 +92,7 @@ namespace DrdPlus\Calculators\Fight;
         <tr>
             <td colspan="100%">
                 držen <span
-                        class="keyword <?php if ($controller->getFight()->getPreviousMeleeShieldHolding()->getValue() !== $controller->getFight()->getSelectedMeleeShieldHolding()->getValue()) { ?> changed <?php } ?>">
+                        class="keyword <?php if ($controller->getFight()->getPreviousArmaments()->getPreviousMeleeShieldHolding()->getValue() !== $controller->getFight()->getSelectedMeleeShieldHolding()->getValue()) { ?> changed <?php } ?>">
                     <?= $controller->getFight()->getSelectedMeleeShieldHolding()->translateTo('cs') ?>
                 </span>
             </td>
@@ -118,7 +118,7 @@ namespace DrdPlus\Calculators\Fight;
         <tr>
             <td colspan="100%">
                 držen <span
-                        class="keyword <?php if ($controller->getFight()->getPreviousRangedShieldHolding()->getValue() !== $controller->getFight()->getSelectedRangedShieldHolding()->getValue()) { ?> changed <?php } ?>">
+                        class="keyword <?php if ($controller->getFight()->getPreviousArmaments()->getPreviousRangedShieldHolding()->getValue() !== $controller->getFight()->getSelectedRangedShieldHolding()->getValue()) { ?> changed <?php } ?>">
                     <?= $controller->getFight()->getSelectedRangedShieldHolding()->translateTo('cs') ?>
                 </span>
             </td>

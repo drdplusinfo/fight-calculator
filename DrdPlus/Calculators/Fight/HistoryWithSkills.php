@@ -4,7 +4,7 @@ namespace DrdPlus\Calculators\Fight;
 use DrdPlus\Configurator\Skeleton\Cookie;
 use DrdPlus\Configurator\Skeleton\History;
 
-class PreviousValues extends History
+class HistoryWithSkills extends History
 {
     private const RANKS_HISTORY = 'ranks_history';
 
