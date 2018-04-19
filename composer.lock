@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "871bd18b3181659a723202f15709b6d9",
-    "content-hash": "b639f093ea91415a0450c234844a759d",
+    "hash": "a9a4a55501bf8dc987b26f11725d6a0f",
+    "content-hash": "572e97d8e5c3dfbb0e7826b6b40f294d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -291,16 +291,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.6.3",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "e3eed9b1facbb0ced3a0995244843a189e7d1b13"
+                "reference": "11037b4352c008373561dc6fc836834eed80c3b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e3eed9b1facbb0ced3a0995244843a189e7d1b13",
-                "reference": "e3eed9b1facbb0ced3a0995244843a189e7d1b13",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/11037b4352c008373561dc6fc836834eed80c3b5",
+                "reference": "11037b4352c008373561dc6fc836834eed80c3b5",
                 "shasum": ""
             },
             "require": {
@@ -309,9 +309,11 @@
                 "php": "^7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.4.6",
+                "doctrine/coding-standard": "^4.0",
+                "phpunit/phpunit": "^7.0",
                 "phpunit/phpunit-mock-objects": "!=3.2.4,!=3.2.5",
-                "symfony/console": "2.*||^3.0"
+                "symfony/console": "^2.0.5||^3.0",
+                "symfony/phpunit-bridge": "^3.4.5|^4.0.5"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
@@ -322,7 +324,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6.x-dev"
+                    "dev-master": "2.7.x-dev"
                 }
             },
             "autoload": {
@@ -360,7 +362,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-11-19 13:38:54"
+            "time": "2018-04-07 18:44:18"
         },
         {
             "name": "doctrine/inflector",
@@ -1019,12 +1021,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-attack-skeleton.git",
-                "reference": "82e30697566e253b708356eb9e67fd01067678ea"
+                "reference": "a3244022085db00d42c7d346309653336b28da3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/82e30697566e253b708356eb9e67fd01067678ea",
-                "reference": "82e30697566e253b708356eb9e67fd01067678ea",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/a3244022085db00d42c7d346309653336b28da3b",
+                "reference": "a3244022085db00d42c7d346309653336b28da3b",
                 "shasum": ""
             },
             "require": {
@@ -1060,7 +1062,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2018-04-02 14:04:35"
+            "time": "2018-04-12 09:58:48"
         },
         {
             "name": "drd-plus/background",
@@ -1151,22 +1153,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-calculator-skeleton.git",
-                "reference": "0bdaf3f0cbc521ed0ad196b90ee307d36e6b0696"
+                "reference": "69d8962f26a74d13e68e93184f5dd279783e5208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-calculator-skeleton/zipball/0bdaf3f0cbc521ed0ad196b90ee307d36e6b0696",
-                "reference": "0bdaf3f0cbc521ed0ad196b90ee307d36e6b0696",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-calculator-skeleton/zipball/69d8962f26a74d13e68e93184f5dd279783e5208",
+                "reference": "69d8962f26a74d13e68e93184f5dd279783e5208",
                 "shasum": ""
             },
             "require": {
                 "granam/strict-object": "dev-master",
-                "php": ">=7.1",
-                "roave/security-advisories": "dev-master"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "^6.2"
+                "phpunit/phpunit": "^6.2",
+                "roave/security-advisories": "dev-master"
             },
             "type": "project",
             "autoload": {
@@ -1179,7 +1181,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2018-03-15 15:08:58"
+            "time": "2018-04-18 07:00:58"
         },
         {
             "name": "drd-plus/codes",
@@ -1187,12 +1189,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "80029ec10a9819ba0b9772d2717123ef42fd9223"
+                "reference": "55806a1aa8f7a680b07b33926a9c12dc58e1527c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/80029ec10a9819ba0b9772d2717123ef42fd9223",
-                "reference": "80029ec10a9819ba0b9772d2717123ef42fd9223",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/55806a1aa8f7a680b07b33926a9c12dc58e1527c",
+                "reference": "55806a1aa8f7a680b07b33926a9c12dc58e1527c",
                 "shasum": ""
             },
             "require": {
@@ -1218,7 +1220,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2018-03-29 13:45:31"
+            "time": "2018-04-13 07:58:47"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1361,12 +1363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-health.git",
-                "reference": "02699edbf25bf6b270a901924bf7fd055d4ce858"
+                "reference": "2e6e417160cc266886617cac9ef1e7a66d28fb0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/02699edbf25bf6b270a901924bf7fd055d4ce858",
-                "reference": "02699edbf25bf6b270a901924bf7fd055d4ce858",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/2e6e417160cc266886617cac9ef1e7a66d28fb0a",
+                "reference": "2e6e417160cc266886617cac9ef1e7a66d28fb0a",
                 "shasum": ""
             },
             "require": {
@@ -1381,13 +1383,13 @@
                 "drd-plus/rolls-on": "dev-master",
                 "drd-plus/skills": "dev-master",
                 "drd-plus/tables": "dev-master",
-                "php": ">=7.1",
-                "roave/security-advisories": "dev-master"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
                 "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "~6.0"
+                "phpunit/phpunit": "~6.0",
+                "roave/security-advisories": "dev-master"
             },
             "type": "project",
             "autoload": {
@@ -1400,7 +1402,7 @@
                 "MIT"
             ],
             "description": "Body and soul harms, afflictions and their treatment of a being for Drd+",
-            "time": "2018-01-07 08:30:56"
+            "time": "2018-04-18 06:40:08"
         },
         {
             "name": "drd-plus/hunting-and-fishing",
@@ -1567,12 +1569,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "69b9cbc8d3378fb4ee7e4488c49dba7895cb42c2"
+                "reference": "25f1f8ade683b0145b6b87b341d3c80bf30018f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/69b9cbc8d3378fb4ee7e4488c49dba7895cb42c2",
-                "reference": "69b9cbc8d3378fb4ee7e4488c49dba7895cb42c2",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/25f1f8ade683b0145b6b87b341d3c80bf30018f1",
+                "reference": "25f1f8ade683b0145b6b87b341d3c80bf30018f1",
                 "shasum": ""
             },
             "require": {
@@ -1603,7 +1605,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2017-10-05 14:24:54"
+            "time": "2018-02-22 07:35:19"
         },
         {
             "name": "drd-plus/properties-by-fate",
@@ -1831,12 +1833,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "0c586a017567083da7af3ab4b8f0c5a08e352fb6"
+                "reference": "cc893de68737fa608cf3f26001b36981aac22c44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/0c586a017567083da7af3ab4b8f0c5a08e352fb6",
-                "reference": "0c586a017567083da7af3ab4b8f0c5a08e352fb6",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/cc893de68737fa608cf3f26001b36981aac22c44",
+                "reference": "cc893de68737fa608cf3f26001b36981aac22c44",
                 "shasum": ""
             },
             "require": {
@@ -1849,13 +1851,13 @@
                 "granam/integer": "dev-master",
                 "granam/number": "dev-master",
                 "granam/strict-object": "dev-master",
-                "php": ">=7.1",
-                "roave/security-advisories": "dev-master"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
                 "mockery/mockery": "1.0.x-dev",
-                "phpunit/phpunit": "~6.0"
+                "phpunit/phpunit": "~6.0",
+                "roave/security-advisories": "dev-master"
             },
             "type": "project",
             "autoload": {
@@ -1868,7 +1870,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2018-03-31 12:13:39"
+            "time": "2018-04-11 07:20:50"
         },
         {
             "name": "granam/boolean",
@@ -2259,12 +2261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-string.git",
-                "reference": "dd2942317b13a6306ce645bdce4082086ec9913d"
+                "reference": "4ea796338556d07dc9d1c65253b18c7a71ef6919"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/dd2942317b13a6306ce645bdce4082086ec9913d",
-                "reference": "dd2942317b13a6306ce645bdce4082086ec9913d",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/4ea796338556d07dc9d1c65253b18c7a71ef6919",
+                "reference": "4ea796338556d07dc9d1c65253b18c7a71ef6919",
                 "shasum": ""
             },
             "require": {
@@ -2305,7 +2307,7 @@
                 "php",
                 "string"
             ],
-            "time": "2018-03-07 11:01:24"
+            "time": "2018-04-18 11:29:39"
         },
         {
             "name": "granam/tools",
@@ -2363,12 +2365,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "c83f6aa0ed08f680c012656d411d1b7c94003012"
+                "reference": "2b28787651b69de2b14ae222737deb05befbb33b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/c83f6aa0ed08f680c012656d411d1b7c94003012",
-                "reference": "c83f6aa0ed08f680c012656d411d1b7c94003012",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2b28787651b69de2b14ae222737deb05befbb33b",
+                "reference": "2b28787651b69de2b14ae222737deb05befbb33b",
                 "shasum": ""
             },
             "conflict": {
@@ -2385,8 +2387,8 @@
                 "codeigniter/framework": "<=3.0.6",
                 "composer/composer": "<=1.0.0-alpha11",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
-                "contao/core": ">=2,<3.5.32",
-                "contao/core-bundle": ">=4,<4.4.8",
+                "contao/core": ">=2,<3.5.35",
+                "contao/core-bundle": ">=4,<4.4.18|>=4.5,<4.5.8",
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "contao/newsletter-bundle": ">=4,<4.1",
                 "doctrine/annotations": ">=1,<1.2.7",
@@ -2413,6 +2415,7 @@
                 "illuminate/database": ">=4,<4.0.99|>=4.1,<4.1.29",
                 "illuminate/encryption": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
                 "joomla/session": "<1.3.1",
+                "kreait/firebase-php": ">=3.2,<3.8.1",
                 "laravel/framework": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
                 "laravel/socialite": ">=1,<1.0.99|>=2,<2.0.10",
                 "magento/magento1ce": ">=1.5.0.1,<1.9.3.2",
@@ -2426,6 +2429,7 @@
                 "padraic/humbug_get_contents": "<1.1.2",
                 "pagarme/pagarme-php": ">=0,<3",
                 "paragonie/random_compat": "<2",
+                "paypal/merchant-sdk-php": "<3.12",
                 "phpmailer/phpmailer": ">=5,<5.2.24",
                 "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
                 "phpxmlrpc/extras": "<0.6.1",
@@ -2441,6 +2445,7 @@
                 "simplesamlphp/saml2": "<1.10.6|>=2,<2.3.8|>=3,<3.1.4",
                 "simplesamlphp/simplesamlphp": "<1.15.2",
                 "simplesamlphp/simplesamlphp-module-infocard": "<1.0.1",
+                "slim/slim": "<2.6",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
                 "stormpath/sdk": ">=0,<9.9.99",
@@ -2463,7 +2468,7 @@
                 "symfony/web-profiler-bundle": ">=2,<2.3.19|>=2.4,<2.4.9|>=2.5,<2.5.4",
                 "symfony/yaml": ">=2,<2.0.22|>=2.1,<2.1.7",
                 "thelia/backoffice-default-template": ">=2.1,<2.1.2",
-                "thelia/thelia": ">=2.1.0-beta1,<2.1.3|>=2.1,<2.1.2",
+                "thelia/thelia": ">=2.1,<2.1.2|>=2.1.0-beta1,<2.1.3",
                 "titon/framework": ">=0,<9.9.99",
                 "twig/twig": "<1.20",
                 "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.22|>=8,<8.7.5",
@@ -2515,20 +2520,20 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2018-04-02 06:47:13"
+            "time": "2018-04-18 09:24:34"
         },
         {
             "name": "symfony/console",
-            "version": "v4.0.6",
+            "version": "v4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "555c8dbe0ae9e561740451eabdbed2cc554b6a51"
+                "reference": "aad9a6fe47319f22748fd764f52d3a7ca6fa6b64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/555c8dbe0ae9e561740451eabdbed2cc554b6a51",
-                "reference": "555c8dbe0ae9e561740451eabdbed2cc554b6a51",
+                "url": "https://api.github.com/repos/symfony/console/zipball/aad9a6fe47319f22748fd764f52d3a7ca6fa6b64",
+                "reference": "aad9a6fe47319f22748fd764f52d3a7ca6fa6b64",
                 "shasum": ""
             },
             "require": {
@@ -2583,7 +2588,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-26 15:55:47"
+            "time": "2018-04-03 05:24:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3101,16 +3106,16 @@
         },
         {
             "name": "phpgt/dom",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PhpGt/Dom.git",
-                "reference": "865d16dfc91bfb1cdf31a53ccd487b933fa45655"
+                "reference": "343babc51b1d9caeef6372aafea4006c28d28617"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PhpGt/Dom/zipball/865d16dfc91bfb1cdf31a53ccd487b933fa45655",
-                "reference": "865d16dfc91bfb1cdf31a53ccd487b933fa45655",
+                "url": "https://api.github.com/repos/PhpGt/Dom/zipball/343babc51b1d9caeef6372aafea4006c28d28617",
+                "reference": "343babc51b1d9caeef6372aafea4006c28d28617",
                 "shasum": ""
             },
             "require": {
@@ -3137,27 +3142,27 @@
                 }
             ],
             "description": "The modern DOM API for PHP 7 projects.",
-            "time": "2017-12-12 22:49:41"
+            "time": "2018-04-17 12:53:55"
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.7.5",
+            "version": "1.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
+                "reference": "33a7e3c4fda54e912ff6338c48823bd5c0f0b712"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
-                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/33a7e3c4fda54e912ff6338c48823bd5c0f0b712",
+                "reference": "33a7e3c4fda54e912ff6338c48823bd5c0f0b712",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
                 "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
-                "sebastian/comparator": "^1.1|^2.0",
+                "sebastian/comparator": "^1.1|^2.0|^3.0",
                 "sebastian/recursion-context": "^1.0|^2.0|^3.0"
             },
             "require-dev": {
@@ -3200,20 +3205,20 @@
                 "spy",
                 "stub"
             ],
-            "time": "2018-02-19 10:16:54"
+            "time": "2018-04-18 13:57:24"
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "5.3.0",
+            "version": "5.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "661f34d0bd3f1a7225ef491a70a020ad23a057a1"
+                "reference": "c89677919c5dd6d3b3852f230a663118762218ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/661f34d0bd3f1a7225ef491a70a020ad23a057a1",
-                "reference": "661f34d0bd3f1a7225ef491a70a020ad23a057a1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c89677919c5dd6d3b3852f230a663118762218ac",
+                "reference": "c89677919c5dd6d3b3852f230a663118762218ac",
                 "shasum": ""
             },
             "require": {
@@ -3263,7 +3268,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-12-06 09:29:45"
+            "time": "2018-04-06 15:36:58"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3453,16 +3458,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.5.7",
+            "version": "6.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6bd77b57707c236833d2b57b968e403df060c9d9"
+                "reference": "4f21a3c6b97c42952fd5c2837bb354ec0199b97b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6bd77b57707c236833d2b57b968e403df060c9d9",
-                "reference": "6bd77b57707c236833d2b57b968e403df060c9d9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4f21a3c6b97c42952fd5c2837bb354ec0199b97b",
+                "reference": "4f21a3c6b97c42952fd5c2837bb354ec0199b97b",
                 "shasum": ""
             },
             "require": {
@@ -3533,7 +3538,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-02-26 07:01:09"
+            "time": "2018-04-10 11:38:34"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
