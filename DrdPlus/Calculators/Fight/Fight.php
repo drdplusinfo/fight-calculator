@@ -3,7 +3,7 @@ namespace DrdPlus\Calculators\Fight;
 
 use DrdPlus\Background\BackgroundParts\Ancestry;
 use DrdPlus\Background\BackgroundParts\SkillPointsFromBackground;
-use DrdPlus\Calculators\AttackSkeleton\Attack;
+use DrdPlus\Calculators\AttackSkeleton\AttackForCalculator;
 use DrdPlus\Calculators\AttackSkeleton\CurrentProperties;
 use DrdPlus\Calculators\AttackSkeleton\CurrentValues;
 use DrdPlus\Calculators\AttackSkeleton\CustomArmamentsService;
@@ -59,10 +59,12 @@ use DrdPlus\Tables\Tables;
 use Granam\Integer\PositiveIntegerObject;
 use Granam\String\StringTools;
 
-class Fight extends Attack
+class Fight extends AttackForCalculator
 {
     use UsingSkills;
 
+    /** @var History */
+    private $history;
     /** @var PreviousArmamentsWithSkills */
     private $previousArmamentsWithSkills;
 
@@ -71,7 +73,7 @@ class Fight extends Attack
      * @param CurrentProperties $currentProperties
      * @param History $history
      * @param PreviousProperties $previousProperties
-     * @param CustomArmamentsService $newWeaponService
+     * @param CustomArmamentsService $customArmamentsService
      * @param Tables $tables
      * @throws \DrdPlus\Calculators\AttackSkeleton\Exceptions\BrokenNewArmamentValues
      */
@@ -80,20 +82,14 @@ class Fight extends Attack
         CurrentProperties $currentProperties,
         History $history,
         PreviousProperties $previousProperties,
-        CustomArmamentsService $newWeaponService,
+        CustomArmamentsService $customArmamentsService,
         Tables $tables
     )
     {
-        parent::__construct(
-            $currentValues,
-            $currentProperties,
-            $history,
-            $previousProperties,
-            $newWeaponService,
-            $tables
-        );
+        parent::__construct($currentValues, $history, $customArmamentsService, $tables);
+        $this->history = $history;
         $this->previousArmamentsWithSkills = new PreviousArmamentsWithSkills($history, $previousProperties, $tables);
-        $this->registerCustomArmaments($currentValues, $newWeaponService);
+        $this->registerCustomArmaments($currentValues, $customArmamentsService);
     }
 
     /**
@@ -713,6 +709,14 @@ class Fight extends Attack
     private function getPreviousMeleeSkillRank(): int
     {
         return (int)$this->getHistory()->getValue(Controller::MELEE_FIGHT_SKILL_RANK);
+    }
+
+    /**
+     * @return History
+     */
+    private function getHistory(): History
+    {
+        return $this->history;
     }
 
     /**
