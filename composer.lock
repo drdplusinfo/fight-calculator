@@ -861,12 +861,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
-                "reference": "c08813d3b1092c054db8ea75bdb58acbd2229c79"
+                "reference": "2beebc6c6e32ae6c03ee77a2ea386eb5e764cef6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/c08813d3b1092c054db8ea75bdb58acbd2229c79",
-                "reference": "c08813d3b1092c054db8ea75bdb58acbd2229c79",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/2beebc6c6e32ae6c03ee77a2ea386eb5e764cef6",
+                "reference": "2beebc6c6e32ae6c03ee77a2ea386eb5e764cef6",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,7 @@
                 "sub-type",
                 "value-dependent enum"
             ],
-            "time": "2017-09-13 13:06:20"
+            "time": "2018-04-20 21:32:01"
         },
         {
             "name": "doctrineum/self-registering-type",
@@ -1189,12 +1189,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "55806a1aa8f7a680b07b33926a9c12dc58e1527c"
+                "reference": "29e9d40144378b7ed5fcf7c70d1f2c721672bec0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/55806a1aa8f7a680b07b33926a9c12dc58e1527c",
-                "reference": "55806a1aa8f7a680b07b33926a9c12dc58e1527c",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/29e9d40144378b7ed5fcf7c70d1f2c721672bec0",
+                "reference": "29e9d40144378b7ed5fcf7c70d1f2c721672bec0",
                 "shasum": ""
             },
             "require": {
@@ -1220,7 +1220,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2018-04-13 07:58:47"
+            "time": "2018-04-23 11:31:52"
         },
         {
             "name": "drd-plus/combat-actions",
@@ -1363,12 +1363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-health.git",
-                "reference": "2e6e417160cc266886617cac9ef1e7a66d28fb0a"
+                "reference": "e1cf131c883d9ebfbc1376dd76b52ebc429b6c1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/2e6e417160cc266886617cac9ef1e7a66d28fb0a",
-                "reference": "2e6e417160cc266886617cac9ef1e7a66d28fb0a",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-health/zipball/e1cf131c883d9ebfbc1376dd76b52ebc429b6c1f",
+                "reference": "e1cf131c883d9ebfbc1376dd76b52ebc429b6c1f",
                 "shasum": ""
             },
             "require": {
@@ -1402,7 +1402,7 @@
                 "MIT"
             ],
             "description": "Body and soul harms, afflictions and their treatment of a being for Drd+",
-            "time": "2018-04-18 06:40:08"
+            "time": "2018-04-20 21:38:21"
         },
         {
             "name": "drd-plus/hunting-and-fishing",
@@ -1833,12 +1833,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "4a6454a7c21ae733a7f25a4df2e767a0d053ddca"
+                "reference": "dc8205645419163b2477ba993b022ecf18275c80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/4a6454a7c21ae733a7f25a4df2e767a0d053ddca",
-                "reference": "4a6454a7c21ae733a7f25a4df2e767a0d053ddca",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/dc8205645419163b2477ba993b022ecf18275c80",
+                "reference": "dc8205645419163b2477ba993b022ecf18275c80",
                 "shasum": ""
             },
             "require": {
@@ -1870,7 +1870,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2018-04-20 05:35:11"
+            "time": "2018-04-23 10:17:18"
         },
         {
             "name": "granam/boolean",
@@ -2075,12 +2075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-number.git",
-                "reference": "98ceb1ae2178883247a61808c5176f6385b93666"
+                "reference": "58754315aa8bf2eb45164dc13dc2ec3f4b0eb7a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-number/zipball/98ceb1ae2178883247a61808c5176f6385b93666",
-                "reference": "98ceb1ae2178883247a61808c5176f6385b93666",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-number/zipball/58754315aa8bf2eb45164dc13dc2ec3f4b0eb7a7",
+                "reference": "58754315aa8bf2eb45164dc13dc2ec3f4b0eb7a7",
                 "shasum": ""
             },
             "require": {
@@ -2117,7 +2117,7 @@
                 "number",
                 "php"
             ],
-            "time": "2017-11-23 08:29:42"
+            "time": "2018-04-21 14:14:06"
         },
         {
             "name": "granam/object-history",
@@ -2161,22 +2161,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-scalar.git",
-                "reference": "ccbd29e3fc296c946ca064573e9b8e6a9baabcd9"
+                "reference": "a6c242cd56834f32cdc08fe6572ee8a782b69ddd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-scalar/zipball/ccbd29e3fc296c946ca064573e9b8e6a9baabcd9",
-                "reference": "ccbd29e3fc296c946ca064573e9b8e6a9baabcd9",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-scalar/zipball/a6c242cd56834f32cdc08fe6572ee8a782b69ddd",
+                "reference": "a6c242cd56834f32cdc08fe6572ee8a782b69ddd",
                 "shasum": ""
             },
             "require": {
                 "granam/strict-object": "dev-master",
                 "granam/tools": "dev-master",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": ">=0.9",
+                "mockery/mockery": "~1.0",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "project",
@@ -2202,7 +2202,7 @@
                 "php",
                 "scalar"
             ],
-            "time": "2017-09-25 13:48:57"
+            "time": "2018-04-21 14:32:17"
         },
         {
             "name": "granam/strict-object",
@@ -2210,12 +2210,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-object.git",
-                "reference": "79f9d0f6ac4a6082bd59669b148363bc3ae8f177"
+                "reference": "b18f36c2b6a26ff6d7d6d190de7e5b3b8dc09858"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/79f9d0f6ac4a6082bd59669b148363bc3ae8f177",
-                "reference": "79f9d0f6ac4a6082bd59669b148363bc3ae8f177",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/b18f36c2b6a26ff6d7d6d190de7e5b3b8dc09858",
+                "reference": "b18f36c2b6a26ff6d7d6d190de7e5b3b8dc09858",
                 "shasum": ""
             },
             "require": {
@@ -2253,7 +2253,7 @@
                 "strict",
                 "write"
             ],
-            "time": "2017-02-19 12:20:51"
+            "time": "2018-04-21 14:37:08"
         },
         {
             "name": "granam/string",
@@ -2261,12 +2261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-string.git",
-                "reference": "4ea796338556d07dc9d1c65253b18c7a71ef6919"
+                "reference": "1c92da651de89cdc17ec15d0c7cdc1728f236553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/4ea796338556d07dc9d1c65253b18c7a71ef6919",
-                "reference": "4ea796338556d07dc9d1c65253b18c7a71ef6919",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/1c92da651de89cdc17ec15d0c7cdc1728f236553",
+                "reference": "1c92da651de89cdc17ec15d0c7cdc1728f236553",
                 "shasum": ""
             },
             "require": {
@@ -2307,7 +2307,7 @@
                 "php",
                 "string"
             ],
-            "time": "2018-04-18 11:29:39"
+            "time": "2018-04-21 14:40:21"
         },
         {
             "name": "granam/tools",
@@ -2315,12 +2315,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-tools.git",
-                "reference": "89731e21484b16182e325e9e65da396d2e13e689"
+                "reference": "537b3598cdd6ea4b25c242a62477bc581afd8f06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-tools/zipball/89731e21484b16182e325e9e65da396d2e13e689",
-                "reference": "89731e21484b16182e325e9e65da396d2e13e689",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-tools/zipball/537b3598cdd6ea4b25c242a62477bc581afd8f06",
+                "reference": "537b3598cdd6ea4b25c242a62477bc581afd8f06",
                 "shasum": ""
             },
             "require": {
@@ -2329,7 +2329,7 @@
             "require-dev": {
                 "doctrine/orm": "2.*",
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "1.0.x-dev",
+                "mockery/mockery": "~1.0",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "project",
@@ -2357,7 +2357,7 @@
                 "php",
                 "string"
             ],
-            "time": "2017-09-24 13:32:29"
+            "time": "2018-04-22 12:55:42"
         },
         {
             "name": "roave/security-advisories",
@@ -2365,12 +2365,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "2b28787651b69de2b14ae222737deb05befbb33b"
+                "reference": "9deddd9fc64853356d688a1514318abb2d9f3d4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2b28787651b69de2b14ae222737deb05befbb33b",
-                "reference": "2b28787651b69de2b14ae222737deb05befbb33b",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9deddd9fc64853356d688a1514318abb2d9f3d4b",
+                "reference": "9deddd9fc64853356d688a1514318abb2d9f3d4b",
                 "shasum": ""
             },
             "conflict": {
@@ -2520,7 +2520,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2018-04-18 09:24:34"
+            "time": "2018-04-22 05:30:14"
         },
         {
             "name": "symfony/console",

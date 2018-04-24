@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Calculators\Fight;
 
-use DrdPlus\Codes\Body\WoundTypeCode;
+use DrdPlus\Codes\Body\PhysicalWoundTypeCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
 use DrdPlus\Calculators\AttackSkeleton\CurrentValues;
 
@@ -32,8 +32,8 @@ use DrdPlus\Calculators\AttackSkeleton\CurrentValues;
                       required="required"></label>
 <label>Typ <select name="<?= CurrentValues::CUSTOM_MELEE_WEAPON_WOUND_TYPE ?>[0]"
                    required="required">
-        <?php foreach (WoundTypeCode::getPossibleValues() as $woundTypeValue) {
-            $woundType = WoundTypeCode::getIt($woundTypeValue); ?>
+        <?php foreach (PhysicalWoundTypeCode::getPossibleValues() as $woundTypeValue) {
+            $woundType = PhysicalWoundTypeCode::getIt($woundTypeValue); ?>
             <option value="<?= $woundTypeValue ?>"><?= $woundType->translateTo('cs') ?></option>
         <?php } ?>
     </select>
