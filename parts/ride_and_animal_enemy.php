@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Codes\Skills\PsychicalSkillCode;

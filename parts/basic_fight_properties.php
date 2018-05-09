@@ -1,10 +1,10 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
 /** @var Controller $controller */
 ?>
 <h2 id="Obecně"><a class="inner" href="#Obecně">Obecně</a></h2>
-<table class="block result shortened">
+<table class="result shortened">
     <?php
     $fightProperties = $controller->getFight()->getGenericFightProperties();
     $previousFightProperties = $controller->getFight()->getPreviousGenericFightProperties();

@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
 use DrdPlus\FightProperties\FightProperties;
 

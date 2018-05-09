@@ -1,14 +1,15 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
 use DrdPlus\Background\BackgroundParts\Ancestry;
 use DrdPlus\Background\BackgroundParts\SkillPointsFromBackground;
-use DrdPlus\Calculators\AttackSkeleton\AttackForCalculator;
-use DrdPlus\Calculators\AttackSkeleton\CurrentProperties;
-use DrdPlus\Calculators\AttackSkeleton\CurrentValues;
-use DrdPlus\Calculators\AttackSkeleton\CustomArmamentsService;
-use DrdPlus\Calculators\AttackSkeleton\PreviousArmaments;
-use DrdPlus\Calculators\AttackSkeleton\PreviousProperties;
+use DrdPlus\Calculator\AttackSkeleton\AttackForCalculator;
+use DrdPlus\Calculator\AttackSkeleton\CurrentProperties;
+use DrdPlus\Calculator\AttackSkeleton\CurrentAttackValues;
+use DrdPlus\Calculator\AttackSkeleton\CustomArmamentsService;
+use DrdPlus\Calculator\AttackSkeleton\PreviousArmaments;
+use DrdPlus\Calculator\AttackSkeleton\PreviousProperties;
+use DrdPlus\Calculator\Skeleton\History;
 use DrdPlus\Codes\Armaments\BodyArmorCode;
 use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
@@ -23,7 +24,6 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
 use DrdPlus\Codes\Skills\SkillCode;
 use DrdPlus\Codes\Units\DistanceUnitCode;
 use DrdPlus\CombatActions\CombatActions;
-use DrdPlus\Configurator\Skeleton\History;
 use DrdPlus\FightProperties\BodyPropertiesForFight;
 use DrdPlus\FightProperties\FightProperties;
 use DrdPlus\Health\Health;
@@ -69,16 +69,16 @@ class Fight extends AttackForCalculator
     private $previousArmamentsWithSkills;
 
     /**
-     * @param CurrentValues $currentValues
+     * @param CurrentAttackValues $currentAttackValues
      * @param CurrentProperties $currentProperties
      * @param History $history
      * @param PreviousProperties $previousProperties
      * @param CustomArmamentsService $customArmamentsService
      * @param Tables $tables
-     * @throws \DrdPlus\Calculators\AttackSkeleton\Exceptions\BrokenNewArmamentValues
+     * @throws \DrdPlus\Calculator\AttackSkeleton\Exceptions\BrokenNewArmamentValues
      */
     public function __construct(
-        CurrentValues $currentValues,
+        CurrentAttackValues $currentAttackValues,
         CurrentProperties $currentProperties,
         History $history,
         PreviousProperties $previousProperties,
@@ -86,10 +86,10 @@ class Fight extends AttackForCalculator
         Tables $tables
     )
     {
-        parent::__construct($currentValues, $history, $customArmamentsService, $tables);
+        parent::__construct($currentAttackValues, $history, $customArmamentsService, $tables);
         $this->history = $history;
         $this->previousArmamentsWithSkills = new PreviousArmamentsWithSkills($history, $previousProperties, $tables);
-        $this->registerCustomArmaments($currentValues, $customArmamentsService);
+        $this->registerCustomArmaments($currentAttackValues, $customArmamentsService);
     }
 
     /**
@@ -117,8 +117,8 @@ class Fight extends AttackForCalculator
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShieldForMelee(),
             $this->getSelectedShieldUsageSkillRank(),
-            $this->getSelectedBodyArmor(),
-            $this->getSelectedHelm(),
+            $this->getCurrentBodyArmor(),
+            $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
             $this->getSelectedProfessionCode(),
             $this->getSelectedOnHorseback(),
@@ -130,7 +130,7 @@ class Fight extends AttackForCalculator
 
     /**
      * @return FightProperties
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
@@ -139,14 +139,14 @@ class Fight extends AttackForCalculator
     public function getCurrentRangedFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getSelectedRangedWeapon(),
-            $this->getSelectedRangedWeaponHolding(),
-            $this->getSelectedRangedSkillCode(),
-            $this->getSelectedRangedSkillRank(),
-            $this->getSelectedShieldForRanged(),
+            $this->getCurrentRangedWeapon(),
+            $this->getCurrentRangedWeaponHolding(),
+            $this->getCurrentRangedSkillCode(),
+            $this->getCurrentRangedSkillRank(),
+            $this->getCurrentShieldForRanged(),
             $this->getSelectedShieldUsageSkillRank(),
-            $this->getSelectedBodyArmor(),
-            $this->getSelectedHelm(),
+            $this->getCurrentBodyArmor(),
+            $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
             $this->getSelectedProfessionCode(),
             $this->getSelectedOnHorseback(),
@@ -165,8 +165,8 @@ class Fight extends AttackForCalculator
             0, // zero skill rank
             ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
             $this->getSelectedShieldUsageSkillRank(),
-            $this->getSelectedBodyArmor(),
-            $this->getSelectedHelm(),
+            $this->getCurrentBodyArmor(),
+            $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
             $this->getSelectedProfessionCode(),
             $this->getSelectedOnHorseback(),
@@ -391,7 +391,7 @@ class Fight extends AttackForCalculator
      * @param Skills $skills
      * @param ProfessionFirstLevel $professionFirstLevel
      * @param SkillPointsFromBackground $skillPointsFromBackground
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\WeaponSkillWithoutKnownSkillGroup
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\WeaponSkillWithoutKnownSkillGroup
      */
     private function addSkillWithWeapon(
         SkillCode $skillWithWeapon,
@@ -466,7 +466,7 @@ class Fight extends AttackForCalculator
     /**
      * @return FightProperties
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
@@ -622,7 +622,7 @@ class Fight extends AttackForCalculator
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
     public function getPreviousMeleeWeaponFightProperties(): FightProperties
     {
@@ -652,14 +652,14 @@ class Fight extends AttackForCalculator
     public function getRangedShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getSelectedShieldForRanged(),
+            $this->getCurrentShieldForRanged(),
             $this->getSelectedRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
-            $this->getSelectedShieldForRanged(),
+            $this->getCurrentShieldForRanged(),
             $this->getSelectedShieldUsageSkillRank(),
-            $this->getSelectedBodyArmor(),
-            $this->getSelectedHelm(),
+            $this->getCurrentBodyArmor(),
+            $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
             $this->getSelectedProfessionCode(),
             $this->getSelectedOnHorseback(),
@@ -675,7 +675,7 @@ class Fight extends AttackForCalculator
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
     public function getMeleeWeaponFightProperties(): FightProperties
     {
@@ -686,8 +686,8 @@ class Fight extends AttackForCalculator
             $this->getSelectedMeleeSkillRank(),
             $this->getSelectedShieldForMelee(),
             $this->getSelectedShieldUsageSkillRank(),
-            $this->getSelectedBodyArmor(),
-            $this->getSelectedHelm(),
+            $this->getCurrentBodyArmor(),
+            $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
             $this->getSelectedProfessionCode(),
             $this->getSelectedOnHorseback(),
@@ -699,7 +699,7 @@ class Fight extends AttackForCalculator
 
     /**
      * @return SkillCode
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
     private function getPreviousMeleeSkillCode(): SkillCode
     {
@@ -737,16 +737,16 @@ class Fight extends AttackForCalculator
 
     /**
      * @return SkillCode
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
     public function getSelectedMeleeSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->getCurrentValues()->getValue(Controller::MELEE_FIGHT_SKILL));
+        return $this->getSelectedSkill($this->getCurrentAttackValues()->getCurrentValue(Controller::MELEE_FIGHT_SKILL));
     }
 
     public function getSelectedMeleeSkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::MELEE_FIGHT_SKILL_RANK);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::MELEE_FIGHT_SKILL_RANK);
     }
 
     /**
@@ -814,36 +814,36 @@ class Fight extends AttackForCalculator
 
     /**
      * @return SkillCode
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
-    public function getSelectedRangedSkillCode(): SkillCode
+    public function getCurrentRangedSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->getCurrentValues()->getValue(Controller::RANGED_FIGHT_SKILL));
+        return $this->getSelectedSkill($this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_FIGHT_SKILL));
     }
 
     public function getSelectedShieldUsageSkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::SHIELD_USAGE_SKILL_RANK);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::SHIELD_USAGE_SKILL_RANK);
     }
 
     public function getCurrentArmorSkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::ARMOR_SKILL_VALUE);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::ARMOR_SKILL_VALUE);
     }
 
-    public function getSelectedRangedSkillRank(): int
+    public function getCurrentRangedSkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::RANGED_FIGHT_SKILL_RANK);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_FIGHT_SKILL_RANK);
     }
 
     public function getSelectedFightWithShieldsSkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::FIGHT_WITH_SHIELDS_SKILL_RANK);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     public function getSelectedProfessionCode(): ProfessionCode
     {
-        $selectedProfession = $this->getCurrentValues()->getValue(Controller::PROFESSION);
+        $selectedProfession = $this->getCurrentAttackValues()->getCurrentValue(Controller::PROFESSION);
         if (!$selectedProfession) {
             return ProfessionCode::getIt(ProfessionCode::COMMONER);
         }
@@ -863,27 +863,27 @@ class Fight extends AttackForCalculator
 
     public function getSelectedOnHorseback(): bool
     {
-        return (bool)$this->getCurrentValues()->getValue(Controller::ON_HORSEBACK);
+        return (bool)$this->getCurrentAttackValues()->getCurrentValue(Controller::ON_HORSEBACK);
     }
 
     public function getSelectedRidingSkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::RIDING_SKILL_RANK);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::RIDING_SKILL_RANK);
     }
 
     public function getSelectedFightFreeWillAnimal(): bool
     {
-        return (bool)$this->getCurrentValues()->getValue(Controller::FIGHT_FREE_WILL_ANIMAL);
+        return (bool)$this->getCurrentAttackValues()->getCurrentValue(Controller::FIGHT_FREE_WILL_ANIMAL);
     }
 
     public function getSelectedZoologySkillRank(): int
     {
-        return (int)$this->getCurrentValues()->getValue(Controller::ZOOLOGY_SKILL_RANK);
+        return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::ZOOLOGY_SKILL_RANK);
     }
 
     /**
      * @return Distance
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
@@ -891,7 +891,7 @@ class Fight extends AttackForCalculator
      */
     public function getCurrentTargetDistance(): Distance
     {
-        $distanceValue = $this->getCurrentValues()->getValue(Controller::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
@@ -903,7 +903,7 @@ class Fight extends AttackForCalculator
 
     /**
      * @return float
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
@@ -916,7 +916,7 @@ class Fight extends AttackForCalculator
 
     public function getCurrentTargetSize(): Size
     {
-        $distanceValue = $this->getCurrentValues()->getValue(Controller::RANGED_TARGET_SIZE);
+        $distanceValue = $this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_TARGET_SIZE);
         if ($distanceValue === null) {
             return Size::getIt(1);
         }
@@ -926,7 +926,7 @@ class Fight extends AttackForCalculator
 
     /**
      * @return Distance
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
@@ -947,7 +947,7 @@ class Fight extends AttackForCalculator
 
     /**
      * @return float
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands

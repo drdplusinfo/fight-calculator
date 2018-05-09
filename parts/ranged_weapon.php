@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\Codes\Armaments\WeaponCategoryCode;
@@ -8,9 +8,9 @@ use DrdPlus\Tables\Tables;
 
 /** @var Controller $controller */
 /** @var Tables $tables */
-$selectedRangedWeapon = $controller->getFight()->getSelectedRangedWeapon();
+$selectedRangedWeapon = $controller->getFight()->getCurrentRangedWeapon();
 $selectedRangedWeaponValue = $selectedRangedWeapon ? $selectedRangedWeapon->getValue() : null;
-if ($controller->addingNewRangedWeapon()) { ?>
+if ($controller->isAddingNewRangedWeapon()) { ?>
     <div id="addRangedWeapon" class="block add">
         <?php include __DIR__ . '/add_custom_ranged_weapon.php' ?>
     </div>
@@ -22,7 +22,7 @@ foreach ($controller->getCurrentValues()->getCustomRangedWeaponsValues() as $wea
     <?php }
 } ?>
 
-<div class="block <?php if ($controller->addingNewRangedWeapon()) { ?>hidden<?php } ?>" id="chooseRangedWeapon">
+<div class="block <?php if ($controller->isAddingNewRangedWeapon()) { ?>hidden<?php } ?>" id="chooseRangedWeapon">
     <div class="panel">
         <a title="Přidat vlastní zbraň na dálku"
            href="<?= $controller->getCurrentUrlWithQuery([Controller::ACTION => Controller::ADD_NEW_RANGED_WEAPON]) ?>"
@@ -52,20 +52,20 @@ foreach ($controller->getCurrentValues()->getCustomRangedWeaponsValues() as $wea
         <label>
             <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>"
                    name="<?= Controller::RANGED_WEAPON_HOLDING ?>"
-                   <?php if ($controller->getFight()->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentRangedWeaponHolding()->getValue() === ItemHoldingCode::MAIN_HAND) { ?>checked<?php } ?>>
             v dominantní ruce</label>
     </div>
     <div class="panel">
         <label>
             <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= Controller::RANGED_WEAPON_HOLDING ?>"
-                   <?php if ($controller->getFight()->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentRangedWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
             v druhé ruce</label>
     </div>
     <div class="panel">
         <label>
             <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>"
                    name="<?= Controller::RANGED_WEAPON_HOLDING ?>"
-                   <?php if ($controller->getFight()->getSelectedRangedWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentRangedWeaponHolding()->getValue() === ItemHoldingCode::TWO_HANDS) { ?>checked<?php } ?>>
             obouručně
         </label>
     </div>
@@ -78,7 +78,7 @@ foreach ($controller->getCurrentValues()->getCustomRangedWeaponsValues() as $wea
         <div class="panel">
             <label><select name="<?= Controller::RANGED_FIGHT_SKILL ?>">
                     <?php
-                    $selectedSkillForRanged = $controller->getFight()->getSelectedRangedSkillCode();
+                    $selectedSkillForRanged = $controller->getFight()->getCurrentRangedSkillCode();
                     foreach ($controller->getFight()->getSkillsForRanged() as $skillCode) {
                         ?>
                         <option value="<?= $skillCode->getValue() ?>"
@@ -92,19 +92,19 @@ foreach ($controller->getCurrentValues()->getCustomRangedWeaponsValues() as $wea
         <div class="panel skill-ranks"
              data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryRangedSkillRanksJson()) ?>">
             <label>na stupni <input type="radio" value="0" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
-                                    <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 0) { ?>checked<?php } ?>>
+                                    <?php if ($controller->getFight()->getCurrentRangedSkillRank() === 0) { ?>checked<?php } ?>>
                 0,
             </label>
             <label><input type="radio" value="1" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
-                          <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 1) { ?>checked<?php } ?>>
+                          <?php if ($controller->getFight()->getCurrentRangedSkillRank() === 1) { ?>checked<?php } ?>>
                 1,
             </label>
             <label><input type="radio" value="2" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
-                          <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 2) { ?>checked<?php } ?>>
+                          <?php if ($controller->getFight()->getCurrentRangedSkillRank() === 2) { ?>checked<?php } ?>>
                 2,
             </label>
             <label><input type="radio" value="3" name="<?= Controller::RANGED_FIGHT_SKILL_RANK ?>"
-                          <?php if ($controller->getFight()->getSelectedRangedSkillRank() === 3) { ?>checked<?php } ?>>
+                          <?php if ($controller->getFight()->getCurrentRangedSkillRank() === 3) { ?>checked<?php } ?>>
                 3
             </label>
         </div>

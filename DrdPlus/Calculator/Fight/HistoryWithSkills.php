@@ -1,8 +1,8 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
-use DrdPlus\Configurator\Skeleton\Cookie;
-use DrdPlus\Configurator\Skeleton\History;
+use DrdPlus\Calculator\Skeleton\Cookie;
+use DrdPlus\Calculator\Skeleton\History;
 
 class HistoryWithSkills extends History
 {

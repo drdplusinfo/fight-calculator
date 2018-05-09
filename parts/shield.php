@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
 /** @var Controller $controller */
 ?>
@@ -11,7 +11,7 @@ namespace DrdPlus\Calculators\Fight;
             foreach ($controller->getShields() as $shield) {
                 $shieldCode = $shield['code']; ?>
                 <option value="<?= $shieldCode->getValue() ?>"
-                        <?php if ($controller->getFight()->getSelectedShield()->getValue() === $shieldCode->getValue()) { ?>selected<?php }
+                        <?php if ($controller->getFight()->getCurrentShield()->getValue() === $shieldCode->getValue()) { ?>selected<?php }
                         if (!$shield['canUseIt']) { ?>disabled<?php } ?>>
                     <?= (!$shield['canUseIt'] ? '💪 ' : '') . $shieldCode->translateTo('cs') . ($controller->getFight()->getCoverOfShield($shieldCode) > 0 ? (' +' . $controller->getFight()->getCoverOfShield($shieldCode)) : '') ?>
                 </option>
@@ -76,7 +76,7 @@ namespace DrdPlus\Calculators\Fight;
         </label>
     </div>
 </div>
-<div class="block <?php if ($controller->getFight()->getSelectedShield()->isUnarmed()) { ?>hidden<?php } ?>">
+<div class="block <?php if ($controller->getFight()->getCurrentShield()->isUnarmed()) { ?>hidden<?php } ?>">
     <table class="panel result">
         <?php
         /** @noinspection PhpUnusedLocalVariableInspection */

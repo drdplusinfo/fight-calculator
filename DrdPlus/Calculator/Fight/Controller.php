@@ -1,15 +1,15 @@
 <?php
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
-use DrdPlus\Calculators\AttackSkeleton\CustomArmamentsService;
-use DrdPlus\Calculators\AttackSkeleton\PreviousProperties;
+use DrdPlus\Calculator\AttackSkeleton\CustomArmamentsService;
+use DrdPlus\Calculator\AttackSkeleton\PreviousProperties;
+use DrdPlus\Calculator\Skeleton\History;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
-use DrdPlus\Configurator\Skeleton\History;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
 
-class Controller extends \DrdPlus\Calculators\AttackSkeleton\Controller
+class Controller extends \DrdPlus\Calculator\AttackSkeleton\Controller
 {
     public const PROFESSION = 'profession';
     public const MELEE_FIGHT_SKILL = 'melee_fight_skill';
@@ -30,7 +30,7 @@ class Controller extends \DrdPlus\Calculators\AttackSkeleton\Controller
     private $fight;
 
     /**
-     * @throws \DrdPlus\Calculators\AttackSkeleton\Exceptions\BrokenNewArmamentValues
+     * @throws \DrdPlus\Calculator\AttackSkeleton\Exceptions\BrokenNewArmamentValues
      */
     public function __construct()
     {
@@ -45,7 +45,7 @@ class Controller extends \DrdPlus\Calculators\AttackSkeleton\Controller
         );
     }
 
-    protected function createHistory(string $cookiesPostfix, int $cookiesTtl = null): History
+    protected function createHistory(array $values, string $cookiesPostfix, int $cookiesTtl = null): History
     {
         return new HistoryWithSkills(
             [
@@ -54,8 +54,8 @@ class Controller extends \DrdPlus\Calculators\AttackSkeleton\Controller
                 self::RANGED_FIGHT_SKILL => self::RANGED_FIGHT_SKILL_RANK,
             ],
             $this->shouldDeleteHistory(),
-            $_GET, // values to remember
-            !empty($_GET[self::REMEMBER_CURRENT]), // should remember given values
+            $values, // values to remember
+            !empty($values[self::REMEMBER_CURRENT]), // should remember given values
             $cookiesPostfix,
             $cookiesTtl
         );

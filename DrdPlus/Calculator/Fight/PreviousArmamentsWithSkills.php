@@ -2,9 +2,9 @@
 declare(strict_types=1);
 /** be strict for parameter types, https://www.quora.com/Are-strict_types-in-PHP-7-not-a-bad-idea */
 
-namespace DrdPlus\Calculators\Fight;
+namespace DrdPlus\Calculator\Fight;
 
-use DrdPlus\Calculators\AttackSkeleton\PreviousArmaments;
+use DrdPlus\Calculator\AttackSkeleton\PreviousArmaments;
 use DrdPlus\Codes\Skills\SkillCode;
 
 class PreviousArmamentsWithSkills extends PreviousArmaments
@@ -48,7 +48,7 @@ class PreviousArmamentsWithSkills extends PreviousArmaments
 
     /**
      * @return SkillCode
-     * @throws \DrdPlus\Calculators\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
     public function getPreviousRangedSkillCode(): SkillCode
     {

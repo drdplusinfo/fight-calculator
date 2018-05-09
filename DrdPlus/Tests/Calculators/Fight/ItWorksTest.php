@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Tests\Calculators\Fight;
 
-use DrdPlus\Calculators\Fight\Controller;
+use DrdPlus\Calculator\Fight\Controller;
 use Gt\Dom\HTMLDocument;
 use PHPUnit\Framework\TestCase;
 
