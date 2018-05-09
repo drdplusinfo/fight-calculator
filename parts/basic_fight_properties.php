@@ -3,68 +3,45 @@ namespace DrdPlus\Calculator\Fight;
 
 /** @var Controller $controller */
 ?>
-<h2 id="Obecně"><a class="inner" href="#Obecně">Obecně</a></h2>
-<table class="result shortened">
-    <?php
-    $fightProperties = $controller->getFight()->getGenericFightProperties();
-    $previousFightProperties = $controller->getFight()->getPreviousGenericFightProperties();
-    ?>
-    <tbody>
-    <tr>
-        <td>Boj</td>
-        <td></td>
-        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getFight(), $fightProperties->getFight()) ?>">
-            <?= $fightProperties->getFight() ?>
-        </td>
-        <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
-    </tr>
-    <tr>
-        <td>Útok</td>
-        <td></td>
-        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getAttack(), $fightProperties->getAttack()) ?>">
-            <?= $fightProperties->getAttack() ?>
-        </td>
-        <td><span class="hint">(není ovlivněn výzbrojí)</span></td>
-    </tr>
-    <tr>
-        <td>Střelba</td>
-        <td></td>
-        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getShooting(), $fightProperties->getShooting()) ?>">
-            <?= $fightProperties->getShooting() ?>
-        </td>
-        <td><span class="hint">(není ovlivněna výzbrojí)</span></td>
-    </tr>
-    <tr>
-        <td>Obrana</td>
-        <td></td>
-        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getDefense(), $fightProperties->getDefense()) ?>">
-            <?= $fightProperties->getDefense() ?>
-        </td>
-        <td><span class="hint">(není ovlivněna výzbrojí)</span></td>
-    </tr>
-    <tr>
-        <td>OČ</td>
-        <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getDefenseNumber(), $fightProperties->getDefenseNumber()) ?>">
-            <?= $fightProperties->getDefenseNumber() ?>
-        </td>
-        <td><span class="hint">(ovlivněno pouze akcí, oslněním a Převahou)</span></td>
-    </tr>
-    <tr>
-        <td>Zbroj</td>
-        <td><img class="line-sized" src="images/armor-icon.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfSelectedBodyArmor()) ?>">
-            <?= $controller->getFight()->getProtectionOfSelectedBodyArmor() ?>
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Helma</td>
-        <td><img class="line-sized" src="images/helm-icon.png"></td>
-        <td class="<?= $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getPreviousHelmProtection(), $controller->getFight()->getSelectedHelmProtection()) ?>">
-            <?= $controller->getFight()->getSelectedHelmProtection() ?>
-        </td>
-        <td></td>
-    </tr>
-    </tbody>
-</table>
+<h2 id="Obecně" class="row"><a class="inner" href="#Obecně">Obecně</a></h2>
+<?php
+use DrdPlus\Properties\Body\Size;
+use DrdPlus\Tables\Measurements\Distance\Distance;
+use DrdPlus\Tables\Tables;
+
+$fightProperties = $controller->getFight()->getGenericFightProperties();
+$previousFightProperties = $controller->getFight()->getPreviousGenericFightProperties();
+$basicFightProperties = [];
+$basicFightProperties[] = ['Boj', $fightProperties->getFight(), $controller->getClassForChangedValue($previousFightProperties->getFight(), $fightProperties->getFight()), '(není ovlivněn výzbrojí)'];
+$basicFightProperties[] = ['Útok', $fightProperties->getAttack(), $controller->getClassForChangedValue($previousFightProperties->getAttack(), $fightProperties->getAttack()), '(není ovlivněn výzbrojí)'];
+$basicFightProperties[] = ['Obrana', $fightProperties->getDefense(), $controller->getClassForChangedValue($previousFightProperties->getDefense(), $fightProperties->getDefense()), '(není ovlivněna výzbrojí)'];
+$basicFightProperties[] = ['Střelba', $fightProperties->getShooting(), $controller->getClassForChangedValue($previousFightProperties->getShooting(), $fightProperties->getShooting()), '(není ovlivněna výzbrojí)'];
+$basicFightProperties[] = ['OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png">', $fightProperties->getDefenseNumber(), $controller->getClassForChangedValue($previousFightProperties->getDefenseNumber(), $fightProperties->getDefenseNumber()), '(ovlivněno pouze akcí, oslněním a Převahou)'];
+$targetDistance = new Distance(1, Distance::METER, Tables::getIt()->getDistanceTable());
+$attackNumber = $fightProperties->getAttackNumber($targetDistance, Size::getIt(1));
+$basicFightProperties[] = ['ÚČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png">', $attackNumber, $controller->getClassForChangedValue($previousFightProperties->getAttackNumber($targetDistance, Size::getIt(1)), $attackNumber), ''];
+$basicFightProperties[] = ['Zbroj <img class="line-sized" src="images/armor-icon.png">', $controller->getFight()->getProtectionOfCurrentBodyArmor(), $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfCurrentBodyArmor()), ''];
+$basicFightProperties[] = ['Helma <img class="line-sized" src="images/helm-icon.png">', $controller->getFight()->getCurrentHelmProtection(), $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getPreviousHelmProtection(), $controller->getFight()->getCurrentHelmProtection()), ''];
+$basicFightPropertyOrder = 1; ?>
+<div class="row">
+    <?php foreach ($basicFightProperties as [$name, $value, $class, $note]) {
+        if ($basicFightPropertyOrder > 1 && $basicFightPropertyOrder % 2 === 1) { ?>
+          <div class="row">
+        <?php } ?>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-3"><?= $name ?></div>
+          <div class="col-xs-3">
+            <strong class="<?= $class ?>"><?= $controller->formatNumber($value) ?></strong>
+              <?php if ($note) { ?>
+                <span class="note"><?= $note ?></span>
+              <?php } ?>
+          </div>
+        </div>
+      </div>
+        <?php if ($basicFightPropertyOrder % 2 === 0) { ?>
+        </div>
+        <?php }
+        $basicFightPropertyOrder++;
+    } ?>
+</div>

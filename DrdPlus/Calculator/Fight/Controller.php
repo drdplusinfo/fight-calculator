@@ -8,6 +8,7 @@ use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
+use Granam\Number\Tools\ToNumber;
 
 class Controller extends \DrdPlus\Calculator\AttackSkeleton\Controller
 {
@@ -130,5 +131,14 @@ class Controller extends \DrdPlus\Calculator\AttackSkeleton\Controller
         }
 
         return '';
+    }
+
+    public function formatNumber($number): string
+    {
+        $number = ToNumber::toNumber($number);
+
+        return $number >= 0
+            ? '+' . $number
+            : (string)$number;
     }
 }
