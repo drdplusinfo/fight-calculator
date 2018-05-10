@@ -108,20 +108,20 @@ class Fight extends AttackForCalculator
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getMeleeShieldFightProperties(): FightProperties
+    public function getCurrentMeleeShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getSelectedShieldForMelee(),
+            $this->getCurrentShieldForMelee(),
             $this->getCurrentMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getSelectedFightWithShieldsSkillRank(),
-            $this->getSelectedShieldForMelee(),
-            $this->getSelectedShieldUsageSkillRank(),
+            $this->getCurrentFightWithShieldsSkillRank(),
+            $this->getCurrentShieldForMelee(),
+            $this->getCurrentShieldUsageSkillRank(),
             $this->getCurrentBodyArmor(),
             $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
-            $this->getSelectedProfessionCode(),
-            $this->getSelectedOnHorseback(),
+            $this->getCurrentProfessionCode(),
+            $this->getCurrentOnHorseback(),
             $this->getSelectedRidingSkillRank(),
             $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
@@ -144,12 +144,12 @@ class Fight extends AttackForCalculator
             $this->getCurrentRangedSkillCode(),
             $this->getCurrentRangedSkillRank(),
             $this->getCurrentShieldForRanged(),
-            $this->getSelectedShieldUsageSkillRank(),
+            $this->getCurrentShieldUsageSkillRank(),
             $this->getCurrentBodyArmor(),
             $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
-            $this->getSelectedProfessionCode(),
-            $this->getSelectedOnHorseback(),
+            $this->getCurrentProfessionCode(),
+            $this->getCurrentOnHorseback(),
             $this->getSelectedRidingSkillRank(),
             $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
@@ -164,12 +164,12 @@ class Fight extends AttackForCalculator
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
             ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
-            $this->getSelectedShieldUsageSkillRank(),
+            $this->getCurrentShieldUsageSkillRank(),
             $this->getCurrentBodyArmor(),
             $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
-            $this->getSelectedProfessionCode(),
-            $this->getSelectedOnHorseback(),
+            $this->getCurrentProfessionCode(),
+            $this->getCurrentOnHorseback(),
             $this->getSelectedRidingSkillRank(),
             $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
@@ -655,14 +655,14 @@ class Fight extends AttackForCalculator
             $this->getCurrentShieldForRanged(),
             $this->getCurrentRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getSelectedFightWithShieldsSkillRank(),
+            $this->getCurrentFightWithShieldsSkillRank(),
             $this->getCurrentShieldForRanged(),
-            $this->getSelectedShieldUsageSkillRank(),
+            $this->getCurrentShieldUsageSkillRank(),
             $this->getCurrentBodyArmor(),
             $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
-            $this->getSelectedProfessionCode(),
-            $this->getSelectedOnHorseback(),
+            $this->getCurrentProfessionCode(),
+            $this->getCurrentOnHorseback(),
             $this->getSelectedRidingSkillRank(),
             $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
@@ -682,15 +682,15 @@ class Fight extends AttackForCalculator
         return $this->getCurrentFightProperties(
             $this->getCurrentMeleeWeapon(),
             $this->getCurrentMeleeWeaponHolding(),
-            $this->getSelectedMeleeSkillCode(),
-            $this->getSelectedMeleeSkillRank(),
-            $this->getSelectedShieldForMelee(),
-            $this->getSelectedShieldUsageSkillRank(),
+            $this->getCurrentMeleeSkillCode(),
+            $this->getCurrentMeleeSkillRank(),
+            $this->getCurrentShieldForMelee(),
+            $this->getCurrentShieldUsageSkillRank(),
             $this->getCurrentBodyArmor(),
             $this->getCurrentHelm(),
             $this->getCurrentArmorSkillRank(),
-            $this->getSelectedProfessionCode(),
-            $this->getSelectedOnHorseback(),
+            $this->getCurrentProfessionCode(),
+            $this->getCurrentOnHorseback(),
             $this->getSelectedRidingSkillRank(),
             $this->getSelectedFightFreeWillAnimal(),
             $this->getSelectedZoologySkillRank()
@@ -703,7 +703,7 @@ class Fight extends AttackForCalculator
      */
     private function getPreviousMeleeSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->getHistory()->getValue(Controller::MELEE_FIGHT_SKILL));
+        return $this->getCurrentSkill($this->getHistory()->getValue(Controller::MELEE_FIGHT_SKILL));
     }
 
     private function getPreviousMeleeSkillRank(): int
@@ -739,12 +739,12 @@ class Fight extends AttackForCalculator
      * @return SkillCode
      * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
-    public function getSelectedMeleeSkillCode(): SkillCode
+    public function getCurrentMeleeSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->getCurrentAttackValues()->getCurrentValue(Controller::MELEE_FIGHT_SKILL));
+        return $this->getCurrentSkill($this->getCurrentAttackValues()->getCurrentValue(Controller::MELEE_FIGHT_SKILL));
     }
 
-    public function getSelectedMeleeSkillRank(): int
+    public function getCurrentMeleeSkillRank(): int
     {
         return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::MELEE_FIGHT_SKILL_RANK);
     }
@@ -818,10 +818,10 @@ class Fight extends AttackForCalculator
      */
     public function getCurrentRangedSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_FIGHT_SKILL));
+        return $this->getCurrentSkill($this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_FIGHT_SKILL));
     }
 
-    public function getSelectedShieldUsageSkillRank(): int
+    public function getCurrentShieldUsageSkillRank(): int
     {
         return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::SHIELD_USAGE_SKILL_RANK);
     }
@@ -836,12 +836,12 @@ class Fight extends AttackForCalculator
         return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::RANGED_FIGHT_SKILL_RANK);
     }
 
-    public function getSelectedFightWithShieldsSkillRank(): int
+    public function getCurrentFightWithShieldsSkillRank(): int
     {
         return (int)$this->getCurrentAttackValues()->getCurrentValue(Controller::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
-    public function getSelectedProfessionCode(): ProfessionCode
+    public function getCurrentProfessionCode(): ProfessionCode
     {
         $selectedProfession = $this->getCurrentAttackValues()->getCurrentValue(Controller::PROFESSION);
         if (!$selectedProfession) {
@@ -855,13 +855,13 @@ class Fight extends AttackForCalculator
     {
         $previousProfession = $this->getHistory()->getValue(Controller::PROFESSION);
         if (!$previousProfession) {
-            return $this->getSelectedProfessionCode();
+            return $this->getCurrentProfessionCode();
         }
 
         return ProfessionCode::getIt($previousProfession);
     }
 
-    public function getSelectedOnHorseback(): bool
+    public function getCurrentOnHorseback(): bool
     {
         return (bool)$this->getCurrentAttackValues()->getCurrentValue(Controller::ON_HORSEBACK);
     }

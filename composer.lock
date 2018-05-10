@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a9a4a55501bf8dc987b26f11725d6a0f",
+    "hash": "78e0178656c295ff1f266daeb802161e",
     "content-hash": "572e97d8e5c3dfbb0e7826b6b40f294d",
     "packages": [
         {
@@ -1021,12 +1021,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-attack-skeleton.git",
-                "reference": "94a0a52202d842bc501ef51c977d42d603c89c0b"
+                "reference": "41e0481db876c5e4abe03ad41ec1c8e3e4d9a20a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/94a0a52202d842bc501ef51c977d42d603c89c0b",
-                "reference": "94a0a52202d842bc501ef51c977d42d603c89c0b",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/41e0481db876c5e4abe03ad41ec1c8e3e4d9a20a",
+                "reference": "41e0481db876c5e4abe03ad41ec1c8e3e4d9a20a",
                 "shasum": ""
             },
             "require": {
@@ -1062,7 +1062,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2018-05-08 14:15:12"
+            "time": "2018-05-10 09:45:30"
         },
         {
             "name": "drd-plus/background",
@@ -1153,12 +1153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-calculator-skeleton.git",
-                "reference": "9e807835eedfc1450e0cdc2e34acf98b599796ae"
+                "reference": "0f4100af4989626c013776cd1d61236cfbc716ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-calculator-skeleton/zipball/9e807835eedfc1450e0cdc2e34acf98b599796ae",
-                "reference": "9e807835eedfc1450e0cdc2e34acf98b599796ae",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-calculator-skeleton/zipball/0f4100af4989626c013776cd1d61236cfbc716ef",
+                "reference": "0f4100af4989626c013776cd1d61236cfbc716ef",
                 "shasum": ""
             },
             "require": {
@@ -1182,7 +1182,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2018-05-09 08:58:09"
+            "time": "2018-05-10 07:43:44"
         },
         {
             "name": "drd-plus/codes",
@@ -2367,12 +2367,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "d3268ea60c79284f9a8db7b78eb48cc99cc5d471"
+                "reference": "bc0c7361e137f205dc5775583701743b5c4edcda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d3268ea60c79284f9a8db7b78eb48cc99cc5d471",
-                "reference": "d3268ea60c79284f9a8db7b78eb48cc99cc5d471",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/bc0c7361e137f205dc5775583701743b5c4edcda",
+                "reference": "bc0c7361e137f205dc5775583701743b5c4edcda",
                 "shasum": ""
             },
             "conflict": {
@@ -2403,13 +2403,14 @@
                 "doctrine/mongodb-odm-bundle": ">=2,<3.0.1",
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=7,<7.58|>=8,<8.4.6|>=8.5,<8.5.1",
-                "drupal/drupal": ">=7,<7.58|>=8,<8.4.6|>=8.5,<8.5.1",
+                "drupal/core": ">=7,<7.59|>=8,<8.4.8|>=8.5,<8.5.3",
+                "drupal/drupal": ">=7,<7.59|>=8,<8.4.8|>=8.5,<8.5.3",
                 "erusev/parsedown": "<1.7",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.3|>=5.4,<5.4.11.3|>=2017.8,<2017.8.1.1|>=2017.12,<2017.12.2.1",
                 "firebase/php-jwt": "<2",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
+                "fuel/core": "<=1.8",
                 "gree/jose": "<=2.2",
                 "gregwar/rst": "<1.0.3",
                 "guzzlehttp/guzzle": ">=6,<6.2.1|>=4.0.0-rc2,<4.2.4|>=5,<5.3.1",
@@ -2522,7 +2523,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2018-04-30 07:23:33"
+            "time": "2018-05-09 13:33:28"
         },
         {
             "name": "symfony/console",

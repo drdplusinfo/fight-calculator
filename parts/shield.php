@@ -46,19 +46,19 @@ namespace DrdPlus\Calculator\Fight;
             <?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></a>
         </span>
       <label>na stupni <input type="radio" value="0" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
-                              <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
+                              <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
         0,
       </label>
       <label><input type="radio" value="1" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
-                    <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 1) { ?>checked<?php } ?>>
+                    <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 1) { ?>checked<?php } ?>>
         1,
       </label>
       <label><input type="radio" value="2" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
-                    <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 2) { ?>checked<?php } ?>>
+                    <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 2) { ?>checked<?php } ?>>
         2,
       </label>
       <label><input type="radio" value="3" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
-                    <?php if ($controller->getFight()->getSelectedShieldUsageSkillRank() === 3) { ?>checked<?php } ?>>
+                    <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 3) { ?>checked<?php } ?>>
         3
       </label>
     </div>
@@ -69,19 +69,19 @@ namespace DrdPlus\Calculator\Fight;
         </a>
       </label>
       <label>na stupni <input type="radio" value="0" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                              <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
+                              <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
         0,
       </label>
       <label><input type="radio" value="1" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                    <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 1) { ?>checked<?php } ?>>
+                    <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 1) { ?>checked<?php } ?>>
         1,
       </label>
       <label><input type="radio" value="2" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                    <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 2) { ?>checked<?php } ?>>
+                    <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 2) { ?>checked<?php } ?>>
         2,
       </label>
       <label><input type="radio" value="3" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
-                    <?php if ($controller->getFight()->getSelectedFightWithShieldsSkillRank() === 3) { ?>checked<?php } ?>>
+                    <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 3) { ?>checked<?php } ?>>
         3
       </label>
     </div>
@@ -90,7 +90,7 @@ namespace DrdPlus\Calculator\Fight;
     <div class="col">
         <?php
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $currentShieldFightProperties = $controller->getFight()->getMeleeShieldFightProperties();
+        $currentShieldFightProperties = $controller->getFight()->getCurrentMeleeShieldFightProperties();
         /** @noinspection PhpUnusedLocalVariableInspection */
         $previousShieldFightProperties = $controller->getFight()->getPreviousMeleeShieldFightProperties();
         /** @noinspection PhpUnusedLocalVariableInspection */

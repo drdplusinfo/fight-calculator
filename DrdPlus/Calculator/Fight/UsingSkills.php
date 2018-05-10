@@ -17,7 +17,7 @@ trait UsingSkills
      * @return SkillCode
      * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
      */
-    public function getSelectedSkill(string $skillName = null): SkillCode
+    public function getCurrentSkill(string $skillName = null): SkillCode
     {
         if (!$skillName) {
             return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED);

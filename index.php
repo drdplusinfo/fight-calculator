@@ -20,7 +20,7 @@ $controller = new Controller();
     <link href="css/generic/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/generic/skeleton.css" rel="stylesheet" type="text/css">
     <link href="css/generic/issues.css" rel="stylesheet" type="text/css">
-    <link href="css/attack/attack-skeleton.css" rel="stylesheet" type="text/css">
+    <link href="css/attack/skeleton.css" rel="stylesheet" type="text/css">
     <link href="css/fight.css" rel="stylesheet" type="text/css">
     <noscript>
       <link href="css/generic/no_script.css" rel="stylesheet" type="text/css">

@@ -11,7 +11,7 @@ use DrdPlus\Codes\Skills\PsychicalSkillCode;
         <label>
             <input type="checkbox" value="1"
                    name="<?= Controller::ON_HORSEBACK ?>"
-                   <?php if ($controller->getFight()->getSelectedOnHorseback()) { ?>checked="checked" <?php } ?>>
+                   <?php if ($controller->getFight()->getCurrentOnHorseback()) { ?>checked="checked" <?php } ?>>
             Bojuješ ze sedla
         </label>
     </div>

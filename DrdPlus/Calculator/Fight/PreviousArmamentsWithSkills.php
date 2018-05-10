@@ -52,7 +52,7 @@ class PreviousArmamentsWithSkills extends PreviousArmaments
      */
     public function getPreviousRangedSkillCode(): SkillCode
     {
-        return $this->getSelectedSkill($this->getHistory()->getValue(Controller::RANGED_FIGHT_SKILL));
+        return $this->getCurrentSkill($this->getHistory()->getValue(Controller::RANGED_FIGHT_SKILL));
     }
 
     public function getPreviousRangedSkillRank(): int

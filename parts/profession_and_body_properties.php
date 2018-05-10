@@ -14,7 +14,7 @@ use DrdPlus\Codes\ProfessionCode;
     <select id="profession" name="<?= Controller::PROFESSION ?>">
         <?php foreach (ProfessionCode::getPossibleValues() as $professionValue) { ?>
           <option value="<?= $professionValue ?>"
-                  <?php if ($controller->getFight()->getSelectedProfessionCode()->getValue() === $professionValue) { ?>selected<?php } ?>>
+                  <?php if ($controller->getFight()->getCurrentProfessionCode()->getValue() === $professionValue) { ?>selected<?php } ?>>
               <?= ProfessionCode::getIt($professionValue)->translateTo('cs') ?>
           </option>
         <?php } ?>
