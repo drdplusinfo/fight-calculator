@@ -18,31 +18,31 @@ $currentAttackNumber = $fightProperties->getAttackNumber(
     $controller->getFight()->getCurrentTargetSize() // melee attack is not affected by this
 );
 ?>
-<tr>
-    <td>BČ</td>
-    <td><img class="line-sized" src="images/emojione/fight-2694.png"></td>
-    <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getFightNumber(), $fightProperties->getFightNumber()) ?>">
+<div class="col">
+  BČ
+  <img class="line-sized" src="images/emojione/fight-2694.png">
+  <span class="<?= $controller->getClassForChangedValue($previousFightProperties->getFightNumber(), $fightProperties->getFightNumber()) ?>">
         <?= $fightProperties->getFightNumber() ?>
-    </td>
-</tr>
-<tr>
-    <td>ÚČ</td>
-    <td><img class="line-sized" src="images/emojione/fight-number-1f624.png"></td>
-    <td class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
+
+</div>
+<div class="col">
+  ÚČ
+  <img class="line-sized" src="images/emojione/fight-number-1f624.png">
+  <span class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
         <?= $currentAttackNumber ?>
-    </td>
-</tr>
-<tr>
-    <td>ZZ</td>
-    <td><img class="line-sized" src="images/emojione/base-of-wounds-1f480.png"></td>
-    <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getBaseOfWounds(), $fightProperties->getBaseOfWounds()) ?>">
+
+</div>
+<div class="col">
+  ZZ
+  <img class="line-sized" src="images/emojione/base-of-wounds-1f480.png">
+  <span class="<?= $controller->getClassForChangedValue($previousFightProperties->getBaseOfWounds(), $fightProperties->getBaseOfWounds()) ?>">
         <?= $fightProperties->getBaseOfWounds() ?>
-    </td>
-</tr>
-<tr>
-    <td>OČ</td>
-    <td><img class="line-sized" src="images/emojione/defense-number-1f6e1.png"></td>
-    <td class="<?= $controller->getClassForChangedValue($previousFightProperties->getDefenseNumberWithWeaponlike(), $fightProperties->getDefenseNumberWithWeaponlike()) ?>">
+
+</div>
+<div class="col">
+  OČ
+  <img class="line-sized" src="images/emojione/defense-number-1f6e1.png">
+  <span class="<?= $controller->getClassForChangedValue($previousFightProperties->getDefenseNumberWithWeaponlike(), $fightProperties->getDefenseNumberWithWeaponlike()) ?>">
         <?= $fightProperties->getDefenseNumberWithWeaponlike() ?>
-    </td>
-</tr>
+
+</div>

@@ -34,6 +34,7 @@
   "scripts": {
     "pre-autoload-dump": [
       "rm -fr ./css/generic && ln -s ../vendor/drd-plus/calculator-skeleton/css/generic ./css/generic",
+      "rm -fr ./css/attack && ln -s ../vendor/drd-plus/attack-skeleton/css/attack ./css/attack",
       "rm -fr ./js/generic && ln -s ../vendor/drd-plus/calculator-skeleton/js/generic ./js/generic",
       "rm -fr ./images/generic && ln -s ../vendor/drd-plus/calculator-skeleton/images/generic ./images/generic"
     ]

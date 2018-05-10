@@ -20,6 +20,7 @@ $controller = new Controller();
     <link href="css/generic/graphics.css" rel="stylesheet" type="text/css">
     <link href="css/generic/skeleton.css" rel="stylesheet" type="text/css">
     <link href="css/generic/issues.css" rel="stylesheet" type="text/css">
+    <link href="css/attack/attack-skeleton.css" rel="stylesheet" type="text/css">
     <link href="css/fight.css" rel="stylesheet" type="text/css">
     <noscript>
       <link href="css/generic/no_script.css" rel="stylesheet" type="text/css">
@@ -32,39 +33,14 @@ $controller = new Controller();
       <hr class="col">
     </div>
     <form action="" method="get">
-      <div class="col">
-          <?php include __DIR__ . '/parts/basic_fight_properties.php' ?>
-      </div>
-      <div class="col">
-        <h2 id="Na blízko"><a href="#Na blízko" class="inner">Na blízko</a></h2>
-        <fieldset>
-            <?php include __DIR__ . '/parts/melee_weapon.php' ?>
-        </fieldset>
-      </div>
-      <div class="col">
-        <h2 id="Na dálku"><a href="#Na dálku" class="inner">Na dálku</a></h2>
-        <fieldset>
-            <?php include __DIR__ . '/parts/ranged_weapon.php'; ?>
-        </fieldset>
-      </div>
-      <div class="col">
-        <h2 id="Štít"><a href="#Štít" class="inner">Štít</a></h2>
-        <fieldset>
-            <?php include __DIR__ . '/parts/shield.php'; ?>
-        </fieldset>
-      </div>
-      <div class="col">
-        <h2 id="Zbroj"><a href="#Zbroj" class="inner">Zbroj a helma</a></h2>
-        <fieldset>
-            <?php include __DIR__ . '/parts/armor_and_helm.php'; ?>
-        </fieldset>
-      </div>
-      <div class="col">
-        <h2 id="Vlastnosti"><a href="#Vlastnosti" class="inner">Vlastnosti</a></h2>
-        <fieldset>
-            <?php include __DIR__ . '/parts/profession_and_body_properties.php'; ?>
-        </fieldset>
-      </div>
+        <?php
+        include __DIR__ . '/parts/basic_fight_properties.php';
+        include __DIR__ . '/parts/profession_and_body_properties.php';
+        include __DIR__ . '/parts/melee_weapon.php';
+        include __DIR__ . '/parts/ranged_weapon.php';
+        include __DIR__ . '/parts/shield.php';
+        include __DIR__ . '/parts/armor_and_helm.php';
+        ?>
       <div class="col">
         <h2 id="Prostředí"><a href="#Prostředí" class="inner">Prostředí</a></h2>
         <fieldset>

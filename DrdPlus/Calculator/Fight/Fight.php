@@ -112,7 +112,7 @@ class Fight extends AttackForCalculator
     {
         return $this->getCurrentFightProperties(
             $this->getSelectedShieldForMelee(),
-            $this->getSelectedMeleeShieldHolding(),
+            $this->getCurrentMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getSelectedShieldForMelee(),
@@ -653,7 +653,7 @@ class Fight extends AttackForCalculator
     {
         return $this->getCurrentFightProperties(
             $this->getCurrentShieldForRanged(),
-            $this->getSelectedRangedShieldHolding(),
+            $this->getCurrentRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->getSelectedFightWithShieldsSkillRank(),
             $this->getCurrentShieldForRanged(),
