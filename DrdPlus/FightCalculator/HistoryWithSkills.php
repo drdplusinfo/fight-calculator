@@ -1,8 +1,8 @@
 <?php
-namespace DrdPlus\Calculator\Fight;
+namespace DrdPlus\FightCalculator;
 
-use DrdPlus\Calculator\Skeleton\Cookie;
-use DrdPlus\Calculator\Skeleton\History;
+use DrdPlus\CalculatorSkeleton\History;
+use DrdPlus\FrontendSkeleton\Cookie;
 
 class HistoryWithSkills extends History
 {
@@ -32,16 +32,16 @@ class HistoryWithSkills extends History
         parent::__construct($deleteFightHistory, $valuesToRemember, $rememberCurrent, $cookiesPostfix, $cookiesTtl);
     }
 
-    protected function remember(array $valuesToRemember, int $cookiesTtl): void
+    protected function remember(array $valuesToRemember, \DateTime $cookiesTtlDate): void
     {
-        parent::remember($valuesToRemember, $cookiesTtl);
+        parent::remember($valuesToRemember, $cookiesTtlDate);
         $this->addSelectedSkillsToHistory($valuesToRemember);
     }
 
     protected function deleteHistory(): void
     {
         parent::deleteHistory();
-        Cookie::setCookie(self::RANKS_HISTORY, null);
+        Cookie::deleteCookie(self::RANKS_HISTORY);
     }
 
     private function addSelectedSkillsToHistory(array $request): void

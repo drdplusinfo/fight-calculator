@@ -2,7 +2,7 @@
 declare(strict_types=1);
 /** be strict for parameter types, https://www.quora.com/Are-strict_types-in-PHP-7-not-a-bad-idea */
 
-namespace DrdPlus\Calculator\Fight;
+namespace DrdPlus\FightCalculator;
 
 use DrdPlus\Codes\Skills\CombinedSkillCode;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
@@ -15,7 +15,7 @@ trait UsingSkills
     /**
      * @param string|null $skillName
      * @return SkillCode
-     * @throws \DrdPlus\Calculator\Fight\Exceptions\UnknownSkill
+     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
      */
     public function getCurrentSkill(string $skillName = null): SkillCode
     {

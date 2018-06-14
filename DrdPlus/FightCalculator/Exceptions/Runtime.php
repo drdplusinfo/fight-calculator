@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculator\Fight\Exceptions;
+namespace DrdPlus\FightCalculator\Exceptions;
 
 interface Runtime extends Exception
 {

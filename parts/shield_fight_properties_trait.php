@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculator\Fight;
+namespace DrdPlus\FightCalculator;
 
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Codes\Units\DistanceUnitCode;
@@ -9,7 +9,7 @@ use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Tables;
 
 /**
- * @var Controller $controller
+ * @var FightController $controller
  * @var FightProperties $previousShieldFightProperties
  * @var FightProperties $currentShieldFightProperties
  * @var ItemHoldingCode $previousShieldHolding
@@ -27,7 +27,7 @@ $currentAttackNumber = $currentShieldFightProperties->getAttackNumber(
 ?>
 <div class="col">
   BČ
-  <img class="line-sized" src="images/emojione/fight-2694.png">
+  <img class="line-sized" src="/images/emojione/fight-2694.png">
   <span class="<?= $controller->getClassForChangedValue($previousShieldFightProperties->getFightNumber(), $currentShieldFightProperties->getFightNumber()) ?>">
       <?= $controller->formatNumber($currentShieldFightProperties->getFightNumber()) ?>
   </span>
@@ -35,21 +35,21 @@ $currentAttackNumber = $currentShieldFightProperties->getAttackNumber(
 </div>
 <div class="col">
   ÚČ
-  <img class="line-sized" src="images/emojione/fight-number-1f624.png">
+  <img class="line-sized" src="/images/emojione/fight-number-1f624.png">
   <span class="<?= $controller->getClassForChangedValue($previousAttackNumber, $currentAttackNumber) ?>">
       <?= $controller->formatNumber($currentAttackNumber) ?></span>
   <span class="hint">se štítem <a href="https://pph.drdplus.info/#boj_se_zbrani">jako zbraň</a></span>
 </div>
 <div class="col">
   ZZ
-  <img class="line-sized" src="images/emojione/base-of-wounds-1f480.png">
+  <img class="line-sized" src="/images/emojione/base-of-wounds-1f480.png">
   <span class="<?= $controller->getClassForChangedValue($previousShieldFightProperties->getBaseOfWounds(), $currentShieldFightProperties->getBaseOfWounds()) ?>">
       <?= $controller->formatNumber($currentShieldFightProperties->getBaseOfWounds()) ?></span>
   <span class="hint">se štítem <a href="https://pph.drdplus.info/#boj_se_zbrani">jako zbraň</a></span>
 </div>
 <div class="col">
   OČ
-  <img class="line-sized" src="images/emojione/defense-number-1f6e1.png">
+  <img class="line-sized" src="/images/emojione/defense-number-1f6e1.png">
   <span class="<?= $controller->getClassForChangedValue($previousShieldFightProperties->getDefenseNumberWithShield(), $currentShieldFightProperties->getDefenseNumberWithShield()) ?>">
       <?= $controller->formatNumber($currentShieldFightProperties->getDefenseNumberWithShield()) ?>
 </div>

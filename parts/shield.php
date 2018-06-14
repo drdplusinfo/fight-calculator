@@ -1,16 +1,15 @@
 <?php
-namespace DrdPlus\Calculator\Fight;
+namespace DrdPlus\FightCalculator;
 
-/** @var Controller $controller */
+/** @var FightController $controller */
 ?>
 
 <div class="row">
   <h2 id="Štít" class="col"><a href="#Štít" class="inner">Štít</a></h2>
 </div>
 <fieldset>
-    <?php if ($controller->isAddingNewShield()) {
-        include __DIR__ . '/../vendor/drd-plus/attack-skeleton/parts/add_custom_shield.php';
-    }
+    <?php
+    echo $controller->getAddCustomShield();
     foreach ($controller->getCurrentValues()->getCustomShieldsValues() as $shieldName => $shieldValues) {
         /** @var array|string[] $shieldValues */
         foreach ($shieldValues as $typeName => $shieldValue) { ?>
@@ -20,10 +19,10 @@ namespace DrdPlus\Calculator\Fight;
   <div class="row <?php if ($controller->isAddingNewShield()) { ?>hidden<?php } ?>" id="chooseShield">
     <div class="col-sm">
       <a title="Přidat vlastní štít"
-         href="<?= $controller->getCurrentUrlWithQuery([Controller::ACTION => Controller::ADD_NEW_SHIELD]) ?>"
+         href="<?= $controller->getLocalUrlWithQuery([FightController::ACTION => FightController::ADD_NEW_SHIELD]) ?>"
          class="button add">+</a>
       <label>
-        <select name="<?= Controller::SHIELD ?>"><?php
+        <select name="<?= FightController::SHIELD ?>"><?php
             /** @var array $shield */
             foreach ($controller->getShields() as $shield) {
                 $shieldCode = $shield['code']; ?>
@@ -45,19 +44,19 @@ namespace DrdPlus\Calculator\Fight;
       <span class="keyword"><a href="https://pph.drdplus.info/#pouzivani_stitu" target="_blank">
             <?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></a>
         </span>
-      <label>na stupni <input type="radio" value="0" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
+      <label>na stupni <input type="radio" value="0" name="<?= FightController::SHIELD_USAGE_SKILL_RANK ?>"
                               <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
         0,
       </label>
-      <label><input type="radio" value="1" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
+      <label><input type="radio" value="1" name="<?= FightController::SHIELD_USAGE_SKILL_RANK ?>"
                     <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 1) { ?>checked<?php } ?>>
         1,
       </label>
-      <label><input type="radio" value="2" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
+      <label><input type="radio" value="2" name="<?= FightController::SHIELD_USAGE_SKILL_RANK ?>"
                     <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 2) { ?>checked<?php } ?>>
         2,
       </label>
-      <label><input type="radio" value="3" name="<?= Controller::SHIELD_USAGE_SKILL_RANK ?>"
+      <label><input type="radio" value="3" name="<?= FightController::SHIELD_USAGE_SKILL_RANK ?>"
                     <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 3) { ?>checked<?php } ?>>
         3
       </label>
@@ -68,19 +67,19 @@ namespace DrdPlus\Calculator\Fight;
             <?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?>
         </a>
       </label>
-      <label>na stupni <input type="radio" value="0" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+      <label>na stupni <input type="radio" value="0" name="<?= FightController::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
                               <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
         0,
       </label>
-      <label><input type="radio" value="1" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+      <label><input type="radio" value="1" name="<?= FightController::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
                     <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 1) { ?>checked<?php } ?>>
         1,
       </label>
-      <label><input type="radio" value="2" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+      <label><input type="radio" value="2" name="<?= FightController::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
                     <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 2) { ?>checked<?php } ?>>
         2,
       </label>
-      <label><input type="radio" value="3" name="<?= Controller::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
+      <label><input type="radio" value="3" name="<?= FightController::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
                     <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 3) { ?>checked<?php } ?>>
         3
       </label>

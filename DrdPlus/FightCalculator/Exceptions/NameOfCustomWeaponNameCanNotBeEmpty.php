@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Calculator\Fight\Exceptions;
+namespace DrdPlus\FightCalculator\Exceptions;
 
 class NameOfCustomWeaponNameCanNotBeEmpty extends \InvalidArgumentException implements Logic
 {

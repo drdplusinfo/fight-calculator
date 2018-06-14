@@ -24,19 +24,26 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "~6.0",
+    "phpunit/phpunit": "~7.0",
     "mockery/mockery": "~1.0",
-    "granam/exceptions-hierarchy": "~4.0",
+    "granam/exceptions-hierarchy": "dev-master",
     "phpgt/dom": "^1.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
     "pre-autoload-dump": [
-      "rm -fr ./css/generic && ln -s ../vendor/drd-plus/calculator-skeleton/css/generic ./css/generic",
-      "rm -fr ./css/attack && ln -s ../vendor/drd-plus/attack-skeleton/css/attack ./css/attack",
-      "rm -fr ./js/generic && ln -s ../vendor/drd-plus/calculator-skeleton/js/generic ./js/generic",
-      "rm -fr ./images/generic && ln -s ../vendor/drd-plus/calculator-skeleton/images/generic ./images/generic"
+      "rm -f DrdPlus/Tests/CalculatorSkeleton && ln -s ../../vendor/drd-plus/calculator-skeleton/DrdPlus/Tests/CalculatorSkeleton DrdPlus/Tests/",
+      "rm -fr ./css/generic && cp -r ./vendor/drd-plus/calculator-skeleton/css/generic ./css/",
+      "rm -f ./js/generic && ln -s ../vendor/drd-plus/calculator-skeleton/js/generic ./js/generic",
+      "rm -f ./images/generic && ln -s ../vendor/drd-plus/calculator-skeleton/images/generic ./images/generic",
+      "find ./cache -mindepth 2 -type f -exec rm {} +"
+    ],
+    "post-update-cmd": [
+      "php ./vendor/bin/assets --dir=css"
+    ],
+    "post-install-cmd": [
+      "php ./vendor/bin/assets --dir=css"
     ]
   }
 }

@@ -1,16 +1,17 @@
 <?php
-namespace DrdPlus\Calculator\Fight;
+namespace DrdPlus\FightCalculator;
 
-use DrdPlus\Calculator\AttackSkeleton\CustomArmamentsService;
-use DrdPlus\Calculator\AttackSkeleton\PreviousProperties;
-use DrdPlus\Calculator\Skeleton\History;
+use DrdPlus\AttackSkeleton\AttackController;
+use DrdPlus\AttackSkeleton\CustomArmamentsService;
+use DrdPlus\AttackSkeleton\PreviousProperties;
+use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
 use Granam\Number\Tools\ToNumber;
 
-class Controller extends \DrdPlus\Calculator\AttackSkeleton\Controller
+class FightController extends AttackController
 {
     public const PROFESSION = 'profession';
     public const MELEE_FIGHT_SKILL = 'melee_fight_skill';
@@ -31,11 +32,34 @@ class Controller extends \DrdPlus\Calculator\AttackSkeleton\Controller
     private $fight;
 
     /**
-     * @throws \DrdPlus\Calculator\AttackSkeleton\Exceptions\BrokenNewArmamentValues
+     * @param string $sourceCodeUrl
+     * @param string $documentRoot
+     * @param string $vendorRoot
+     * @param string|null $partsRoot
+     * @param string|null $genericPartsRoot
+     * @param int|null $cookiesTtl
+     * @param array|null $selectedValues
      */
-    public function __construct()
+    public function __construct(
+        string $sourceCodeUrl,
+        string $documentRoot,
+        string $vendorRoot,
+        string $partsRoot = null,
+        string $genericPartsRoot = null,
+        int $cookiesTtl = null,
+        array $selectedValues = null
+    )
     {
-        parent::__construct('fight' /* cookies postfix */);
+        parent::__construct(
+            $sourceCodeUrl,
+            'fight' /* cookies postfix */,
+            $documentRoot,
+            $vendorRoot,
+            $partsRoot,
+            $genericPartsRoot,
+            $cookiesTtl,
+            $selectedValues
+        );
         $this->fight = new Fight(
             $this->getCurrentValues(),
             $this->getCurrentProperties(),
@@ -46,6 +70,12 @@ class Controller extends \DrdPlus\Calculator\AttackSkeleton\Controller
         );
     }
 
+    /**
+     * @param array $values
+     * @param string $cookiesPostfix
+     * @param int|null $cookiesTtl
+     * @return History|HistoryWithSkills
+     */
     protected function createHistory(array $values, string $cookiesPostfix, int $cookiesTtl = null): History
     {
         return new HistoryWithSkills(
