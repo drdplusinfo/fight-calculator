@@ -1,3 +1,7 @@
+.background-image {
+    background-size: contain;
+}
+
 body {
     font-size: 16px;
     font-family: serif;
