@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\FightCalculator;
 
-/** @var Controller $controller */
+/** @var FightController $controller */
 ?>
 <div class="row">
   <h2 id="Obecně" class="col"><a class="inner" href="#Obecně">Obecně</a></h2>
@@ -18,12 +18,12 @@ $basicFightProperties[] = ['Boj', $fightProperties->getFight(), $controller->get
 $basicFightProperties[] = ['Útok', $fightProperties->getAttack(), $controller->getClassForChangedValue($previousFightProperties->getAttack(), $fightProperties->getAttack()), '(není ovlivněn výzbrojí)'];
 $basicFightProperties[] = ['Obrana', $fightProperties->getDefense(), $controller->getClassForChangedValue($previousFightProperties->getDefense(), $fightProperties->getDefense()), '(není ovlivněna výzbrojí)'];
 $basicFightProperties[] = ['Střelba', $fightProperties->getShooting(), $controller->getClassForChangedValue($previousFightProperties->getShooting(), $fightProperties->getShooting()), '(není ovlivněna výzbrojí)'];
-$basicFightProperties[] = ['OČ <img class="line-sized" src="images/emojione/defense-number-1f6e1.png">', $fightProperties->getDefenseNumber(), $controller->getClassForChangedValue($previousFightProperties->getDefenseNumber(), $fightProperties->getDefenseNumber()), '(ovlivněno pouze akcí, oslněním a Převahou)'];
+$basicFightProperties[] = ['OČ <img class="line-sized" src="/images/emojione/defense-number-1f6e1.png">', $fightProperties->getDefenseNumber(), $controller->getClassForChangedValue($previousFightProperties->getDefenseNumber(), $fightProperties->getDefenseNumber()), '(ovlivněno pouze akcí, oslněním a Převahou)'];
 $targetDistance = new Distance(1, Distance::METER, Tables::getIt()->getDistanceTable());
 $attackNumber = $fightProperties->getAttackNumber($targetDistance, Size::getIt(1));
-$basicFightProperties[] = ['ÚČ <img class="line-sized" src="images/emojione/fight-number-1f624.png">', $attackNumber, $controller->getClassForChangedValue($previousFightProperties->getAttackNumber($targetDistance, Size::getIt(1)), $attackNumber), ''];
-$basicFightProperties[] = ['Zbroj <img class="line-sized" src="images/armor-icon.png">', $controller->getFight()->getProtectionOfCurrentBodyArmor(), $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfCurrentBodyArmor()), ''];
-$basicFightProperties[] = ['Helma <img class="line-sized" src="images/helm-icon.png">', $controller->getFight()->getCurrentHelmProtection(), $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getPreviousHelmProtection(), $controller->getFight()->getCurrentHelmProtection()), ''];
+$basicFightProperties[] = ['ÚČ <img class="line-sized" src="/images/emojione/fight-number-1f624.png">', $attackNumber, $controller->getClassForChangedValue($previousFightProperties->getAttackNumber($targetDistance, Size::getIt(1)), $attackNumber), ''];
+$basicFightProperties[] = ['Zbroj <img class="line-sized" src="/images/armor-icon.png">', $controller->getFight()->getProtectionOfCurrentBodyArmor(), $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getProtectionOfPreviousBodyArmor(), $controller->getFight()->getProtectionOfCurrentBodyArmor()), ''];
+$basicFightProperties[] = ['Helma <img class="line-sized" src="/images/helm-icon.png">', $controller->getFight()->getCurrentHelmProtection(), $controller->getClassForChangedValue($controller->getFight()->getPreviousArmaments()->getPreviousHelmProtection(), $controller->getFight()->getCurrentHelmProtection()), ''];
 $basicFightPropertyOrder = 1; ?>
 <div class="row">
     <?php foreach ($basicFightProperties as [$name, $value, $class, $note]) {
