@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e21165875dc70a70827a59219335874a",
+    "hash": "e1bb163dde7cded1d2fe1813a4e48db5",
     "content-hash": "23fde0d53e6245aeb9ca5cc260c42385",
     "packages": [
         {
@@ -1021,12 +1021,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-attack-skeleton.git",
-                "reference": "2c253f4ffa9473e4cbf8179639f767045146c697"
+                "reference": "f25a42ffcaf72f5fe4027fa8d0e8933224f2969a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/2c253f4ffa9473e4cbf8179639f767045146c697",
-                "reference": "2c253f4ffa9473e4cbf8179639f767045146c697",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/f25a42ffcaf72f5fe4027fa8d0e8933224f2969a",
+                "reference": "f25a42ffcaf72f5fe4027fa8d0e8933224f2969a",
                 "shasum": ""
             },
             "require": {
@@ -1062,7 +1062,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2018-06-14 05:28:54"
+            "time": "2018-06-19 15:52:42"
         },
         {
             "name": "drd-plus/background",
@@ -1153,12 +1153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-calculator-skeleton.git",
-                "reference": "3a33d79757825eaeef501f58217e48a389926ccb"
+                "reference": "0d0ef4b45627cab768d1837a39fede619d7cc7b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-calculator-skeleton/zipball/3a33d79757825eaeef501f58217e48a389926ccb",
-                "reference": "3a33d79757825eaeef501f58217e48a389926ccb",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-calculator-skeleton/zipball/0d0ef4b45627cab768d1837a39fede619d7cc7b3",
+                "reference": "0d0ef4b45627cab768d1837a39fede619d7cc7b3",
                 "shasum": ""
             },
             "require": {
@@ -1186,7 +1186,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2018-06-14 05:23:43"
+            "time": "2018-06-19 11:51:00"
         },
         {
             "name": "drd-plus/codes",
@@ -1368,12 +1368,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-frontend-skeleton.git",
-                "reference": "dbabca053e1a7f63733d83fa4e4c6121f6be3d36"
+                "reference": "770e275785cb10bcb78b72cc11564155cb53d315"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-frontend-skeleton/zipball/dbabca053e1a7f63733d83fa4e4c6121f6be3d36",
-                "reference": "dbabca053e1a7f63733d83fa4e4c6121f6be3d36",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-frontend-skeleton/zipball/770e275785cb10bcb78b72cc11564155cb53d315",
+                "reference": "770e275785cb10bcb78b72cc11564155cb53d315",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1414,7 @@
                 "pages",
                 "view"
             ],
-            "time": "2018-06-14 05:15:13"
+            "time": "2018-06-19 14:52:29"
         },
         {
             "name": "drd-plus/health",
@@ -3980,16 +3980,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "ed5fd2281113729f1ebcc64d101ad66028aeb3d5"
+                "reference": "591a30922f54656695e59b1f39501aec513403da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/ed5fd2281113729f1ebcc64d101ad66028aeb3d5",
-                "reference": "ed5fd2281113729f1ebcc64d101ad66028aeb3d5",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/591a30922f54656695e59b1f39501aec513403da",
+                "reference": "591a30922f54656695e59b1f39501aec513403da",
                 "shasum": ""
             },
             "require": {
@@ -4040,7 +4040,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2018-04-18 13:33:00"
+            "time": "2018-06-14 15:05:28"
         },
         {
             "name": "sebastian/diff",

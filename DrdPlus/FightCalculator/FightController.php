@@ -6,6 +6,7 @@ use DrdPlus\AttackSkeleton\CustomArmamentsService;
 use DrdPlus\AttackSkeleton\PreviousProperties;
 use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
+use DrdPlus\FrontendSkeleton\HtmlHelper;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
@@ -51,6 +52,7 @@ class FightController extends AttackController
     )
     {
         parent::__construct(
+            HtmlHelper::createFromGlobals($documentRoot),
             $sourceCodeUrl,
             'fight' /* cookies postfix */,
             $documentRoot,
