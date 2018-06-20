@@ -33,10 +33,10 @@
   "prefer-stable": true,
   "scripts": {
     "pre-autoload-dump": [
-      "rm -f DrdPlus/Tests/CalculatorSkeleton && ln -s ../../vendor/drd-plus/calculator-skeleton/DrdPlus/Tests/CalculatorSkeleton DrdPlus/Tests/",
-      "rm -fr ./css/generic && cp -r ./vendor/drd-plus/calculator-skeleton/css/generic ./css/",
-      "rm -f ./js/generic && ln -s ../vendor/drd-plus/calculator-skeleton/js/generic ./js/generic",
-      "rm -f ./images/generic && ln -s ../vendor/drd-plus/calculator-skeleton/images/generic ./images/generic",
+      "rm -f DrdPlus/Tests/CalculatorSkeleton && ln -s ../../vendor/drd-plus/attack-skeleton/DrdPlus/Tests/CalculatorSkeleton DrdPlus/Tests/",
+      "rm -fr ./css/generic && cp -r ./vendor/drd-plus/attack-skeleton/css/generic ./css/",
+      "rm -f ./js/generic && ln -s ../vendor/drd-plus/attack-skeleton/js/generic ./js/generic",
+      "rm -f ./images/generic && ln -s ../vendor/drd-plus/attack-skeleton/images/generic ./images/generic",
       "find ./cache -mindepth 2 -type f -exec rm {} +"
     ],
     "post-update-cmd": [

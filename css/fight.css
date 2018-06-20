@@ -67,10 +67,6 @@ table.result {
     text-align: left;
 }
 
-.skill {
-    margin: 0.2em 0;
-}
-
 .body-properties > .panel {
     min-width: 5em;
 }
@@ -108,18 +104,6 @@ table.result {
     display: inline-block;
     padding: 1px 1em;
     border-radius: 2px;
-}
-
-.button {
-    display: inline-block;
-    text-align: center;
-    color: black;
-    height: 1.3em;
-    min-width: 1.3em;
-    text-decoration: none;
-    border: 1px solid grey;
-    border-radius: 2px;
-    cursor: pointer;
 }
 
 .cancel {

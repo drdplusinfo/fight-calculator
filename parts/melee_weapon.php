@@ -12,18 +12,18 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
 <div class="row">
   <h2 id="Na blízko" class="col"><a href="#Na blízko" class="inner">Na blízko</a></h2>
 </div>
-<div class="row">
-  <fieldset>
-      <?php if ($controller->isAddingNewMeleeWeapon()) {
-          echo $controller->getAddCustomMeleeWeaponContent();
-      }
-      foreach ($controller->getCurrentValues()->getCustomMeleeWeaponsValues() as $weaponName => $weaponValues) {
-          /** @var array|string[] $weaponValues */
-          foreach ($weaponValues as $typeName => $weaponValue) { ?>
-            <input type="hidden" name="<?= $typeName ?>[<?= $weaponName ?>]" value="<?= $weaponValue ?>">
-          <?php }
-      } ?>
-    <div class="<?php if ($controller->isAddingNewMeleeWeapon()) { ?>hidden<?php } ?>" id="chooseMeleeWeapon">
+<fieldset>
+    <?php if ($controller->isAddingNewMeleeWeapon()) {
+        echo $controller->getAddCustomMeleeWeaponContent();
+    }
+    foreach ($controller->getCurrentValues()->getCustomMeleeWeaponsValues() as $weaponName => $weaponValues) {
+        /** @var array|string[] $weaponValues */
+        foreach ($weaponValues as $typeName => $weaponValue) { ?>
+          <input type="hidden" name="<?= $typeName ?>[<?= $weaponName ?>]" value="<?= $weaponValue ?>">
+        <?php }
+    } ?>
+  <div class="<?php if ($controller->isAddingNewMeleeWeapon()) { ?>hidden<?php } ?>" id="chooseMeleeWeapon">
+    <div class="row">
       <div class="col">
         <a title="Přidat vlastní zbraň na blízko"
            href="<?= $controller->getLocalUrlWithQuery([FightController::ACTION => FightController::ADD_NEW_MELEE_WEAPON]) ?>"
@@ -47,12 +47,12 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
               <?php } ?>
           </select>
         </label>
-      </div>
-      <div class="col">
           <?php foreach ($controller->getMessagesAboutMeleeWeapons() as $messagesAboutMeleeWeapon) { ?>
             <div class="info-message"><?= $messagesAboutMeleeWeapon ?></div>
           <?php } ?>
       </div>
+    </div>
+    <div class="row">
       <div class="col">
         <label>
           <input type="radio" value="<?= ItemHoldingCode::MAIN_HAND ?>"
@@ -62,8 +62,7 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
         <label>
           <input type="radio" value="<?= ItemHoldingCode::OFFHAND ?>" name="<?= FightController::MELEE_WEAPON_HOLDING ?>"
                  <?php if ($controller->getFight()->getCurrentMeleeWeaponHolding()->getValue() === ItemHoldingCode::OFFHAND) { ?>checked<?php } ?>>
-          v druhé
-          ruce</label>
+          v druhé ruce</label>
         <label>
           <input type="radio" value="<?= ItemHoldingCode::TWO_HANDS ?>"
                  name="<?= FightController::MELEE_WEAPON_HOLDING ?>"
@@ -71,23 +70,20 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
           obouručně
         </label>
       </div>
-      <div class="skill with-skill-ranks row">
-        <div class="col">
-          <label>
-            <select name="<?= FightController::MELEE_FIGHT_SKILL ?>">
-                <?php
-                $selectedSkillForMelee = $controller->getFight()->getCurrentMeleeSkillCode();
-                foreach ($controller->getFight()->getPossibleSkillsForMelee() as $skillCode) { ?>
-                  <option value="<?= $skillCode->getValue() ?>"
-                          <?php if ($selectedSkillForMelee->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>
-                      <?= $skillCode->translateTo('cs') ?>
-                  </option>
-                <?php } ?>
-            </select>
-          </label>
-        </div>
-        <div class="skill-ranks col"
-             data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryMeleeSkillRanksJson()) ?>">
+      <div class="col">
+        <label>
+          <select name="<?= FightController::MELEE_FIGHT_SKILL ?>">
+              <?php
+              $selectedSkillForMelee = $controller->getFight()->getCurrentMeleeSkillCode();
+              foreach ($controller->getFight()->getPossibleSkillsForMelee() as $skillCode) { ?>
+                <option value="<?= $skillCode->getValue() ?>"
+                        <?php if ($selectedSkillForMelee->getValue() === $skillCode->getValue()) { ?>selected<?php } ?>>
+                    <?= $skillCode->translateTo('cs') ?>
+                </option>
+              <?php } ?>
+          </select>
+        </label>
+        <span class="skill-ranks" data-history-skill-ranks="<?= htmlspecialchars($controller->getHistoryMeleeSkillRanksJson()) ?>">
           <label>na stupni <input type="radio" value="0" name="<?= FightController::MELEE_FIGHT_SKILL_RANK ?>"
                                   <?php if ($controller->getFight()->getCurrentMeleeSkillRank() === 0) { ?>checked<?php } ?>>0,
           </label>
@@ -100,16 +96,16 @@ $selectedMeleeWeaponValue = $selectedMeleeWeapon ? $selectedMeleeWeapon->getValu
           <label><input type="radio" value="3" name="<?= FightController::MELEE_FIGHT_SKILL_RANK ?>"
                         <?php if ($controller->getFight()->getCurrentMeleeSkillRank() === 3) { ?>checked<?php } ?>>3
           </label>
-        </div>
-      </div>
-      <div class="row">
-          <?php
-          /** @noinspection PhpUnusedLocalVariableInspection */
-          $fightProperties = $controller->getFight()->getMeleeWeaponFightProperties();
-          /** @noinspection PhpUnusedLocalVariableInspection */
-          $previousFightProperties = $controller->getFight()->getPreviousMeleeWeaponFightProperties();
-          include __DIR__ . '/fight_properties_trait.php'; ?>
+        </span>
       </div>
     </div>
-  </fieldset>
-</div>
+  </div>
+  <div class="with-skill-ranks row">
+      <?php
+      /** @noinspection PhpUnusedLocalVariableInspection */
+      $fightProperties = $controller->getFight()->getMeleeWeaponFightProperties();
+      /** @noinspection PhpUnusedLocalVariableInspection */
+      $previousFightProperties = $controller->getFight()->getPreviousMeleeWeaponFightProperties();
+      include __DIR__ . '/fight_properties_trait.php'; ?>
+  </div>
+</fieldset>

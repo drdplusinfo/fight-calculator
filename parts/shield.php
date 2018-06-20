@@ -9,7 +9,9 @@ namespace DrdPlus\FightCalculator;
 </div>
 <fieldset>
     <?php
-    echo $controller->getAddCustomShieldContent();
+    if ($controller->isAddingNewShield()) {
+        echo $controller->getAddCustomShieldContent();
+    }
     foreach ($controller->getCurrentValues()->getCustomShieldsValues() as $shieldName => $shieldValues) {
         /** @var array|string[] $shieldValues */
         foreach ($shieldValues as $typeName => $shieldValue) { ?>
