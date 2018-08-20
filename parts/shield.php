@@ -44,8 +44,9 @@ namespace DrdPlus\FightCalculator;
   <div class="row">
     <div class="col">
       <span class="keyword"><a href="https://pph.drdplus.info/#pouzivani_stitu" target="_blank">
-            <?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></a>
-        </span>
+          <?= $controller->getShieldUsageSkillCode()->translateTo('cs') ?></a>
+      </span>
+      <span data-history-skill-ranks="<?= \htmlspecialchars($controller->getHistoryShieldUsageSkillRanksJson()) ?>">
       <label>na stupni <input type="radio" value="0" name="<?= FightController::SHIELD_USAGE_SKILL_RANK ?>"
                               <?php if ($controller->getFight()->getCurrentShieldUsageSkillRank() === 0) { ?>checked<?php } ?>>
         0,
@@ -69,6 +70,7 @@ namespace DrdPlus\FightCalculator;
             <?= $controller->getFightWithShieldsSkillCode()->translateTo('cs') ?>
         </a>
       </label>
+      <span data-history-skill-ranks="<?= \htmlspecialchars($controller->getHistoryFightWithShieldSkillRanksJson()) ?>">
       <label>na stupni <input type="radio" value="0" name="<?= FightController::FIGHT_WITH_SHIELDS_SKILL_RANK ?>"
                               <?php if ($controller->getFight()->getCurrentFightWithShieldsSkillRank() === 0) { ?>checked<?php } ?>>
         0,

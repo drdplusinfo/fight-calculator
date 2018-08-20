@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e1bb163dde7cded1d2fe1813a4e48db5",
+    "hash": "f239effc112495583bb3d5f50a0f6379",
     "content-hash": "23fde0d53e6245aeb9ca5cc260c42385",
     "packages": [
         {
@@ -627,12 +627,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-boolean.git",
-                "reference": "6473dd57d8d58e99bccddb5a820540778a959e8f"
+                "reference": "0a94ff04cfa58d620609f09075d6f88fc54a72d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-boolean/zipball/6473dd57d8d58e99bccddb5a820540778a959e8f",
-                "reference": "6473dd57d8d58e99bccddb5a820540778a959e8f",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-boolean/zipball/0a94ff04cfa58d620609f09075d6f88fc54a72d0",
+                "reference": "0a94ff04cfa58d620609f09075d6f88fc54a72d0",
                 "shasum": ""
             },
             "require": {
@@ -643,8 +643,9 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~6.0"
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~7.0",
+                "roave/security-advisories": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -665,7 +666,7 @@
                 }
             ],
             "description": "Enumeration type for Doctrine - booleans only",
-            "time": "2017-09-24 14:55:40"
+            "time": "2018-06-20 17:21:40"
         },
         {
             "name": "doctrineum/date-interval",
@@ -673,12 +674,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-date-interval.git",
-                "reference": "5b5554a2c683e775053bacb113c00bbf13411e53"
+                "reference": "570784146ec93f3acdcf9ba671fb43bca97b1f85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-date-interval/zipball/5b5554a2c683e775053bacb113c00bbf13411e53",
-                "reference": "5b5554a2c683e775053bacb113c00bbf13411e53",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-date-interval/zipball/570784146ec93f3acdcf9ba671fb43bca97b1f85",
+                "reference": "570784146ec93f3acdcf9ba671fb43bca97b1f85",
                 "shasum": ""
             },
             "require": {
@@ -691,8 +692,9 @@
             "require-dev": {
                 "doctrine/orm": "~2,>=2.2.3",
                 "ext-pdo_sqlite": "*",
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~6.0"
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~7.0",
+                "roave/security-advisories": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -712,7 +714,7 @@
                 "doctrine",
                 "interval"
             ],
-            "time": "2017-09-24 14:54:47"
+            "time": "2018-06-20 17:44:55"
         },
         {
             "name": "doctrineum/entity",
@@ -815,12 +817,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-integer.git",
-                "reference": "2d5fa0892d8eb0a3de8811eae8b2b01e8c9916c6"
+                "reference": "08e866ba7881e63017a57cdf360cc5284d3f7b7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/2d5fa0892d8eb0a3de8811eae8b2b01e8c9916c6",
-                "reference": "2d5fa0892d8eb0a3de8811eae8b2b01e8c9916c6",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/08e866ba7881e63017a57cdf360cc5284d3f7b7f",
+                "reference": "08e866ba7881e63017a57cdf360cc5284d3f7b7f",
                 "shasum": ""
             },
             "require": {
@@ -831,8 +833,9 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~6.0"
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~7.0",
+                "roave/security-advisories": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -853,7 +856,7 @@
                 }
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2017-09-24 14:52:56"
+            "time": "2018-06-20 15:24:41"
         },
         {
             "name": "doctrineum/scalar",
@@ -861,12 +864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
-                "reference": "1158384533165b092fa5f91e7e691d24f90ab999"
+                "reference": "bc04364afee367e6dc7712eedba6e0e6a989260e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/1158384533165b092fa5f91e7e691d24f90ab999",
-                "reference": "1158384533165b092fa5f91e7e691d24f90ab999",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/bc04364afee367e6dc7712eedba6e0e6a989260e",
+                "reference": "bc04364afee367e6dc7712eedba6e0e6a989260e",
                 "shasum": ""
             },
             "require": {
@@ -879,8 +882,8 @@
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "1.0.x-dev",
-                "phpunit/phpunit": "~6.0",
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~7.0",
                 "roave/security-advisories": "dev-master"
             },
             "type": "library",
@@ -909,7 +912,7 @@
                 "sub-type",
                 "value-dependent enum"
             ],
-            "time": "2018-04-25 13:30:36"
+            "time": "2018-06-20 15:29:04"
         },
         {
             "name": "doctrineum/self-registering-type",
@@ -1021,12 +1024,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-attack-skeleton.git",
-                "reference": "8d34a5fbb1189d52b78e375e76a205c9c8db87c8"
+                "reference": "5c8a688575dbf0e39da1b6f06c6bbe098cb1f46d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/8d34a5fbb1189d52b78e375e76a205c9c8db87c8",
-                "reference": "8d34a5fbb1189d52b78e375e76a205c9c8db87c8",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-attack-skeleton/zipball/5c8a688575dbf0e39da1b6f06c6bbe098cb1f46d",
+                "reference": "5c8a688575dbf0e39da1b6f06c6bbe098cb1f46d",
                 "shasum": ""
             },
             "require": {
@@ -1062,7 +1065,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2018-06-20 05:41:41"
+            "time": "2018-06-20 06:14:33"
         },
         {
             "name": "drd-plus/background",
@@ -1070,12 +1073,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-background.git",
-                "reference": "b43fd0c575eaed480a7c95c4d5e404f39d29e8fa"
+                "reference": "666fca1bd5c200576439538f6ecf8947e4388ac7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/b43fd0c575eaed480a7c95c4d5e404f39d29e8fa",
-                "reference": "b43fd0c575eaed480a7c95c4d5e404f39d29e8fa",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-background/zipball/666fca1bd5c200576439538f6ecf8947e4388ac7",
+                "reference": "666fca1bd5c200576439538f6ecf8947e4388ac7",
                 "shasum": ""
             },
             "require": {
@@ -1084,13 +1087,13 @@
                 "doctrineum/integer": "dev-master",
                 "drd-plus/professions": "dev-master",
                 "drd-plus/tables": "dev-master",
-                "php": ">=7.1",
-                "roave/security-advisories": "dev-master"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "granam/exceptions-hierarchy": "~4.0",
-                "mockery/mockery": "1.0.x-dev",
-                "phpunit/phpunit": "~6.0"
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~7.0",
+                "roave/security-advisories": "dev-master"
             },
             "type": "project",
             "autoload": {
@@ -1103,7 +1106,7 @@
                 "MIT"
             ],
             "description": "Background of a person for Drd+",
-            "time": "2017-10-05 14:19:11"
+            "time": "2018-06-20 15:29:53"
         },
         {
             "name": "drd-plus/calculations",
@@ -1368,12 +1371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-frontend-skeleton.git",
-                "reference": "1f62a40bbb8cab68f1e5dc8f73067a39d87d361a"
+                "reference": "f3c6904c581861bc78740de77a0ec36905d74912"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-frontend-skeleton/zipball/1f62a40bbb8cab68f1e5dc8f73067a39d87d361a",
-                "reference": "1f62a40bbb8cab68f1e5dc8f73067a39d87d361a",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-frontend-skeleton/zipball/f3c6904c581861bc78740de77a0ec36905d74912",
+                "reference": "f3c6904c581861bc78740de77a0ec36905d74912",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1417,7 @@
                 "pages",
                 "view"
             ],
-            "time": "2018-06-20 05:16:35"
+            "time": "2018-06-29 03:46:48"
         },
         {
             "name": "drd-plus/health",
@@ -1508,12 +1511,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-lighting.git",
-                "reference": "76ce1cd948b46aebce576a60604dc08cfbf6041c"
+                "reference": "ac146a078dc9f178241138e9c1e2e478f4f5d450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-lighting/zipball/76ce1cd948b46aebce576a60604dc08cfbf6041c",
-                "reference": "76ce1cd948b46aebce576a60604dc08cfbf6041c",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-lighting/zipball/ac146a078dc9f178241138e9c1e2e478f4f5d450",
+                "reference": "ac146a078dc9f178241138e9c1e2e478f4f5d450",
                 "shasum": ""
             },
             "require": {
@@ -1526,8 +1529,8 @@
                 "roave/security-advisories": "dev-master"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~6.0"
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~7.0"
             },
             "type": "library",
             "autoload": {
@@ -1540,7 +1543,7 @@
                 "MIT"
             ],
             "description": "Effects of insufficient lighting or to bright light for Drd+",
-            "time": "2017-09-25 06:54:40"
+            "time": "2018-06-20 15:05:06"
         },
         {
             "name": "drd-plus/profession-levels",
@@ -1892,12 +1895,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "293d9bfb01fdfc5d2f777f8560a3013c9910d3e5"
+                "reference": "2633f981d705e0c83d11d124be261b2c46bcb8f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/293d9bfb01fdfc5d2f777f8560a3013c9910d3e5",
-                "reference": "293d9bfb01fdfc5d2f777f8560a3013c9910d3e5",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/2633f981d705e0c83d11d124be261b2c46bcb8f4",
+                "reference": "2633f981d705e0c83d11d124be261b2c46bcb8f4",
                 "shasum": ""
             },
             "require": {
@@ -1929,7 +1932,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2018-04-28 16:57:24"
+            "time": "2018-06-26 05:32:05"
         },
         {
             "name": "granam/boolean",
@@ -2876,16 +2879,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "2d5d973bf9933d46802b01010bd25c800c87c242"
+                "reference": "70591cda56b4b47c55776ac78e157c4bb6c8b43f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/2d5d973bf9933d46802b01010bd25c800c87c242",
-                "reference": "2d5d973bf9933d46802b01010bd25c800c87c242",
+                "url": "https://api.github.com/repos/symfony/console/zipball/70591cda56b4b47c55776ac78e157c4bb6c8b43f",
+                "reference": "70591cda56b4b47c55776ac78e157c4bb6c8b43f",
                 "shasum": ""
             },
             "require": {
@@ -2940,7 +2943,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-30 07:26:09"
+            "time": "2018-05-31 10:17:53"
         },
         {
             "name": "symfony/css-selector",
@@ -3851,16 +3854,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.2.4",
+            "version": "7.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "00bc0b93f0ff4f557e9ea766557fde96da9a03dd"
+                "reference": "400a3836ee549ae6f665323ac3f21e27eac7155f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/00bc0b93f0ff4f557e9ea766557fde96da9a03dd",
-                "reference": "00bc0b93f0ff4f557e9ea766557fde96da9a03dd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/400a3836ee549ae6f665323ac3f21e27eac7155f",
+                "reference": "400a3836ee549ae6f665323ac3f21e27eac7155f",
                 "shasum": ""
             },
             "require": {
@@ -3876,7 +3879,7 @@
                 "php": "^7.1",
                 "phpspec/prophecy": "^1.7",
                 "phpunit/php-code-coverage": "^6.0.7",
-                "phpunit/php-file-iterator": "^2.0",
+                "phpunit/php-file-iterator": "^2.0.1",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^2.0",
                 "sebastian/comparator": "^3.0",
@@ -3931,7 +3934,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-06-05 03:40:05"
+            "time": "2018-06-21 13:13:39"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

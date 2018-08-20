@@ -1,5 +1,5 @@
 {
-  "name": "drd-plus/fight-calculator",
+  "name": "drdplus/fight-calculator",
   "license": "MIT",
   "type": "project",
   "description": "Configurator of weapons for DrD+",
@@ -18,9 +18,9 @@
   "require": {
     "php": ">=7.1",
     "granam/strict-object": "dev-master",
-    "drd-plus/tables": "dev-master",
-    "drd-plus/fight-properties": "dev-master",
-    "drd-plus/attack-skeleton": "dev-master"
+    "drdplus/tables": "dev-master",
+    "drdplus/fight-properties": "dev-master",
+    "drdplus/attack-skeleton": "dev-master"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
@@ -33,10 +33,10 @@
   "prefer-stable": true,
   "scripts": {
     "pre-autoload-dump": [
-      "rm -f DrdPlus/Tests/CalculatorSkeleton && ln -s ../../vendor/drd-plus/attack-skeleton/DrdPlus/Tests/CalculatorSkeleton DrdPlus/Tests/",
-      "rm -fr ./css/generic && cp -r ./vendor/drd-plus/attack-skeleton/css/generic ./css/",
-      "rm -f ./js/generic && ln -s ../vendor/drd-plus/attack-skeleton/js/generic ./js/generic",
-      "rm -f ./images/generic && ln -s ../vendor/drd-plus/attack-skeleton/images/generic ./images/generic",
+      "rm -f DrdPlus/Tests/CalculatorSkeleton && ln -s ../../vendor/drdplus/attack-skeleton/DrdPlus/Tests/CalculatorSkeleton DrdPlus/Tests/",
+      "rm -fr ./css/generic && cp -r ./vendor/drdplus/attack-skeleton/css/generic ./css/",
+      "rm -f ./js/generic && ln -s ../vendor/drdplus/attack-skeleton/js/generic ./js/generic",
+      "rm -f ./images/generic && ln -s ../vendor/drdplus/attack-skeleton/images/generic ./images/generic",
       "find ./cache -mindepth 2 -type f -exec rm {} +"
     ],
     "post-update-cmd": [

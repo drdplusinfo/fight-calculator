@@ -130,6 +130,16 @@ class FightController extends AttackController
         return $this->arrayToJson($this->getHistoryWithSkillRanks()->getPreviousSkillRanks(self::RANGED_FIGHT_SKILL_RANK));
     }
 
+    public function getHistoryShieldUsageSkillRanksJson(): string
+    {
+        return $this->arrayToJson($this->getHistoryWithSkillRanks()->getPreviousSkillRanks(self::SHIELD_USAGE_SKILL_RANK));
+    }
+
+    public function getHistoryFightWithShieldSkillRanksJson(): string
+    {
+        return $this->arrayToJson($this->getHistoryWithSkillRanks()->getPreviousSkillRanks(self::FIGHT_WITH_SHIELDS_SKILL_RANK));
+    }
+
     /**
      * @return PhysicalSkillCode
      */
