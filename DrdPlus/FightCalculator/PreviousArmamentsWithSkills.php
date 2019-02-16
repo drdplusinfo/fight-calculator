@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
-/** be strict for parameter types, https://www.quora.com/Are-strict_types-in-PHP-7-not-a-bad-idea */
 
 namespace DrdPlus\FightCalculator;
 
 use DrdPlus\AttackSkeleton\PreviousArmaments;
+use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Codes\Skills\SkillCode;
 
 class PreviousArmamentsWithSkills extends PreviousArmaments
@@ -13,51 +13,49 @@ class PreviousArmamentsWithSkills extends PreviousArmaments
 
     public function getPreviousFightWithShieldsSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::FIGHT_WITH_SHIELDS_SKILL_RANK);
+        return (int)$this->getHistory()->getValue(FightRequest::FIGHT_WITH_SHIELDS_SKILL_RANK);
     }
 
     public function getPreviousShieldUsageSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::SHIELD_USAGE_SKILL_RANK);
+        return (int)$this->getHistory()->getValue(FightRequest::SHIELD_USAGE_SKILL_RANK);
     }
 
     public function getPreviousArmorSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::ARMOR_SKILL_VALUE);
+        return (int)$this->getHistory()->getValue(FightRequest::ARMOR_SKILL_VALUE);
     }
 
     public function getPreviousOnHorseback(): bool
     {
-        return (bool)$this->getHistory()->getValue(FightController::ON_HORSEBACK);
+        return (bool)$this->getHistory()->getValue(FightRequest::ON_HORSEBACK);
     }
 
     public function getPreviousRidingSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::RIDING_SKILL_RANK);
+        return (int)$this->getHistory()->getValue(FightRequest::RIDING_SKILL_RANK);
     }
 
     public function getPreviousFightFreeWillAnimal(): bool
     {
-        return (bool)$this->getHistory()->getValue(FightController::FIGHT_FREE_WILL_ANIMAL);
+        return (bool)$this->getHistory()->getValue(FightRequest::FIGHT_FREE_WILL_ANIMAL);
     }
 
     public function getPreviousZoologySkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::ZOOLOGY_SKILL_RANK);
+        return (int)$this->getHistory()->getValue(FightRequest::ZOOLOGY_SKILL_RANK);
     }
 
-    /**
-     * @return SkillCode
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     */
-    public function getPreviousRangedSkillCode(): SkillCode
+    public function getPreviousRangedFightSkillCode(): SkillCode
     {
-        return $this->getCurrentSkill($this->getHistory()->getValue(FightController::RANGED_FIGHT_SKILL));
+        return $this->getSkill(
+            $this->getHistory()->getValue(FightRequest::RANGED_FIGHT_SKILL),
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED)
+        );
     }
 
-    public function getPreviousRangedSkillRank(): int
+    public function getPreviousRangedFightSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::RANGED_FIGHT_SKILL_RANK);
+        return (int)$this->getHistory()->getValue(FightRequest::RANGED_FIGHT_SKILL_RANK);
     }
-
 }

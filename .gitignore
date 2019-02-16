@@ -1,7 +1,2 @@
-/vendor/
-/.idea/
+/.idea
 /phpunit_log
-/css/generic
-/css/attack
-/js/generic
-/images/generic

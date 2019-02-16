@@ -2,7 +2,7 @@
 namespace DrdPlus\FightCalculator;
 
 use DrdPlus\CalculatorSkeleton\History;
-use DrdPlus\FrontendSkeleton\Cookie;
+use DrdPlus\RulesSkeleton\CookiesService;
 
 class HistoryWithSkills extends History
 {
@@ -10,26 +10,33 @@ class HistoryWithSkills extends History
 
     /** @var array|string[] */
     private $skillToSkillRankNames;
+    /** @var CookiesService */
+    private $cookiesService;
+    /** @var null|array */
+    private $ranksHistory;
 
     /**
      * @param array|string[] $skillNamesToSkillRankNames
-     * @param bool $deleteFightHistory
-     * @param array $valuesToRemember
-     * @param bool $rememberCurrent
-     * @param string $cookiesPostfix
+     * @param CookiesService $cookiesService ,
+     * @param bool $deletePreviousHistory ,
+     * @param array $valuesToRemember ,
+     * @param bool $rememberHistory ,
+     * @param string $cookiesPostfix ,
      * @param int $cookiesTtl = null
      */
     public function __construct(
         array $skillNamesToSkillRankNames,
-        bool $deleteFightHistory,
+        CookiesService $cookiesService,
+        bool $deletePreviousHistory,
         array $valuesToRemember,
-        bool $rememberCurrent,
+        bool $rememberHistory,
         string $cookiesPostfix,
         int $cookiesTtl = null
     )
     {
         $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
-        parent::__construct($deleteFightHistory, $valuesToRemember, $rememberCurrent, $cookiesPostfix, $cookiesTtl);
+        $this->cookiesService = $cookiesService;
+        parent::__construct($cookiesService, $deletePreviousHistory, $valuesToRemember, $rememberHistory, $cookiesPostfix, $cookiesTtl);
     }
 
     protected function remember(array $valuesToRemember, \DateTime $cookiesTtlDate): void
@@ -41,7 +48,7 @@ class HistoryWithSkills extends History
     protected function deleteHistory(): void
     {
         parent::deleteHistory();
-        Cookie::deleteCookie(self::RANKS_HISTORY);
+        $this->cookiesService->deleteCookie(self::RANKS_HISTORY);
     }
 
     private function addSelectedSkillsToHistory(array $request): void
@@ -63,18 +70,14 @@ class HistoryWithSkills extends History
             $ranksHistory[$rankName] = \array_merge($ranksHistory[$rankName] ?? [], $rankValues);
         }
         $serialized = \serialize($ranksHistory);
-        Cookie::setCookie(self::RANKS_HISTORY, $serialized);
+        $this->cookiesService->setCookie(self::RANKS_HISTORY, $serialized);
     }
-
-    /** @var null|array */
-    private $ranksHistory;
 
     private function getRanksHistory(): array
     {
         if ($this->ranksHistory === null) {
             $this->ranksHistory = \unserialize($_COOKIE[self::RANKS_HISTORY] ?? '', ['allowed_classes' => false]) ?: [];
         }
-
         return $this->ranksHistory;
     }
 

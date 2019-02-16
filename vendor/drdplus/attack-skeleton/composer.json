@@ -1,0 +1,37 @@
+{
+  "name": "drdplus/attack-skeleton",
+  "license": "MIT",
+  "type": "project",
+  "description": "Configurator skeleton for those using weapons for DrD+",
+  "keywords": [
+    "DrD",
+    "DrD plus",
+    "weapons",
+    "attack",
+    "calculator",
+    "skeleton"
+  ],
+  "autoload": {
+    "psr-4": {
+      "DrdPlus\\": "DrdPlus/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "drdplus/calculator-skeleton": "^1.0",
+    "drdplus/properties": "~2.0",
+    "drdplus/armourer": "~2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7.0",
+    "mockery/mockery": "~1.0",
+    "phpgt/dom": "^1.0",
+    "composer/composer": "^1.8",
+    "roave/security-advisories": "dev-master"
+  },
+  "scripts": {
+    "pre-autoload-dump": [
+      "find ./vendor/drdplus/calculator-skeleton/web/*.html -exec cp {} ./web/ \\;"
+    ]
+  }
+}

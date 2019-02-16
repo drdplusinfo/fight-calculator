@@ -1,0 +1,24 @@
+{
+  "name": "drdplus/armourer",
+  "license": "MIT",
+  "type": "library",
+  "description": "DrD+ armaments and their stats",
+  "autoload": {
+    "psr-4": {
+      "DrdPlus\\": "DrdPlus/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "granam/tools": "^3.0",
+    "drdplus/tables": "~2.0",
+    "drdplus/codes": "~2.0",
+    "drdplus/properties": "~2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "phpunit/phpunit": "~7.0",
+    "mockery/mockery": "~1.0",
+    "granam/exceptions-hierarchy": "~4.0"
+  }
+}

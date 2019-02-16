@@ -1,14 +1,10 @@
 <?php
 namespace DrdPlus\FightCalculator;
 
+use DrdPlus\Armourer\Armourer;
 use DrdPlus\Background\BackgroundParts\Ancestry;
 use DrdPlus\Background\BackgroundParts\SkillPointsFromBackground;
-use DrdPlus\AttackSkeleton\AttackForCalculator;
-use DrdPlus\AttackSkeleton\CurrentProperties;
-use DrdPlus\AttackSkeleton\CurrentAttackValues;
-use DrdPlus\AttackSkeleton\CustomArmamentsService;
-use DrdPlus\AttackSkeleton\PreviousArmaments;
-use DrdPlus\AttackSkeleton\PreviousProperties;
+use DrdPlus\CalculatorSkeleton\CurrentValues;
 use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\Codes\Armaments\BodyArmorCode;
 use DrdPlus\Codes\Armaments\HelmCode;
@@ -33,15 +29,17 @@ use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Person\ProfessionLevels\ProfessionZeroLevel;
 use DrdPlus\Professions\Commoner;
 use DrdPlus\Professions\Profession;
-use DrdPlus\Properties\Base\Agility;
-use DrdPlus\Properties\Base\Charisma;
-use DrdPlus\Properties\Base\Intelligence;
-use DrdPlus\Properties\Base\Knack;
-use DrdPlus\Properties\Base\Strength;
-use DrdPlus\Properties\Base\Will;
+use DrdPlus\BaseProperties\Agility;
+use DrdPlus\BaseProperties\Charisma;
+use DrdPlus\BaseProperties\Intelligence;
+use DrdPlus\BaseProperties\Knack;
+use DrdPlus\BaseProperties\Strength;
+use DrdPlus\BaseProperties\Will;
 use DrdPlus\Properties\Body\Height;
 use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\Size;
+use DrdPlus\Properties\Combat\EncounterRange;
+use DrdPlus\Properties\Combat\MaximalRange;
 use DrdPlus\Properties\Derived\Speed;
 use DrdPlus\Skills\Combined\CombinedSkill;
 use DrdPlus\Skills\Combined\CombinedSkillPoint;
@@ -57,47 +55,49 @@ use DrdPlus\Tables\Combat\Attacks\AttackNumberByContinuousDistanceTable;
 use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\PositiveIntegerObject;
+use Granam\Strict\Object\StrictObject;
 use Granam\String\StringTools;
 
-class Fight extends AttackForCalculator
+class Fight extends StrictObject
 {
     use UsingSkills;
 
-    /** @var History */
-    private $history;
+    /** @var HistoryWithSkills */
+    private $historyWithSkills;
     /** @var PreviousArmamentsWithSkills */
     private $previousArmamentsWithSkills;
+    /** @var CurrentArmamentsWithSkills */
+    private $currentArmamentsWithSkills;
+    /** @var CurrentProperties */
+    private $currentProperties;
+    /** @var Tables */
+    private $tables;
+    /** @var Armourer */
+    private $armourer;
+    /** @var PreviousProperties */
+    private $previousProperties;
+    /** @var CurrentValues */
+    private $currentValues;
 
-    /**
-     * @param CurrentAttackValues $currentAttackValues
-     * @param CurrentProperties $currentProperties
-     * @param History $history
-     * @param PreviousProperties $previousProperties
-     * @param CustomArmamentsService $customArmamentsService
-     * @param Tables $tables
-     * @throws \DrdPlus\AttackSkeleton\Exceptions\BrokenNewArmamentValues
-     */
     public function __construct(
-        CurrentAttackValues $currentAttackValues,
-        CurrentProperties $currentProperties,
-        History $history,
+        CurrentArmamentsWithSkills $currentArmamentsWithSkills,
+        PreviousProperties $currentProperties,
+        CurrentValues $currentValues,
+        PreviousArmamentsWithSkills $previousArmamentsWithSkills,
         PreviousProperties $previousProperties,
-        CustomArmamentsService $customArmamentsService,
+        HistoryWithSkills $historyWithSkills,
+        Armourer $armourer,
         Tables $tables
     )
     {
-        parent::__construct($currentAttackValues, $history, $customArmamentsService, $tables);
-        $this->history = $history;
-        $this->previousArmamentsWithSkills = new PreviousArmamentsWithSkills($history, $previousProperties, $tables);
-        $this->registerCustomArmaments($currentAttackValues, $customArmamentsService);
-    }
-
-    /**
-     * @return PreviousArmamentsWithSkills
-     */
-    public function getPreviousArmaments(): PreviousArmaments
-    {
-        return $this->previousArmamentsWithSkills;
+        $this->currentArmamentsWithSkills = $currentArmamentsWithSkills;
+        $this->currentProperties = $currentProperties;
+        $this->currentValues = $currentValues;
+        $this->previousArmamentsWithSkills = $previousArmamentsWithSkills;
+        $this->previousProperties = $previousProperties;
+        $this->historyWithSkills = $historyWithSkills;
+        $this->armourer = $armourer;
+        $this->tables = $tables;
     }
 
     /**
@@ -111,20 +111,20 @@ class Fight extends AttackForCalculator
     public function getCurrentMeleeShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getCurrentShieldForMelee(),
-            $this->getCurrentMeleeShieldHolding(),
+            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
+            $this->currentArmamentsWithSkills->getCurrentMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getCurrentFightWithShieldsSkillRank(),
-            $this->getCurrentShieldForMelee(),
-            $this->getCurrentShieldUsageSkillRank(),
-            $this->getCurrentBodyArmor(),
-            $this->getCurrentHelm(),
-            $this->getCurrentArmorSkillRank(),
-            $this->getCurrentProfessionCode(),
-            $this->getCurrentOnHorseback(),
-            $this->getSelectedRidingSkillRank(),
-            $this->getSelectedFightFreeWillAnimal(),
-            $this->getSelectedZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
+            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
+            $this->currentArmamentsWithSkills->getCurrentHelm(),
+            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
+            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
+            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
 
@@ -139,20 +139,20 @@ class Fight extends AttackForCalculator
     public function getCurrentRangedFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getCurrentRangedWeapon(),
-            $this->getCurrentRangedWeaponHolding(),
-            $this->getCurrentRangedSkillCode(),
-            $this->getCurrentRangedSkillRank(),
-            $this->getCurrentShieldForRanged(),
-            $this->getCurrentShieldUsageSkillRank(),
-            $this->getCurrentBodyArmor(),
-            $this->getCurrentHelm(),
-            $this->getCurrentArmorSkillRank(),
-            $this->getCurrentProfessionCode(),
-            $this->getCurrentOnHorseback(),
-            $this->getSelectedRidingSkillRank(),
-            $this->getSelectedFightFreeWillAnimal(),
-            $this->getSelectedZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentRangedWeapon(),
+            $this->currentArmamentsWithSkills->getCurrentRangedWeaponHolding(),
+            $this->currentArmamentsWithSkills->getCurrentRangedFightSkillCode(),
+            $this->currentArmamentsWithSkills->getCurrentRangedSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
+            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
+            $this->currentArmamentsWithSkills->getCurrentHelm(),
+            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
+            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
+            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
 
@@ -164,15 +164,15 @@ class Fight extends AttackForCalculator
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
             ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
-            $this->getCurrentShieldUsageSkillRank(),
-            $this->getCurrentBodyArmor(),
-            $this->getCurrentHelm(),
-            $this->getCurrentArmorSkillRank(),
-            $this->getCurrentProfessionCode(),
-            $this->getCurrentOnHorseback(),
-            $this->getSelectedRidingSkillRank(),
-            $this->getSelectedFightFreeWillAnimal(),
-            $this->getSelectedZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
+            $this->currentArmamentsWithSkills->getCurrentHelm(),
+            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
+            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
+            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
 
@@ -194,14 +194,14 @@ class Fight extends AttackForCalculator
     ): FightProperties
     {
         return $this->getFightProperties(
-            $this->getCurrentProperties()->getCurrentStrength(),
-            $this->getCurrentProperties()->getCurrentAgility(),
-            $this->getCurrentProperties()->getCurrentKnack(),
-            $this->getCurrentProperties()->getCurrentWill(),
-            $this->getCurrentProperties()->getCurrentIntelligence(),
-            $this->getCurrentProperties()->getCurrentCharisma(),
-            $this->getCurrentProperties()->getCurrentSize(),
-            $this->getCurrentProperties()->getCurrentHeightInCm(),
+            $this->currentProperties->getCurrentStrength(),
+            $this->currentProperties->getCurrentAgility(),
+            $this->currentProperties->getCurrentKnack(),
+            $this->currentProperties->getCurrentWill(),
+            $this->currentProperties->getCurrentIntelligence(),
+            $this->currentProperties->getCurrentCharisma(),
+            $this->currentProperties->getCurrentSize(),
+            $this->currentProperties->getCurrentHeightInCm(),
             $weaponlikeCode,
             $weaponHoldingCode,
             $weaponSkillCode,
@@ -244,7 +244,6 @@ class Fight extends AttackForCalculator
         int $zoologySkillRank
     ): FightProperties
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return new FightProperties(
             new BodyPropertiesForFight(
                 $strength,
@@ -254,10 +253,10 @@ class Fight extends AttackForCalculator
                 $intelligence,
                 $charisma,
                 $size,
-                $height = Height::getIt($heightInCm, Tables::getIt()),
+                $height = Height::getIt($heightInCm, $this->tables),
                 Speed::getIt($strength, $agility, $height)
             ),
-            new CombatActions([], Tables::getIt()),
+            new CombatActions([], $this->tables),
             $this->createSkills(
                 $skillWithWeapon,
                 $skillRankWithWeapon,
@@ -270,7 +269,7 @@ class Fight extends AttackForCalculator
             $bodyArmorCode,
             $helmCode,
             $professionCode,
-            Tables::getIt(),
+            $this->tables,
             $weaponlikeCode,
             $weaponHolding,
             false, // does not fight with two weapons
@@ -304,7 +303,6 @@ class Fight extends AttackForCalculator
     ): Skills
     {
         $professionFirstLevel = ProfessionFirstLevel::createFirstLevel(Profession::getItByCode($professionCode));
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         $skills = Skills::createSkills(
             new ProfessionLevels(
                 ProfessionZeroLevel::createZeroLevel(Commoner::getIt()),
@@ -312,15 +310,14 @@ class Fight extends AttackForCalculator
             ),
             $skillPointsFromBackground = SkillPointsFromBackground::getIt(
                 new PositiveIntegerObject(8), // just a maximum
-                Ancestry::getIt(new PositiveIntegerObject(8), Tables::getIt()),
-                Tables::getIt()
+                Ancestry::getIt(new PositiveIntegerObject(8), $this->tables),
+                $this->tables
             ),
             new PhysicalSkills($professionFirstLevel),
             new PsychicalSkills($professionFirstLevel),
             new CombinedSkills($professionFirstLevel),
-            Tables::getIt()
+            $this->tables
         );
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         $this->addSkillWithWeapon(
             $skillWithWeapon,
             $skillRankWithWeapon,
@@ -330,54 +327,46 @@ class Fight extends AttackForCalculator
         );
 
         if ($skillRankWithArmor > 0) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             $armorWearing = $skills->getPhysicalSkills()->getArmorWearing();
             while ($skillRankWithArmor-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $armorWearing->increaseSkillRank($physicalSkillPoint);
             }
         }
         if ($shieldUsageSkillRank > 0) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             $shieldUsage = $skills->getPhysicalSkills()->getShieldUsage();
             while ($shieldUsageSkillRank-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $shieldUsage->increaseSkillRank($physicalSkillPoint);
             }
         }
         if ($ridingSkillRank > 0) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             $riding = $skills->getPhysicalSkills()->getRiding();
             while ($ridingSkillRank-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $riding->increaseSkillRank($physicalSkillPoint);
             }
         }
         if ($zoologySkillRank > 0) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $psychicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             $zoology = $skills->getPsychicalSkills()->getZoology();
             while ($zoologySkillRank-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $zoology->increaseSkillRank($psychicalSkillPoint);
             }
         }
@@ -405,54 +394,45 @@ class Fight extends AttackForCalculator
             return;
         }
         if (\in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var PhysicalSkill $skill */
             $skill = $skills->getPhysicalSkills()->$getSkill();
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PhysicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             while ($skillRankWithWeapon-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $skill->increaseSkillRank($physicalSkillPoint);
             }
 
             return;
         }
         if (\in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var PsychicalSkill $skill */
             $skill = $skills->getPsychicalSkills()->$getSkill();
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $physicalSkillPoint = PsychicalSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             while ($skillRankWithWeapon-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $skill->increaseSkillRank($physicalSkillPoint);
             }
 
             return;
         }
         if (\in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var CombinedSkill $skill */
             $skill = $skills->getCombinedSkills()->$getSkill();
-            /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
             $combinedSkillPoint = CombinedSkillPoint::createFromFirstLevelSkillPointsFromBackground(
                 $professionFirstLevel,
                 $skillPointsFromBackground,
-                Tables::getIt()
+                $this->tables
             );
             while ($skillRankWithWeapon-- > 0) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 $skill->increaseSkillRank($combinedSkillPoint);
             }
 
@@ -475,17 +455,17 @@ class Fight extends AttackForCalculator
     public function getPreviousRangedFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
-            $this->getPreviousArmaments()->getPreviousRangedWeapon(),
-            $this->getPreviousArmaments()->getPreviousRangedWeaponHolding(),
-            $this->getPreviousArmaments()->getPreviousRangedSkillCode(),
-            $this->getPreviousArmaments()->getPreviousRangedSkillRank(),
-            $this->getPreviousArmaments()->getPreviousShield(),
-            $this->getPreviousArmaments()->getPreviousShieldUsageSkillRank(),
-            $this->getPreviousArmaments()->getPreviousArmorSkillRank(),
-            $this->getPreviousArmaments()->getPreviousOnHorseback(),
-            $this->getPreviousArmaments()->getPreviousRidingSkillRank(),
-            $this->getPreviousArmaments()->getPreviousFightFreeWillAnimal(),
-            $this->getPreviousArmaments()->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousRangedWeapon(),
+            $this->previousArmamentsWithSkills->getPreviousRangedWeaponHolding(),
+            $this->previousArmamentsWithSkills->getPreviousRangedFightSkillCode(),
+            $this->previousArmamentsWithSkills->getPreviousRangedFightSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousShield(),
+            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
+            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
 
@@ -519,22 +499,22 @@ class Fight extends AttackForCalculator
     ): FightProperties
     {
         return $this->getFightProperties(
-            $this->getPreviousProperties()->getPreviousStrength(),
-            $this->getPreviousProperties()->getPreviousAgility(),
-            $this->getPreviousProperties()->getPreviousKnack(),
-            $this->getPreviousProperties()->getPreviousWill(),
-            $this->getPreviousProperties()->getPreviousIntelligence(),
-            $this->getPreviousProperties()->getPreviousCharisma(),
-            $this->getPreviousProperties()->getPreviousSize(),
-            $this->getPreviousProperties()->getPreviousHeightInCm(),
+            $this->previousProperties->getPreviousStrength(),
+            $this->previousProperties->getPreviousAgility(),
+            $this->previousProperties->getPreviousKnack(),
+            $this->previousProperties->getPreviousWill(),
+            $this->previousProperties->getPreviousIntelligence(),
+            $this->previousProperties->getPreviousCharisma(),
+            $this->previousProperties->getPreviousSize(),
+            $this->previousProperties->getPreviousHeightInCm(),
             $weaponlikeCode,
             $weaponHoldingCode,
             $fightWithWeaponSkillCode,
             $skillRankWithWeapon,
             $previousShield,
             $shieldUsageSkillRank,
-            $this->getPreviousArmaments()->getPreviousBodyArmor(),
-            $this->getPreviousArmaments()->getPreviousHelm(),
+            $this->previousArmamentsWithSkills->getPreviousBodyArmor(),
+            $this->previousArmamentsWithSkills->getPreviousHelm(),
             $armorSkillRank,
             $this->getPreviousProfessionCode(),
             $onHorseback,
@@ -555,17 +535,17 @@ class Fight extends AttackForCalculator
     public function getPreviousMeleeShieldFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
-            $this->getPreviousArmaments()->getPreviousShield(),
-            $this->getPreviousArmaments()->getPreviousMeleeShieldHolding(),
+            $this->previousArmamentsWithSkills->getPreviousShield(),
+            $this->previousArmamentsWithSkills->getPreviousMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getPreviousArmaments()->getPreviousFightWithShieldsSkillRank(),
-            $this->getPreviousArmaments()->getPreviousShield(),
-            $this->getPreviousArmaments()->getPreviousShieldUsageSkillRank(),
-            $this->getPreviousArmaments()->getPreviousArmorSkillRank(),
-            $this->getPreviousArmaments()->getPreviousOnHorseback(),
-            $this->getPreviousArmaments()->getPreviousRidingSkillRank(),
-            $this->getPreviousArmaments()->getPreviousFightFreeWillAnimal(),
-            $this->getPreviousArmaments()->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousFightWithShieldsSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousShield(),
+            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
+            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
 
@@ -580,17 +560,17 @@ class Fight extends AttackForCalculator
     public function getPreviousRangedShieldFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
-            $this->getPreviousArmaments()->getPreviousShield(),
-            $this->getPreviousArmaments()->getPreviousRangedShieldHolding(),
+            $this->previousArmamentsWithSkills->getPreviousShield(),
+            $this->previousArmamentsWithSkills->getPreviousRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getPreviousArmaments()->getPreviousFightWithShieldsSkillRank(),
-            $this->getPreviousArmaments()->getPreviousShield(),
-            $this->getPreviousArmaments()->getPreviousShieldUsageSkillRank(),
-            $this->getPreviousArmaments()->getPreviousArmorSkillRank(),
-            $this->getPreviousArmaments()->getPreviousOnHorseback(),
-            $this->getPreviousArmaments()->getPreviousRidingSkillRank(),
-            $this->getPreviousArmaments()->getPreviousFightFreeWillAnimal(),
-            $this->getPreviousArmaments()->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousFightWithShieldsSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousShield(),
+            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
+            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
 
@@ -606,12 +586,12 @@ class Fight extends AttackForCalculator
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
             ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
-            $this->getPreviousArmaments()->getPreviousShieldUsageSkillRank(),
-            $this->getPreviousArmaments()->getPreviousArmorSkillRank(),
-            $this->getPreviousArmaments()->getPreviousOnHorseback(),
-            $this->getPreviousArmaments()->getPreviousRidingSkillRank(),
-            $this->getPreviousArmaments()->getPreviousFightFreeWillAnimal(),
-            $this->getPreviousArmaments()->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
+            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
 
@@ -627,17 +607,17 @@ class Fight extends AttackForCalculator
     public function getPreviousMeleeWeaponFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
-            $this->getPreviousArmaments()->getPreviousMeleeWeapon(),
-            $this->getPreviousArmaments()->getPreviousMeleeWeaponHolding(),
+            $this->previousArmamentsWithSkills->getPreviousMeleeWeapon(),
+            $this->previousArmamentsWithSkills->getPreviousMeleeWeaponHolding(),
             $this->getPreviousMeleeSkillCode(),
             $this->getPreviousMeleeSkillRank(),
-            $this->getPreviousArmaments()->getPreviousShield(),
-            $this->getPreviousArmaments()->getPreviousShieldUsageSkillRank(),
-            $this->getPreviousArmaments()->getPreviousArmorSkillRank(),
-            $this->getPreviousArmaments()->getPreviousOnHorseback(),
-            $this->getPreviousArmaments()->getPreviousRidingSkillRank(),
-            $this->getPreviousArmaments()->getPreviousFightFreeWillAnimal(),
-            $this->getPreviousArmaments()->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousShield(),
+            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
+            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
 
@@ -652,20 +632,20 @@ class Fight extends AttackForCalculator
     public function getRangedShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getCurrentShieldForRanged(),
-            $this->getCurrentRangedShieldHolding(),
+            $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
+            $this->currentArmamentsWithSkills->getCurrentRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->getCurrentFightWithShieldsSkillRank(),
-            $this->getCurrentShieldForRanged(),
-            $this->getCurrentShieldUsageSkillRank(),
-            $this->getCurrentBodyArmor(),
-            $this->getCurrentHelm(),
-            $this->getCurrentArmorSkillRank(),
-            $this->getCurrentProfessionCode(),
-            $this->getCurrentOnHorseback(),
-            $this->getSelectedRidingSkillRank(),
-            $this->getSelectedFightFreeWillAnimal(),
-            $this->getSelectedZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
+            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
+            $this->currentArmamentsWithSkills->getCurrentHelm(),
+            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
+            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
+            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
 
@@ -677,23 +657,23 @@ class Fight extends AttackForCalculator
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
      */
-    public function getMeleeWeaponFightProperties(): FightProperties
+    public function getCurrentMeleeWeaponFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
-            $this->getCurrentMeleeWeapon(),
-            $this->getCurrentMeleeWeaponHolding(),
-            $this->getCurrentMeleeSkillCode(),
-            $this->getCurrentMeleeSkillRank(),
-            $this->getCurrentShieldForMelee(),
-            $this->getCurrentShieldUsageSkillRank(),
-            $this->getCurrentBodyArmor(),
-            $this->getCurrentHelm(),
-            $this->getCurrentArmorSkillRank(),
-            $this->getCurrentProfessionCode(),
-            $this->getCurrentOnHorseback(),
-            $this->getSelectedRidingSkillRank(),
-            $this->getSelectedFightFreeWillAnimal(),
-            $this->getSelectedZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentMeleeWeapon(),
+            $this->currentArmamentsWithSkills->getCurrentMeleeWeaponHolding(),
+            $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode(),
+            $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
+            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
+            $this->currentArmamentsWithSkills->getCurrentHelm(),
+            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
+            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
+            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
 
@@ -703,12 +683,15 @@ class Fight extends AttackForCalculator
      */
     private function getPreviousMeleeSkillCode(): SkillCode
     {
-        return $this->getCurrentSkill($this->getHistory()->getValue(FightController::MELEE_FIGHT_SKILL));
+        return $this->getSkill(
+            $this->getHistory()->getValue(FightRequest::MELEE_FIGHT_SKILL),
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED)
+        );
     }
 
     private function getPreviousMeleeSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightController::MELEE_FIGHT_SKILL_RANK);
+        return (int)$this->getHistory()->getValue(FightRequest::MELEE_FIGHT_SKILL_RANK);
     }
 
     /**
@@ -716,7 +699,7 @@ class Fight extends AttackForCalculator
      */
     private function getHistory(): History
     {
-        return $this->history;
+        return $this->historyWithSkills;
     }
 
     /**
@@ -730,29 +713,15 @@ class Fight extends AttackForCalculator
     /**
      * @return array|SkillCode[]
      */
-    public function getSkillsForRanged(): array
+    public function getPossibleRangedFightSkills(): array
     {
         return $this->getSkillsForCategories(WeaponCategoryCode::getRangedWeaponCategoryValues());
     }
 
     /**
-     * @return SkillCode
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     */
-    public function getCurrentMeleeSkillCode(): SkillCode
-    {
-        return $this->getCurrentSkill($this->getCurrentAttackValues()->getCurrentValue(FightController::MELEE_FIGHT_SKILL));
-    }
-
-    public function getCurrentMeleeSkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::MELEE_FIGHT_SKILL_RANK);
-    }
-
-    /**
      * @return array|SkillCode[]
      */
-    public function getPossibleSkillsForMelee(): array
+    public function getPossibleMeleeFightSkills(): array
     {
         return $this->getSkillsForCategories(WeaponCategoryCode::getMeleeWeaponCategoryValues());
     }
@@ -799,8 +768,7 @@ class Fight extends AttackForCalculator
         );
         $categoryNames = \array_map(
             function (string $categoryName) {
-                /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-                return StringTools::toConstant(WeaponCategoryCode::getIt($categoryName)->translateTo('en', 4));
+                return StringTools::toConstantLikeValue(WeaponCategoryCode::getIt($categoryName)->translateTo('en', 4));
             },
             $weaponCategoryValues
         );
@@ -813,75 +781,6 @@ class Fight extends AttackForCalculator
     }
 
     /**
-     * @return SkillCode
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     */
-    public function getCurrentRangedSkillCode(): SkillCode
-    {
-        return $this->getCurrentSkill($this->getCurrentAttackValues()->getCurrentValue(FightController::RANGED_FIGHT_SKILL));
-    }
-
-    public function getCurrentShieldUsageSkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::SHIELD_USAGE_SKILL_RANK);
-    }
-
-    public function getCurrentArmorSkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::ARMOR_SKILL_VALUE);
-    }
-
-    public function getCurrentRangedSkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::RANGED_FIGHT_SKILL_RANK);
-    }
-
-    public function getCurrentFightWithShieldsSkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::FIGHT_WITH_SHIELDS_SKILL_RANK);
-    }
-
-    public function getCurrentProfessionCode(): ProfessionCode
-    {
-        $selectedProfession = $this->getCurrentAttackValues()->getCurrentValue(FightController::PROFESSION);
-        if (!$selectedProfession) {
-            return ProfessionCode::getIt(ProfessionCode::COMMONER);
-        }
-
-        return ProfessionCode::getIt($selectedProfession);
-    }
-
-    private function getPreviousProfessionCode(): ProfessionCode
-    {
-        $previousProfession = $this->getHistory()->getValue(FightController::PROFESSION);
-        if (!$previousProfession) {
-            return $this->getCurrentProfessionCode();
-        }
-
-        return ProfessionCode::getIt($previousProfession);
-    }
-
-    public function getCurrentOnHorseback(): bool
-    {
-        return (bool)$this->getCurrentAttackValues()->getCurrentValue(FightController::ON_HORSEBACK);
-    }
-
-    public function getSelectedRidingSkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::RIDING_SKILL_RANK);
-    }
-
-    public function getSelectedFightFreeWillAnimal(): bool
-    {
-        return (bool)$this->getCurrentAttackValues()->getCurrentValue(FightController::FIGHT_FREE_WILL_ANIMAL);
-    }
-
-    public function getSelectedZoologySkillRank(): int
-    {
-        return (int)$this->getCurrentAttackValues()->getCurrentValue(FightController::ZOOLOGY_SKILL_RANK);
-    }
-
-    /**
      * @return Distance
      * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
@@ -891,32 +790,35 @@ class Fight extends AttackForCalculator
      */
     public function getCurrentTargetDistance(): Distance
     {
-        $distanceValue = $this->getCurrentAttackValues()->getCurrentValue(FightController::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
         $distanceValue = \min($distanceValue, $this->getCurrentRangedWeaponMaximalRange());
 
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
     }
 
     /**
-     * @return float
+     * @return MaximalRange
      * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    private function getCurrentRangedWeaponMaximalRange(): float
+    public function getCurrentRangedWeaponMaximalRange(): MaximalRange
     {
-        return $this->getCurrentRangedFightProperties()->getMaximalRange()->getInMeters(Tables::getIt());
+        return $this->armourer->getMaximalRangeWithWeaponlike(
+            $this->currentArmamentsWithSkills->getCurrentRangedWeapon(),
+            $this->currentProperties->getCurrentStrength(),
+            $this->currentProperties->getCurrentSpeed()
+        );
     }
 
     public function getCurrentTargetSize(): Size
     {
-        $distanceValue = $this->getCurrentAttackValues()->getCurrentValue(FightController::RANGED_TARGET_SIZE);
+        $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_SIZE);
         if ($distanceValue === null) {
             return Size::getIt(1);
         }
@@ -935,14 +837,13 @@ class Fight extends AttackForCalculator
      */
     public function getPreviousTargetDistance(): Distance
     {
-        $distanceValue = $this->getHistory()->getValue(FightController::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->getHistory()->getValue(FightRequest::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
         $distanceValue = \min($distanceValue, $this->getPreviousRangedWeaponMaximalRange());
 
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+        return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 
     /**
@@ -956,16 +857,79 @@ class Fight extends AttackForCalculator
      */
     private function getPreviousRangedWeaponMaximalRange(): float
     {
-        return $this->getPreviousRangedFightProperties()->getMaximalRange()->getInMeters(Tables::getIt());
+        return $this->getPreviousRangedFightProperties()->getMaximalRange()->getInMeters($this->tables);
     }
 
     public function getPreviousTargetSize(): Size
     {
-        $distanceValue = $this->getHistory()->getValue(FightController::RANGED_TARGET_SIZE);
+        $distanceValue = $this->getHistory()->getValue(FightRequest::RANGED_TARGET_SIZE);
         if ($distanceValue === null) {
             return Size::getIt(1);
         }
 
         return Size::getIt($distanceValue);
+    }
+
+    private function getPreviousProfessionCode(): ProfessionCode
+    {
+        $previousProfession = $this->getHistory()->getValue(FightRequest::PROFESSION);
+        if (!$previousProfession) {
+            return $this->currentArmamentsWithSkills->getCurrentProfessionCode();
+        }
+
+        return ProfessionCode::getIt($previousProfession);
+    }
+
+    public function getHistoryMeleeSkillRanksJson(): string
+    {
+        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::MELEE_FIGHT_SKILL_RANK));
+    }
+
+    private function arrayToJson(array $values): string
+    {
+        return \json_encode($values, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getHistoryRangedSkillRanksJson(): string
+    {
+        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
+    }
+
+    public function getHistoryShieldUsageSkillRanksJson(): string
+    {
+        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
+    }
+
+    public function getHistoryFightWithShieldSkillRanksJson(): string
+    {
+        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::FIGHT_WITH_SHIELDS_SKILL_RANK));
+    }
+
+    public function getShieldUsageSkillCode(): PhysicalSkillCode
+    {
+        return PhysicalSkillCode::getIt(PhysicalSkillCode::SHIELD_USAGE);
+    }
+
+    public function getFightWithShieldsSkillCode(): PhysicalSkillCode
+    {
+        return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS);
+    }
+
+    public function getCurrentEncounterRange(): EncounterRange
+    {
+        return $this->armourer->getEncounterRangeWithWeaponlike(
+            $this->currentArmamentsWithSkills->getCurrentRangedWeapon(),
+            $this->currentProperties->getCurrentStrength(),
+            $this->currentProperties->getCurrentSpeed()
+        );
+    }
+
+    public function getPreviousEncounterRange(): EncounterRange
+    {
+        return $this->armourer->getEncounterRangeWithWeaponlike(
+            $this->previousArmamentsWithSkills->getPreviousRangedWeapon(),
+            $this->previousProperties->getPreviousStrength(),
+            $this->previousProperties->getPreviousSpeed()
+        );
     }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "drdplus/races",
+  "license": "MIT",
+  "type": "library",
+  "description": "Drd+ races",
+  "autoload": {
+    "psr-4": {
+      "DrdPlus\\": "DrdPlus/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "granam/string-enum": "~1.0",
+    "granam/tools": "~3.0",
+    "drdplus/tables": "~2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "phpunit/phpunit": "~7.0",
+    "mockery/mockery": "~1.0",
+    "granam/exceptions-hierarchy": "~4.0"
+  }
+}

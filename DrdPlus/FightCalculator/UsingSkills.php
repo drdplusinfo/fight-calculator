@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-/** be strict for parameter types, https://www.quora.com/Are-strict_types-in-PHP-7-not-a-bad-idea */
 
 namespace DrdPlus\FightCalculator;
 
@@ -14,13 +13,14 @@ trait UsingSkills
 
     /**
      * @param string|null $skillName
+     * @param SkillCode $defaultSkillCode
      * @return SkillCode
      * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
      */
-    public function getCurrentSkill(string $skillName = null): SkillCode
+    private function getSkill(?string $skillName, SkillCode $defaultSkillCode): SkillCode
     {
-        if (!$skillName) {
-            return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED);
+        if ($skillName === null) {
+            return $defaultSkillCode;
         }
 
         if (\in_array($skillName, PhysicalSkillCode::getPossibleValues(), true)) {

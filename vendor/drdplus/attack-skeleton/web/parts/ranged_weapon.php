@@ -1,0 +1,2 @@
+<?= /** @noinspection PhpUndefinedVariableInspection */
+$rangedWeapon;
