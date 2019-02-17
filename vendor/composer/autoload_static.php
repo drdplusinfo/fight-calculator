@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7
+class ComposerStaticInitfa38ac8ec888227c02d9c619ad92c00e
 {
     public static $files = array (
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -49,8 +49,8 @@ class ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -74,52 +74,52 @@ class ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7
         ),
         'Granam\\' => 
         array (
-            0 => __DIR__ . '/..' . '/granam/boolean/Granam',
-            1 => __DIR__ . '/..' . '/granam/date-interval/Granam',
-            2 => __DIR__ . '/..' . '/granam/exceptions-hierarchy/Granam',
-            3 => __DIR__ . '/..' . '/granam/float/Granam',
-            4 => __DIR__ . '/..' . '/granam/integer/Granam',
-            5 => __DIR__ . '/..' . '/granam/number/Granam',
+            0 => __DIR__ . '/..' . '/granam/strict-object/Granam',
+            1 => __DIR__ . '/..' . '/granam/tools/Granam',
+            2 => __DIR__ . '/..' . '/granam/scalar/Granam',
+            3 => __DIR__ . '/..' . '/granam/boolean/Granam',
+            4 => __DIR__ . '/..' . '/granam/number/Granam',
+            5 => __DIR__ . '/..' . '/granam/float/Granam',
             6 => __DIR__ . '/..' . '/granam/object-history/Granam',
-            7 => __DIR__ . '/..' . '/granam/scalar/Granam',
-            8 => __DIR__ . '/..' . '/granam/strict-object/Granam',
-            9 => __DIR__ . '/..' . '/granam/string/Granam',
-            10 => __DIR__ . '/..' . '/granam/tools/Granam',
+            7 => __DIR__ . '/..' . '/granam/integer/Granam',
+            8 => __DIR__ . '/..' . '/granam/string/Granam',
+            9 => __DIR__ . '/..' . '/granam/date-interval/Granam',
+            10 => __DIR__ . '/..' . '/granam/exceptions-hierarchy/Granam',
         ),
         'DrdPlus\\' => 
         array (
             0 => __DIR__ . '/../..' . '/DrdPlus',
-            1 => __DIR__ . '/..' . '/drd-plus/attack-skeleton/DrdPlus',
-            2 => __DIR__ . '/..' . '/drd-plus/background/DrdPlus',
+            1 => __DIR__ . '/..' . '/drd-plus/tables/DrdPlus',
+            2 => __DIR__ . '/..' . '/drd-plus/codes/DrdPlus',
             3 => __DIR__ . '/..' . '/drd-plus/calculations/DrdPlus',
-            4 => __DIR__ . '/..' . '/drd-plus/calculator-skeleton/DrdPlus',
-            5 => __DIR__ . '/..' . '/drd-plus/codes/DrdPlus',
-            6 => __DIR__ . '/..' . '/drd-plus/combat-actions/DrdPlus',
-            7 => __DIR__ . '/..' . '/drd-plus/dice-rolls/DrdPlus',
-            8 => __DIR__ . '/..' . '/drd-plus/fight-properties/DrdPlus',
-            9 => __DIR__ . '/..' . '/drd-plus/health/DrdPlus',
+            4 => __DIR__ . '/..' . '/drd-plus/properties/DrdPlus',
+            5 => __DIR__ . '/..' . '/drd-plus/dice-rolls/DrdPlus',
+            6 => __DIR__ . '/..' . '/drd-plus/professions/DrdPlus',
+            7 => __DIR__ . '/..' . '/drd-plus/profession-levels/DrdPlus',
+            8 => __DIR__ . '/..' . '/drd-plus/rolls-on/DrdPlus',
+            9 => __DIR__ . '/..' . '/drd-plus/lighting/DrdPlus',
             10 => __DIR__ . '/..' . '/drd-plus/hunting-and-fishing/DrdPlus',
-            11 => __DIR__ . '/..' . '/drd-plus/lighting/DrdPlus',
-            12 => __DIR__ . '/..' . '/drd-plus/profession-levels/DrdPlus',
-            13 => __DIR__ . '/..' . '/drd-plus/professions/DrdPlus',
-            14 => __DIR__ . '/..' . '/drd-plus/properties/DrdPlus',
+            11 => __DIR__ . '/..' . '/drd-plus/background/DrdPlus',
+            12 => __DIR__ . '/..' . '/drd-plus/skills/DrdPlus',
+            13 => __DIR__ . '/..' . '/drd-plus/races/DrdPlus',
+            14 => __DIR__ . '/..' . '/drd-plus/properties-by-levels/DrdPlus',
             15 => __DIR__ . '/..' . '/drd-plus/properties-by-fate/DrdPlus',
-            16 => __DIR__ . '/..' . '/drd-plus/properties-by-levels/DrdPlus',
-            17 => __DIR__ . '/..' . '/drd-plus/races/DrdPlus',
-            18 => __DIR__ . '/..' . '/drd-plus/rolls-on/DrdPlus',
-            19 => __DIR__ . '/..' . '/drd-plus/skills/DrdPlus',
-            20 => __DIR__ . '/..' . '/drd-plus/tables/DrdPlus',
+            16 => __DIR__ . '/..' . '/drd-plus/health/DrdPlus',
+            17 => __DIR__ . '/..' . '/drd-plus/combat-actions/DrdPlus',
+            18 => __DIR__ . '/..' . '/drd-plus/fight-properties/DrdPlus',
+            19 => __DIR__ . '/..' . '/drd-plus/calculator-skeleton/DrdPlus',
+            20 => __DIR__ . '/..' . '/drd-plus/attack-skeleton/DrdPlus',
         ),
         'Doctrineum\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrineum/boolean/Doctrineum',
-            1 => __DIR__ . '/..' . '/doctrineum/date-interval/Doctrineum',
-            2 => __DIR__ . '/..' . '/doctrineum/entity/Doctrineum',
+            0 => __DIR__ . '/..' . '/doctrineum/self-registering-type/Doctrineum',
+            1 => __DIR__ . '/..' . '/doctrineum/scalar/Doctrineum',
+            2 => __DIR__ . '/..' . '/doctrineum/boolean/Doctrineum',
             3 => __DIR__ . '/..' . '/doctrineum/float/Doctrineum',
             4 => __DIR__ . '/..' . '/doctrineum/integer/Doctrineum',
-            5 => __DIR__ . '/..' . '/doctrineum/scalar/Doctrineum',
-            6 => __DIR__ . '/..' . '/doctrineum/self-registering-type/Doctrineum',
-            7 => __DIR__ . '/..' . '/doctrineum/string/Doctrineum',
+            5 => __DIR__ . '/..' . '/doctrineum/entity/Doctrineum',
+            6 => __DIR__ . '/..' . '/doctrineum/string/Doctrineum',
+            7 => __DIR__ . '/..' . '/doctrineum/date-interval/Doctrineum',
         ),
         'Doctrine\\ORM\\' => 
         array (
@@ -799,10 +799,10 @@ class ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitfd6ed01c081e25d101f62a040b95cda7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfa38ac8ec888227c02d9c619ad92c00e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfa38ac8ec888227c02d9c619ad92c00e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitfa38ac8ec888227c02d9c619ad92c00e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitfa38ac8ec888227c02d9c619ad92c00e::$classMap;
 
         }, null, ClassLoader::class);
     }
