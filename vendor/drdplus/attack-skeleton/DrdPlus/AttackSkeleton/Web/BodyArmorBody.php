@@ -25,7 +25,7 @@ class BodyArmorBody extends AbstractArmamentBody
     /** @var ArmamentsUsabilityMessages */
     private $armamentsUsabilityMessages;
     /** @var HtmlHelper */
-    private $frontendHelper;
+    private $htmlHelper;
     /** @var PossibleArmaments */
     private $possibleArmaments;
     /** @var Armourer */
@@ -39,7 +39,7 @@ class BodyArmorBody extends AbstractArmamentBody
         CurrentArmaments $currentArmaments,
         PossibleArmaments $possibleArmaments,
         ArmamentsUsabilityMessages $armamentsUsabilityMessages,
-        HtmlHelper $frontendHelper,
+        HtmlHelper $htmlHelper,
         Armourer $armourer,
         AddCustomBodyArmorBody $addCustomBodyArmorBody
     )
@@ -48,7 +48,7 @@ class BodyArmorBody extends AbstractArmamentBody
         $this->currentArmamentsValues = $currentArmamentsValues;
         $this->currentArmaments = $currentArmaments;
         $this->armamentsUsabilityMessages = $armamentsUsabilityMessages;
-        $this->frontendHelper = $frontendHelper;
+        $this->htmlHelper = $htmlHelper;
         $this->possibleArmaments = $possibleArmaments;
         $this->armourer = $armourer;
         $this->addCustomBodyArmorBody = $addCustomBodyArmorBody;
@@ -130,7 +130,7 @@ HTML;
 
     private function getUrlToAddNewBodyArmor(): string
     {
-        return $this->frontendHelper->getLocalUrlWithQuery([AttackRequest::ACTION => AttackRequest::ADD_NEW_BODY_ARMOR]);
+        return $this->htmlHelper->getLocalUrlWithQuery([AttackRequest::ACTION => AttackRequest::ADD_NEW_BODY_ARMOR]);
     }
 
     private function getPossibleBodyArmors(): string
@@ -140,7 +140,7 @@ HTML;
             /** @var BodyArmorCode $bodyArmorCode */
             $bodyArmorCode = $possibleBodyArmor['code'];
             $bodyArmors[] = <<<HTML
-<option value="{$bodyArmorCode->getValue()}" {$this->getBodyArmorSelected($bodyArmorCode)} {$this->getDisabled($possibleBodyArmor['canUseIt'])}>
+<option value="{$bodyArmorCode->getValue()}" {$this->getBodyArmorSelected($bodyArmorCode)} {$this->htmlHelper->getDisabled($possibleBodyArmor['canUseIt'])}>
   {$this->getUsabilityPictogram($possibleBodyArmor['canUseIt'])}{$bodyArmorCode->translateTo('cs')} {$this->getBodyArmorProtection($bodyArmorCode)}
 </option>
 HTML;
@@ -151,11 +151,11 @@ HTML;
 
     private function getBodyArmorSelected(BodyArmorCode $bodyArmorCode): string
     {
-        return $this->getSelected($this->currentArmaments->getCurrentBodyArmor(), $bodyArmorCode);
+        return $this->htmlHelper->getSelected($this->currentArmaments->getCurrentBodyArmor(), $bodyArmorCode);
     }
 
     private function getBodyArmorProtection(BodyArmorCode $bodyArmorCode): string
     {
-        return $this->frontendHelper->formatInteger($this->armourer->getProtectionOfBodyArmor($bodyArmorCode));
+        return $this->htmlHelper->formatInteger($this->armourer->getProtectionOfBodyArmor($bodyArmorCode));
     }
 }

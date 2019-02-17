@@ -1,2 +1,2 @@
-<?= /** @noinspection PhpUndefinedVariableInspection */
-$shield;
+<?= /** @var \DrdPlus\AttackSkeleton\Web\ShieldBody $shieldBody */
+$shieldBody->getValue();

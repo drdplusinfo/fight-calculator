@@ -1,2 +1,2 @@
-<?= /** @noinspection PhpUndefinedVariableInspection */
-$helm;
+<?= /** @var \DrdPlus\AttackSkeleton\Web\HelmBody $helmBody */
+$helmBody->getValue();

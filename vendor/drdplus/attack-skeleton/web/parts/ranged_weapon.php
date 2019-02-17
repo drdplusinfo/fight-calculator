@@ -1,2 +1,2 @@
-<?= /** @noinspection PhpUndefinedVariableInspection */
-$rangedWeapon;
+<?= /** @var \DrdPlus\AttackSkeleton\Web\RangedWeaponBody $rangedWeaponBody */
+$rangedWeaponBody->getValue();

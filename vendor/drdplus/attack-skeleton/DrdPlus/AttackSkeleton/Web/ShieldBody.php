@@ -27,7 +27,7 @@ class ShieldBody extends AbstractArmamentBody
     /** @var ArmamentsUsabilityMessages */
     private $armamentsUsabilityMessages;
     /** @var HtmlHelper */
-    private $frontendHelper;
+    private $htmlHelper;
     /** @var PossibleArmaments */
     private $possibleArmaments;
     /** @var Armourer */
@@ -39,7 +39,7 @@ class ShieldBody extends AbstractArmamentBody
         CurrentArmaments $currentArmaments,
         PossibleArmaments $possibleArmaments,
         ArmamentsUsabilityMessages $armamentsUsabilityMessages,
-        HtmlHelper $frontendHelper,
+        HtmlHelper $htmlHelper,
         Armourer $armourer,
         AddCustomShieldBody $addCustomShieldBody
     )
@@ -48,7 +48,7 @@ class ShieldBody extends AbstractArmamentBody
         $this->currentArmamentsValues = $currentArmamentsValues;
         $this->currentArmaments = $currentArmaments;
         $this->armamentsUsabilityMessages = $armamentsUsabilityMessages;
-        $this->frontendHelper = $frontendHelper;
+        $this->htmlHelper = $htmlHelper;
         $this->possibleArmaments = $possibleArmaments;
         $this->armourer = $armourer;
         $this->addCustomShieldBody = $addCustomShieldBody;
@@ -82,7 +82,7 @@ HTML;
             /** @var ShieldCode $shieldCode */
             $shieldCode = $possibleShield['code'];
             $shields[] = <<<HTML
-<option value="{$shieldCode->getValue()}" {$this->getShieldSelected($shieldCode)} {$this->getDisabled($possibleShield['canUseIt'])}>
+<option value="{$shieldCode->getValue()}" {$this->getShieldSelected($shieldCode)} {$this->htmlHelper->getDisabled($possibleShield['canUseIt'])}>
   {$this->getUsabilityPictogram($possibleShield['canUseIt'])}{$shieldCode->translateTo('cs')} {$this->getShieldProtection($shieldCode)}
 </option>
 HTML;
@@ -93,12 +93,12 @@ HTML;
 
     private function getShieldProtection(ShieldCode $shieldCode): string
     {
-        return $this->frontendHelper->formatInteger($this->armourer->getCoverOfShield($shieldCode));
+        return $this->htmlHelper->formatInteger($this->armourer->getCoverOfShield($shieldCode));
     }
 
     private function getShieldSelected(ShieldCode $shieldCode): string
     {
-        return $this->getSelected($this->currentArmaments->getCurrentShield(), $shieldCode);
+        return $this->htmlHelper->getSelected($this->currentArmaments->getCurrentShield(), $shieldCode);
     }
 
     private function getShieldSelectName(): string
@@ -108,7 +108,7 @@ HTML;
 
     private function getLinkToAddNewShield(): string
     {
-        return $this->frontendHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_SHIELD);
+        return $this->htmlHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_SHIELD);
     }
 
     private function getVisibilityClass(): string

@@ -4,7 +4,7 @@ namespace DrdPlus\FightCalculator;
 /** @var \DrdPlus\AttackSkeleton\Web\RangedWeaponBody $rangedWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\RangedWeaponSkillBody $rangedWeaponSkillBody */
 /** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $rangedFightPropertiesBody */
-/** @var \DrdPlus\FightCalculator\Web\RangedTarget $rangedTarget */
+/** @var \DrdPlus\FightCalculator\Web\RangedTargetBody $rangedTarget */
 ?>
 <div class="row">
   <h2 id="Na dálku" class="col"><a href="#Na dálku" class="inner">Na dálku</a></h2>

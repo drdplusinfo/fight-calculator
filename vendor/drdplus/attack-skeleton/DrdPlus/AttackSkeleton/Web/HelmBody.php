@@ -25,7 +25,7 @@ class HelmBody extends AbstractArmamentBody
     /** @var ArmamentsUsabilityMessages */
     private $armamentsUsabilityMessages;
     /** @var HtmlHelper */
-    private $frontendHelper;
+    private $htmlHelper;
     /** @var PossibleArmaments */
     private $possibleArmaments;
     /** @var Armourer */
@@ -39,7 +39,7 @@ class HelmBody extends AbstractArmamentBody
         CurrentArmaments $currentArmaments,
         PossibleArmaments $possibleArmaments,
         ArmamentsUsabilityMessages $armamentsUsabilityMessages,
-        HtmlHelper $frontendHelper,
+        HtmlHelper $htmlHelper,
         Armourer $armourer,
         AddCustomHelmBody $addCustomHelmBody
     )
@@ -48,7 +48,7 @@ class HelmBody extends AbstractArmamentBody
         $this->currentArmamentsValues = $currentArmamentsValues;
         $this->currentArmaments = $currentArmaments;
         $this->armamentsUsabilityMessages = $armamentsUsabilityMessages;
-        $this->frontendHelper = $frontendHelper;
+        $this->htmlHelper = $htmlHelper;
         $this->possibleArmaments = $possibleArmaments;
         $this->armourer = $armourer;
         $this->addCustomHelmBody = $addCustomHelmBody;
@@ -82,7 +82,7 @@ HTML;
             /** @var HelmCode $helmCode */
             $helmCode = $possibleHelm['code'];
             $helms[] = <<<HTML
-<option value="{$helmCode->getValue()}" {$this->getHelmSelected($helmCode)} {$this->getDisabled($possibleHelm['canUseIt'])}>
+<option value="{$helmCode->getValue()}" {$this->getHelmSelected($helmCode)} {$this->htmlHelper->getDisabled($possibleHelm['canUseIt'])}>
   {$this->getUsabilityPictogram($possibleHelm['canUseIt'])}{$helmCode->translateTo('cs')} {$this->getHelmProtection($helmCode)}
 </option>
 HTML;
@@ -93,12 +93,12 @@ HTML;
 
     private function getHelmProtection(HelmCode $helmCode): string
     {
-        return $this->frontendHelper->formatInteger($this->armourer->getProtectionOfHelm($helmCode));
+        return $this->htmlHelper->formatInteger($this->armourer->getProtectionOfHelm($helmCode));
     }
 
     private function getHelmSelected(HelmCode $helmCode): string
     {
-        return $this->getSelected($this->currentArmaments->getCurrentHelm(), $helmCode);
+        return $this->htmlHelper->getSelected($this->currentArmaments->getCurrentHelm(), $helmCode);
     }
 
     private function getHelmSelectName(): string
@@ -108,7 +108,7 @@ HTML;
 
     private function getLinkToAddNewHelm(): string
     {
-        return $this->frontendHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_HELM);
+        return $this->htmlHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_HELM);
     }
 
     private function getVisibilityClass(): string

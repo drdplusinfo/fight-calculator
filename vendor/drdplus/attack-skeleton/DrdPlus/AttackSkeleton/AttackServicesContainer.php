@@ -77,14 +77,14 @@ class AttackServicesContainer extends CalculatorServicesContainer
     public function getRulesMainBodyParameters(): array
     {
         return [
-            'historyDeletion' => $this->getHistoryDeletionBody(),
-            'bodyProperties' => $this->getBodyPropertiesBody(),
-            'bodyArmor' => $this->getBodyArmorBody(),
-            'helm' => $this->getHelmBody(),
-            'meleeWeapon' => $this->getMeleeWeaponBody(),
-            'rangedWeapon' => $this->getRangedWeaponBody(),
-            'shield' => $this->getShieldBody(),
-            'calculatorDebugContacts' => $this->getCalculatorDebugContactsBody(),
+            'historyDeletionBody' => $this->getHistoryDeletionBody(),
+            'bodyPropertiesBody' => $this->getBodyPropertiesBody(),
+            'bodyArmorBody' => $this->getBodyArmorBody(),
+            'helmBody' => $this->getHelmBody(),
+            'meleeWeaponBody' => $this->getMeleeWeaponBody(),
+            'rangedWeaponBody' => $this->getRangedWeaponBody(),
+            'shieldBody' => $this->getShieldBody(),
+            'calculatorDebugContactsBody' => $this->getCalculatorDebugContactsBody(),
         ];
     }
 

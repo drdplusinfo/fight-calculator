@@ -28,7 +28,7 @@ class RangedWeaponBody extends AbstractArmamentBody
     /** @var ArmamentsUsabilityMessages */
     private $armamentsUsabilityMessages;
     /** @var HtmlHelper */
-    private $frontendHelper;
+    private $htmlHelper;
     /** @var PossibleArmaments */
     private $possibleArmaments;
 
@@ -38,7 +38,7 @@ class RangedWeaponBody extends AbstractArmamentBody
         CurrentArmaments $currentArmaments,
         PossibleArmaments $possibleArmaments,
         ArmamentsUsabilityMessages $armamentsUsabilityMessages,
-        HtmlHelper $frontendHelper,
+        HtmlHelper $htmlHelper,
         AddCustomRangedWeaponBody $addCustomRangedWeaponBody
     )
     {
@@ -46,7 +46,7 @@ class RangedWeaponBody extends AbstractArmamentBody
         $this->currentArmamentsValues = $currentArmamentsValues;
         $this->currentArmaments = $currentArmaments;
         $this->armamentsUsabilityMessages = $armamentsUsabilityMessages;
-        $this->frontendHelper = $frontendHelper;
+        $this->htmlHelper = $htmlHelper;
         $this->possibleArmaments = $possibleArmaments;
         $this->addCustomRangedWeaponBody = $addCustomRangedWeaponBody;
     }
@@ -158,7 +158,7 @@ HTML;
 
     private function getUrlToAddNewRangedWeapon(): string
     {
-        return $this->frontendHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_RANGED_WEAPON);
+        return $this->htmlHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_RANGED_WEAPON);
     }
 
     private function getRangedWeaponSelectName(): string
@@ -179,7 +179,7 @@ HTML;
             /** @var RangedWeaponCode $rangedWeaponCode */
             $rangedWeaponCode = $rangedWeapon['code'];
             $possibleRangedWeaponsOfCategory .= <<<HTML
-<option value="{$rangedWeaponCode->getValue()}" {$this->getRangedWeaponSelected($rangedWeaponCode)} {$this->getDisabled($rangedWeapon['canUseIt'])}>
+<option value="{$rangedWeaponCode->getValue()}" {$this->getRangedWeaponSelected($rangedWeaponCode)} {$this->htmlHelper->getDisabled($rangedWeapon['canUseIt'])}>
   {$this->getUsabilityPictogram($rangedWeapon['canUseIt'])}{$rangedWeaponCode->translateTo('cs')}
 </option>
 HTML;
@@ -190,7 +190,7 @@ HTML;
 
     private function getRangedWeaponSelected(RangedWeaponCode $rangedWeaponCode): string
     {
-        return $this->getSelected($this->currentArmaments->getCurrentRangedWeapon(), $rangedWeaponCode);
+        return $this->htmlHelper->getSelected($this->currentArmaments->getCurrentRangedWeapon(), $rangedWeaponCode);
     }
 
     private function getPossibleRangedWeapons(): string

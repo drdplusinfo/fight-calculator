@@ -8,9 +8,9 @@ use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 use DrdPlus\Tables\Tables;
 use Granam\Strict\Object\StrictObject;
-use Granam\String\StringInterface;
+use Granam\WebContentBuilder\Web\BodyInterface;
 
-class RangedTarget extends StrictObject implements StringInterface
+class RangedTargetBody extends StrictObject implements BodyInterface
 {
     /**
      * @var Fight

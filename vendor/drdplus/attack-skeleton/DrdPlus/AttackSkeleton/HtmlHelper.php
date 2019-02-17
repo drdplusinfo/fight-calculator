@@ -31,6 +31,27 @@ class HtmlHelper extends \DrdPlus\RulesSkeleton\HtmlHelper
         return '';
     }
 
+    public function getChecked($current, $expected): string
+    {
+        return (string)$current === (string)$expected
+            ? 'checked'
+            : '';
+    }
+
+    public function getSelected($current, $expected): string
+    {
+        return (string)$current === (string)$expected
+            ? 'selected'
+            : '';
+    }
+
+    public function getDisabled(bool $canUseIt): string
+    {
+        return !$canUseIt
+            ? 'disabled'
+            : '';
+    }
+
     /**
      * @param array $additionalParameters
      * @return string

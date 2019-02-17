@@ -26,7 +26,7 @@ class MeleeWeaponBody extends AbstractArmamentBody
     /** @var ArmamentsUsabilityMessages */
     private $armamentsUsabilityMessages;
     /** @var HtmlHelper */
-    private $frontendHelper;
+    private $htmlHelper;
     /** @var PossibleArmaments */
     private $possibleArmaments;
     /** @var AddCustomMeleeWeaponBody */
@@ -38,7 +38,7 @@ class MeleeWeaponBody extends AbstractArmamentBody
         CurrentArmaments $currentArmaments,
         PossibleArmaments $possibleArmaments,
         ArmamentsUsabilityMessages $armamentsUsabilityMessages,
-        HtmlHelper $frontendHelper,
+        HtmlHelper $htmlHelper,
         AddCustomMeleeWeaponBody $addCustomMeleeWeaponBody
     )
     {
@@ -46,7 +46,7 @@ class MeleeWeaponBody extends AbstractArmamentBody
         $this->currentArmamentsValues = $currentArmamentsValues;
         $this->currentArmaments = $currentArmaments;
         $this->armamentsUsabilityMessages = $armamentsUsabilityMessages;
-        $this->frontendHelper = $frontendHelper;
+        $this->htmlHelper = $htmlHelper;
         $this->possibleArmaments = $possibleArmaments;
         $this->addCustomMeleeWeaponBody = $addCustomMeleeWeaponBody;
     }
@@ -100,7 +100,7 @@ HTML;
 
     private function getUrlToAddNewMeleeWeapon(): string
     {
-        return $this->frontendHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_MELEE_WEAPON);
+        return $this->htmlHelper->getLocalUrlToAction(AttackRequest::ADD_NEW_MELEE_WEAPON);
     }
 
     private function getMeleeWeaponSelectName(): string
@@ -121,7 +121,7 @@ HTML;
             /** @var MeleeWeaponCode $meleeWeaponCode */
             $meleeWeaponCode = $meleeWeapon['code'];
             $possibleMeleeWeaponsOfCategory .= <<<HTML
-<option value="{$meleeWeaponCode->getValue()}" {$this->getMeleeWeaponSelected($meleeWeaponCode)} {$this->getDisabled($meleeWeapon['canUseIt'])}>
+<option value="{$meleeWeaponCode->getValue()}" {$this->getMeleeWeaponSelected($meleeWeaponCode)} {$this->htmlHelper->getDisabled($meleeWeapon['canUseIt'])}>
   {$this->getUsabilityPictogram($meleeWeapon['canUseIt'])}{$meleeWeaponCode->translateTo('cs')}
 </option>
 HTML;
@@ -132,7 +132,7 @@ HTML;
 
     private function getMeleeWeaponSelected(MeleeWeaponCode $meleeWeaponCode): string
     {
-        return $this->getSelected($this->currentArmaments->getCurrentMeleeWeapon(), $meleeWeaponCode);
+        return $this->htmlHelper->getSelected($this->currentArmaments->getCurrentMeleeWeapon(), $meleeWeaponCode);
     }
 
     private function getPossibleMeleeWeapons(): string

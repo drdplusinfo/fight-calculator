@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f097f57ce712bdb540bfcdb0c62d519",
+    "content-hash": "13c6a7fc1b6dde5bcebc500a2e0e79df",
     "packages": [
         {
             "name": "drdplus/armourer",
@@ -48,17 +48,11 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.0.1",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-                "reference": "64a4b1252667cc6f3b1ef088c0bf41cb0b7fea3d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/64a4b1252667cc6f3b1ef088c0bf41cb0b7fea3d",
-                "reference": "64a4b1252667cc6f3b1ef088c0bf41cb0b7fea3d",
-                "shasum": ""
+                "url": "/var/www/utok.skeleton",
+                "reference": "3da20da4b718faa7b3ee682dbfe678cd528081f6"
             },
             "require": {
                 "drdplus/armourer": "~2.0",
@@ -79,20 +73,24 @@
                     "DrdPlus\\": "DrdPlus/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "pre-autoload-dump": [
+                    "find ./vendor/drdplus/calculator-skeleton/web/*.html -exec cp {} ./web/ \\;"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "description": "Configurator skeleton for those using weapons for DrD+",
             "keywords": [
-                "Skeleton",
+                "DrD",
+                "DrD plus",
                 "attack",
                 "calculator",
-                "drd",
-                "drd plus",
+                "skeleton",
                 "weapons"
             ],
-            "time": "2019-02-15T10:00:53+00:00"
+            "time": "2019-02-17T11:40:15+00:00"
         },
         {
             "name": "drdplus/background",
