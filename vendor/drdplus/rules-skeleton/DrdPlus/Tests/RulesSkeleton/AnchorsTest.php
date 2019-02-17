@@ -442,8 +442,7 @@ class AnchorsTest extends AbstractContentTest
     }
 
     /**
-     * @test1
-     * @backupGlobals enabled
+     * @test
      */
     public function No_links_point_to_local_hosts(): void
     {

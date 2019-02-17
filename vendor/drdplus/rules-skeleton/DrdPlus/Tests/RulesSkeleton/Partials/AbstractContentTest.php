@@ -62,7 +62,7 @@ abstract class AbstractContentTest extends TestWithMockery
     protected function passIn(): bool
     {
         $_COOKIE[$this->getNameForLocalOwnershipConfirmation()] = true; // this cookie simulates confirmation of ownership
-        $usagePolicy = new UsagePolicy($this->getVariablePartOfNameForPass(), new Request(new Bot()), new CookiesService());
+        $usagePolicy = new UsagePolicy($this->getVariablePartOfNameForPass(), new Request($this->getBot()), new CookiesService());
         self::assertTrue(
             $usagePolicy->hasVisitorConfirmedOwnership(),
             "Ownership has not been confirmed by cookie '{$this->getNameForLocalOwnershipConfirmation()}'"
@@ -73,10 +73,19 @@ abstract class AbstractContentTest extends TestWithMockery
         return true;
     }
 
+    protected function getBot(): Bot
+    {
+        static $bot;
+        if ($bot === null) {
+            $bot = new Bot();
+        }
+        return $bot;
+    }
+
     protected function passOut(): bool
     {
         unset($_COOKIE[$this->getNameForLocalOwnershipConfirmation()]);
-        $usagePolicy = new UsagePolicy($this->getVariablePartOfNameForPass(), new Request(new Bot()), new CookiesService());
+        $usagePolicy = new UsagePolicy($this->getVariablePartOfNameForPass(), new Request($this->getBot()), new CookiesService());
         self::assertFalse(
             $usagePolicy->hasVisitorConfirmedOwnership(),
             "Ownership is still confirmed by cookie '{$this->getNameForLocalOwnershipConfirmation()}'"
@@ -517,7 +526,7 @@ abstract class AbstractContentTest extends TestWithMockery
     {
         static $nameOfOwnershipConfirmation;
         if ($nameOfOwnershipConfirmation === null) {
-            $usagePolicy = new UsagePolicy($this->getVariablePartOfNameForPass(), new Request(new Bot()), new CookiesService());
+            $usagePolicy = new UsagePolicy($this->getVariablePartOfNameForPass(), new Request($this->getBot()), new CookiesService());
             try {
                 $usagePolicyReflection = new \ReflectionClass(UsagePolicy::class);
             } catch (\ReflectionException $reflectionException) {
@@ -745,5 +754,32 @@ abstract class AbstractContentTest extends TestWithMockery
             $ids[] = \html_entity_decode($id);
         }
         return $ids;
+    }
+
+    /**
+     * @test
+     */
+    public function Globals_are_cleaned(): void
+    {
+        self::assertCount(0, $_GET, 'Global $_GET is not empty, have you forgot to set @backupGlobals enabled ?, ' . \var_export($_GET, true));
+        self::assertCount(0, $_POST, 'Global $_POST is not empty, have you forgot to set @backupGlobals enabled ? ' . \var_export($_POST, true));
+        if (!$this->getTestsConfiguration()->hasProtectedAccess()) {
+            self::assertCount(0, $_COOKIE, 'Global $_COOKIE is not empty, have you forgot to set @backupGlobals enabled ? ' . \var_export($_COOKIE, true));
+        } else {
+            $allowedCookieKeys = [
+                UsagePolicy::OWNERSHIP_COOKIE_NAME,
+                UsagePolicy::TRIAL_COOKIE_NAME,
+                UsagePolicy::TRIAL_EXPIRED_AT_COOKIE_NAME,
+            ];
+            if (isset($_COOKIE[UsagePolicy::OWNERSHIP_COOKIE_NAME])) {
+                $allowedCookieKeys[] = $_COOKIE[UsagePolicy::OWNERSHIP_COOKIE_NAME];
+            }
+            $cookieTrash = \array_diff_key($_COOKIE, \array_fill_keys($allowedCookieKeys, 'foo'));
+            self::assertCount(
+                0,
+                $cookieTrash,
+                'Global $_COOKIE after filtering pass-related values is not empty, have you forgot to set @backupGlobals enabled ? ' . \var_export($cookieTrash, true)
+            );
+        }
     }
 }

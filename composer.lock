@@ -792,16 +792,16 @@
         },
         {
             "name": "drdplus/rules-skeleton",
-            "version": "1.1.35",
+            "version": "1.1.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-                "reference": "27df533cfd4e72d9e996cb9c8375919e6cc14bbe"
+                "reference": "5db4e7d718ce0fb3cb326d992bd35c78fbc25615"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/27df533cfd4e72d9e996cb9c8375919e6cc14bbe",
-                "reference": "27df533cfd4e72d9e996cb9c8375919e6cc14bbe",
+                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/5db4e7d718ce0fb3cb326d992bd35c78fbc25615",
+                "reference": "5db4e7d718ce0fb3cb326d992bd35c78fbc25615",
                 "shasum": ""
             },
             "require": {
@@ -857,7 +857,7 @@
                 "helper",
                 "rules"
             ],
-            "time": "2019-02-07T07:32:53+00:00"
+            "time": "2019-02-17T19:46:09+00:00"
         },
         {
             "name": "drdplus/skills",

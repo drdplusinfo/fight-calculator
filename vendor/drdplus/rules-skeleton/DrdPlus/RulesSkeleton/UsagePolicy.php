@@ -9,7 +9,7 @@ class UsagePolicy extends StrictObject
 {
     public const OWNERSHIP_COOKIE_NAME = 'ownershipCookieName';
     public const TRIAL_COOKIE_NAME = 'trialCookieName';
-    public const TRIAL_EXPIRED_AT_COOKIE_NAME = 'trialExpiredAtName';
+    public const TRIAL_EXPIRED_AT_COOKIE_NAME = 'trialExpiredAtCookieName';
 
     /** @var string */
     private $articleName;

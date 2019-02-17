@@ -3,7 +3,6 @@ namespace DrdPlus\Tests\RulesSkeleton;
 
 use DrdPlus\RulesSkeleton\HtmlHelper;
 use DrdPlus\RulesSkeleton\Request;
-use DrdPlus\RulesSkeleton\UsagePolicy;
 use DrdPlus\Tests\RulesSkeleton\Partials\AbstractContentTest;
 use Gt\Dom\Element;
 use Gt\Dom\HTMLDocument;

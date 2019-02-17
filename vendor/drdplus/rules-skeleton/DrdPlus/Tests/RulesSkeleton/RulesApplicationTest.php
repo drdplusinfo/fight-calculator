@@ -12,8 +12,9 @@ use DrdPlus\Tests\RulesSkeleton\Partials\AbstractContentTest;
 use Granam\WebContentBuilder\HtmlDocument;
 use Gt\Dom\Element;
 use Gt\Dom\TokenList;
-use Mockery\MockInterface;
-
+use Mockery\MockInterface;/**
+ * @backupGlobals enabled
+ */
 class RulesApplicationTest extends AbstractContentTest
 {
     /**
