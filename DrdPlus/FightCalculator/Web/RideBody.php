@@ -37,11 +37,10 @@ class RideBody extends AbstractArmamentBody
 </div>
 <div class="block">
 Dovednost <span class="keyword">
-    <a href="https://pph.drdplus.info/#jezdectvi" target="_blank">{$this->getRidingCzechName()}</a>
+    <a href="https://pph.drdplus.info/#jezdectvi" target="_blank">{$this->getRidingHumanName()}</a>
 </span>
 <label>
-na stupni <input type="radio" value="0" name="{$this->getRidingSkillRankInputName()}"
-                        <?php if ($controller->getFight()->getSelectedRidingSkillRank() === 0) { ?>checked<?php } ?>>
+na stupni <input type="radio" value="0" name="{$this->getRidingSkillRankInputName()}" {$this->getCheckedRidingSkillRank(0)}>
   0,
 </label>
 <label>
@@ -64,12 +63,10 @@ HTML;
 
     private function getCheckedOnHorseback(): string
     {
-        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentOnHorseback(), true)
-            ? 'checked'
-            : '';
+        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentOnHorseback(), true);
     }
 
-    private function getRidingCzechName(): string
+    private function getRidingHumanName(): string
     {
         return PhysicalSkillCode::getIt(PhysicalSkillCode::RIDING)->translateTo('cs');
     }

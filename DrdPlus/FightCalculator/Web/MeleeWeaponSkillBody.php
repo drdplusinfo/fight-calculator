@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DrdPlus\FightCalculator\Web;
 
+use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\AttackSkeleton\Web\AbstractArmamentBody;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
@@ -18,11 +19,20 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
      * @var Fight
      */
     private $fight;
+    /**
+     * @var HtmlHelper
+     */
+    private $htmlHelper;
 
-    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills, Fight $fight)
+    public function __construct(
+        CurrentArmamentsWithSkills $currentArmamentsWithSkills,
+        Fight $fight,
+        HtmlHelper $htmlHelper
+    )
     {
         $this->currentArmamentsWithSkills = $currentArmamentsWithSkills;
         $this->fight = $fight;
+        $this->htmlHelper = $htmlHelper;
     }
 
     public function __toString()
@@ -35,7 +45,7 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
         return <<<HTML
 <div class="col">
     <label>
-        <select name="{$this->getMeleeFightSkillSelectName()}">
+        <select name="{$this->getMeleeFightSkillInputName()}">
             {$this->getPossibleMeleeFightSkills()}
         </select>
     </label>
@@ -68,7 +78,7 @@ HTML;
         $currentMeleeFightSkillCode = $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode();
         foreach ($this->fight->getPossibleMeleeFightSkills() as $possibleMeleeFightSkill) {
             $possibleMeleeFightSkills[] = <<<HTML
-<option value="{$possibleMeleeFightSkill->getValue()}" {$this->getSelected($possibleMeleeFightSkill, $currentMeleeFightSkillCode)}>
+<option value="{$possibleMeleeFightSkill->getValue()}" {$this->htmlHelper->getSelected($possibleMeleeFightSkill, $currentMeleeFightSkillCode)}>
     {$possibleMeleeFightSkill->translateTo('cs')}
 </option>
 HTML;
@@ -76,7 +86,7 @@ HTML;
         return \implode("\n", $possibleMeleeFightSkills);
     }
 
-    private function getMeleeFightSkillSelectName(): string
+    private function getMeleeFightSkillInputName(): string
     {
         return FightRequest::MELEE_FIGHT_SKILL;
     }
@@ -88,8 +98,6 @@ HTML;
 
     private function getMeleeFightSkillValueChecked(int $matchingRank): string
     {
-        return $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode() === $matchingRank
-            ? 'checked'
-            : '';
+        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode(), $matchingRank);
     }
 }
