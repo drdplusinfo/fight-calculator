@@ -7,11 +7,14 @@ use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
 use DrdPlus\FightCalculator\Web\BasicFightPropertiesBody;
 use DrdPlus\FightCalculator\Web\FightPropertiesBody;
+use DrdPlus\FightCalculator\Web\FightWithShieldSkillBody;
 use DrdPlus\FightCalculator\Web\MeleeWeaponSkillBody;
 use DrdPlus\FightCalculator\Web\ProfessionsBody;
 use DrdPlus\FightCalculator\Web\RangedTargetBody;
 use DrdPlus\FightCalculator\Web\RangedWeaponSkillBody;
+use DrdPlus\FightCalculator\Web\RideBody;
 use DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody;
+use DrdPlus\FightCalculator\Web\ShieldUsageSkillBody;
 
 class FightServicesContainer extends AttackServicesContainer
 {
@@ -35,6 +38,10 @@ class FightServicesContainer extends AttackServicesContainer
     private $historyWithSkills;
     /** @var BasicFightPropertiesBody */
     private $basicFightPropertiesBody;
+    /** @var ShieldUsageSkillBody */
+    private $shieldUsageSkillBody;
+    /** @var FightWithShieldSkillBody */
+    private $fightWithShieldSkillBody;
     /** @var ShieldFightPropertiesBody */
     private $shieldWithMeleeWeaponBody;
     /** @var ShieldFightPropertiesBody */
@@ -45,6 +52,8 @@ class FightServicesContainer extends AttackServicesContainer
     private $previousProperties;
     /** @var ProfessionsBody */
     private $professionsBody;
+    /** @var RideBody */
+    private $rideBody;
     /** @var FightPropertiesBody */
     private $meleeWeaponFightPropertiesBody;
 
@@ -66,10 +75,13 @@ class FightServicesContainer extends AttackServicesContainer
             'rangedTargetBody' => $this->getRangedTargetBody(),
             // shield
             'shieldBody' => $this->getShieldBody(),
+            'shieldUsageSkillBody' => $this->getShieldUsageSkillBody(),
+            'fightWithShieldSkillBody' => $this->getFightWithShieldSkillBody(),
             'shieldWithMeleeWeaponBody' => $this->getShieldWithMeleeWeaponBody(),
             'shieldWithRangedWeaponBody' => $this->getShieldWithRangedWeaponBody(),
             'withoutShield' => $this->getCurrentArmaments()->getCurrentShield()->isUnarmed(),
             // others
+            'rideBody' => $this->getProfessionsBody(),
             'professionsBody' => $this->getProfessionsBody(),
             'historyDeletionBody' => $this->getHistoryDeletionBody(),
             'bodyPropertiesBody' => $this->getBodyPropertiesBody(),
@@ -90,6 +102,17 @@ class FightServicesContainer extends AttackServicesContainer
         return $this->meleeWeaponFightPropertiesBody;
     }
 
+    public function getRideBody(): RideBody
+    {
+        if ($this->rideBody === null) {
+            $this->rideBody = new RideBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->rideBody;
+    }
+
     public function getProfessionsBody(): ProfessionsBody
     {
         if ($this->professionsBody === null) {
@@ -99,6 +122,30 @@ class FightServicesContainer extends AttackServicesContainer
             );
         }
         return $this->professionsBody;
+    }
+
+    public function getShieldUsageSkillBody(): ShieldUsageSkillBody
+    {
+        if ($this->shieldUsageSkillBody === null) {
+            $this->shieldUsageSkillBody = new ShieldUsageSkillBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getFight(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->shieldUsageSkillBody;
+    }
+
+    public function getFightWithShieldSkillBody(): FightWithShieldSkillBody
+    {
+        if ($this->fightWithShieldSkillBody === null) {
+            $this->fightWithShieldSkillBody = new FightWithShieldSkillBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getFight(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->fightWithShieldSkillBody;
     }
 
     public function getShieldWithMeleeWeaponBody(): ShieldFightPropertiesBody
