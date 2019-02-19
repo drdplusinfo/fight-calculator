@@ -9,6 +9,7 @@ use DrdPlus\FightCalculator\Web\BasicFightPropertiesBody;
 use DrdPlus\FightCalculator\Web\FightPropertiesBody;
 use DrdPlus\FightCalculator\Web\MeleeWeaponSkillBody;
 use DrdPlus\FightCalculator\Web\ProfessionsBody;
+use DrdPlus\FightCalculator\Web\RangedTargetBody;
 use DrdPlus\FightCalculator\Web\RangedWeaponSkillBody;
 use DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody;
 
@@ -20,6 +21,8 @@ class FightServicesContainer extends AttackServicesContainer
     private $rangedWeaponSkillBody;
     /** @var FightPropertiesBody */
     private $rangedWeaponFightPropertiesBody;
+    /** @var RangedTargetBody */
+    private $rangedTargetBody;
     /** @var CurrentArmamentsWithSkills */
     private $currentArmamentsWithSkills;
     /** @var CurrentProperties */
@@ -60,6 +63,7 @@ class FightServicesContainer extends AttackServicesContainer
             'rangedWeaponBody' => $this->getRangedWeaponBody(),
             'rangedWeaponSkillBody' => $this->getRangedWeaponSkillBody(),
             'rangedWeaponFightPropertiesBody' => $this->getRangedWeaponFightPropertiesBody(),
+            'rangedTargetBody' => $this->getRangedTargetBody(),
             // shield
             'shieldBody' => $this->getShieldBody(),
             'shieldWithMeleeWeaponBody' => $this->getShieldWithMeleeWeaponBody(),
@@ -183,6 +187,19 @@ class FightServicesContainer extends AttackServicesContainer
             );
         }
         return $this->rangedWeaponFightPropertiesBody;
+    }
+
+    public function getRangedTargetBody(): RangedTargetBody
+    {
+        if ($this->rangedTargetBody === null) {
+            $this->rangedTargetBody = new RangedTargetBody(
+                $this->getFight(),
+                $this->getRangedWeaponFightPropertiesBody(),
+                $this->getHtmlHelper(),
+                $this->getTables()
+            );
+        }
+        return $this->rangedTargetBody;
     }
 
     public function getCurrentArmamentsWithSkills(): CurrentArmamentsWithSkills

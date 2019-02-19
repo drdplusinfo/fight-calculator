@@ -19,7 +19,7 @@ class RangedTargetBody extends StrictObject implements BodyInterface
     /**
      * @var FightPropertiesBody
      */
-    private $rangedFightPropertiesBody;
+    private $rangedWeaponFightPropertiesBody;
     /**
      * @var HtmlHelper
      */
@@ -31,13 +31,13 @@ class RangedTargetBody extends StrictObject implements BodyInterface
 
     public function __construct(
         Fight $fight,
-        FightPropertiesBody $rangedFightPropertiesBody,
+        FightPropertiesBody $rangedWeaponFightPropertiesBody,
         HtmlHelper $htmlHelper,
         Tables $tables
     )
     {
         $this->fight = $fight;
-        $this->rangedFightPropertiesBody = $rangedFightPropertiesBody;
+        $this->rangedWeaponFightPropertiesBody = $rangedWeaponFightPropertiesBody;
         $this->htmlHelper = $htmlHelper;
         $this->tables = $tables;
     }
@@ -64,7 +64,7 @@ class RangedTargetBody extends StrictObject implements BodyInterface
     </div>
   </div>
   <div class="row">
-      {$this->rangedFightPropertiesBody->getValue()}
+      {$this->rangedWeaponFightPropertiesBody->getValue()}
     <div class="col-sm-3">
       Soubojový dostřel
       <img alt="Luk se šípem" class="line-sized" src="/images/emojione/bow-and-arrow-1f3f9.png">

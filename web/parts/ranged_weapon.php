@@ -4,7 +4,7 @@ namespace DrdPlus\FightCalculator;
 /** @var \DrdPlus\AttackSkeleton\Web\RangedWeaponBody $rangedWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\RangedWeaponSkillBody $rangedWeaponSkillBody */
 /** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $rangedWeaponFightPropertiesBody */
-/** @var \DrdPlus\FightCalculator\Web\RangedTargetBody $rangedTarget */
+/** @var \DrdPlus\FightCalculator\Web\RangedTargetBody $rangedTargetBody */
 ?>
 <div class="row">
   <h2 id="Na dálku" class="col"><a href="#Na dálku" class="inner">Na dálku</a></h2>
@@ -15,5 +15,5 @@ namespace DrdPlus\FightCalculator;
   <div class="with-skill-ranks row">
       <?= $rangedWeaponFightPropertiesBody->getValue() ?>
   </div>
-  <div class="row"><?= $rangedTarget->getValue() ?></div>
+  <div class="row"><?= $rangedTargetBody->getValue() ?></div>
 </fieldset>
