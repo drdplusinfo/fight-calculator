@@ -273,18 +273,12 @@
     },
     {
         "name": "drdplus/calculator-skeleton",
-        "version": "1.0.27",
-        "version_normalized": "1.0.27.0",
+        "version": "1.0.29",
+        "version_normalized": "1.0.29.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/drdplusinfo/drdplus-calculator-skeleton.git",
-            "reference": "946275cbc7930511b88cba3ed0eeb6e11c67c9ad"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-calculator-skeleton/zipball/946275cbc7930511b88cba3ed0eeb6e11c67c9ad",
-            "reference": "946275cbc7930511b88cba3ed0eeb6e11c67c9ad",
-            "shasum": ""
+            "url": "/var/www/kalkulator.skeleton",
+            "reference": "9450dcc1e9e0d4f34c88962087ee8d4ec616f159"
         },
         "require": {
             "composer-plugin-api": "^1.1",
@@ -303,18 +297,17 @@
             "phpunit/phpunit": "~7.0",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-07T10:13:20+00:00",
+        "time": "2019-02-11T09:24:41+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\CalculatorSkeleton\\CalculatorInjectorComposerPlugin"
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
                 "DrdPlus\\": "DrdPlus/"
             }
         },
-        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],

@@ -5,5 +5,5 @@ namespace DrdPlus\Tests\CalculatorSkeleton;
 
 class TableOfContentsTest extends \DrdPlus\Tests\RulesSkeleton\TableOfContentsTest
 {
-    use Partials\AbstractCalculatorContentTestTrait;
+    use Partials\CalculatorContentTestTrait;
 }

@@ -7,6 +7,9 @@ use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\RulesSkeleton\CookiesService;
 use DrdPlus\Tests\CalculatorSkeleton\Partials\AbstractCalculatorContentTest;
 
+/**
+ * @backupGlobals enabled
+ */
 class HistoryTest extends AbstractCalculatorContentTest
 {
     /** @var CookiesService */

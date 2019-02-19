@@ -5,5 +5,5 @@ namespace DrdPlus\Tests\CalculatorSkeleton;
 
 class GraphicsTest extends \DrdPlus\Tests\RulesSkeleton\GraphicsTest
 {
-    use Partials\AbstractCalculatorContentTestTrait;
+    use Partials\CalculatorContentTestTrait;
 }

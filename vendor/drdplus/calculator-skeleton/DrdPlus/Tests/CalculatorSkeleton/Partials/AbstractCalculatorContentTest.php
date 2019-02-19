@@ -7,5 +7,5 @@ use DrdPlus\Tests\RulesSkeleton\Partials\AbstractContentTest;
 
 abstract class AbstractCalculatorContentTest extends AbstractContentTest
 {
-    use AbstractCalculatorContentTestTrait;
+    use CalculatorContentTestTrait;
 }

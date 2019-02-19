@@ -798,7 +798,7 @@ class Fight extends StrictObject
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
-        $distanceValue = \min($distanceValue, $this->getCurrentRangedWeaponMaximalRange());
+        $distanceValue = \min($distanceValue, $this->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables));
 
         return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
     }

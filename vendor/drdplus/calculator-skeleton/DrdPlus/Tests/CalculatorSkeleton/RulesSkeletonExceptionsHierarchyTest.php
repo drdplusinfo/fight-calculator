@@ -5,5 +5,5 @@ namespace DrdPlus\Tests\CalculatorSkeleton;
 
 class RulesSkeletonExceptionsHierarchyTest extends \DrdPlus\Tests\RulesSkeleton\RulesSkeletonExceptionsHierarchyTest
 {
-    use Partials\AbstractCalculatorContentTestTrait;
+    use Partials\CalculatorContentTestTrait;
 }

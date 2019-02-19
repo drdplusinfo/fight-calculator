@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13c6a7fc1b6dde5bcebc500a2e0e79df",
+    "content-hash": "718e799084bb1adceec4339f5897469f",
     "packages": [
         {
             "name": "drdplus/armourer",
@@ -214,17 +214,11 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.0.27",
+            "version": "1.0.29",
             "source": {
                 "type": "git",
-                "url": "https://github.com/drdplusinfo/drdplus-calculator-skeleton.git",
-                "reference": "946275cbc7930511b88cba3ed0eeb6e11c67c9ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/drdplus-calculator-skeleton/zipball/946275cbc7930511b88cba3ed0eeb6e11c67c9ad",
-                "reference": "946275cbc7930511b88cba3ed0eeb6e11c67c9ad",
-                "shasum": ""
+                "url": "/var/www/kalkulator.skeleton",
+                "reference": "9450dcc1e9e0d4f34c88962087ee8d4ec616f159"
             },
             "require": {
                 "composer-plugin-api": "^1.1",
@@ -252,12 +246,11 @@
                     "DrdPlus\\": "DrdPlus/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-02-07T10:13:20+00:00"
+            "time": "2019-02-11T09:24:41+00:00"
         },
         {
             "name": "drdplus/codes",

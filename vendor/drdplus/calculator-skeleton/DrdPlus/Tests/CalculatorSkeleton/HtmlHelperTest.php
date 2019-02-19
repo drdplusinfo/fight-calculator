@@ -7,7 +7,7 @@ use DrdPlus\RulesSkeleton\HtmlHelper;
 
 class HtmlHelperTest extends \DrdPlus\Tests\RulesSkeleton\HtmlHelperTest
 {
-    use Partials\AbstractCalculatorContentTestTrait;
+    use Partials\CalculatorContentTestTrait;
 
     protected static function getSutClass(string $sutTestClass = null, string $regexp = '~\\\Tests(.+)Test$~'): string
     {

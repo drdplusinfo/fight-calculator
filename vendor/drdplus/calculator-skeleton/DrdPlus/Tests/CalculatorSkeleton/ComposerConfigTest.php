@@ -7,7 +7,7 @@ use DrdPlus\RulesSkeleton\SkeletonInjectorComposerPlugin;
 
 class ComposerConfigTest extends \DrdPlus\Tests\RulesSkeleton\ComposerConfigTest
 {
-    use Partials\AbstractCalculatorContentTestTrait;
+    use Partials\CalculatorContentTestTrait;
 
     /**
      * @test
