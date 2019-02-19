@@ -11,7 +11,6 @@ use DrdPlus\CalculatorSkeleton\CurrentValues;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Codes\Skills\SkillCode;
-use DrdPlus\Tables\Tables;
 
 class CurrentArmamentsWithSkills extends CurrentArmaments
 {
@@ -19,29 +18,17 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
 
     /** @var CurrentValues */
     private $currentValues;
-    /** @var Armourer */
-    private $armourer;
-    /** @var Tables */
-    private $tables;
-    /**
-     * @var PreviousProperties
-     */
-    private $currentProperties;
 
     public function __construct(
-        PreviousProperties $currentProperties,
+        CurrentProperties $currentProperties,
         CurrentArmamentsValues $currentArmamentsValues,
         Armourer $armourer,
         CustomArmamentsRegistrar $customArmamentsRegistrar,
-        CurrentValues $currentValues,
-        Tables $tables
+        CurrentValues $currentValues
     )
     {
         parent::__construct($currentProperties, $currentArmamentsValues, $armourer, $customArmamentsRegistrar);
         $this->currentValues = $currentValues;
-        $this->armourer = $armourer;
-        $this->tables = $tables;
-        $this->currentProperties = $currentProperties;
     }
 
     public function getCurrentMeleeFightSkillCode(): SkillCode

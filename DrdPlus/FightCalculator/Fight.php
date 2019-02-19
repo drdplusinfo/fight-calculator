@@ -81,7 +81,7 @@ class Fight extends StrictObject
 
     public function __construct(
         CurrentArmamentsWithSkills $currentArmamentsWithSkills,
-        PreviousProperties $currentProperties,
+        CurrentProperties $currentProperties,
         CurrentValues $currentValues,
         PreviousArmamentsWithSkills $previousArmamentsWithSkills,
         PreviousProperties $previousProperties,
@@ -629,7 +629,7 @@ class Fight extends StrictObject
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getRangedShieldFightProperties(): FightProperties
+    public function getCurrentRangedShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
             $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
