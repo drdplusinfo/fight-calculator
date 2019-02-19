@@ -56,7 +56,7 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
         );
     }
 
-    public function getCurrentRangedSkillRank(): int
+    public function getCurrentRangedFightSkillRank(): int
     {
         return (int)$this->currentValues->getCurrentValue(FightRequest::RANGED_FIGHT_SKILL_RANK);
     }

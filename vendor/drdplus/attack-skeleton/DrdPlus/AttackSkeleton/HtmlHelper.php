@@ -84,8 +84,13 @@ class HtmlHelper extends \DrdPlus\RulesSkeleton\HtmlHelper
         return $query;
     }
 
-    public function formatInteger(int $integer): string
+    /**
+     * @param int|IntegerInterface $integer
+     * @return string
+     */
+    public function formatInteger($integer): string
     {
+        $integer = ToInteger::toInteger($integer);
         return $integer >= 0
             ? ('+' . $integer)
             : (string)$integer;

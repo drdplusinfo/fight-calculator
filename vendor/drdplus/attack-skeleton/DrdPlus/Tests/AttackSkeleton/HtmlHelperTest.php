@@ -65,4 +65,28 @@ class HtmlHelperTest extends \DrdPlus\Tests\CalculatorSkeleton\HtmlHelperTest
         self::assertSame('disabled', $htmlHelper->getDisabled(false));
         self::assertSame('', $htmlHelper->getDisabled(true));
     }
+
+    /**
+     * @test
+     * @dataProvider provideIntegersToFormat
+     * @param $inputValue
+     * @param string $expectedFormattedValue
+     */
+    public function I_can_get_formatted_integer($inputValue, string $expectedFormattedValue): void
+    {
+        $htmlHelper = $this->getHtmlHelper();
+        self::assertSame($expectedFormattedValue, $htmlHelper->formatInteger($inputValue));
+    }
+
+    public function provideIntegersToFormat(): array
+    {
+        return [
+            'positive integer' => [123, '+123'],
+            'zero integer' => [0, '+0'],
+            'negative integer' => [-555, '-555'],
+            'positive integer object' => [new IntegerObject(123), '+123'],
+            'zero integer object' => [new IntegerObject(0), '+0'],
+            'negative integer object' => [new IntegerObject(-555), '-555'],
+        ];
+    }
 }

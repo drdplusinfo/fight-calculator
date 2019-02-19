@@ -5,6 +5,7 @@ namespace DrdPlus\FightCalculator\Web;
 
 use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\AttackSkeleton\Web\AbstractArmamentBody;
+use DrdPlus\Codes\Skills\SkillCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
@@ -75,10 +76,9 @@ HTML;
     private function getPossibleMeleeFightSkills(): string
     {
         $possibleMeleeFightSkills = [];
-        $currentMeleeFightSkillCode = $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode();
         foreach ($this->fight->getPossibleMeleeFightSkills() as $possibleMeleeFightSkill) {
             $possibleMeleeFightSkills[] = <<<HTML
-<option value="{$possibleMeleeFightSkill->getValue()}" {$this->htmlHelper->getSelected($possibleMeleeFightSkill, $currentMeleeFightSkillCode)}>
+<option value="{$possibleMeleeFightSkill->getValue()}" {$this->getSelectedForSkill($possibleMeleeFightSkill)}>
     {$possibleMeleeFightSkill->translateTo('cs')}
 </option>
 HTML;
@@ -99,5 +99,10 @@ HTML;
     private function getMeleeFightSkillValueChecked(int $matchingRank): string
     {
         return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode(), $matchingRank);
+    }
+
+    private function getSelectedForSkill(SkillCode $possibleMeleeFightSkill): string
+    {
+        return $this->htmlHelper->getSelected($possibleMeleeFightSkill, $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode());
     }
 }

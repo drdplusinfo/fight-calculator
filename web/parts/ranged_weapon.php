@@ -3,7 +3,7 @@ namespace DrdPlus\FightCalculator;
 
 /** @var \DrdPlus\AttackSkeleton\Web\RangedWeaponBody $rangedWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\RangedWeaponSkillBody $rangedWeaponSkillBody */
-/** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $rangedFightPropertiesBody */
+/** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $rangedWeaponFightPropertiesBody */
 /** @var \DrdPlus\FightCalculator\Web\RangedTargetBody $rangedTarget */
 ?>
 <div class="row">
@@ -13,7 +13,7 @@ namespace DrdPlus\FightCalculator;
     <?= $rangedWeaponBody->getValue() ?>
     <?= $rangedWeaponSkillBody->getValue() ?>
   <div class="with-skill-ranks row">
-      <?= $rangedFightPropertiesBody->getValue() ?>
+      <?= $rangedWeaponFightPropertiesBody->getValue() ?>
   </div>
   <div class="row"><?= $rangedTarget->getValue() ?></div>
 </fieldset>

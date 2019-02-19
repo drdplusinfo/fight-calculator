@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace DrdPlus\FightCalculator\Web;
 
+use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\AttackSkeleton\Web\AbstractArmamentBody;
+use DrdPlus\Codes\Skills\SkillCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
@@ -18,11 +20,16 @@ class RangedWeaponSkillBody extends AbstractArmamentBody
      * @var Fight
      */
     private $fight;
+    /**
+     * @var HtmlHelper
+     */
+    private $htmlHelper;
 
-    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills, Fight $fight)
+    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills, Fight $fight, HtmlHelper $htmlHelper)
     {
         $this->currentArmamentsWithSkills = $currentArmamentsWithSkills;
         $this->fight = $fight;
+        $this->htmlHelper = $htmlHelper;
     }
 
     public function __toString()
@@ -65,10 +72,9 @@ HTML;
     private function getPossibleRangedFightSkills(): string
     {
         $possibleRangedFightSkills = [];
-        $currentRangedFightSkillCode = $this->currentArmamentsWithSkills->getCurrentRangedFightSkillCode();
         foreach ($this->fight->getPossibleRangedFightSkills() as $possibleRangedFightSkill) {
             $possibleRangedFightSkills[] = <<<HTML
-<option value="{$possibleRangedFightSkill->getValue()}" {$this->getSelected($possibleRangedFightSkill, $currentRangedFightSkillCode)}>
+<option value="{$possibleRangedFightSkill->getValue()}" {$this->getSelectedForSkill($possibleRangedFightSkill)}>
     {$possibleRangedFightSkill->translateTo('cs')}
 </option>
 HTML;
@@ -88,8 +94,11 @@ HTML;
 
     private function getRangedFightSkillValueChecked(int $matchingRank): string
     {
-        return $this->currentArmamentsWithSkills->getCurrentRangedFightSkillCode() === $matchingRank
-            ? 'checked'
-            : '';
+        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentRangedFightSkillRank(), $matchingRank);
+    }
+
+    private function getSelectedForSkill(SkillCode $possibleRangedFightSkill): string
+    {
+        return $this->htmlHelper->getSelected($possibleRangedFightSkill, $this->currentArmamentsWithSkills->getCurrentRangedFightSkillCode());
     }
 }

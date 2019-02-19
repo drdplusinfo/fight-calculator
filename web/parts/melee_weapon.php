@@ -3,7 +3,7 @@ namespace DrdPlus\FightCalculator;
 
 /** @var \DrdPlus\AttackSkeleton\Web\MeleeWeaponBody $meleeWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\MeleeWeaponSkillBody $meleeWeaponSkillBody */
-/** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $meleeFightPropertiesBody */
+/** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $meleeWeaponFightPropertiesBody */
 ?>
 <div class="row">
   <h2 id="Na blízko" class="col"><a href="#Na blízko" class="inner">Na blízko</a></h2>
@@ -12,6 +12,6 @@ namespace DrdPlus\FightCalculator;
     <?= $meleeWeaponBody->getValue() ?>
     <?= $meleeWeaponSkillBody->getValue() ?>
   <div class="with-skill-ranks row">
-      <?= $meleeFightPropertiesBody->getValue() ?>
+      <?= $meleeWeaponFightPropertiesBody->getValue() ?>
   </div>
 </fieldset>

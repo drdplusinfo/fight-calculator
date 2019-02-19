@@ -136,13 +136,13 @@ class Fight extends StrictObject
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getCurrentRangedFightProperties(): FightProperties
+    public function getCurrentRangedWeaponFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
             $this->currentArmamentsWithSkills->getCurrentRangedWeapon(),
             $this->currentArmamentsWithSkills->getCurrentRangedWeaponHolding(),
             $this->currentArmamentsWithSkills->getCurrentRangedFightSkillCode(),
-            $this->currentArmamentsWithSkills->getCurrentRangedSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentRangedFightSkillRank(),
             $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
             $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
             $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
@@ -229,55 +229,59 @@ class Fight extends StrictObject
         Size $size,
         HeightInCm $heightInCm,
         WeaponlikeCode $weaponlikeCode,
-        ItemHoldingCode $weaponHolding,
+        ItemHoldingCode $weaponlikeHolding,
         SkillCode $skillWithWeapon,
         int $skillRankWithWeapon,
         ShieldCode $usedShield,
         int $shieldUsageSkillRank,
-        BodyArmorCode $bodyArmorCode,
-        HelmCode $helmCode,
+        BodyArmorCode $wornBodyArmorCode,
+        HelmCode $wornHelmCode,
         int $skillRankWithArmor,
         ProfessionCode $professionCode,
         bool $fightsOnHorseback,
         int $ridingSkillRank,
-        bool $fightFreeWillAnimal,
+        bool $fightsFreeWillAnimal,
         int $zoologySkillRank
     ): FightProperties
     {
+        $bodyPropertiesForFight = new BodyPropertiesForFight(
+            $strength,
+            $agility,
+            $knack,
+            $will,
+            $intelligence,
+            $charisma,
+            $size,
+            $height = Height::getIt($heightInCm, $this->tables),
+            Speed::getIt($strength, $agility, $height)
+        );
+        $emptyCombatActions = new CombatActions([], $this->tables);
+        $skills = $this->createSkills(
+            $skillWithWeapon,
+            $skillRankWithWeapon,
+            $professionCode,
+            $skillRankWithArmor,
+            $shieldUsageSkillRank,
+            $ridingSkillRank,
+            $zoologySkillRank
+        );
         return new FightProperties(
-            new BodyPropertiesForFight(
-                $strength,
-                $agility,
-                $knack,
-                $will,
-                $intelligence,
-                $charisma,
-                $size,
-                $height = Height::getIt($heightInCm, $this->tables),
-                Speed::getIt($strength, $agility, $height)
-            ),
-            new CombatActions([], $this->tables),
-            $this->createSkills(
-                $skillWithWeapon,
-                $skillRankWithWeapon,
-                $professionCode,
-                $skillRankWithArmor,
-                $shieldUsageSkillRank,
-                $ridingSkillRank,
-                $zoologySkillRank
-            ),
-            $bodyArmorCode,
-            $helmCode,
+            $bodyPropertiesForFight,
+            $emptyCombatActions,
+            $skills,
+            $wornBodyArmorCode,
+            $wornHelmCode,
             $professionCode,
             $this->tables,
+            $this->armourer,
             $weaponlikeCode,
-            $weaponHolding,
+            $weaponlikeHolding,
             false, // does not fight with two weapons
             $usedShield,
             false, // enemy is not faster
             Glared::createWithoutGlare(new Health()),
             $fightsOnHorseback,
-            $fightFreeWillAnimal
+            $fightsFreeWillAnimal
         );
     }
 
@@ -452,7 +456,7 @@ class Fight extends StrictObject
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
      * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
      */
-    public function getPreviousRangedFightProperties(): FightProperties
+    public function getPreviousRangedWeaponFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
             $this->previousArmamentsWithSkills->getPreviousRangedWeapon(),
@@ -857,7 +861,7 @@ class Fight extends StrictObject
      */
     private function getPreviousRangedWeaponMaximalRange(): float
     {
-        return $this->getPreviousRangedFightProperties()->getMaximalRange()->getInMeters($this->tables);
+        return $this->getPreviousRangedWeaponFightProperties()->getMaximalRange()->getInMeters($this->tables);
     }
 
     public function getPreviousTargetSize(): Size

@@ -6,13 +6,20 @@ namespace DrdPlus\FightCalculator;
 use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
 use DrdPlus\FightCalculator\Web\BasicFightPropertiesBody;
+use DrdPlus\FightCalculator\Web\FightPropertiesBody;
 use DrdPlus\FightCalculator\Web\MeleeWeaponSkillBody;
+use DrdPlus\FightCalculator\Web\ProfessionsBody;
+use DrdPlus\FightCalculator\Web\RangedWeaponSkillBody;
 use DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody;
 
 class FightServicesContainer extends AttackServicesContainer
 {
     /** @var MeleeWeaponSkillBody */
     private $meleeWeaponSkillBody;
+    /** @var RangedWeaponSkillBody */
+    private $rangedWeaponSkillBody;
+    /** @var FightPropertiesBody */
+    private $rangedWeaponFightPropertiesBody;
     /** @var CurrentArmamentsWithSkills */
     private $currentArmamentsWithSkills;
     /** @var CurrentProperties */
@@ -33,23 +40,61 @@ class FightServicesContainer extends AttackServicesContainer
     private $previousArmaments;
     /** @var PreviousProperties */
     private $previousProperties;
+    /** @var ProfessionsBody */
+    private $professionsBody;
+    /** @var FightPropertiesBody */
+    private $meleeWeaponFightPropertiesBody;
 
     public function getRulesMainBodyParameters(): array
     {
         return [
-            'historyDeletionBody' => $this->getHistoryDeletionBody(),
-            'bodyPropertiesBody' => $this->getBodyPropertiesBody(),
+            'basicFightPropertiesBody' => $this->getBasicFightPropertiesBody(),
+            // armors
             'bodyArmorBody' => $this->getBodyArmorBody(),
             'helmBody' => $this->getHelmBody(),
+            // melee
             'meleeWeaponBody' => $this->getMeleeWeaponBody(),
             'meleeWeaponSkillBody' => $this->getMeleeWeaponSkillBody(),
+            'meleeWeaponFightPropertiesBody' => $this->getMeleeWeaponFightPropertiesBody(),
+            // ranged
             'rangedWeaponBody' => $this->getRangedWeaponBody(),
+            'rangedWeaponSkillBody' => $this->getRangedWeaponSkillBody(),
+            'rangedWeaponFightPropertiesBody' => $this->getRangedWeaponFightPropertiesBody(),
+            // shield
             'shieldBody' => $this->getShieldBody(),
-            'withoutShield' => $this->getCurrentArmaments()->getCurrentShield()->isUnarmed(),
             'shieldWithMeleeWeaponBody' => $this->getShieldWithMeleeWeaponBody(),
             'shieldWithRangedWeaponBody' => $this->getShieldWithRangedWeaponBody(),
+            'withoutShield' => $this->getCurrentArmaments()->getCurrentShield()->isUnarmed(),
+            // others
+            'professionsBody' => $this->getProfessionsBody(),
+            'historyDeletionBody' => $this->getHistoryDeletionBody(),
+            'bodyPropertiesBody' => $this->getBodyPropertiesBody(),
             'calculatorDebugContactsBody' => $this->getCalculatorDebugContactsBody(),
         ];
+    }
+
+    public function getMeleeWeaponFightPropertiesBody(): FightPropertiesBody
+    {
+        if ($this->meleeWeaponFightPropertiesBody === null) {
+            $this->meleeWeaponFightPropertiesBody = new FightPropertiesBody(
+                $this->getFight()->getCurrentMeleeWeaponFightProperties(),
+                $this->getFight()->getPreviousMeleeWeaponFightProperties(),
+                $this->getFight(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->meleeWeaponFightPropertiesBody;
+    }
+
+    public function getProfessionsBody(): ProfessionsBody
+    {
+        if ($this->professionsBody === null) {
+            $this->professionsBody = new ProfessionsBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->professionsBody;
     }
 
     public function getShieldWithMeleeWeaponBody(): ShieldFightPropertiesBody
@@ -113,6 +158,31 @@ class FightServicesContainer extends AttackServicesContainer
             );
         }
         return $this->meleeWeaponSkillBody;
+    }
+
+    public function getRangedWeaponSkillBody(): RangedWeaponSkillBody
+    {
+        if ($this->rangedWeaponSkillBody === null) {
+            $this->rangedWeaponSkillBody = new RangedWeaponSkillBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getFight(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->rangedWeaponSkillBody;
+    }
+
+    public function getRangedWeaponFightPropertiesBody(): FightPropertiesBody
+    {
+        if ($this->rangedWeaponFightPropertiesBody === null) {
+            $this->rangedWeaponFightPropertiesBody = new FightPropertiesBody(
+                $this->getFight()->getCurrentRangedWeaponFightProperties(),
+                $this->getFight()->getPreviousRangedWeaponFightProperties(),
+                $this->getFight(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->rangedWeaponFightPropertiesBody;
     }
 
     public function getCurrentArmamentsWithSkills(): CurrentArmamentsWithSkills
@@ -180,8 +250,9 @@ class FightServicesContainer extends AttackServicesContainer
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                 ],
-                $this->getCookiesService()
-
+                $this->getCookiesService(),
+                $this->getRequest(),
+                $this->getConfiguration()
             );
         }
         return $this->historyWithSkills;

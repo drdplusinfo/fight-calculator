@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\FightCalculator;
 
+use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
+use DrdPlus\CalculatorSkeleton\CalculatorRequest;
 use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\RulesSkeleton\CookiesService;
 
@@ -17,38 +19,38 @@ class HistoryWithSkills extends History
 
     /**
      * @param array|string[] $skillNamesToSkillRankNames
-     * @param CookiesService $cookiesService ,
-     * @param bool $deletePreviousHistory ,
-     * @param array $valuesToRemember ,
-     * @param bool $rememberHistory ,
-     * @param string $cookiesPostfix ,
-     * @param int $cookiesTtl = null
+     * @param CookiesService $cookiesService
+     * @param CalculatorRequest $calculatorRequest
+     * @param CalculatorConfiguration $calculatorConfiguration
      */
     public function __construct(
         array $skillNamesToSkillRankNames,
         CookiesService $cookiesService,
-        bool $deletePreviousHistory,
-        array $valuesToRemember,
-        bool $rememberHistory,
-        string $cookiesPostfix,
-        int $cookiesTtl = null
+        CalculatorRequest $calculatorRequest,
+        CalculatorConfiguration $calculatorConfiguration
     )
     {
         $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
         $this->cookiesService = $cookiesService;
-        parent::__construct($cookiesService, $deletePreviousHistory, $valuesToRemember, $rememberHistory, $cookiesPostfix, $cookiesTtl);
-    }
-
-    protected function remember(array $valuesToRemember, \DateTime $cookiesTtlDate): void
-    {
-        parent::remember($valuesToRemember, $cookiesTtlDate);
-        $this->addSelectedSkillsToHistory($valuesToRemember);
+        parent::__construct(
+            $cookiesService,
+            $calculatorRequest->isRequestedHistoryDeletion(),
+            $calculatorRequest->getValuesFromGet(),
+            $calculatorRequest->isRequestedRememberCurrent(),
+            $calculatorConfiguration->getCookiesPostfix()
+        );
     }
 
     protected function deleteHistory(): void
     {
         parent::deleteHistory();
         $this->cookiesService->deleteCookie(self::RANKS_HISTORY);
+    }
+
+    protected function remember(array $valuesToRemember, \DateTime $cookiesTtlDate): void
+    {
+        parent::remember($valuesToRemember, $cookiesTtlDate);
+        $this->addSelectedSkillsToHistory($valuesToRemember);
     }
 
     private function addSelectedSkillsToHistory(array $request): void
