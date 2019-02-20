@@ -46,13 +46,9 @@ class BasicFightPropertiesBody extends StrictObject implements BodyInterface
     public function getValue(): string
     {
         $basicFightProperties = $this->getBasicFightProperties();
-        $basicFightPropertyOrder = 1;
         $rows = [];
         foreach ($basicFightProperties as [$name, $value, $class, $note]) {
             $row = '';
-            if ($basicFightPropertyOrder > 1 && $basicFightPropertyOrder % 2 === 1) {
-                $row = '<div class="row">';
-            }
             $row .= <<<HTML
 <div class="col-sm-6">
   <div class="row">
@@ -64,11 +60,7 @@ class BasicFightPropertiesBody extends StrictObject implements BodyInterface
   </div>
 </div>
 HTML;
-            if ($basicFightPropertyOrder % 2 === 0) {
-                $row .= '</div>';
-            }
             $rows[] = $row;
-            $basicFightPropertyOrder++;
         }
         return \implode("\n", $rows);
     }
