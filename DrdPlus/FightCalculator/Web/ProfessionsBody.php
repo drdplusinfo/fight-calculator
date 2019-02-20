@@ -38,9 +38,12 @@ class ProfessionsBody extends StrictObject implements BodyInterface
     public function getValue(): string
     {
         return <<<HTML
+<label>
+Povolání
 <select id="profession" name="{$this->getProfessionInputName()}">
   {$this->getProfessionOptions()}
 </select>
+</label>
 HTML;
     }
 

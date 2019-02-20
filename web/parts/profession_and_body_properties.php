@@ -2,14 +2,13 @@
 <div class="row">
   <h2 id="Vlastnosti" class="col"><a href="#Vlastnosti" class="inner">Vlastnosti</a></h2>
 </div>
-<fieldset class="row body-properties">
-  <div class="col-sm-2">
-    <div>
-      <label for="profession">Povolání</label>
-    </div>
-    <div>
-        <?= $webPartsContainer->getProfessionsBody()->getValue() ?>
-    </div>
+<div class="row">
+  <div class="col-sm">
+      <?= $webPartsContainer->getProfessionsBody()->getValue() ?>
   </div>
-    <?= $webPartsContainer->getBodyPropertiesBody()->getValue() ?>
+</div>
+<fieldset class="row">
+  <div class="col">
+      <?= $webPartsContainer->getBodyPropertiesBody()->getValue() ?>
+  </div>
 </fieldset>
