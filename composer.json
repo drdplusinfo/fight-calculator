@@ -18,6 +18,10 @@
   "repositories": [
     {
       "type": "vcs",
+      "url": "/var/www/rules.skeleton"
+    },
+    {
+      "type": "vcs",
       "url": "/var/www/utok.skeleton"
     },
     {

@@ -1,31 +1,24 @@
-<?php
-/** @var \DrdPlus\AttackSkeleton\Web\ShieldBody $shieldBody */
-/** @var \DrdPlus\FightCalculator\Web\ShieldUsageSkillBody $shieldUsageSkillBody */
-/** @var \DrdPlus\FightCalculator\Web\FightWithShieldSkillBody $fightWithShieldSkillBody */
-/** @var bool $withoutShield */
-/** @var \DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody $shieldWithMeleeWeaponBody */
-/** @var \DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody $shieldWithRangedWeaponBody */
-?>
+<?php /** @var \DrdPlus\FightCalculator\Web\FightWebPartsContainer $webPartsContainer */ ?>
 <div class="row">
   <h2 id="Štít" class="col"><a href="#Štít" class="inner">Štít</a></h2>
 </div>
 <fieldset>
-    <?= $shieldBody->getValue() ?>
+    <?= $webPartsContainer->getShieldBody()->getValue() ?>
   <div class="row">
     <div class="col">
-        <?= $shieldUsageSkillBody->getValue(); ?>
+        <?= $webPartsContainer->getShieldUsageSkillBody()->getValue(); ?>
     </div>
     <div class="col">
-        <?= $fightWithShieldSkillBody->getValue() ?>
+        <?= $webPartsContainer->getFightWithShieldSkillBody()->getValue() ?>
     </div>
   </div>
-  <div class="row <?php if ($withoutShield): ?>hidden<?php endif; ?>">
+  <div class="row <?php if ($webPartsContainer->isWithoutShield()): ?>hidden<?php endif; ?>">
     <div class="col">
       <div class="row">
         <h4 class="col">štít se zbraní na blízko</h4>
       </div>
       <div class="row">
-          <?= $shieldWithMeleeWeaponBody->getValue() ?>
+          <?= $webPartsContainer->getShieldWithMeleeWeaponBody()->getValue() ?>
       </div>
     </div>
     <div class="col">
@@ -33,7 +26,7 @@
         <div class="col"><h4>štít se zbraní na dálku</h4></div>
       </div>
       <div class="row">
-          <?= $shieldWithRangedWeaponBody->getValue() ?>
+          <?= $webPartsContainer->getShieldWithRangedWeaponBody()->getValue() ?>
       </div>
     </div>
 </fieldset>

@@ -1,2 +1,2 @@
-<?= /** @var \DrdPlus\AttackSkeleton\Web\MeleeWeaponBody $meleeWeaponBody */
-$meleeWeaponBody->getValue();
+<?= /** @var \DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer $attackWebPartsContainer */
+$attackWebPartsContainer->getMeleeWeaponBody()->getValue();

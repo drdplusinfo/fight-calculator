@@ -1,7 +1,4 @@
-<?php
-/** @var \DrdPlus\FightCalculator\Web\ProfessionsBody $professionsBody */
-/** @var \DrdPlus\AttackSkeleton\Web\BodyPropertiesBody $bodyPropertiesBody */
-?>
+<?php /** @var \DrdPlus\FightCalculator\Web\FightWebPartsContainer $webPartsContainer */ ?>
 <div class="row">
   <h2 id="Vlastnosti" class="col"><a href="#Vlastnosti" class="inner">Vlastnosti</a></h2>
 </div>
@@ -11,8 +8,8 @@
       <label for="profession">Povolání</label>
     </div>
     <div>
-        <?= $professionsBody->getValue() ?>
+        <?= $webPartsContainer->getProfessionsBody()->getValue() ?>
     </div>
   </div>
-    <?= $bodyPropertiesBody->getValue() ?>
+    <?= $webPartsContainer->getBodyPropertiesBody()->getValue() ?>
 </fieldset>

@@ -1,2 +1,2 @@
-<?= /** @var \DrdPlus\CalculatorSkeleton\Web\HistoryDeletionBody $historyDeletionBody */
-$historyDeletionBody->getValue();
+<?= /** @var \DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer $webPartsContainer */
+$webPartsContainer->getHistoryDeletionBody()->getValue();

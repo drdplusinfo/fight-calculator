@@ -99,12 +99,12 @@
     },
     {
         "name": "drdplus/attack-skeleton",
-        "version": "2.0.6",
-        "version_normalized": "2.0.6.0",
+        "version": "2.0.7",
+        "version_normalized": "2.0.7.0",
         "source": {
             "type": "git",
             "url": "/var/www/utok.skeleton",
-            "reference": "1f5ec13a8940fe74ead5445dd5b6defcfa804e92"
+            "reference": "6c9ab9dc59c22556414c5ababc836b0222ed5919"
         },
         "require": {
             "drdplus/armourer": "~2.0",
@@ -119,7 +119,7 @@
             "phpunit/phpunit": "~7.0",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-19T14:48:34+00:00",
+        "time": "2019-02-20T08:41:02+00:00",
         "type": "project",
         "installation-source": "source",
         "autoload": {
@@ -273,12 +273,12 @@
     },
     {
         "name": "drdplus/calculator-skeleton",
-        "version": "1.0.29",
-        "version_normalized": "1.0.29.0",
+        "version": "1.0.30",
+        "version_normalized": "1.0.30.0",
         "source": {
             "type": "git",
             "url": "/var/www/kalkulator.skeleton",
-            "reference": "9450dcc1e9e0d4f34c88962087ee8d4ec616f159"
+            "reference": "7f6915b5bdf3fc0bd884c8204897ec7f508235ce"
         },
         "require": {
             "composer-plugin-api": "^1.1",
@@ -297,7 +297,7 @@
             "phpunit/phpunit": "~7.0",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-11T09:24:41+00:00",
+        "time": "2019-02-20T08:08:48+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\CalculatorSkeleton\\CalculatorInjectorComposerPlugin"
@@ -872,18 +872,12 @@
     },
     {
         "name": "drdplus/rules-skeleton",
-        "version": "1.1.37",
-        "version_normalized": "1.1.37.0",
+        "version": "1.1.38",
+        "version_normalized": "1.1.38.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-            "reference": "5db4e7d718ce0fb3cb326d992bd35c78fbc25615"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/5db4e7d718ce0fb3cb326d992bd35c78fbc25615",
-            "reference": "5db4e7d718ce0fb3cb326d992bd35c78fbc25615",
-            "shasum": ""
+            "url": "/var/www/rules.skeleton",
+            "reference": "8c6d736c7a27097beff07b6a497cda18c0588e1c"
         },
         "require": {
             "composer-plugin-api": "^1.0",
@@ -915,7 +909,7 @@
             "phpunit/phpunit": "^7.5",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-17T19:46:09+00:00",
+        "time": "2019-02-20T08:00:31+00:00",
         "bin": [
             "bin/fix_web_permissions.sh"
         ],
@@ -923,22 +917,29 @@
         "extra": {
             "class": "DrdPlus\\RulesSkeleton\\SkeletonInjectorComposerPlugin"
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
                 "DrdPlus\\": "DrdPlus/"
             }
         },
-        "notification-url": "https://packagist.org/downloads/",
+        "scripts": {
+            "post-update-cmd": [
+                "php vendor/bin/assets --css --dir=css"
+            ],
+            "post-install-cmd": [
+                "php vendor/bin/assets --css --dir=css"
+            ]
+        },
         "license": [
             "MIT"
         ],
         "description": "Skeleton for DrD+ rules as HTML",
         "keywords": [
-            "Skeleton",
             "drd plus",
             "helper",
-            "rules"
+            "rules",
+            "skeleton"
         ]
     },
     {
@@ -4126,37 +4127,38 @@
     },
     {
         "name": "tracy/tracy",
-        "version": "v2.5.5",
-        "version_normalized": "2.5.5.0",
+        "version": "v2.6.0",
+        "version_normalized": "2.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/tracy.git",
-            "reference": "35fa649b483b28e16f61de07110ea0585fc8d6ea"
+            "reference": "28c54772200b5fefd8c9a421b36019cda2b2f9f4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/tracy/zipball/35fa649b483b28e16f61de07110ea0585fc8d6ea",
-            "reference": "35fa649b483b28e16f61de07110ea0585fc8d6ea",
+            "url": "https://api.github.com/repos/nette/tracy/zipball/28c54772200b5fefd8c9a421b36019cda2b2f9f4",
+            "reference": "28c54772200b5fefd8c9a421b36019cda2b2f9f4",
             "shasum": ""
         },
         "require": {
             "ext-json": "*",
             "ext-session": "*",
-            "php": ">=5.4.4"
+            "php": ">=7.1"
         },
         "require-dev": {
-            "nette/di": "~2.3",
-            "nette/tester": "~1.7",
-            "nette/utils": "~2.3"
+            "nette/di": "^2.4 || ~3.0.0",
+            "nette/tester": "^2.1",
+            "nette/utils": "^2.4 || ^3.0",
+            "psr/log": "^1.0"
         },
         "suggest": {
             "https://nette.org/donate": "Please support Tracy via a donation"
         },
-        "time": "2018-11-05T15:10:59+00:00",
+        "time": "2019-02-20T06:26:57+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.5-dev"
+                "dev-master": "2.6-dev"
             }
         },
         "installation-source": "dist",
@@ -4165,7 +4167,7 @@
                 "src"
             ],
             "files": [
-                "src/shortcuts.php"
+                "src/Tracy/shortcuts.php"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",

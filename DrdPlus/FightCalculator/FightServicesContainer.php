@@ -5,29 +5,11 @@ namespace DrdPlus\FightCalculator;
 
 use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
-use DrdPlus\FightCalculator\Web\AnimalEnemyBody;
-use DrdPlus\FightCalculator\Web\ArmorSkillBody;
-use DrdPlus\FightCalculator\Web\BasicFightPropertiesBody;
-use DrdPlus\FightCalculator\Web\FightPropertiesBody;
-use DrdPlus\FightCalculator\Web\FightWithShieldSkillBody;
-use DrdPlus\FightCalculator\Web\MeleeWeaponSkillBody;
-use DrdPlus\FightCalculator\Web\ProfessionsBody;
-use DrdPlus\FightCalculator\Web\RangedTargetBody;
-use DrdPlus\FightCalculator\Web\RangedWeaponSkillBody;
-use DrdPlus\FightCalculator\Web\RideBody;
-use DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody;
-use DrdPlus\FightCalculator\Web\ShieldUsageSkillBody;
+use DrdPlus\FightCalculator\Web\FightWebPartsContainer;
 
 class FightServicesContainer extends AttackServicesContainer
 {
-    /** @var MeleeWeaponSkillBody */
-    private $meleeWeaponSkillBody;
-    /** @var RangedWeaponSkillBody */
-    private $rangedWeaponSkillBody;
-    /** @var FightPropertiesBody */
-    private $rangedWeaponFightPropertiesBody;
-    /** @var RangedTargetBody */
-    private $rangedTargetBody;
+
     /** @var CurrentArmamentsWithSkills */
     private $currentArmamentsWithSkills;
     /** @var CurrentProperties */
@@ -38,173 +20,12 @@ class FightServicesContainer extends AttackServicesContainer
     private $previousArmamentsWithSkills;
     /** @var HistoryWithSkills */
     private $historyWithSkills;
-    /** @var BasicFightPropertiesBody */
-    private $basicFightPropertiesBody;
-    /** @var ShieldUsageSkillBody */
-    private $shieldUsageSkillBody;
-    /** @var FightWithShieldSkillBody */
-    private $fightWithShieldSkillBody;
-    /** @var ShieldFightPropertiesBody */
-    private $shieldWithMeleeWeaponBody;
-    /** @var ShieldFightPropertiesBody */
-    private $shieldWithRangedWeaponBody;
     /** @var PreviousArmaments */
     private $previousArmaments;
     /** @var PreviousProperties */
     private $previousProperties;
-    /** @var ProfessionsBody */
-    private $professionsBody;
-    /** @var AnimalEnemyBody */
-    private $animalEnemyBody;
-    /** @var RideBody */
-    private $rideBody;
-    /** @var FightPropertiesBody */
-    private $meleeWeaponFightPropertiesBody;
-
-    public function getRulesMainBodyParameters(): array
-    {
-        return [
-            'basicFightPropertiesBody' => $this->getBasicFightPropertiesBody(),
-            // armors
-            'bodyArmorBody' => $this->getBodyArmorBody(),
-            'helmBody' => $this->getHelmBody(),
-            'armorSkillBody' => $this->getBodyArmorBody(),
-            // melee
-            'meleeWeaponBody' => $this->getMeleeWeaponBody(),
-            'meleeWeaponSkillBody' => $this->getMeleeWeaponSkillBody(),
-            'meleeWeaponFightPropertiesBody' => $this->getMeleeWeaponFightPropertiesBody(),
-            // ranged
-            'rangedWeaponBody' => $this->getRangedWeaponBody(),
-            'rangedWeaponSkillBody' => $this->getRangedWeaponSkillBody(),
-            'rangedWeaponFightPropertiesBody' => $this->getRangedWeaponFightPropertiesBody(),
-            'rangedTargetBody' => $this->getRangedTargetBody(),
-            // shield
-            'shieldBody' => $this->getShieldBody(),
-            'shieldUsageSkillBody' => $this->getShieldUsageSkillBody(),
-            'fightWithShieldSkillBody' => $this->getFightWithShieldSkillBody(),
-            'shieldWithMeleeWeaponBody' => $this->getShieldWithMeleeWeaponBody(),
-            'shieldWithRangedWeaponBody' => $this->getShieldWithRangedWeaponBody(),
-            'withoutShield' => $this->getCurrentArmaments()->getCurrentShield()->isUnarmed(),
-            // others
-            'rideBody' => $this->getProfessionsBody(),
-            'animalEnemyBody' => $this->getAnimalEnemyBody(),
-            'professionsBody' => $this->getProfessionsBody(),
-            'historyDeletionBody' => $this->getHistoryDeletionBody(),
-            'bodyPropertiesBody' => $this->getBodyPropertiesBody(),
-            'calculatorDebugContactsBody' => $this->getCalculatorDebugContactsBody(),
-        ];
-    }
-
-    public function getArmorSkillBody()
-    {
-        if ($this->armorSkillBody === null) {
-            $this->armorSkillBody = new ArmorSkillBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->armorSkillBody;
-    }
-
-    public function getMeleeWeaponFightPropertiesBody(): FightPropertiesBody
-    {
-        if ($this->meleeWeaponFightPropertiesBody === null) {
-            $this->meleeWeaponFightPropertiesBody = new FightPropertiesBody(
-                $this->getFight()->getCurrentMeleeWeaponFightProperties(),
-                $this->getFight()->getPreviousMeleeWeaponFightProperties(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->meleeWeaponFightPropertiesBody;
-    }
-
-    public function getRideBody(): RideBody
-    {
-        if ($this->rideBody === null) {
-            $this->rideBody = new RideBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->rideBody;
-    }
-
-    public function getProfessionsBody(): ProfessionsBody
-    {
-        if ($this->professionsBody === null) {
-            $this->professionsBody = new ProfessionsBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->professionsBody;
-    }
-
-    public function getAnimalEnemyBody(): AnimalEnemyBody
-    {
-        if ($this->animalEnemyBody === null) {
-            $this->animalEnemyBody = new AnimalEnemyBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->animalEnemyBody;
-    }
-
-    public function getShieldUsageSkillBody(): ShieldUsageSkillBody
-    {
-        if ($this->shieldUsageSkillBody === null) {
-            $this->shieldUsageSkillBody = new ShieldUsageSkillBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->shieldUsageSkillBody;
-    }
-
-    public function getFightWithShieldSkillBody(): FightWithShieldSkillBody
-    {
-        if ($this->fightWithShieldSkillBody === null) {
-            $this->fightWithShieldSkillBody = new FightWithShieldSkillBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->fightWithShieldSkillBody;
-    }
-
-    public function getShieldWithMeleeWeaponBody(): ShieldFightPropertiesBody
-    {
-        if ($this->shieldWithMeleeWeaponBody === null) {
-            $this->shieldWithMeleeWeaponBody = new ShieldFightPropertiesBody(
-                $this->getCurrentArmaments()->getCurrentMeleeShieldHolding(),
-                $this->getPreviousArmaments()->getPreviousMeleeShieldHolding(),
-                $this->getFight()->getCurrentMeleeShieldFightProperties(),
-                $this->getFight()->getPreviousMeleeShieldFightProperties(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->shieldWithMeleeWeaponBody;
-    }
-
-    public function getShieldWithRangedWeaponBody(): ShieldFightPropertiesBody
-    {
-        if ($this->shieldWithRangedWeaponBody === null) {
-            $this->shieldWithRangedWeaponBody = new ShieldFightPropertiesBody(
-                $this->getCurrentArmaments()->getCurrentRangedShieldHolding(),
-                $this->getPreviousArmaments()->getPreviousRangedShieldHolding(),
-                $this->getFight()->getCurrentRangedShieldFightProperties(),
-                $this->getFight()->getPreviousRangedShieldFightProperties(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->shieldWithRangedWeaponBody;
-    }
+    /** @var FightWebPartsContainer */
+    private $fightWebPartsContainer;
 
     public function getPreviousArmaments(): PreviousArmaments
     {
@@ -225,56 +46,6 @@ class FightServicesContainer extends AttackServicesContainer
             $this->previousProperties = new PreviousProperties($this->getHistory(), $this->getTables());
         }
         return $this->previousProperties;
-    }
-
-    public function getMeleeWeaponSkillBody(): MeleeWeaponSkillBody
-    {
-        if ($this->meleeWeaponSkillBody === null) {
-            $this->meleeWeaponSkillBody = new MeleeWeaponSkillBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->meleeWeaponSkillBody;
-    }
-
-    public function getRangedWeaponSkillBody(): RangedWeaponSkillBody
-    {
-        if ($this->rangedWeaponSkillBody === null) {
-            $this->rangedWeaponSkillBody = new RangedWeaponSkillBody(
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->rangedWeaponSkillBody;
-    }
-
-    public function getRangedWeaponFightPropertiesBody(): FightPropertiesBody
-    {
-        if ($this->rangedWeaponFightPropertiesBody === null) {
-            $this->rangedWeaponFightPropertiesBody = new FightPropertiesBody(
-                $this->getFight()->getCurrentRangedWeaponFightProperties(),
-                $this->getFight()->getPreviousRangedWeaponFightProperties(),
-                $this->getFight(),
-                $this->getHtmlHelper()
-            );
-        }
-        return $this->rangedWeaponFightPropertiesBody;
-    }
-
-    public function getRangedTargetBody(): RangedTargetBody
-    {
-        if ($this->rangedTargetBody === null) {
-            $this->rangedTargetBody = new RangedTargetBody(
-                $this->getFight(),
-                $this->getRangedWeaponFightPropertiesBody(),
-                $this->getHtmlHelper(),
-                $this->getTables()
-            );
-        }
-        return $this->rangedTargetBody;
     }
 
     public function getCurrentArmamentsWithSkills(): CurrentArmamentsWithSkills
@@ -350,16 +121,12 @@ class FightServicesContainer extends AttackServicesContainer
         return $this->historyWithSkills;
     }
 
-    public function getBasicFightPropertiesBody(): BasicFightPropertiesBody
+    public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
     {
-        if ($this->basicFightPropertiesBody === null) {
-            $this->basicFightPropertiesBody = new BasicFightPropertiesBody(
-                $this->getFight(),
-                $this->getCurrentArmaments(),
-                $this->getPreviousArmaments(),
-                $this->getHtmlHelper()
-            );
+        if ($this->fightWebPartsContainer === null) {
+            $this->fightWebPartsContainer = new FightWebPartsContainer($this);
         }
-        return $this->basicFightPropertiesBody;
+        return $this->fightWebPartsContainer;
     }
+
 }

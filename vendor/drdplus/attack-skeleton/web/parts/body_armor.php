@@ -1,2 +1,2 @@
-<?= /** @var \DrdPlus\AttackSkeleton\Web\BodyArmorBody $bodyArmorBody */
-$bodyArmorBody->getValue();
+<?= /** @var \DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer $attackWebPartsContainer */
+$attackWebPartsContainer->getBodyArmorBody()->getValue();

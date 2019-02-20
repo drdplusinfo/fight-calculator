@@ -25,7 +25,6 @@ class HistoryDeletionBody extends StrictObject implements BodyInterface
   </form>
 </div>
 HTML;
-
     }
 
 }
