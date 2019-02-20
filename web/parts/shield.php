@@ -1,15 +1,11 @@
 <?php
-namespace DrdPlus\FightCalculator;
-
 /** @var \DrdPlus\AttackSkeleton\Web\ShieldBody $shieldBody */
 /** @var \DrdPlus\FightCalculator\Web\ShieldUsageSkillBody $shieldUsageSkillBody */
 /** @var \DrdPlus\FightCalculator\Web\FightWithShieldSkillBody $fightWithShieldSkillBody */
 /** @var bool $withoutShield */
 /** @var \DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody $shieldWithMeleeWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\ShieldFightPropertiesBody $shieldWithRangedWeaponBody */
-
 ?>
-
 <div class="row">
   <h2 id="Štít" class="col"><a href="#Štít" class="inner">Štít</a></h2>
 </div>

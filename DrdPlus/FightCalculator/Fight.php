@@ -123,7 +123,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
             $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
             $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
             $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
@@ -151,7 +151,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
             $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
             $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
             $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
@@ -171,7 +171,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
             $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
             $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
             $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
@@ -468,7 +468,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
             $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
             $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
@@ -548,7 +548,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
             $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
             $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
@@ -573,7 +573,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
             $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
             $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
@@ -594,7 +594,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
             $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
             $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
@@ -620,7 +620,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
             $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
             $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
@@ -648,7 +648,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
             $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
             $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
             $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
@@ -676,7 +676,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
             $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
             $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
             $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }

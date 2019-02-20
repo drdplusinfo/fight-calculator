@@ -1,6 +1,4 @@
 <?php
-namespace DrdPlus\FightCalculator;
-
 /** @var \DrdPlus\FightCalculator\Web\ProfessionsBody $professionsBody */
 /** @var \DrdPlus\AttackSkeleton\Web\BodyPropertiesBody $bodyPropertiesBody */
 ?>

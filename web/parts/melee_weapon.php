@@ -1,6 +1,4 @@
 <?php
-namespace DrdPlus\FightCalculator;
-
 /** @var \DrdPlus\AttackSkeleton\Web\MeleeWeaponBody $meleeWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\MeleeWeaponSkillBody $meleeWeaponSkillBody */
 /** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $meleeWeaponFightPropertiesBody */

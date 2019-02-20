@@ -5,6 +5,8 @@ namespace DrdPlus\FightCalculator;
 
 use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
+use DrdPlus\FightCalculator\Web\AnimalEnemyBody;
+use DrdPlus\FightCalculator\Web\ArmorSkillBody;
 use DrdPlus\FightCalculator\Web\BasicFightPropertiesBody;
 use DrdPlus\FightCalculator\Web\FightPropertiesBody;
 use DrdPlus\FightCalculator\Web\FightWithShieldSkillBody;
@@ -52,6 +54,8 @@ class FightServicesContainer extends AttackServicesContainer
     private $previousProperties;
     /** @var ProfessionsBody */
     private $professionsBody;
+    /** @var AnimalEnemyBody */
+    private $animalEnemyBody;
     /** @var RideBody */
     private $rideBody;
     /** @var FightPropertiesBody */
@@ -64,6 +68,7 @@ class FightServicesContainer extends AttackServicesContainer
             // armors
             'bodyArmorBody' => $this->getBodyArmorBody(),
             'helmBody' => $this->getHelmBody(),
+            'armorSkillBody' => $this->getBodyArmorBody(),
             // melee
             'meleeWeaponBody' => $this->getMeleeWeaponBody(),
             'meleeWeaponSkillBody' => $this->getMeleeWeaponSkillBody(),
@@ -82,11 +87,23 @@ class FightServicesContainer extends AttackServicesContainer
             'withoutShield' => $this->getCurrentArmaments()->getCurrentShield()->isUnarmed(),
             // others
             'rideBody' => $this->getProfessionsBody(),
+            'animalEnemyBody' => $this->getAnimalEnemyBody(),
             'professionsBody' => $this->getProfessionsBody(),
             'historyDeletionBody' => $this->getHistoryDeletionBody(),
             'bodyPropertiesBody' => $this->getBodyPropertiesBody(),
             'calculatorDebugContactsBody' => $this->getCalculatorDebugContactsBody(),
         ];
+    }
+
+    public function getArmorSkillBody()
+    {
+        if ($this->armorSkillBody === null) {
+            $this->armorSkillBody = new ArmorSkillBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->armorSkillBody;
     }
 
     public function getMeleeWeaponFightPropertiesBody(): FightPropertiesBody
@@ -122,6 +139,17 @@ class FightServicesContainer extends AttackServicesContainer
             );
         }
         return $this->professionsBody;
+    }
+
+    public function getAnimalEnemyBody(): AnimalEnemyBody
+    {
+        if ($this->animalEnemyBody === null) {
+            $this->animalEnemyBody = new AnimalEnemyBody(
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getHtmlHelper()
+            );
+        }
+        return $this->animalEnemyBody;
     }
 
     public function getShieldUsageSkillBody(): ShieldUsageSkillBody

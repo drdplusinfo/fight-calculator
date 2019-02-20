@@ -36,9 +36,9 @@ class PreviousArmamentsWithSkills extends PreviousArmaments
         return (int)$this->getHistory()->getValue(FightRequest::RIDING_SKILL_RANK);
     }
 
-    public function getPreviousFightFreeWillAnimal(): bool
+    public function getPreviousFightingFreeWillAnimal(): bool
     {
-        return (bool)$this->getHistory()->getValue(FightRequest::FIGHT_FREE_WILL_ANIMAL);
+        return (bool)$this->getHistory()->getValue(FightRequest::FIGHTING_FREE_WILL_ANIMAL);
     }
 
     public function getPreviousZoologySkillRank(): int

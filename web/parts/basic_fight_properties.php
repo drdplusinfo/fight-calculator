@@ -1,6 +1,4 @@
 <?php
-namespace DrdPlus\FightCalculator;
-
 /** @var \DrdPlus\FightCalculator\Web\BasicFightPropertiesBody $basicFightPropertiesBody */
 ?>
 <div class="row">

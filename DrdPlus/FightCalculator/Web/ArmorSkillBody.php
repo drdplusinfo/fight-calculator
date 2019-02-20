@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DrdPlus\FightCalculator\Web;
 
+use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\FightRequest;
@@ -15,10 +16,15 @@ class ArmorSkillBody extends StrictObject implements BodyInterface
      * @var CurrentArmamentsWithSkills
      */
     private $currentArmamentsWithSkills;
+    /**
+     * @var HtmlHelper
+     */
+    private $htmlHelper;
 
-    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills)
+    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills, HtmlHelper $htmlHelper)
     {
         $this->currentArmamentsWithSkills = $currentArmamentsWithSkills;
+        $this->htmlHelper = $htmlHelper;
     }
 
     public function __toString()
@@ -63,8 +69,6 @@ HTML;
 
     private function getArmorSkillValueChecked(int $matchingRank): string
     {
-        return $this->currentArmamentsWithSkills->getCurrentArmorSkillRank() === $matchingRank
-            ? 'checked'
-            : '';
+        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentArmorSkillRank(), $matchingRank);
     }
 }

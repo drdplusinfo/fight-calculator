@@ -17,7 +17,7 @@ class FightRequest extends AttackRequest
     public const ARMOR_SKILL_VALUE = 'armor_skill_value';
     public const ON_HORSEBACK = 'on_horseback';
     public const RIDING_SKILL_RANK = 'riding_skill_rank';
-    public const FIGHT_FREE_WILL_ANIMAL = 'fight_free_will_animal';
+    public const FIGHTING_FREE_WILL_ANIMAL = 'fight_free_will_animal';
     public const ZOOLOGY_SKILL_RANK = 'zoology_skill_rank';
     public const RANGED_TARGET_DISTANCE = 'ranged_target_distance';
     public const RANGED_TARGET_SIZE = 'ranged_target_size';

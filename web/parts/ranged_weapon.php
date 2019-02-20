@@ -1,6 +1,4 @@
 <?php
-namespace DrdPlus\FightCalculator;
-
 /** @var \DrdPlus\AttackSkeleton\Web\RangedWeaponBody $rangedWeaponBody */
 /** @var \DrdPlus\FightCalculator\Web\RangedWeaponSkillBody $rangedWeaponSkillBody */
 /** @var \DrdPlus\FightCalculator\Web\FightPropertiesBody $rangedWeaponFightPropertiesBody */

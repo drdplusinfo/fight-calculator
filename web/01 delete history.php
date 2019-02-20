@@ -1,2 +1,2 @@
-<?= /** @noinspection PhpUndefinedVariableInspection */
-$historyDeletion;
+<?= /** @var \DrdPlus\CalculatorSkeleton\Web\HistoryDeletionBody $historyDeletionBody */
+$historyDeletionBody;

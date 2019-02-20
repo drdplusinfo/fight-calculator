@@ -1,6 +1,4 @@
 <?php
-namespace DrdPlus\FightCalculator;
-
 /** @var \DrdPlus\AttackSkeleton\Web\BodyArmorBody $bodyArmorBody */
 /** @var \DrdPlus\AttackSkeleton\Web\HelmBody $helmBody */
 /** @var \DrdPlus\FightCalculator\Web\ArmorSkillBody $armorSkillBody */

@@ -96,9 +96,9 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
         return (int)$this->currentValues->getCurrentValue(FightRequest::RIDING_SKILL_RANK);
     }
 
-    public function getCurrentFightFreeWillAnimal(): bool
+    public function getCurrentFightingFreeWillAnimal(): bool
     {
-        return (bool)$this->currentValues->getCurrentValue(FightRequest::FIGHT_FREE_WILL_ANIMAL);
+        return (bool)$this->currentValues->getCurrentValue(FightRequest::FIGHTING_FREE_WILL_ANIMAL);
     }
 
     public function getCurrentZoologySkillRank(): int
