@@ -156,7 +156,7 @@ class Fight extends StrictObject
         );
     }
 
-    public function getGenericFightProperties(): FightProperties
+    public function getCurrentGenericFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
             MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),

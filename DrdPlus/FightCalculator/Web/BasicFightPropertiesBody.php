@@ -67,41 +67,41 @@ HTML;
 
     private function getBasicFightProperties(): array
     {
-        $genericFightProperties = $this->fight->getGenericFightProperties();
+        $currentGenericFightProperties = $this->fight->getCurrentGenericFightProperties();
         $previousGenericFightProperties = $this->fight->getPreviousGenericFightProperties();
         $basicFightProperties = [];
         $basicFightProperties[] = [
             'Boj',
-            $genericFightProperties->getFight(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getFight(), $genericFightProperties->getFight()),
+            $currentGenericFightProperties->getFight(),
+            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getFight(), $currentGenericFightProperties->getFight()),
             '(není ovlivněn výzbrojí)',
         ];
         $basicFightProperties[] = [
             'Útok',
-            $genericFightProperties->getAttack(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getAttack(), $genericFightProperties->getAttack()),
+            $currentGenericFightProperties->getAttack(),
+            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getAttack(), $currentGenericFightProperties->getAttack()),
             '(není ovlivněn výzbrojí)',
         ];
         $basicFightProperties[] = [
             'Obrana',
-            $genericFightProperties->getDefense(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getDefense(), $genericFightProperties->getDefense()),
+            $currentGenericFightProperties->getDefense(),
+            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getDefense(), $currentGenericFightProperties->getDefense()),
             '(není ovlivněna výzbrojí)',
         ];
         $basicFightProperties[] = [
             'Střelba',
-            $genericFightProperties->getShooting(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getShooting(), $genericFightProperties->getShooting()),
+            $currentGenericFightProperties->getShooting(),
+            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getShooting(), $currentGenericFightProperties->getShooting()),
             '(není ovlivněna výzbrojí)',
         ];
         $basicFightProperties[] = [
             'OČ <img alt="OČ" class="line-sized" src="/images/emojione/defense-number-1f6e1.png">',
-            $genericFightProperties->getDefenseNumber(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getDefenseNumber(), $genericFightProperties->getDefenseNumber()),
+            $currentGenericFightProperties->getDefenseNumber(),
+            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getDefenseNumber(), $currentGenericFightProperties->getDefenseNumber()),
             '(ovlivněno pouze akcí, oslněním a Převahou)',
         ];
         $targetDistance = new Distance(1, Distance::METER, Tables::getIt()->getDistanceTable());
-        $attackNumber = $genericFightProperties->getAttackNumber($targetDistance, Size::getIt(1));
+        $attackNumber = $currentGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1));
         $basicFightProperties[] = [
             'ÚČ <img alt="ÚČ" class="line-sized" src="/images/emojione/fight-number-1f624.png">',
             $attackNumber,
