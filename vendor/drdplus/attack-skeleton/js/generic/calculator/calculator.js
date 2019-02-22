@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var allInputs = document.getElementsByTagName('input');
     var allSelects = document.getElementsByTagName('select');
     var allButtons = document.getElementsByTagName('button');
+    var allForms = document.getElementsByTagName('form');
     var allControls = [];
     for (var inputIndex = 0, inputsLength = allInputs.length; inputIndex < inputsLength; inputIndex++) {
         var input = allInputs[inputIndex];
@@ -36,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
         })(selectIndex));
     }
 
-    for (var i = 0, controlsLength = allControls.length; i < controlsLength; i++) {
-        var control = allControls[i];
+    for (var controlIndex = 0, controlsLength = allControls.length; controlIndex < controlsLength; controlIndex++) {
+        var control = allControls[controlIndex];
         if (typeof control.type !== 'undefined' && control.type !== 'submit') {
             if (typeof control.type === 'undefined' || control.type !== 'button') {
                 control.addEventListener('change', function () {
@@ -49,6 +50,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         }
+    }
+
+    for (var formIndex = 0, formsLength = allForms.length; formIndex < formsLength; formIndex++) {
+        var form = allForms[formIndex];
+        form.addEventListener('submit', function () {
+            this.dataset.submitted = 'true';
+        });
     }
 
     function submitOnChange(changedInput) {
@@ -68,6 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function submit(form) {
+        if (form.dataset.submitted === 'true') {
+            return true;
+        }
         var formButtons = form.getElementsByTagName('button');
         for (var buttonIndex = 0, buttonsLength = formButtons.length; buttonIndex < buttonsLength; buttonIndex++) {
             var button = formButtons[buttonIndex];

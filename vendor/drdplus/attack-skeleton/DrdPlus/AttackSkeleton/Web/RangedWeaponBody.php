@@ -149,7 +149,7 @@ HTML;
         $messagesAboutRangedWeapons = '';
         foreach ($this->armamentsUsabilityMessages->getMessagesAboutRangedWeapons() as $messageAboutRangedWeapon) {
             $messagesAboutRangedWeapons .= <<<HTML
-<div class="info">{$messageAboutRangedWeapon}</div>
+<div class="alert alert-primary">{$messageAboutRangedWeapon}</div>
 HTML;
         }
 

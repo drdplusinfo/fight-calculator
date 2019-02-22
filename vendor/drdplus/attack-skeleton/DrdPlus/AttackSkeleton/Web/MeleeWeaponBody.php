@@ -91,7 +91,7 @@ HTML;
         $messagesAboutMeleeWeapons = '';
         foreach ($this->armamentsUsabilityMessages->getMessagesAboutMeleeWeapons() as $messageAboutMeleeWeapon) {
             $messagesAboutMeleeWeapons .= <<<HTML
-<div class="info">{$messageAboutMeleeWeapon}</div>
+<div class="alert alert-primary">{$messageAboutMeleeWeapon}</div>
 HTML;
         }
 

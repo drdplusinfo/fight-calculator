@@ -123,7 +123,7 @@ HTML;
         $messagesAboutHelms = [];
         foreach ($this->armamentsUsabilityMessages->getMessagesAboutHelms() as $messageAboutHelm) {
             $messagesAboutHelms [] = <<<HTML
-          <div class="info">{$messageAboutHelm}</div>
+          <div class="alert alert-primary">{$messageAboutHelm}</div>
 HTML;
         }
 

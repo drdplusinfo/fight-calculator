@@ -121,7 +121,7 @@ HTML;
         $messagesAboutBodyArmors = [];
         foreach ($this->armamentsUsabilityMessages->getMessagesAboutBodyArmors() as $messageAboutBodyArmor) {
             $messagesAboutBodyArmors[] = <<<HTML
-<div class="info">{$messageAboutBodyArmor}</div>
+<div class="alert alert-primary">{$messageAboutBodyArmor}</div>
 HTML;
         }
 

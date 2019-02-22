@@ -123,7 +123,7 @@ HTML;
         $messagesAboutShields = '';
         foreach ($this->armamentsUsabilityMessages->getMessagesAboutShields() as $messageAboutShield) {
             $messagesAboutShields .= <<<HTML
-          <div class="info">$messageAboutShield</div>
+          <div class="alert alert-primary">$messageAboutShield</div>
 HTML;
         }
 

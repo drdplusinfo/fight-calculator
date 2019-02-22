@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace DrdPlus\CalculatorSkeleton;
 
 use DrdPlus\CalculatorSkeleton\Web\CalculatorWebPartsContainer;
+use DrdPlus\RulesSkeleton\Cache;
 use DrdPlus\RulesSkeleton\HtmlHelper;
 use DrdPlus\RulesSkeleton\Request;
 use DrdPlus\RulesSkeleton\ServicesContainer;
@@ -161,4 +162,20 @@ class CalculatorServicesContainer extends ServicesContainer
         }
         return $this->gitReader;
     }
+
+    public function getTablesWebCache(): Cache
+    {
+        return $this->getDummyWebCache();
+    }
+
+    public function getPassWebCache(): Cache
+    {
+        return $this->getDummyWebCache();
+    }
+
+    public function getPassedWebCache(): Cache
+    {
+        return $this->getDummyWebCache();
+    }
+
 }
