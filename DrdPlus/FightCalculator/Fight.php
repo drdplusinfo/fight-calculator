@@ -115,16 +115,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
-            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
-            $this->currentArmamentsWithSkills->getCurrentHelm(),
-            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
-            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
-            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
-            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentShieldForMelee()
         );
     }
 
@@ -143,16 +134,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentRangedWeaponHolding(),
             $this->currentArmamentsWithSkills->getCurrentRangedFightSkillCode(),
             $this->currentArmamentsWithSkills->getCurrentRangedFightSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
-            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
-            $this->currentArmamentsWithSkills->getCurrentHelm(),
-            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
-            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
-            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
-            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentShieldForRanged()
         );
     }
 
@@ -163,16 +145,7 @@ class Fight extends StrictObject
             ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
-            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
-            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
-            $this->currentArmamentsWithSkills->getCurrentHelm(),
-            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
-            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
-            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
-            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
         );
     }
 
@@ -181,16 +154,7 @@ class Fight extends StrictObject
         ItemHoldingCode $weaponHoldingCode,
         SkillCode $weaponSkillCode,
         int $skillRankWithWeapon,
-        ShieldCode $usedShield,
-        int $shieldUsageSkillRank,
-        BodyArmorCode $bodyArmorCode,
-        HelmCode $helmCode,
-        int $armorSkillRank,
-        ProfessionCode $professionCode,
-        bool $onHorseback,
-        int $ridingSkillRank,
-        bool $fightingFreeWillAnimal,
-        int $zoologySkillRank
+        ShieldCode $usedShield
     ): FightProperties
     {
         return $this->getFightProperties(
@@ -207,15 +171,15 @@ class Fight extends StrictObject
             $weaponSkillCode,
             $skillRankWithWeapon,
             $usedShield,
-            $shieldUsageSkillRank,
-            $bodyArmorCode,
-            $helmCode,
-            $armorSkillRank,
-            $professionCode,
-            $onHorseback,
-            $ridingSkillRank,
-            $fightingFreeWillAnimal,
-            $zoologySkillRank
+            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
+            $this->currentArmamentsWithSkills->getCurrentHelm(),
+            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
+            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
+            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
+            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
+            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
         );
     }
 
@@ -520,7 +484,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousBodyArmor(),
             $this->previousArmamentsWithSkills->getPreviousHelm(),
             $armorSkillRank,
-            $this->getPreviousProfessionCode(),
+            $this->previousArmamentsWithSkills->getPreviousProfessionCode(),
             $onHorseback,
             $ridingSkillRank,
             $fightingFreeWillAnimal,
@@ -640,16 +604,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
-            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
-            $this->currentArmamentsWithSkills->getCurrentHelm(),
-            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
-            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
-            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
-            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentShieldForRanged()
         );
     }
 
@@ -668,16 +623,7 @@ class Fight extends StrictObject
             $this->currentArmamentsWithSkills->getCurrentMeleeWeaponHolding(),
             $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode(),
             $this->currentArmamentsWithSkills->getCurrentMeleeFightSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
-            $this->currentArmamentsWithSkills->getCurrentShieldUsageSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentBodyArmor(),
-            $this->currentArmamentsWithSkills->getCurrentHelm(),
-            $this->currentArmamentsWithSkills->getCurrentArmorSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentProfessionCode(),
-            $this->currentArmamentsWithSkills->getCurrentOnHorseback(),
-            $this->currentArmamentsWithSkills->getCurrentRidingSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentFightingFreeWillAnimal(),
-            $this->currentArmamentsWithSkills->getCurrentZoologySkillRank()
+            $this->currentArmamentsWithSkills->getCurrentShieldForMelee()
         );
     }
 
@@ -872,16 +818,6 @@ class Fight extends StrictObject
         }
 
         return Size::getIt($distanceValue);
-    }
-
-    private function getPreviousProfessionCode(): ProfessionCode
-    {
-        $previousProfession = $this->getHistory()->getValue(FightRequest::PROFESSION);
-        if (!$previousProfession) {
-            return $this->currentArmamentsWithSkills->getCurrentProfessionCode();
-        }
-
-        return ProfessionCode::getIt($previousProfession);
     }
 
     public function getHistoryMeleeSkillRanksJson(): string

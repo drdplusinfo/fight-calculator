@@ -48,11 +48,11 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.0.8",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "/var/www/utok.skeleton",
-                "reference": "266ede5fcab879afce24b56a3828e44aeeb2e904"
+                "reference": "af65d8dbe3292bcc100a29e8688ddbca43b7c9ca"
             },
             "require": {
                 "drdplus/armourer": "~2.0",
@@ -90,7 +90,7 @@
                 "skeleton",
                 "weapons"
             ],
-            "time": "2019-02-22T08:55:49+00:00"
+            "time": "2019-02-22T11:59:55+00:00"
         },
         {
             "name": "drdplus/background",
@@ -214,11 +214,11 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.0.34",
+            "version": "1.0.37",
             "source": {
                 "type": "git",
                 "url": "/var/www/kalkulator.skeleton",
-                "reference": "84e05251010b095964b1d1101765bcf7ce8b1b26"
+                "reference": "424bdd47e9616aa9d594b3f055ce0cc79d13903d"
             },
             "require": {
                 "composer-plugin-api": "^1.1",
@@ -250,7 +250,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-02-22T10:01:29+00:00"
+            "time": "2019-02-22T11:53:10+00:00"
         },
         {
             "name": "drdplus/codes",

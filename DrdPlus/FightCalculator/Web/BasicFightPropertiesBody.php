@@ -47,14 +47,16 @@ class BasicFightPropertiesBody extends StrictObject implements BodyInterface
     {
         $basicFightProperties = $this->getBasicFightProperties();
         $rows = [];
-        foreach ($basicFightProperties as [$name, $value, $class, $note]) {
+        foreach ($basicFightProperties as [$name, $previousValue, $currentValue, $note]) {
             $row = '';
             $row .= <<<HTML
 <div class="col-sm-6">
   <div class="row">
     <div class="col-sm-3">{$name}</div>
     <div class="col-xs-3">
-      <strong class="{$class}">{$this->htmlHelper->formatInteger($value)}</strong>
+      <strong class="{$this->htmlHelper->getCssClassForChangedValue($previousValue, $currentValue)}">
+        {$this->htmlHelper->formatInteger($currentValue)}
+      </strong>
       <span class="note">{$note}</span>
     </div>
   </div>
@@ -67,63 +69,56 @@ HTML;
 
     private function getBasicFightProperties(): array
     {
-        $currentGenericFightProperties = $this->fight->getCurrentGenericFightProperties();
         $previousGenericFightProperties = $this->fight->getPreviousGenericFightProperties();
+        $currentGenericFightProperties = $this->fight->getCurrentGenericFightProperties();
         $basicFightProperties = [];
         $basicFightProperties[] = [
             'Boj',
+            $previousGenericFightProperties->getFight(),
             $currentGenericFightProperties->getFight(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getFight(), $currentGenericFightProperties->getFight()),
             '(není ovlivněn výzbrojí)',
         ];
         $basicFightProperties[] = [
             'Útok',
+            $previousGenericFightProperties->getAttack(),
             $currentGenericFightProperties->getAttack(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getAttack(), $currentGenericFightProperties->getAttack()),
             '(není ovlivněn výzbrojí)',
         ];
         $basicFightProperties[] = [
             'Obrana',
+            $previousGenericFightProperties->getDefense(),
             $currentGenericFightProperties->getDefense(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getDefense(), $currentGenericFightProperties->getDefense()),
             '(není ovlivněna výzbrojí)',
         ];
         $basicFightProperties[] = [
             'Střelba',
+            $previousGenericFightProperties->getShooting(),
             $currentGenericFightProperties->getShooting(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getShooting(), $currentGenericFightProperties->getShooting()),
             '(není ovlivněna výzbrojí)',
         ];
         $basicFightProperties[] = [
             'OČ <img alt="OČ" class="line-sized" src="/images/emojione/defense-number-1f6e1.png">',
+            $previousGenericFightProperties->getDefenseNumber(),
             $currentGenericFightProperties->getDefenseNumber(),
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getDefenseNumber(), $currentGenericFightProperties->getDefenseNumber()),
             '(ovlivněno pouze akcí, oslněním a Převahou)',
         ];
         $targetDistance = new Distance(1, Distance::METER, Tables::getIt()->getDistanceTable());
-        $attackNumber = $currentGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1));
         $basicFightProperties[] = [
             'ÚČ <img alt="ÚČ" class="line-sized" src="/images/emojione/fight-number-1f624.png">',
-            $attackNumber,
-            $this->htmlHelper->getCssClassForChangedValue($previousGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1)), $attackNumber),
+            $previousGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1)),
+            $currentGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1)),
             '',
         ];
         $basicFightProperties[] = [
             'Zbroj <img alt="Zbroj" class="line-sized" src="/images/armor-icon.png">',
+            $this->previousArmaments->getProtectionOfPreviousBodyArmor(),
             $this->currentArmaments->getCurrentBodyArmorProtection(),
-            $this->htmlHelper->getCssClassForChangedValue(
-                $this->previousArmaments->getProtectionOfPreviousBodyArmor(),
-                $this->currentArmaments->getCurrentBodyArmorProtection()
-            ),
             '',
         ];
         $basicFightProperties[] = [
             'Helma <img alt="Helma" class="line-sized" src="/images/helm-icon.png">',
+            $this->previousArmaments->getPreviousHelmProtection(),
             $this->currentArmaments->getCurrentHelmProtection(),
-            $this->htmlHelper->getCssClassForChangedValue(
-                $this->previousArmaments->getPreviousHelmProtection(),
-                $this->currentArmaments->getCurrentHelmProtection()
-            ),
             '',
         ];
         return $basicFightProperties;
