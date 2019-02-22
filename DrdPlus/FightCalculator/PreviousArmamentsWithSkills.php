@@ -63,9 +63,6 @@ class PreviousArmamentsWithSkills extends PreviousArmaments
     public function getPreviousProfessionCode(): ProfessionCode
     {
         $previousProfessionValue = $this->getHistory()->getValue(FightRequest::PROFESSION);
-        if (!$previousProfessionValue) {
-            $previousProfessionValue = ProfessionCode::COMMONER;
-        }
-        return ProfessionCode::getIt($previousProfessionValue);
+        return ProfessionCode::findIt($previousProfessionValue ?? '');
     }
 }

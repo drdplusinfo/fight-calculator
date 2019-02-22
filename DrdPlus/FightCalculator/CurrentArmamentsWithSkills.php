@@ -79,11 +79,7 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
     public function getCurrentProfessionCode(): ProfessionCode
     {
         $selectedProfession = $this->currentValues->getCurrentValue(FightRequest::PROFESSION);
-        if (!$selectedProfession) {
-            return ProfessionCode::getIt(ProfessionCode::COMMONER);
-        }
-
-        return ProfessionCode::getIt($selectedProfession);
+        return ProfessionCode::findIt($selectedProfession ?? '');
     }
 
     public function getCurrentOnHorseback(): bool

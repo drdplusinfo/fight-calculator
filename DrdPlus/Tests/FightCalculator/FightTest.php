@@ -85,6 +85,10 @@ class FightTest extends TestWithMockery
         return $currentProperties;
     }
 
+    /**
+     * @param int $value
+     * @return Speed|MockInterface
+     */
     private function createSpeed(int $value): Speed
     {
         $speed = $this->mockery(Speed::class);
@@ -131,6 +135,10 @@ class FightTest extends TestWithMockery
         return $this->mockery(HistoryWithSkills::class);
     }
 
+    /**
+     * @param int $maximalRangeInMeters
+     * @return Armourer|MockInterface
+     */
     private function createArmourer(int $maximalRangeInMeters): Armourer
     {
         $armourer = $this->mockery(Armourer::class);

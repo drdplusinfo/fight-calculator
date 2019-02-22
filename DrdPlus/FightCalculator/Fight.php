@@ -100,14 +100,6 @@ class Fight extends StrictObject
         $this->tables = $tables;
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
     public function getCurrentMeleeShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
@@ -119,14 +111,6 @@ class Fight extends StrictObject
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
     public function getCurrentRangedWeaponFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
@@ -249,17 +233,6 @@ class Fight extends StrictObject
         );
     }
 
-    /**
-     * @param SkillCode $skillWithWeapon
-     * @param int $skillRankWithWeapon
-     * @param ProfessionCode $professionCode
-     * @param int $skillRankWithArmor
-     * @param int $shieldUsageSkillRank
-     * @param int $ridingSkillRank
-     * @param int $zoologySkillRank
-     * @return Skills
-     * @throws \DrdPlus\Professions\Exceptions\ProfessionNotFound
-     */
     private function createSkills(
         SkillCode $skillWithWeapon,
         int $skillRankWithWeapon,
@@ -342,14 +315,6 @@ class Fight extends StrictObject
         return $skills;
     }
 
-    /**
-     * @param SkillCode $skillWithWeapon
-     * @param int $skillRankWithWeapon
-     * @param Skills $skills
-     * @param ProfessionFirstLevel $professionFirstLevel
-     * @param SkillPointsFromBackground $skillPointsFromBackground
-     * @throws \DrdPlus\FightCalculator\Exceptions\WeaponSkillWithoutKnownSkillGroup
-     */
     private function addSkillWithWeapon(
         SkillCode $skillWithWeapon,
         int $skillRankWithWeapon,
@@ -411,15 +376,6 @@ class Fight extends StrictObject
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
     public function getPreviousRangedWeaponFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
@@ -427,43 +383,16 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousRangedWeaponHolding(),
             $this->previousArmamentsWithSkills->getPreviousRangedFightSkillCode(),
             $this->previousArmamentsWithSkills->getPreviousRangedFightSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield(),
-            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
-            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
-            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousShield()
         );
     }
 
-    /**
-     * @param WeaponlikeCode $weaponlikeCode
-     * @param ItemHoldingCode $weaponHoldingCode
-     * @param SkillCode $fightWithWeaponSkillCode
-     * @param int $skillRankWithWeapon
-     * @param ShieldCode $previousShield
-     * @param int $shieldUsageSkillRank
-     * @param int $armorSkillRank
-     * @param bool $onHorseback
-     * @param int $ridingSkillRank
-     * @param bool $fightingFreeWillAnimal
-     * @param int $zoologySkillRank
-     * @return FightProperties
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     */
     private function getPreviousFightProperties(
         WeaponlikeCode $weaponlikeCode,
         ItemHoldingCode $weaponHoldingCode,
         SkillCode $fightWithWeaponSkillCode,
         int $skillRankWithWeapon,
-        ShieldCode $previousShield,
-        int $shieldUsageSkillRank,
-        int $armorSkillRank,
-        bool $onHorseback,
-        int $ridingSkillRank,
-        bool $fightingFreeWillAnimal,
-        int $zoologySkillRank
+        ShieldCode $previousShield
     ): FightProperties
     {
         return $this->getFightProperties(
@@ -480,26 +409,18 @@ class Fight extends StrictObject
             $fightWithWeaponSkillCode,
             $skillRankWithWeapon,
             $previousShield,
-            $shieldUsageSkillRank,
+            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousBodyArmor(),
             $this->previousArmamentsWithSkills->getPreviousHelm(),
-            $armorSkillRank,
+            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
             $this->previousArmamentsWithSkills->getPreviousProfessionCode(),
-            $onHorseback,
-            $ridingSkillRank,
-            $fightingFreeWillAnimal,
-            $zoologySkillRank
+            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
+            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
+            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
+            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     */
     public function getPreviousMeleeShieldFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
@@ -507,24 +428,10 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousMeleeShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->previousArmamentsWithSkills->getPreviousFightWithShieldsSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield(),
-            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
-            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
-            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousShield()
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     */
     public function getPreviousRangedShieldFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
@@ -532,20 +439,10 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousRangedShieldHolding(),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->previousArmamentsWithSkills->getPreviousFightWithShieldsSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield(),
-            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
-            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
-            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousShield()
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     */
     public function getPreviousGenericFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
@@ -553,25 +450,10 @@ class Fight extends StrictObject
             ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
             PsychicalSkillCode::getIt(PsychicalSkillCode::ASTRONOMY), // whatever
             0, // zero skill rank
-            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD),
-            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
-            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
-            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     */
     public function getPreviousMeleeWeaponFightProperties(): FightProperties
     {
         return $this->getPreviousFightProperties(
@@ -579,24 +461,10 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousMeleeWeaponHolding(),
             $this->getPreviousMeleeSkillCode(),
             $this->getPreviousMeleeSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield(),
-            $this->previousArmamentsWithSkills->getPreviousShieldUsageSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousArmorSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousOnHorseback(),
-            $this->previousArmamentsWithSkills->getPreviousRidingSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousFightingFreeWillAnimal(),
-            $this->previousArmamentsWithSkills->getPreviousZoologySkillRank()
+            $this->previousArmamentsWithSkills->getPreviousShield()
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
     public function getCurrentRangedShieldFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
@@ -608,14 +476,6 @@ class Fight extends StrictObject
         );
     }
 
-    /**
-     * @return FightProperties
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     */
     public function getCurrentMeleeWeaponFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
@@ -627,10 +487,6 @@ class Fight extends StrictObject
         );
     }
 
-    /**
-     * @return SkillCode
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     */
     private function getPreviousMeleeSkillCode(): SkillCode
     {
         return $this->getSkill(
@@ -644,17 +500,11 @@ class Fight extends StrictObject
         return (int)$this->getHistory()->getValue(FightRequest::MELEE_FIGHT_SKILL_RANK);
     }
 
-    /**
-     * @return History
-     */
     private function getHistory(): History
     {
         return $this->historyWithSkills;
     }
 
-    /**
-     * @return PhysicalSkillCode
-     */
     public function getSkillForArmor(): PhysicalSkillCode
     {
         return PhysicalSkillCode::getIt(PhysicalSkillCode::ARMOR_WEARING);
@@ -730,14 +580,6 @@ class Fight extends StrictObject
         });
     }
 
-    /**
-     * @return Distance
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
     public function getCurrentTargetDistance(): Distance
     {
         $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_DISTANCE);
@@ -749,14 +591,6 @@ class Fight extends StrictObject
         return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
     }
 
-    /**
-     * @return MaximalRange
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
     public function getCurrentRangedWeaponMaximalRange(): MaximalRange
     {
         return $this->armourer->getMaximalRangeWithWeaponlike(
@@ -776,15 +610,6 @@ class Fight extends StrictObject
         return Size::getIt($distanceValue);
     }
 
-    /**
-     * @return Distance
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     */
     public function getPreviousTargetDistance(): Distance
     {
         $distanceValue = $this->getHistory()->getValue(FightRequest::RANGED_TARGET_DISTANCE);
@@ -796,15 +621,6 @@ class Fight extends StrictObject
         return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 
-    /**
-     * @return float
-     * @throws \DrdPlus\FightCalculator\Exceptions\UnknownSkill
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     */
     private function getPreviousRangedWeaponMaximalRange(): float
     {
         return $this->getPreviousRangedWeaponFightProperties()->getMaximalRange()->getInMeters($this->tables);
