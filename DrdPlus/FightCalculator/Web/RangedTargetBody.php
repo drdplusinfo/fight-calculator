@@ -50,6 +50,7 @@ class RangedTargetBody extends StrictObject implements BodyInterface
     public function getValue(): string
     {
         return <<<HTML
+<div class="col">
   <div class="row">
     <div class="col-sm">
       <label>vzdálenost cíle <span class="hint">v metrech</span>
@@ -80,6 +81,7 @@ class RangedTargetBody extends StrictObject implements BodyInterface
       </span>
     </div>
   </div>
+</div>
 HTML;
     }
 
