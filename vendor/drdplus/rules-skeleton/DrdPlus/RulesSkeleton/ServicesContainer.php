@@ -145,7 +145,13 @@ class ServicesContainer extends StrictObject
     public function getWebPartsContainer(): WebPartsContainer
     {
         if ($this->webPartsContainer === null) {
-            $this->webPartsContainer = new WebPartsContainer($this);
+            $this->webPartsContainer = new WebPartsContainer(
+                $this->getPass(),
+                $this->getWebFiles(),
+                $this->getDirs(),
+                $this->getHtmlHelper(),
+                $this->getRequest()
+            );
         }
         return $this->webPartsContainer;
     }

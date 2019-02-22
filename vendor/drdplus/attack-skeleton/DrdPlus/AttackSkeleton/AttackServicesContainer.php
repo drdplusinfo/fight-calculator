@@ -151,7 +151,20 @@ class AttackServicesContainer extends CalculatorServicesContainer
     public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
     {
         if ($this->attackWebPartsContainer === null) {
-            $this->attackWebPartsContainer = new AttackWebPartsContainer($this);
+            $this->attackWebPartsContainer = new AttackWebPartsContainer(
+                $this->getPass(),
+                $this->getWebFiles(),
+                $this->getDirs(),
+                $this->getHtmlHelper(),
+                $this->getRequest(),
+                $this->getCurrentProperties(),
+                $this->getCustomArmamentsState(),
+                $this->getCurrentArmamentsValues(),
+                $this->getCurrentArmaments(),
+                $this->getPossibleArmaments(),
+                $this->getArmamentsUsabilityMessages(),
+                $this->getArmourer()
+            );
         }
         return $this->attackWebPartsContainer;
     }

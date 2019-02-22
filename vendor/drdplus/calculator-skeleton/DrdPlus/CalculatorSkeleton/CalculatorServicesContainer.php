@@ -9,6 +9,7 @@ use DrdPlus\RulesSkeleton\Request;
 use DrdPlus\RulesSkeleton\ServicesContainer;
 use DrdPlus\RulesSkeleton\Web\RulesMainContent;
 use Granam\Git\Git;
+use Granam\String\StringTools;
 
 /**
  * @method CalculatorConfiguration getConfiguration()
@@ -20,6 +21,9 @@ class CalculatorServicesContainer extends ServicesContainer
 
     /** @var Memory */
     private $memory;
+
+    /** @var DateTimeProvider */
+    private $dateTimeProvider;
 
     /** @var CurrentValues */
     private $currentValues;
@@ -59,15 +63,31 @@ class CalculatorServicesContainer extends ServicesContainer
     {
         if ($this->memory === null) {
             $this->memory = new Memory(
-                $this->getCookiesService(),
-                $this->getRequest()->isRequestedHistoryDeletion(),
-                $this->getRequest()->getValuesFromGet(),
-                $this->getRequest()->isRequestedRememberCurrent(),
-                $this->getConfiguration()->getCookiesPostfix(),
+                $this->getMemoryStorage(),
+                $this->getDateTimeProvider(),
                 $this->getConfiguration()->getCookiesTtl()
             );
         }
         return $this->memory;
+    }
+
+    protected function getMemoryStorage(): CookiesStorage
+    {
+        return new CookiesStorage($this->getCookiesService(), $this->getCookiesStorageKeyPrefix() . '-memory');
+    }
+
+    public function getDateTimeProvider(): DateTimeProvider
+    {
+        if ($this->dateTimeProvider === null) {
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $this->dateTimeProvider = new DateTimeProvider(new \DateTimeImmutable());
+        }
+        return $this->dateTimeProvider;
+    }
+
+    protected function getCookiesStorageKeyPrefix(): string
+    {
+        return StringTools::getClassBaseName(static::class) . '-' . $this->getConfiguration()->getCookiesPostfix();
     }
 
     public function getCurrentValues(): CurrentValues
@@ -82,15 +102,17 @@ class CalculatorServicesContainer extends ServicesContainer
     {
         if ($this->history === null) {
             $this->history = new History(
-                $this->getCookiesService(),
-                $this->getRequest()->isRequestedHistoryDeletion(),
-                $this->getRequest()->getValuesFromGet(),
-                $this->getRequest()->isRequestedRememberCurrent(),
-                $this->getConfiguration()->getCookiesPostfix(),
+                $this->getHistoryStorage(),
+                $this->getDateTimeProvider(),
                 $this->getConfiguration()->getCookiesTtl()
             );
         }
         return $this->history;
+    }
+
+    protected function getHistoryStorage(): CookiesStorage
+    {
+        return new CookiesStorage($this->getCookiesService(), $this->getCookiesStorageKeyPrefix() . '-history');
     }
 
     public function getCalculatorContent(): CalculatorContent
@@ -121,7 +143,13 @@ class CalculatorServicesContainer extends ServicesContainer
     public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
     {
         if ($this->calculatorWebPartsContainer === null) {
-            $this->calculatorWebPartsContainer = new CalculatorWebPartsContainer($this);
+            $this->calculatorWebPartsContainer = new CalculatorWebPartsContainer(
+                $this->getPass(),
+                $this->getWebFiles(),
+                $this->getDirs(),
+                $this->getHtmlHelper(),
+                $this->getRequest()
+            );
         }
         return $this->calculatorWebPartsContainer;
     }

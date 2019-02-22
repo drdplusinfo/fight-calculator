@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace DrdPlus\CalculatorSkeleton\Web;
 
-use DrdPlus\CalculatorSkeleton\CalculatorServicesContainer;
 use DrdPlus\RulesSkeleton\Web\WebPartsContainer;
 
 class CalculatorWebPartsContainer extends WebPartsContainer
@@ -11,14 +10,8 @@ class CalculatorWebPartsContainer extends WebPartsContainer
 
     /** @var HistoryDeletionBody */
     private $historyDeletionBody;
-
     /** @var CalculatorDebugContactsBody */
     private $calculatorDebugContactsBody;
-
-    public function __construct(CalculatorServicesContainer $calculatorServicesContainer)
-    {
-        parent::__construct($calculatorServicesContainer);
-    }
 
     public function getHistoryDeletionBody(): HistoryDeletionBody
     {

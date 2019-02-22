@@ -1,86 +1,84 @@
 <?php
 namespace DrdPlus\FightCalculator;
 
-use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
-use DrdPlus\CalculatorSkeleton\CalculatorRequest;
+use DrdPlus\CalculatorSkeleton\DateTimeProvider;
 use DrdPlus\CalculatorSkeleton\History;
-use DrdPlus\RulesSkeleton\CookiesService;
+use DrdPlus\CalculatorSkeleton\StorageInterface;
 
 class HistoryWithSkills extends History
 {
-    private const RANKS_HISTORY = 'ranks_history';
-
     /** @var array|string[] */
     private $skillToSkillRankNames;
-    /** @var CookiesService */
-    private $cookiesService;
     /** @var null|array */
-    private $ranksHistory;
+    private $ranksHistoryValues;
+    /** @var StorageInterface */
+    private $ranksHistoryStorage;
 
     /**
      * @param array|string[] $skillNamesToSkillRankNames
-     * @param CookiesService $cookiesService
-     * @param CalculatorRequest $calculatorRequest
-     * @param CalculatorConfiguration $calculatorConfiguration
+     * @param StorageInterface $historyStorage ,
+     * @param DateTimeProvider $dateTimeProvider ,
+     * @param StorageInterface $ranksHistoryStorage ,
+     * @param null|int $ttl
      */
     public function __construct(
         array $skillNamesToSkillRankNames,
-        CookiesService $cookiesService,
-        CalculatorRequest $calculatorRequest,
-        CalculatorConfiguration $calculatorConfiguration
+        StorageInterface $historyStorage,
+        DateTimeProvider $dateTimeProvider,
+        StorageInterface $ranksHistoryStorage,
+        ?int $ttl
     )
     {
         $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
-        $this->cookiesService = $cookiesService;
-        parent::__construct(
-            $cookiesService,
-            $calculatorRequest->isRequestedHistoryDeletion(),
-            $calculatorRequest->getValuesFromGet(),
-            $calculatorRequest->isRequestedRememberCurrent(),
-            $calculatorConfiguration->getCookiesPostfix()
-        );
+        parent::__construct($historyStorage, $dateTimeProvider, $ttl);
+        $this->ranksHistoryStorage = $ranksHistoryStorage;
     }
 
-    protected function deleteHistory(): void
+    public function deleteHistory(): void
     {
+        $this->ranksHistoryStorage->deleteAll();
         parent::deleteHistory();
-        $this->cookiesService->deleteCookie(self::RANKS_HISTORY);
     }
 
-    protected function remember(array $valuesToRemember, \DateTime $cookiesTtlDate): void
+    public function saveHistory(array $valuesToRemember): void
     {
-        parent::remember($valuesToRemember, $cookiesTtlDate);
-        $this->addSelectedSkillsToHistory($valuesToRemember);
+        parent::saveHistory($valuesToRemember);
+        $this->loadRanksHistoryValues(); // loads previous history as they would be overwritten now
+        $ranksHistoryToSave = $this->getRanksHistoryToSave($valuesToRemember);
+        $this->ranksHistoryStorage->storeValues($ranksHistoryToSave, $this->getTtlDate());
     }
 
-    private function addSelectedSkillsToHistory(array $request): void
+    private function loadRanksHistoryValues(): void
+    {
+        $this->ranksHistoryValues = $this->ranksHistoryStorage->getValues();
+    }
+
+    private function getRanksHistoryToSave(array $valuesToRemember): array
     {
         $skillsToSave = [];
-        foreach ($this->skillToSkillRankNames as $skillName => $rankName
-        ) {
-            if (\array_key_exists($rankName, $request) && !empty($request[$skillName])) {
+        foreach ($this->skillToSkillRankNames as $skillName => $rankName) {
+            if (\array_key_exists($rankName, $valuesToRemember) && !empty($valuesToRemember[$skillName])) {
                 // like melee_fight_skill => fight_unarmed => 0
-                $skillsToSave[$rankName][$request[$skillName]] = $request[$rankName];
+                $skillsToSave[$rankName][$valuesToRemember[$skillName]] = $valuesToRemember[$rankName];
             }
         }
         if (\count($skillsToSave) === 0) {
-            return;
+            return [];
         }
         $ranksHistory = $this->getRanksHistory();
         foreach ($skillsToSave as $rankName => $rankValues) {
             // changed values are replaced because of string keys
             $ranksHistory[$rankName] = \array_merge($ranksHistory[$rankName] ?? [], $rankValues);
         }
-        $serialized = \serialize($ranksHistory);
-        $this->cookiesService->setCookie(self::RANKS_HISTORY, $serialized);
+        return $ranksHistory;
     }
 
     private function getRanksHistory(): array
     {
-        if ($this->ranksHistory === null) {
-            $this->ranksHistory = \unserialize($_COOKIE[self::RANKS_HISTORY] ?? '', ['allowed_classes' => false]) ?: [];
+        if ($this->ranksHistoryValues === null) {
+            $this->loadRanksHistoryValues();
         }
-        return $this->ranksHistory;
+        return $this->ranksHistoryValues;
     }
 
     public function getPreviousSkillRanks(string $skillRankInputName): array

@@ -3,8 +3,23 @@ declare(strict_types=1);
 
 namespace DrdPlus\FightCalculator\Web;
 
+use DrdPlus\Armourer\Armourer;
+use DrdPlus\AttackSkeleton\ArmamentsUsabilityMessages;
+use DrdPlus\AttackSkeleton\CurrentArmaments;
+use DrdPlus\AttackSkeleton\CurrentArmamentsValues;
+use DrdPlus\AttackSkeleton\CustomArmamentsState;
+use DrdPlus\AttackSkeleton\HtmlHelper;
+use DrdPlus\AttackSkeleton\PossibleArmaments;
+use DrdPlus\AttackSkeleton\PreviousArmaments;
 use DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer;
-use DrdPlus\FightCalculator\FightServicesContainer;
+use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
+use DrdPlus\FightCalculator\CurrentProperties;
+use DrdPlus\FightCalculator\Fight;
+use DrdPlus\RulesSkeleton\Dirs;
+use DrdPlus\RulesSkeleton\Request;
+use DrdPlus\RulesSkeleton\Web\Pass;
+use DrdPlus\RulesSkeleton\Web\WebFiles;
+use DrdPlus\Tables\Tables;
 
 class FightWebPartsContainer extends AttackWebPartsContainer
 {
@@ -36,23 +51,68 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     private $rideBody;
     /** @var FightPropertiesBody */
     private $meleeWeaponFightPropertiesBody;
+    /** @var CurrentArmamentsWithSkills */
+    private $currentArmamentsWithSkills;
+    /** @var HtmlHelper */
+    private $htmlHelper;
+    /** @var Fight */
+    private $fight;
+    /** @var CurrentArmaments */
+    private $currentArmaments;
+    /** @var Tables */
+    private $tables;
     /**
-     * @var FightServicesContainer
+     * @var PreviousArmaments
      */
-    private $fightServicesContainer;
+    private $previousArmaments;
 
-    public function __construct(FightServicesContainer $fightServicesContainer)
+    public function __construct(
+        Pass $pass,
+        WebFiles $webFiles,
+        Dirs $dirs,
+        HtmlHelper $htmlHelper,
+        Request $request,
+        CurrentProperties $currentProperties,
+        CustomArmamentsState $customArmamentsState,
+        CurrentArmamentsValues $currentArmamentsValues,
+        CurrentArmaments $currentArmaments,
+        PossibleArmaments $possibleArmaments,
+        ArmamentsUsabilityMessages $armamentsUsabilityMessages,
+        Armourer $armourer,
+        PreviousArmaments $previousArmaments,
+        CurrentArmamentsWithSkills $currentArmamentsWithSkills,
+        Fight $fight,
+        Tables $tables
+    )
     {
-        parent::__construct($fightServicesContainer);
-        $this->fightServicesContainer = $fightServicesContainer;
+        parent::__construct(
+            $pass,
+            $webFiles,
+            $dirs,
+            $htmlHelper,
+            $request,
+            $currentProperties,
+            $customArmamentsState,
+            $currentArmamentsValues,
+            $currentArmaments,
+            $possibleArmaments,
+            $armamentsUsabilityMessages,
+            $armourer
+        );
+        $this->currentArmamentsWithSkills = $currentArmamentsWithSkills;
+        $this->htmlHelper = $htmlHelper;
+        $this->fight = $fight;
+        $this->currentArmaments = $currentArmaments;
+        $this->tables = $tables;
+        $this->previousArmaments = $previousArmaments;
     }
 
     public function getArmorSkillBody(): ArmorSkillBody
     {
         if ($this->armorSkillBody === null) {
             $this->armorSkillBody = new ArmorSkillBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->htmlHelper
             );
         }
         return $this->armorSkillBody;
@@ -62,10 +122,10 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->meleeWeaponFightPropertiesBody === null) {
             $this->meleeWeaponFightPropertiesBody = new FightPropertiesBody(
-                $this->fightServicesContainer->getFight()->getCurrentMeleeWeaponFightProperties(),
-                $this->fightServicesContainer->getFight()->getPreviousMeleeWeaponFightProperties(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->fight->getCurrentMeleeWeaponFightProperties(),
+                $this->fight->getPreviousMeleeWeaponFightProperties(),
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->meleeWeaponFightPropertiesBody;
@@ -75,8 +135,8 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->rideBody === null) {
             $this->rideBody = new RideBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->htmlHelper
             );
         }
         return $this->rideBody;
@@ -86,8 +146,8 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->professionsBody === null) {
             $this->professionsBody = new ProfessionsBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->htmlHelper
             );
         }
         return $this->professionsBody;
@@ -97,8 +157,8 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->animalEnemyBody === null) {
             $this->animalEnemyBody = new AnimalEnemyBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->htmlHelper
             );
         }
         return $this->animalEnemyBody;
@@ -108,9 +168,9 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->shieldUsageSkillBody === null) {
             $this->shieldUsageSkillBody = new ShieldUsageSkillBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->shieldUsageSkillBody;
@@ -120,9 +180,9 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->fightWithShieldSkillBody === null) {
             $this->fightWithShieldSkillBody = new FightWithShieldSkillBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->fightWithShieldSkillBody;
@@ -132,12 +192,12 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->shieldWithMeleeWeaponBody === null) {
             $this->shieldWithMeleeWeaponBody = new ShieldFightPropertiesBody(
-                $this->fightServicesContainer->getCurrentArmaments()->getCurrentMeleeShieldHolding(),
-                $this->fightServicesContainer->getPreviousArmaments()->getPreviousMeleeShieldHolding(),
-                $this->fightServicesContainer->getFight()->getCurrentMeleeShieldFightProperties(),
-                $this->fightServicesContainer->getFight()->getPreviousMeleeShieldFightProperties(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmaments->getCurrentMeleeShieldHolding(),
+                $this->previousArmaments->getPreviousMeleeShieldHolding(),
+                $this->fight->getCurrentMeleeShieldFightProperties(),
+                $this->fight->getPreviousMeleeShieldFightProperties(),
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->shieldWithMeleeWeaponBody;
@@ -147,12 +207,12 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->shieldWithRangedWeaponBody === null) {
             $this->shieldWithRangedWeaponBody = new ShieldFightPropertiesBody(
-                $this->fightServicesContainer->getCurrentArmaments()->getCurrentRangedShieldHolding(),
-                $this->fightServicesContainer->getPreviousArmaments()->getPreviousRangedShieldHolding(),
-                $this->fightServicesContainer->getFight()->getCurrentRangedShieldFightProperties(),
-                $this->fightServicesContainer->getFight()->getPreviousRangedShieldFightProperties(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmaments->getCurrentRangedShieldHolding(),
+                $this->previousArmaments->getPreviousRangedShieldHolding(),
+                $this->fight->getCurrentRangedShieldFightProperties(),
+                $this->fight->getPreviousRangedShieldFightProperties(),
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->shieldWithRangedWeaponBody;
@@ -162,9 +222,9 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->meleeWeaponSkillBody === null) {
             $this->meleeWeaponSkillBody = new MeleeWeaponSkillBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->meleeWeaponSkillBody;
@@ -174,9 +234,9 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->rangedWeaponSkillBody === null) {
             $this->rangedWeaponSkillBody = new RangedWeaponSkillBody(
-                $this->fightServicesContainer->getCurrentArmamentsWithSkills(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->currentArmamentsWithSkills,
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->rangedWeaponSkillBody;
@@ -186,10 +246,10 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->rangedWeaponFightPropertiesBody === null) {
             $this->rangedWeaponFightPropertiesBody = new FightPropertiesBody(
-                $this->fightServicesContainer->getFight()->getCurrentRangedWeaponFightProperties(),
-                $this->fightServicesContainer->getFight()->getPreviousRangedWeaponFightProperties(),
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->fight->getCurrentRangedWeaponFightProperties(),
+                $this->fight->getPreviousRangedWeaponFightProperties(),
+                $this->fight,
+                $this->htmlHelper
             );
         }
         return $this->rangedWeaponFightPropertiesBody;
@@ -199,10 +259,10 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->rangedTargetBody === null) {
             $this->rangedTargetBody = new RangedTargetBody(
-                $this->fightServicesContainer->getFight(),
+                $this->fight,
                 $this->getRangedWeaponFightPropertiesBody(),
-                $this->fightServicesContainer->getHtmlHelper(),
-                $this->fightServicesContainer->getTables()
+                $this->htmlHelper,
+                $this->tables
             );
         }
         return $this->rangedTargetBody;
@@ -212,10 +272,10 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     {
         if ($this->basicFightPropertiesBody === null) {
             $this->basicFightPropertiesBody = new BasicFightPropertiesBody(
-                $this->fightServicesContainer->getFight(),
-                $this->fightServicesContainer->getCurrentArmaments(),
-                $this->fightServicesContainer->getPreviousArmaments(),
-                $this->fightServicesContainer->getHtmlHelper()
+                $this->fight,
+                $this->currentArmaments,
+                $this->previousArmaments,
+                $this->htmlHelper
             );
         }
         return $this->basicFightPropertiesBody;
@@ -223,6 +283,6 @@ class FightWebPartsContainer extends AttackWebPartsContainer
 
     public function isWithoutShield(): bool
     {
-        return $this->fightServicesContainer->getCurrentArmaments()->getCurrentShield()->isUnarmed();
+        return $this->currentArmaments->getCurrentShield()->isUnarmed();
     }
 }

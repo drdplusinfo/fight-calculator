@@ -5,6 +5,7 @@ namespace DrdPlus\FightCalculator;
 
 use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
+use DrdPlus\CalculatorSkeleton\CookiesStorage;
 use DrdPlus\FightCalculator\Web\FightWebPartsContainer;
 
 class FightServicesContainer extends AttackServicesContainer
@@ -113,18 +114,41 @@ class FightServicesContainer extends AttackServicesContainer
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                 ],
-                $this->getCookiesService(),
-                $this->getRequest(),
-                $this->getConfiguration()
+                $this->getHistoryStorage(),
+                $this->getDateTimeProvider(),
+                $this->getRanksHistoryStorage(),
+                $this->getConfiguration()->getCookiesTtl()
             );
         }
         return $this->historyWithSkills;
     }
 
+    protected function getRanksHistoryStorage(): CookiesStorage
+    {
+        return new CookiesStorage($this->getCookiesService(), $this->getCookiesStorageKeyPrefix() . '-ranks_history');
+    }
+
     public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
     {
         if ($this->fightWebPartsContainer === null) {
-            $this->fightWebPartsContainer = new FightWebPartsContainer($this);
+            $this->fightWebPartsContainer = new FightWebPartsContainer(
+                $this->getPass(),
+                $this->getWebFiles(),
+                $this->getDirs(),
+                $this->getHtmlHelper(),
+                $this->getRequest(),
+                $this->getCurrentProperties(),
+                $this->getCustomArmamentsState(),
+                $this->getCurrentArmamentsValues(),
+                $this->getCurrentArmaments(),
+                $this->getPossibleArmaments(),
+                $this->getArmamentsUsabilityMessages(),
+                $this->getArmourer(),
+                $this->getPreviousArmaments(),
+                $this->getCurrentArmamentsWithSkills(),
+                $this->getFight(),
+                $this->getTables()
+            );
         }
         return $this->fightWebPartsContainer;
     }
