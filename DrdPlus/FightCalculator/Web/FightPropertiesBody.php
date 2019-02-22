@@ -40,68 +40,43 @@ class FightPropertiesBody extends StrictObject implements BodyInterface
 
     public function getValue(): string
     {
+        $previousFightNumber = $this->previousFightProperties->getFightNumber();
+        $currentFightNumber = $this->currentFightProperties->getFightNumber();
+        $previousAttackNumber = $this->previousFightProperties->getAttackNumber($this->fight->getPreviousTargetDistance(), $this->fight->getPreviousTargetSize());
+        $currentAttackNumber = $this->currentFightProperties->getAttackNumber($this->fight->getCurrentTargetDistance(), $this->fight->getCurrentTargetSize());
+        $previousBaseOfWounds = $this->previousFightProperties->getBaseOfWounds();
+        $currentBaseOfWounds = $this->currentFightProperties->getBaseOfWounds();
+        $previousDefenseNumber = $this->previousFightProperties->getDefenseNumberWithWeaponlike();
+        $currentDefenseNumber = $this->currentFightProperties->getDefenseNumberWithWeaponlike();
         return <<<HTML
 <div class="col fight-property">
   BČ
   <img alt="Bojové číslo" class="line-sized" src="/images/emojione/fight-2694.png">
-  <span class="{$this->getCssClassForChangeOfFightNumber()}">{$this->currentFightProperties->getFightNumber()}</span>
+  <span class="{$this->htmlHelper->getCssClassForChangedValue($previousFightNumber, $currentFightNumber)}">
+    {$this->htmlHelper->formatInteger($currentFightNumber)}
+  </span>
 </div>
 <div class="col fight-property">
   ÚČ
   <img alt="Útočné číslo" class="line-sized" src="/images/emojione/fight-number-1f624.png">
-  <span class="{$this->getCssClassForChangeOfAttackNumber()}">
-    {$this->currentFightProperties->getAttackNumber($this->fight->getCurrentTargetDistance(), $this->fight->getCurrentTargetSize())}
+  <span class="{$this->htmlHelper->getCssClassForChangedValue($previousAttackNumber, $currentAttackNumber)}">
+    {$this->htmlHelper->formatInteger($currentAttackNumber)}
   </span>
 </div>
 <div class="col fight-property">
   ZZ
   <img alt="Základ zranění" class="line-sized" src="/images/emojione/base-of-wounds-1f480.png">
-  <span class="{$this->getCssClassForChangeOfBaseOfWounds()}">{$this->currentFightProperties->getBaseOfWounds()}</span>
+  <span class="{$this->htmlHelper->getCssClassForChangedValue($previousBaseOfWounds, $currentBaseOfWounds)}">
+    {$this->htmlHelper->formatInteger($currentBaseOfWounds)}
+  </span>
 </div>
 <div class="col fight-property">
   OČ
   <img alt="Obranné číslo" class="line-sized" src="/images/emojione/defense-number-1f6e1.png">
-  <span class="{$this->getCssClassForChangeOfDefenseNumber()}">{$this->currentFightProperties->getDefenseNumberWithWeaponlike()}</span>
+  <span class="{$this->htmlHelper->getCssClassForChangedValue($previousDefenseNumber, $currentDefenseNumber)}">
+    {$this->htmlHelper->formatInteger($currentDefenseNumber)}
+  </span>
 </div>
 HTML;
     }
-
-    private function getCssClassForChangeOfFightNumber(): string
-    {
-        return $this->htmlHelper->getCssClassForChangedValue(
-            $this->previousFightProperties->getFightNumber(),
-            $this->currentFightProperties->getFightNumber()
-        );
-    }
-
-    private function getCssClassForChangeOfAttackNumber(): string
-    {
-        return $this->htmlHelper->getCssClassForChangedValue(
-            $this->previousFightProperties->getAttackNumber(
-                $this->fight->getPreviousTargetDistance(),
-                $this->fight->getPreviousTargetSize()
-            ),
-            $this->currentFightProperties->getAttackNumber(
-                $this->fight->getCurrentTargetDistance(),
-                $this->fight->getCurrentTargetSize()
-            )
-        );
-    }
-
-    private function getCssClassForChangeOfBaseOfWounds(): string
-    {
-        return $this->htmlHelper->getCssClassForChangedValue(
-            $this->previousFightProperties->getBaseOfWounds(),
-            $this->currentFightProperties->getBaseOfWounds()
-        );
-    }
-
-    private function getCssClassForChangeOfDefenseNumber(): string
-    {
-        return $this->htmlHelper->getCssClassForChangedValue(
-            $this->previousFightProperties->getDefenseNumberWithWeaponlike(),
-            $this->currentFightProperties->getDefenseNumberWithWeaponlike()
-        );
-    }
-
 }
