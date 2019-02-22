@@ -30,4 +30,14 @@ trait AttackCalculatorTestTrait
     {
         return new HtmlHelper($dirs ?? $this->getDirs(), $inDevMode, $inForcedProductionMode, $shouldHideCovered);
     }
+
+    protected function isAttackSkeletonChecked(): bool
+    {
+        return $this->isSkeletonChecked($this->getAttackSkeletonProjectRoot());
+    }
+
+    private function getAttackSkeletonProjectRoot(): string
+    {
+        return __DIR__ . '/../../../..';
+    }
 }

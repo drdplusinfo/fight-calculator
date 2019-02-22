@@ -65,7 +65,7 @@ class BodyArmorBody extends AbstractArmamentBody
     <div class="messages">
       {$this->getMessagesAboutBodyArmors()}
     </div>
-    <a title="Přidat vlastní zbroj" href="{$this->getUrlToAddNewBodyArmor()}" class="button add">+</a>
+    <a title="Přidat vlastní zbroj" href="{$this->getUrlToAddNewBodyArmor()}" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="{$this->getBodyArmorSelectName()}" title="Zbroj">
         {$this->getPossibleBodyArmors()}

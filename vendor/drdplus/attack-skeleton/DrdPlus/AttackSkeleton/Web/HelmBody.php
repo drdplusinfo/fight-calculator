@@ -64,7 +64,7 @@ class HelmBody extends AbstractArmamentBody
     <div class="messages">
         {$this->getMessagesAboutHelms()}
     </div>
-    <a title="Přidat vlastní helmu" href="{$this->getLinkToAddNewHelm()}" class="button add">+</a>
+    <a title="Přidat vlastní helmu" href="{$this->getLinkToAddNewHelm()}" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="{$this->getHelmSelectName()}" title="Helma">
          {$this->getPossibleHelms()} 

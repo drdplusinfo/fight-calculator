@@ -33,7 +33,7 @@ class HelmBodyTest extends AbstractAttackTest
     <div class="messages">
         
     </div>
-    <a title="Přidat vlastní helmu" href="?action=add_new_helm" class="button add">+</a>
+    <a title="Přidat vlastní helmu" href="?action=add_new_helm" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="helm" title="Helma">
          <option value="without_helm" selected >

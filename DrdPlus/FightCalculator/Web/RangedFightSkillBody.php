@@ -10,7 +10,7 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
-class RangedWeaponSkillBody extends AbstractArmamentBody
+class RangedFightSkillBody extends AbstractArmamentBody
 {
     /**
      * @var CurrentArmamentsWithSkills

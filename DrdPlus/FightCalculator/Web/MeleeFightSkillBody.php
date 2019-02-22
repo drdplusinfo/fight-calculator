@@ -10,7 +10,7 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
-class MeleeWeaponSkillBody extends AbstractArmamentBody
+class MeleeFightSkillBody extends AbstractArmamentBody
 {
     /**
      * @var CurrentArmamentsWithSkills
@@ -44,6 +44,7 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
     public function getValue(): string
     {
         return <<<HTML
+<div class="row">
 <div class="col">
     <label>
         <select name="{$this->getMeleeFightSkillInputName()}">
@@ -64,6 +65,7 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
           <input type="radio" value="3" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getMeleeFightSkillValueChecked(3)}>3
         </label>
     </span>
+</div>
 </div>
 HTML;
     }

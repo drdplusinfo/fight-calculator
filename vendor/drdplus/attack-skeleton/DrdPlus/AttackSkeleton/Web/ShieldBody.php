@@ -64,7 +64,7 @@ class ShieldBody extends AbstractArmamentBody
     <div class="messages">
         {$this->getMessagesAboutShields()}
     </div>
-    <a title="Přidat vlastní štít" href="{$this->getLinkToAddNewShield()}" class="button add">+</a>
+    <a title="Přidat vlastní štít" href="{$this->getLinkToAddNewShield()}" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="{$this->getShieldSelectName()}" title="Štít">
          {$this->getPossibleShields()} 

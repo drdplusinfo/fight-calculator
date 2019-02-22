@@ -38,7 +38,7 @@ class ShieldBodyTest extends AbstractArmamentBodyTest
     <div class="messages">
         
     </div>
-    <a title="Přidat vlastní štít" href="?action=add_new_shield" class="button add">+</a>
+    <a title="Přidat vlastní štít" href="?action=add_new_shield" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="shield" title="Štít">
          <option value="without_shield" selected>
@@ -78,7 +78,7 @@ HTML
     <div class="messages">
         
     </div>
-    <a title="Přidat vlastní štít" href="?action=add_new_shield" class="button add">+</a>
+    <a title="Přidat vlastní štít" href="?action=add_new_shield" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="shield" title="Štít">
          <option value="without_shield" selected>

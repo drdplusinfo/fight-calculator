@@ -31,7 +31,7 @@ class RangedWeaponBodyTest extends AbstractAttackTest
     </div>
     <div class="row" id="chooseRangedWeapon">
       <div class="col">
-    <a title="Přidat vlastní zbraň na dálku" href="?action=add_new_ranged_weapon" class="button add">+</a>
+    <a title="Přidat vlastní zbraň na dálku" href="?action=add_new_ranged_weapon" class="btn btn-success btn-sm add">+</a>
     <label>
         <select name="ranged_weapon" title="Zbraň na dálku">
             <optgroup label="vrhací zbraně">

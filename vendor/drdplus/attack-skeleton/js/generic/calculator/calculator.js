@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var allInputs = document.getElementsByTagName('input');
     var allSelects = document.getElementsByTagName('select');
     var allButtons = document.getElementsByTagName('button');
-    var allForms = document.getElementsByTagName('form');
     var allControls = [];
     for (var inputIndex = 0, inputsLength = allInputs.length; inputIndex < inputsLength; inputIndex++) {
         var input = allInputs[inputIndex];
@@ -52,13 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    for (var formIndex = 0, formsLength = allForms.length; formIndex < formsLength; formIndex++) {
-        var form = allForms[formIndex];
-        form.addEventListener('submit', function () {
-            this.dataset.submitted = 'true';
-        });
-    }
-
     function submitOnChange(changedInput) {
         var form;
         var node = changedInput;
@@ -70,15 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
             throw 'No form found for an input ' + changedInput.outerHTML
         }
         if (submit(form) && requiredInputsAreFilled(form)) {
-            disableControls(5000);
             invalidateResult();
         }
     }
 
     function submit(form) {
-        if (form.dataset.submitted === 'true') {
-            return true;
-        }
         var formButtons = form.getElementsByTagName('button');
         for (var buttonIndex = 0, buttonsLength = formButtons.length; buttonIndex < buttonsLength; buttonIndex++) {
             var button = formButtons[buttonIndex];
@@ -107,21 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         return true;
-    }
-
-    function enableControls() {
-        for (var j = 0, length = allControls.length; j < length; j++) {
-            allControls[j].disabled = null;
-        }
-    }
-
-    function disableControls(forMilliSeconds) {
-        for (var j = 0, length = allControls.length; j < length; j++) {
-            allControls[j].disabled = true;
-        }
-        if (forMilliSeconds) {
-            window.setTimeout(enableControls, forMilliSeconds /* unlock after */)
-        }
     }
 
     function invalidateResult() {

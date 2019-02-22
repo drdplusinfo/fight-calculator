@@ -1,7 +1,7 @@
 {
   "name": "drdplus/attack-skeleton",
   "license": "MIT",
-  "type": "project",
+  "type": "composer-plugin",
   "description": "Configurator skeleton for those using weapons for DrD+",
   "keywords": [
     "DrD",
@@ -20,7 +20,8 @@
     "php": ">=7.1",
     "drdplus/calculator-skeleton": "^1.0",
     "drdplus/properties": "~2.0",
-    "drdplus/armourer": "~2.0"
+    "drdplus/armourer": "~2.0",
+    "composer-plugin-api": "^1.1"
   },
   "require-dev": {
     "phpunit/phpunit": "~7.0",
@@ -33,5 +34,8 @@
     "pre-autoload-dump": [
       "find ./vendor/drdplus/calculator-skeleton/web/*.html -exec cp {} ./web/ \\;"
     ]
+  },
+  "extra": {
+    "class": "DrdPlus\\AttackSkeleton\\AttackInjectorComposerPlugin"
   }
 }

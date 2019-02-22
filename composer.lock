@@ -48,13 +48,14 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.0.10",
+            "version": "2.0.11",
             "source": {
                 "type": "git",
                 "url": "/var/www/utok.skeleton",
-                "reference": "af65d8dbe3292bcc100a29e8688ddbca43b7c9ca"
+                "reference": "bbe94b59bf0bc29dead8950533d4d55f5ebc7f90"
             },
             "require": {
+                "composer-plugin-api": "^1.1",
                 "drdplus/armourer": "~2.0",
                 "drdplus/calculator-skeleton": "^1.0",
                 "drdplus/properties": "~2.0",
@@ -67,7 +68,10 @@
                 "phpunit/phpunit": "~7.0",
                 "roave/security-advisories": "dev-master"
             },
-            "type": "project",
+            "type": "composer-plugin",
+            "extra": {
+                "class": "DrdPlus\\AttackSkeleton\\AttackInjectorComposerPlugin"
+            },
             "autoload": {
                 "psr-4": {
                     "DrdPlus\\": "DrdPlus/"
@@ -90,7 +94,7 @@
                 "skeleton",
                 "weapons"
             ],
-            "time": "2019-02-22T11:59:55+00:00"
+            "time": "2019-02-22T14:18:46+00:00"
         },
         {
             "name": "drdplus/background",
@@ -214,11 +218,11 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.0.37",
+            "version": "1.0.38",
             "source": {
                 "type": "git",
                 "url": "/var/www/kalkulator.skeleton",
-                "reference": "424bdd47e9616aa9d594b3f055ce0cc79d13903d"
+                "reference": "9f44f41ffdd5ecbcfb94cf8c554715c9a4140a87"
             },
             "require": {
                 "composer-plugin-api": "^1.1",
@@ -250,7 +254,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-02-22T11:53:10+00:00"
+            "time": "2019-02-22T14:17:26+00:00"
         },
         {
             "name": "drdplus/codes",

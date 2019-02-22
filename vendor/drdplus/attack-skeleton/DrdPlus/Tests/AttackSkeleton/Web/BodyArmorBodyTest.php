@@ -32,7 +32,7 @@ class BodyArmorBodyTest extends AbstractAttackTest
     <div class="messages">
       
     </div>
-    <a title="Přidat vlastní zbroj" href="?action=add_new_body_armor" class="button add">+</a>
+    <a title="Přidat vlastní zbroj" href="?action=add_new_body_armor" class="btn btn-success btn-sm add">+</a>
     <label>
       <select name="body_armor" title="Zbroj">
         <option value="without_armor" selected >

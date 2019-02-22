@@ -72,7 +72,7 @@ HTML;
     {
         return <<<HTML
 <div class="col">
-    <a title="Přidat vlastní zbraň na dálku" href="{$this->getUrlToAddNewRangedWeapon()}" class="button add">+</a>
+    <a title="Přidat vlastní zbraň na dálku" href="{$this->getUrlToAddNewRangedWeapon()}" class="btn btn-success btn-sm add">+</a>
     <label>
         <select name="{$this->getRangedWeaponSelectName()}" title="Zbraň na dálku">
             {$this->getPossibleRangedWeapons()}

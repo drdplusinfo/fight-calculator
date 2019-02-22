@@ -203,7 +203,7 @@ HTML;
     </div>
     <div class="row" id="chooseMeleeWeapon">
         <div class="col">
-            <a title="Přidat vlastní zbraň na blízko" href="{$this->getUrlToAddNewMeleeWeapon()}" class="button add">+</a>
+            <a title="Přidat vlastní zbraň na blízko" href="{$this->getUrlToAddNewMeleeWeapon()}" class="btn btn-success btn-sm add">+</a>
             <label>
                 <select name="{$this->getMeleeWeaponSelectName()}" title="Zbraň na blízko">
                     {$this->getPossibleMeleeWeapons()}
