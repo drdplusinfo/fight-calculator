@@ -25,9 +25,9 @@ class FightWebPartsContainer extends AttackWebPartsContainer
 {
     /** @var ArmorSkillBody */
     private $armorSkillBody;
-    /** @var MeleeFightSkillBody */
+    /** @var MeleeWeaponSkillBody */
     private $meleeWeaponSkillBody;
-    /** @var RangedFightSkillBody */
+    /** @var RangedWeaponSkillBody */
     private $rangedWeaponSkillBody;
     /** @var FightPropertiesBody */
     private $rangedWeaponFightPropertiesBody;
@@ -218,10 +218,10 @@ class FightWebPartsContainer extends AttackWebPartsContainer
         return $this->shieldWithRangedWeaponBody;
     }
 
-    public function getMeleeWeaponSkillBody(): MeleeFightSkillBody
+    public function getMeleeWeaponSkillBody(): MeleeWeaponSkillBody
     {
         if ($this->meleeWeaponSkillBody === null) {
-            $this->meleeWeaponSkillBody = new MeleeFightSkillBody(
+            $this->meleeWeaponSkillBody = new MeleeWeaponSkillBody(
                 $this->currentArmamentsWithSkills,
                 $this->fight,
                 $this->htmlHelper
@@ -230,10 +230,10 @@ class FightWebPartsContainer extends AttackWebPartsContainer
         return $this->meleeWeaponSkillBody;
     }
 
-    public function getRangedWeaponSkillBody(): RangedFightSkillBody
+    public function getRangedWeaponSkillBody(): RangedWeaponSkillBody
     {
         if ($this->rangedWeaponSkillBody === null) {
-            $this->rangedWeaponSkillBody = new RangedFightSkillBody(
+            $this->rangedWeaponSkillBody = new RangedWeaponSkillBody(
                 $this->currentArmamentsWithSkills,
                 $this->fight,
                 $this->htmlHelper

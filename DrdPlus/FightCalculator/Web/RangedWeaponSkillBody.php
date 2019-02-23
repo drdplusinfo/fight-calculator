@@ -10,7 +10,7 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
-class RangedFightSkillBody extends AbstractArmamentBody
+class RangedWeaponSkillBody extends AbstractArmamentBody
 {
     /**
      * @var CurrentArmamentsWithSkills
@@ -48,16 +48,16 @@ class RangedFightSkillBody extends AbstractArmamentBody
     </label>
     <span class="skill-ranks" data-history-skill-ranks="{$this->getHistoryRangedSkillRanks()}">
         <label>
-          na stupni <input type="radio" value="0" name="{$this->getRangedFightSkillRankInputName()}" {$this->getRangedFightSkillValueChecked(0)}>0,
+          na stupni <input type="radio" value="0" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(0)}>0,
         </label>
         <label>
-          <input type="radio" value="1" name="{$this->getRangedFightSkillRankInputName()}" {$this->getRangedFightSkillValueChecked(1)}>1,
+          <input type="radio" value="1" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(1)}>1,
         </label>
         <label>
-          <input type="radio" value="2" name="{$this->getRangedFightSkillRankInputName()}" {$this->getRangedFightSkillValueChecked(2)}>2,
+          <input type="radio" value="2" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(2)}>2,
         </label>
         <label>
-          <input type="radio" value="3" name="{$this->getRangedFightSkillRankInputName()}" {$this->getRangedFightSkillValueChecked(3)}>3
+          <input type="radio" value="3" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(3)}>3
         </label>
     </span>
 </div>
@@ -92,7 +92,7 @@ HTML;
         return FightRequest::RANGED_FIGHT_SKILL_RANK;
     }
 
-    private function getRangedFightSkillValueChecked(int $matchingRank): string
+    private function getCheckedForRangedFightSkillValue(int $matchingRank): string
     {
         return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentRangedFightSkillRank(), $matchingRank);
     }

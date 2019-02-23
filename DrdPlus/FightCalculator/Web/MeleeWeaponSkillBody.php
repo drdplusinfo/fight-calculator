@@ -10,7 +10,7 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
-class MeleeFightSkillBody extends AbstractArmamentBody
+class MeleeWeaponSkillBody extends AbstractArmamentBody
 {
     /**
      * @var CurrentArmamentsWithSkills
@@ -53,16 +53,16 @@ class MeleeFightSkillBody extends AbstractArmamentBody
     </label>
     <span class="skill-ranks" data-history-skill-ranks="{$this->getHistoryMeleeSkillRanks()}">
         <label>
-          na stupni <input type="radio" value="0" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getMeleeFightSkillValueChecked(0)}>0,
+          na stupni <input type="radio" value="0" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getCheckedForMeleeFightSkillRank(0)}>0,
         </label>
         <label>
-          <input type="radio" value="1" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getMeleeFightSkillValueChecked(1)}>1,
+          <input type="radio" value="1" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getCheckedForMeleeFightSkillRank(1)}>1,
         </label>
         <label>
-          <input type="radio" value="2" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getMeleeFightSkillValueChecked(2)}>2,
+          <input type="radio" value="2" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getCheckedForMeleeFightSkillRank(2)}>2,
         </label>
         <label>
-          <input type="radio" value="3" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getMeleeFightSkillValueChecked(3)}>3
+          <input type="radio" value="3" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getCheckedForMeleeFightSkillRank(3)}>3
         </label>
     </span>
 </div>
@@ -98,9 +98,9 @@ HTML;
         return FightRequest::MELEE_FIGHT_SKILL_RANK;
     }
 
-    private function getMeleeFightSkillValueChecked(int $matchingRank): string
+    private function getCheckedForMeleeFightSkillRank(int $matchingRank): string
     {
-        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentMeleeFightSkillCode(), $matchingRank);
+        return $this->htmlHelper->getChecked($this->currentArmamentsWithSkills->getCurrentMeleeFightSkillRank(), $matchingRank);
     }
 
     private function getSelectedForSkill(SkillCode $possibleMeleeFightSkill): string

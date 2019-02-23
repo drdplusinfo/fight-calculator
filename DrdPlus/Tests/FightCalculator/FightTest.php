@@ -11,7 +11,7 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\CurrentProperties;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
-use DrdPlus\FightCalculator\HistoryWithSkills;
+use DrdPlus\FightCalculator\SkillsHistory;
 use DrdPlus\FightCalculator\PreviousArmamentsWithSkills;
 use DrdPlus\FightCalculator\PreviousProperties;
 use DrdPlus\Properties\Combat\MaximalRange;
@@ -128,11 +128,11 @@ class FightTest extends TestWithMockery
     }
 
     /**
-     * @return HistoryWithSkills|MockInterface
+     * @return SkillsHistory|MockInterface
      */
-    private function createHistoryWithSkills(): HistoryWithSkills
+    private function createHistoryWithSkills(): SkillsHistory
     {
-        return $this->mockery(HistoryWithSkills::class);
+        return $this->mockery(SkillsHistory::class);
     }
 
     /**

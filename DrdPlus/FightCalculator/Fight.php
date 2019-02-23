@@ -62,8 +62,8 @@ class Fight extends StrictObject
 {
     use UsingSkills;
 
-    /** @var HistoryWithSkills */
-    private $historyWithSkills;
+    /** @var SkillsHistory */
+    private $skillsHistory;
     /** @var PreviousArmamentsWithSkills */
     private $previousArmamentsWithSkills;
     /** @var CurrentArmamentsWithSkills */
@@ -78,6 +78,10 @@ class Fight extends StrictObject
     private $previousProperties;
     /** @var CurrentValues */
     private $currentValues;
+    /**
+     * @var History
+     */
+    private $history;
 
     public function __construct(
         CurrentArmamentsWithSkills $currentArmamentsWithSkills,
@@ -85,7 +89,8 @@ class Fight extends StrictObject
         CurrentValues $currentValues,
         PreviousArmamentsWithSkills $previousArmamentsWithSkills,
         PreviousProperties $previousProperties,
-        HistoryWithSkills $historyWithSkills,
+        History $history,
+        SkillsHistory $skillsHistory,
         Armourer $armourer,
         Tables $tables
     )
@@ -95,9 +100,10 @@ class Fight extends StrictObject
         $this->currentValues = $currentValues;
         $this->previousArmamentsWithSkills = $previousArmamentsWithSkills;
         $this->previousProperties = $previousProperties;
-        $this->historyWithSkills = $historyWithSkills;
+        $this->skillsHistory = $skillsHistory;
         $this->armourer = $armourer;
         $this->tables = $tables;
+        $this->history = $history;
     }
 
     public function getCurrentMeleeShieldFightProperties(): FightProperties
@@ -490,19 +496,14 @@ class Fight extends StrictObject
     private function getPreviousMeleeSkillCode(): SkillCode
     {
         return $this->getSkill(
-            $this->getHistory()->getValue(FightRequest::MELEE_FIGHT_SKILL),
+            $this->history->getValue(FightRequest::MELEE_FIGHT_SKILL),
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_UNARMED)
         );
     }
 
     private function getPreviousMeleeSkillRank(): int
     {
-        return (int)$this->getHistory()->getValue(FightRequest::MELEE_FIGHT_SKILL_RANK);
-    }
-
-    private function getHistory(): History
-    {
-        return $this->historyWithSkills;
+        return (int)$this->history->getValue(FightRequest::MELEE_FIGHT_SKILL_RANK);
     }
 
     public function getSkillForArmor(): PhysicalSkillCode
@@ -612,7 +613,7 @@ class Fight extends StrictObject
 
     public function getPreviousTargetDistance(): Distance
     {
-        $distanceValue = $this->getHistory()->getValue(FightRequest::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_DISTANCE);
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
@@ -628,7 +629,7 @@ class Fight extends StrictObject
 
     public function getPreviousTargetSize(): Size
     {
-        $distanceValue = $this->getHistory()->getValue(FightRequest::RANGED_TARGET_SIZE);
+        $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_SIZE);
         if ($distanceValue === null) {
             return Size::getIt(1);
         }
@@ -638,7 +639,7 @@ class Fight extends StrictObject
 
     public function getHistoryMeleeSkillRanksJson(): string
     {
-        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::MELEE_FIGHT_SKILL_RANK));
+        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::MELEE_FIGHT_SKILL_RANK));
     }
 
     private function arrayToJson(array $values): string
@@ -648,17 +649,17 @@ class Fight extends StrictObject
 
     public function getHistoryRangedSkillRanksJson(): string
     {
-        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
+        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
     }
 
     public function getHistoryShieldUsageSkillRanksJson(): string
     {
-        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
+        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
     }
 
     public function getHistoryFightWithShieldSkillRanksJson(): string
     {
-        return $this->arrayToJson($this->historyWithSkills->getPreviousSkillRanks(FightRequest::FIGHT_WITH_SHIELDS_SKILL_RANK));
+        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::FIGHT_WITH_SHIELDS_SKILL_RANK));
     }
 
     public function getShieldUsageSkillCode(): PhysicalSkillCode

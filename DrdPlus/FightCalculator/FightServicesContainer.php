@@ -19,8 +19,8 @@ class FightServicesContainer extends AttackServicesContainer
     private $fight;
     /** @var PreviousArmamentsWithSkills */
     private $previousArmamentsWithSkills;
-    /** @var HistoryWithSkills */
-    private $historyWithSkills;
+    /** @var SkillsHistory */
+    private $skillsHistory;
     /** @var PreviousArmaments */
     private $previousArmaments;
     /** @var PreviousProperties */
@@ -84,7 +84,8 @@ class FightServicesContainer extends AttackServicesContainer
                 $this->getCurrentValues(),
                 $this->getPreviousArmamentsWithSkills(),
                 $this->getPreviousProperties(),
-                $this->getHistoryWithSkills(),
+                $this->getHistory(),
+                $this->getSkillsHistory(),
                 $this->getArmourer(),
                 $this->getTables()
             );
@@ -105,22 +106,21 @@ class FightServicesContainer extends AttackServicesContainer
         return $this->previousArmamentsWithSkills;
     }
 
-    public function getHistoryWithSkills(): HistoryWithSkills
+    public function getSkillsHistory(): SkillsHistory
     {
-        if ($this->historyWithSkills === null) {
-            $this->historyWithSkills = new HistoryWithSkills(
+        if ($this->skillsHistory === null) {
+            $this->skillsHistory = new SkillsHistory(
                 [
                     FightRequest::MELEE_FIGHT_SKILL => FightRequest::MELEE_FIGHT_SKILL_RANK,
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                 ],
-                $this->getHistoryStorage(),
                 $this->getDateTimeProvider(),
                 $this->getRanksHistoryStorage(),
                 $this->getConfiguration()->getCookiesTtl()
             );
         }
-        return $this->historyWithSkills;
+        return $this->skillsHistory;
     }
 
     protected function getRanksHistoryStorage(): CookiesStorage

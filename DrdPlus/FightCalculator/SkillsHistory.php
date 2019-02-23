@@ -2,10 +2,10 @@
 namespace DrdPlus\FightCalculator;
 
 use DrdPlus\CalculatorSkeleton\DateTimeProvider;
-use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\CalculatorSkeleton\StorageInterface;
+use Granam\Strict\Object\StrictObject;
 
-class HistoryWithSkills extends History
+class SkillsHistory extends StrictObject
 {
     /** @var array|string[] */
     private $skillToSkillRankNames;
@@ -13,39 +13,58 @@ class HistoryWithSkills extends History
     private $ranksHistoryValues;
     /** @var StorageInterface */
     private $ranksHistoryStorage;
+    /**
+     * @var DateTimeProvider
+     */
+    private $dateTimeProvider;
+    /**
+     * @var int|null
+     */
+    private $ttl;
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $ttlDate;
 
     /**
      * @param array|string[] $skillNamesToSkillRankNames
-     * @param StorageInterface $historyStorage ,
-     * @param DateTimeProvider $dateTimeProvider ,
-     * @param StorageInterface $ranksHistoryStorage ,
+     * @param DateTimeProvider $dateTimeProvider
+     * @param StorageInterface $ranksHistoryStorage
      * @param null|int $ttl
      */
     public function __construct(
         array $skillNamesToSkillRankNames,
-        StorageInterface $historyStorage,
         DateTimeProvider $dateTimeProvider,
         StorageInterface $ranksHistoryStorage,
         ?int $ttl
     )
     {
         $this->skillToSkillRankNames = $skillNamesToSkillRankNames;
-        parent::__construct($historyStorage, $dateTimeProvider, $ttl);
         $this->ranksHistoryStorage = $ranksHistoryStorage;
+        $this->dateTimeProvider = $dateTimeProvider;
+        $this->ttl = $ttl;
     }
 
     public function deleteHistory(): void
     {
         $this->ranksHistoryStorage->deleteAll();
-        parent::deleteHistory();
     }
 
     public function saveHistory(array $valuesToRemember): void
     {
-        parent::saveHistory($valuesToRemember);
         $this->loadRanksHistoryValues(); // loads previous history as they would be overwritten now
         $ranksHistoryToSave = $this->getRanksHistoryToSave($valuesToRemember);
         $this->ranksHistoryStorage->storeValues($ranksHistoryToSave, $this->getTtlDate());
+    }
+
+    protected function getTtlDate(): \DateTimeImmutable
+    {
+        if ($this->ttlDate === null) {
+            $this->ttlDate = $this->ttl !== null
+                ? $this->dateTimeProvider->getNow()->modify('+' . $this->ttl . ' seconds')
+                : $this->dateTimeProvider->getNow()->modify('+ 1 year');
+        }
+        return $this->ttlDate;
     }
 
     private function loadRanksHistoryValues(): void
