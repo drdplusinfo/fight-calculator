@@ -1,2 +1,2 @@
 <?= /** @var \DrdPlus\FightCalculator\Web\FightWebPartsContainer $webPartsContainer */
-$webPartsContainer->getHistoryDeletionBody();
+$webPartsContainer->getHistoryDeletionBody()->getValue();
