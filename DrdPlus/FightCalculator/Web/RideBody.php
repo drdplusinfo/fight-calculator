@@ -29,13 +29,13 @@ class RideBody extends AbstractArmamentBody
     public function getValue(): string
     {
         return <<<HTML
-<div>
+<div class="col">
     <label>
       <input type="checkbox" value="1" name="{$this->getOnHorsebackInputName()}" {$this->getCheckedOnHorseback()}>
       Bojuješ ze sedla
     </label>
 </div>
-<div class="block">
+<div class="col">
 Dovednost <span class="keyword">
     <a href="https://pph.drdplus.info/#jezdectvi" target="_blank">{$this->getRidingHumanName()}</a>
 </span>

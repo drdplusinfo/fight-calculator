@@ -29,4 +29,5 @@
           <?= $webPartsContainer->getShieldWithRangedWeaponBody()->getValue() ?>
       </div>
     </div>
+  </div>
 </fieldset>
