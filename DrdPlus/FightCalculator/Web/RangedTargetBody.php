@@ -68,14 +68,12 @@ class RangedTargetBody extends StrictObject implements BodyInterface
       {$this->rangedWeaponFightPropertiesBody->getValue()}
     <div class="col-sm-3">
       Soubojový dostřel
-      <img alt="Luk se šípem" class="line-sized" src="/images/emojione/bow-and-arrow-1f3f9.png">
       <span class="{$this->getChangedClassForEncounterRange()}">
           {$this->fight->getCurrentEncounterRange()} ({$this->fight->getCurrentEncounterRange()->getInMeters($this->tables)} m)
       </span>
     </div>
     <div class="col-sm-3">
       Maximální dostřel
-      <img alt="Luk se šípem" class="line-sized" src="/images/emojione/bow-and-arrow-1f3f9.png">
       <span class="{$this->getChangedClassForMaximalRange()}">
           {$this->fight->getCurrentRangedWeaponMaximalRange()} ({$this->fight->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables)} m)
       </span>

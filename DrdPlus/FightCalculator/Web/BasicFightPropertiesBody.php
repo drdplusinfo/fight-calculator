@@ -92,26 +92,26 @@ HTML;
             '(není ovlivněna výzbrojí)',
         ];
         $basicFightProperties[] = [
-            'OČ <img alt="OČ" class="line-sized" src="/images/emojione/defense-number-1f6e1.png">',
+            'OČ',
             $previousGenericFightProperties->getDefenseNumber(),
             $currentGenericFightProperties->getDefenseNumber(),
             '(ovlivněno pouze akcí, oslněním a Převahou)',
         ];
         $targetDistance = new Distance(1, Distance::METER, Tables::getIt()->getDistanceTable());
         $basicFightProperties[] = [
-            'ÚČ <img alt="ÚČ" class="line-sized" src="/images/emojione/fight-number-1f624.png">',
+            'ÚČ',
             $previousGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1)),
             $currentGenericFightProperties->getAttackNumber($targetDistance, Size::getIt(1)),
             '',
         ];
         $basicFightProperties[] = [
-            'Zbroj <img alt="Zbroj" class="line-sized" src="/images/armor-icon.png">',
+            'Zbroj',
             $this->previousArmaments->getProtectionOfPreviousBodyArmor(),
             $this->currentArmaments->getCurrentBodyArmorProtection(),
             '',
         ];
         $basicFightProperties[] = [
-            'Helma <img alt="Helma" class="line-sized" src="/images/helm-icon.png">',
+            'Helma',
             $this->previousArmaments->getPreviousHelmProtection(),
             $this->currentArmaments->getCurrentHelmProtection(),
             '',

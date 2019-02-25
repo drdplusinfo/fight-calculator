@@ -51,28 +51,24 @@ class FightPropertiesBody extends StrictObject implements BodyInterface
         return <<<HTML
 <div class="col fight-property">
   BČ
-  <img alt="Bojové číslo" class="line-sized" src="/images/emojione/fight-2694.png">
   <span class="{$this->htmlHelper->getCssClassForChangedValue($previousFightNumber, $currentFightNumber)}">
     {$this->htmlHelper->formatInteger($currentFightNumber)}
   </span>
 </div>
 <div class="col fight-property">
   ÚČ
-  <img alt="Útočné číslo" class="line-sized" src="/images/emojione/fight-number-1f624.png">
   <span class="{$this->htmlHelper->getCssClassForChangedValue($previousAttackNumber, $currentAttackNumber)}">
     {$this->htmlHelper->formatInteger($currentAttackNumber)}
   </span>
 </div>
 <div class="col fight-property">
   ZZ
-  <img alt="Základ zranění" class="line-sized" src="/images/emojione/base-of-wounds-1f480.png">
   <span class="{$this->htmlHelper->getCssClassForChangedValue($previousBaseOfWounds, $currentBaseOfWounds)}">
     {$this->htmlHelper->formatInteger($currentBaseOfWounds)}
   </span>
 </div>
 <div class="col fight-property">
   OČ
-  <img alt="Obranné číslo" class="line-sized" src="/images/emojione/defense-number-1f6e1.png">
   <span class="{$this->htmlHelper->getCssClassForChangedValue($previousDefenseNumber, $currentDefenseNumber)}">
     {$this->htmlHelper->formatInteger($currentDefenseNumber)}
   </span>
