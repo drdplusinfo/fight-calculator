@@ -10,7 +10,7 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
-class RangedWeaponSkillBody extends AbstractArmamentBody
+class RangedFightSkillBody extends AbstractArmamentBody
 {
     /**
      * @var CurrentArmamentsWithSkills
@@ -35,26 +35,28 @@ class RangedWeaponSkillBody extends AbstractArmamentBody
     public function getValue(): string
     {
         return <<<HTML
-<div class="col">
-    <label>
-        <select name="{$this->getRangedFightSkillSelectName()}">
-            {$this->getPossibleRangedFightSkills()}
-        </select>
-    </label>
-    <span class="skill-ranks">
+<div class="row">
+    <div class="col">
         <label>
-          na stupni <input type="radio" value="0" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(0)}>0,
+            <select name="{$this->getRangedFightSkillSelectName()}">
+                {$this->getPossibleRangedFightSkills()}
+            </select>
         </label>
-        <label>
-          <input type="radio" value="1" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(1)}>1,
-        </label>
-        <label>
-          <input type="radio" value="2" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(2)}>2,
-        </label>
-        <label>
-          <input type="radio" value="3" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(3)}>3
-        </label>
-    </span>
+        <span class="skill-ranks">
+            <label>
+              na stupni <input type="radio" value="0" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(0)}>0,
+            </label>
+            <label>
+              <input type="radio" value="1" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(1)}>1,
+            </label>
+            <label>
+              <input type="radio" value="2" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(2)}>2,
+            </label>
+            <label>
+              <input type="radio" value="3" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(3)}>3
+            </label>
+        </span>
+    </div>
 </div>
 HTML;
     }

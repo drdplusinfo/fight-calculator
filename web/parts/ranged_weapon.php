@@ -4,7 +4,7 @@
 </div>
 <fieldset>
     <?= $webPartsContainer->getRangedWeaponBody()->getValue() ?>
-    <?= $webPartsContainer->getRangedWeaponSkillBody()->getValue() ?>
+    <?= $webPartsContainer->getRangedFightSkillBody()->getValue() ?>
   <div class="with-skill-ranks row">
       <?= $webPartsContainer->getRangedWeaponFightPropertiesBody()->getValue() ?>
   </div>

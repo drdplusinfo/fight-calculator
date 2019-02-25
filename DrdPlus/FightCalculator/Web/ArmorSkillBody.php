@@ -43,8 +43,6 @@ class ArmorSkillBody extends StrictObject implements BodyInterface
           <a target="_blank" href="https://pph.drdplus.info/#noseni_zbroje">{$this->getArmorWearingSkillHumanName()}</a>
         </span>
       </label>
-    </div>
-    <div class="col">
       <label>
         na stupni <input type="radio" value="0" name="{$armorSkillValueInputName}" {$this->getArmorSkillValueChecked(0)}>0,
       </label>

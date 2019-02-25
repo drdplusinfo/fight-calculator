@@ -15,6 +15,12 @@
       "DrdPlus\\": "DrdPlus/"
     }
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "/var/www/utok.skeleton"
+    }
+  ],
   "require": {
     "ext-json": "*",
     "php": ">=7.1",

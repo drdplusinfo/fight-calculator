@@ -209,20 +209,14 @@ HTML;
                     {$this->getPossibleMeleeWeapons()}
                 </select>
             </label>
-        </div>
-        <div class="col">
             <label>
                 <input type="radio" value="{$this->getMainHandHolding()}" name="{$this->getMeleeWeaponHoldingName()}" {$this->getMainHandHoldingChecked()}>
                 v dominantní ruce
             </label>
-        </div>
-        <div class="col">
             <label>
                 <input type="radio" value="{$this->getOffhandHolding()}" name="{$this->getMeleeWeaponHoldingName()}" {$this->getOffhandHoldingChecked()}>
                 v druhé ruce
             </label>
-        </div>
-        <div class="col">
             <label>
                 <input type="radio" value="{$this->getTwoHandsHolding()}"
                        name="{$this->getMeleeWeaponHoldingName()}" {$this->getTwoHandsHoldingChecked()}>

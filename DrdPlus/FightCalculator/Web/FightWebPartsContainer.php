@@ -27,8 +27,8 @@ class FightWebPartsContainer extends AttackWebPartsContainer
     private $armorSkillBody;
     /** @var MeleeWeaponSkillBody */
     private $meleeWeaponSkillBody;
-    /** @var RangedWeaponSkillBody */
-    private $rangedWeaponSkillBody;
+    /** @var RangedFightSkillBody */
+    private $rangedFightSkillBody;
     /** @var FightPropertiesBody */
     private $rangedWeaponFightPropertiesBody;
     /** @var RangedTargetBody */
@@ -228,16 +228,16 @@ class FightWebPartsContainer extends AttackWebPartsContainer
         return $this->meleeWeaponSkillBody;
     }
 
-    public function getRangedWeaponSkillBody(): RangedWeaponSkillBody
+    public function getRangedFightSkillBody(): RangedFightSkillBody
     {
-        if ($this->rangedWeaponSkillBody === null) {
-            $this->rangedWeaponSkillBody = new RangedWeaponSkillBody(
+        if ($this->rangedFightSkillBody === null) {
+            $this->rangedFightSkillBody = new RangedFightSkillBody(
                 $this->currentArmamentsWithSkills,
                 $this->fight,
                 $this->htmlHelper
             );
         }
-        return $this->rangedWeaponSkillBody;
+        return $this->rangedFightSkillBody;
     }
 
     public function getRangedWeaponFightPropertiesBody(): FightPropertiesBody

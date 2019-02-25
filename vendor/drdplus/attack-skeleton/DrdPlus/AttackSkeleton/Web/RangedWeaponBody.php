@@ -61,8 +61,10 @@ class RangedWeaponBody extends AbstractArmamentBody
       {$this->getMessagesAboutRangedWeapons()}
     </div>
     <div class="row" id="chooseRangedWeapon">
-      {$this->addCustomRangedWeapon()}
-      {$this->getRangedWeaponHolding()}
+        <div class="col">
+          {$this->addCustomRangedWeapon()}
+          {$this->getRangedWeaponHolding()}
+        </div>
     </div>
 </div>
 HTML;
@@ -71,42 +73,32 @@ HTML;
     private function addCustomRangedWeapon(): string
     {
         return <<<HTML
-<div class="col">
-    <a title="Přidat vlastní zbraň na dálku" href="{$this->getUrlToAddNewRangedWeapon()}" class="btn btn-success btn-sm add">+</a>
-    <label>
-        <select name="{$this->getRangedWeaponSelectName()}" title="Zbraň na dálku">
-            {$this->getPossibleRangedWeapons()}
-        </select>
-    </label>
-</div>
+<a title="Přidat vlastní zbraň na dálku" href="{$this->getUrlToAddNewRangedWeapon()}" class="btn btn-success btn-sm add">+</a>
+<label>
+    <select name="{$this->getRangedWeaponSelectName()}" title="Zbraň na dálku">
+        {$this->getPossibleRangedWeapons()}
+    </select>
+</label>
 HTML;
-
     }
 
     private function getRangedWeaponHolding(): string
     {
         return <<<HTML
-<div class="col">
-    <label>
-        <input type="radio" value="{$this->getMainHandHolding()}" name="{$this->getRangedWeaponHoldingName()}" {$this->getCheckedMainHandHolding()}>
-        v dominantní ruce
-    </label>
-</div>
-<div class="col">
-    <label>
-        <input type="radio" value="{$this->getOffhandHolding()}" name="{$this->getRangedWeaponHoldingName()}" {$this->getCheckedOffhandHolding()}>
-        v druhé ruce
-    </label>
-</div>
-<div class="col">
-    <label>
-        <input type="radio" value="{$this->getTwoHandsHolding()}"
-               name="{$this->getRangedWeaponHoldingName()}" {$this->getCheckedTwoHandsHolding()}>
-        obouručně
-    </label>
-</div>
+<label>
+    <input type="radio" value="{$this->getMainHandHolding()}" name="{$this->getRangedWeaponHoldingName()}" {$this->getCheckedMainHandHolding()}>
+    v dominantní ruce
+</label>
+<label>
+    <input type="radio" value="{$this->getOffhandHolding()}" name="{$this->getRangedWeaponHoldingName()}" {$this->getCheckedOffhandHolding()}>
+    v druhé ruce
+</label>
+<label>
+    <input type="radio" value="{$this->getTwoHandsHolding()}"
+           name="{$this->getRangedWeaponHoldingName()}" {$this->getCheckedTwoHandsHolding()}>
+    obouručně
+</label>
 HTML;
-
     }
 
     private function getAddCustomRangedWeapon(): string
