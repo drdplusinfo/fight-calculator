@@ -13,17 +13,11 @@ class SkillsHistory extends StrictObject
     private $ranksHistoryValues;
     /** @var StorageInterface */
     private $ranksHistoryStorage;
-    /**
-     * @var DateTimeProvider
-     */
+    /** @var DateTimeProvider */
     private $dateTimeProvider;
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     private $ttl;
-    /**
-     * @var \DateTimeImmutable
-     */
+    /** @var \DateTimeImmutable */
     private $ttlDate;
 
     /**
@@ -45,12 +39,12 @@ class SkillsHistory extends StrictObject
         $this->ttl = $ttl;
     }
 
-    public function deleteHistory(): void
+    public function deleteSkillsHistory(): void
     {
         $this->ranksHistoryStorage->deleteAll();
     }
 
-    public function saveHistory(array $valuesToRemember): void
+    public function saveSkillsHistory(array $valuesToRemember): void
     {
         $this->loadRanksHistoryValues(); // loads previous history as they would be overwritten now
         $ranksHistoryToSave = $this->getRanksHistoryToSave($valuesToRemember);

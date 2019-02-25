@@ -116,16 +116,16 @@ class FightServicesContainer extends AttackServicesContainer
                     FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
                 ],
                 $this->getDateTimeProvider(),
-                $this->getRanksHistoryStorage(),
+                $this->getSkillsHistoryStorage(),
                 $this->getConfiguration()->getCookiesTtl()
             );
         }
         return $this->skillsHistory;
     }
 
-    protected function getRanksHistoryStorage(): CookiesStorage
+    private function getSkillsHistoryStorage(): CookiesStorage
     {
-        return new CookiesStorage($this->getCookiesService(), $this->getCookiesStorageKeyPrefix() . '-ranks_history');
+        return new CookiesStorage($this->getCookiesService(), $this->getCookiesStorageKeyPrefix() . '-skills_history');
     }
 
     public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
