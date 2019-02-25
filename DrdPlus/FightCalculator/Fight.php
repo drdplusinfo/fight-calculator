@@ -637,7 +637,7 @@ class Fight extends StrictObject
         return Size::getIt($distanceValue);
     }
 
-    public function getHistoryMeleeSkillRanksJson(): string
+    public function getPreviousMeleeSkillRanksJson(): string
     {
         return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::MELEE_FIGHT_SKILL_RANK));
     }
@@ -647,17 +647,17 @@ class Fight extends StrictObject
         return \json_encode($values, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
     }
 
-    public function getHistoryRangedSkillRanksJson(): string
+    public function getPreviousRangedSkillRanksJson(): string
     {
         return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
     }
 
-    public function getHistoryShieldUsageSkillRanksJson(): string
+    public function getPreviousShieldUsageSkillRanksJson(): string
     {
         return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
     }
 
-    public function getHistoryFightWithShieldSkillRanksJson(): string
+    public function getPreviousFightWithShieldSkillRanksJson(): string
     {
         return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::FIGHT_WITH_SHIELDS_SKILL_RANK));
     }

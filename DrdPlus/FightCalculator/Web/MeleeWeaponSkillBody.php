@@ -72,7 +72,7 @@ HTML;
 
     private function getHistoryMeleeSkillRanks(): string
     {
-        return \htmlspecialchars($this->fight->getHistoryMeleeSkillRanksJson());
+        return \htmlspecialchars($this->fight->getPreviousMeleeSkillRanksJson());
     }
 
     private function getPossibleMeleeFightSkills(): string

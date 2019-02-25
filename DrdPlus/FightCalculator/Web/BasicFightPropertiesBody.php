@@ -50,21 +50,16 @@ class BasicFightPropertiesBody extends StrictObject implements BodyInterface
         foreach ($basicFightProperties as [$name, $previousValue, $currentValue, $note]) {
             $row = '';
             $row .= <<<HTML
-<div class="col-sm-6">
-  <div class="row">
-    <div class="col-sm-3">{$name}</div>
-    <div class="col-xs-3">
-      <strong class="{$this->htmlHelper->getCssClassForChangedValue($previousValue, $currentValue)}">
-        {$this->htmlHelper->formatInteger($currentValue)}
-      </strong>
-      <span class="note">{$note}</span>
-    </div>
+<div class="col">
+  <div>
+      {$name}&nbsp;<strong class="{$this->htmlHelper->getCssClassForChangedValue($previousValue, $currentValue)}">{$this->htmlHelper->formatInteger($currentValue)}</strong>
   </div>
+  <div class="note">{$note}</div>
 </div>
 HTML;
             $rows[] = $row;
         }
-        return \implode("\n", $rows);
+        return '<div class="row">' . \implode("\n", $rows) . '</div>';
     }
 
     private function getBasicFightProperties(): array

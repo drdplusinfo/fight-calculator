@@ -65,7 +65,7 @@ HTML;
 
     private function getHistoryFightWithShieldSkillRanks(): string
     {
-        return \htmlspecialchars($this->fight->getHistoryFightWithShieldSkillRanksJson());
+        return \htmlspecialchars($this->fight->getPreviousFightWithShieldSkillRanksJson());
     }
 
     private function getFightWithShieldsSkillRankInputName(): string

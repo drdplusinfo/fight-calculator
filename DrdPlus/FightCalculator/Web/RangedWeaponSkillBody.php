@@ -66,7 +66,7 @@ HTML;
 
     private function getHistoryRangedSkillRanks(): string
     {
-        return \htmlspecialchars($this->fight->getHistoryRangedSkillRanksJson());
+        return \htmlspecialchars($this->fight->getPreviousRangedSkillRanksJson());
     }
 
     private function getPossibleRangedFightSkills(): string
