@@ -62,8 +62,6 @@ class Fight extends StrictObject
 {
     use UsingSkills;
 
-    /** @var SkillsHistory */
-    private $skillsHistory;
     /** @var PreviousArmamentsWithSkills */
     private $previousArmamentsWithSkills;
     /** @var CurrentArmamentsWithSkills */
@@ -78,9 +76,7 @@ class Fight extends StrictObject
     private $previousProperties;
     /** @var CurrentValues */
     private $currentValues;
-    /**
-     * @var History
-     */
+    /** @var History */
     private $history;
 
     public function __construct(
@@ -90,7 +86,6 @@ class Fight extends StrictObject
         PreviousArmamentsWithSkills $previousArmamentsWithSkills,
         PreviousProperties $previousProperties,
         History $history,
-        SkillsHistory $skillsHistory,
         Armourer $armourer,
         Tables $tables
     )
@@ -100,7 +95,6 @@ class Fight extends StrictObject
         $this->currentValues = $currentValues;
         $this->previousArmamentsWithSkills = $previousArmamentsWithSkills;
         $this->previousProperties = $previousProperties;
-        $this->skillsHistory = $skillsHistory;
         $this->armourer = $armourer;
         $this->tables = $tables;
         $this->history = $history;
@@ -635,31 +629,6 @@ class Fight extends StrictObject
         }
 
         return Size::getIt($distanceValue);
-    }
-
-    public function getPreviousMeleeSkillRanksJson(): string
-    {
-        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::MELEE_FIGHT_SKILL_RANK));
-    }
-
-    private function arrayToJson(array $values): string
-    {
-        return \json_encode($values, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
-    }
-
-    public function getPreviousRangedSkillRanksJson(): string
-    {
-        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
-    }
-
-    public function getPreviousShieldUsageSkillRanksJson(): string
-    {
-        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::SHIELD_USAGE_SKILL_RANK));
-    }
-
-    public function getPreviousFightWithShieldSkillRanksJson(): string
-    {
-        return $this->arrayToJson($this->skillsHistory->getPreviousSkillRanks(FightRequest::FIGHT_WITH_SHIELDS_SKILL_RANK));
     }
 
     public function getShieldUsageSkillCode(): PhysicalSkillCode

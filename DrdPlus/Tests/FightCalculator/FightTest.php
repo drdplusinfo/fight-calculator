@@ -11,7 +11,6 @@ use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\CurrentProperties;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
-use DrdPlus\FightCalculator\SkillsHistory;
 use DrdPlus\FightCalculator\PreviousArmamentsWithSkills;
 use DrdPlus\FightCalculator\PreviousProperties;
 use DrdPlus\Properties\Combat\MaximalRange;
@@ -39,7 +38,6 @@ class FightTest extends TestWithMockery
             $this->createCurrentValues([FightRequest::RANGED_TARGET_DISTANCE => $currentRangedTargetDistance]),
             $this->createPreviousArmamentsWithSkills(),
             $this->createPreviousProperties(),
-            $this->createHistoryWithSkills(),
             $this->createArmourer($maximalRangeInMeters = -99),
             Tables::getIt()
         );
@@ -125,14 +123,6 @@ class FightTest extends TestWithMockery
     private function createPreviousProperties(): PreviousProperties
     {
         return $this->mockery(PreviousProperties::class);
-    }
-
-    /**
-     * @return SkillsHistory|MockInterface
-     */
-    private function createHistoryWithSkills(): SkillsHistory
-    {
-        return $this->mockery(SkillsHistory::class);
     }
 
     /**

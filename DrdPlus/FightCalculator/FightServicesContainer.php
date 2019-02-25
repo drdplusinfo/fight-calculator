@@ -5,7 +5,6 @@ namespace DrdPlus\FightCalculator;
 
 use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
-use DrdPlus\CalculatorSkeleton\CookiesStorage;
 use DrdPlus\FightCalculator\Web\FightWebPartsContainer;
 
 class FightServicesContainer extends AttackServicesContainer
@@ -19,8 +18,6 @@ class FightServicesContainer extends AttackServicesContainer
     private $fight;
     /** @var PreviousArmamentsWithSkills */
     private $previousArmamentsWithSkills;
-    /** @var SkillsHistory */
-    private $skillsHistory;
     /** @var PreviousArmaments */
     private $previousArmaments;
     /** @var PreviousProperties */
@@ -85,7 +82,6 @@ class FightServicesContainer extends AttackServicesContainer
                 $this->getPreviousArmamentsWithSkills(),
                 $this->getPreviousProperties(),
                 $this->getHistory(),
-                $this->getSkillsHistory(),
                 $this->getArmourer(),
                 $this->getTables()
             );
@@ -104,28 +100,6 @@ class FightServicesContainer extends AttackServicesContainer
             );
         }
         return $this->previousArmamentsWithSkills;
-    }
-
-    public function getSkillsHistory(): SkillsHistory
-    {
-        if ($this->skillsHistory === null) {
-            $this->skillsHistory = new SkillsHistory(
-                [
-                    FightRequest::MELEE_FIGHT_SKILL => FightRequest::MELEE_FIGHT_SKILL_RANK,
-                    FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
-                    FightRequest::RANGED_FIGHT_SKILL => FightRequest::RANGED_FIGHT_SKILL_RANK,
-                ],
-                $this->getDateTimeProvider(),
-                $this->getSkillsHistoryStorage(),
-                $this->getConfiguration()->getCookiesTtl()
-            );
-        }
-        return $this->skillsHistory;
-    }
-
-    private function getSkillsHistoryStorage(): CookiesStorage
-    {
-        return new CookiesStorage($this->getCookiesService(), $this->getCookiesStorageKeyPrefix() . '-skills_history');
     }
 
     public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer

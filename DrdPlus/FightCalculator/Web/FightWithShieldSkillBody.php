@@ -7,7 +7,6 @@ use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\AttackSkeleton\Web\AbstractArmamentBody;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
-use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
 class FightWithShieldSkillBody extends AbstractArmamentBody
@@ -17,18 +16,13 @@ class FightWithShieldSkillBody extends AbstractArmamentBody
      */
     private $currentArmamentsWithSkills;
     /**
-     * @var Fight
-     */
-    private $fight;
-    /**
      * @var HtmlHelper
      */
     private $htmlHelper;
 
-    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills, Fight $fight, HtmlHelper $htmlHelper)
+    public function __construct(CurrentArmamentsWithSkills $currentArmamentsWithSkills, HtmlHelper $htmlHelper)
     {
         $this->currentArmamentsWithSkills = $currentArmamentsWithSkills;
-        $this->fight = $fight;
         $this->htmlHelper = $htmlHelper;
     }
 
@@ -41,7 +35,7 @@ class FightWithShieldSkillBody extends AbstractArmamentBody
     {
         return <<<HTML
 <a class="keyword" target="_blank" href="https://pph.drdplus.info/#boj_se_zbrani">{$this->getFightWithShieldHumanName()}</a>
-<span class="skill-ranks" data-history-skill-ranks="{$this->getHistoryFightWithShieldSkillRanks()}">
+<span class="skill-ranks">
     <label>
       na stupni <input type="radio" value="0" name="{$this->getFightWithShieldsSkillRankInputName()}" {$this->getFightWithShieldSkillValueChecked(0)}>0,
     </label>
@@ -61,11 +55,6 @@ HTML;
     private function getFightWithShieldHumanName(): string
     {
         return PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS)->translateTo('cs');
-    }
-
-    private function getHistoryFightWithShieldSkillRanks(): string
-    {
-        return \htmlspecialchars($this->fight->getPreviousFightWithShieldSkillRanksJson());
     }
 
     private function getFightWithShieldsSkillRankInputName(): string

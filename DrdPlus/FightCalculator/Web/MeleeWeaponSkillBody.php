@@ -36,11 +36,6 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
         $this->htmlHelper = $htmlHelper;
     }
 
-    public function __toString()
-    {
-        return $this->getValue();
-    }
-
     public function getValue(): string
     {
         return <<<HTML
@@ -51,7 +46,7 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
             {$this->getPossibleMeleeFightSkills()}
         </select>
     </label>
-    <span class="skill-ranks" data-history-skill-ranks="{$this->getHistoryMeleeSkillRanks()}">
+    <span class="skill-ranks">
         <label>
           na stupni <input type="radio" value="0" name="{$this->getMeleeFightSkillRankInputName()}" {$this->getCheckedForMeleeFightSkillRank(0)}>0,
         </label>
@@ -68,11 +63,6 @@ class MeleeWeaponSkillBody extends AbstractArmamentBody
 </div>
 </div>
 HTML;
-    }
-
-    private function getHistoryMeleeSkillRanks(): string
-    {
-        return \htmlspecialchars($this->fight->getPreviousMeleeSkillRanksJson());
     }
 
     private function getPossibleMeleeFightSkills(): string

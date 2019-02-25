@@ -32,11 +32,6 @@ class RangedWeaponSkillBody extends AbstractArmamentBody
         $this->htmlHelper = $htmlHelper;
     }
 
-    public function __toString()
-    {
-        return $this->getValue();
-    }
-
     public function getValue(): string
     {
         return <<<HTML
@@ -46,7 +41,7 @@ class RangedWeaponSkillBody extends AbstractArmamentBody
             {$this->getPossibleRangedFightSkills()}
         </select>
     </label>
-    <span class="skill-ranks" data-history-skill-ranks="{$this->getHistoryRangedSkillRanks()}">
+    <span class="skill-ranks">
         <label>
           na stupni <input type="radio" value="0" name="{$this->getRangedFightSkillRankInputName()}" {$this->getCheckedForRangedFightSkillValue(0)}>0,
         </label>
@@ -62,11 +57,6 @@ class RangedWeaponSkillBody extends AbstractArmamentBody
     </span>
 </div>
 HTML;
-    }
-
-    private function getHistoryRangedSkillRanks(): string
-    {
-        return \htmlspecialchars($this->fight->getPreviousRangedSkillRanksJson());
     }
 
     private function getPossibleRangedFightSkills(): string

@@ -169,7 +169,6 @@ class FightWebPartsContainer extends AttackWebPartsContainer
         if ($this->shieldUsageSkillBody === null) {
             $this->shieldUsageSkillBody = new ShieldUsageSkillBody(
                 $this->currentArmamentsWithSkills,
-                $this->fight,
                 $this->htmlHelper
             );
         }
@@ -181,7 +180,6 @@ class FightWebPartsContainer extends AttackWebPartsContainer
         if ($this->fightWithShieldSkillBody === null) {
             $this->fightWithShieldSkillBody = new FightWithShieldSkillBody(
                 $this->currentArmamentsWithSkills,
-                $this->fight,
                 $this->htmlHelper
             );
         }
