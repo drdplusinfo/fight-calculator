@@ -207,14 +207,27 @@ class PreviousArmaments extends StrictObject
         return $helmValue;
     }
 
-    /**
-     * @return ShieldCode
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @throws \DrdPlus\Codes\Exceptions\ThereIsNoOppositeForTwoHandsHolding
-     */
+    public function getPreviousShieldForMelee(): ShieldCode
+    {
+        $previousShield = $this->getPreviousShield();
+        if ($previousShield->isUnarmed()) {
+            return $previousShield;
+        }
+        if ($this->getPreviousMeleeWeaponHolding()->holdsByTwoHands()
+            || !$this->canUseShield(
+                $previousShield,
+                $this->getPreviousMeleeShieldHolding($previousShield),
+                $this->armourer,
+                $this->previousProperties->getPreviousStrength(),
+                $this->previousProperties->getPreviousSize()
+            )
+        ) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+
+        return $previousShield;
+    }
+
     public function getPreviousShield(): ShieldCode
     {
         $previousShield = ShieldCode::getIt($this->getPreviousShieldValue());
@@ -222,6 +235,26 @@ class PreviousArmaments extends StrictObject
             || $this->getPreviousRangedWeaponHolding()->holdsByTwoHands()
             || !$this->couldUseShield($previousShield, $this->getPreviousMeleeShieldHolding($previousShield))
             || !$this->couldUseShield($previousShield, $this->getPreviousRangedShieldHolding($previousShield))
+        ) {
+            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        }
+        return $previousShield;
+    }
+
+    public function getPreviousShieldForRanged(): ShieldCode
+    {
+        $previousShield = $this->getPreviousShield();
+        if ($previousShield->isUnarmed()) {
+            return $previousShield;
+        }
+        if ($this->getPreviousRangedWeaponHolding()->holdsByTwoHands()
+            || !$this->canUseShield(
+                $previousShield,
+                $this->getPreviousRangedShieldHolding($previousShield),
+                $this->armourer,
+                $this->previousProperties->getPreviousStrength(),
+                $this->previousProperties->getPreviousSize()
+            )
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
@@ -291,7 +324,7 @@ class PreviousArmaments extends StrictObject
         return $this->getShieldHolding(
             $this->getPreviousMeleeWeaponHolding(),
             $this->getPreviousMeleeWeapon(),
-            $shieldCode ?? $this->getPreviousShield(),
+            $shieldCode ?? $this->getPreviousShieldForMelee(),
             $this->getArmourer()
         );
     }
@@ -310,7 +343,7 @@ class PreviousArmaments extends StrictObject
         return $this->getShieldHolding(
             $this->getPreviousRangedWeaponHolding(),
             $this->getPreviousRangedWeapon(),
-            $shieldCode ?? $this->getPreviousShield(),
+            $shieldCode ?? $this->getPreviousShieldForRanged(),
             $this->getArmourer()
         );
     }

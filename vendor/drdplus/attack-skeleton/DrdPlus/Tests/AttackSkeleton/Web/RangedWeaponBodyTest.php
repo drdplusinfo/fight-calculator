@@ -24,7 +24,7 @@ class RangedWeaponBodyTest extends AbstractAttackTest
             $this->getHtmlHelper(),
             new AddCustomRangedWeaponBody($this->getHtmlHelper())
         );
-        self::assertSame(<<<HTML
+        $expectedContent = <<<HTML
 <div class="">
     <div class="row messages">
       
@@ -81,20 +81,14 @@ class RangedWeaponBodyTest extends AbstractAttackTest
 </optgroup>
         </select>
     </label>
-</div>
-      <div class="col">
     <label>
         <input type="radio" value="main_hand" name="ranged_weapon_holding" checked>
         v dominantní ruce
     </label>
-</div>
-<div class="col">
     <label>
         <input type="radio" value="offhand" name="ranged_weapon_holding" >
         v druhé ruce
     </label>
-</div>
-<div class="col">
     <label>
         <input type="radio" value="two_hands"
                name="ranged_weapon_holding" >
@@ -103,8 +97,12 @@ class RangedWeaponBodyTest extends AbstractAttackTest
 </div>
     </div>
 </div>
-HTML
-            , \trim($rangedWeaponBody->getValue())
-        );
+HTML;
+        self::assertSame($this->unifyHtmlContent($expectedContent), $this->unifyHtmlContent($rangedWeaponBody->getValue()));
+    }
+
+    private function unifyHtmlContent(string $html)
+    {
+        return \preg_replace('~\n\s+(</?)~', "\n$1", \preg_replace('~ {2,}~', ' ', \trim($html)));
     }
 }

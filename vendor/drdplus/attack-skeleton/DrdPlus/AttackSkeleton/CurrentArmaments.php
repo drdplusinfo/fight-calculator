@@ -92,7 +92,13 @@ class CurrentArmaments extends StrictObject
             return $currentShield;
         }
         if ($this->getCurrentMeleeWeaponHolding()->holdsByTwoHands()
-            || !$this->canUseShield($currentShield, $this->getCurrentMeleeShieldHolding($currentShield), $this->armourer, $this->currentProperties)
+            || !$this->canUseShield(
+                $currentShield,
+                $this->getCurrentMeleeShieldHolding($currentShield),
+                $this->armourer,
+                $this->currentProperties->getCurrentStrength(),
+                $this->currentProperties->getCurrentSize()
+            )
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
@@ -114,7 +120,8 @@ class CurrentArmaments extends StrictObject
             $currentShield,
             ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
             $this->armourer,
-            $this->currentProperties
+            $this->currentProperties->getCurrentStrength(),
+            $this->currentProperties->getCurrentSize()
         )) {
             return $currentShield;
         }
@@ -190,7 +197,13 @@ class CurrentArmaments extends StrictObject
             return $currentShield;
         }
         if ($this->getCurrentRangedWeaponHolding()->holdsByTwoHands()
-            || !$this->canUseShield($currentShield, $this->getCurrentRangedShieldHolding($currentShield), $this->armourer, $this->currentProperties)
+            || !$this->canUseShield(
+                $currentShield,
+                $this->getCurrentRangedShieldHolding($currentShield),
+                $this->armourer,
+                $this->currentProperties->getCurrentStrength(),
+                $this->currentProperties->getCurrentSize()
+            )
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
@@ -215,7 +228,12 @@ class CurrentArmaments extends StrictObject
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
         $currentHelm = HelmCode::getIt($helmValue);
-        if (!$this->canUseArmament($currentHelm, $this->currentProperties->getCurrentStrength(), $this->armourer, $this->currentProperties)) {
+        if (!$this->canUseArmament(
+            $currentHelm,
+            $this->currentProperties->getCurrentStrength(),
+            $this->armourer,
+            $this->currentProperties->getCurrentSize()
+        )) {
             return HelmCode::getIt(HelmCode::WITHOUT_HELM);
         }
 
@@ -249,7 +267,12 @@ class CurrentArmaments extends StrictObject
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
         $currentBodyArmor = BodyArmorCode::getIt($bodyArmorValue);
-        if (!$this->canUseArmament($currentBodyArmor, $this->currentProperties->getCurrentStrength(), $this->armourer, $this->currentProperties)) {
+        if (!$this->canUseArmament(
+            $currentBodyArmor,
+            $this->currentProperties->getCurrentStrength(),
+            $this->armourer,
+            $this->currentProperties->getCurrentSize()
+        )) {
             return BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR);
         }
 

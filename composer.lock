@@ -48,11 +48,11 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.0.13",
+            "version": "2.0.15",
             "source": {
                 "type": "git",
                 "url": "/var/www/utok.skeleton",
-                "reference": "34ba51f56c1b72433b08eb0cc521253fd02bda5c"
+                "reference": "0b90399b95cc648d86d52e1367162a65e3d7d874"
             },
             "require": {
                 "composer-plugin-api": "^1.1",
@@ -94,7 +94,7 @@
                 "skeleton",
                 "weapons"
             ],
-            "time": "2019-02-25T17:10:13+00:00"
+            "time": "2019-02-26T17:32:56+00:00"
         },
         {
             "name": "drdplus/background",
@@ -221,7 +221,7 @@
             "version": "1.0.38",
             "source": {
                 "type": "git",
-                "url": "/var/www/kalkulator.skeleton",
+                "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
                 "reference": "9f44f41ffdd5ecbcfb94cf8c554715c9a4140a87"
             },
             "require": {

@@ -169,20 +169,14 @@ class MeleeWeaponBodyTest extends AbstractAttackTest
 </optgroup>
                 </select>
             </label>
-        </div>
-        <div class="col">
             <label>
                 <input type="radio" value="main_hand" name="melee_weapon_holding" checked>
                 v dominantní ruce
             </label>
-        </div>
-        <div class="col">
             <label>
                 <input type="radio" value="offhand" name="melee_weapon_holding" >
                 v druhé ruce
             </label>
-        </div>
-        <div class="col">
             <label>
                 <input type="radio" value="two_hands"
                        name="melee_weapon_holding" >

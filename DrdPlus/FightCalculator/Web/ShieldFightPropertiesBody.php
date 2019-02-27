@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace DrdPlus\FightCalculator\Web;
 
 use DrdPlus\AttackSkeleton\HtmlHelper;
+use DrdPlus\Codes\Armaments\ShieldCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightProperties\FightProperties;
-use Gt\Dom\Element;
-use Gt\Dom\HTMLDocument;
 
 class ShieldFightPropertiesBody extends FightPropertiesBody
 {
@@ -16,6 +15,10 @@ class ShieldFightPropertiesBody extends FightPropertiesBody
     private $currentShieldHolding;
     /** @var ItemHoldingCode */
     private $previousShieldHolding;
+    /** @var ShieldCode */
+    private $currentShield;
+    /** @var ShieldCode */
+    private $selectedShield;
 
     public function __construct(
         ItemHoldingCode $currentShieldHolding,
@@ -23,46 +26,49 @@ class ShieldFightPropertiesBody extends FightPropertiesBody
         FightProperties $currentFightProperties,
         FightProperties $previousFightProperties,
         Fight $fight,
-        HtmlHelper $htmlHelper
+        HtmlHelper $htmlHelper,
+        ShieldCode $currentShield,
+        ShieldCode $selectedShield
     )
     {
         parent::__construct($currentFightProperties, $previousFightProperties, $fight, $htmlHelper);
         $this->currentShieldHolding = $currentShieldHolding;
         $this->previousShieldHolding = $previousShieldHolding;
+        $this->currentShield = $currentShield;
+        $this->selectedShield = $selectedShield;
     }
 
     public function getValue(): string
     {
         $shieldFightProperties = parent::getValue();
-        $document = new HTMLDocument(<<<HTML
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-  <title></title>
-  <meta charset="utf-8">
-</head>
-<body>
-    <span id="hint" class="hint">se štítem <a href="https://pph.drdplus.info/#boj_se_zbrani">jako zbraň</a></span>
-    <div id="content">
-        {$shieldFightProperties}
-        <div class="col note">
-          držen
-          <span class="keyword {$this->getCssClassForChangeOfShieldHolding()}">
-              {$this->getCurrentShieldHoldingHumanName()}
-          </span>
-        </div>
-    </div>
-</body>
-</html>
-HTML
-        );
-        $hint = $document->getElementById('hint');
-        foreach ($document->getElementsByClassName('fight-property') as $fightProperty) {
-            $fightProperty->appendChild($hint);
+        return <<<HTML
+{$this->getUnusableShieldWarning()}
+<div class="row">
+{$shieldFightProperties}
+<div class="col note">
+  držen
+  <span class="keyword {$this->getCssClassForChangeOfShieldHolding()}">
+      {$this->getCurrentShieldHoldingHumanName()}
+  </span>
+</div>
+</div>
+HTML;
+    }
+
+    private function getUnusableShieldWarning(): string
+    {
+        if (!$this->selectedShield->isUnarmed() && $this->currentShield->isUnarmed() && $this->currentShieldHolding->holdsByOffhand()) {
+            return <<<HTML
+<div class="row">
+<div class="col">
+<div class="alert alert-secondary">
+Štít v téhle ruce neudržíš, přehoď si zbraň do druhé ruky
+</div>
+</div>
+</div>
+HTML;
         }
-        /** @var Element $content */
-        $content = $document->getElementById('content');
-        return $content->prop_get_innerHTML();
+        return '';
     }
 
     private function getCssClassForChangeOfShieldHolding(): string

@@ -42,8 +42,14 @@ class FightPropertiesBody extends StrictObject implements BodyInterface
     {
         $previousFightNumber = $this->previousFightProperties->getFightNumber();
         $currentFightNumber = $this->currentFightProperties->getFightNumber();
-        $previousAttackNumber = $this->previousFightProperties->getAttackNumber($this->fight->getPreviousTargetDistance(), $this->fight->getPreviousTargetSize());
-        $currentAttackNumber = $this->currentFightProperties->getAttackNumber($this->fight->getCurrentTargetDistance(), $this->fight->getCurrentTargetSize());
+        $previousAttackNumber = $this->previousFightProperties->getAttackNumber(
+            $this->fight->getPreviousTargetDistance(),
+            $this->fight->getPreviousTargetSize()
+        );
+        $currentAttackNumber = $this->currentFightProperties->getAttackNumber(
+            $this->fight->getCurrentTargetDistance(),
+            $this->fight->getCurrentTargetSize()
+        );
         $previousBaseOfWounds = $this->previousFightProperties->getBaseOfWounds();
         $currentBaseOfWounds = $this->currentFightProperties->getBaseOfWounds();
         $previousDefenseNumber = $this->previousFightProperties->getDefenseNumberWithWeaponlike();

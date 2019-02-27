@@ -8,6 +8,7 @@ use DrdPlus\AttackSkeleton\CurrentArmaments;
 use DrdPlus\AttackSkeleton\CurrentArmamentsValues;
 use DrdPlus\AttackSkeleton\CustomArmamentsRegistrar;
 use DrdPlus\CalculatorSkeleton\CurrentValues;
+use DrdPlus\Codes\Armaments\ShieldCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\Codes\Skills\SkillCode;
@@ -18,6 +19,10 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
 
     /** @var CurrentValues */
     private $currentValues;
+    /**
+     * @var CurrentArmamentsValues
+     */
+    private $currentArmamentsValues;
 
     public function __construct(
         CurrentProperties $currentProperties,
@@ -29,6 +34,7 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
     {
         parent::__construct($currentProperties, $currentArmamentsValues, $armourer, $customArmamentsRegistrar);
         $this->currentValues = $currentValues;
+        $this->currentArmamentsValues = $currentArmamentsValues;
     }
 
     public function getCurrentMeleeFightSkillCode(): SkillCode
@@ -100,5 +106,14 @@ class CurrentArmamentsWithSkills extends CurrentArmaments
     public function getCurrentZoologySkillRank(): int
     {
         return (int)$this->currentValues->getCurrentValue(FightRequest::ZOOLOGY_SKILL_RANK);
+    }
+
+    /**
+     * @return ShieldCode Currently worn, even if not usable shield
+     */
+    public function getSelectedShield(): ShieldCode
+    {
+        $currentShieldValue = $this->currentArmamentsValues->getShieldValue() ?: ShieldCode::WITHOUT_SHIELD;
+        return ShieldCode::findIt($currentShieldValue);
     }
 }

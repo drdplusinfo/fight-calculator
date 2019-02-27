@@ -170,7 +170,7 @@ class PossibleArmaments extends StrictObject
                     $armamentCode,
                     $this->currentProperties->getCurrentStrength(),
                     $this->armourer,
-                    $this->currentProperties
+                    $this->currentProperties->getCurrentSize()
                 ),
             ];
         }

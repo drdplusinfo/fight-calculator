@@ -100,17 +100,6 @@ class Fight extends StrictObject
         $this->history = $history;
     }
 
-    public function getCurrentMeleeShieldFightProperties(): FightProperties
-    {
-        return $this->getCurrentFightProperties(
-            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
-            $this->currentArmamentsWithSkills->getCurrentMeleeShieldHolding(),
-            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentShieldForMelee()
-        );
-    }
-
     public function getCurrentRangedWeaponFightProperties(): FightProperties
     {
         return $this->getCurrentFightProperties(
@@ -383,7 +372,7 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousRangedWeaponHolding(),
             $this->previousArmamentsWithSkills->getPreviousRangedFightSkillCode(),
             $this->previousArmamentsWithSkills->getPreviousRangedFightSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield()
+            $this->previousArmamentsWithSkills->getPreviousShieldForRanged()
         );
     }
 
@@ -423,23 +412,28 @@ class Fight extends StrictObject
 
     public function getPreviousMeleeShieldFightProperties(): FightProperties
     {
+        return $this->getPreviousShieldFightProperties(
+            $this->previousArmamentsWithSkills->getPreviousShieldForMelee(),
+            $this->previousArmamentsWithSkills->getPreviousMeleeShieldHolding()
+        );
+    }
+
+    private function getPreviousShieldFightProperties(ShieldCode $previousShield, ItemHoldingCode $previousShieldHolding): FightProperties
+    {
         return $this->getPreviousFightProperties(
-            $this->previousArmamentsWithSkills->getPreviousShield(),
-            $this->previousArmamentsWithSkills->getPreviousMeleeShieldHolding(),
+            $previousShield,
+            $previousShieldHolding,
             PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
             $this->previousArmamentsWithSkills->getPreviousFightWithShieldsSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield()
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
         );
     }
 
     public function getPreviousRangedShieldFightProperties(): FightProperties
     {
-        return $this->getPreviousFightProperties(
-            $this->previousArmamentsWithSkills->getPreviousShield(),
-            $this->previousArmamentsWithSkills->getPreviousRangedShieldHolding(),
-            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->previousArmamentsWithSkills->getPreviousFightWithShieldsSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield()
+        return $this->getPreviousShieldFightProperties(
+            $this->previousArmamentsWithSkills->getPreviousShieldForRanged(),
+            $this->previousArmamentsWithSkills->getPreviousRangedShieldHolding()
         );
     }
 
@@ -461,18 +455,34 @@ class Fight extends StrictObject
             $this->previousArmamentsWithSkills->getPreviousMeleeWeaponHolding(),
             $this->getPreviousMeleeSkillCode(),
             $this->getPreviousMeleeSkillRank(),
-            $this->previousArmamentsWithSkills->getPreviousShield()
+            $this->previousArmamentsWithSkills->getPreviousShieldForMelee()
+        );
+    }
+
+    public function getCurrentMeleeShieldFightProperties(): FightProperties
+    {
+        return $this->getCurrentShieldFightProperties(
+            $this->currentArmamentsWithSkills->getCurrentShieldForMelee(),
+            $this->currentArmamentsWithSkills->getCurrentMeleeShieldHolding()
+        );
+    }
+
+    private function getCurrentShieldFightProperties(ShieldCode $currentShield, ItemHoldingCode $currentShieldHolding): FightProperties
+    {
+        return $this->getCurrentFightProperties(
+            $currentShield,
+            $currentShieldHolding,
+            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
+            $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
+            ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD)
         );
     }
 
     public function getCurrentRangedShieldFightProperties(): FightProperties
     {
-        return $this->getCurrentFightProperties(
+        return $this->getCurrentShieldFightProperties(
             $this->currentArmamentsWithSkills->getCurrentShieldForRanged(),
-            $this->currentArmamentsWithSkills->getCurrentRangedShieldHolding(),
-            PhysicalSkillCode::getIt(PhysicalSkillCode::FIGHT_WITH_SHIELDS),
-            $this->currentArmamentsWithSkills->getCurrentFightWithShieldsSkillRank(),
-            $this->currentArmamentsWithSkills->getCurrentShieldForRanged()
+            $this->currentArmamentsWithSkills->getCurrentRangedShieldHolding()
         );
     }
 

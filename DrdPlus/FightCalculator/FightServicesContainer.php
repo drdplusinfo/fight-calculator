@@ -114,7 +114,6 @@ class FightServicesContainer extends AttackServicesContainer
                 $this->getCurrentProperties(),
                 $this->getCustomArmamentsState(),
                 $this->getCurrentArmamentsValues(),
-                $this->getCurrentArmaments(),
                 $this->getPossibleArmaments(),
                 $this->getArmamentsUsabilityMessages(),
                 $this->getArmourer(),
