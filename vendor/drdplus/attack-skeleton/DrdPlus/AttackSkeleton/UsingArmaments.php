@@ -74,14 +74,11 @@ trait UsingArmaments
         if ($armourer->isTwoHandedOnly($weaponlikeCode)) {
             return ItemHoldingCode::getIt(ItemHoldingCode::TWO_HANDS);
         }
-        if ($armourer->isOneHandedOnly($weaponlikeCode)) {
+        $weaponHoldingCode = ItemHoldingCode::findIt($weaponHolding);
+        if ($weaponHoldingCode->holdsByTwoHands() && $armourer->isOneHandedOnly($weaponlikeCode)) {
             return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
         }
-        if (!$weaponHolding) {
-            return ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND);
-        }
-
-        return ItemHoldingCode::getIt($weaponHolding);
+        return $weaponHoldingCode;
     }
 
     /**

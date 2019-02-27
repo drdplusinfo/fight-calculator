@@ -26,11 +26,6 @@ class FightWithShieldSkillBody extends AbstractArmamentBody
         $this->htmlHelper = $htmlHelper;
     }
 
-    public function __toString()
-    {
-        return $this->getValue();
-    }
-
     public function getValue(): string
     {
         return <<<HTML

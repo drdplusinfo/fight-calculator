@@ -224,21 +224,22 @@ class PreviousArmaments extends StrictObject
         ) {
             return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
         }
-
         return $previousShield;
     }
 
     public function getPreviousShield(): ShieldCode
     {
         $previousShield = ShieldCode::getIt($this->getPreviousShieldValue());
-        if ($this->getPreviousMeleeWeaponHolding()->holdsByTwoHands()
-            || $this->getPreviousRangedWeaponHolding()->holdsByTwoHands()
-            || !$this->couldUseShield($previousShield, $this->getPreviousMeleeShieldHolding($previousShield))
-            || !$this->couldUseShield($previousShield, $this->getPreviousRangedShieldHolding($previousShield))
-        ) {
-            return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
+        if ($this->canUseShield(
+            $previousShield,
+            ItemHoldingCode::getIt(ItemHoldingCode::MAIN_HAND),
+            $this->armourer,
+            $this->previousProperties->getPreviousStrength(),
+            $this->previousProperties->getPreviousSize()
+        )) {
+            return $previousShield;
         }
-        return $previousShield;
+        return ShieldCode::getIt(ShieldCode::WITHOUT_SHIELD);
     }
 
     public function getPreviousShieldForRanged(): ShieldCode

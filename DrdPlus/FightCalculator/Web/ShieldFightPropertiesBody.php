@@ -46,10 +46,7 @@ class ShieldFightPropertiesBody extends FightPropertiesBody
 <div class="row">
 {$shieldFightProperties}
 <div class="col note">
-  držen
-  <span class="keyword {$this->getCssClassForChangeOfShieldHolding()}">
-      {$this->getCurrentShieldHoldingHumanName()}
-  </span>
+  <span class="keyword {$this->getCssClassForChangeOfShieldHolding()}">{$this->getCurrentShieldHoldingHumanName()}</span>
 </div>
 </div>
 HTML;
