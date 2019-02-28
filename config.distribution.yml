@@ -8,3 +8,4 @@ web:
   cookies_postfix: 'boj'
 google:
   analytics_id: 'UA-121206931-18'
+
