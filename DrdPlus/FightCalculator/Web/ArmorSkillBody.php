@@ -40,7 +40,7 @@ class ArmorSkillBody extends StrictObject implements BodyInterface
     <div class="col">
       <label>
         <span class="keyword">
-          <a target="_blank" href="https://pph.drdplus.info/#noseni_zbroje">{$this->getArmorWearingSkillHumanName()}</a>
+          <a target="_blank" href="https://pph.drdplus.info/?trial=1#noseni_zbroje">{$this->getArmorWearingSkillHumanName()}</a>
         </span>
       </label>
       <label>

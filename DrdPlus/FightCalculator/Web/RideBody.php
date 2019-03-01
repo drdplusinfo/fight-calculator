@@ -37,7 +37,7 @@ class RideBody extends AbstractArmamentBody
 </div>
 <div class="col">
 Dovednost <span class="keyword">
-    <a href="https://pph.drdplus.info/#jezdectvi" target="_blank">{$this->getRidingHumanName()}</a>
+    <a href="https://pph.drdplus.info/?trial=1#jezdectvi" target="_blank">{$this->getRidingHumanName()}</a>
 </span>
 <label>
 na stupni <input type="radio" value="0" name="{$this->getRidingSkillRankInputName()}" {$this->getCheckedRidingSkillRank(0)}>

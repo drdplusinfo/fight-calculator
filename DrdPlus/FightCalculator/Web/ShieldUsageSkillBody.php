@@ -7,7 +7,6 @@ use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\AttackSkeleton\Web\AbstractArmamentBody;
 use DrdPlus\Codes\Skills\PhysicalSkillCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
-use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 
 class ShieldUsageSkillBody extends AbstractArmamentBody
@@ -30,7 +29,7 @@ class ShieldUsageSkillBody extends AbstractArmamentBody
     public function getValue(): string
     {
         return <<<HTML
-<a class="keyword" href="https://pph.drdplus.info/#pouzivani_stitu" target="_blank">{$this->getShieldUsageHumanName()}</a>
+<a class="keyword" href="https://pph.drdplus.info/?trial=1#pouzivani_stitu" target="_blank">{$this->getShieldUsageHumanName()}</a>
 <span class="skill-ranks">
     <label>
       na stupni <input type="radio" value="0" name="{$this->getShieldUsageSkillRankInputName()}" {$this->getShieldUsageSkillValueChecked(0)}>0,

@@ -29,7 +29,7 @@ class FightWithShieldSkillBody extends AbstractArmamentBody
     public function getValue(): string
     {
         return <<<HTML
-<a class="keyword" target="_blank" href="https://pph.drdplus.info/#boj_se_zbrani">{$this->getFightWithShieldHumanName()}</a>
+<a class="keyword" target="_blank" href="https://pph.drdplus.info/?trial=1#boj_se_zbrani">{$this->getFightWithShieldHumanName()}</a>
 <span class="skill-ranks">
     <label>
       na stupni <input type="radio" value="0" name="{$this->getFightWithShieldsSkillRankInputName()}" {$this->getFightWithShieldSkillValueChecked(0)}>0,

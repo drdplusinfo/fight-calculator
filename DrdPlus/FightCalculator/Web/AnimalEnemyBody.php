@@ -42,7 +42,7 @@ class AnimalEnemyBody extends StrictObject implements BodyInterface
     </label>
 </div>
 <div class="col">
-    Dovednost <a class="keyword" href="https://pph.drdplus.info/#zoologie" target="_blank">{$this->getZoologyHumanName()}</a>
+    Dovednost <a class="keyword" href="https://pph.drdplus.info/?trial=1#zoologie" target="_blank">{$this->getZoologyHumanName()}</a>
     <label>
       na stupni <input type="radio" value="0" name="{$this->getZoologySkillRankInputName()}" {$this->getZoologySkillRankChecked(0)}> 0,
     </label>
