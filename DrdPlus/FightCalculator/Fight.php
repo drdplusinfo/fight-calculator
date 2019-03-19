@@ -592,8 +592,7 @@ class Fight extends StrictObject
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
         $distanceValue = \min($distanceValue, $this->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables));
-
-        return new Distance($distanceValue, DistanceUnitCode::METER, Tables::getIt()->getDistanceTable());
+        return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 
     public function getCurrentRangedWeaponMaximalRange(): MaximalRange
@@ -621,14 +620,13 @@ class Fight extends StrictObject
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
-        $distanceValue = \min($distanceValue, $this->getPreviousRangedWeaponMaximalRange());
-
+        $distanceValue = \min($distanceValue, $this->getPreviousRangedWeaponMaximalRange()->getInMeters($this->tables));
         return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 
-    private function getPreviousRangedWeaponMaximalRange(): float
+    private function getPreviousRangedWeaponMaximalRange(): MaximalRange
     {
-        return $this->getPreviousRangedWeaponFightProperties()->getMaximalRange()->getInMeters($this->tables);
+        return $this->getPreviousRangedWeaponFightProperties()->getMaximalRange();
     }
 
     public function getPreviousTargetSize(): Size
