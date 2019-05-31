@@ -124,7 +124,7 @@ class AllCodesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \Granam\ScalarEnum\Exceptions\UnexpectedValueToEnum
+     * @expectedException \Granam\ScalarEnum\Exceptions\WrongValueForScalarEnum
      * @expectedExceptionMessageRegExp ~\DateTime~
      * @dataProvider provideCodeClasses
      * @param string $codeClass
@@ -191,6 +191,21 @@ PHPDOC
                     "Missing findIt method annotation in $codeClass"
                 );
             }
+        }
+    }
+
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function Every_code_is_tested()
+    {
+        foreach ($this->getCodeClasses() as $codeClass) {
+            $expectedTestClass = str_replace('DrdPlus\\Codes', 'DrdPlus\\Tests\\Codes', $codeClass) . 'Test';
+            self::assertTrue(
+                class_exists($expectedTestClass),
+                "Expected test $expectedTestClass has not been found"
+            );
         }
     }
 }

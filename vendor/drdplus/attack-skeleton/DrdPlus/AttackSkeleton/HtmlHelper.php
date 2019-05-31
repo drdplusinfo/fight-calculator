@@ -7,7 +7,7 @@ use Granam\Integer\IntegerInterface;
 use Granam\Integer\Tools\ToInteger;
 
 /**
- * @method static HtmlHelper createFromGlobals(\DrdPlus\RulesSkeleton\Dirs $dirs)
+ * @method static HtmlHelper createFromGlobals(\DrdPlus\RulesSkeleton\Dirs $dirs, \DrdPlus\RulesSkeleton\Environment $environment)
  */
 class HtmlHelper extends \DrdPlus\RulesSkeleton\HtmlHelper
 {
@@ -67,18 +67,18 @@ class HtmlHelper extends \DrdPlus\RulesSkeleton\HtmlHelper
         }
         $queryParts = [];
         foreach ($parameters as $name => $value) {
-            if (\is_array($value)) {
+            if (is_array($value)) {
                 /** @var array $value */
                 foreach ($value as $index => $item) {
-                    $queryParts[] = \urlencode("{$name}[{$index}]") . '=' . \urlencode((string)$item);
+                    $queryParts[] = urlencode("{$name}[{$index}]") . '=' . urlencode((string)$item);
                 }
             } else {
-                $queryParts[] = \urlencode((string)$name) . '=' . \urlencode((string)$value);
+                $queryParts[] = urlencode((string)$name) . '=' . urlencode((string)$value);
             }
         }
         $query = '';
         if ($queryParts) {
-            $query = '?' . \implode('&', $queryParts);
+            $query = '?' . implode('&', $queryParts);
         }
 
         return $query;

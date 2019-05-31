@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Tests\Calculators\Fight;
 
-use DrdPlus\FightCalculator\FightController;
+use DrdPlus\AttackSkeleton\AttackRequest;
 use Gt\Dom\HTMLDocument;
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +36,7 @@ class ItWorksTest extends TestCase
      */
     public function I_can_show_form_to_add_new_ranged_weapon(): void
     {
-        $this->I_can_show_it_with_a_request(['action' => FightController::ADD_NEW_RANGED_WEAPON]);
+        $this->I_can_show_it_with_a_request(['action' => AttackRequest::ADD_NEW_RANGED_WEAPON]);
     }
 
     /**
@@ -61,7 +61,7 @@ class ItWorksTest extends TestCase
      */
     public function I_can_show_form_to_add_new_melee_weapon(): void
     {
-        $this->I_can_show_it_with_a_request(['action' => FightController::ADD_NEW_MELEE_WEAPON]);
+        $this->I_can_show_it_with_a_request(['action' => AttackRequest::ADD_NEW_MELEE_WEAPON]);
     }
 
     /**
@@ -72,7 +72,7 @@ class ItWorksTest extends TestCase
      */
     public function I_can_show_form_to_add_new_body_armor(): void
     {
-        $this->I_can_show_it_with_a_request(['action' => FightController::ADD_NEW_BODY_ARMOR]);
+        $this->I_can_show_it_with_a_request(['action' => AttackRequest::ADD_NEW_BODY_ARMOR]);
     }
 
     /**
@@ -83,6 +83,6 @@ class ItWorksTest extends TestCase
      */
     public function I_can_show_form_to_add_new_helm(): void
     {
-        $this->I_can_show_it_with_a_request(['action' => FightController::ADD_NEW_HELM]);
+        $this->I_can_show_it_with_a_request(['action' => AttackRequest::ADD_NEW_HELM]);
     }
 }

@@ -8,7 +8,7 @@ use DrdPlus\RulesSkeleton\Dirs;
 use DrdPlus\Tests\CalculatorSkeleton\Partials\CalculatorContentTestTrait;
 
 /**
- * @method HtmlHelper getHtmlHelper
+ * @method HtmlHelper getHtmlHelper()
  */
 trait AttackCalculatorTestTrait
 {
@@ -28,7 +28,13 @@ trait AttackCalculatorTestTrait
         bool $shouldHideCovered = false
     ): \DrdPlus\RulesSkeleton\HtmlHelper
     {
-        return new HtmlHelper($dirs ?? $this->getDirs(), $inDevMode, $inForcedProductionMode, $shouldHideCovered);
+        return new HtmlHelper(
+            $dirs ?? $this->getDirs(),
+            $this->getEnvironment(),
+            $inDevMode,
+            $inForcedProductionMode,
+            $shouldHideCovered
+        );
     }
 
     protected function isAttackSkeletonChecked(): bool

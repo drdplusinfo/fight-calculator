@@ -3,18 +3,19 @@ declare(strict_types=1);
 
 namespace DrdPlus\Tests\Tables\Theurgist\Spells;
 
-use DrdPlus\Tables\Measurements\Distance\DistanceTable;
 use DrdPlus\Codes\Theurgist\AffectionPeriodCode;
 use DrdPlus\Codes\Theurgist\FormulaCode;
 use DrdPlus\Codes\Theurgist\FormulaMutableSpellParameterCode;
 use DrdPlus\Codes\Theurgist\ModifierCode;
+use DrdPlus\Tables\Measurements\Time\Time;
+use DrdPlus\Tables\Tables;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\AdditionByDifficulty;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\CastingRounds;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\DifficultyChange;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\Evocation;
-use DrdPlus\Tables\Theurgist\Spells\SpellParameters\FormulaDifficulty;
+use DrdPlus\Tables\Theurgist\Spells\SpellParameters\Difficulty;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\Partials\CastingParameter;
-use DrdPlus\Tables\Theurgist\Spells\SpellParameters\Radius;
+use DrdPlus\Tables\Theurgist\Spells\SpellParameters\SpellRadius;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\Realm;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\RealmsAffection;
 use DrdPlus\Tables\Theurgist\Spells\SpellParameters\SpellSpeed;
@@ -47,7 +48,7 @@ class FormulaTest extends TestWithMockery
         foreach (FormulaCode::getPossibleValues() as $formulaValue) {
             $formulaCode = FormulaCode::getIt($formulaValue);
             $formulasTable = $this->createFormulasTable();
-            $formula = new Formula($formulaCode, $formulasTable, $this->createDistanceTable());
+            $formula = new Formula($formulaCode, $this->createTables($formulasTable));
             self::assertSame($formulaCode, $formula->getFormulaCode());
             self::assertSame([], $formula->getModifiers());
             foreach (FormulaMutableSpellParameterCode::getPossibleValues() as $mutableParameterName) {
@@ -57,8 +58,8 @@ class FormulaTest extends TestWithMockery
 
                 $this->addWithAdditionGetter(0, $baseParameter, $baseParameter);
                 $this->addValueGetter($baseParameter, 123);
-                /** like @see Formula::getCurrentRadius() */
-                $getCurrentParameter = StringTools::assembleGetterForName('current' . $mutableParameterName);
+                /** like @see Formula::getCurrentSpellRadius() */
+                $getCurrentParameter = StringTools::assembleGetterForName('current' . ucfirst($mutableParameterName));
                 /** @var CastingParameter $currentParameter */
                 $currentParameter = $formula->$getCurrentParameter();
                 self::assertInstanceOf($this->getParameterClass($mutableParameterName), $currentParameter);
@@ -69,6 +70,19 @@ class FormulaTest extends TestWithMockery
         }
     }
 
+    /**
+     * @param FormulasTable $formulasTable
+     * @return Tables|MockInterface
+     */
+    private function createTables(FormulasTable $formulasTable): Tables
+    {
+        $tables = $this->mockery(Tables::class);
+        $tables->shouldReceive('getFormulasTable')
+            ->andReturn($formulasTable);
+        $tables->makePartial();
+        return $tables;
+    }
+
     private function addValueGetter(MockInterface $object, $value): void
     {
         $object->shouldReceive('getValue')
@@ -76,7 +90,7 @@ class FormulaTest extends TestWithMockery
     }
 
     /**
-     * @return \Mockery\MockInterface|FormulasTable
+     * @return MockInterface|FormulasTable
      */
     private function createFormulasTable()
     {
@@ -85,7 +99,7 @@ class FormulaTest extends TestWithMockery
 
     /**
      * @param string $parameterName
-     * @return CastingParameter|\Mockery\MockInterface
+     * @return CastingParameter|MockInterface
      */
     private function createExpectedParameter(string $parameterName): CastingParameter
     {
@@ -99,7 +113,7 @@ class FormulaTest extends TestWithMockery
         $parameterClassBasename = ucfirst(StringTools::assembleMethodName($parameterName));
 
         $baseParameterClass = $this->parameterNamespace . '\\' . $parameterClassBasename;
-        self::assertTrue(class_exists($baseParameterClass));
+        self::assertTrue(class_exists($baseParameterClass), 'Can not find class ' . $baseParameterClass);
 
         return $baseParameterClass;
     }
@@ -142,16 +156,16 @@ class FormulaTest extends TestWithMockery
         foreach (FormulaCode::getPossibleValues() as $formulaValue) {
             $formulaCode = FormulaCode::getIt($formulaValue);
             $formulasTable = $this->createFormulasTable();
-            $formula = new Formula($formulaCode, $formulasTable, $this->createDistanceTable());
+            $formula = new Formula($formulaCode, $this->createTables($formulasTable));
             self::assertSame([], $formula->getModifiers());
             self::assertSame($formulaCode, $formula->getFormulaCode());
             foreach (FormulaMutableSpellParameterCode::getPossibleValues() as $mutableParameterName) {
-                if ($mutableParameterName === FormulaMutableSpellParameterCode::DURATION) {
+                if ($mutableParameterName === FormulaMutableSpellParameterCode::SPELL_DURATION) {
                     continue; // can not be null, skipping
                 }
                 $this->addBaseParameterGetter($mutableParameterName, $formulaCode, $formulasTable, null);
 
-                /** like @see Formula::getCurrentRadius() */
+                /** like @see Formula::getCurrentSpellRadius() */
                 $getCurrentParameter = StringTools::assembleGetterForName('current' . $mutableParameterName);
                 self::assertNull($formula->$getCurrentParameter());
             }
@@ -165,13 +179,13 @@ class FormulaTest extends TestWithMockery
     public function I_can_create_it_with_addition_for_every_formula(): void
     {
         $parameterValues = [
-            FormulaMutableSpellParameterCode::RADIUS => 1,
-            FormulaMutableSpellParameterCode::DURATION => 2,
-            FormulaMutableSpellParameterCode::POWER => 3,
-            FormulaMutableSpellParameterCode::ATTACK => 4,
+            FormulaMutableSpellParameterCode::SPELL_RADIUS => 1,
+            FormulaMutableSpellParameterCode::SPELL_DURATION => 2,
+            FormulaMutableSpellParameterCode::SPELL_POWER => 3,
+            FormulaMutableSpellParameterCode::SPELL_ATTACK => 4,
             FormulaMutableSpellParameterCode::SIZE_CHANGE => 5,
             FormulaMutableSpellParameterCode::DETAIL_LEVEL => 6,
-            FormulaMutableSpellParameterCode::BRIGHTNESS => 7,
+            FormulaMutableSpellParameterCode::SPELL_BRIGHTNESS => 7,
             FormulaMutableSpellParameterCode::SPELL_SPEED => 8,
             FormulaMutableSpellParameterCode::EPICENTER_SHIFT => 9,
         ];
@@ -188,7 +202,7 @@ class FormulaTest extends TestWithMockery
                 $baseParameters[$mutableParameterName] = $baseParameter;
                 $parameterChanges[$mutableParameterName] = $parameterValues[$mutableParameterName] - $defaultValue;
             }
-            $formula = new Formula($formulaCode, $formulasTable, $this->createDistanceTable(), $parameterValues);
+            $formula = new Formula($formulaCode, $this->createTables($formulasTable), $parameterValues);
             self::assertSame($formulaCode, $formula->getFormulaCode());
             foreach (FormulaMutableSpellParameterCode::getPossibleValues() as $mutableParameterName) {
                 $baseParameter = $baseParameters[$mutableParameterName];
@@ -199,7 +213,7 @@ class FormulaTest extends TestWithMockery
                     $changedParameter = $this->createExpectedParameter($mutableParameterName)
                 );
                 $this->addValueGetter($changedParameter, 123);
-                /** like @see Formula::getCurrentRadius() */
+                /** like @see Formula::getCurrentSpellRadius() */
                 $getCurrentParameter = StringTools::assembleGetterForName('current' . $mutableParameterName);
                 /** @var CastingParameter $currentParameter */
                 $currentParameter = $formula->$getCurrentParameter();
@@ -210,16 +224,7 @@ class FormulaTest extends TestWithMockery
     }
 
     /**
-     * @return MockInterface|DistanceTable
-     */
-    private function createDistanceTable(): DistanceTable
-    {
-        return $this->mockery(DistanceTable::class);
-    }
-
-    /**
      * @test
-     * @throws \Granam\Integer\Tools\Exceptions\Exception
      */
     public function I_get_basic_difficulty_change_without_any_parameter(): void
     {
@@ -228,18 +233,18 @@ class FormulaTest extends TestWithMockery
             $formulasTable = $this->createFormulasTable();
             foreach (FormulaMutableSpellParameterCode::getPossibleValues() as $mutableParameterName) {
                 $baseParameter = null;
-                if ($mutableParameterName === FormulaMutableSpellParameterCode::DURATION) {
+                if ($mutableParameterName === FormulaMutableSpellParameterCode::SPELL_DURATION) {
                     // duration can not be null
-                    $baseParameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::DURATION);
+                    $baseParameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::SPELL_DURATION);
                     $this->addWithAdditionGetter(0, $baseParameter, $baseParameter);
                     $this->addAdditionByDifficultyGetter(0, $baseParameter);
                 }
                 $this->addBaseParameterGetter($mutableParameterName, $formulaCode, $formulasTable, $baseParameter);
             }
             $this->addFormulaDifficultyGetter($formulasTable, $formulaCode, 0);
-            $formula = new Formula($formulaCode, $formulasTable, $this->createDistanceTable());
+            $formula = new Formula($formulaCode, $this->createTables($formulasTable));
             self::assertSame(
-                $formulasTable->getFormulaDifficulty($formulaCode)->createWithChange(0),
+                $formulasTable->getDifficulty($formulaCode)->createWithChange(0),
                 $formula->getCurrentDifficulty()
             );
         }
@@ -249,20 +254,19 @@ class FormulaTest extends TestWithMockery
         MockInterface $formulaTable,
         FormulaCode $expectedFormulaCode,
         int $expectedDifficultyChange,
-        FormulaDifficulty $formulaChangedDifficulty = null
+        Difficulty $formulaChangedDifficulty = null
     ): void
     {
-        $formulaTable->shouldReceive('getFormulaDifficulty')
+        $formulaTable->shouldReceive('getDifficulty')
             ->with($expectedFormulaCode)
-            ->andReturn($formulaDifficulty = $this->mockery(FormulaDifficulty::class));
+            ->andReturn($formulaDifficulty = $this->mockery(Difficulty::class));
         $formulaDifficulty->shouldReceive('createWithChange')
             ->with($expectedDifficultyChange)
-            ->andReturn($formulaChangedDifficulty ?? $this->mockery(FormulaDifficulty::class));
+            ->andReturn($formulaChangedDifficulty ?? $this->mockery(Difficulty::class));
     }
 
     /**
      * @test
-     * @throws \Granam\Integer\Tools\Exceptions\Exception
      */
     public function I_get_difficulty_change_with_every_parameter(): void
     {
@@ -275,23 +279,23 @@ class FormulaTest extends TestWithMockery
                 $this->addBaseParameterGetter($mutableParameterName, $formulaCode, $formulasTable, $parameter);
                 $changedParameter = $this->createExpectedParameter($mutableParameterName);
                 $this->addWithAdditionGetter(0, $parameter, $changedParameter);
+                /** @noinspection PhpUnhandledExceptionInspection */
                 $parameterDifficulties[] = $difficultyChange = random_int(-10, 10);
                 $this->addAdditionByDifficultyGetter($difficultyChange, $changedParameter);
             }
             $this->addFormulaDifficultyGetter($formulasTable, $formulaCode, 123 + 456 + 789 + 789 + 159 + array_sum($parameterDifficulties));
             $formula = new Formula(
                 $formulaCode,
-                $formulasTable,
-                $this->createDistanceTable(),
+                $this->createTables($formulasTable),
                 [],
                 [$modifier1 = $this->createModifierWithDifficulty(123), [$modifier2 = $this->createModifierWithDifficulty(456)]],
                 [$this->getSpellTrait(789), [$this->getSpellTrait(789), [$this->getSpellTrait(159)]]]
             );
             self::assertSame([$modifier1, $modifier2], $formula->getModifiers());
             try {
-                self::assertNotEquals($formulasTable->getFormulaDifficulty($formulaCode), $formula->getCurrentDifficulty());
+                self::assertNotEquals($formulasTable->getDifficulty($formulaCode), $formula->getCurrentDifficulty());
                 self::assertEquals(
-                    $formulasTable->getFormulaDifficulty($formulaCode)->createWithChange(
+                    $formulasTable->getDifficulty($formulaCode)->createWithChange(
                         123 + 456 + 789 + 789 + 159 + array_sum($parameterDifficulties)
                     ),
                     $formula->getCurrentDifficulty()
@@ -351,8 +355,7 @@ class FormulaTest extends TestWithMockery
         $formulasTable = $this->createFormulasTable();
         $formula = new Formula(
             FormulaCode::getIt(FormulaCode::PORTAL),
-            $formulasTable,
-            $this->createDistanceTable(),
+            $this->createTables($formulasTable),
             [],
             [$this->createModifier(1), [$this->createModifier(2), [$this->createModifier(3), $this->createModifier(4)]]]
         );
@@ -361,6 +364,14 @@ class FormulaTest extends TestWithMockery
         $finalCastingRounds = $formula->getCurrentCastingRounds();
         self::assertInstanceOf(CastingRounds::class, $finalCastingRounds);
         self::assertSame(123 + 1 + 2 + 3 + 4, $finalCastingRounds->getValue());
+        self::assertEquals(
+            new Time(123 + 1 + 2 + 3 + 4, Time::ROUND, Tables::getIt()->getTimeTable()),
+            $finalCastingRounds->getTime()
+        );
+        self::assertEquals(
+            (new Time(123 + 1 + 2 + 3 + 4, Time::ROUND, Tables::getIt()->getTimeTable()))->getBonus(),
+            $finalCastingRounds->getTimeBonus()
+        );
     }
 
     /**
@@ -395,7 +406,7 @@ class FormulaTest extends TestWithMockery
     public function I_can_get_current_evocation()
     {
         $formulasTable = $this->createFormulasTable();
-        $formula = new Formula($formulaCode = FormulaCode::getIt(FormulaCode::DISCHARGE), $formulasTable, $this->createDistanceTable());
+        $formula = new Formula($formulaCode = FormulaCode::getIt(FormulaCode::DISCHARGE), $this->createTables($formulasTable));
         $formulasTable->shouldReceive('getEvocation')
             ->with($formulaCode)
             ->andReturn($evocation = $this->mockery(Evocation::class));
@@ -410,7 +421,7 @@ class FormulaTest extends TestWithMockery
     private function createRealmsAffection(string $periodName, int $formulaAffectionValue)
     {
         $realmsAffection = $this->mockery(RealmsAffection::class);
-        $realmsAffection->shouldReceive('getAffectionPeriod')
+        $realmsAffection->shouldReceive('getAffectionPeriodCode')
             ->andReturn($affectionPeriod = $this->mockery(AffectionPeriodCode::class));
         $affectionPeriod->shouldReceive('getValue')
             ->andReturn($periodName);
@@ -428,8 +439,7 @@ class FormulaTest extends TestWithMockery
         $formulasTable = $this->createFormulasTable();
         $formula = new Formula(
             $formulaCode = FormulaCode::getIt(FormulaCode::ILLUSION),
-            $formulasTable,
-            $this->createDistanceTable(),
+            $this->createTables($formulasTable),
             [],
             [$this->createModifierWithRealmsAffection(-5, AffectionPeriodCode::DAILY),
                 [
@@ -464,7 +474,7 @@ class FormulaTest extends TestWithMockery
         $modifier = $this->mockery(Modifier::class);
         $modifier->shouldReceive('getRealmsAffection')
             ->andReturn($realmsAffection = $this->mockery(RealmsAffection::class));
-        $realmsAffection->shouldReceive('getAffectionPeriod')
+        $realmsAffection->shouldReceive('getAffectionPeriodCode')
             ->andReturn($affectionPeriod = $this->mockery(AffectionPeriodCode::class));
         $affectionPeriod->shouldReceive('getValue')
             ->andReturn($affectionPeriodValue);
@@ -488,7 +498,6 @@ class FormulaTest extends TestWithMockery
 
     /**
      * @test
-     * @throws \Granam\Integer\Tools\Exceptions\Exception
      */
     public function I_get_final_realm(): void
     {
@@ -496,15 +505,15 @@ class FormulaTest extends TestWithMockery
         $formulasTable = $this->createFormulasTable();
         foreach (FormulaMutableSpellParameterCode::getPossibleValues() as $mutableParameterName) {
             $baseParameter = null;
-            if ($mutableParameterName === FormulaMutableSpellParameterCode::DURATION) {
+            if ($mutableParameterName === FormulaMutableSpellParameterCode::SPELL_DURATION) {
                 // duration can not be null
-                $baseParameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::DURATION);
+                $baseParameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::SPELL_DURATION);
                 $this->addWithAdditionGetter(0, $baseParameter, $baseParameter);
                 $this->addAdditionByDifficultyGetter(0, $baseParameter);
             }
             $this->addBaseParameterGetter($mutableParameterName, $formulaCode, $formulasTable, $baseParameter);
         }
-        $changedDifficulty = $this->createFormulaDifficulty();
+        $changedDifficulty = $this->createDifficulty();
         $this->addFormulaDifficultyGetter(
             $formulasTable,
             $formulaCode,
@@ -513,11 +522,11 @@ class FormulaTest extends TestWithMockery
         );
         $this->addCurrentRealmsIncrementGetter($changedDifficulty, 123);
         $this->addRealmGetter($formulasTable, $formulaCode, 123, $formulaRealm = $this->mockery(Realm::class));
-        $formulaWithoutModifiers = new Formula($formulaCode, $formulasTable, $this->createDistanceTable());
+        $formulaWithoutModifiers = new Formula($formulaCode, $this->createTables($formulasTable));
         self::assertSame($formulaRealm, $formulaWithoutModifiers->getRequiredRealm());
 
         $lowModifiers = [$this->createModifierWithRequiredRealm(0), $this->createModifierWithRequiredRealm(122)];
-        $formulaWithLowModifiers = new Formula($formulaCode, $formulasTable, $this->createDistanceTable(), [], $lowModifiers, []);
+        $formulaWithLowModifiers = new Formula($formulaCode, $this->createTables($formulasTable), [], $lowModifiers, []);
         $formulaRealm->shouldReceive('getValue')
             ->andReturn(123);
         self::assertSame($formulaRealm, $formulaWithLowModifiers->getRequiredRealm());
@@ -526,7 +535,7 @@ class FormulaTest extends TestWithMockery
             [$this->createModifierWithRequiredRealm(123)],
             $this->createModifierWithRequiredRealm(124, $highestRealm = $this->mockery(Realm::class)),
         ];
-        $formulaWithHighModifiers = new Formula($formulaCode, $formulasTable, $this->createDistanceTable(), [], $highModifiers, []);
+        $formulaWithHighModifiers = new Formula($formulaCode, $this->createTables($formulasTable), [], $highModifiers, []);
         /**
          * @var Realm $formulaRealm
          * @var Realm $highestRealm
@@ -536,11 +545,11 @@ class FormulaTest extends TestWithMockery
     }
 
     /**
-     * @return FormulaDifficulty|MockInterface
+     * @return Difficulty|MockInterface
      */
-    private function createFormulaDifficulty(): FormulaDifficulty
+    private function createDifficulty(): Difficulty
     {
-        return $this->mockery(FormulaDifficulty::class);
+        return $this->mockery(Difficulty::class);
     }
 
     private function addCurrentRealmsIncrementGetter(MockInterface $formulaDifficulty, int $currentRealmsIncrement): void
@@ -587,15 +596,13 @@ class FormulaTest extends TestWithMockery
 
     /**
      * @test
-     * @throws \Granam\Integer\Tools\Exceptions\Exception
      */
     public function I_can_get_current_radius(): void
     {
         $formulasTable = $this->createFormulasTable();
         $formula = new Formula(
             FormulaCode::getIt(FormulaCode::PORTAL),
-            $formulasTable,
-            $distanceTable = $this->createDistanceTable(),
+            $this->createTables($formulasTable),
             [],
             [
                 $this->createModifierWithRadius(1, ModifierCode::getIt(ModifierCode::FILTER)),
@@ -608,11 +615,11 @@ class FormulaTest extends TestWithMockery
                 ],
             ]
         );
-        $formulasTable->shouldReceive('getRadius')
+        $formulasTable->shouldReceive('getSpellRadius')
             ->andReturn($radius = $this->createRadius(123 /* whatever */));
         $this->addWithAdditionGetter(0, $radius, $radiusWithAddition = $this->createRadius(456));
-        $currentRadius = $formula->getCurrentRadius();
-        self::assertInstanceOf(Radius::class, $currentRadius);
+        $currentRadius = $formula->getCurrentSpellRadius();
+        self::assertInstanceOf(SpellRadius::class, $currentRadius);
         self::assertSame(456 + 1 + 2 + 3 + 4, $currentRadius->getValue());
     }
 
@@ -624,7 +631,7 @@ class FormulaTest extends TestWithMockery
     private function createModifierWithRadius(int $radiusValue, ModifierCode $modifierCode)
     {
         $modifier = $this->mockery(Modifier::class);
-        $modifier->shouldReceive('getRadiusWithAddition')
+        $modifier->shouldReceive('getSpellRadiusWithAddition')
             ->andReturn($this->createRadius($radiusValue));
         $modifier->shouldReceive('getModifierCode')
             ->andReturn($modifierCode);
@@ -634,11 +641,11 @@ class FormulaTest extends TestWithMockery
 
     /**
      * @param int $value
-     * @return MockInterface|Radius
+     * @return MockInterface|SpellRadius
      */
     private function createRadius(int $value)
     {
-        $radius = $this->mockery(Radius::class);
+        $radius = $this->mockery(SpellRadius::class);
         $radius->shouldReceive('getValue')
             ->andReturn($value);
 
@@ -656,14 +663,13 @@ class FormulaTest extends TestWithMockery
             $formulaCode = FormulaCode::getIt(FormulaCode::PORTAL);
             $formulasTable = $this->createFormulasTable();
             /** like instance of @see SpellSpeed */
-            $parameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::DURATION);
-            $this->addBaseParameterGetter(FormulaMutableSpellParameterCode::DURATION, $formulaCode, $formulasTable, $parameter);
+            $parameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::SPELL_DURATION);
+            $this->addBaseParameterGetter(FormulaMutableSpellParameterCode::SPELL_DURATION, $formulaCode, $formulasTable, $parameter);
             $this->addDefaultValueGetter($parameter, 123);
             new Formula(
                 $formulaCode,
-                $formulasTable,
-                $this->createDistanceTable(),
-                [FormulaMutableSpellParameterCode::DURATION => 0.0]
+                $this->createTables($formulasTable),
+                [FormulaMutableSpellParameterCode::SPELL_DURATION => 0.0]
             );
         } catch (\Exception $exception) {
             self::fail('No exception expected so far: ' . $exception->getMessage() . '; ' . $exception->getTraceAsString());
@@ -671,9 +677,9 @@ class FormulaTest extends TestWithMockery
         try {
             $formulaCode = FormulaCode::getIt(FormulaCode::PORTAL);
             $formulasTable = $this->createFormulasTable();
-            $parameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::DURATION);
+            $parameter = $this->createExpectedParameter(FormulaMutableSpellParameterCode::SPELL_DURATION);
             $this->addBaseParameterGetter(
-                FormulaMutableSpellParameterCode::DURATION,
+                FormulaMutableSpellParameterCode::SPELL_DURATION,
                 $formulaCode,
                 $formulasTable,
                 $parameter
@@ -681,18 +687,16 @@ class FormulaTest extends TestWithMockery
             $this->addDefaultValueGetter($parameter, 456);
             new Formula(
                 $formulaCode,
-                $formulasTable,
-                $this->createDistanceTable(),
-                [FormulaMutableSpellParameterCode::DURATION => '5.000']
+                $this->createTables($formulasTable),
+                [FormulaMutableSpellParameterCode::SPELL_DURATION => '5.000']
             );
         } catch (\Exception $exception) {
             self::fail('No exception expected so far: ' . $exception->getMessage() . '; ' . $exception->getTraceAsString());
         }
         new Formula(
             FormulaCode::getIt(FormulaCode::PORTAL),
-            $this->createFormulasTable(),
-            $this->createDistanceTable(),
-            [FormulaMutableSpellParameterCode::DURATION => 0.1]
+            $this->createTables($this->createFormulasTable()),
+            [FormulaMutableSpellParameterCode::SPELL_DURATION => 0.1]
         );
     }
 
@@ -705,9 +709,9 @@ class FormulaTest extends TestWithMockery
     {
         try {
             $formulasTable = $this->createFormulasTable();
-            $brightness = $this->createExpectedParameter(FormulaMutableSpellParameterCode::BRIGHTNESS);
+            $brightness = $this->createExpectedParameter(FormulaMutableSpellParameterCode::SPELL_BRIGHTNESS);
             $this->addBaseParameterGetter(
-                FormulaMutableSpellParameterCode::BRIGHTNESS,
+                FormulaMutableSpellParameterCode::SPELL_BRIGHTNESS,
                 FormulaCode::getIt(FormulaCode::LIGHT),
                 $formulasTable,
                 $brightness
@@ -715,25 +719,23 @@ class FormulaTest extends TestWithMockery
             $this->addDefaultValueGetter($brightness, 1);
             new Formula(
                 FormulaCode::getIt(FormulaCode::LIGHT),
-                $formulasTable,
-                $this->createDistanceTable(),
-                [FormulaMutableSpellParameterCode::BRIGHTNESS => 4]
+                $this->createTables($formulasTable),
+                [FormulaMutableSpellParameterCode::SPELL_BRIGHTNESS => 4]
             );
         } catch (\Exception $exception) {
             self::fail('No exception expected so far: ' . $exception->getMessage() . '; ' . $exception->getTraceAsString());
         }
         $formulasTable = $this->createFormulasTable();
         $this->addBaseParameterGetter(
-            FormulaMutableSpellParameterCode::BRIGHTNESS,
+            FormulaMutableSpellParameterCode::SPELL_BRIGHTNESS,
             FormulaCode::getIt(FormulaCode::LIGHT),
             $formulasTable,
             null // unused
         );
         new Formula(
             FormulaCode::getIt(FormulaCode::LIGHT),
-            $formulasTable,
-            $this->createDistanceTable(),
-            [FormulaMutableSpellParameterCode::BRIGHTNESS => 4]
+            $this->createTables($formulasTable),
+            [FormulaMutableSpellParameterCode::SPELL_BRIGHTNESS => 4]
         );
     }
 
@@ -746,8 +748,7 @@ class FormulaTest extends TestWithMockery
     {
         new Formula(
             FormulaCode::getIt(FormulaCode::PORTAL),
-            $this->createFormulasTable(),
-            $this->createDistanceTable(),
+            $this->createTables($this->createFormulasTable()),
             ['divine' => 0]
         );
     }
@@ -761,8 +762,7 @@ class FormulaTest extends TestWithMockery
     {
         new Formula(
             FormulaCode::getIt(FormulaCode::PORTAL),
-            $this->createFormulasTable(),
-            $this->createDistanceTable(),
+            $this->createTables($this->createFormulasTable()),
             [],
             [new \DateTime()]
         );
@@ -777,8 +777,7 @@ class FormulaTest extends TestWithMockery
     {
         new Formula(
             FormulaCode::getIt(FormulaCode::PORTAL),
-            $this->createFormulasTable(),
-            $this->createDistanceTable(),
+            $this->createTables($this->createFormulasTable()),
             [],
             [],
             [new \stdClass()]

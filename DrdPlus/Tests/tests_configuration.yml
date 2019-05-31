@@ -7,3 +7,6 @@ has_more_versions: false
 has_protected_access: false
 expected_web_name: 'DrD+ kalkulátor pro boj'
 expected_page_title: 'DrD+ kalkulátor pro boj'
+has_character_sheet: false
+has_links_to_journals: false
+has_link_to_single_journal: false

@@ -22,6 +22,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    for (selectIndex = 0; selectIndex < selectsLength; selectIndex++) {
+        allSelects[selectIndex].addEventListener('change', (function (selectIndex) {
+            return function () {
+                var inputsWithSelects = allSelects[selectIndex].parentNode.parentNode.getElementsByTagName('input');
+                for (var inputWithSelectIndex = 0, inputsWithSelectsLength = inputsWithSelects.length;
+                     inputWithSelectIndex < inputsWithSelectsLength;
+                     inputWithSelectIndex++
+                ) {
+                    inputsWithSelects[inputWithSelectIndex].checked = true;
+                }
+            }
+        })(selectIndex));
+    }
+
     for (var controlIndex = 0, controlsLength = allControls.length; controlIndex < controlsLength; controlIndex++) {
         var control = allControls[controlIndex];
         if (typeof control.type !== 'undefined' && control.type !== 'submit') {

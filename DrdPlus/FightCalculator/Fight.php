@@ -315,7 +315,7 @@ class Fight extends StrictObject
         if ($skillRankWithWeapon === 0) {
             return;
         }
-        if (\in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
+        if (in_array($skillWithWeapon->getValue(), PhysicalSkillCode::getPossibleValues(), true)) {
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var PhysicalSkill $skill */
             $skill = $skills->getPhysicalSkills()->$getSkill();
@@ -330,7 +330,7 @@ class Fight extends StrictObject
 
             return;
         }
-        if (\in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
+        if (in_array($skillWithWeapon->getValue(), PsychicalSkillCode::getPossibleValues(), true)) {
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var PsychicalSkill $skill */
             $skill = $skills->getPsychicalSkills()->$getSkill();
@@ -345,7 +345,7 @@ class Fight extends StrictObject
 
             return;
         }
-        if (\in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
+        if (in_array($skillWithWeapon->getValue(), CombinedSkillCode::getPossibleValues(), true)) {
             $getSkill = StringTools::assembleGetterForName($skillWithWeapon->getValue());
             /** @var CombinedSkill $skill */
             $skill = $skills->getCombinedSkills()->$getSkill();
@@ -538,50 +538,50 @@ class Fight extends StrictObject
     private function getSkillsForCategories(array $weaponCategoryValues): array
     {
         $fightWithCategories = [];
-        $fightWithPhysical = \array_map(
+        $fightWithPhysical = array_map(
             function (string $skillName) {
                 return PhysicalSkillCode::getIt($skillName);
             },
             $this->filterForCategories(PhysicalSkillCode::getPossibleValues(), $weaponCategoryValues)
         );
-        $fightWithCategories = \array_merge($fightWithCategories, $fightWithPhysical);
-        $fightWithPsychical = \array_map(
+        $fightWithCategories = array_merge($fightWithCategories, $fightWithPhysical);
+        $fightWithPsychical = array_map(
             function (string $skillName) {
                 return PsychicalSkillCode::getIt($skillName);
             },
             $this->filterForCategories(PsychicalSkillCode::getPossibleValues(), $weaponCategoryValues)
         );
-        $fightWithCategories = \array_merge($fightWithCategories, $fightWithPsychical);
-        $fightWithCombined = \array_map(
+        $fightWithCategories = array_merge($fightWithCategories, $fightWithPsychical);
+        $fightWithCombined = array_map(
             function (string $skillName) {
                 return CombinedSkillCode::getIt($skillName);
             },
             $this->filterForCategories(CombinedSkillCode::getPossibleValues(), $weaponCategoryValues)
         );
-        $fightWithCategories = \array_merge($fightWithCategories, $fightWithCombined);
+        $fightWithCategories = array_merge($fightWithCategories, $fightWithCombined);
 
         return $fightWithCategories;
     }
 
     private function filterForCategories(array $skillCodeValues, array $weaponCategoryValues): array
     {
-        $fightWith = \array_filter(
+        $fightWith = array_filter(
             $skillCodeValues,
             function (string $skillName) {
                 return strpos($skillName, 'fight_') === 0;
             }
         );
-        $categoryNames = \array_map(
+        $categoryNames = array_map(
             function (string $categoryName) {
                 return StringTools::toConstantLikeValue(WeaponCategoryCode::getIt($categoryName)->translateTo('en', 4));
             },
             $weaponCategoryValues
         );
 
-        return \array_filter($fightWith, function (string $skillName) use ($categoryNames) {
-            $categoryFromSkill = \str_replace(['fight_with_', 'fight_' /*without weapon */], '', $skillName);
+        return array_filter($fightWith, function (string $skillName) use ($categoryNames) {
+            $categoryFromSkill = str_replace(['fight_with_', 'fight_' /*without weapon */], '', $skillName);
 
-            return \in_array($categoryFromSkill, $categoryNames, true);
+            return in_array($categoryFromSkill, $categoryNames, true);
         });
     }
 
@@ -591,7 +591,7 @@ class Fight extends StrictObject
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
-        $distanceValue = \min($distanceValue, $this->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables));
+        $distanceValue = min($distanceValue, $this->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables));
         return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 
@@ -620,7 +620,7 @@ class Fight extends StrictObject
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
-        $distanceValue = \min($distanceValue, $this->getPreviousRangedWeaponMaximalRange()->getInMeters($this->tables));
+        $distanceValue = min($distanceValue, $this->getPreviousRangedWeaponMaximalRange()->getInMeters($this->tables));
         return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 

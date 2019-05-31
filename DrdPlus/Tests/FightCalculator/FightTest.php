@@ -6,6 +6,7 @@ namespace DrdPlus\Tests\FightCalculator;
 use DrdPlus\Armourer\Armourer;
 use DrdPlus\BaseProperties\Strength;
 use DrdPlus\CalculatorSkeleton\CurrentValues;
+use DrdPlus\CalculatorSkeleton\History;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\CurrentProperties;
@@ -25,6 +26,9 @@ class FightTest extends TestWithMockery
     /**
      * @test
      * @dataProvider provideRangeAndDistance
+     * @param int $maximalRangeInMeters
+     * @param int $currentRangedTargetDistance
+     * @param float $expectedTargetDistance
      */
     public function I_will_get_lesser_of_current_target_distance_and_weapon_maximal_range(
         int $maximalRangeInMeters,
@@ -38,10 +42,11 @@ class FightTest extends TestWithMockery
             $this->createCurrentValues([FightRequest::RANGED_TARGET_DISTANCE => $currentRangedTargetDistance]),
             $this->createPreviousArmamentsWithSkills(),
             $this->createPreviousProperties(),
-            $this->createArmourer($maximalRangeInMeters = -99),
+            $this->createHistory(),
+            $this->createArmourer($maximalRangeInMeters),
             Tables::getIt()
         );
-        self::assertSame((float)$maximalRangeInMeters, $fight->getCurrentTargetDistance()->getMeters());
+        self::assertSame($expectedTargetDistance, $fight->getCurrentTargetDistance()->getMeters());
     }
 
     public function provideRangeAndDistance(): array
@@ -56,6 +61,14 @@ class FightTest extends TestWithMockery
             ],
             'lesser target distance than maximal range' => [5, 4, 4.0],
         ];
+    }
+
+    /**
+     * @return History|MockInterface
+     */
+    private function createHistory(): History
+    {
+        return $this->mockery(History::class);
     }
 
     /**

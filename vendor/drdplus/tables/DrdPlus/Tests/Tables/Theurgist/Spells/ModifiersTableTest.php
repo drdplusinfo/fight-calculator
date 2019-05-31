@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DrdPlus\Tests\Tables\Theurgist\Spells;
 
@@ -8,53 +8,32 @@ use DrdPlus\Codes\Theurgist\FormulaCode;
 use DrdPlus\Codes\Theurgist\ModifierCode;
 use DrdPlus\Codes\Theurgist\ProfileCode;
 use DrdPlus\Codes\Theurgist\SpellTraitCode;
+use DrdPlus\Tables\Tables;
 use DrdPlus\Tables\Theurgist\Spells\FormulasTable;
 use DrdPlus\Tables\Theurgist\Spells\ModifiersTable;
 use DrdPlus\Tables\Theurgist\Spells\ProfilesTable;
+use DrdPlus\Tests\Tables\Theurgist\AbstractTheurgistTableTest;
 
 class ModifiersTableTest extends AbstractTheurgistTableTest
 {
-
-    /**
-     * @test
-     */
-    public function I_can_get_every_mandatory_parameter()
+    protected function getMandatoryParameters(): array
     {
-        $mandatoryParameters = ['realm', 'difficulty_change'];
-        foreach ($mandatoryParameters as $mandatoryParameter) {
-            $this->I_can_get_mandatory_parameter($mandatoryParameter, ModifierCode::class);
-        }
+        return [ModifiersTable::REALM, ModifiersTable::DIFFICULTY_CHANGE];
     }
 
-    /**
-     * @test
-     */
-    public function I_can_get_every_optional_parameter()
+    protected function getMainCodeClass(): string
     {
-        /**
-         * @see ModifiersTable::getRealmsAffection()
-         * @see ModifiersTable::getCastingRounds()
-         * @see ModifiersTable::getRadius()
-         * @see ModifiersTable::getEpicenterShift()
-         * @see ModifiersTable::getPower()
-         * @see ModifiersTable::getAttack()
-         * @see ModifiersTable::getGrafts()
-         * @see ModifiersTable::getSpellSpeed()
-         * @see ModifiersTable::getNumberOfWaypoints()
-         * @see ModifiersTable::getInvisibility()
-         * @see ModifiersTable::getQuality()
-         * @see ModifiersTable::getNumberOfConditions()
-         * @see ModifiersTable::getResistance()
-         * @see ModifiersTable::getNumberOfSituations()
-         * @see ModifiersTable::getThreshold()
-         */
-        $optionalParameters = [
-            'realms_affection', 'casting_rounds', 'radius', 'epicenter_shift', 'power', 'attack', 'grafts', 'spell_speed', 'number_of_waypoints',
-            'invisibility', 'quality', 'number_of_conditions', 'resistance', 'number_of_situations', 'threshold',
+        return ModifierCode::class;
+    }
+
+    protected function getOptionalParameters(): array
+    {
+        return [
+            ModifiersTable::REALMS_AFFECTION, ModifiersTable::CASTING_ROUNDS, ModifiersTable::RADIUS, ModifiersTable::EPICENTER_SHIFT,
+            ModifiersTable::SPELL_POWER, ModifiersTable::SPELL_ATTACK, ModifiersTable::GRAFTS, ModifiersTable::SPELL_SPEED,
+            ModifiersTable::NUMBER_OF_WAYPOINTS, ModifiersTable::INVISIBILITY, ModifiersTable::QUALITY, ModifiersTable::NUMBER_OF_CONDITIONS,
+            ModifiersTable::RESISTANCE, ModifiersTable::NUMBER_OF_SITUATIONS, ModifiersTable::THRESHOLD,
         ];
-        foreach ($optionalParameters as $optionalParameter) {
-            $this->I_can_get_optional_parameter($optionalParameter, ModifierCode::class);
-        }
     }
 
     /**
@@ -62,9 +41,9 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_get_forms()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         foreach (ModifierCode::getPossibleValues() as $modifierValue) {
-            $forms = $modifiersTable->getForms(ModifierCode::getIt($modifierValue));
+            $forms = $modifiersTable->getFormCodes(ModifierCode::getIt($modifierValue));
             $formValues = [];
             foreach ($forms as $form) {
                 self::assertInstanceOf(FormCode::class, $form);
@@ -115,7 +94,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_get_spell_trait_codes()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         foreach (ModifierCode::getPossibleValues() as $modifierValue) {
             $spellTraitCodes = $modifiersTable->getSpellTraitCodes(ModifierCode::getIt($modifierValue));
             /** @var array|string[] $expectedTraitValues */
@@ -176,7 +155,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_get_formulas_for_modifier()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         foreach (ModifierCode::getPossibleValues() as $modifierValue) {
             $formulaCodes = $modifiersTable->getFormulaCodes(ModifierCode::getIt($modifierValue));
             self::assertTrue(is_array($formulaCodes));
@@ -216,7 +195,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
     private function getExpectedFormulaValues(string $modifierValue): array
     {
         $expectedFormulaValues = [];
-        $formulasTable = new FormulasTable();
+        $formulasTable = new FormulasTable(Tables::getIt());
         foreach (FormulaCode::getPossibleValues() as $formulaValue) {
             $modifierCodes = $formulasTable->getModifierCodes(FormulaCode::getIt($formulaValue));
             foreach ($modifierCodes as $modifierCode) {
@@ -237,7 +216,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_not_get_formulas_to_unknown_modifier()
     {
-        (new ModifiersTable())->getFormulaCodes($this->createModifierCode('black and white'));
+        (new ModifiersTable(Tables::getIt()))->getFormulaCodes($this->createModifierCode('black and white'));
     }
 
     /**
@@ -260,9 +239,9 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_get_profiles_to_modifier()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         foreach (ModifierCode::getPossibleValues() as $modifierValue) {
-            $profileCodes = $modifiersTable->getProfiles(ModifierCode::getIt($modifierValue));
+            $profileCodes = $modifiersTable->getProfileCodes(ModifierCode::getIt($modifierValue));
             self::assertTrue(is_array($profileCodes));
             self::assertNotEmpty($profileCodes);
             $collectedProfileValues = [];
@@ -334,7 +313,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
         $expectedProfileValues = [];
         $profilesTable = new ProfilesTable();
         foreach (ProfileCode::getPossibleValues() as $profileValue) {
-            $modifierCodes = $profilesTable->getModifiersForProfile(ProfileCode::getIt($profileValue));
+            $modifierCodes = $profilesTable->getModifierCodes(ProfileCode::getIt($profileValue));
             foreach ($modifierCodes as $modifierCode) {
                 if ($modifierCode->getValue() === $modifierValue) {
                     $expectedProfileValues[] = $this->reverseProfileGender($profileValue);
@@ -353,7 +332,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_not_get_profiles_to_unknown_modifiers()
     {
-        (new ModifiersTable())->getProfiles($this->createModifierCode('magnified'));
+        (new ModifiersTable(Tables::getIt()))->getProfileCodes($this->createModifierCode('magnified'));
     }
 
     /**
@@ -361,7 +340,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_get_parent_modifiers()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         $fromParentMatchingProfiles = [];
         foreach (ModifierCode::getPossibleValues() as $modifierValue) {
             $profileValues = $this->getExpectedProfileValues($modifierValue);
@@ -369,7 +348,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
             $modifier = ModifierCode::getIt($modifierValue);
             $parentModifiers = $modifiersTable->getParentModifierCodes($modifier);
             foreach ($parentModifiers as $parentModifier) {
-                self::assertContains($modifier, $modifiersTable->getChildModifiers($parentModifier));
+                self::assertContains($modifier, $modifiersTable->getChildModifierCodes($parentModifier));
                 $parentProfileValues = $this->getExpectedProfileValues($parentModifier->getValue());
                 $matchingProfile = null;
                 foreach ($parentProfileValues as $parentProfileValue) {
@@ -417,13 +396,13 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_get_child_modifiers()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         $fromChildrenMatchingProfiles = [];
         foreach (ModifierCode::getPossibleValues() as $modifierValue) {
             $profileValues = $this->getExpectedProfileValues($modifierValue);
             $fromChildToModifierMatchingProfiles = [];
             $modifier = ModifierCode::getIt($modifierValue);
-            $childModifiers = $modifiersTable->getChildModifiers($modifier);
+            $childModifiers = $modifiersTable->getChildModifierCodes($modifier);
             foreach ($childModifiers as $childModifier) {
                 self::assertContains($modifier, $modifiersTable->getParentModifierCodes($childModifier));
                 $childProfileValues = $this->getExpectedProfileValues($childModifier->getValue());
@@ -475,7 +454,7 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_not_get_parent_modifiers_for_unknown_modifier()
     {
-        $modifiersTable = new ModifiersTable();
+        $modifiersTable = new ModifiersTable(Tables::getIt());
         $modifiersTable->getParentModifierCodes($this->createModifierCode('dancing'));
     }
 
@@ -486,8 +465,8 @@ class ModifiersTableTest extends AbstractTheurgistTableTest
      */
     public function I_can_not_get_child_modifiers_for_unknown_modifier()
     {
-        $modifiersTable = new ModifiersTable();
-        $modifiersTable->getChildModifiers($this->createModifierCode('lazy'));
+        $modifiersTable = new ModifiersTable(Tables::getIt());
+        $modifiersTable->getChildModifierCodes($this->createModifierCode('lazy'));
     }
 
 }
