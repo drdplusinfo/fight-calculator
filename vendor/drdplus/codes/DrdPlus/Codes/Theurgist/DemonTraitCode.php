@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Codes\Theurgist;
 
 /**
@@ -7,6 +8,7 @@ namespace DrdPlus\Codes\Theurgist;
  */
 class DemonTraitCode extends AbstractTheurgistCode
 {
+    public const UNLIMITED_ENDURANCE = 'unlimited_endurance';
     public const CHEAP_UNLIMITED_CAPACITY = 'cheap_unlimited_capacity';
     public const UNLIMITED_CAPACITY = 'unlimited_capacity';
     public const CASTER = 'caster';
@@ -16,6 +18,7 @@ class DemonTraitCode extends AbstractTheurgistCode
     public static function getPossibleValues(): array
     {
         return [
+            self::UNLIMITED_ENDURANCE,
             self::CHEAP_UNLIMITED_CAPACITY,
             self::UNLIMITED_CAPACITY,
             self::CASTER,
@@ -24,19 +27,20 @@ class DemonTraitCode extends AbstractTheurgistCode
         ];
     }
 
-    private static $translations = [
-        'cs' => [
-            self::CHEAP_UNLIMITED_CAPACITY => 'neomezená kapacita',
-            self::UNLIMITED_CAPACITY => 'neomezená kapacita',
-            self::CASTER => 'sesilatel',
-            self::FORMULER => 'formulovač',
-            self::BUILDER => 'budovatel',
-        ],
-    ];
-
-    protected function getTranslations(string $languageCode): array
+    protected function fetchTranslations(): array
     {
-        return self::$translations[$languageCode] ?? [];
+        return [
+            'cs' => [
+                'one' => [
+                    self::UNLIMITED_ENDURANCE => 'neomezená výdrž',
+                    self::CHEAP_UNLIMITED_CAPACITY => 'neomezená kapacita',
+                    self::UNLIMITED_CAPACITY => 'neomezená kapacita',
+                    self::CASTER => 'sesilatel',
+                    self::FORMULER => 'formulovač',
+                    self::BUILDER => 'budovatel',
+                ],
+            ],
+        ];
     }
 
 }

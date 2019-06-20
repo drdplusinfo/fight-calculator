@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tables\Theurgist\Spells\SpellParameters;
 
@@ -27,7 +26,7 @@ class DifficultyAddition extends StrictObject implements IntegerInterface
     private $currentAddition;
 
     /**
-     * @param string|int|StringInterface|IntegerInterface $difficultyAdditionByRealmsNotation in format 'difficulty per realm' or 'realms=difficulty per realms'
+     * @param string|int|StringInterface|IntegerInterface $difficultyAdditionByRealmsNotation in format 'difficulty per realm' or 'realms per step=difficulty per step'
      * @param int|null $currentAddition How much is currently active addition
      * @throws \DrdPlus\Tables\Theurgist\Spells\SpellParameters\Exceptions\InvalidFormatOfAdditionByRealmsNotation
      * @throws \DrdPlus\Tables\Theurgist\Spells\SpellParameters\Exceptions\InvalidFormatOfRealmsIncrement
