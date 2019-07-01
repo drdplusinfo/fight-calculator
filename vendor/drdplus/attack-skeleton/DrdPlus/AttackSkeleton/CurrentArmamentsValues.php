@@ -212,7 +212,7 @@ class CurrentArmamentsValues extends StrictObject
                 self::CUSTOM_BODY_ARMOR_ROUNDS_TO_PUT_ON,
             ],
             self::CUSTOM_BODY_ARMOR_NAME,
-            self::CUSTOM_BODY_ARMOR_NAME
+            ''
         );
     }
 
@@ -245,7 +245,7 @@ class CurrentArmamentsValues extends StrictObject
                 self::CUSTOM_HELM_WEIGHT,
             ],
             self::CUSTOM_HELM_NAME,
-            self::CUSTOM_HELM_NAME
+            ''
         );
     }
 
@@ -284,7 +284,7 @@ class CurrentArmamentsValues extends StrictObject
 
     public function getMeleeWeaponValue(): ?string
     {
-            return $this->currentValues->getCurrentValue(AttackRequest::MELEE_WEAPON);
+        return $this->currentValues->getCurrentValue(AttackRequest::MELEE_WEAPON);
     }
 
     public function getMeleeWeaponHoldingValue(): ?string
