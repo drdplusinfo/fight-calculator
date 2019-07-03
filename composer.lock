@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "drdplus/armourer",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/armourer.git",
-                "reference": "c2b8e2349881d4edb433689c5edba0810a32c6d8"
+                "reference": "a1455de0191143b05b05e1febf1dedb06f84f209"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/armourer/zipball/c2b8e2349881d4edb433689c5edba0810a32c6d8",
-                "reference": "c2b8e2349881d4edb433689c5edba0810a32c6d8",
+                "url": "https://api.github.com/repos/drdplusinfo/armourer/zipball/a1455de0191143b05b05e1febf1dedb06f84f209",
+                "reference": "a1455de0191143b05b05e1febf1dedb06f84f209",
                 "shasum": ""
             },
             "require": {
@@ -44,20 +44,20 @@
                 "MIT"
             ],
             "description": "DrD+ armaments and their stats",
-            "time": "2019-02-13T08:14:34+00:00"
+            "time": "2019-07-03T04:11:00+00:00"
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.0.19",
+            "version": "2.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-                "reference": "fcbc33abe2f933da5fce3f6c14ee4c9608fc8707"
+                "reference": "38371f2839f994462f77f258ec65dca561deba07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/fcbc33abe2f933da5fce3f6c14ee4c9608fc8707",
-                "reference": "fcbc33abe2f933da5fce3f6c14ee4c9608fc8707",
+                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/38371f2839f994462f77f258ec65dca561deba07",
+                "reference": "38371f2839f994462f77f258ec65dca561deba07",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2019-07-01T08:03:27+00:00"
+            "time": "2019-07-03T07:11:27+00:00"
         },
         {
             "name": "drdplus/background",
@@ -798,16 +798,16 @@
         },
         {
             "name": "drdplus/rules-skeleton",
-            "version": "1.1.48",
+            "version": "1.1.49",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-                "reference": "0c0f96e0ffdec9c0126b0a4067273bb6709966cb"
+                "reference": "7cad29807b615cc6c6ab85a015745404d4fe65e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/0c0f96e0ffdec9c0126b0a4067273bb6709966cb",
-                "reference": "0c0f96e0ffdec9c0126b0a4067273bb6709966cb",
+                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/7cad29807b615cc6c6ab85a015745404d4fe65e0",
+                "reference": "7cad29807b615cc6c6ab85a015745404d4fe65e0",
                 "shasum": ""
             },
             "require": {
@@ -863,7 +863,7 @@
                 "helper",
                 "rules"
             ],
-            "time": "2019-05-30T14:17:19+00:00"
+            "time": "2019-07-02T07:53:49+00:00"
         },
         {
             "name": "drdplus/skills",

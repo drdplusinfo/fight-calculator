@@ -62,4 +62,29 @@ class CurrentArmamentsValuesTest extends TestWithMockery
             $currentArmamentsValues->getCurrentCustomBodyArmorsValues()
         );
     }
+
+    /**
+     * @test
+     */
+    public function I_can_get_current_custom_ranged_weapons_values()
+    {
+        $rangedWeaponsValues = [
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_NAME => 'baz',
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_CATEGORY => 'secret',
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_OFFENSIVENESS => 333,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_RANGE_IN_M => 222,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_REQUIRED_STRENGTH => 111,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_WOUND_TYPE => 'splash',
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_WOUNDS => 444,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_COVER => 555,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_WEIGHT => 666,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY => false,
+            CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_MAXIMAL_APPLICABLE_STRENGTH => 777,
+        ];
+        $currentArmamentsValues = new CurrentArmamentsValues($this->createCurrentValues($rangedWeaponsValues));
+        self::assertSame(
+            ['baz' => $rangedWeaponsValues],
+            $currentArmamentsValues->getCurrentCustomRangedWeaponsValues()
+        );
+    }
 }

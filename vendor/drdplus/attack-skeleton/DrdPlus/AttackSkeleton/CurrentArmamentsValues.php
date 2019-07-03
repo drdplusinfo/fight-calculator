@@ -22,14 +22,15 @@ class CurrentArmamentsValues extends StrictObject
     // ranged weapon
     public const CUSTOM_RANGED_WEAPON_NAME = 'custom_ranged_weapon_name';
     public const CUSTOM_RANGED_WEAPON_CATEGORY = 'custom_ranged_weapon_category';
-    public const CUSTOM_RANGED_WEAPON_REQUIRED_STRENGTH = 'custom_ranged_weapon_required_strength';
-    public const CUSTOM_RANGED_WEAPON_RANGE_IN_M = 'custom_ranged_weapon_range_in_m';
     public const CUSTOM_RANGED_WEAPON_OFFENSIVENESS = 'custom_ranged_weapon_offensiveness';
-    public const CUSTOM_RANGED_WEAPON_WOUNDS = 'custom_ranged_weapon_wounds';
+    public const CUSTOM_RANGED_WEAPON_RANGE_IN_M = 'custom_ranged_weapon_range_in_m';
+    public const CUSTOM_RANGED_WEAPON_REQUIRED_STRENGTH = 'custom_ranged_weapon_required_strength';
     public const CUSTOM_RANGED_WEAPON_WOUND_TYPE = 'custom_ranged_weapon_wound_type';
+    public const CUSTOM_RANGED_WEAPON_WOUNDS = 'custom_ranged_weapon_wounds';
     public const CUSTOM_RANGED_WEAPON_COVER = 'custom_ranged_weapon_cover';
     public const CUSTOM_RANGED_WEAPON_WEIGHT = 'custom_ranged_weapon_weight';
     public const CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY = 'custom_ranged_weapon_two_handed_only';
+    public const CUSTOM_RANGED_WEAPON_MAXIMAL_APPLICABLE_STRENGTH = 'custom_ranged_weapon_maximal_applicable_strength';
     // body armor
     public const CUSTOM_BODY_ARMOR_NAME = 'custom_body_armor_name';
     public const CUSTOM_BODY_ARMOR_REQUIRED_STRENGTH = 'custom_body_armor_required_strength';
@@ -176,6 +177,7 @@ class CurrentArmamentsValues extends StrictObject
                 self::CUSTOM_RANGED_WEAPON_COVER,
                 self::CUSTOM_RANGED_WEAPON_WEIGHT,
                 self::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY,
+                self::CUSTOM_RANGED_WEAPON_MAXIMAL_APPLICABLE_STRENGTH,
             ],
             self::CUSTOM_RANGED_WEAPON_NAME,
             self::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY

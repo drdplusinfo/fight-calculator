@@ -42,7 +42,7 @@ class AddCustomShieldBody extends StrictObject implements BodyInterface
     <input type="number" min="-10" max="20" value="1" name="{$this->getCustomShieldCoverName()}[0]" required>
   </label>
   <label>Váha v kg
-    <input type="number" min="0" max="99.99" value="0.5" name="{$this->getCustomShieldWeightName()}[0]" required>
+    <input type="number" min="0" max="99.99" step="0.1" value="0.5" name="{$this->getCustomShieldWeightName()}[0]" required>
   </label>
   <input type="submit" class="manual" value="Přidat štít">
 </div>

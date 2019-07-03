@@ -98,6 +98,7 @@ class CustomArmamentAdder extends StrictObject
      * @param int $cover
      * @param Weight $weight
      * @param bool $twoHandedOnly
+     * @param Strength $maximalApplicableStrength
      * @return bool if a weapon has been added or already exists
      * @throws Exceptions\NameOfCustomWeaponNameCanNotBeEmpty
      * @throws \DrdPlus\Codes\Armaments\Exceptions\InvalidWeaponCategoryForNewRangedWeaponCode
@@ -116,7 +117,8 @@ class CustomArmamentAdder extends StrictObject
         PhysicalWoundTypeCode $woundTypeCode,
         int $cover,
         Weight $weight,
-        bool $twoHandedOnly
+        bool $twoHandedOnly,
+        Strength $maximalApplicableStrength
     ): bool
     {
         if ($name === '') {
@@ -141,7 +143,8 @@ class CustomArmamentAdder extends StrictObject
             $woundTypeCode,
             $cover,
             $weight,
-            $twoHandedOnly
+            $twoHandedOnly,
+            $maximalApplicableStrength
         );
     }
 

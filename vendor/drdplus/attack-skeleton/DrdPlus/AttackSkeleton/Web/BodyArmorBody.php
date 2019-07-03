@@ -96,7 +96,7 @@ HTML;
             /** @var array|string[] $armorValues */
             foreach ($armorValues as $typeName => $armorValue) {
                 $possibleCustomBodyArmors[] = <<<HTML
-<input type="hidden" name="{$typeName}[{$armorName}]" value="<{$armorValue}">
+<input type="hidden" name="{$typeName}[{$armorName}]" value="{$armorValue}">
 HTML;
             }
         }

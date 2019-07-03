@@ -60,10 +60,14 @@ class AddCustomRangedWeaponBody extends StrictObject implements BodyInterface
     <input type="number" min="-10" max="20" value="0" name="{$this->getCustomRangedWeaponCoverName()}[0]" required>
   </label>
   <label>Váha v kg
-    <input type="number" min="0" max="99.99" value="1" name="{$this->getCustomRangedWeaponWeightName()}[0]" required>
+    <input type="number" min="0" max="99.99" step="0.1" value="1" name="{$this->getCustomRangedWeaponWeightName()}[0]" required>
   </label>
   <label>Pouze obouruční
-    <input type="checkbox" value="1" name="{$this->getCustomRangedWeaponTwoHandedOnlyName()}[0]"></label>
+    <input type="checkbox" value="1" name="{$this->getCustomRangedWeaponTwoHandedOnlyName()}[0]">
+  </label>
+  <label>Maximální použitelná síla
+    <input type="number" min="-20" max="50" value="10" name="{$this->getCustomRangedWeaponMaximalApplicableStrengthName()}[0]" required>
+  </label>
   <input type="submit" class="manual" value="Přidat">
 </div>
 {$this->getCancelActionButton($this->frontendHelper)}
@@ -106,6 +110,11 @@ HTML;
     private function getCustomRangedWeaponRequiredStrengthName(): string
     {
         return CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_REQUIRED_STRENGTH;
+    }
+
+    private function getCustomRangedWeaponMaximalApplicableStrengthName(): string
+    {
+        return CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_MAXIMAL_APPLICABLE_STRENGTH;
     }
 
     private function getCustomRangedWeaponRangeInMetersName(): string

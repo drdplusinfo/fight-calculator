@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Armourer;
 
@@ -1008,7 +1007,7 @@ class Armourer extends StrictObject
         bool $twoHandedOnly
     ): bool
     {
-        $meleeWeaponTable = Tables::getIt()->getMeleeWeaponsTableByMeleeWeaponCode($meleeWeaponCode);
+        $meleeWeaponTable = $this->tables->getMeleeWeaponsTableByMeleeWeaponCode($meleeWeaponCode);
 
         return $meleeWeaponTable->addCustomMeleeWeapon(
             $meleeWeaponCode,
@@ -1056,7 +1055,7 @@ class Armourer extends StrictObject
     ): bool
     {
         if ($rangedWeaponCode->isBow()) {
-            return Tables::getIt()->getBowsTable()->addNewBow(
+            return $this->tables->getBowsTable()->addNewBow(
                 $rangedWeaponCode,
                 $requiredStrength,
                 $range,
@@ -1069,7 +1068,7 @@ class Armourer extends StrictObject
                 $maximalApplicableStrength
             );
         }
-        $rangedWeaponTable = Tables::getIt()->getRangedWeaponsTableByRangedWeaponCode($rangedWeaponCode);
+        $rangedWeaponTable = $this->tables->getRangedWeaponsTableByRangedWeaponCode($rangedWeaponCode);
 
         return $rangedWeaponTable->addCustomRangedWeapon(
             $rangedWeaponCode,
@@ -1105,7 +1104,7 @@ class Armourer extends StrictObject
         PositiveInteger $roundsToPutOn
     ): bool
     {
-        return Tables::getIt()->getBodyArmorsTable()->addCustomBodyArmor(
+        return $this->tables->getBodyArmorsTable()->addCustomBodyArmor(
             $bodyArmorCode,
             $requiredStrength,
             $restriction,
@@ -1132,7 +1131,7 @@ class Armourer extends StrictObject
         Weight $weight
     ): bool
     {
-        return Tables::getIt()->getHelmsTable()->addCustomHelm(
+        return $this->tables->getHelmsTable()->addCustomHelm(
             $helmCode,
             $requiredStrength,
             $restriction,

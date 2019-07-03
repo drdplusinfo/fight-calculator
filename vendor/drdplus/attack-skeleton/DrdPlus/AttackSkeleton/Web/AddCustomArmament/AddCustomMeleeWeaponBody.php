@@ -60,7 +60,7 @@ class AddCustomMeleeWeaponBody extends StrictObject implements BodyInterface
     <input type="number" min="-10" max="20" value="0" name="{$this->getCustomMeleeWeaponCoverName()}[0]" required>
   </label>
   <label>Váha v kg
-    <input type="number" min="0" max="99.99" value="1" name="{$this->getCustomMeleeWeaponWeightName()}[0]" required>
+    <input type="number" min="0" max="99.99" step="0.1" value="1" name="{$this->getCustomMeleeWeaponWeightName()}[0]" required>
   </label>
   <label>Pouze obouruční
     <input type="checkbox" value="1" name="{$this->getCustomMeleeWeaponTwoHandedOnlyName()}[0]">

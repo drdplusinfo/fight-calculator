@@ -29,23 +29,46 @@ class AddCustomHelmBody extends StrictObject implements BodyInterface
     {
         return <<<HTML
 <div class="col">
-  <label>Název
-    <input type="text" placeholder="Název nové helmy" name="{$this->getCustomHelmName()}[0]" required>
-  </label>
-  <label>Potřebná síla
-    <input type="number" min="-20" max="50" value="0" name="{$this->getCustomHelmRequiredStrengthName()}[0]" required>
-  </label>
-  <label>Omezení
-    <input type="number" min="-10" max="20" value="0" name="{$this->getCustomHelmRestrictionName()}[0]" required>
-  </label>
-  <label>Ochrana
-    <input type="number" min="-10" max="20" value="1" name="{$this->getCustomHelmProtectionName()}[0]" required>
-  </label>
-  <label>Váha v kg
-    <input type="number" min="0" max="99.99" value="0.5" name="{$this->getCustomHelmWeightName()}[0]" required>
-  </label>
-  <input type="submit" class="manual" value="Přidat helmu">
+  <div>
+    <label for="customHelmName">Název</label>
+  </div>
+    <div>
+      <input id="customHelmName" type="text" placeholder="Název nové helmy" name="{$this->getCustomHelmName()}[0]" required>
+    </div>
 </div>
+<div class="col">
+  <div>
+  <label for="customHelmRequiredStrength">Potřebná síla</label>
+  </div>
+    <div>
+    <input id="customHelmRequiredStrength" type="number" min="-20" max="50" value="0" name="{$this->getCustomHelmRequiredStrengthName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label>Omezení</label>
+  </div>
+  <div>
+    <input type="number" min="-10" max="20" value="0" name="{$this->getCustomHelmRestrictionName()}[0]" required>
+  </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customHelmProtection">Ochrana</label>
+  </div>
+  <div>
+    <input id="customHelmProtection" type="number" min="-10" max="20" value="1" name="{$this->getCustomHelmProtectionName()}[0]" required>
+  </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customHelmWeight">Váha v kg</label>
+  </div>
+    <div>
+      <input id="customHelmWeight" type="number" min="0" max="99.99" step="0.1" value="0.5" name="{$this->getCustomHelmWeightName()}[0]" required>
+    </div>
+</div>
+<input type="submit" class="manual" value="Přidat helmu">
 {$this->getCancelActionButton($this->frontendHelper)}
 HTML;
     }

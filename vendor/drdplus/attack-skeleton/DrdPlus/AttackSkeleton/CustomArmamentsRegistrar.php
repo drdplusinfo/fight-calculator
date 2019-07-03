@@ -90,7 +90,8 @@ class CustomArmamentsRegistrar extends StrictObject
                     Weight::KG,
                     $this->tables->getWeightTable()
                 ),
-                ToBoolean::toBoolean($customRangedWeaponsValue[CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY])
+                ToBoolean::toBoolean($customRangedWeaponsValue[CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_TWO_HANDED_ONLY]),
+                Strength::getIt($customRangedWeaponsValue[CurrentArmamentsValues::CUSTOM_RANGED_WEAPON_MAXIMAL_APPLICABLE_STRENGTH])
             );
         }
     }
