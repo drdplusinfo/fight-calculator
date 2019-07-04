@@ -220,16 +220,16 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.0.42",
+            "version": "1.0.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-                "reference": "1d6c2c1f68f641a55b1083e32e328b6dc9110bd3"
+                "reference": "cbbf23157e27f804f126d71d35919bc1d5e548b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/1d6c2c1f68f641a55b1083e32e328b6dc9110bd3",
-                "reference": "1d6c2c1f68f641a55b1083e32e328b6dc9110bd3",
+                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/cbbf23157e27f804f126d71d35919bc1d5e548b8",
+                "reference": "cbbf23157e27f804f126d71d35919bc1d5e548b8",
                 "shasum": ""
             },
             "require": {
@@ -263,7 +263,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-07-04T07:43:06+00:00"
+            "time": "2019-07-04T11:36:17+00:00"
         },
         {
             "name": "drdplus/codes",
