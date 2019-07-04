@@ -413,17 +413,17 @@
     },
     {
         "name": "drdplus/attack-skeleton",
-        "version": "2.0.23",
-        "version_normalized": "2.0.23.0",
+        "version": "2.0.25",
+        "version_normalized": "2.0.25.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-            "reference": "38371f2839f994462f77f258ec65dca561deba07"
+            "reference": "3da4e43db88203ab7faede513685a1a4c00700e2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/38371f2839f994462f77f258ec65dca561deba07",
-            "reference": "38371f2839f994462f77f258ec65dca561deba07",
+            "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/3da4e43db88203ab7faede513685a1a4c00700e2",
+            "reference": "3da4e43db88203ab7faede513685a1a4c00700e2",
             "shasum": ""
         },
         "require": {
@@ -440,7 +440,7 @@
             "phpunit/phpunit": "~7.0",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-07-03T07:11:27+00:00",
+        "time": "2019-07-04T07:53:06+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\AttackSkeleton\\AttackInjectorComposerPlugin"
@@ -593,22 +593,22 @@
     },
     {
         "name": "drdplus/calculator-skeleton",
-        "version": "1.0.41",
-        "version_normalized": "1.0.41.0",
+        "version": "1.0.42",
+        "version_normalized": "1.0.42.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-            "reference": "f9d04f07b691fef7e9095de0dce89c0325294b6c"
+            "reference": "1d6c2c1f68f641a55b1083e32e328b6dc9110bd3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/f9d04f07b691fef7e9095de0dce89c0325294b6c",
-            "reference": "f9d04f07b691fef7e9095de0dce89c0325294b6c",
+            "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/1d6c2c1f68f641a55b1083e32e328b6dc9110bd3",
+            "reference": "1d6c2c1f68f641a55b1083e32e328b6dc9110bd3",
             "shasum": ""
         },
         "require": {
             "composer-plugin-api": "^1.1",
-            "drdplus/rules-skeleton": "~1.1",
+            "drdplus/rules-skeleton": "~1.2",
             "granam/exceptions-hierarchy": "^4.0",
             "granam/integer": "^6.1",
             "granam/scalar": "^4.0",
@@ -623,7 +623,7 @@
             "phpunit/phpunit": "~7.0",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-05-31T04:36:01+00:00",
+        "time": "2019-07-04T07:43:06+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\CalculatorSkeleton\\CalculatorInjectorComposerPlugin"
@@ -1199,17 +1199,17 @@
     },
     {
         "name": "drdplus/rules-skeleton",
-        "version": "1.1.49",
-        "version_normalized": "1.1.49.0",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-            "reference": "7cad29807b615cc6c6ab85a015745404d4fe65e0"
+            "reference": "3cff375de1edfe0b579bbb75c3321f50df165095"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/7cad29807b615cc6c6ab85a015745404d4fe65e0",
-            "reference": "7cad29807b615cc6c6ab85a015745404d4fe65e0",
+            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/3cff375de1edfe0b579bbb75c3321f50df165095",
+            "reference": "3cff375de1edfe0b579bbb75c3321f50df165095",
             "shasum": ""
         },
         "require": {
@@ -1228,7 +1228,7 @@
             "granam/strict-object": "^3.0",
             "granam/string": "^3.2",
             "granam/tools": "^3.0",
-            "granam/web-content-builder": "^1.0",
+            "granam/web-content-builder": "^1.1",
             "granam/yaml-reader": "^1.0",
             "php": ">=7.1",
             "phpgt/dom": "~1.1",
@@ -1242,7 +1242,7 @@
             "phpunit/phpunit": "^7.5",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-07-02T07:53:49+00:00",
+        "time": "2019-07-04T07:14:49+00:00",
         "bin": [
             "bin/fix_web_permissions.sh"
         ],
@@ -2298,17 +2298,17 @@
     },
     {
         "name": "granam/web-content-builder",
-        "version": "1.0.11",
-        "version_normalized": "1.0.11.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/web-content-builder.git",
-            "reference": "4bac99766cee39f6d3291ca09f82cb2494f39ba0"
+            "reference": "89bc9499fd134fe6b5d30bcbe46829631031dbc0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/web-content-builder/zipball/4bac99766cee39f6d3291ca09f82cb2494f39ba0",
-            "reference": "4bac99766cee39f6d3291ca09f82cb2494f39ba0",
+            "url": "https://api.github.com/repos/granam/web-content-builder/zipball/89bc9499fd134fe6b5d30bcbe46829631031dbc0",
+            "reference": "89bc9499fd134fe6b5d30bcbe46829631031dbc0",
             "shasum": ""
         },
         "require": {
@@ -2329,7 +2329,7 @@
             "phpunit/phpunit": "~7.0",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-05-28T15:45:26+00:00",
+        "time": "2019-07-04T07:02:01+00:00",
         "bin": [
             "bin/assets"
         ],

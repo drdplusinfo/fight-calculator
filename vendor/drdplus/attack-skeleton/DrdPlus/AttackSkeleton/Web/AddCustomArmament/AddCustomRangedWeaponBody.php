@@ -31,45 +31,98 @@ class AddCustomRangedWeaponBody extends StrictObject implements BodyInterface
     {
         return <<<HTML
 <div class="col">
-  <label>Název
-    <input type="text" placeholder="Název nové zbraně na dálku" name="{$this->getCustomRangedWeaponName()}[0]" required>
-  </label>
-  <label>Kategorie
-    <select name="{$this->getCustomRangedWeaponCategoryName()}[0]" required>
-      {$this->getRangedWeaponCategories()}
-    </select>
-  </label>
-  <label>Potřebná síla
-    <input type="number" min="-20" max="50" value="0" name="{$this->getCustomRangedWeaponRequiredStrengthName()}[0]" required>
-  </label>
-  <label>Dostřel v metrech
-    <input type="number" min="0" max="500" value="1" name="{$this->getCustomRangedWeaponRangeInMetersName()}[0]" required>
-  </label>
-  <label>Útočnost
-    <input type="number" min="=-20" max="50" value="0" name="{$this->getCustomRangedWeaponOffensivenessName()}[0]" required>
-  </label>
-  <label>Zranění
-    <input type="number" min="=-20" max="50" value="0" name="{$this->getCustomRangedWeaponWoundsName()}[0]" required>
-  </label>
-  <label>Typ
-    <select name="{$this->getCustomRangedWeaponWoundTypeName()}[0]" required>
-      {$this->getWeaponWoundTypes()}
-    </select>
-  </label>
-  <label>Kryt
-    <input type="number" min="-10" max="20" value="0" name="{$this->getCustomRangedWeaponCoverName()}[0]" required>
-  </label>
-  <label>Váha v kg
-    <input type="number" min="0" max="99.99" step="0.1" value="1" name="{$this->getCustomRangedWeaponWeightName()}[0]" required>
-  </label>
-  <label>Pouze obouruční
-    <input type="checkbox" value="1" name="{$this->getCustomRangedWeaponTwoHandedOnlyName()}[0]">
-  </label>
-  <label>Maximální použitelná síla
-    <input type="number" min="-20" max="50" value="10" name="{$this->getCustomRangedWeaponMaximalApplicableStrengthName()}[0]" required>
-  </label>
-  <input type="submit" class="manual" value="Přidat">
+  <div>
+    <label for="customRangedWeaponName">Název</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponName" type="text" placeholder="Název nové zbraně na dálku" name="{$this->getCustomRangedWeaponName()}[0]" required>
+    </div>
 </div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponCategory">Kategorie</label>
+  </div>
+    <div>
+        <select id="customRangedWeaponCategory" name="{$this->getCustomRangedWeaponCategoryName()}[0]" required>
+          {$this->getRangedWeaponCategories()}
+        </select>
+    </div>
+</div>
+<div class="col">
+      <div>
+        <label for="customRangedWeaponRequiredStrength">Potřebná síla</label>
+      </div>
+    <div>
+      <input id="customRangedWeaponRequiredStrength" type="number" min="-20" max="50" value="0" name="{$this->getCustomRangedWeaponRequiredStrengthName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponRange">Dostřel v metrech</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponRange" type="number" min="0" max="500" value="1" name="{$this->getCustomRangedWeaponRangeInMetersName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponOffensiveness">Útočnost</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponOffensiveness" type="number" min="=-20" max="50" value="0" name="{$this->getCustomRangedWeaponOffensivenessName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+      <div>
+        <label for="customRangedWeaponWounds">Zranění</label>
+      </div>
+    <div>
+      <input id="customRangedWeaponWounds" type="number" min="=-20" max="50" value="0" name="{$this->getCustomRangedWeaponWoundsName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponWoundType">Typ</label>
+  </div>
+    <div>
+        <select id="customRangedWeaponWoundType" name="{$this->getCustomRangedWeaponWoundTypeName()}[0]" required>
+          {$this->getWeaponWoundTypes()}
+        </select>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponCover">Kryt</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponCover" type="number" min="-10" max="20" value="0" name="{$this->getCustomRangedWeaponCoverName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponWeight">Váha v kg</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponWeight" type="number" min="0" max="99.99" step="0.1" value="1" name="{$this->getCustomRangedWeaponWeightName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponTwoHandedOnly">Pouze obouruční</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponTwoHandedOnly" type="checkbox" value="1" name="{$this->getCustomRangedWeaponTwoHandedOnlyName()}[0]">
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customRangedWeaponMaximalApplicableStrengt">Maximální použitelná síla</label>
+  </div>
+    <div>
+      <input id="customRangedWeaponMaximalApplicableStrength" type="number" min="-20" max="50" value="10" name="{$this->getCustomRangedWeaponMaximalApplicableStrengthName()}[0]" required>
+    </div>
+</div>
+<input type="submit" class="manual" value="Přidat">
 {$this->getCancelActionButton($this->frontendHelper)}
 HTML;
     }

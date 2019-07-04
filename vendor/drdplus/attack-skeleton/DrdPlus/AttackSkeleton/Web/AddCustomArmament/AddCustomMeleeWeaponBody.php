@@ -31,42 +31,90 @@ class AddCustomMeleeWeaponBody extends StrictObject implements BodyInterface
     {
         return <<<HTML
 <div class="col">
-  <label>Název
-    <input type="text" placeholder="Název nové zbraně na blízko" name="{$this->getCustomMeleeWeaponName()}[0]" required>
-  </label>
-  <label>Kategorie
-    <select name="{$this->getCustomMeleeWeaponCategoryName()}[0]" required>
+      <div>
+        <label for="customMeleeWeaponName">Název</label>
+      </div>
+    <div>
+      <input id="customMeleeWeaponName" type="text" placeholder="Název nové zbraně na blízko" name="{$this->getCustomMeleeWeaponName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+  <label for="customMeleeWeaponCategory">Kategorie</label>
+  </div>
+    <div>
+    <select id="customMeleeWeaponCategory" name="{$this->getCustomMeleeWeaponCategoryName()}[0]" required>
       {$this->getMeleeWeaponCategories()}
     </select>
-  </label>
-  <label>Potřebná síla
-    <input type="number" min="-20" max="50" value="0" name="{$this->getCustomMeleeWeaponRequiredStrengthName()}[0]" required>
-  </label>
-  <label>Délka
-    <input type="number" min="0" max="10" value="1" name="{$this->getCustomMeleeWeaponLengthName()}[0]" required>
-  </label>
-  <label>Útočnost
-    <input type="number" min="=-20" max="50" value="0" name="{$this->getCustomMeleeWeaponOffensivenessName()}[0]" required>
-  </label>
-  <label>Zranění
-    <input type="number" min="=-20" max="50" value="0" name="{$this->getCustomMeleeWeaponWoundsName()}[0]" required>
-  </label>
-  <label>Typ
-    <select name="{$this->getCustomMeleeWeaponWoundTypeName()}[0]" required>
-      {$this->getWeaponWoundTypes()}
-    </select>
-  </label>
-  <label>Kryt
-    <input type="number" min="-10" max="20" value="0" name="{$this->getCustomMeleeWeaponCoverName()}[0]" required>
-  </label>
-  <label>Váha v kg
-    <input type="number" min="0" max="99.99" step="0.1" value="1" name="{$this->getCustomMeleeWeaponWeightName()}[0]" required>
-  </label>
-  <label>Pouze obouruční
-    <input type="checkbox" value="1" name="{$this->getCustomMeleeWeaponTwoHandedOnlyName()}[0]">
-  </label>
-  <input type="submit" class="manual" value="Přidat">
+    </div>
 </div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponRequiredStrength">Potřebná síla</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponRequiredStrength" type="number" min="-20" max="50" value="0" name="{$this->getCustomMeleeWeaponRequiredStrengthName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponLength">Délka</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponLength" type="number" min="0" max="10" value="1" name="{$this->getCustomMeleeWeaponLengthName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponOffensiveness">Útočnost</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponOffensiveness" type="number" min="=-20" max="50" value="0" name="{$this->getCustomMeleeWeaponOffensivenessName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponWounds">Zranění</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponWounds" type="number" min="=-20" max="50" value="0" name="{$this->getCustomMeleeWeaponWoundsName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponWoundType">Typ</label>
+  </div>
+    <div>
+        <select id="customMeleeWeaponWoundType" name="{$this->getCustomMeleeWeaponWoundTypeName()}[0]" required>
+          {$this->getWeaponWoundTypes()}
+        </select>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponCover">Kryt</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponCover" type="number" min="-10" max="20" value="0" name="{$this->getCustomMeleeWeaponCoverName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponWeight">Váha v kg</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponWeight" type="number" min="0" max="99.99" step="0.1" value="1" name="{$this->getCustomMeleeWeaponWeightName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customMeleeWeaponTwoHandedOnly">Pouze obouruční</label>
+  </div>
+    <div>
+      <input id="customMeleeWeaponTwoHandedOnly" type="checkbox" value="1" name="{$this->getCustomMeleeWeaponTwoHandedOnlyName()}[0]">
+    </div>
+</div>
+<input type="submit" class="manual" value="Přidat">
 {$this->getCancelActionButton($this->frontendHelper)}
 HTML;
     }

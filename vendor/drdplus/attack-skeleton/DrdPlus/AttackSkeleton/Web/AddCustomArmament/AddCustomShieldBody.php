@@ -29,23 +29,46 @@ class AddCustomShieldBody extends StrictObject implements BodyInterface
     {
         return <<<HTML
 <div class="col">
-  <label>Název
-    <input type="text" placeholder="Název nového štítu" name="{$this->getCustomShieldName()}[0]" required>
-  </label>
-  <label>Potřebná síla
-    <input type="number" min="-20" max="50" value="0" name="{$this->getCustomShieldRequiredStrengthName()}[0]" required>
-  </label>
-  <label>Omezení
-    <input type="number" min="-10" max="20" value="0" name="{$this->getCustomShieldRestrictionName()}[0]" required>
-  </label>
-  <label>Kryt
-    <input type="number" min="-10" max="20" value="1" name="{$this->getCustomShieldCoverName()}[0]" required>
-  </label>
-  <label>Váha v kg
-    <input type="number" min="0" max="99.99" step="0.1" value="0.5" name="{$this->getCustomShieldWeightName()}[0]" required>
-  </label>
-  <input type="submit" class="manual" value="Přidat štít">
+  <div>
+    <label for="customShieldName">Název</label>
+  </div>
+    <div>
+      <input id="customShieldName" type="text" placeholder="Název nového štítu" name="{$this->getCustomShieldName()}[0]" required>
+    </div>
 </div>
+<div class="col">
+  <div>
+    <label for="customShieldRequiredStrength">Potřebná síla</label>
+  </div>
+    <div>
+      <input id="customShieldRequiredStrength" type="number" min="-20" max="50" value="0" name="{$this->getCustomShieldRequiredStrengthName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customShieldRestriction">Omezení</label>
+  </div>
+    <div>
+      <input id="customShieldRestriction" type="number" min="-10" max="20" value="0" name="{$this->getCustomShieldRestrictionName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customShieldCover">Kryt</label>
+  </div>
+    <div>
+      <input id="customShieldCover" type="number" min="-10" max="20" value="1" name="{$this->getCustomShieldCoverName()}[0]" required>
+    </div>
+</div>
+<div class="col">
+  <div>
+    <label for="customShieldWeight">Váha v kg</label>
+  </div>
+    <div>
+      <input id="customShieldWeight" type="number" min="0" max="99.99" step="0.1" value="0.5" name="{$this->getCustomShieldWeightName()}[0]" required>
+    </div>
+</div>
+<input type="submit" class="manual" value="Přidat štít">
 {$this->getCancelActionButton($this->frontendHelper)}
 HTML;
     }
