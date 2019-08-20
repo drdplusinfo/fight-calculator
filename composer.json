@@ -15,12 +15,6 @@
       "DrdPlus\\": "DrdPlus/"
     }
   },
-  "repositories": [
-    {
-      "url": "/home/jaroslav/projects/docker/drdplus/www/utok.skeleton",
-      "type": "git"
-    }
-  ],
   "require": {
     "ext-json": "*",
     "php": ">=7.1",
