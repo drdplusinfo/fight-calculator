@@ -7,6 +7,7 @@ use Granam\WebContentBuilder\Web\Content;
 use Granam\WebContentBuilder\Web\CssFiles;
 use Granam\WebContentBuilder\Web\Head;
 use Granam\WebContentBuilder\Web\JsFiles;
+use Granam\WebContentBuilder\Web\SimpleSourceDirProvider;
 use Granam\WebContentBuilder\Web\WebFiles;
 
 class ContentTest extends AbstractContentTest
@@ -31,7 +32,7 @@ class ContentTest extends AbstractContentTest
         return new Content(
             $htmlHelper,
             new Head($htmlHelper, new CssFiles($this->getDirs(), false), new JsFiles($this->getDirs(), false)),
-            new Body(new WebFiles(__DIR__ . '/files'))
+            new Body(new WebFiles(new SimpleSourceDirProvider(__DIR__ . '/files')))
         );
     }
 

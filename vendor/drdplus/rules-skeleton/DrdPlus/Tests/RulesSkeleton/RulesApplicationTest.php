@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\RulesSkeleton;
 
 use DrdPlus\RulesSkeleton\Configuration;
@@ -142,7 +143,7 @@ class RulesApplicationTest extends AbstractContentTest
         $now = \time();
         $trialExpiredAt = $now + 240 + 1;
         $trialExpiredAtSecondAfter = $trialExpiredAt++;
-        if ($this->isSkeletonChecked() || $this->getTestsConfiguration()->hasProtectedAccess()) {
+        if ($this->getTestsConfiguration()->hasProtectedAccess()) {
             self::assertNull(
                 $_GET[Request::TRIAL] ?? $_POST[Request::TRIAL] ?? $_COOKIE[Request::TRIAL] ?? null,
                 'Globals have not been reset'
@@ -206,7 +207,11 @@ class RulesApplicationTest extends AbstractContentTest
         $_GET[Request::PDF] = '1';
         $content = $this->fetchNonCachedContent();
         if (!$this->getTestsConfiguration()->hasPdf()) {
-            self::assertSame(0, strlen($content), 'No PDF expected due to tests configuration');
+            self::assertStringStartsWith(
+                '<!DOCTYPE html>',
+                $content,
+                'No PDF expected due to tests configuration'
+            );
         } else {
             $pdfFile = glob($this->getDirs()->getPdfRoot() . '/*.pdf')[0] ?? null;
             self::assertNotNull($pdfFile, 'No PDF file found in ' . $this->getDirs()->getPdfRoot() . '/*.pdf');

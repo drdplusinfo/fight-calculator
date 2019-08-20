@@ -1,5 +1,4 @@
-<?php
-namespace DrdPlus\FightCalculator;
+<?php declare(strict_types=1);namespace DrdPlus\FightCalculator;
 
 use DrdPlus\Armourer\Armourer;
 use DrdPlus\Background\BackgroundParts\Ancestry;

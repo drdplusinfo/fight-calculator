@@ -1,15 +1,13 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\AttackSkeleton;
 
-use DrdPlus\Tests\AttackSkeleton\Partials\AttackCalculatorTestTrait;
 use Granam\Integer\IntegerObject;
 use Granam\String\StringObject;
 
 class HtmlHelperTest extends \DrdPlus\Tests\CalculatorSkeleton\HtmlHelperTest
 {
-    use AttackCalculatorTestTrait;
+    use Partials\AttackCalculatorTestTrait;
 
     /**
      * @test

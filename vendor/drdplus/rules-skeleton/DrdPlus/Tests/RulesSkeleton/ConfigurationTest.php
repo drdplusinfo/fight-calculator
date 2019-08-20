@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\RulesSkeleton;
 
@@ -209,5 +208,26 @@ class ConfigurationTest extends AbstractContentTest
         $completeSettings[Configuration::APPLICATION][Configuration::YAML_FILE_WITH_ROUTES] = 'foo';
         $configuration = new Configuration($this->getDirs(), $completeSettings);
         self::assertSame('foo', $configuration->getYamlFileWithRoutes());
+    }
+
+    /**
+     * @test
+     */
+    public function I_will_get_default_home_button_target_if_none_custom_is_set()
+    {
+        $completeSettings = $this->getSomeCompleteSettings();
+        $configuration = new Configuration($this->getDirs(), $completeSettings);
+        self::assertSame('https://www.drdplus.info', $configuration->getHomeButtonTarget());
+    }
+
+    /**
+     * @test
+     */
+    public function I_can_overwrite_default_home_button_target()
+    {
+        $completeSettings = $this->getSomeCompleteSettings();
+        $completeSettings[Configuration::WEB][Configuration::HOME_BUTTON_TARGET] = '..';
+        $configuration = new Configuration($this->getDirs(), $completeSettings);
+        self::assertSame('..', $configuration->getHomeButtonTarget());
     }
 }

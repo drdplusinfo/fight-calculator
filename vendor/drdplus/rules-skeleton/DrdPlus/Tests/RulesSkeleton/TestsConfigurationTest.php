@@ -1,9 +1,9 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\RulesSkeleton;
 
 use DrdPlus\Tests\RulesSkeleton\Partials\AbstractContentTest;
+use Granam\String\StringTools;
 
 class TestsConfigurationTest extends AbstractContentTest
 {
@@ -14,21 +14,75 @@ class TestsConfigurationTest extends AbstractContentTest
      */
     public function I_can_use_it(): void
     {
+        $testsConfiguration = $this->createTestsConfiguration();
+        foreach ($this->getBooleanGetters() as $hasGetter) {
+            if ($hasGetter === 'hasShownHomeButton') {
+                self::assertFalse(
+                    $testsConfiguration->$hasGetter(),
+                    "$hasGetter should return false as it is deprecated and replaced by another configurations"
+                );
+            } else {
+                self::assertTrue(
+                    $testsConfiguration->$hasGetter(),
+                    "$hasGetter should return true by default to ensure strict mode"
+                );
+            }
+        }
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    protected function getBooleanGetters(): array
+    {
         $testsConfigurationReflection = new \ReflectionClass(static::getSutClass());
         $methods = $testsConfigurationReflection->getMethods(
             \ReflectionMethod::IS_PUBLIC ^ \ReflectionMethod::IS_STATIC ^ \ReflectionMethod::IS_ABSTRACT
         );
-        $hasGetters = [];
+        $booleanGetters = [];
         foreach ($methods as $method) {
             $methodName = $method->getName();
-            if (\strpos($methodName, 'has') === 0 || \strpos($methodName, 'can') === 0) {
-                $hasGetters[] = $methodName;
+            if (\strpos($methodName, 'has') === 0 || \strpos($methodName, 'can') === 0 || \strpos($methodName, 'is') === 0) {
+                $booleanGetters[] = $methodName;
             }
         }
-        $testsConfiguration = $this->createTestsConfiguration();
-        foreach ($hasGetters as $hasGetter) {
-            self::assertTrue($testsConfiguration->$hasGetter(), "$hasGetter should return true by default to ensure strict mode");
+        return $booleanGetters;
+    }
+
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function I_can_disable_every_boolean_option()
+    {
+        $testsConfiguration = $this->createTestsConfiguration(array_fill_keys($this->getBooleanOptionNames(), false));
+        foreach ($this->getBooleanGetters() as $hasGetter) {
+            self::assertFalse(
+                $testsConfiguration->$hasGetter(),
+                "$hasGetter() should return false in this test, is that value properly initialized in constructor?"
+            );
         }
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    protected function getBooleanOptionNames(): array
+    {
+        $sutClasses = array_unique([TestsConfiguration::class, static::getSutClass()]);
+        $booleanProperties = [];
+        foreach ($sutClasses as $sutClass) {
+            $testsConfigurationReflection = new \ReflectionClass($sutClass);
+            $properties = $testsConfigurationReflection->getProperties(~\ReflectionProperty::IS_STATIC);
+            $testsConfiguration = $this->getTestsConfiguration($sutClass);
+            foreach ($properties as $property) {
+                $property->setAccessible(true);
+                if (is_bool($property->getValue($testsConfiguration))) {
+                    $booleanProperties[] = StringTools::camelCaseToSnakeCase($property->getName());
+                }
+            }
+        }
+        return $booleanProperties;
     }
 
     /**
@@ -276,5 +330,67 @@ class TestsConfigurationTest extends AbstractContentTest
     public function I_am_stopped_if_public_url_is_missing(): void
     {
         $this->createTestsConfiguration([TestsConfiguration::EXPECTED_PUBLIC_URL => null]);
+    }
+
+    /**
+     * @test
+     * @dataProvider provideStrictBooleanConfiguration
+     * @param string $directive
+     * @param $value
+     */
+    public function Skeleton_boolean_tests_configuration_is_strict(string $directive, $value)
+    {
+        $getter = StringTools::assembleGetterForName($directive, '');
+        self::assertSame($value, $this->getTestsConfiguration()->$getter());
+    }
+
+    public function provideStrictBooleanConfiguration(): array
+    {
+        return [
+            TestsConfiguration::HAS_LOCAL_LINKS => [TestsConfiguration::HAS_LOCAL_LINKS, true],
+            TestsConfiguration::HAS_EXTERNAL_ANCHORS_WITH_HASHES => [TestsConfiguration::HAS_EXTERNAL_ANCHORS_WITH_HASHES, true],
+            TestsConfiguration::HAS_IDS => [TestsConfiguration::HAS_IDS, true],
+            TestsConfiguration::HAS_CALCULATIONS => [TestsConfiguration::HAS_CALCULATIONS, true],
+            TestsConfiguration::HAS_LINKS_TO_ALTAR => [TestsConfiguration::HAS_LINKS_TO_ALTAR, true],
+            TestsConfiguration::CAN_BE_BOUGHT_ON_ESHOP => [TestsConfiguration::CAN_BE_BOUGHT_ON_ESHOP, true],
+            TestsConfiguration::HAS_LINK_TO_SINGLE_JOURNAL => [TestsConfiguration::HAS_LINK_TO_SINGLE_JOURNAL, true],
+            TestsConfiguration::HAS_LINKS_TO_JOURNALS => [TestsConfiguration::HAS_LINKS_TO_JOURNALS, true],
+            TestsConfiguration::HAS_BUTTONS => [TestsConfiguration::HAS_BUTTONS, true],
+            TestsConfiguration::HAS_MARKED_CONTENT => [TestsConfiguration::HAS_MARKED_CONTENT, true],
+            TestsConfiguration::HAS_TABLES => [TestsConfiguration::HAS_TABLES, true],
+            TestsConfiguration::HAS_PROTECTED_ACCESS => [TestsConfiguration::HAS_PROTECTED_ACCESS, true],
+            TestsConfiguration::HAS_NOTES => [TestsConfiguration::HAS_NOTES, true],
+            TestsConfiguration::HAS_HEADINGS => [TestsConfiguration::HAS_HEADINGS, true],
+            TestsConfiguration::HAS_AUTHORS => [TestsConfiguration::HAS_AUTHORS, true],
+            TestsConfiguration::HAS_SHOWN_HOME_BUTTON => [TestsConfiguration::HAS_SHOWN_HOME_BUTTON, false],
+            TestsConfiguration::HAS_SHOWN_HOME_BUTTON_ON_HOMEPAGE => [TestsConfiguration::HAS_SHOWN_HOME_BUTTON_ON_HOMEPAGE, true],
+            TestsConfiguration::HAS_SHOWN_HOME_BUTTON_ON_ROUTES => [TestsConfiguration::HAS_SHOWN_HOME_BUTTON_ON_ROUTES, true],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider provideStrictArrayConfiguration
+     * @param string $directive
+     * @param bool $hasContent
+     */
+    public function Skeleton_array_tests_configuration_is_strict(string $directive, bool $hasContent)
+    {
+        $getter = StringTools::assembleGetterForName($directive, 'get');
+        if ($hasContent) {
+            self::assertNotEmpty($this->getTestsConfiguration()->$getter());
+        } else {
+            self::assertEmpty($this->getTestsConfiguration()->$getter());
+        }
+    }
+
+    public function provideStrictArrayConfiguration(): array
+    {
+        return [
+            TestsConfiguration::TOO_SHORT_RESULT_NAMES => [TestsConfiguration::TOO_SHORT_RESULT_NAMES, true],
+            TestsConfiguration::TOO_SHORT_FAILURE_NAMES => [TestsConfiguration::TOO_SHORT_FAILURE_NAMES, true],
+            TestsConfiguration::TOO_SHORT_SUCCESS_NAMES => [TestsConfiguration::TOO_SHORT_SUCCESS_NAMES, true],
+            TestsConfiguration::SOME_EXPECTED_TABLE_IDS => [TestsConfiguration::SOME_EXPECTED_TABLE_IDS, true],
+        ];
     }
 }

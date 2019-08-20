@@ -1,10 +1,11 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\RulesSkeleton;
 
+use DrdPlus\RulesSkeleton\Environment;
 use DrdPlus\RulesSkeleton\Request;
 use DrdPlus\Tests\RulesSkeleton\Partials\AbstractContentTest;
+use Mockery\MockInterface;
 
 /**
  * @backupGlobals enabled
@@ -33,7 +34,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_detect_czech_seznam_bot(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         foreach (static::getCrawlerUserAgents() as $crawlerUserAgent) {
             self::assertTrue(
                 $request->isVisitorBot($crawlerUserAgent),
@@ -52,7 +53,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_do_not_get_non_bot_browsers_marked_as_bots(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         foreach (static::getNonCrawlerUserAgents() as $nonCrawlerUserAgent) {
             self::assertFalse(
                 $request->isVisitorBot($nonCrawlerUserAgent),
@@ -71,7 +72,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_current_url_even_if_query_string_is_not_set(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         unset($_SERVER['QUERY_STRING']);
         self::assertSame('/', $request->getCurrentUrl());
     }
@@ -81,7 +82,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_current_url_with_updated_query_parameters(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         $_GET = ['foo' => 123, 'bar' => 456];
         self::assertSame('/?foo=0&bar=456&baz=OK', $request->getCurrentUrl(['foo' => false, 'baz' => 'OK']));
     }
@@ -91,7 +92,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_current_url_with_updated_query_parameters_even_if_get_is_not_set(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         unset($_GET);
         $currentUrl = $request->getCurrentUrl(['foo' => true]);
         global $_GET; // because backup globals do not works for unset global
@@ -102,9 +103,35 @@ class RequestTest extends AbstractContentTest
     /**
      * @test
      */
+    public function I_can_get_current_url_with_updated_query_parameters_and_removed_unwanted(): void
+    {
+        $request = new Request($this->getBot(), $this->getEnvironment());
+        $_GET = ['foo' => 123, 'bar' => 456, 'baz' => 789];
+        self::assertSame(
+            '/?foo=0&baz=789',
+            $request->getCurrentUrl(['foo' => false], ['bar'])
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function I_can_get_current_url_without_automatic_parameters(): void
+    {
+        $request = new Request($this->getBot(), $this->getEnvironment());
+        $_GET = ['foo' => 'ok', 'bar' => 'not ok', Request::TRIAL_EXPIRED_AT => time(), Request::TRIAL => '1', Request::CACHE => '1'];
+        self::assertSame(
+            sprintf('/?foo=nice&%s=1&%s=1', Request::TRIAL, Request::CACHE),
+            $request->getCurrentUrlWithoutAutomaticValues(['foo' => 'nice'], ['bar'])
+        );
+    }
+
+    /**
+     * @test
+     */
     public function I_can_get_value_from_get(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         unset($_GET);
         self::assertNull($request->getValueFromGet('foo'));
         global $_GET; // because backup globals do not works for unset global
@@ -118,7 +145,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_value_from_post(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         unset($_POST);
         self::assertNull($request->getValueFromPost('foo'));
         global $_POST; // because backup globals do not works for unset global
@@ -131,7 +158,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_value_from_cookie(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         unset($_COOKIE);
         self::assertNull($request->getValueFromCookie('foo'));
         global $_COOKIE; // because backup globals do not works for unset global
@@ -144,7 +171,7 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_value_from_request_with_priority_post_get_cookie(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         unset($_POST, $_GET, $_COOKIE);
         self::assertNull($request->getValue('foo'));
         global $_POST, $_GET, $_COOKIE; // because backup globals do not works for unset global
@@ -167,13 +194,13 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_get_requested_tables_ids(string $parameterName): void
     {
-        self::assertSame([], (new Request($this->getBot()))->getRequestedTablesIds());
+        self::assertSame([], (new Request($this->getBot(), $this->getEnvironment()))->getRequestedTablesIds());
         $_GET[$parameterName] = '    ';
-        self::assertSame([], (new Request($this->getBot()))->getRequestedTablesIds());
+        self::assertSame([], (new Request($this->getBot(), $this->getEnvironment()))->getRequestedTablesIds());
         $_GET[$parameterName] = 'foo';
-        self::assertSame(['foo'], (new Request($this->getBot()))->getRequestedTablesIds());
+        self::assertSame(['foo'], (new Request($this->getBot(), $this->getEnvironment()))->getRequestedTablesIds());
         $_GET[$parameterName] .= ',bar,baz';
-        self::assertSame(['foo', 'bar', 'baz'], (new Request($this->getBot()))->getRequestedTablesIds());
+        self::assertSame(['foo', 'bar', 'baz'], (new Request($this->getBot(), $this->getEnvironment()))->getRequestedTablesIds());
         unset($_GET[$parameterName]); // to avoid using this in next iteration as @backupGlobals does not work
     }
 
@@ -191,7 +218,7 @@ class RequestTest extends AbstractContentTest
     public function I_can_get_path_info(): void
     {
         $_SERVER['PATH_INFO'] = null;
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         self::assertSame('', $request->getPathInfo());
         $_SERVER['PATH_INFO'] = 'foo/bar';
         self::assertSame('foo/bar', $request->getPathInfo());
@@ -203,7 +230,7 @@ class RequestTest extends AbstractContentTest
     public function I_can_get_current_path(): void
     {
         $_SERVER['REQUEST_URI'] = null;
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         self::assertSame('/', $request->getPath());
         $_SERVER['REQUEST_URI'] = '/foo/bar';
         self::assertSame('/foo/bar', $request->getPath());
@@ -215,7 +242,7 @@ class RequestTest extends AbstractContentTest
     public function I_can_get_query_string(): void
     {
         $_SERVER['QUERY_STRING'] = null;
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         self::assertSame('', $request->getQueryString());
         $_SERVER['QUERY_STRING'] = 'foo=bar';
         self::assertSame('foo=bar', $request->getQueryString());
@@ -224,10 +251,25 @@ class RequestTest extends AbstractContentTest
     /**
      * @test
      */
-    public function I_can_get_php_sapi(): void
+    public function I_can_find_out_if_request_comes_from_cli(): void
     {
-        $request = new Request($this->getBot());
-        self::assertSame(\PHP_SAPI, $request->getPhpSapi());
+        $request = new Request($this->getBot(), $this->createEnvironment('paper'));
+        self::assertFalse($request->isCliRequest());
+        $request = new Request($this->getBot(), $this->createEnvironment('cli'));
+        self::assertTrue($request->isCliRequest());
+    }
+
+    /**
+     * @param string $phpSapi
+     * @return Environment|MockInterface
+     */
+    private function createEnvironment(string $phpSapi): Environment
+    {
+        $environment = $this->mockery(Environment::class);
+        $environment->shouldReceive('getPhpSapi')
+            ->andReturn($phpSapi);
+        $environment->makePartial();
+        return $environment;
     }
 
     /**
@@ -235,11 +277,22 @@ class RequestTest extends AbstractContentTest
      */
     public function I_can_find_out_if_trial_just_expired(): void
     {
-        $request = new Request($this->getBot());
+        $request = new Request($this->getBot(), $this->getEnvironment());
         self::assertFalse($request->trialJustExpired());
         $_GET[Request::TRIAL_EXPIRED_AT] = time() + 10;
         self::assertFalse($request->trialJustExpired());
         $_GET[Request::TRIAL_EXPIRED_AT] = time() - 10;
         self::assertTrue($request->trialJustExpired());
     }
+
+    /**
+     * @test
+     */
+    public function I_will_get_homepage_on_multiple_slashes(): void
+    {
+        $router = new Request($this->getBot(), $this->getEnvironment());
+        $_SERVER['REQUEST_URI'] = '//';
+        self::assertSame('/', $router->getPath());
+    }
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\AttackSkeleton;
 
@@ -92,16 +91,16 @@ class PreviousArmaments extends StrictObject
         if ($meleeWeaponValue === null) {
             return MeleeWeaponCode::HAND;
         }
-        return $meleeWeaponValue;
+        return (string)$meleeWeaponValue;
     }
 
     private function getPreviousMeleeWeaponHoldingValue(): string
     {
         $previousMeleeWeaponHoldingValue = $this->history->getValue(AttackRequest::MELEE_WEAPON_HOLDING);
         if ($previousMeleeWeaponHoldingValue !== null) {
-            return $previousMeleeWeaponHoldingValue;
+            return ItemHoldingCode::MAIN_HAND;
         }
-        return ItemHoldingCode::MAIN_HAND;
+        return (string)$previousMeleeWeaponHoldingValue;
     }
 
     /**
@@ -148,12 +147,12 @@ class PreviousArmaments extends StrictObject
         if ($rangedWeaponValue === null) {
             return RangedWeaponCode::SAND;
         }
-        return $rangedWeaponValue;
+        return (string)$rangedWeaponValue;
     }
 
     /**
-     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
      * @return BodyArmorCode
+     * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
      */
     public function getPreviousBodyArmor(): BodyArmorCode
     {
@@ -176,7 +175,7 @@ class PreviousArmaments extends StrictObject
         if ($bodyArmorValue === null) {
             return BodyArmorCode::WITHOUT_ARMOR;
         }
-        return $bodyArmorValue;
+        return (string)$bodyArmorValue;
     }
 
     /**
@@ -204,7 +203,7 @@ class PreviousArmaments extends StrictObject
         if ($helmValue === null) {
             return HelmCode::WITHOUT_HELM;
         }
-        return $helmValue;
+        return (string)$helmValue;
     }
 
     public function getPreviousShieldForMelee(): ShieldCode
@@ -269,7 +268,7 @@ class PreviousArmaments extends StrictObject
         if ($shieldValue === null) {
             return ShieldCode::WITHOUT_SHIELD;
         }
-        return $shieldValue;
+        return (string)$shieldValue;
     }
 
     public function couldUseShield(ShieldCode $shieldCode, ItemHoldingCode $itemHoldingCode): bool
@@ -308,7 +307,7 @@ class PreviousArmaments extends StrictObject
         if ($rangedWeaponHoldingValue === null) {
             return ItemHoldingCode::MAIN_HAND;
         }
-        return $rangedWeaponHoldingValue;
+        return (string)$rangedWeaponHoldingValue;
     }
 
     /**

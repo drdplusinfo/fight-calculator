@@ -1,6 +1,6 @@
 <?php /** @var \DrdPlus\FightCalculator\Web\FightWebPartsContainer $webPartsContainer */ ?>
 <div class="row">
-  <h2 id="Zbroj" class="col"><a href="#Zbroj" class="inner">Zbroj a helma</a></h2>
+  <h2 id="Zbroj a helma" class="col"><a href="#Zbroj a helma" class="inner">Zbroj a helma</a></h2>
 </div>
 <fieldset>
     <?php

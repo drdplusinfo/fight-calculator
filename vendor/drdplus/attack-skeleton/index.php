@@ -5,6 +5,7 @@ use DrdPlus\CalculatorSkeleton\CalculatorApplication;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
 use DrdPlus\RulesSkeleton\Dirs;
 use DrdPlus\RulesSkeleton\Environment;
+use DrdPlus\RulesSkeleton\TracyDebugger;
 
 error_reporting(-1);
 if ((!empty($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] === '127.0.0.1') || PHP_SAPI === 'cli') {
@@ -19,12 +20,12 @@ $documentRoot = $documentRoot ?? (PHP_SAPI !== 'cli' ? rtrim(dirname($_SERVER['S
 require_once $documentRoot . '/vendor/autoload.php';
 
 $dirs = Dirs::createFromGlobals();
-$htmlHelper = HtmlHelper::createFromGlobals($dirs, new Environment());
+$htmlHelper = HtmlHelper::createFromGlobals($dirs, Environment::createFromGlobals());
 if (PHP_SAPI !== 'cli') {
-    \DrdPlus\RulesSkeleton\TracyDebugger::enable($htmlHelper->isInProduction());
+    TracyDebugger::enable($htmlHelper->isInProduction());
 }
 
 $calculatorConfiguration = CalculatorConfiguration::createFromYml($dirs);
 $servicesContainer = new AttackServicesContainer($calculatorConfiguration, $htmlHelper);
-$calculatorApplication = new CalculatorApplication($servicesContainer);
+$calculatorApplication = $rulesApplication ?? new CalculatorApplication($servicesContainer);
 $calculatorApplication->run();

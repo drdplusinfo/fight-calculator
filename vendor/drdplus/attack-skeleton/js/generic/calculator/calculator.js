@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (var controlIndex = 0, controlsLength = allControls.length; controlIndex < controlsLength; controlIndex++) {
         var control = allControls[controlIndex];
-        if (typeof control.type !== 'undefined' && control.type !== 'submit') {
+        if ((typeof control.type === 'undefined' || control.type !== 'submit') && !control.classList.contains('manual')) {
             if (typeof control.type === 'undefined' || control.type !== 'button') {
                 control.addEventListener('change', function () {
                     submitOnChange(this)
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (var inputIndex = 0, inputsLength = formInputs.length; inputIndex < inputsLength; inputIndex++) {
             var input = formInputs[inputIndex];
             if (input.type === 'submit' && !input.disabled) {
-                if (button.classList.contains('manual')) {
+                if (input.classList.contains('manual')) {
                     hasManualSubmit = true;
                 } else {
                     input.click();

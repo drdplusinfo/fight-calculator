@@ -1,8 +1,8 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\CalculatorSkeleton\Partials;
 
+use DrdPlus\CalculatorSkeleton\CalculatorApplication;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
 use DrdPlus\CalculatorSkeleton\CalculatorServicesContainer;
 use DrdPlus\RulesSkeleton\Configuration;
@@ -54,16 +54,35 @@ trait CalculatorContentTestTrait
     }
 
     /**
+     * @return string|CalculatorApplication
+     */
+    protected function getRulesApplicationClass(): string
+    {
+        return CalculatorApplication::class;
+    }
+
+    /**
+     * @param string|null $class
      * @return TestsConfiguration|\DrdPlus\Tests\RulesSkeleton\TestsConfiguration
      */
-    protected function getTestsConfiguration(): \DrdPlus\Tests\RulesSkeleton\TestsConfiguration
+    protected function getTestsConfiguration(string $class = null): \DrdPlus\Tests\RulesSkeleton\TestsConfiguration
     {
         static $testsConfiguration;
         if ($testsConfiguration === null) {
-            $testsConfiguration = TestsConfiguration::createFromYaml(\DRD_PLUS_TESTS_ROOT . '/tests_configuration.yml');
+            /** @var TestsConfiguration $class */
+            $class = $class ?? TestsConfiguration::class;
+            $testsConfiguration = $class::createFromYaml(\DRD_PLUS_TESTS_ROOT . '/tests_configuration.yml');
         }
 
         return $testsConfiguration;
+    }
+
+    /**
+     * @return TestsConfiguration|\DrdPlus\Tests\RulesSkeleton\TestsConfiguration
+     */
+    protected function getRulesSkeletonTestsConfiguration(): \DrdPlus\Tests\RulesSkeleton\TestsConfiguration
+    {
+        return parent::getTestsConfiguration();
     }
 
     protected function isSkeletonChecked(string $skeletonDocumentRoot = null): bool

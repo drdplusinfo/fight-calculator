@@ -1,10 +1,10 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\AttackSkeleton;
 
 use DeviceDetector\Parser\Bot;
 use DrdPlus\CalculatorSkeleton\CurrentValues;
+use DrdPlus\RulesSkeleton\Environment;
 use DrdPlus\RulesSkeleton\Request;
 
 class AttackRequest extends Request
@@ -29,9 +29,9 @@ class AttackRequest extends Request
     /** @var CurrentValues */
     private $currentValues;
 
-    public function __construct(CurrentValues $currentValues, Bot $botParser)
+    public function __construct(CurrentValues $currentValues, Bot $botParser, Environment $environment)
     {
-        parent::__construct($botParser);
+        parent::__construct($botParser, $environment);
         $this->currentValues = $currentValues;
     }
 

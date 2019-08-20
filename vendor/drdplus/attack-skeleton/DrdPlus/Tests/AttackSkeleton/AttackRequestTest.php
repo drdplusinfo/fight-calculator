@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\AttackSkeleton;
 
@@ -14,7 +13,7 @@ class AttackRequestTest extends AbstractAttackTest
      */
     public function I_can_get_scroll_from_top(): void
     {
-        $frontendHelper = new AttackRequest($this->createCurrentValues(123456), $this->getBot());
+        $frontendHelper = new AttackRequest($this->createCurrentValues(123456), $this->getBot(), $this->getEnvironment());
         self::assertSame(123456, $frontendHelper->getScrollFromTop());
     }
 

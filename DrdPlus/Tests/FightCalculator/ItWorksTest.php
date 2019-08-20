@@ -1,5 +1,4 @@
-<?php
-namespace DrdPlus\Tests\Calculators\Fight;
+<?php declare(strict_types=1);namespace DrdPlus\Tests\Calculators\Fight;
 
 use DrdPlus\AttackSkeleton\AttackRequest;
 use Gt\Dom\HTMLDocument;

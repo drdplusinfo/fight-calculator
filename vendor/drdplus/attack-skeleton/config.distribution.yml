@@ -4,8 +4,8 @@ web:
   menu_position_fixed: false
   show_home_button: true
   name: 'HTML kostra pro DrD+ kalkulátory útoku'
-  title_smiley: '️'
+  title_smiley: ""
   cookies_postfix: 'attack-skeleton'
+  can_be_bought_on_eshop: false
 google:
   analytics_id: 'UA-121206931-1'
-

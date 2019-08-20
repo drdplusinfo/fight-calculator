@@ -1,5 +1,4 @@
-<?php
-namespace DrdPlus\AttackSkeleton;
+<?php declare(strict_types=1);namespace DrdPlus\AttackSkeleton;
 
 use Composer\Composer;
 use Composer\DependencyResolver\Operation\InstallOperation;

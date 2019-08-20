@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\AttackSkeleton;
 
@@ -7,6 +6,7 @@ use DrdPlus\Armourer\Armourer;
 use DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
 use DrdPlus\CalculatorSkeleton\CalculatorServicesContainer;
+use DrdPlus\RulesSkeleton\Web\WebPartsContainer;
 use DrdPlus\Tables\Tables;
 
 /**
@@ -111,7 +111,7 @@ class AttackServicesContainer extends CalculatorServicesContainer
     public function getAttackRequest(): AttackRequest
     {
         if ($this->attackRequest === null) {
-            $this->attackRequest = new AttackRequest($this->getCurrentValues(), $this->getBotParser());
+            $this->attackRequest = new AttackRequest($this->getCurrentValues(), $this->getBotParser(), $this->getEnvironment());
         }
         return $this->attackRequest;
     }
@@ -148,7 +148,7 @@ class AttackServicesContainer extends CalculatorServicesContainer
         return $this->customArmamentsState;
     }
 
-    public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
+    public function getWebPartsContainer(): WebPartsContainer
     {
         if ($this->attackWebPartsContainer === null) {
             $this->attackWebPartsContainer = new AttackWebPartsContainer(

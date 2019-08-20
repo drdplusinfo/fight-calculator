@@ -1,2 +1,1 @@
-<?php
-/** @see \DrdPlus\AttackSkeleton\Web\MeleeWeaponBody */
+<?php declare(strict_types=1);/** @see \DrdPlus\AttackSkeleton\Web\MeleeWeaponBody */

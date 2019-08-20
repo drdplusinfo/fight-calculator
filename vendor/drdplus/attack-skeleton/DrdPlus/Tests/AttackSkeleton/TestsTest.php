@@ -1,37 +1,36 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\AttackSkeleton;
 
-class TestsTest extends \DrdPlus\Tests\RulesSkeleton\TestsTest
+class TestsTest extends \DrdPlus\Tests\CalculatorSkeleton\TestsTest
 {
     /**
      * @test
      * @throws \ReflectionException
      */
-    public function All_calculator_skeleton_tests_are_used(): void
+    public function All_rules_skeleton_tests_are_used(): void
     {
-        $reflectionClass = new \ReflectionClass(static::class);
-        $calculatorSkeletonDir = \dirname($reflectionClass->getFileName());
-        foreach ($this->getClassesFromDir($calculatorSkeletonDir) as $calculatorSkeletonTestClass) {
-            if (\is_a($calculatorSkeletonTestClass, \Throwable::class, true)) {
+        $reflectionClass = new \ReflectionClass(parent::class);
+        $rulesSkeletonDir = dirname($reflectionClass->getFileName());
+        foreach ($this->getClassesFromDir($rulesSkeletonDir) as $rulesSkeletonTestClass) {
+            if (is_a($rulesSkeletonTestClass, \Throwable::class, true)) {
                 continue;
             }
-            $calculatorSkeletonTestClassReflection = new \ReflectionClass($calculatorSkeletonTestClass);
-            if ($calculatorSkeletonTestClassReflection->isAbstract()
-                || $calculatorSkeletonTestClassReflection->isInterface()
-                || $calculatorSkeletonTestClassReflection->isTrait()
+            $rulesSkeletonTestClassReflection = new \ReflectionClass($rulesSkeletonTestClass);
+            if ($rulesSkeletonTestClassReflection->isAbstract()
+                || $rulesSkeletonTestClassReflection->isInterface()
+                || $rulesSkeletonTestClassReflection->isTrait()
             ) {
                 continue;
             }
-            $expectedCalculatorTestClass = \str_replace('\CalculatorSkeleton', '\AttackSkeleton', $calculatorSkeletonTestClass);
+            $expectedCalculatorTestClass = str_replace('\\CalculatorSkeleton', '\\AttackSkeleton', $rulesSkeletonTestClass);
             self::assertTrue(
-                \class_exists($expectedCalculatorTestClass),
-                "Missing test class {$expectedCalculatorTestClass} adopted from calculator skeleton test class {$calculatorSkeletonTestClass}"
+                class_exists($expectedCalculatorTestClass),
+                "Missing test class {$expectedCalculatorTestClass} adopted from rules skeleton test class {$rulesSkeletonTestClass}"
             );
             self::assertTrue(
-                \is_a($expectedCalculatorTestClass, $calculatorSkeletonTestClass, true),
-                "$expectedCalculatorTestClass should be a child of $calculatorSkeletonTestClass"
+                is_a($expectedCalculatorTestClass, $rulesSkeletonTestClass, true),
+                "$expectedCalculatorTestClass should be a child of $rulesSkeletonTestClass"
             );
         }
     }

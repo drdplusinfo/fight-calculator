@@ -102,7 +102,7 @@ HTML
         ));
         $elementWithId = $withAnchorsOnIds->getElementById(\html_entity_decode($topId));
         $anchors = $elementWithId->getElementsByTagName('a');
-        self::assertSame(\count($expectedAnchors), \count($anchors), 'Expected different cout of anchors inside ' . $withAnchorsOnIds->saveHTML());
+        self::assertSame(\count($expectedAnchors), \count($anchors), 'Expected different count of anchors inside ' . $withAnchorsOnIds->saveHTML());
         foreach ($expectedAnchors as $index => $expectedAnchor) {
             self::assertSame(
                 $expectedAnchor,
@@ -131,6 +131,51 @@ HTML
                 'Znalost&lt;divočiny&gt;',
                 '<h6 id="Znalost&lt;divočiny&gt;">Znalost&lt;divočiny&gt;</h6>',
                 ['<a href="#Znalost&lt;divo%C4%8Diny&gt;">Znalost&lt;divočiny&gt;</a>'],
+            ],
+            'heading with ID but marked as without link' => [
+                'some_heading',
+                '<h1 id="some_heading" class="' . HtmlHelper::CLASS_WITHOUT_ANCHOR_TO_ID . '">Some heading</h1>',
+                [],
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider provideHtmlWithHeading
+     * @param string $headingTag
+     * @param string $htmlWithHeading
+     * @param string|null $expectedHeading
+     */
+    public function I_can_add_id_to_heading(string $headingTag, string $htmlWithHeading, ?string $expectedHeading): void
+    {
+        $htmlHelper = $this->getHtmlHelper();
+        $withAnchorsOnIds = $htmlHelper->addIdsToHeadings(new HtmlDocument(<<<HTML
+<!DOCTYPE html>
+<html lang="cs">
+<body>
+{$htmlWithHeading}
+</body>
+</html>
+HTML
+        ));
+        $heading = $withAnchorsOnIds->getElementsByTagName($headingTag)[0];
+        $id = $heading->getAttribute('id');
+        self::assertSame($expectedHeading, $id, 'Expected different ID on heading ' . $heading->prop_get_outerHTML());
+    }
+
+    public function provideHtmlWithHeading(): array
+    {
+        return [
+            'heading' => [
+                'h1',
+                '<h1>Some heading</h1>',
+                'Some heading',
+            ],
+            'heading with class to suppress ID injection' => [
+                'h2',
+                '<h2 class="' . HtmlHelper::CLASS_HEADING_WITHOUT_ID . '">Another heading</h2>',
+                null,
             ],
         ];
     }
