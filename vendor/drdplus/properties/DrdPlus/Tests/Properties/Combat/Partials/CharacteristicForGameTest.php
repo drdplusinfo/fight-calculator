@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Combat\Partials;
@@ -50,7 +51,7 @@ abstract class CharacteristicForGameTest extends CombatCharacteristicTest
     {
         $reflectionClass = new \ReflectionClass(self::getSutClass());
         $classBasename = preg_replace('~^.+[\\\](\w+)$~', '$1', self::getSutClass());
-        self::assertContains(<<<ANNOTATION
+        self::assertStringContainsString(<<<ANNOTATION
  * @method {$classBasename} add(int | \\Granam\\Integer\\IntegerInterface \$value)
  * @method {$classBasename} sub(int | \\Granam\\Integer\\IntegerInterface \$value)
 ANNOTATION

@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Health\Afflictions\AfflictionSize;
@@ -19,21 +20,21 @@ class AfflictionSizeTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\IntegerEnum\Exceptions\WrongValueForIntegerEnum
-     * @expectedExceptionMessageRegExp ~Broken heart by fixed dart~
      */
     public function I_am_stopped_by_specific_exception_on_invalid_value()
     {
+        $this->expectException(\Granam\IntegerEnum\Exceptions\WrongValueForIntegerEnum::class);
+        $this->expectExceptionMessageRegExp('~Broken heart by fixed dart~');
         AfflictionSize::getIt('Broken heart by fixed dart');
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\AfflictionSizeCanNotBeNegative
-     * @expectedExceptionMessageRegExp ~-1~
      */
     public function I_can_not_use_negative_value()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\AfflictionSizeCanNotBeNegative::class);
+        $this->expectExceptionMessageRegExp('~-1~');
         AfflictionSize::getEnum(-1);
     }
 }

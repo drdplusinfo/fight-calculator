@@ -15,9 +15,6 @@ use Gt\Dom\Element;
 use Gt\Dom\TokenList;
 use Mockery\MockInterface;
 
-/**
- * @backupGlobals enabled
- */
 class RulesApplicationTest extends AbstractContentTest
 {
     /**
@@ -36,9 +33,11 @@ class RulesApplicationTest extends AbstractContentTest
             self::assertTrue($menu->classList->contains('top'), 'Contacts should be positioned on top');
             self::assertFalse($menu->classList->contains('fixed'), 'Contacts should not be fixed as application does not say so');
         }
-        $configurationWithFixedMenu = $this->createCustomConfiguration([Configuration::WEB => [Configuration::MENU_POSITION_FIXED => true]]);
+        $configurationWithFixedMenu = $this->createCustomConfiguration(
+            [Configuration::WEB => [Configuration::MENU_POSITION_FIXED => true]]
+        );
         self::assertTrue($configurationWithFixedMenu->isMenuPositionFixed(), 'Expected configuration with menu position fixed');
-        $rulesApplication = $this->createRulesApplication($configurationWithFixedMenu);
+        $rulesApplication = $this->createRulesApplication($this->createServicesContainer($configurationWithFixedMenu));
         if ($this->isSkeletonChecked()) {
             $content = $this->fetchNonCachedContent($rulesApplication);
             $htmlDocument = new HtmlDocument($content);
@@ -131,6 +130,7 @@ class RulesApplicationTest extends AbstractContentTest
 
     /**
      * @test
+     * @backupGlobals enabled
      * @dataProvider provideRequestType
      * @param string $requestType
      * @throws \ReflectionException
@@ -190,10 +190,9 @@ class RulesApplicationTest extends AbstractContentTest
         self::assertCount(0, $this->getMetaRefreshes($this->getHtmlDocument()), 'No meta tag with refresh meaning expected');
         $this->passOut();
         self::assertNull($_POST[Request::TRIAL] ?? null, 'Globals have not been reset');
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $this->createServicesContainer()->getUsagePolicy()->activateTrial(new \DateTimeImmutable('+1 year'));
-        $_POST[Request::TRIAL] = '1';
-        $content = $this->fetchNonCachedContent();
+        $rulesApplication = $this->createRulesApplication($servicesContainer = $this->createServicesContainer());
+        $servicesContainer->getUsagePolicy()->activateTrial(new \DateTimeImmutable('+1 year'));
+        $content = $this->fetchNonCachedContent($rulesApplication);
         $document = new HtmlDocument($content);
         $metaRefreshes = $this->getMetaRefreshes($document);
         self::assertCount(0, $metaRefreshes, 'No meta tag with refresh meaning expected as we are owners');
@@ -201,6 +200,7 @@ class RulesApplicationTest extends AbstractContentTest
 
     /**
      * @test
+     * @backupGlobals enabled
      */
     public function I_can_get_pdf(): void
     {

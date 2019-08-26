@@ -92,6 +92,6 @@ HTML
         );
         $expectedPageTitle = \trim($this->getConfiguration()->getTitleSmiley() . ' ' . $pageName);
         self::assertSame($expectedPageTitle, $head->getPageTitle());
-        self::assertContains("<title>$expectedPageTitle</title>", $head->getValue());
+        self::assertStringContainsString("<title>$expectedPageTitle</title>", $head->getValue());
     }
 }

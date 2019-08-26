@@ -34,11 +34,11 @@ abstract class AbstractBackgroundAdvantageTest extends AbstractTestOfEnum
 
     /**
      * @test
-     * @expectedException \DrdPlus\Background\Exceptions\TooMuchSpentBackgroundPoints
-     * @expectedExceptionMessageRegExp ~9~
      */
     public function I_can_not_get_ancestry_background_points_with_invalid_value()
     {
+        $this->expectException(\DrdPlus\Background\Exceptions\TooMuchSpentBackgroundPoints::class);
+        $this->expectExceptionMessageRegExp('~9~');
         $this->createSutToTestSpentBackgroundPoints(new PositiveIntegerObject(9));
     }
 
@@ -89,10 +89,10 @@ abstract class AbstractBackgroundAdvantageTest extends AbstractTestOfEnum
 
     /**
      * @test
-     * @expectedException \DrdPlus\Background\BackgroundParts\Partials\Exceptions\UnknownExceptionality
      */
-    public static function I_have_to_define_exceptionality_code_in_getter()
+    public function I_have_to_define_exceptionality_code_in_getter()
     {
+        $this->expectException(\DrdPlus\Background\BackgroundParts\Partials\Exceptions\UnknownExceptionality::class);
         BrokenSut::getExceptionalityCode();
     }
 }

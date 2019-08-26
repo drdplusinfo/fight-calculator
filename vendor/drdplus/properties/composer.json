@@ -10,20 +10,16 @@
   },
   "require": {
     "php": ">=7.1",
-    "granam/string": "^3.0",
-    "granam/scalar-enum": "~1.0",
-    "granam/integer-enum": "~1.0",
-    "granam/float-enum": "~1.0",
-    "granam/boolean-enum": "~1.0",
-    "drdplus/codes": "~2.0",
-    "drdplus/tables": "~2.0",
-    "drdplus/base-properties": "~2.0",
+    "granam/integer-enum": "^1.1",
+    "granam/float-enum": "^1.0",
+    "granam/boolean-enum": "^1.0",
+    "drdplus/tables": "^2.5",
     "drdplus/calculations": "^1.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "~7.0",
-    "mockery/mockery": "~1.0",
-    "granam/exceptions-hierarchy": "~4.0"
+    "phpunit/phpunit": "^8.3",
+    "mockery/mockery": "^1.2",
+    "granam/exceptions-hierarchy": "^5.0"
   }
 }

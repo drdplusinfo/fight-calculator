@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\FightProperties;
 
 use DrdPlus\Codes\Armaments\ArmamentCode;
@@ -1030,11 +1031,11 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getAttackNumberModifier
      * @param Armourer|\Mockery\MockInterface $armourer
      * @param WeaponlikeCode $weaponlikeCode
      * @param Strength $expectedStrength
      * @param int $attackNumberMalus
+     * @see FightProperties::getAttackNumberModifier
      */
     private function addAttackNumberMalusByStrengthWithWeaponlike(
         Armourer $armourer,
@@ -1057,12 +1058,12 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getAttackNumberModifier
      * @param Skills|\Mockery\MockInterface $skills
      * @param WeaponlikeCode $expectedWeaponlikeCode
      * @param MissingWeaponSkillTable $expectedMissingWeaponSkillTable
      * @param bool $fightsWithTwoWeapons
      * @param int $attackNumberMalus
+     * @see FightProperties::getAttackNumberModifier
      */
     private function addMalusToAttackNumberFromSkillsWithWeaponlike(
         Skills $skills,
@@ -1305,11 +1306,11 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getFightNumberMalusByStrength
      * @param Armourer|\Mockery\MockInterface $armourer
      * @param WeaponlikeCode $expectedWeaponlikeCode
      * @param Strength $expectedStrength
      * @param int $fightNumberMalusByStrengthWithWeapon
+     * @see FightProperties::getFightNumberMalusByStrength
      */
     private function addFightNumberMalusByStrengthWithWeaponOrShield(
         Armourer $armourer,
@@ -1333,7 +1334,6 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getFightNumberMalusFromProtectivesBySkills
      * @param Skills|\Mockery\MockInterface $skills
      * @param Armourer $armourer
      * @param BodyArmorCode $bodyArmorCode
@@ -1344,6 +1344,7 @@ class FightPropertiesTest extends TestWithMockery
      * @param $malusToFightNumberWithShield
      * @param ShieldCode $shieldAsWeapon = null
      * @param int $malusToFightNumberWithShieldAsWeapon = null
+     * @see FightProperties::getFightNumberMalusFromProtectivesBySkills
      */
     private function addFightNumberMalusFromProtectivesBySkills(
         Skills $skills,
@@ -1409,12 +1410,12 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getFightNumberMalusFromWeaponlikesBySkills
      * @param Skills|\Mockery\MockInterface $skills
      * @param WeaponlikeCode $weaponlikeCode
      * @param MissingWeaponSkillTable $expectedMissingWeaponSkillTable
      * @param bool $fightsWithTwoWeapons
      * @param int $malusFromWeaponlike
+     * @see FightProperties::getFightNumberMalusFromWeaponlikesBySkills
      */
     private function addMalusToFightNumberWithWeaponlike(
         Skills $skills,
@@ -1439,9 +1440,9 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getFightNumberMalusFromWeaponlikesBySkills
      * @param Skills|\Mockery\MockInterface $skills
      * @param int $malusFromRiding
+     * @see FightProperties::getFightNumberMalusFromWeaponlikesBySkills
      */
     private function addMalusToFightNumberByRiding(Skills $skills, int $malusFromRiding): void
     {
@@ -1450,13 +1451,13 @@ class FightPropertiesTest extends TestWithMockery
     }
 
     /**
-     * @see FightProperties::getLongerWeaponlike
      * @param Tables|\Mockery\MockInterface $tables
      * @param Armourer|\Mockery\MockInterface $armourer
      * @param WeaponlikeCode $weaponlikeCode
      * @param int $lengthOfWeaponlike
      * @param ShieldCode $shieldCode
      * @param int $lengthOfShield
+     * @see FightProperties::getLongerWeaponlike
      */
     private function addFightNumberBonusByWeaponlikeLength(
         Tables $tables,
@@ -1693,7 +1694,6 @@ class FightPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\FightProperties\Exceptions\CanNotUseArmamentBecauseOfMissingStrength
      * @dataProvider provideArmamentsBearing
      * @param bool $weaponIsBearable
      * @param bool $shieldIsBearable
@@ -1707,6 +1707,7 @@ class FightPropertiesTest extends TestWithMockery
         bool $helmIsBearable
     ): void
     {
+        $this->expectException(\DrdPlus\FightProperties\Exceptions\CanNotUseArmamentBecauseOfMissingStrength::class);
         $armourer = $this->createArmourer();
 
         $weaponlikeCode = $this->createWeapon();
@@ -1774,7 +1775,6 @@ class FightPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\FightProperties\Exceptions\CanNotHoldItByTwoHands
      * @dataProvider provideWeaponOrShieldInvalidTwoHandsHolding
      * @param bool $fightsWithTwoWeapons
      * @param bool $holdsByTwoHands
@@ -1786,6 +1786,7 @@ class FightPropertiesTest extends TestWithMockery
         bool $canHoldByOneHand
     ): void
     {
+        $this->expectException(\DrdPlus\FightProperties\Exceptions\CanNotHoldItByTwoHands::class);
         $armourer = $this->createArmourer();
 
         $weaponlikeCode = $this->createWeapon();
@@ -1840,10 +1841,10 @@ class FightPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\FightProperties\Exceptions\CanNotHoldItByOneHand
      */
     public function I_can_not_create_it_with_one_hand_holding_if_not_possible(): void
     {
+        $this->expectException(\DrdPlus\FightProperties\Exceptions\CanNotHoldItByOneHand::class);
         $armourer = $this->createArmourer();
 
         $weaponlikeCode = $this->createWeapon();
@@ -1887,11 +1888,11 @@ class FightPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\FightProperties\Exceptions\ImpossibleActionsWithCurrentWeaponlike
-     * @expectedExceptionMessageRegExp ~foo~
      */
     public function I_can_not_create_it_with_weapon_incompatible_actions(): void
     {
+        $this->expectException(\DrdPlus\FightProperties\Exceptions\ImpossibleActionsWithCurrentWeaponlike::class);
+        $this->expectExceptionMessageRegExp('~foo~');
         $armourer = $this->createArmourer();
 
         $weaponlikeCode = $this->createWeapon();
@@ -1935,10 +1936,10 @@ class FightPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\FightProperties\Exceptions\UnknownWeaponHolding
      */
     public function I_can_not_create_it_with_unknown_holding(): void
     {
+        $this->expectException(\DrdPlus\FightProperties\Exceptions\UnknownWeaponHolding::class);
         $armourer = $this->createArmourer();
 
         $weaponlikeCode = $this->createWeapon();
@@ -1982,11 +1983,11 @@ class FightPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\FightProperties\Exceptions\NoHandLeftForShield
-     * @expectedExceptionMessageRegExp ~buckler when holding foo with~
      */
     public function I_can_not_use_shield_when_holding_weapon_by_two_hands(): void
     {
+        $this->expectException(\DrdPlus\FightProperties\Exceptions\NoHandLeftForShield::class);
+        $this->expectExceptionMessageRegExp('~buckler when holding foo with~');
         $armourer = $this->createArmourer();
 
         $weaponlikeCode = $this->createWeapon();

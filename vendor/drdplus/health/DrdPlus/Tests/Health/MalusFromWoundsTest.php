@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Health\MalusFromWounds;
@@ -21,21 +22,21 @@ class MalusFromWoundsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnexpectedMalusValue
-     * @expectedExceptionMessageRegExp ~1~
      */
     public function I_can_not_create_positive_malus()
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnexpectedMalusValue::class);
+        $this->expectExceptionMessageRegExp('~1~');
         MalusFromWounds::getIt(1);
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnexpectedMalusValue
-     * @expectedExceptionMessageRegExp ~-4~
      */
     public function I_can_not_create_worse_malus_than_minus_three()
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnexpectedMalusValue::class);
+        $this->expectExceptionMessageRegExp('~-4~');
         MalusFromWounds::getIt(-4);
     }
 }

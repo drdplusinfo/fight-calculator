@@ -79,10 +79,10 @@ class BackgroundTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Background\Exceptions\TooMuchSpentBackgroundPoints
      */
     public function I_can_not_spent_more_than_available_points_in_total()
     {
+        $this->expectException(\DrdPlus\Background\Exceptions\TooMuchSpentBackgroundPoints::class);
         $backgroundPoints = BackgroundPoints::getIt(FateCode::getIt(FateCode::GOOD_BACKGROUND), Tables::getIt());
         $pointsForAncestry = 6;
         $pointsForBackgroundSkillPoints = 5;

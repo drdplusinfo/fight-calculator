@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Skills;
 
@@ -637,10 +636,10 @@ class SkillsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnknownPaymentForSkillPoint
      */
     public function I_can_not_use_unknown_payment()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnknownPaymentForSkillPoint::class);
         $professionLevels = $this->createProfessionLevels();
         $skillsFromBackground = $this->createSkillPointsFromBackground($professionLevels->getFirstLevel()->getProfession());
         $physicalSkills = $this->createPhysicalSkillsWithUnknownPayment($professionLevels->getFirstLevel(), Swimming::class);
@@ -695,7 +694,6 @@ class SkillsTest extends TestWithMockery
     /**
      * @test
      * @dataProvider provideDifferentSkillPointsFromBackground
-     * @expectedException \DrdPlus\Skills\Exceptions\SkillPointsFromBackgroundAreNotSame
      * @param ProfessionLevels $professionLevels
      * @param SkillPointsFromBackground $skillsFromBackground
      * @param SkillPointsFromBackground $fromFirstSkillsSkillPointsFromBackground
@@ -708,6 +706,7 @@ class SkillsTest extends TestWithMockery
         SkillPointsFromBackground $fromOtherSkillsSkillPointsFromBackground
     )
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\SkillPointsFromBackgroundAreNotSame::class);
         $physicalSkills = $this->createPhysicalSkillsWithDifferentBackground($fromFirstSkillsSkillPointsFromBackground, $professionLevels->getFirstLevel(), Swimming::class);
         $psychicalSkills = $this->createPsychicalSkillsPaidByFirstLevelBackground($fromOtherSkillsSkillPointsFromBackground, $professionLevels->getFirstLevel());
         $combinedSkills = $this->createCombinedSkillsPaidByFirstLevelBackground($fromOtherSkillsSkillPointsFromBackground, $professionLevels->getFirstLevel());
@@ -771,7 +770,6 @@ class SkillsTest extends TestWithMockery
     /**
      * @test
      * @dataProvider provideSkillsWithTooHighFirstLevelPayment
-     * @expectedException \DrdPlus\Skills\Exceptions\HigherSkillRanksFromFirstLevelThanPossible
      * @param ProfessionLevels $professionLevels
      * @param SkillPointsFromBackground $skillsFromBackground
      * @param PhysicalSkills $physicalSkills
@@ -786,6 +784,7 @@ class SkillsTest extends TestWithMockery
         CombinedSkills $combinedSkills
     )
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\HigherSkillRanksFromFirstLevelThanPossible::class);
         Skills::createSkills(
             $professionLevels,
             $skillsFromBackground,
@@ -907,13 +906,13 @@ class SkillsTest extends TestWithMockery
     /**
      * @test
      * @dataProvider provideProfessionLevelsWithTooLowPropertyIncrease
-     * @expectedException \DrdPlus\Skills\Exceptions\HigherSkillRanksFromNextLevelsThanPossible
      * @param ProfessionLevels $professionLevels
      */
     public function I_can_not_increase_skills_by_next_levels_more_than_provides_property_increments(
         ProfessionLevels $professionLevels
     )
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\HigherSkillRanksFromNextLevelsThanPossible::class);
         $nextLevels = $professionLevels->getProfessionNextLevels();
         $nextLevel = \end($nextLevels);
         $physicalSkills = $this->createPhysicalSkillsByNextLevelPropertyIncrease($nextLevel);
@@ -942,10 +941,10 @@ class SkillsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\TooHighSingleSkillIncrementPerNextLevel
      */
     public function I_can_not_increase_same_skill_more_than_once_per_next_level()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\TooHighSingleSkillIncrementPerNextLevel::class);
         $professionLevels = $this->createProfessionLevels('foo', 2);
         $nextLevels = $professionLevels->getProfessionNextLevels();
         $physicalSkills = $this->createPhysicalSkillsWithTooHighSkillIncrementPerNextLevel(\end($nextLevels), Swimming::class);
@@ -1377,12 +1376,12 @@ class SkillsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnknownTypeOfWeapon
      * @dataProvider provideBattleParameterNames
      * @param string $malusTo
      */
     public function I_can_not_get_battle_number_malus_for_unknown_weapon($malusTo)
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnknownTypeOfWeapon::class);
         $professionLevels = $this->createProfessionLevels();
         $skillsFromBackground = $this->createSkillPointsFromBackground($professionLevels->getFirstLevel()->getProfession());
         $firstLevel = $professionLevels->getFirstLevel();

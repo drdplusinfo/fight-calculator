@@ -13,7 +13,7 @@ class Environment extends StrictObject
     /** @var string|null */
     private $remoteAddress;
 
-    public static function createFromGlobals()
+    public static function createFromGlobals(): Environment
     {
         return new static(\PHP_SAPI, $_ENV['PROJECT_ENVIRONMENT'] ?? null, $_SERVER['REMOTE_ADDR'] ?? null);
     }

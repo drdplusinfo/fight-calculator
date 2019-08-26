@@ -6,6 +6,7 @@ use DrdPlus\Armourer\Armourer;
 use DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
 use DrdPlus\CalculatorSkeleton\CalculatorServicesContainer;
+use DrdPlus\RulesSkeleton\Request;
 use DrdPlus\RulesSkeleton\Web\WebPartsContainer;
 use DrdPlus\Tables\Tables;
 
@@ -108,10 +109,13 @@ class AttackServicesContainer extends CalculatorServicesContainer
         return $this->tables;
     }
 
-    public function getAttackRequest(): AttackRequest
+    /**
+     * @return Request|AttackRequest
+     */
+    public function getRequest(): Request
     {
         if ($this->attackRequest === null) {
-            $this->attackRequest = new AttackRequest($this->getCurrentValues(), $this->getBotParser(), $this->getEnvironment());
+            $this->attackRequest = AttackRequest::createFromGlobals($this->getBotParser(), $this->getEnvironment());
         }
         return $this->attackRequest;
     }

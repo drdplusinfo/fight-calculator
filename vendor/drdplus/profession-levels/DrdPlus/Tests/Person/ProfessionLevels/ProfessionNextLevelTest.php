@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Person\ProfessionLevels;
 
@@ -260,10 +259,10 @@ class ProfessionNextLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\MaximumLevelExceeded
      */
     public function I_can_not_create_higher_next_level_than_twenty()
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\MaximumLevelExceeded::class);
         ProfessionNextLevel::createNextLevel(
             $this->createProfession(ProfessionCode::FIGHTER),
             $this->createLevelRank(22),
@@ -278,10 +277,10 @@ class ProfessionNextLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\MinimumLevelExceeded
      */
     public function I_can_not_create_lesser_next_level_than_two()
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\MinimumLevelExceeded::class);
         ProfessionNextLevel::createNextLevel(
             $this->createProfession(ProfessionCode::FIGHTER),
             $this->createLevelRank(1),
@@ -297,12 +296,12 @@ class ProfessionNextLevelTest extends AbstractTestOfProfessionLevel
     /**
      * @test
      * @dataProvider provideProfessionCode
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidNextLevelPropertiesSum
-     * @expectedExceptionMessageRegExp " 2, got 6$"
      * @param string $professionCode
      */
     public function I_can_not_create_next_level_with_too_high_properties_sum($professionCode)
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidNextLevelPropertiesSum::class);
+        $this->expectExceptionMessageRegExp('" 2, got 6$"');
         ProfessionNextLevel::createNextLevel(
             $this->createProfession($professionCode),
             $levelRank = LevelRank::getIt(2),
@@ -318,12 +317,12 @@ class ProfessionNextLevelTest extends AbstractTestOfProfessionLevel
     /**
      * @test
      * @dataProvider provideProfessionCode
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidNextLevelPropertiesSum
-     * @expectedExceptionMessageRegExp " 2, got 0$"
      * @param string $professionCode
      */
     public function I_can_not_create_next_level_with_too_low_properties_sum($professionCode)
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidNextLevelPropertiesSum::class);
+        $this->expectExceptionMessageRegExp('" 2, got 0$"');
         ProfessionNextLevel::createNextLevel(
             $this->createProfession($professionCode),
             $levelRank = LevelRank::getIt(2),
@@ -341,10 +340,10 @@ class ProfessionNextLevelTest extends AbstractTestOfProfessionLevel
      *
      * @test
      * @dataProvider providePropertyCodeOneByOne
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\NegativeNextLevelProperty
      */
     public function I_can_not_create_next_level_with_negative_property($propertyCodeToNegative)
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\NegativeNextLevelProperty::class);
         ProfessionNextLevel::createNextLevel(
             $this->createProfession(ProfessionCode::FIGHTER),
             $levelRank = LevelRank::getIt(2),
@@ -374,10 +373,10 @@ class ProfessionNextLevelTest extends AbstractTestOfProfessionLevel
      *
      * @test
      * @dataProvider providePropertyCodeOneByOne
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\TooHighNextLevelPropertyIncrement
      */
     public function I_can_not_create_next_level_with_too_high_property_increment($propertyCodeTooHigh)
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\TooHighNextLevelPropertyIncrement::class);
         ProfessionNextLevel::createNextLevel(
             $this->createProfession(ProfessionCode::FIGHTER),
             $levelRank = LevelRank::getIt(2),

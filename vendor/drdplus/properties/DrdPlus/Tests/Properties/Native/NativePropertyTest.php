@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Native;
@@ -15,7 +16,7 @@ abstract class NativePropertyTest extends AbstractBooleanPropertyTest
     {
         $reflectionClass = new \ReflectionClass(self::getSutClass());
         $classBasename = preg_replace('~^.+[\\\](\w+)$~', '$1', self::getSutClass());
-        self::assertContains(<<<ANNOTATION
+        self::assertStringContainsString(<<<ANNOTATION
 /**
  * @method static {$classBasename} getIt(\$value)
  */

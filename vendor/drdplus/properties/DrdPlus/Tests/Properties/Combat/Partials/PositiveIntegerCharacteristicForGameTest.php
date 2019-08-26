@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Combat\Partials;
@@ -26,22 +27,22 @@ abstract class PositiveIntegerCharacteristicForGameTest extends CharacteristicFo
 
     /**
      * @test
-     * @expectedException \Granam\Integer\Tools\Exceptions\PositiveIntegerCanNotBeNegative
-     * @expectedExceptionMessageRegExp ~-1~
      */
     public function I_can_not_turn_it_to_negative_by_add_negative()
     {
+        $this->expectException(\Granam\Integer\Tools\Exceptions\PositiveIntegerCanNotBeNegative::class);
+        $this->expectExceptionMessageRegExp('~-1~');
         $sut = $this->createSut();
         $sut->add(-($sut->getValue() + 1));
     }
 
     /**
      * @test
-     * @expectedException \Granam\Integer\Tools\Exceptions\PositiveIntegerCanNotBeNegative
-     * @expectedExceptionMessageRegExp ~-1~
      */
     public function I_can_not_subtract_to_negative()
     {
+        $this->expectException(\Granam\Integer\Tools\Exceptions\PositiveIntegerCanNotBeNegative::class);
+        $this->expectExceptionMessageRegExp('~-1~');
         $sut = $this->createSut();
         $sut->sub($sut->getValue() + 1);
     }

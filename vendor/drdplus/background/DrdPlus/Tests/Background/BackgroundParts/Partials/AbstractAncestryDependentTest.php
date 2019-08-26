@@ -96,12 +96,12 @@ abstract class AbstractAncestryDependentTest extends AbstractBackgroundAdvantage
     /**
      * @test
      * @dataProvider provideTooMuchBackgroundPointsToAncestry
-     * @expectedException \DrdPlus\Background\Exceptions\TooMuchSpentBackgroundPoints
      * @param int $spentBackgroundPoints
      * @param int $ancestryBackgroundPoints
      */
     public function I_can_not_spent_more_than_three_over_ancestry(int $spentBackgroundPoints, int $ancestryBackgroundPoints): void
     {
+        $this->expectException(\DrdPlus\Background\Exceptions\TooMuchSpentBackgroundPoints::class);
         /** @var Possession|SkillPointsFromBackground $sutClass */
         $sutClass = self::getSutClass();
         self::assertGreaterThan($ancestryBackgroundPoints + 3, $spentBackgroundPoints);

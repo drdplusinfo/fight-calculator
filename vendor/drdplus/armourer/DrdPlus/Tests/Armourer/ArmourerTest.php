@@ -910,11 +910,11 @@ class ArmourerTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tables\Armaments\Exceptions\EncounterRangeCanNotBeGreaterThanMaximalRange
-     * @expectedExceptionMessageRegExp ~456~
      */
     public function I_can_not_get_attack_number_modifier_with_greater_encounter_than_maximal_range(): void
     {
+        $this->expectException(\DrdPlus\Tables\Armaments\Exceptions\EncounterRangeCanNotBeGreaterThanMaximalRange::class);
+        $this->expectExceptionMessageRegExp('~456~');
         (new Armourer($this->createTables()))->getAttackNumberModifierByDistance(
             $this->createDistanceWithBonus(123),
             $this->createEncounterRange(456),
@@ -924,11 +924,11 @@ class ArmourerTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tables\Armaments\Exceptions\DistanceIsOutOfMaximalRange
-     * @expectedExceptionMessageRegExp ~457~
      */
     public function I_can_not_get_attack_number_modifier_with_greater_distance_than_maximal_range(): void
     {
+        $this->expectException(\DrdPlus\Tables\Armaments\Exceptions\DistanceIsOutOfMaximalRange::class);
+        $this->expectExceptionMessageRegExp('~457~');
         $tables = $this->createTables();
         $tables->shouldReceive('getDistanceTable')
             ->andReturn($distanceTable = $this->createDistanceTable());
@@ -2177,11 +2177,11 @@ class ArmourerTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @expectedExceptionMessageRegExp ~stiletto~
      */
     public function I_can_not_get_base_of_wounds_bonus_for_too_short_melee_weapon(): void
     {
+        $this->expectException(\DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands::class);
+        $this->expectExceptionMessageRegExp('~stiletto~');
         $tables = $this->createTables();
         $dagger = $this->createMeleeWeaponCode('stiletto', 'knifeOrDagger');
         $tables->shouldReceive('getWeaponlikeTableByWeaponlikeCode')
@@ -2265,11 +2265,11 @@ class ArmourerTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands
-     * @expectedExceptionMessageRegExp ~pavise~
      */
     public function I_can_not_get_strength_for_single_handed_only_weaponlike_when_holding_by_two_hands(): void
     {
+        $this->expectException(\DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByTwoHands::class);
+        $this->expectExceptionMessageRegExp('~pavise~');
         // its quite strange, but currently every shield, including monstrous pavise, is single-handed only
         (new Armourer(Tables::getIt()))->getStrengthForWeaponOrShield(
             ShieldCode::getIt(ShieldCode::PAVISE),
@@ -2280,11 +2280,11 @@ class ArmourerTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand
-     * @expectedExceptionMessageRegExp ~long_bow~
      */
     public function I_can_not_get_strength_for_two_handed_only_weaponlike_when_holding_by_one_hand(): void
     {
+        $this->expectException(\DrdPlus\Tables\Armaments\Exceptions\CanNotHoldWeaponByOneHand::class);
+        $this->expectExceptionMessageRegExp('~long_bow~');
         // its quite strange, but currently every shield, including monstrous pavise, is single-handed only
         (new Armourer(Tables::getIt()))->getStrengthForWeaponOrShield(
             RangedWeaponCode::getIt(RangedWeaponCode::LONG_BOW),
@@ -2487,11 +2487,11 @@ class ArmourerTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tables\Armaments\Exceptions\CanNotUseMeleeWeaponlikeBecauseOfMissingStrength
-     * @expectedExceptionMessageRegExp ~'foo' is too heavy~
      */
     public function I_can_not_get_power_of_destruction_if_can_not_bear_weapon(): void
     {
+        $this->expectException(\DrdPlus\Tables\Armaments\Exceptions\CanNotUseMeleeWeaponlikeBecauseOfMissingStrength::class);
+        $this->expectExceptionMessageRegExp("~'foo' is too heavy~");
         $armourer = new Armourer($tables = $this->createTables());
         $weaponlike = $this->createMeleeWeaponCode('foo', WeaponCategoryCode::SWORDS);
         $tables->shouldReceive('getArmamentStrengthSanctionsTableByCode')

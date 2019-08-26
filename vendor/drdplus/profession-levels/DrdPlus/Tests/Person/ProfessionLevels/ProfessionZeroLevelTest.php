@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 declare(strict_types = 1);
 
 namespace DrdPlus\Person\ProfessionLevels;
@@ -48,11 +49,11 @@ class ProfessionZeroLevelTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidZeroLevelRank
-     * @expectedExceptionMessageRegExp ~[^\d]0[^\d]~
      */
     public function I_can_not_create_it_with_higher_level_thank_zero()
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidZeroLevelRank::class);
+        $this->expectExceptionMessageRegExp('~[^\d]0[^\d]~');
         $professionZeroLevel = ProfessionZeroLevel::createZeroLevel($commoner = Commoner::getIt());
         $reflection = new \ReflectionClass(ProfessionZeroLevel::class);
         /** @see \DrdPlus\Person\ProfessionLevels\ProfessionLevel::__construct */
@@ -76,7 +77,6 @@ class ProfessionZeroLevelTest extends TestCase
     /**
      * @test
      * @dataProvider provideIncrementedProperty
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidZeroLevelPropertyValue
      * @param Strength $strength
      * @param Agility $agility
      * @param Knack $knack
@@ -93,6 +93,7 @@ class ProfessionZeroLevelTest extends TestCase
         Charisma $charisma
     )
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidZeroLevelPropertyValue::class);
         $professionZeroLevel = ProfessionZeroLevel::createZeroLevel($commoner = Commoner::getIt());
         $reflection = new \ReflectionClass(ProfessionZeroLevel::class);
         /** @see \DrdPlus\Person\ProfessionLevels\ProfessionLevel::__construct */

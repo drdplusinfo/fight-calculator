@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Health\TreatmentBoundary;
@@ -17,21 +18,21 @@ class TreatmentBoundaryTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\TreatmentBoundaryCanNotBeNegative
-     * @expectedExceptionMessageRegExp ~Why you ask me?~
      */
     public function I_am_stopped_by_specific_exception_on_invalid_value(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\TreatmentBoundaryCanNotBeNegative::class);
+        $this->expectExceptionMessageRegExp('~Why you ask me?~');
         TreatmentBoundary::getIt('Why you ask me?');
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\TreatmentBoundaryCanNotBeNegative
-     * @expectedExceptionMessageRegExp ~-1~
      */
     public function I_can_not_use_negative_value(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\TreatmentBoundaryCanNotBeNegative::class);
+        $this->expectExceptionMessageRegExp('~-1~');
         TreatmentBoundary::getIt(-1);
     }
 }

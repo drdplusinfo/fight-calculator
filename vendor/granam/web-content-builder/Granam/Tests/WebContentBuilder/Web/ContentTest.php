@@ -19,7 +19,7 @@ class ContentTest extends AbstractContentTest
     public function I_can_get_content(): void
     {
         $content = $this->createContent();
-        self::assertContains(
+        self::assertStringContainsString(
             preg_replace('~\s~', '', file_get_contents(__DIR__ . '/files/foo.html')),
             preg_replace('~\s~', '', $content->getValue())
         );

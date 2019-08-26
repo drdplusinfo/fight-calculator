@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Granam\Tests\BooleanEnum;
 
@@ -60,47 +59,47 @@ class BooleanEnumTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum
-     * @expectedExceptionMessageRegExp ~got NULL$~
      */
     public function I_can_not_use_null(): void
     {
+        $this->expectException(\Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum::class);
+        $this->expectExceptionMessageRegExp('~got NULL$~');
         BooleanEnum::getEnum(null);
     }
 
     /**
      * @test
-     * @expectedException \Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum
      */
     public function I_can_not_use_array(): void
     {
+        $this->expectException(\Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum::class);
         BooleanEnum::getEnum([]);
     }
 
     /**
      * @test
-     * @expectedException \Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum
      */
     public function I_can_not_use_resource(): void
     {
+        $this->expectException(\Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum::class);
         BooleanEnum::getEnum(tmpfile());
     }
 
     /**
      * @test
-     * @expectedException \Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum
      */
     public function I_can_not_use_object_without_to_string_method(): void
     {
+        $this->expectException(\Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum::class);
         BooleanEnum::getEnum(new \stdClass());
     }
 
     /**
      * @test
-     * @expectedException \Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum
      */
     public function callback_to_php_value_cause_exception(): void
     {
+        $this->expectException(\Granam\BooleanEnum\Exceptions\WrongValueForBooleanEnum::class);
         BooleanEnum::getEnum(function () {
         });
     }

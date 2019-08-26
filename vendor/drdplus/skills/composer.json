@@ -10,18 +10,16 @@
   },
   "require": {
     "php": ">=7.1",
-    "granam/integer": "^6.1",
     "drdplus/background": "~2.0",
     "drdplus/lighting": "~2.0",
     "drdplus/hunting-and-fishing": "~2.0",
     "drdplus/profession-levels": "~2.0",
-    "drdplus/armourer": "~2.0"
+    "drdplus/armourer": "^2.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "~7.0",
-    "mockery/mockery": "~1.0",
-    "granam/exceptions-hierarchy": "~4.0",
-    "drdplus/professions": "~2.0"
+    "phpunit/phpunit": "^8.3",
+    "mockery/mockery": "^1.2",
+    "granam/exceptions-hierarchy": "^5.0"
   }
 }

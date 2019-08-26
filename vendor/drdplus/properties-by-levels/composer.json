@@ -12,14 +12,12 @@
     "php": ">=7.1",
     "drdplus/properties-by-fate": "~2.0",
     "drdplus/profession-levels": "~2.0",
-    "drdplus/properties": "~2.0",
-    "drdplus/races": "~2.0",
-    "drdplus/tables": "~2.0"
+    "drdplus/races": "~2.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "~7.0",
-    "mockery/mockery": "~1.0",
-    "granam/exceptions-hierarchy": "~4.0"
+    "phpunit/phpunit": "^8.3",
+    "mockery/mockery": "^1.2",
+    "granam/exceptions-hierarchy": "^5.0"
   }
 }

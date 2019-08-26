@@ -45,7 +45,6 @@ class HtmlHelperTest extends AbstractContentTest
 
     /**
      * @test
-     * @backupGlobals enabled
      * @dataProvider provideEnvironment
      * @param bool $forcedProduction
      * @param bool $onDev
@@ -55,8 +54,7 @@ class HtmlHelperTest extends AbstractContentTest
      */
     public function I_can_find_out_if_I_am_in_production(bool $forcedProduction, bool $onDev, bool $isCli, bool $onLocalhost, bool $expectingProduction): void
     {
-        /** @var HtmlHelper $htmlHelperClass */
-        $htmlHelperClass = static::getSutClass();
+        $htmlHelperClass = $this->getHtmlHelperClass();
         /** @var HtmlHelper $htmlHelper */
         $htmlHelper = new $htmlHelperClass(
             $this->getDirs(),

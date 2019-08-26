@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\HuntingAndFishing;
 
@@ -113,10 +112,10 @@ class CatchQualityTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\HuntingAndFishing\Exceptions\HuntingTimeIsTooShort
      */
     public function I_can_not_hunt_for_less_than_half_of_hour(): void
     {
+        $this->expectException(\DrdPlus\HuntingAndFishing\Exceptions\HuntingTimeIsTooShort::class);
         try {
             new CatchQuality(
                 $this->createHuntPrerequisite(123),

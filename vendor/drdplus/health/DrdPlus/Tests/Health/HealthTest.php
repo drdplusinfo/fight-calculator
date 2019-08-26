@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Codes\Body\OrdinaryWoundOriginCode;
@@ -426,10 +427,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UselessRollAgainstMalus
      */
     public function I_can_not_roll_on_malus_from_wounds_if_not_needed(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UselessRollAgainstMalus::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(10));
         $health->rollAgainstMalusFromWounds($this->createWill(),
             $this->createRoll2d6Plus(),
@@ -441,10 +442,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst
      */
     public function I_can_not_add_new_wound_if_roll_on_malus_expected(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(10));
         try {
             $health->addWound($this->createWoundSize(10),
@@ -462,10 +463,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst
      */
     public function I_can_not_heal_fresh_ordinary_wounds_if_roll_on_malus_expected(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(10));
         try {
             $health->addWound(
@@ -491,10 +492,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst
      */
     public function I_can_not_heal_serious_wound_if_roll_on_malus_expected(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(10));
         try {
             $seriousWound = $health->addWound($this->createWoundSize(14),
@@ -514,10 +515,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst
      */
     public function I_can_not_regenerate_if_roll_on_malus_expected(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(10));
         try {
             $health->addWound($this->createWoundSize(14),
@@ -532,10 +533,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst
      */
     public function I_can_not_get_malus_from_wounds_if_roll_on_it_expected(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\NeedsToRollAgainstMalusFromWoundsFirst::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(10));
         try {
             $health->addWound(
@@ -750,10 +751,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnknownAfflictionOriginatingWound
      */
     public function I_can_not_add_affliction_of_unknown_wound(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnknownAfflictionOriginatingWound::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $affliction = $this->createAffliction($this->createSeriousWound());
         $health->addAffliction($affliction);
@@ -777,10 +778,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\AfflictionIsAlreadyRegistered
      */
     public function I_can_not_add_same_affliction_twice(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\AfflictionIsAlreadyRegistered::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $wound = $health->addWound(
             $this->createWoundSize(6),
@@ -800,10 +801,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnknownAfflictionOriginatingWound
      */
     public function I_can_not_add_affliction_with_to_health_unknown_wound(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnknownAfflictionOriginatingWound::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $seriousWound = $health->addWound(
             $this->createWoundSize(6),
@@ -1083,10 +1084,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnknownSeriousWoundToHeal
      */
     public function I_can_not_heal_serious_wound_from_different_health(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnknownSeriousWoundToHeal::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $seriousWound = $health->addWound($this->createWoundSize(5),
             SeriousWoundOriginCode::getMechanicalCutWoundOrigin(),
@@ -1102,11 +1103,11 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnknownSeriousWoundToHeal
      * @throws \ReflectionException
      */
     public function I_can_not_heal_serious_wound_not_created_by_current_health(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnknownSeriousWoundToHeal::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $healthReflection = new \ReflectionClass($health);
         $openForNewWound = $healthReflection->getProperty('openForNewWound');
@@ -1122,10 +1123,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\ExpectedFreshWoundToHeal
      */
     public function I_can_not_heal_old_serious_wound(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\ExpectedFreshWoundToHeal::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $seriousWound = $health->addWound(
             $this->createWoundSize(5),
@@ -1148,10 +1149,10 @@ class HealthTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\ExpectedFreshWoundToHeal
      */
     public function I_can_not_heal_already_treated_serious_wound(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\ExpectedFreshWoundToHeal::class);
         $health = $this->createHealthToTest($woundBoundary = $this->createWoundBoundary(5));
         $seriousWound = $health->addWound(
             $this->createWoundSize(5),

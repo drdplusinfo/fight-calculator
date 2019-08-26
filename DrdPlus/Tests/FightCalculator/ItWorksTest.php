@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);namespace DrdPlus\Tests\Calculators\Fight;
+<?php declare(strict_types=1);
+
+namespace DrdPlus\Tests\Calculators\Fight;
 
 use DrdPlus\AttackSkeleton\AttackRequest;
 use Gt\Dom\HTMLDocument;
@@ -6,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class ItWorksTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setBackupGlobals(true);
     }

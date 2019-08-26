@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Skills;
 
@@ -34,7 +33,7 @@ abstract class SkillTest extends TestWithMockery
         $sut = new $sutClass($professionLevel = $this->createProfessionFirstLevel());
         self::assertInstanceOf(Skill::class, $sut);
         $reflectionClass = new \ReflectionClass($sutClass);
-        self::assertContains(
+        self::assertStringContainsString(
             '* @link https://pph.drdplus.info/#',
             $reflectionClass->getDocComment(),
             'Skill class ' . $sutClass . ' should has link to rules'
@@ -331,10 +330,10 @@ abstract class SkillTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnexpectedRankValue
      */
     public function I_can_not_add_rank_with_invalid_sequence(): void
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnexpectedRankValue::class);
         $cheatingSkill = new CheatingSkill($this->createProfessionFirstLevel());
         self::assertCount(1, $cheatingSkill->getSkillRanks());
         /** @var CombinedSkillPoint|\Mockery\MockInterface $skillPoint */
@@ -346,11 +345,11 @@ abstract class SkillTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\CanNotVerifyOwningSkill
-     * @expectedExceptionMessageRegExp ~Cooking~
      */
     public function I_can_not_add_skill_rank_from_another_skill(): void
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\CanNotVerifyOwningSkill::class);
+        $this->expectExceptionMessageRegExp('~Cooking~');
         $cheatingSkill = new CheatingSkill($this->createProfessionFirstLevel());
         /** @var CombinedSkillPoint|\Mockery\MockInterface $skillPoint */
         $skillPoint = $this->mockery(CombinedSkillPoint::class);
@@ -361,11 +360,11 @@ abstract class SkillTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\CanNotVerifyOwningSkill
-     * @expectedExceptionMessageRegExp ~instance~
      */
     public function I_can_not_add_skill_rank_from_same_skill_but_different_instance(): void
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\CanNotVerifyOwningSkill::class);
+        $this->expectExceptionMessageRegExp('~instance~');
         $cheatingSkill = new CheatingSkill($this->createProfessionFirstLevel());
         /** @var CombinedSkillPoint|\Mockery\MockInterface $skillPoint */
         $skillPoint = $this->mockery(CombinedSkillPoint::class);

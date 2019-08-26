@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions;
 
 use DrdPlus\Codes\Body\SeriousWoundOriginCode;
@@ -67,11 +68,11 @@ abstract class AfflictionByWoundTest extends AfflictionTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\WoundHasToBeFreshForAffliction
      * @throws \ReflectionException
      */
     public function I_can_not_create_it_with_old_wound()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\WoundHasToBeFreshForAffliction::class);
         $reflection = new \ReflectionClass(self::getSutClass());
         $constructor = $reflection->getConstructor();
         $constructor->setAccessible(true);

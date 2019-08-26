@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 namespace DrdPlus\Tests\Professions;
 
 use DrdPlus\Codes\ProfessionCode;
@@ -27,10 +28,10 @@ abstract class ProfessionTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Professions\Exceptions\ProfessionNotFound
      */
     public function I_can_not_create_profession_by_unknown_code()
     {
+        $this->expectException(\DrdPlus\Professions\Exceptions\ProfessionNotFound::class);
         /** @var ProfessionCode|\Mockery\MockInterface $professionCode */
         $professionCode = $this->mockery(ProfessionCode::class);
         $professionCode->shouldReceive('getValue')

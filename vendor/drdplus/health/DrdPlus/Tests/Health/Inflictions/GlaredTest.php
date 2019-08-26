@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Health\Inflictions;
 
 use DrdPlus\Codes\Units\TimeUnitCode;

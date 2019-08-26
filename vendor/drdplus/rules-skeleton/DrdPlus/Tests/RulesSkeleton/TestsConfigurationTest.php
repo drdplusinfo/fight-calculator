@@ -170,11 +170,11 @@ class TestsConfigurationTest extends AbstractContentTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tests\RulesSkeleton\Exceptions\AllowedCalculationPrefixShouldStartByUpperLetter
-     * @expectedExceptionMessageRegExp ~říčany u čeho chceš~
      */
     public function I_can_not_add_allowed_calculation_id_prefix_with_lowercase_first_letter(): void
     {
+        $this->expectException(\DrdPlus\Tests\RulesSkeleton\Exceptions\AllowedCalculationPrefixShouldStartByUpperLetter::class);
+        $this->expectExceptionMessageRegExp('~říčany u čeho chceš~');
         $this->createTestsConfiguration(
             [TestsConfiguration::ALLOWED_CALCULATION_ID_PREFIXES => ['říčany u čeho chceš']]
         );
@@ -182,11 +182,11 @@ class TestsConfigurationTest extends AbstractContentTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tests\RulesSkeleton\Exceptions\AllowedCalculationPrefixShouldStartByUpperLetter
-     * @expectedExceptionMessageRegExp ~žbrdloch~
      */
     public function I_can_not_set_allowed_calculation_id_prefixes_with_even_single_one_with_lowercase_first_letter(): void
     {
+        $this->expectException(\DrdPlus\Tests\RulesSkeleton\Exceptions\AllowedCalculationPrefixShouldStartByUpperLetter::class);
+        $this->expectExceptionMessageRegExp('~žbrdloch~');
         $this->createTestsConfiguration(
             [TestsConfiguration::ALLOWED_CALCULATION_ID_PREFIXES => [
                 'Potvora na entou',
@@ -224,21 +224,21 @@ class TestsConfigurationTest extends AbstractContentTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tests\RulesSkeleton\Exceptions\InvalidPublicUrl
-     * @expectedExceptionMessageRegExp ~not valid~
      */
     public function I_can_not_create_it_with_invalid_public_url(): void
     {
+        $this->expectException(\DrdPlus\Tests\RulesSkeleton\Exceptions\InvalidPublicUrl::class);
+        $this->expectExceptionMessageRegExp('~not valid~');
         $this->createTestsConfiguration([TestsConfiguration::EXPECTED_PUBLIC_URL => 'example.com']); // missing protocol
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tests\RulesSkeleton\Exceptions\PublicUrlShouldUseHttps
-     * @expectedExceptionMessageRegExp ~HTTPS~
      */
     public function I_can_not_create_it_with_public_url_without_https(): void
     {
+        $this->expectException(\DrdPlus\Tests\RulesSkeleton\Exceptions\PublicUrlShouldUseHttps::class);
+        $this->expectExceptionMessageRegExp('~HTTPS~');
         $this->createTestsConfiguration([TestsConfiguration::EXPECTED_PUBLIC_URL => 'http://example.com']);
     }
 
@@ -325,10 +325,10 @@ class TestsConfigurationTest extends AbstractContentTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Tests\RulesSkeleton\Exceptions\InvalidPublicUrl
      */
     public function I_am_stopped_if_public_url_is_missing(): void
     {
+        $this->expectException(\DrdPlus\Tests\RulesSkeleton\Exceptions\InvalidPublicUrl::class);
         $this->createTestsConfiguration([TestsConfiguration::EXPECTED_PUBLIC_URL => null]);
     }
 
@@ -340,6 +340,10 @@ class TestsConfigurationTest extends AbstractContentTest
      */
     public function Skeleton_boolean_tests_configuration_is_strict(string $directive, $value)
     {
+        if (!$this->isSkeletonChecked()) {
+            self::assertTrue(true, 'SKeleton already checked this for you');
+            return;
+        }
         $getter = StringTools::assembleGetterForName($directive, '');
         self::assertSame($value, $this->getTestsConfiguration()->$getter());
     }
@@ -376,6 +380,10 @@ class TestsConfigurationTest extends AbstractContentTest
      */
     public function Skeleton_array_tests_configuration_is_strict(string $directive, bool $hasContent)
     {
+        if (!$this->isSkeletonChecked()) {
+            self::assertTrue(true, 'SKeleton already checked this for you');
+            return;
+        }
         $getter = StringTools::assembleGetterForName($directive, 'get');
         if ($hasContent) {
             self::assertNotEmpty($this->getTestsConfiguration()->$getter());

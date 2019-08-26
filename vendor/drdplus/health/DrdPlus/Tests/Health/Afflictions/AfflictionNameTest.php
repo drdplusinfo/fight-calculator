@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions;
 
 use DrdPlus\Health\Afflictions\AfflictionName;
@@ -18,10 +19,10 @@ class AfflictionNameTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\AfflictionNameCanNotBeEmpty
      */
     public function I_can_not_create_empty_name()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\AfflictionNameCanNotBeEmpty::class);
         AfflictionName::getIt('');
     }
 }

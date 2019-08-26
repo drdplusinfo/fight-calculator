@@ -2,6 +2,7 @@
 
 namespace Granam\Tests\WebContentBuilder;
 
+use Granam\WebContentBuilder\Exceptions\NameToCreateHtmlIdFromIsEmpty;
 use Granam\WebContentBuilder\HtmlDocument;
 use Granam\WebContentBuilder\HtmlHelper;
 use Granam\Tests\WebContentBuilder\Partials\AbstractContentTest;
@@ -22,10 +23,10 @@ class HtmlHelperTest extends AbstractContentTest
 
     /**
      * @test
-     * @expectedException \Granam\WebContentBuilder\Exceptions\NameToCreateHtmlIdFromIsEmpty
      */
     public function I_can_not_create_id_from_empty_name(): void
     {
+        $this->expectException(NameToCreateHtmlIdFromIsEmpty::class);
         /** @var HtmlHelper $htmlHelperClass */
         $htmlHelperClass = static::getSutClass();
         $htmlHelperClass::toId('');

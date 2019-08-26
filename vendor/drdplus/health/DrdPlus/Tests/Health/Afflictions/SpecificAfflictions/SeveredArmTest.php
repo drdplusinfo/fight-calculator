@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions\SpecificAfflictions;
 
 use DrdPlus\Health\Afflictions\AfflictionDangerousness;
@@ -97,19 +98,19 @@ class SeveredArmTest extends AfflictionByWoundTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\SpecificAfflictions\Exceptions\SeveredArmAfflictionSizeExceeded
      */
     public function I_can_not_create_more_than_completely_severed_arm()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\SpecificAfflictions\Exceptions\SeveredArmAfflictionSizeExceeded::class);
         SeveredArm::createIt($this->createWound(), 7);
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\AfflictionSizeCanNotBeNegative
      */
     public function I_can_not_create_severed_arm_with_negative_value()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\AfflictionSizeCanNotBeNegative::class);
         try {
             SeveredArm::createIt($this->createWound(), 0);
         } catch (\Exception $e) {

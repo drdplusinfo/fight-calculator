@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Combat;
@@ -162,10 +163,10 @@ class FightTest extends CharacteristicForGameTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Properties\Combat\Exceptions\UnknownProfession
      */
     public function I_can_not_get_fight_for_unknown_profession()
     {
+        $this->expectException(\DrdPlus\Properties\Combat\Exceptions\UnknownProfession::class);
         Fight::getIt(
             $this->createProfessionCode('monk'),
             $this->createBaseProperties(0, 0, 0, 0),

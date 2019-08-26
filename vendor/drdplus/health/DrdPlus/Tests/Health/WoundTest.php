@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Codes\Body\OrdinaryWoundOriginCode;
@@ -128,10 +129,10 @@ abstract class WoundTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\WoundHasToBeCreatedByHealthItself
      */
     public function I_can_not_create_wound_directly(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\WoundHasToBeCreatedByHealthItself::class);
         $this->createWound(
             $this->createHealth(false /* not open for new wounds */),
             new WoundSize(1),

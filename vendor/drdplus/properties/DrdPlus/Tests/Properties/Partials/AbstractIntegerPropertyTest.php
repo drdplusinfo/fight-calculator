@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Partials;
@@ -62,7 +63,7 @@ abstract class AbstractIntegerPropertyTest extends AbstractSimplePropertyTest
     {
         $reflectionClass = new \ReflectionClass(self::getSutClass());
         $classBasename = str_replace($reflectionClass->getNamespaceName() . '\\', '', $reflectionClass->getName());
-        self::assertContains(<<<ANNOTATION
+        self::assertStringContainsString(<<<ANNOTATION
  * @method static {$classBasename} getIt(int | \\Granam\\Integer\\IntegerInterface \$value)
  * @method {$classBasename} add(int | \\Granam\\Integer\\IntegerInterface \$value)
  * @method {$classBasename} sub(int | \\Granam\\Integer\\IntegerInterface \$value)

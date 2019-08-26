@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Person\ProfessionLevels;
 
@@ -64,10 +63,10 @@ class LevelRankTest extends TestWithMockery
      * @param int $prohibitedValue
      * @test
      * @dataProvider provideProhibitedLevelValue
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidLevelRank
      */
     public function I_can_not_create_negative_level(int $prohibitedValue): void
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidLevelRank::class);
         LevelRank::getIt($prohibitedValue);
     }
 

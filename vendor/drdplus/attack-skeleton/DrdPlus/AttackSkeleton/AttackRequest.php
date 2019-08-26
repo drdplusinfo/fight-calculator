@@ -2,12 +2,9 @@
 
 namespace DrdPlus\AttackSkeleton;
 
-use DeviceDetector\Parser\Bot;
-use DrdPlus\CalculatorSkeleton\CurrentValues;
-use DrdPlus\RulesSkeleton\Environment;
-use DrdPlus\RulesSkeleton\Request;
+use DrdPlus\CalculatorSkeleton\CalculatorRequest;
 
-class AttackRequest extends Request
+class AttackRequest extends CalculatorRequest
 {
     public const MELEE_WEAPON = 'melee_weapon';
     public const RANGED_WEAPON = 'ranged_weapon';
@@ -17,7 +14,6 @@ class AttackRequest extends Request
     public const SHIELD = 'shield';
     public const BODY_ARMOR = 'body_armor';
     public const HELM = 'helm';
-    public const SCROLL_FROM_TOP = 'scroll_from_top';
     // special actions
     public const ACTION = 'action';
     public const ADD_NEW_MELEE_WEAPON = 'add_new_melee_weapon';
@@ -25,19 +21,5 @@ class AttackRequest extends Request
     public const ADD_NEW_SHIELD = 'add_new_shield';
     public const ADD_NEW_BODY_ARMOR = 'add_new_body_armor';
     public const ADD_NEW_HELM = 'add_new_helm';
-
-    /** @var CurrentValues */
-    private $currentValues;
-
-    public function __construct(CurrentValues $currentValues, Bot $botParser, Environment $environment)
-    {
-        parent::__construct($botParser, $environment);
-        $this->currentValues = $currentValues;
-    }
-
-    public function getScrollFromTop(): int
-    {
-        return (int)$this->currentValues->getSelectedValue(self::SCROLL_FROM_TOP);
-    }
 
 }

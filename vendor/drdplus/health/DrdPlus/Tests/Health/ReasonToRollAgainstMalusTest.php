@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Health\ReasonToRollAgainstMalusFromWounds;
@@ -31,11 +32,11 @@ class ReasonToRollAgainstMalusTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\UnknownReasonToRollAgainstMalus
-     * @expectedExceptionMessageRegExp ~hypochondriac~
      */
     public function I_can_not_create_unknown_reason(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\UnknownReasonToRollAgainstMalus::class);
+        $this->expectExceptionMessageRegExp('~hypochondriac~');
         ReasonToRollAgainstMalusFromWounds::getEnum('hypochondriac');
     }
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Person\ProfessionLevels;
 
@@ -64,7 +63,7 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
             [ProfessionCode::RANGER],
             [ProfessionCode::WIZARD],
             [ProfessionCode::THEURGIST],
-            [ProfessionCode::PRIEST]
+            [ProfessionCode::PRIEST],
         ];
     }
 
@@ -253,11 +252,11 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelRank
      * @throws \ReflectionException
      */
     public function I_can_not_create_higher_first_level_than_one(): void
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelRank::class);
         new PublicConstructorProfessionFistLevel(
             $this->createProfession(ProfessionCode::FIGHTER),
             $this->createLevelRank(2),
@@ -272,11 +271,11 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelRank
      * @throws \ReflectionException
      */
     public function I_can_not_create_lesser_first_level_than_one(): void
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelRank::class);
         new PublicConstructorProfessionFistLevel(
             $this->createProfession(ProfessionCode::FIGHTER),
             $this->createLevelRank(0),
@@ -291,10 +290,7 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelPropertyValue
      * @dataProvider provideTooHighFirstLevelPropertiesOneByOne
-     * @throws \ReflectionException
-     *
      * @param string $professionCode
      * @param int $strength
      * @param int $agility
@@ -302,6 +298,8 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
      * @param int $will
      * @param int $intelligence
      * @param int $charisma
+     * @throws \ReflectionException
+     *
      */
     public function I_can_not_use_greater_than_allowed_first_level_property(
         string $professionCode,
@@ -313,6 +311,7 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
         int $charisma
     ): void
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelPropertyValue::class);
         new PublicConstructorProfessionFistLevel(
             $this->createProfession($professionCode),
             $this->createLevelRank(),
@@ -362,10 +361,7 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelPropertyValue
      * @dataProvider getTooLowFirstLevelPropertiesOneByOne
-     * @throws \ReflectionException
-     *
      * @param $professionCode
      * @param $strength
      * @param $agility
@@ -373,6 +369,8 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
      * @param $will
      * @param $intelligence
      * @param $charisma
+     * @throws \ReflectionException
+     *
      */
     public function I_can_not_use_lesser_than_allowed_first_level_property(
         string $professionCode,
@@ -384,6 +382,7 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
         int $charisma
     ): void
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidFirstLevelPropertyValue::class);
         new PublicConstructorProfessionFistLevel(
             $this->createProfession($professionCode),
             $this->createLevelRank(),
@@ -421,11 +420,11 @@ class ProfessionFirstLevelTest extends AbstractTestOfProfessionLevel
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\UnknownBaseProperty
      * @throws \ReflectionException
      */
     public function I_am_stopped_on_use_of_unknown_property_code(): void
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\UnknownBaseProperty::class);
         ProfessionFirstLevel::createFirstLevel(
             $this->createProfession(ProfessionCode::FIGHTER)
         )->getBasePropertyIncrement($this->createPropertyCode('invalid'));

@@ -14,7 +14,7 @@ class ContactsContentTest extends AbstractContentTest
      */
     public function Proper_facebook_link_is_used_in_debug_contacts(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '"https://www.facebook.com/drdplus.info"',
             $this->getDebugContactsContent(),
             'Link to facebook.com/drdplus.info has not been found in debug contacts template'
@@ -47,7 +47,7 @@ class ContactsContentTest extends AbstractContentTest
      */
     public function Proper_rpg_forum_link_is_used_in_debug_contacts(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '"https://rpgforum.cz/forum/viewtopic.php?f=238&t=14870"',
             $this->getDebugContactsContent(),
             'Link to RPG forum has not been found in debug contacts template'

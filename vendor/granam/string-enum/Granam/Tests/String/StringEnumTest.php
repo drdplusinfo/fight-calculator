@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Granam\Tests\StringEnum;
 
@@ -22,11 +21,11 @@ class StringEnumTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\StringEnum\Exceptions\WrongValueForStringEnum
-     * @expectedExceptionMessageRegExp ~got NULL$~
      */
     public function I_can_not_use_null()
     {
+        $this->expectException(\Granam\StringEnum\Exceptions\WrongValueForStringEnum::class);
+        $this->expectExceptionMessageRegExp('~got NULL$~');
         StringEnum::getEnum(null);
     }
 }

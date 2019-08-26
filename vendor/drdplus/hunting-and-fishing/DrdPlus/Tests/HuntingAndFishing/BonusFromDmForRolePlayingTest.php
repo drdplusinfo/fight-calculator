@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\HuntingAndFishing;
 
@@ -34,11 +33,11 @@ class BonusFromDmForRolePlayingTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\HuntingAndFishing\Exceptions\BonusFromDmIsTooHigh
-     * @expectedExceptionMessageRegExp ~4~
      */
     public function I_can_not_create_too_high_bonus(): void
     {
+        $this->expectException(\DrdPlus\HuntingAndFishing\Exceptions\BonusFromDmIsTooHigh::class);
+        $this->expectExceptionMessageRegExp('~4~');
         new BonusFromDmForRolePlaying(4);
     }
 }

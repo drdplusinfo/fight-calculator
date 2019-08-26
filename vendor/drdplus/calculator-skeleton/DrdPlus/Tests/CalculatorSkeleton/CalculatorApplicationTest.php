@@ -66,7 +66,7 @@ class CalculatorApplicationTest extends AbstractCalculatorContentTest
      */
     protected function createRequestForHistoryDeletion(bool $isRequestedHistoryDeletion): CalculatorRequest
     {
-        $request = $this->mockery(CalculatorRequest::class);
+        $request = $this->mockery(CalculatorRequest::class, [$this->getBot(), $this->getEnvironment(), [], [], [], []]);
         $request->shouldReceive('isRequestedHistoryDeletion')
             ->atLeast()->once()
             ->andReturn($isRequestedHistoryDeletion);

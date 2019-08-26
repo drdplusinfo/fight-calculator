@@ -123,7 +123,6 @@ class PassingTest extends AbstractContentTest
 
     /**
      * @test
-     * @backupGlobals enabled
      */
     public function I_see_message_about_trial_expiration_if_happens(): void
     {

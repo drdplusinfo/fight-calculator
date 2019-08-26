@@ -1,5 +1,4 @@
-<?php
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\PropertiesByFate;
 
@@ -59,11 +58,12 @@ abstract class PropertiesByFateTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\NotFateAffectedProperty
-     * @expectedExceptionMessageRegExp ~beauty~
+     * @throws \ReflectionException
      */
     public function I_can_not_get_property_not_affected_by_fortune()
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\NotFateAffectedProperty::class);
+        $this->expectExceptionMessageRegExp('~beauty~');
         /** @var PropertiesByFate $sut */
         $sut = (new \ReflectionClass(self::getSutClass()))->newInstanceWithoutConstructor();
         $sut->getProperty(PropertyCode::getIt(PropertyCode::BEAUTY));

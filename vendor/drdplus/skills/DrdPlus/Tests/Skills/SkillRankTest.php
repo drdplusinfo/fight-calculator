@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Skills;
 
@@ -59,10 +58,10 @@ abstract class SkillRankTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \LogicException
      */
     public function I_can_not_create_negative_skill_rank()
     {
+        $this->expectException(\LogicException::class);
         /** @var SkillRank $sutClass */
         $sutClass = self::getSutClass();
         new $sutClass(
@@ -74,10 +73,10 @@ abstract class SkillRankTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \LogicException
      */
     public function I_can_not_create_skill_rank_with_value_of_four()
     {
+        $this->expectException(\LogicException::class);
         $sutClass = self::getSutClass();
         new $sutClass(
             $this->createOwningSkill(),
@@ -108,10 +107,10 @@ abstract class SkillRankTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\CanNotVerifyOwningSkill
      */
     public function Skill_has_to_be_set_in_descendant_constructor_first()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\CanNotVerifyOwningSkill::class);
         /** @var PositiveInteger $requiredRankValue */
         $requiredRankValue = $this->mockery(PositiveInteger::class);
 
@@ -124,10 +123,10 @@ abstract class SkillRankTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\CanNotVerifyPaidSkillPoint
      */
     public function Skill_point_has_to_be_set_in_descendant_constructor_first()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\CanNotVerifyPaidSkillPoint::class);
         /** @var PositiveInteger $requiredRankValue */
         $requiredRankValue = $this->mockery(PositiveInteger::class);
 
@@ -140,10 +139,10 @@ abstract class SkillRankTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\WastedSkillPoint
      */
     public function I_can_not_pay_for_zero_skill_rank_by_non_zero_skill_point()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\WastedSkillPoint::class);
         /** @var SkillRank|string $sutClass */
         $sutClass = self::getSutClass();
         new $sutClass(

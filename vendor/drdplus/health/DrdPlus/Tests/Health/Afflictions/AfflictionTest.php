@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions;
 
 use DrdPlus\Health\Afflictions\Affliction;

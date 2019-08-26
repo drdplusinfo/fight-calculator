@@ -136,7 +136,7 @@ class ServicesContainer extends StrictObject
     public function getRequest(): Request
     {
         if ($this->request === null) {
-            $this->request = new Request($this->getBotParser(), $this->getEnvironment());
+            $this->request = Request::createFromGlobals($this->getBotParser(), $this->getEnvironment());
         }
         return $this->request;
     }
@@ -380,7 +380,7 @@ class ServicesContainer extends StrictObject
     public function getCookiesService(): CookiesService
     {
         if ($this->cookiesService === null) {
-            $this->cookiesService = new CookiesService();
+            $this->cookiesService = new CookiesService($this->getRequest());
         }
         return $this->cookiesService;
     }

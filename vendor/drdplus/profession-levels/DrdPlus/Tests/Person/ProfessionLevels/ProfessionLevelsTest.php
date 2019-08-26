@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Person\ProfessionLevels;
 
@@ -570,10 +569,10 @@ class ProfessionLevelsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidLevelRank
      */
     public function I_can_not_add_level_with_occupied_sequence()
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidLevelRank::class);
         $professionLevels = $this->createProfessionLevelsForChangeResistTest(ProfessionCode::FIGHTER);
 
         $levelsCount = count($professionLevels->getSortedProfessionLevels());
@@ -586,10 +585,10 @@ class ProfessionLevelsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\InvalidLevelRank
      */
     public function I_can_not_add_level_with_out_of_sequence_rank()
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\InvalidLevelRank::class);
         $professionLevels = $this->createProfessionLevelsForChangeResistTest(ProfessionCode::FIGHTER);
         $levelsCount = count($professionLevels->getSortedProfessionLevels());
         self::assertGreaterThan(1, $levelsCount);
@@ -732,10 +731,10 @@ class ProfessionLevelsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\TooHighPrimaryPropertyIncrease
      */
     public function I_can_not_increase_primary_property_three_times_in_a_row()
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\TooHighPrimaryPropertyIncrease::class);
         try {
             $firstLevel = $this->createProfessionLevelWithPrimaryPropertiesIncreased(ProfessionCode::FIGHTER, 1);
             $zeroLevel = $this->createZeroLevel();
@@ -829,10 +828,10 @@ class ProfessionLevelsTest extends TestWithMockery
      * @param string $professionCode
      * @test
      * dataProvider provideProfessionCode
-     * @expectedException \DrdPlus\Person\ProfessionLevels\Exceptions\TooHighSecondaryPropertyIncrease
      */
     public function I_can_not_increase_secondary_property_two_times_in_a_row($professionCode = 'fighter')
     {
+        $this->expectException(\DrdPlus\Person\ProfessionLevels\Exceptions\TooHighSecondaryPropertyIncrease::class);
         try {
             $firstLevel = $this->createProfessionLevelWithSecondaryPropertiesIncreased($professionCode, 1);
             // the first level does not come to property increment check

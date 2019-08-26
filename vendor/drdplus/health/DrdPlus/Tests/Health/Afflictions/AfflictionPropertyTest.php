@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions;
 
 use DrdPlus\Health\Afflictions\AfflictionProperty;
@@ -45,11 +46,11 @@ class AfflictionPropertyTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\UnknownAfflictionPropertyCode
-     * @expectedExceptionMessageRegExp ~greedy~
      */
     public function I_can_not_use_custom_property()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\UnknownAfflictionPropertyCode::class);
+        $this->expectExceptionMessageRegExp('~greedy~');
         AfflictionProperty::getIt('greedy');
     }
 }

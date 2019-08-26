@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\HuntingAndFishing;
 
@@ -72,7 +71,7 @@ class CatchProcessingQualityTest extends TestWithMockery
     public function I_get_whispered_proper_roll_class_by_ide(): void
     {
         $reflection = new \ReflectionClass(self::getSutClass());
-        self::assertContains(<<<'COMMENT'
+        self::assertStringContainsString(<<<'COMMENT'
  * @method Roll2d6DrdPlus getRoll()
 COMMENT
             , $reflection->getDocComment()

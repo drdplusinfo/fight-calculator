@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions;
 
 use DrdPlus\Health\Afflictions\AfflictionVirulence;
@@ -30,11 +31,11 @@ class AfflictionVirulenceTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\UnknownVirulencePeriod
-     * @expectedExceptionMessageRegExp ~life~
      */
     public function I_can_not_create_custom_virulence()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\UnknownVirulencePeriod::class);
+        $this->expectExceptionMessageRegExp('~life~');
         AfflictionVirulence::getEnum('life');
     }
 }

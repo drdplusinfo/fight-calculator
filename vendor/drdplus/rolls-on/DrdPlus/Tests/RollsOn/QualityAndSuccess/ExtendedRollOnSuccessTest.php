@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\RollsOn\QualityAndSuccess;
 
@@ -147,10 +146,10 @@ class ExtendedRollOnSuccessTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\RollsOn\QualityAndSuccess\Exceptions\ExpectedSimpleRollsOnSuccessOnly
      */
     public function I_can_create_it_only_from_simple_rolls_on_success()
     {
+        $this->expectException(\DrdPlus\RollsOn\QualityAndSuccess\Exceptions\ExpectedSimpleRollsOnSuccessOnly::class);
         $rollOnQuality = $this->createRollOnQuality(123);
 
         new ExtendedRollOnSuccess(
@@ -163,10 +162,10 @@ class ExtendedRollOnSuccessTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\RollsOn\QualityAndSuccess\Exceptions\EveryDifficultyShouldBeUnique
      */
     public function I_can_use_only_unique_difficulties()
     {
+        $this->expectException(\DrdPlus\RollsOn\QualityAndSuccess\Exceptions\EveryDifficultyShouldBeUnique::class);
         $rollOnQuality = $this->createRollOnQuality(123);
 
         new ExtendedRollOnSuccess(
@@ -177,10 +176,10 @@ class ExtendedRollOnSuccessTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\RollsOn\QualityAndSuccess\Exceptions\EverySuccessCodeShouldBeUnique
      */
     public function I_can_use_only_unique_success_codes()
     {
+        $this->expectException(\DrdPlus\RollsOn\QualityAndSuccess\Exceptions\EverySuccessCodeShouldBeUnique::class);
         $rollOnQuality = $this->createRollOnQuality(1);
 
         new ExtendedRollOnSuccess(
@@ -220,12 +219,12 @@ class ExtendedRollOnSuccessTest extends TestWithMockery
     /**
      * @test
      * @dataProvider provideSimpleRollsWithDifferentRollsOnQuality
-     * @expectedException \DrdPlus\RollsOn\QualityAndSuccess\Exceptions\RollOnQualityHasToBeTheSame
      * @param SimpleRollOnSuccess $firstSimpleRoll
      * @param SimpleRollOnSuccess $secondSimpleRoll
      */
     public function I_can_not_use_different_rolls_on_quality(SimpleRollOnSuccess $firstSimpleRoll, SimpleRollOnSuccess $secondSimpleRoll)
     {
+        $this->expectException(\DrdPlus\RollsOn\QualityAndSuccess\Exceptions\RollOnQualityHasToBeTheSame::class);
         new ExtendedRollOnSuccess($firstSimpleRoll, $secondSimpleRoll);
     }
 

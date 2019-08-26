@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\PropertiesByFate;
 
@@ -114,7 +113,6 @@ class ChosenPropertiesTest extends PropertiesByFateTest
     /**
      * @test
      * @dataProvider provideChosenProperties
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\InvalidValueOfChosenProperty
      * @param int $strength
      * @param int $agility
      * @param int $knack
@@ -131,6 +129,7 @@ class ChosenPropertiesTest extends PropertiesByFateTest
         int $charisma
     )
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\InvalidValueOfChosenProperty::class);
         new ChosenProperties(
             Strength::getIt($strength),
             Agility::getIt($agility),
@@ -158,7 +157,6 @@ class ChosenPropertiesTest extends PropertiesByFateTest
     /**
      * @test
      * @dataProvider provideChosenProperties
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties
      * @param int $strength
      * @param int $agility
      * @param int $knack
@@ -175,6 +173,7 @@ class ChosenPropertiesTest extends PropertiesByFateTest
         int $charisma
     )
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties::class);
         new ChosenProperties(
             Strength::getIt($strength),
             Agility::getIt($agility),
@@ -202,7 +201,6 @@ class ChosenPropertiesTest extends PropertiesByFateTest
     /**
      * @test
      * @dataProvider provideChosenProperties
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties
      * @param int $strength
      * @param int $agility
      * @param int $knack
@@ -219,6 +217,7 @@ class ChosenPropertiesTest extends PropertiesByFateTest
         int $charisma
     )
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties::class);
         new ChosenProperties(
             Strength::getIt($strength),
             Agility::getIt($agility),
@@ -288,7 +287,6 @@ class ChosenPropertiesTest extends PropertiesByFateTest
     /**
      * @test
      * @dataProvider provideChosenProperties
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties
      * @param int $strength
      * @param int $agility
      * @param int $knack
@@ -305,6 +303,7 @@ class ChosenPropertiesTest extends PropertiesByFateTest
         int $charisma
     )
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties::class);
         new ChosenProperties(
             Strength::getIt($strength),
             Agility::getIt($agility),
@@ -325,7 +324,6 @@ class ChosenPropertiesTest extends PropertiesByFateTest
     /**
      * @test
      * @dataProvider provideChosenProperties
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\InvalidValueOfChosenProperty
      * @param int $strength
      * @param int $agility
      * @param int $knack
@@ -342,6 +340,7 @@ class ChosenPropertiesTest extends PropertiesByFateTest
         int $charisma
     )
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\InvalidValueOfChosenProperty::class);
         new ChosenProperties(
             Strength::getIt($strength),
             Agility::getIt($agility),
@@ -362,7 +361,6 @@ class ChosenPropertiesTest extends PropertiesByFateTest
     /**
      * @test
      * @dataProvider provideChosenProperties
-     * @expectedException \DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties
      * @param int $strength
      * @param int $agility
      * @param int $knack
@@ -379,6 +377,7 @@ class ChosenPropertiesTest extends PropertiesByFateTest
         int $charisma
     )
     {
+        $this->expectException(\DrdPlus\PropertiesByFate\Exceptions\InvalidSumOfChosenProperties::class);
         new ChosenProperties(
             Strength::getIt($strength),
             Agility::getIt($agility),

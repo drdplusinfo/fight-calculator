@@ -371,33 +371,30 @@
     },
     {
         "name": "drdplus/armourer",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/armourer.git",
-            "reference": "a1455de0191143b05b05e1febf1dedb06f84f209"
+            "reference": "ad674625648663c3eef4da416d16d33c2e88daa1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/armourer/zipball/a1455de0191143b05b05e1febf1dedb06f84f209",
-            "reference": "a1455de0191143b05b05e1febf1dedb06f84f209",
+            "url": "https://api.github.com/repos/drdplusinfo/armourer/zipball/ad674625648663c3eef4da416d16d33c2e88daa1",
+            "reference": "ad674625648663c3eef4da416d16d33c2e88daa1",
             "shasum": ""
         },
         "require": {
-            "drdplus/codes": "~2.0",
-            "drdplus/properties": "~2.0",
-            "drdplus/tables": "~2.0",
-            "granam/tools": "^3.0",
+            "drdplus/properties": "^2.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-07-03T04:11:00+00:00",
+        "time": "2019-08-23T15:05:47+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -413,84 +410,83 @@
     },
     {
         "name": "drdplus/attack-skeleton",
-        "version": "2.0.30",
-        "version_normalized": "2.0.30.0",
+        "version": "2.1.2",
+        "version_normalized": "2.1.2.0",
         "source": {
             "type": "git",
-            "url": "/home/jaroslav/projects/docker/drdplus/www/utok.skeleton",
-            "reference": "0b371bbd81ec3b982780d61838e6a09ecfc685a6"
+            "url": "https://github.com/drdplusinfo/attack-skeleton.git",
+            "reference": "6b3cd545cd3f308abf90d741b0bcbe1f1b258aaa"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/6b3cd545cd3f308abf90d741b0bcbe1f1b258aaa",
+            "reference": "6b3cd545cd3f308abf90d741b0bcbe1f1b258aaa",
+            "shasum": ""
         },
         "require": {
             "composer-plugin-api": "^1.1",
-            "drdplus/armourer": "~2.0",
-            "drdplus/calculator-skeleton": "^1.0",
-            "drdplus/properties": "~2.0",
+            "drdplus/armourer": "^2.0",
+            "drdplus/calculator-skeleton": "^1.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "composer/composer": "^1.8",
-            "mockery/mockery": "~1.0",
-            "phpgt/dom": "^1.0",
-            "phpunit/phpunit": "~7.0",
+            "composer/composer": "^1.9",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-08-20T14:24:53+00:00",
+        "time": "2019-08-26T06:54:39+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\AttackSkeleton\\AttackInjectorComposerPlugin"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "DrdPlus\\": "DrdPlus/"
             }
         },
-        "scripts": {
-            "pre-autoload-dump": [
-                "find ./vendor/drdplus/calculator-skeleton/web/*.html -exec cp {} ./web/ \\;"
-            ]
-        },
+        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
         "description": "Configurator skeleton for those using weapons for DrD+",
         "keywords": [
-            "DrD",
-            "DrD plus",
+            "Skeleton",
             "attack",
             "calculator",
-            "skeleton",
+            "drd",
+            "drd plus",
             "weapons"
         ]
     },
     {
         "name": "drdplus/background",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-background.git",
-            "reference": "70aca51902e6c151c4b0e5d9066c6043c777435c"
+            "reference": "7ed9275971033df5df6c895dd59784c356419d5f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-background/zipball/70aca51902e6c151c4b0e5d9066c6043c777435c",
-            "reference": "70aca51902e6c151c4b0e5d9066c6043c777435c",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-background/zipball/7ed9275971033df5df6c895dd59784c356419d5f",
+            "reference": "7ed9275971033df5df6c895dd59784c356419d5f",
             "shasum": ""
         },
         "require": {
             "drdplus/professions": "~2.0",
-            "drdplus/tables": "~2.0",
-            "granam/integer-enum": "~1.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T15:54:35+00:00",
+        "time": "2019-08-23T15:28:38+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -506,33 +502,31 @@
     },
     {
         "name": "drdplus/base-properties",
-        "version": "2.0.4",
-        "version_normalized": "2.0.4.0",
+        "version": "2.1.1",
+        "version_normalized": "2.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-base-properties.git",
-            "reference": "a5775ebea2f212e5035669412410f3e99758022d"
+            "reference": "58fdb7c5544ad4a0bb5bb829325a5400c0ac2af3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-base-properties/zipball/a5775ebea2f212e5035669412410f3e99758022d",
-            "reference": "a5775ebea2f212e5035669412410f3e99758022d",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-base-properties/zipball/58fdb7c5544ad4a0bb5bb829325a5400c0ac2af3",
+            "reference": "58fdb7c5544ad4a0bb5bb829325a5400c0ac2af3",
             "shasum": ""
         },
         "require": {
-            "drdplus/codes": "~2.0",
-            "granam/integer-enum": "^1.0",
-            "granam/strict-object": "^3.0",
-            "granam/string": "^3.0",
+            "drdplus/codes": "^2.2",
+            "granam/integer-enum": "^1.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-06-07T14:23:49+00:00",
+        "time": "2019-08-23T10:39:57+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -548,17 +542,17 @@
     },
     {
         "name": "drdplus/calculations",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-calculations.git",
-            "reference": "81eed70684077e5116943aedadae35e228f2fd2d"
+            "reference": "260cc27c025db0df9295067ce44343e1c60d438b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-calculations/zipball/81eed70684077e5116943aedadae35e228f2fd2d",
-            "reference": "81eed70684077e5116943aedadae35e228f2fd2d",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-calculations/zipball/260cc27c025db0df9295067ce44343e1c60d438b",
+            "reference": "260cc27c025db0df9295067ce44343e1c60d438b",
             "shasum": ""
         },
         "require": {
@@ -566,11 +560,11 @@
             "php": ">=7.1"
         },
         "require-dev": {
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2018-08-21T07:08:01+00:00",
+        "time": "2019-08-23T06:07:23+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -591,42 +585,38 @@
     },
     {
         "name": "drdplus/calculator-skeleton",
-        "version": "1.0.49",
-        "version_normalized": "1.0.49.0",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-            "reference": "67d9f0bd37989799364ac3a513d4114a81a42dac"
+            "reference": "1f1d4584d71a08c098c583d4ff3261b6665c95a8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/67d9f0bd37989799364ac3a513d4114a81a42dac",
-            "reference": "67d9f0bd37989799364ac3a513d4114a81a42dac",
+            "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/1f1d4584d71a08c098c583d4ff3261b6665c95a8",
+            "reference": "1f1d4584d71a08c098c583d4ff3261b6665c95a8",
             "shasum": ""
         },
         "require": {
             "composer-plugin-api": "^1.1",
-            "drdplus/rules-skeleton": "~1.2",
-            "granam/exceptions-hierarchy": "^4.0",
-            "granam/integer": "^6.1",
-            "granam/scalar": "^4.0",
-            "granam/strict-object": "^3.0",
-            "granam/string": "^3.1",
-            "granam/tools": "^3.0",
+            "drdplus/rules-skeleton": "^1.5",
+            "granam/integer": "^7.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "composer/composer": "^1.8",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "composer/composer": "^1.9",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "~8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-08-20T13:59:16+00:00",
+        "time": "2019-08-23T06:30:21+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\CalculatorSkeleton\\CalculatorInjectorComposerPlugin"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "DrdPlus\\": "DrdPlus/"
@@ -640,33 +630,32 @@
     },
     {
         "name": "drdplus/codes",
-        "version": "2.1.4",
-        "version_normalized": "2.1.4.0",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/codes.git",
-            "reference": "c2556238bf27f7890c0015449232ed6732a581fd"
+            "reference": "5e5512098db529c6446cc63983de6e0cc23911d7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/codes/zipball/c2556238bf27f7890c0015449232ed6732a581fd",
-            "reference": "c2556238bf27f7890c0015449232ed6732a581fd",
+            "url": "https://api.github.com/repos/drdplusinfo/codes/zipball/5e5512098db529c6446cc63983de6e0cc23911d7",
+            "reference": "5e5512098db529c6446cc63983de6e0cc23911d7",
             "shasum": ""
         },
         "require": {
-            "granam/number": "^4.0",
-            "granam/scalar": "^4.1",
-            "granam/scalar-enum": "^1.0",
-            "granam/string": "^3.0",
+            "granam/number": "^5.0",
+            "granam/scalar-enum": "^1.1",
+            "granam/string": "^4.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-06-19T15:54:30+00:00",
+        "time": "2019-08-23T08:02:49+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -682,32 +671,30 @@
     },
     {
         "name": "drdplus/combat-actions",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-combat-actions.git",
-            "reference": "a12fb21acbe53ac3cebac0f8b38c767ad93b6ae0"
+            "reference": "0ef6ac2b2a164179d335f3f404dcb0ed493a7bde"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-combat-actions/zipball/a12fb21acbe53ac3cebac0f8b38c767ad93b6ae0",
-            "reference": "a12fb21acbe53ac3cebac0f8b38c767ad93b6ae0",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-combat-actions/zipball/0ef6ac2b2a164179d335f3f404dcb0ed493a7bde",
+            "reference": "0ef6ac2b2a164179d335f3f404dcb0ed493a7bde",
             "shasum": ""
         },
         "require": {
-            "drdplus/codes": "~2.0",
-            "drdplus/properties": "~2.0",
-            "drdplus/skills": "~2.0",
+            "drdplus/skills": "^2.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T16:59:44+00:00",
+        "time": "2019-08-24T06:12:04+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -723,33 +710,31 @@
     },
     {
         "name": "drdplus/fight-properties",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-fight-properties.git",
-            "reference": "66cfce5fa8ba940ee5b9069c5ce6d5a645d4e1a1"
+            "reference": "904922fa682326d04020d0a18345f83f30fa415d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-fight-properties/zipball/66cfce5fa8ba940ee5b9069c5ce6d5a645d4e1a1",
-            "reference": "66cfce5fa8ba940ee5b9069c5ce6d5a645d4e1a1",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-fight-properties/zipball/904922fa682326d04020d0a18345f83f30fa415d",
+            "reference": "904922fa682326d04020d0a18345f83f30fa415d",
             "shasum": ""
         },
         "require": {
-            "drdplus/armourer": "~2.0",
             "drdplus/combat-actions": "~2.0",
             "drdplus/health": "~2.0",
             "drdplus/properties-by-levels": "~2.0",
-            "drdplus/skills": "~2.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2019-02-15T09:27:52+00:00",
+        "time": "2019-08-25T05:38:38+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -765,37 +750,31 @@
     },
     {
         "name": "drdplus/health",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/health.git",
-            "reference": "f8dee76ddf651367afbbaab6f30376fc80f97001"
+            "reference": "1e8ee71b050d2d65b230a806858109a7e948d2fe"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/health/zipball/f8dee76ddf651367afbbaab6f30376fc80f97001",
-            "reference": "f8dee76ddf651367afbbaab6f30376fc80f97001",
+            "url": "https://api.github.com/repos/drdplusinfo/health/zipball/1e8ee71b050d2d65b230a806858109a7e948d2fe",
+            "reference": "1e8ee71b050d2d65b230a806858109a7e948d2fe",
             "shasum": ""
         },
         "require": {
-            "drdplus/calculations": "~1.0",
-            "drdplus/lighting": "~2.0",
-            "drdplus/properties": "~2.0",
-            "drdplus/rolls-on": "~2.0",
             "drdplus/skills": "~2.0",
-            "drdplus/tables": "~2.0",
-            "granam/integer-enum": "~1.0",
-            "granam/string-enum": "~1.0",
+            "granam/string-enum": "^1.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-15T09:06:13+00:00",
+        "time": "2019-08-25T05:23:16+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -811,31 +790,30 @@
     },
     {
         "name": "drdplus/hunting-and-fishing",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-hunting-and-fishing.git",
-            "reference": "607a2b5a2fab762daf5404bbde9850cefcbc42be"
+            "reference": "d33f06233b47d2c16f37e68d0538c35f3298a710"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-hunting-and-fishing/zipball/607a2b5a2fab762daf5404bbde9850cefcbc42be",
-            "reference": "607a2b5a2fab762daf5404bbde9850cefcbc42be",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-hunting-and-fishing/zipball/d33f06233b47d2c16f37e68d0538c35f3298a710",
+            "reference": "d33f06233b47d2c16f37e68d0538c35f3298a710",
             "shasum": ""
         },
         "require": {
-            "drdplus/rolls-on": "~2.0",
-            "drdplus/tables": "~2.0",
+            "drdplus/rolls-on": "^2.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T10:11:24+00:00",
+        "time": "2019-08-23T15:20:41+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -851,32 +829,29 @@
     },
     {
         "name": "drdplus/lighting",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-lighting.git",
-            "reference": "5b3c5d0ed47d95501fd4155d9007a4089fc73766"
+            "reference": "e6861cd578abf3557b06e97e34df5e396cbe3dc1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-lighting/zipball/5b3c5d0ed47d95501fd4155d9007a4089fc73766",
-            "reference": "5b3c5d0ed47d95501fd4155d9007a4089fc73766",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-lighting/zipball/e6861cd578abf3557b06e97e34df5e396cbe3dc1",
+            "reference": "e6861cd578abf3557b06e97e34df5e396cbe3dc1",
             "shasum": ""
         },
         "require": {
-            "drdplus/calculations": "~1.0",
             "drdplus/rolls-on": "~2.0",
-            "drdplus/tables": "~2.0",
-            "granam/integer": "^6.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T16:41:48+00:00",
+        "time": "2019-08-23T15:31:51+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -892,33 +867,30 @@
     },
     {
         "name": "drdplus/profession-levels",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-profession-levels.git",
-            "reference": "612fcfd801f6b547c60f34c58a9a8c324fd3d338"
+            "reference": "d59edb11159f76c10286148cf5aa0bd7caaea71b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-profession-levels/zipball/612fcfd801f6b547c60f34c58a9a8c324fd3d338",
-            "reference": "612fcfd801f6b547c60f34c58a9a8c324fd3d338",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-profession-levels/zipball/d59edb11159f76c10286148cf5aa0bd7caaea71b",
+            "reference": "d59edb11159f76c10286148cf5aa0bd7caaea71b",
             "shasum": ""
         },
         "require": {
-            "drdplus/codes": "~2.0",
             "drdplus/professions": "~2.0",
-            "drdplus/properties": "~2.0",
-            "granam/integer-enum": "^1.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T16:15:22+00:00",
+        "time": "2019-08-23T14:59:12+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -934,31 +906,30 @@
     },
     {
         "name": "drdplus/professions",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-professions.git",
-            "reference": "fee5e8d0a8ae61e1a20f72b3c41585ebd597b4bb"
+            "reference": "d69ec10f102c1e39edb03bc7a1af440e6bb759f0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-professions/zipball/fee5e8d0a8ae61e1a20f72b3c41585ebd597b4bb",
-            "reference": "fee5e8d0a8ae61e1a20f72b3c41585ebd597b4bb",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-professions/zipball/d69ec10f102c1e39edb03bc7a1af440e6bb759f0",
+            "reference": "d69ec10f102c1e39edb03bc7a1af440e6bb759f0",
             "shasum": ""
         },
         "require": {
-            "drdplus/codes": "~2.0",
-            "drdplus/properties": "~2.0",
+            "drdplus/properties": "^2.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T09:14:00+00:00",
+        "time": "2019-08-26T09:33:32+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -974,38 +945,34 @@
     },
     {
         "name": "drdplus/properties",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-properties.git",
-            "reference": "519670e75491af4c2e5d111a01f2cb1a581d8b2c"
+            "reference": "3f6439a71462b9be6bac3bc8eb72563886b583a0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-properties/zipball/519670e75491af4c2e5d111a01f2cb1a581d8b2c",
-            "reference": "519670e75491af4c2e5d111a01f2cb1a581d8b2c",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-properties/zipball/3f6439a71462b9be6bac3bc8eb72563886b583a0",
+            "reference": "3f6439a71462b9be6bac3bc8eb72563886b583a0",
             "shasum": ""
         },
         "require": {
-            "drdplus/base-properties": "~2.0",
             "drdplus/calculations": "^1.0",
-            "drdplus/codes": "~2.0",
-            "drdplus/tables": "~2.0",
-            "granam/boolean-enum": "~1.0",
-            "granam/float-enum": "~1.0",
-            "granam/integer-enum": "~1.0",
-            "granam/scalar-enum": "~1.0",
-            "granam/string": "^3.0",
+            "drdplus/tables": "^2.5",
+            "granam/boolean-enum": "^1.0",
+            "granam/float-enum": "^1.0",
+            "granam/integer-enum": "^1.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T07:27:22+00:00",
+        "time": "2019-08-23T11:53:01+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1021,34 +988,30 @@
     },
     {
         "name": "drdplus/properties-by-fate",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-properties-by-fate.git",
-            "reference": "0156a159e99c33affcd5b670b474ff19cb46cfcc"
+            "reference": "cd33d3d2a6d3dcdddb544056696e6c8797059739"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-properties-by-fate/zipball/0156a159e99c33affcd5b670b474ff19cb46cfcc",
-            "reference": "0156a159e99c33affcd5b670b474ff19cb46cfcc",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-properties-by-fate/zipball/cd33d3d2a6d3dcdddb544056696e6c8797059739",
+            "reference": "cd33d3d2a6d3dcdddb544056696e6c8797059739",
             "shasum": ""
         },
         "require": {
-            "drdplus/professions": "~2.0",
-            "drdplus/properties": "~2.0",
-            "granam/dice-rolls": "^5.0",
-            "granam/scalar": "^4.0",
-            "granam/string": "^3.0",
+            "drdplus/professions": "^2.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
+            "granam/exceptions-hierarchy": "^5.0",
             "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T17:10:21+00:00",
+        "time": "2019-08-26T09:38:06+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1063,42 +1026,40 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Exceptional properties by choose or fortune for DrD+"
     },
     {
         "name": "drdplus/properties-by-levels",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-properties-by-levels.git",
-            "reference": "6498fea86c6e9e4a5793a22bc421d86abd320474"
+            "reference": "df51476d00566e4b3b0e332eaed95a07c0e81247"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-properties-by-levels/zipball/6498fea86c6e9e4a5793a22bc421d86abd320474",
-            "reference": "6498fea86c6e9e4a5793a22bc421d86abd320474",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-properties-by-levels/zipball/df51476d00566e4b3b0e332eaed95a07c0e81247",
+            "reference": "df51476d00566e4b3b0e332eaed95a07c0e81247",
             "shasum": ""
         },
         "require": {
             "drdplus/profession-levels": "~2.0",
-            "drdplus/properties": "~2.0",
             "drdplus/properties-by-fate": "~2.0",
             "drdplus/races": "~2.0",
-            "drdplus/tables": "~2.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-15T06:57:47+00:00",
+        "time": "2019-08-25T05:40:20+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1114,32 +1075,31 @@
     },
     {
         "name": "drdplus/races",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-races.git",
-            "reference": "a7189555ff5235e690c5fe01afc85aec0015b21a"
+            "reference": "74e72cd5316fd44bae6d99d4f301a0a835a62d37"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-races/zipball/a7189555ff5235e690c5fe01afc85aec0015b21a",
-            "reference": "a7189555ff5235e690c5fe01afc85aec0015b21a",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-races/zipball/74e72cd5316fd44bae6d99d4f301a0a835a62d37",
+            "reference": "74e72cd5316fd44bae6d99d4f301a0a835a62d37",
             "shasum": ""
         },
         "require": {
-            "drdplus/tables": "~2.0",
-            "granam/string-enum": "~1.0",
-            "granam/tools": "~3.0",
+            "drdplus/tables": "^2.5",
+            "granam/string-enum": "^1.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-15T06:53:30+00:00",
+        "time": "2019-08-26T11:46:17+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1155,33 +1115,30 @@
     },
     {
         "name": "drdplus/rolls-on",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-rolls-on.git",
-            "reference": "ce91c52a38bf41aab10387ffc78d265c890d49f7"
+            "reference": "7a08954be9ac3d615ee42c57b4de3042afb1a2d6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-rolls-on/zipball/ce91c52a38bf41aab10387ffc78d265c890d49f7",
-            "reference": "ce91c52a38bf41aab10387ffc78d265c890d49f7",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-rolls-on/zipball/7a08954be9ac3d615ee42c57b4de3042afb1a2d6",
+            "reference": "7a08954be9ac3d615ee42c57b4de3042afb1a2d6",
             "shasum": ""
         },
         "require": {
-            "drdplus/properties": "~2.0",
-            "granam/boolean": "~3.1",
-            "granam/dice-rolls": "~5.0",
-            "granam/integer": "~6.1",
+            "drdplus/properties": "^2.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T08:06:19+00:00",
+        "time": "2019-08-23T15:16:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1197,17 +1154,17 @@
     },
     {
         "name": "drdplus/rules-skeleton",
-        "version": "1.4.12",
-        "version_normalized": "1.4.12.0",
+        "version": "1.5.5",
+        "version_normalized": "1.5.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-            "reference": "ccdafb5c9e7eeeafc790e1d8fa1ffb61898a5fd6"
+            "reference": "138c1b9593d5a4c6783b713aa17bfab5d814f39b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/ccdafb5c9e7eeeafc790e1d8fa1ffb61898a5fd6",
-            "reference": "ccdafb5c9e7eeeafc790e1d8fa1ffb61898a5fd6",
+            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/138c1b9593d5a4c6783b713aa17bfab5d814f39b",
+            "reference": "138c1b9593d5a4c6783b713aa17bfab5d814f39b",
             "shasum": ""
         },
         "require": {
@@ -1221,15 +1178,10 @@
             "ext-posix": "*",
             "ext-yaml": "*",
             "ext-zlib": "*",
-            "granam/exceptions-hierarchy": "^4.0",
             "granam/git": "^1.2",
-            "granam/strict-object": "^3.0",
-            "granam/string": "^3.2",
-            "granam/tools": "^3.0",
-            "granam/web-content-builder": "^1.3",
+            "granam/web-content-builder": "^2.0",
             "granam/yaml-reader": "^1.0",
             "php": ">=7.1",
-            "phpgt/dom": "~1.1",
             "phpmailer/phpmailer": "^6.0",
             "piwik/device-detector": "^3.11",
             "symfony/config": "^4.3",
@@ -1239,12 +1191,13 @@
             "tracy/tracy": "^2.4"
         },
         "require-dev": {
-            "composer/composer": "^1.8",
+            "composer/composer": "^1.9",
+            "granam/exceptions-hierarchy": "^5.0",
             "mockery/mockery": "^1.2",
-            "phpunit/phpunit": "^7.5",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-08-20T06:29:11+00:00",
+        "time": "2019-08-26T07:13:08+00:00",
         "bin": [
             "bin/fix_web_permissions.sh"
         ],
@@ -1252,7 +1205,7 @@
         "extra": {
             "class": "DrdPlus\\RulesSkeleton\\SkeletonInjectorComposerPlugin"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "DrdPlus\\": "DrdPlus/"
@@ -1272,36 +1225,34 @@
     },
     {
         "name": "drdplus/skills",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/drdplus-skills.git",
-            "reference": "9ae6ecdbaadf594d6572ec0c190fc13572c0a53f"
+            "reference": "72cf17bd9412322d432364107a039d2674aa662d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/drdplus-skills/zipball/9ae6ecdbaadf594d6572ec0c190fc13572c0a53f",
-            "reference": "9ae6ecdbaadf594d6572ec0c190fc13572c0a53f",
+            "url": "https://api.github.com/repos/drdplusinfo/drdplus-skills/zipball/72cf17bd9412322d432364107a039d2674aa662d",
+            "reference": "72cf17bd9412322d432364107a039d2674aa662d",
             "shasum": ""
         },
         "require": {
-            "drdplus/armourer": "~2.0",
+            "drdplus/armourer": "^2.0",
             "drdplus/background": "~2.0",
             "drdplus/hunting-and-fishing": "~2.0",
             "drdplus/lighting": "~2.0",
             "drdplus/profession-levels": "~2.0",
-            "granam/integer": "^6.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "drdplus/professions": "~2.0",
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-15T09:53:59+00:00",
+        "time": "2019-08-24T06:03:34+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1317,37 +1268,34 @@
     },
     {
         "name": "drdplus/tables",
-        "version": "2.4.0",
-        "version_normalized": "2.4.0.0",
+        "version": "2.5.0",
+        "version_normalized": "2.5.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/tables.git",
-            "reference": "d998d84e06be913bb91445aef3047c263ab128d7"
+            "reference": "5cea455c2ce12f30e645e2976ef31496b00fef47"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/tables/zipball/d998d84e06be913bb91445aef3047c263ab128d7",
-            "reference": "d998d84e06be913bb91445aef3047c263ab128d7",
+            "url": "https://api.github.com/repos/drdplusinfo/tables/zipball/5cea455c2ce12f30e645e2976ef31496b00fef47",
+            "reference": "5cea455c2ce12f30e645e2976ef31496b00fef47",
             "shasum": ""
         },
         "require": {
-            "drdplus/base-properties": "~2.0",
+            "drdplus/base-properties": "^2.1",
             "drdplus/calculations": "^1.0",
-            "drdplus/codes": "~2.1",
-            "granam/boolean": ">=3.1",
-            "granam/dice-rolls": "^5.0",
-            "granam/float": ">=5.0",
-            "granam/integer": ">=6.1",
-            "granam/number": ">=4.0",
+            "granam/boolean": "^3.2",
+            "granam/dice-rolls": "^6.0",
+            "granam/float": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-06-20T07:05:50+00:00",
+        "time": "2019-08-23T11:11:34+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1445,29 +1393,29 @@
     },
     {
         "name": "granam/boolean",
-        "version": "3.1.0",
-        "version_normalized": "3.1.0.0",
+        "version": "3.2.0",
+        "version_normalized": "3.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/boolean.git",
-            "reference": "70f76753a301ab15f43fc086a58e7929f1231c14"
+            "reference": "aaaea790445c36e319b6096c58a1cbe7eabeca2e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/boolean/zipball/70f76753a301ab15f43fc086a58e7929f1231c14",
-            "reference": "70f76753a301ab15f43fc086a58e7929f1231c14",
+            "url": "https://api.github.com/repos/granam/boolean/zipball/aaaea790445c36e319b6096c58a1cbe7eabeca2e",
+            "reference": "aaaea790445c36e319b6096c58a1cbe7eabeca2e",
             "shasum": ""
         },
         "require": {
-            "granam/scalar": "^4.0",
+            "granam/scalar": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2018-07-17T12:14:47+00:00",
+        "time": "2019-08-23T10:48:18+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -1482,8 +1430,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "http://jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "http://jaroslavtyc.com"
             }
         ],
         "description": "Lightweight boolean container with stand-alone converter",
@@ -1496,31 +1444,31 @@
     },
     {
         "name": "granam/boolean-enum",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/boolean-enum.git",
-            "reference": "48ae76b9c5b8fd33882799dfa8544aeddd793ba8"
+            "reference": "fc2226db44806f416f9be82440f7e8c505c9945b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/boolean-enum/zipball/48ae76b9c5b8fd33882799dfa8544aeddd793ba8",
-            "reference": "48ae76b9c5b8fd33882799dfa8544aeddd793ba8",
+            "url": "https://api.github.com/repos/granam/boolean-enum/zipball/fc2226db44806f416f9be82440f7e8c505c9945b",
+            "reference": "fc2226db44806f416f9be82440f7e8c505c9945b",
             "shasum": ""
         },
         "require": {
-            "granam/boolean": "^3.1",
-            "granam/scalar-enum": "~1.0",
+            "granam/boolean": "^3.2",
+            "granam/scalar-enum": "^1.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T08:59:54+00:00",
+        "time": "2019-08-23T12:08:11+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1535,41 +1483,39 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
+                "role": "Developer",
                 "email": "mail@jaroslavtyc.com",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Developer"
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Enumeration with booleans only"
     },
     {
         "name": "granam/dice-rolls",
-        "version": "5.0.1",
-        "version_normalized": "5.0.1.0",
+        "version": "6.0.0",
+        "version_normalized": "6.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/granam-dice-rolls.git",
-            "reference": "e946f1e6c0712b0fc9ac7107160022129bdbfc7f"
+            "reference": "4713ab570ec90c554fa7089c6c42f769dee94cf6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/granam-dice-rolls/zipball/e946f1e6c0712b0fc9ac7107160022129bdbfc7f",
-            "reference": "e946f1e6c0712b0fc9ac7107160022129bdbfc7f",
+            "url": "https://api.github.com/repos/granam/granam-dice-rolls/zipball/4713ab570ec90c554fa7089c6c42f769dee94cf6",
+            "reference": "4713ab570ec90c554fa7089c6c42f769dee94cf6",
             "shasum": ""
         },
         "require": {
-            "granam/integer": "^6.1",
-            "granam/strict-object": "^3.0",
-            "granam/tools": "^3.0",
+            "granam/integer": "^7.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2018-08-21T17:18:46+00:00",
+        "time": "2019-08-23T07:16:11+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1584,8 +1530,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Configurable roll of a dice",
@@ -1603,26 +1549,26 @@
     },
     {
         "name": "granam/exceptions-hierarchy",
-        "version": "4.0.2",
-        "version_normalized": "4.0.2.0",
+        "version": "5.0.0",
+        "version_normalized": "5.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/exceptions-hierarchy.git",
-            "reference": "846b8592c8b673818569bbb103016723130bbf98"
+            "reference": "4f44bd3d789029e2442e41234049e9b564ce0fa4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/exceptions-hierarchy/zipball/846b8592c8b673818569bbb103016723130bbf98",
-            "reference": "846b8592c8b673818569bbb103016723130bbf98",
+            "url": "https://api.github.com/repos/granam/exceptions-hierarchy/zipball/4f44bd3d789029e2442e41234049e9b564ce0fa4",
+            "reference": "4f44bd3d789029e2442e41234049e9b564ce0fa4",
             "shasum": ""
         },
         "require": {
-            "php": ">=7.0"
+            "php": ">=7.1"
         },
         "require-dev": {
-            "phpunit/phpunit": "~6.0"
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2017-02-19T12:25:30+00:00",
+        "time": "2019-08-22T14:27:06+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1646,29 +1592,29 @@
     },
     {
         "name": "granam/float",
-        "version": "5.0.0",
-        "version_normalized": "5.0.0.0",
+        "version": "5.0.1",
+        "version_normalized": "5.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/float.git",
-            "reference": "6ec56176dca613f2b04c54914dedc0b9f9b82a2e"
+            "reference": "a7ce8140f020fae4408db02fb3dcf176768bb6d4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/float/zipball/6ec56176dca613f2b04c54914dedc0b9f9b82a2e",
-            "reference": "6ec56176dca613f2b04c54914dedc0b9f9b82a2e",
+            "url": "https://api.github.com/repos/granam/float/zipball/a7ce8140f020fae4408db02fb3dcf176768bb6d4",
+            "reference": "a7ce8140f020fae4408db02fb3dcf176768bb6d4",
             "shasum": ""
         },
         "require": {
-            "granam/number": "^4.0",
+            "granam/number": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2018-07-10T13:30:57+00:00",
+        "time": "2019-08-23T06:02:52+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -1683,8 +1629,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Converter and wrapping object for a float value",
@@ -1697,30 +1643,30 @@
     },
     {
         "name": "granam/float-enum",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/float-enum.git",
-            "reference": "00571e66141fd62001e8b7a347ad3a8fc0b238ea"
+            "reference": "4fdc9febf3f50381b2f25b307f00c3a6ff2a72bf"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/float-enum/zipball/00571e66141fd62001e8b7a347ad3a8fc0b238ea",
-            "reference": "00571e66141fd62001e8b7a347ad3a8fc0b238ea",
+            "url": "https://api.github.com/repos/granam/float-enum/zipball/4fdc9febf3f50381b2f25b307f00c3a6ff2a72bf",
+            "reference": "4fdc9febf3f50381b2f25b307f00c3a6ff2a72bf",
             "shasum": ""
         },
         "require": {
             "granam/float": "^5.0",
-            "granam/scalar-enum": "~1.0",
+            "granam/scalar-enum": "^1.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2019-02-14T08:54:00+00:00",
+        "time": "2019-08-23T11:58:59+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1735,9 +1681,9 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
+                "role": "Developer",
                 "email": "mail@jaroslavtyc.com",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Developer"
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Enumeration with floats only"
@@ -1789,30 +1735,29 @@
     },
     {
         "name": "granam/integer",
-        "version": "6.1.0",
-        "version_normalized": "6.1.0.0",
+        "version": "7.0.1",
+        "version_normalized": "7.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/integer.git",
-            "reference": "6930170eb737a01bba987804da63c3d3040028f7"
+            "reference": "583212d46cf3247588bdf63b478b74e29766c2b1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/integer/zipball/6930170eb737a01bba987804da63c3d3040028f7",
-            "reference": "6930170eb737a01bba987804da63c3d3040028f7",
+            "url": "https://api.github.com/repos/granam/integer/zipball/583212d46cf3247588bdf63b478b74e29766c2b1",
+            "reference": "583212d46cf3247588bdf63b478b74e29766c2b1",
             "shasum": ""
         },
         "require": {
-            "granam/number": "^4.0",
-            "granam/object-history": "^1.0",
+            "granam/number": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2018-07-10T12:10:02+00:00",
+        "time": "2019-08-23T06:09:37+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -1827,8 +1772,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "http://jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "http://jaroslavtyc.com"
             }
         ],
         "description": "Lightweight integer container with stand-alone converter",
@@ -1841,31 +1786,31 @@
     },
     {
         "name": "granam/integer-enum",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/integer-enum.git",
-            "reference": "7cdb54fe0962587fc77601cbeae8e916af1a2642"
+            "reference": "b4a7fdf59598708d83914bba423fdaa6c2fa2952"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/integer-enum/zipball/7cdb54fe0962587fc77601cbeae8e916af1a2642",
-            "reference": "7cdb54fe0962587fc77601cbeae8e916af1a2642",
+            "url": "https://api.github.com/repos/granam/integer-enum/zipball/b4a7fdf59598708d83914bba423fdaa6c2fa2952",
+            "reference": "b4a7fdf59598708d83914bba423fdaa6c2fa2952",
             "shasum": ""
         },
         "require": {
-            "granam/integer": "^6.1",
-            "granam/scalar-enum": "~1.0",
+            "granam/integer": "^7.0",
+            "granam/scalar-enum": "^1.1",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-14T08:52:04+00:00",
+        "time": "2019-08-23T10:35:45+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1880,38 +1825,38 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
+                "role": "Developer",
                 "email": "mail@jaroslavtyc.com",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Developer"
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Enumeration with integers only"
     },
     {
         "name": "granam/number",
-        "version": "4.0.0",
-        "version_normalized": "4.0.0.0",
+        "version": "5.0.0",
+        "version_normalized": "5.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/number.git",
-            "reference": "1d6da206cdd0e9247f55b6f52af86dce327925e4"
+            "reference": "09731292a96330c75c5740c57fd23dd3f886592c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/number/zipball/1d6da206cdd0e9247f55b6f52af86dce327925e4",
-            "reference": "1d6da206cdd0e9247f55b6f52af86dce327925e4",
+            "url": "https://api.github.com/repos/granam/number/zipball/09731292a96330c75c5740c57fd23dd3f886592c",
+            "reference": "09731292a96330c75c5740c57fd23dd3f886592c",
             "shasum": ""
         },
         "require": {
-            "granam/scalar": "^4.0",
+            "granam/scalar": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2018-07-10T12:01:41+00:00",
+        "time": "2019-08-22T16:34:45+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -1926,8 +1871,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "http://jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "http://jaroslavtyc.com"
             }
         ],
         "description": "Converter and wrapping object for a number (float or integer) value",
@@ -1940,69 +1885,31 @@
         ]
     },
     {
-        "name": "granam/object-history",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/granam/object-history.git",
-            "reference": "f31ea2819e68b980458340eb4c6e2ddd42f8311e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/granam/object-history/zipball/f31ea2819e68b980458340eb4c6e2ddd42f8311e",
-            "reference": "f31ea2819e68b980458340eb4c6e2ddd42f8311e",
-            "shasum": ""
-        },
-        "require": {
-            "granam/tools": "^3.0",
-            "php": ">=7.1"
-        },
-        "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
-        },
-        "time": "2018-07-10T11:17:10+00:00",
-        "type": "project",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Granam\\": "Granam/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "Changes of an object fetched from debug_backtrace"
-    },
-    {
         "name": "granam/scalar",
-        "version": "4.1.0",
-        "version_normalized": "4.1.0.0",
+        "version": "5.0.1",
+        "version_normalized": "5.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/scalar.git",
-            "reference": "c3f78968da6a24ca24b4bb3a2729e61287df7ae3"
+            "reference": "62d0a442dcd1ce113ff1baebf002fa8f57cb4b68"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/scalar/zipball/c3f78968da6a24ca24b4bb3a2729e61287df7ae3",
-            "reference": "c3f78968da6a24ca24b4bb3a2729e61287df7ae3",
+            "url": "https://api.github.com/repos/granam/scalar/zipball/62d0a442dcd1ce113ff1baebf002fa8f57cb4b68",
+            "reference": "62d0a442dcd1ce113ff1baebf002fa8f57cb4b68",
             "shasum": ""
         },
         "require": {
             "granam/strict-object": "^3.0",
-            "granam/tools": "^3.0",
+            "granam/tools": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2018-08-13T13:05:50+00:00",
+        "time": "2019-08-22T15:18:16+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -2017,8 +1924,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "http://jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "http://jaroslavtyc.com"
             }
         ],
         "description": "Lightweight scalar-type container",
@@ -2030,32 +1937,30 @@
     },
     {
         "name": "granam/scalar-enum",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/scalar-enum.git",
-            "reference": "a90493790497e0fba13b684e332cbc33e6ad7e17"
+            "reference": "4c288ae492cd7a8a3eab42ca5896d06501cc6cca"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/scalar-enum/zipball/a90493790497e0fba13b684e332cbc33e6ad7e17",
-            "reference": "a90493790497e0fba13b684e332cbc33e6ad7e17",
+            "url": "https://api.github.com/repos/granam/scalar-enum/zipball/4c288ae492cd7a8a3eab42ca5896d06501cc6cca",
+            "reference": "4c288ae492cd7a8a3eab42ca5896d06501cc6cca",
             "shasum": ""
         },
         "require": {
-            "granam/scalar": "^4.0",
-            "granam/strict-object": "^3.0",
-            "granam/tools": "^3.0",
+            "granam/scalar": "^5.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0",
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-02-13T11:41:46+00:00",
+        "time": "2019-08-23T07:25:36+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2070,9 +1975,9 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
+                "role": "Developer",
                 "email": "mail@jaroslavtyc.com",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Developer"
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Enumeration with scalar values",
@@ -2118,8 +2023,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Base object, checking access to undefined properties and methods",
@@ -2136,37 +2041,38 @@
     },
     {
         "name": "granam/string",
-        "version": "3.3.0",
-        "version_normalized": "3.3.0.0",
+        "version": "4.0.0",
+        "version_normalized": "4.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/string.git",
-            "reference": "18450970ec9dbb494b6928617db913884e420621"
+            "reference": "31d321fc71e4f67651d1a026d8ebfec2daad5710"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/string/zipball/18450970ec9dbb494b6928617db913884e420621",
-            "reference": "18450970ec9dbb494b6928617db913884e420621",
+            "url": "https://api.github.com/repos/granam/string/zipball/31d321fc71e4f67651d1a026d8ebfec2daad5710",
+            "reference": "31d321fc71e4f67651d1a026d8ebfec2daad5710",
             "shasum": ""
         },
         "require": {
             "ext-intl": "*",
             "ext-mbstring": "*",
-            "granam/scalar": "^4.1",
+            "granam/scalar": "^5.0",
+            "granam/strict-object": "^3.0",
             "php": ">=7.1"
         },
         "require-dev": {
             "ext-mbstring": "*",
-            "granam/exceptions-hierarchy": ">=4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
         "suggest": {
             "ext-iconv": "*",
             "ext-intl": "*",
             "ext-mbstring": "*"
         },
-        "time": "2019-04-12T05:58:22+00:00",
+        "time": "2019-08-22T14:57:56+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -2181,8 +2087,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "https://www.jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "https://www.jaroslavtyc.com"
             }
         ],
         "description": "Lightweight string wrapper",
@@ -2195,30 +2101,30 @@
     },
     {
         "name": "granam/string-enum",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/string-enum.git",
-            "reference": "852cecbb93c7d3a1fba54ed1ad30f0924d835677"
+            "reference": "9049b7b52522846a2f117dd5ede80dc882046bee"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/string-enum/zipball/852cecbb93c7d3a1fba54ed1ad30f0924d835677",
-            "reference": "852cecbb93c7d3a1fba54ed1ad30f0924d835677",
+            "url": "https://api.github.com/repos/granam/string-enum/zipball/9049b7b52522846a2f117dd5ede80dc882046bee",
+            "reference": "9049b7b52522846a2f117dd5ede80dc882046bee",
             "shasum": ""
         },
         "require": {
-            "granam/scalar-enum": "~1.0",
-            "granam/string": "^3.0",
+            "granam/scalar-enum": "^1.1",
+            "granam/string": "^4.0",
             "php": ">=7.1"
         },
         "require-dev": {
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2019-02-14T08:44:27+00:00",
+        "time": "2019-08-25T05:13:13+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2233,9 +2139,9 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
+                "role": "Developer",
                 "email": "mail@jaroslavtyc.com",
-                "homepage": "http://jaroslavtyc.com",
-                "role": "Developer"
+                "homepage": "http://jaroslavtyc.com"
             }
         ],
         "description": "Enumeration with strings only",
@@ -2247,17 +2153,17 @@
     },
     {
         "name": "granam/tools",
-        "version": "3.0.3",
-        "version_normalized": "3.0.3.0",
+        "version": "5.0.1",
+        "version_normalized": "5.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/tools.git",
-            "reference": "281a08cf7e7d7665b20855f002a7b9180e94c86a"
+            "reference": "c75f9b2bdcdfe706b3994e6482617c0611d96e5c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/tools/zipball/281a08cf7e7d7665b20855f002a7b9180e94c86a",
-            "reference": "281a08cf7e7d7665b20855f002a7b9180e94c86a",
+            "url": "https://api.github.com/repos/granam/tools/zipball/c75f9b2bdcdfe706b3994e6482617c0611d96e5c",
+            "reference": "c75f9b2bdcdfe706b3994e6482617c0611d96e5c",
             "shasum": ""
         },
         "require": {
@@ -2265,12 +2171,11 @@
             "php": ">=7.1"
         },
         "require-dev": {
-            "doctrine/orm": "2.*",
-            "granam/exceptions-hierarchy": "~4.0",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~7.0"
+            "granam/exceptions-hierarchy": "^5.0",
+            "mockery/mockery": "^1.2",
+            "phpunit/phpunit": "^8.3"
         },
-        "time": "2018-07-20T06:12:40+00:00",
+        "time": "2019-08-22T16:07:47+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -2285,8 +2190,8 @@
         "authors": [
             {
                 "name": "Jaroslav Týc",
-                "homepage": "http://jaroslavtyc.com",
-                "role": "Original author"
+                "role": "Original author",
+                "homepage": "http://jaroslavtyc.com"
             }
         ],
         "description": "Toolbox",
@@ -2300,17 +2205,17 @@
     },
     {
         "name": "granam/web-content-builder",
-        "version": "1.3.1",
-        "version_normalized": "1.3.1.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/granam/web-content-builder.git",
-            "reference": "25a71e192ab05b1d57b939a633fb75b8cd931587"
+            "reference": "5d7206ffae7d0526b0ba4c1f5fc72b119eca7acd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/granam/web-content-builder/zipball/25a71e192ab05b1d57b939a633fb75b8cd931587",
-            "reference": "25a71e192ab05b1d57b939a633fb75b8cd931587",
+            "url": "https://api.github.com/repos/granam/web-content-builder/zipball/5d7206ffae7d0526b0ba4c1f5fc72b119eca7acd",
+            "reference": "5d7206ffae7d0526b0ba4c1f5fc72b119eca7acd",
             "shasum": ""
         },
         "require": {
@@ -2318,20 +2223,19 @@
             "erusev/parsedown": "^1.7",
             "ext-dom": "*",
             "ext-json": "*",
-            "granam/strict-object": "^3.0",
-            "granam/string": "^3.2",
+            "granam/string": "^4.0",
             "php": ">=7.1",
-            "phpgt/dom": "^1.1",
-            "piwik/device-detector": "^3.11"
+            "phpgt/dom": "^2.1",
+            "piwik/device-detector": "^3.12"
         },
         "require-dev": {
             "composer/composer": "^1.7",
-            "granam/exceptions-hierarchy": "^4.0",
+            "granam/exceptions-hierarchy": "^5.0",
             "mockery/mockery": "^1.2",
-            "phpunit/phpunit": "~7.0",
+            "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-07-30T05:31:18+00:00",
+        "time": "2019-08-23T06:57:57+00:00",
         "bin": [
             "bin/assets"
         ],
@@ -2728,18 +2632,18 @@
         "authors": [
             {
                 "name": "Arne Blankerts",
-                "email": "arne@blankerts.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "arne@blankerts.de"
             },
             {
                 "name": "Sebastian Heuer",
-                "email": "sebastian@phpeople.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "sebastian@phpeople.de"
             },
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)"
@@ -2777,18 +2681,18 @@
         "authors": [
             {
                 "name": "Arne Blankerts",
-                "email": "arne@blankerts.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "arne@blankerts.de"
             },
             {
                 "name": "Sebastian Heuer",
-                "email": "sebastian@phpeople.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "sebastian@phpeople.de"
             },
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "Library for handling version information and constraints"
@@ -2952,30 +2856,76 @@
         ]
     },
     {
-        "name": "phpgt/dom",
-        "version": "v1.1.2",
-        "version_normalized": "1.1.2.0",
+        "name": "phpgt/cssxpath",
+        "version": "v1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/PhpGt/Dom.git",
-            "reference": "12011a45fad9930306466dbc5d09da6d90380d1a"
+            "url": "https://github.com/PhpGt/CssXPath.git",
+            "reference": "af4b9583ad4a950225f10a0b9c97d8dc4f14e22d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PhpGt/Dom/zipball/12011a45fad9930306466dbc5d09da6d90380d1a",
-            "reference": "12011a45fad9930306466dbc5d09da6d90380d1a",
+            "url": "https://api.github.com/repos/PhpGt/CssXPath/zipball/af4b9583ad4a950225f10a0b9c97d8dc4f14e22d",
+            "reference": "af4b9583ad4a950225f10a0b9c97d8dc4f14e22d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.2"
+        },
+        "require-dev": {
+            "phpgt/dom": "*",
+            "phpunit/phpunit": "^8.0"
+        },
+        "time": "2019-08-15T09:48:36+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Gt\\CssXPath\\": "./src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Greg Bowler",
+                "role": "Developer",
+                "email": "greg.bowler@g105b.com",
+                "homepage": "https://www.g105b.com"
+            }
+        ],
+        "description": "Convert CSS selectors to XPath queries."
+    },
+    {
+        "name": "phpgt/dom",
+        "version": "v2.1.3",
+        "version_normalized": "2.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PhpGt/Dom.git",
+            "reference": "1ffa6a1f747dbd1bcbb6d0e444481cedb29ec338"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PhpGt/Dom/zipball/1ffa6a1f747dbd1bcbb6d0e444481cedb29ec338",
+            "reference": "1ffa6a1f747dbd1bcbb6d0e444481cedb29ec338",
             "shasum": ""
         },
         "require": {
             "ext-dom": "*",
+            "ext-libxml": "*",
             "ext-mbstring": "*",
-            "php": ">=7.2.0",
-            "symfony/css-selector": "3.2.14"
+            "php": ">=7.2",
+            "phpgt/cssxpath": "*",
+            "psr/http-message": "1.*"
         },
         "require-dev": {
             "phpunit/phpunit": "8.*"
         },
-        "time": "2019-06-10T08:13:02+00:00",
+        "time": "2019-08-15T11:01:38+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2990,44 +2940,44 @@
         "authors": [
             {
                 "name": "Greg Bowler",
+                "role": "Developer",
                 "email": "greg.bowler@g105b.com",
-                "homepage": "https://www.g105b.com",
-                "role": "Developer"
+                "homepage": "https://www.g105b.com"
             },
             {
                 "name": "Alvaro Guimaraes",
-                "homepage": "https://github.com/aguimaraes",
-                "role": "Developer"
+                "role": "Developer",
+                "homepage": "https://github.com/aguimaraes"
             },
             {
                 "name": "James Fellows",
-                "homepage": "https://github.com/j4m3s",
-                "role": "Developer"
+                "role": "Developer",
+                "homepage": "https://github.com/j4m3s"
             },
             {
                 "name": "Emile Ward",
-                "homepage": "https://github.com/emileward",
-                "role": "Developer"
+                "role": "Developer",
+                "homepage": "https://github.com/emileward"
             },
             {
                 "name": "Jelmer Wijnja",
-                "homepage": "https://github.com/Jelmergu",
-                "role": "Developer"
+                "role": "Developer",
+                "homepage": "https://github.com/Jelmergu"
             },
             {
                 "name": "Ognjen Petrovic",
-                "homepage": "https://github.com/ognjen-petrovic",
-                "role": "Developer"
+                "role": "Developer",
+                "homepage": "https://github.com/ognjen-petrovic"
             },
             {
                 "name": "Jacob Bearden",
-                "homepage": "https://github.com/jacobbearden",
-                "role": "Documentation contributor"
+                "role": "Documentation contributor",
+                "homepage": "https://github.com/jacobbearden"
             },
             {
                 "name": "Jaroslav Týc",
-                "homepage": "https://www.jaroslavtyc.com/",
-                "role": "Developer"
+                "role": "Developer",
+                "homepage": "https://www.jaroslavtyc.com/"
             }
         ],
         "description": "The modern DOM API for PHP 7 projects."
@@ -3167,42 +3117,42 @@
     },
     {
         "name": "phpunit/php-code-coverage",
-        "version": "6.1.4",
-        "version_normalized": "6.1.4.0",
+        "version": "7.0.7",
+        "version_normalized": "7.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-            "reference": "807e6013b00af69b6c5d9ceb4282d0393dbb9d8d"
+            "reference": "7743bbcfff2a907e9ee4a25be13d0f8ec5e73800"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/807e6013b00af69b6c5d9ceb4282d0393dbb9d8d",
-            "reference": "807e6013b00af69b6c5d9ceb4282d0393dbb9d8d",
+            "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7743bbcfff2a907e9ee4a25be13d0f8ec5e73800",
+            "reference": "7743bbcfff2a907e9ee4a25be13d0f8ec5e73800",
             "shasum": ""
         },
         "require": {
             "ext-dom": "*",
             "ext-xmlwriter": "*",
-            "php": "^7.1",
-            "phpunit/php-file-iterator": "^2.0",
+            "php": "^7.2",
+            "phpunit/php-file-iterator": "^2.0.2",
             "phpunit/php-text-template": "^1.2.1",
-            "phpunit/php-token-stream": "^3.0",
+            "phpunit/php-token-stream": "^3.1.0",
             "sebastian/code-unit-reverse-lookup": "^1.0.1",
-            "sebastian/environment": "^3.1 || ^4.0",
+            "sebastian/environment": "^4.2.2",
             "sebastian/version": "^2.0.1",
-            "theseer/tokenizer": "^1.1"
+            "theseer/tokenizer": "^1.1.3"
         },
         "require-dev": {
-            "phpunit/phpunit": "^7.0"
+            "phpunit/phpunit": "^8.2.2"
         },
         "suggest": {
-            "ext-xdebug": "^2.6.0"
+            "ext-xdebug": "^2.7.2"
         },
-        "time": "2018-10-31T16:06:48+00:00",
+        "time": "2019-07-25T05:31:54+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "6.1-dev"
+                "dev-master": "7.0-dev"
             }
         },
         "installation-source": "dist",
@@ -3218,8 +3168,8 @@
         "authors": [
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
+                "role": "lead",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -3271,8 +3221,8 @@
         "authors": [
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
+                "role": "lead",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -3315,8 +3265,8 @@
         "authors": [
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
+                "role": "lead",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "Simple template engine.",
@@ -3366,8 +3316,8 @@
         "authors": [
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
+                "role": "lead",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "Utility class for timing",
@@ -3429,46 +3379,45 @@
     },
     {
         "name": "phpunit/phpunit",
-        "version": "7.5.14",
-        "version_normalized": "7.5.14.0",
+        "version": "8.3.4",
+        "version_normalized": "8.3.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "2834789aeb9ac182ad69bfdf9ae91856a59945ff"
+            "reference": "e31cce0cf4499c0ccdbbb211a3280d36ab341e36"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2834789aeb9ac182ad69bfdf9ae91856a59945ff",
-            "reference": "2834789aeb9ac182ad69bfdf9ae91856a59945ff",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e31cce0cf4499c0ccdbbb211a3280d36ab341e36",
+            "reference": "e31cce0cf4499c0ccdbbb211a3280d36ab341e36",
             "shasum": ""
         },
         "require": {
-            "doctrine/instantiator": "^1.1",
+            "doctrine/instantiator": "^1.2.0",
             "ext-dom": "*",
             "ext-json": "*",
             "ext-libxml": "*",
             "ext-mbstring": "*",
             "ext-xml": "*",
-            "myclabs/deep-copy": "^1.7",
-            "phar-io/manifest": "^1.0.2",
-            "phar-io/version": "^2.0",
-            "php": "^7.1",
-            "phpspec/prophecy": "^1.7",
-            "phpunit/php-code-coverage": "^6.0.7",
-            "phpunit/php-file-iterator": "^2.0.1",
+            "ext-xmlwriter": "*",
+            "myclabs/deep-copy": "^1.9.1",
+            "phar-io/manifest": "^1.0.3",
+            "phar-io/version": "^2.0.1",
+            "php": "^7.2",
+            "phpspec/prophecy": "^1.8.1",
+            "phpunit/php-code-coverage": "^7.0.7",
+            "phpunit/php-file-iterator": "^2.0.2",
             "phpunit/php-text-template": "^1.2.1",
-            "phpunit/php-timer": "^2.1",
-            "sebastian/comparator": "^3.0",
-            "sebastian/diff": "^3.0",
-            "sebastian/environment": "^4.0",
-            "sebastian/exporter": "^3.1",
-            "sebastian/global-state": "^2.0",
+            "phpunit/php-timer": "^2.1.2",
+            "sebastian/comparator": "^3.0.2",
+            "sebastian/diff": "^3.0.2",
+            "sebastian/environment": "^4.2.2",
+            "sebastian/exporter": "^3.1.0",
+            "sebastian/global-state": "^3.0.0",
             "sebastian/object-enumerator": "^3.0.3",
-            "sebastian/resource-operations": "^2.0",
+            "sebastian/resource-operations": "^2.0.1",
+            "sebastian/type": "^1.1.3",
             "sebastian/version": "^2.0.1"
-        },
-        "conflict": {
-            "phpunit/phpunit-mock-objects": "*"
         },
         "require-dev": {
             "ext-pdo": "*"
@@ -3476,16 +3425,16 @@
         "suggest": {
             "ext-soap": "*",
             "ext-xdebug": "*",
-            "phpunit/php-invoker": "^2.0"
+            "phpunit/php-invoker": "^2.0.0"
         },
-        "time": "2019-07-15T06:24:08+00:00",
+        "time": "2019-08-11T06:56:55+00:00",
         "bin": [
             "phpunit"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "7.5-dev"
+                "dev-master": "8.3-dev"
             }
         },
         "installation-source": "dist",
@@ -3619,6 +3568,58 @@
             "container-interface",
             "container-interop",
             "psr"
+        ]
+    },
+    {
+        "name": "psr/http-message",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-message.git",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-08-06T14:39:51+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Message\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for HTTP messages",
+        "homepage": "https://github.com/php-fig/http-message",
+        "keywords": [
+            "http",
+            "http-message",
+            "psr",
+            "psr-7",
+            "request",
+            "response"
         ]
     },
     {
@@ -3880,8 +3881,8 @@
         "authors": [
             {
                 "name": "Marco Pivetta",
-                "email": "ocramius@gmail.com",
-                "role": "maintainer"
+                "role": "maintainer",
+                "email": "ocramius@gmail.com"
             }
         ],
         "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it"
@@ -4183,33 +4184,36 @@
     },
     {
         "name": "sebastian/global-state",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "3.0.0",
+        "version_normalized": "3.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/global-state.git",
-            "reference": "e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4"
+            "reference": "edf8a461cf1d4005f19fb0b6b8b95a9f7fa0adc4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4",
-            "reference": "e8ba02eed7bbbb9e59e43dedd3dddeff4a56b0c4",
+            "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/edf8a461cf1d4005f19fb0b6b8b95a9f7fa0adc4",
+            "reference": "edf8a461cf1d4005f19fb0b6b8b95a9f7fa0adc4",
             "shasum": ""
         },
         "require": {
-            "php": "^7.0"
+            "php": "^7.2",
+            "sebastian/object-reflector": "^1.1.1",
+            "sebastian/recursion-context": "^3.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "^6.0"
+            "ext-dom": "*",
+            "phpunit/phpunit": "^8.0"
         },
         "suggest": {
             "ext-uopz": "*"
         },
-        "time": "2017-04-27T15:39:26+00:00",
+        "time": "2019-02-01T05:30:01+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.0-dev"
+                "dev-master": "3.0-dev"
             }
         },
         "installation-source": "dist",
@@ -4430,6 +4434,54 @@
         "homepage": "https://www.github.com/sebastianbergmann/resource-operations"
     },
     {
+        "name": "sebastian/type",
+        "version": "1.1.3",
+        "version_normalized": "1.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/type.git",
+            "reference": "3aaaa15fa71d27650d62a948be022fe3b48541a3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/3aaaa15fa71d27650d62a948be022fe3b48541a3",
+            "reference": "3aaaa15fa71d27650d62a948be022fe3b48541a3",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^8.2"
+        },
+        "time": "2019-07-02T08:10:15+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "role": "lead",
+                "email": "sebastian@phpunit.de"
+            }
+        ],
+        "description": "Collection of value objects that represent the types of the PHP type system",
+        "homepage": "https://github.com/sebastianbergmann/type"
+    },
+    {
         "name": "sebastian/version",
         "version": "2.0.1",
         "version_normalized": "2.0.1.0",
@@ -4467,8 +4519,8 @@
         "authors": [
             {
                 "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
+                "role": "lead",
+                "email": "sebastian@phpunit.de"
             }
         ],
         "description": "Library that helps with managing the version number of Git-hosted PHP projects",
@@ -4712,61 +4764,6 @@
             }
         ],
         "description": "Symfony Console Component",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/css-selector",
-        "version": "v3.2.14",
-        "version_normalized": "3.2.14.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/css-selector.git",
-            "reference": "02983c144038e697c959e6b06ef6666de759ccbc"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/css-selector/zipball/02983c144038e697c959e6b06ef6666de759ccbc",
-            "reference": "02983c144038e697c959e6b06ef6666de759ccbc",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5.9"
-        },
-        "time": "2017-05-01T14:55:58+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.2-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\CssSelector\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jean-François Simon",
-                "email": "jeanfrancois.simon@sensiolabs.com"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony CssSelector Component",
         "homepage": "https://symfony.com"
     },
     {
@@ -5578,8 +5575,8 @@
         "authors": [
             {
                 "name": "Arne Blankerts",
-                "email": "arne@blankerts.de",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "arne@blankerts.de"
             }
         ],
         "description": "A small library for converting tokenized PHP source code into XML and potentially other formats"
@@ -5655,17 +5652,17 @@
     },
     {
         "name": "webmozart/assert",
-        "version": "1.4.0",
-        "version_normalized": "1.4.0.0",
+        "version": "1.5.0",
+        "version_normalized": "1.5.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/webmozart/assert.git",
-            "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
+            "reference": "88e6d84706d09a236046d686bbea96f07b3a34f4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
-            "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
+            "url": "https://api.github.com/repos/webmozart/assert/zipball/88e6d84706d09a236046d686bbea96f07b3a34f4",
+            "reference": "88e6d84706d09a236046d686bbea96f07b3a34f4",
             "shasum": ""
         },
         "require": {
@@ -5673,10 +5670,9 @@
             "symfony/polyfill-ctype": "^1.8"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.6",
-            "sebastian/version": "^1.0.1"
+            "phpunit/phpunit": "^4.8.36 || ^7.5.13"
         },
-        "time": "2018-12-25T11:19:39+00:00",
+        "time": "2019-08-24T08:43:50+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

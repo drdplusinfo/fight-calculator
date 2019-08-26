@@ -2,8 +2,13 @@
 
 namespace DrdPlus\Tests\RulesSkeleton\Partials;
 
+use DeviceDetector\Parser\Bot;
 use DrdPlus\RulesSkeleton\Cache;
 use DrdPlus\RulesSkeleton\Configuration;
+use DrdPlus\RulesSkeleton\CookiesService;
+use DrdPlus\RulesSkeleton\Dirs;
+use DrdPlus\RulesSkeleton\Environment;
+use DrdPlus\RulesSkeleton\HtmlHelper;
 use DrdPlus\RulesSkeleton\Request;
 use DrdPlus\RulesSkeleton\RulesApplication;
 use DrdPlus\RulesSkeleton\CurrentWebVersion;
@@ -43,6 +48,14 @@ trait ClassesTrait
     }
 
     /**
+     * @return string|CookiesService
+     */
+    protected function getCookiesServiceClass()
+    {
+        return CookiesService::class;
+    }
+
+    /**
      * @return string|RulesApplication
      */
     protected function getRulesApplicationClass(): string
@@ -50,4 +63,35 @@ trait ClassesTrait
         return RulesApplication::class;
     }
 
+    /**
+     * @return string|Dirs
+     */
+    protected function getDirsClass(): string
+    {
+        return Dirs::class;
+    }
+
+    /**
+     * @return string|Bot
+     */
+    protected function getBotClass(): string
+    {
+        return Bot::class;
+    }
+
+    /**
+     * @return string|Environment
+     */
+    protected function getEnvironmentClass(): string
+    {
+        return Environment::class;
+    }
+
+    /**
+     * @return string|HtmlHelper
+     */
+    protected function getHtmlHelperClass(): string
+    {
+        return HtmlHelper::class;
+    }
 }

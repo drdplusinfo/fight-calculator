@@ -46,7 +46,7 @@ class AnchorsTest extends AbstractContentTest
                     return;
                 }
             }
-            self::assertNotContains('hidden', (string)$target->className, "Inner link of ID $expectedId should not be hidden");
+            self::assertStringNotContainsString('hidden', (string)$target->className, "Inner link of ID $expectedId should not be hidden");
             self::assertNotRegExp('~(display:\s*none|visibility:\s*hidden)~', (string)$target->getAttribute('style'));
         }
     }

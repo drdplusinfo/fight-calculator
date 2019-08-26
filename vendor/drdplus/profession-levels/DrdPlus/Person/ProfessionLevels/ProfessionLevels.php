@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Person\ProfessionLevels;
 
@@ -27,7 +26,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     /**
      * @var ProfessionNextLevel[]
      */
-    private $professionNextLevels;
+    private $professionNextLevels = [];
 
     /**
      * @param ProfessionZeroLevel $professionZeroLevel
@@ -54,7 +53,6 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     {
         $this->professionZeroLevel = $professionZeroLevel;
         $this->professionFirstLevel = $professionFirstLevel;
-        $this->professionNextLevels = [];
     }
 
     /**

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Granam\Tests\FloatEnum;
 
@@ -92,10 +91,10 @@ class FloatEnumTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\FloatEnum\Exceptions\WrongValueForFloatEnum
      */
     public function I_can_not_use_value_with_trailing_trash()
     {
+        $this->expectException(\Granam\FloatEnum\Exceptions\WrongValueForFloatEnum::class);
         $enumClass = $this->getEnumClass();
         $enumClass::getEnum('12.34foo');
     }
@@ -121,11 +120,11 @@ class FloatEnumTest extends TestCase
     /**
      * @test
      * @dataProvider provideNonNumericValue
-     * @expectedException \Granam\FloatEnum\Exceptions\WrongValueForFloatEnum
      * @param mixed $nonNumericValue
      */
     public function I_can_not_create_enum_from_non_numeric_value($nonNumericValue)
     {
+        $this->expectException(\Granam\FloatEnum\Exceptions\WrongValueForFloatEnum::class);
         $enumClass = $this->getEnumClass();
         $enumClass::getEnum($nonNumericValue);
     }

@@ -54,7 +54,7 @@ class CalculatorServicesContainer extends ServicesContainer
     public function getRequest(): Request
     {
         if ($this->calculatorRequest === null) {
-            $this->calculatorRequest = new CalculatorRequest($this->getBotParser(), $this->getEnvironment());
+            $this->calculatorRequest = CalculatorRequest::createFromGlobals($this->getBotParser(), $this->getEnvironment());
         }
         return $this->calculatorRequest;
     }

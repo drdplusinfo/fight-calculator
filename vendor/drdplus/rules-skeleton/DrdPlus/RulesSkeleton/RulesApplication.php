@@ -175,7 +175,7 @@ class RulesApplication extends StrictObject
     private function sendCustomHeaders(): void
     {
         if ($this->getContent()->containsTables()) {
-            if (\PHP_SAPI === 'cli') {
+            if ($this->servicesContainer->getRequest()->isCliRequest()) {
                 return;
             }
             // anyone can show content of this page
@@ -183,7 +183,7 @@ class RulesApplication extends StrictObject
         } elseif ($this->getContent()->containsPdf()) {
             $pdfFile = $this->servicesContainer->getWebPartsContainer()->getPdfBody()->getPdfFile();
             $pdfFileBasename = \basename($pdfFile);
-            if (\PHP_SAPI === 'cli') {
+            if ($this->servicesContainer->getRequest()->isCliRequest()) {
                 return;
             }
             \header('Content-type: application/pdf');
@@ -194,7 +194,7 @@ class RulesApplication extends StrictObject
 
     private function sendNotFoundHeaders(): void
     {
-        if (\PHP_SAPI === 'cli') {
+        if ($this->servicesContainer->getRequest()->isCliRequest()) {
             return;
         }
         http_response_code(404);

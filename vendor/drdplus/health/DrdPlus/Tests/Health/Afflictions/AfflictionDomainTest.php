@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions;
 
 use DrdPlus\Codes\Body\AfflictionByWoundDomainCode;
@@ -32,10 +33,10 @@ class AfflictionDomainTest extends TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\Exceptions\UnknownAfflictionDomain
      */
     public function I_can_not_create_custom_domain()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\Exceptions\UnknownAfflictionDomain::class);
         AfflictionDomain::getIt('ethereal');
     }
 }

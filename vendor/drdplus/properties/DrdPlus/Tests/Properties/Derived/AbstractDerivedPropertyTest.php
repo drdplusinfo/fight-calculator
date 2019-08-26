@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Derived;
@@ -71,7 +72,7 @@ abstract class AbstractDerivedPropertyTest extends PropertyTest
     {
         $reflectionClass = new \ReflectionClass(self::getSutClass());
         $classBasename = \str_replace($reflectionClass->getNamespaceName() . '\\', '', $reflectionClass->getName());
-        self::assertContains(<<<ANNOTATION
+        self::assertStringContainsString(<<<ANNOTATION
  * @method {$classBasename} add(int | \\Granam\\Integer\\IntegerInterface \$value)
  * @method {$classBasename} sub(int | \\Granam\\Integer\\IntegerInterface \$value)
 ANNOTATION

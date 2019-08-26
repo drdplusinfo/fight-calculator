@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Skills;
 
@@ -275,10 +274,10 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\EmptyFirstLevelSkillPointsFromBackground
      */
     public function I_can_not_create_skill_point_by_poor_first_level_background()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\EmptyFirstLevelSkillPointsFromBackground::class);
         CombinedSkillPoint::createFromFirstLevelSkillPointsFromBackground(
             $this->createProfessionFirstLevel('foo'),
             $this->createSkillPointsFromBackground(0, 'getCombinedSkillPoints'),
@@ -288,7 +287,6 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\ProhibitedOriginOfPaidBySkillPoint
      * @dataProvider provideInvalidPayment
      * @param $firstPaidByBackgroundPoints
      * @param $secondPaidByBackgroundPoints
@@ -297,6 +295,7 @@ abstract class SkillPointTest extends TestWithMockery
         $firstPaidByBackgroundPoints, $secondPaidByBackgroundPoints
     )
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\ProhibitedOriginOfPaidBySkillPoint::class);
         PhysicalSkillPoint::createFromFirstLevelCrossTypeSkillPoints(
             $this->createProfessionFirstLevel('foo'),
             $this->createCombinedSkillPoint($firstPaidByBackgroundPoints, true, true),
@@ -315,10 +314,10 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\NonSensePaymentBySameType
      */
     public function I_can_not_pay_for_skill_point_by_same_type_skill_point()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\NonSensePaymentBySameType::class);
         $professionFirstLevel = $this->createProfessionFirstLevel('bar');
         $psychicalSkillPoint = $this->createPsychicalSkillPoint(true, false, false, PsychicalSkillPoint::PSYCHICAL);
         $psychicalSkillPoint->shouldReceive('getProfessionLevel')
@@ -335,10 +334,10 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\MissingPropertyAdjustmentForPayment
      */
     public function I_can_not_pay_for_skill_point_by_next_level_without_property_increment()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\MissingPropertyAdjustmentForPayment::class);
         PhysicalSkillPoint::createFromNextLevelPropertyIncrease(
             $this->createProfessionNextLevel(Strength::class, Agility::class, false),
             Tables::getIt()
@@ -347,11 +346,11 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnknownPaymentForSkillPoint
      * @throws \ReflectionException
      */
     public function I_had_to_provide_some_skill_points_payment_to_create_a_point()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnknownPaymentForSkillPoint::class);
         $combinedSkillPoint = new \ReflectionClass(CombinedSkillPoint::class);
         $constructor = $combinedSkillPoint->getConstructor();
         $constructor->setAccessible(true);
@@ -363,12 +362,12 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnexpectedSkillPointValue
-     * @expectedExceptionMessageRegExp ~2~
      * @throws \ReflectionException
      */
     public function I_can_not_create_skill_point_with_higher_value_than_one()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnexpectedSkillPointValue::class);
+        $this->expectExceptionMessageRegExp('~2~');
         $combinedSkillPoint = new \ReflectionClass(CombinedSkillPoint::class);
         $constructor = $combinedSkillPoint->getConstructor();
         $constructor->setAccessible(true);
@@ -380,12 +379,12 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnexpectedSkillPointValue
-     * @expectedExceptionMessageRegExp ~-1~
      * @throws \ReflectionException
      */
     public function I_can_not_create_skill_point_with_lesser_value_than_zero()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnexpectedSkillPointValue::class);
+        $this->expectExceptionMessageRegExp('~-1~');
         $combinedSkillPoint = new \ReflectionClass(CombinedSkillPoint::class);
         $constructor = $combinedSkillPoint->getConstructor();
         $constructor->setAccessible(true);
@@ -397,11 +396,11 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\InvalidRelatedProfessionLevel
      * @throws \ReflectionException
      */
     public function I_can_not_create_non_zero_skill_point_with_profession_zero_level()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\InvalidRelatedProfessionLevel::class);
         $combinedSkillPoint = new \ReflectionClass(CombinedSkillPoint::class);
         $constructor = $combinedSkillPoint->getConstructor();
         $constructor->setAccessible(true);
@@ -413,11 +412,11 @@ abstract class SkillPointTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\UnknownProfessionLevelGroup
      * @throws \ReflectionException
      */
     public function I_can_not_create_skill_point_by_new_type_of_level()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\UnknownProfessionLevelGroup::class);
         $combinedSkillPoint = new \ReflectionClass(CombinedSkillPoint::class);
         $constructor = $combinedSkillPoint->getConstructor();
         $constructor->setAccessible(true);

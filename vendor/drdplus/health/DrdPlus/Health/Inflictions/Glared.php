@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Health\Inflictions;
 
 use DrdPlus\Health\Health;
@@ -30,7 +31,7 @@ class Glared extends StrictObject
 
     public static function createWithoutGlare(Health $health): Glared
     {
-        return new static(0, 0, $health);
+        return new static(0, false, $health);
     }
 
     public static function createFromGlare(Glare $glare, Health $health): Glared

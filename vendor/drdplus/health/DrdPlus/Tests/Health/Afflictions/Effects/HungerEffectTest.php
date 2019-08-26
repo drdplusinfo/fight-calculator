@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions\Effects;
 
 use DrdPlus\Health\Afflictions\Effects\HungerEffect;

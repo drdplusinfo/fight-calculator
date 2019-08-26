@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\CombatActions;
 
@@ -338,20 +337,20 @@ class CombatActionsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\CombatActions\Exceptions\UnknownCombatActionCode
-     * @expectedExceptionMessageRegExp ~swimming_against_current~
      */
     public function I_can_not_create_it_with_unknown_code()
     {
+        $this->expectException(\DrdPlus\CombatActions\Exceptions\UnknownCombatActionCode::class);
+        $this->expectExceptionMessageRegExp('~swimming_against_current~');
         new CombatActions(['swimming_against_current'], Tables::getIt());
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\CombatActions\Exceptions\IncompatibleCombatActions
      */
     public function I_can_not_combine_ranged_only_with_melee_only_actions()
     {
+        $this->expectException(\DrdPlus\CombatActions\Exceptions\IncompatibleCombatActions::class);
         new CombatActions(
             [MeleeCombatActionCode::COVER_OF_ALLY, RangedCombatActionCode::AIMED_SHOT],
             Tables::getIt()
@@ -360,11 +359,11 @@ class CombatActionsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\CombatActions\Exceptions\IncompatibleCombatActions
-     * @expectedExceptionMessageRegExp ~'attack_on_disabled_opponent' with 'getting_up'~
      */
     public function I_can_not_combine_native_incompatible_actions()
     {
+        $this->expectException(\DrdPlus\CombatActions\Exceptions\IncompatibleCombatActions::class);
+        $this->expectExceptionMessageRegExp("~'attack_on_disabled_opponent' with 'getting_up'~");
         new CombatActions(
             [CombatActionCode::ATTACK_ON_DISABLED_OPPONENT, CombatActionCode::GETTING_UP],
             $this->createTablesWithCombatActionsIncompatibilityTable()
@@ -388,11 +387,11 @@ class CombatActionsTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\CombatActions\Exceptions\InvalidFormatOfRoundsOfAiming
-     * @expectedExceptionMessageRegExp ~lifetime~
      */
     public function I_can_not_use_non_integer_as_rounds_of_aiming()
     {
+        $this->expectException(\DrdPlus\CombatActions\Exceptions\InvalidFormatOfRoundsOfAiming::class);
+        $this->expectExceptionMessageRegExp('~lifetime~');
         new CombatActions(
             [CombatActionCode::GETTING_UP, CombatActionCode::HANDOVER_ITEM],
             Tables::getIt(),

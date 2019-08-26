@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions\SpecificAfflictions;
 
 use DrdPlus\Codes\Properties\PropertyCode;
@@ -72,10 +73,10 @@ class BleedingTest extends AfflictionByWoundTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Afflictions\SpecificAfflictions\Exceptions\BleedingCanNotExistsDueToTooLowWound
      */
     public function I_can_not_create_it_from_too_low_wound()
     {
+        $this->expectException(\DrdPlus\Health\Afflictions\SpecificAfflictions\Exceptions\BleedingCanNotExistsDueToTooLowWound::class);
         $wound = $this->createWound();
         $woundBoundary = $this->createWoundBoundary(5);
         $this->addSizeCalculation($wound, $woundBoundary, 0);

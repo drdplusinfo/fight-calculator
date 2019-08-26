@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 declare(strict_types = 1);
 
 namespace DrdPlus\Tests\Skills\Psychical;
@@ -65,11 +66,11 @@ class PsychicalSkillsTest extends SameTypeSkillsTest
 
     /**
      * @test
-     * @expectedException \DrdPlus\Skills\Exceptions\CanNotUseZeroSkillPointForNonZeroSkillRank
-     * @expectedExceptionMessageRegExp ~0~
      */
     public function I_can_not_increase_rank_by_zero_skill_point()
     {
+        $this->expectException(\DrdPlus\Skills\Exceptions\CanNotUseZeroSkillPointForNonZeroSkillRank::class);
+        $this->expectExceptionMessageRegExp('~0~');
         $skills = new PsychicalSkills($professionZeroLevel = ProfessionZeroLevel::createZeroLevel(Commoner::getIt()));
         $skills->getEtiquetteOfGangland()->increaseSkillRank(PsychicalSkillPoint::createZeroSkillPoint($professionZeroLevel));
     }

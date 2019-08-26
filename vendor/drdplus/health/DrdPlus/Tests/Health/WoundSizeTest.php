@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health;
 
 use DrdPlus\Health\WoundSize;
@@ -22,21 +23,21 @@ class WoundSizeTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\Integer\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~Terribly wounded by horrible pebble~
      */
     public function I_am_stopped_by_specific_exception_on_invalid_value(): void
     {
+        $this->expectException(\Granam\Integer\Tools\Exceptions\WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~Terribly wounded by horrible pebble~');
         new WoundSize('Terribly wounded by horrible pebble');
     }
 
     /**
      * @test
-     * @expectedException \DrdPlus\Health\Exceptions\WoundSizeCanNotBeNegative
-     * @expectedExceptionMessageRegExp ~-1~
      */
     public function I_can_not_use_negative_value(): void
     {
+        $this->expectException(\DrdPlus\Health\Exceptions\WoundSizeCanNotBeNegative::class);
+        $this->expectExceptionMessageRegExp('~-1~');
         new WoundSize(-1);
     }
 }

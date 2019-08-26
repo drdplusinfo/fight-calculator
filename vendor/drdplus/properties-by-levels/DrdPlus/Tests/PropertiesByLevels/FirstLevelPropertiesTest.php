@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 declare(strict_types = 1);
 
 namespace DrdPlus\Tests\PropertiesByLevels;
@@ -211,10 +212,10 @@ class FirstLevelPropertiesTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\PropertiesByLevels\Exceptions\TooLowStrengthAdjustment
      */
     public function I_can_not_get_it_with_too_low_strength()
     {
+        $this->expectException(\DrdPlus\PropertiesByLevels\Exceptions\TooLowStrengthAdjustment::class);
         $propertiesByFate = $this->createPropertiesByFate(
             -1, 0, 0, 0, 0, 0
         );

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types = 1);
+<?php declare(strict_types = 1);
 
 namespace DrdPlus\Tests\Races;
 
@@ -64,11 +63,11 @@ class RacesFactoryTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Races\Exceptions\UnknownRaceCode
-     * @expectedExceptionMessageRegExp ~dragonius.+drunkalius~
      */
     public function I_can_not_create_subrace_by_unknown_codes()
     {
+        $this->expectException(\DrdPlus\Races\Exceptions\UnknownRaceCode::class);
+        $this->expectExceptionMessageRegExp('~dragonius.+drunkalius~');
         RacesFactory::getSubRaceByCodes($this->createRaceCode('dragonius'), $this->createSubraceCode('drunkalius'));
     }
 

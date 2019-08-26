@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Health\Afflictions\Effects;
 
 use Granam\ScalarEnum\ScalarEnum;

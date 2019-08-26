@@ -4,9 +4,6 @@ namespace DrdPlus\Tests\RulesSkeleton;
 
 use DrdPlus\Tests\RulesSkeleton\Partials\AbstractContentTest;
 
-/**
- * @backupGlobals enabled
- */
 class DevModeTest extends AbstractContentTest
 {
 

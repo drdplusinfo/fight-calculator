@@ -155,6 +155,6 @@ class ServicesContainerTest extends AbstractContentTest
         $servicesContainerClass = static::getSutClass();
         /** @var ServicesContainer $servicesContainer */
         $servicesContainer = new $servicesContainerClass($this->getConfiguration(), $this->createHtmlHelper());
-        self::assertEquals(new CookiesService(), $servicesContainer->getCookiesService());
+        self::assertEquals(new CookiesService($servicesContainer->getRequest()), $servicesContainer->getCookiesService());
     }
 }

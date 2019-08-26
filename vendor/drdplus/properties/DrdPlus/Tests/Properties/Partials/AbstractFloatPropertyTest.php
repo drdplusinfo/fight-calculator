@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 declare(strict_types=1);
 
 namespace DrdPlus\Tests\Properties\Partials;
@@ -20,7 +21,7 @@ abstract class AbstractFloatPropertyTest extends AbstractSimplePropertyTest
     {
         $reflectionClass = new \ReflectionClass(self::getSutClass());
         $classBasename = str_replace($reflectionClass->getNamespaceName() . '\\', '', $reflectionClass->getName());
-        self::assertContains(<<<ANNOTATION
+        self::assertStringContainsString(<<<ANNOTATION
  * @method static {$classBasename} getIt(float | NumberInterface \$value)
 ANNOTATION
             , $reflectionClass->getDocComment());

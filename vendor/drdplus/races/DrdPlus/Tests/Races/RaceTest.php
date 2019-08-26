@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Races;
 
@@ -96,10 +95,10 @@ abstract class RaceTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Races\Exceptions\UnknownRaceCode
      */
     public function I_can_not_create_it_by_enum_factory_method_with_invalid_code()
     {
+        $this->expectException(\DrdPlus\Races\Exceptions\UnknownRaceCode::class);
         $subraceClass = $this->getSubraceClass();
         $subraceClass::getEnum('foo');
     }
@@ -184,12 +183,12 @@ abstract class RaceTest extends TestWithMockery
     /**
      * @test
      * @depends I_can_get_race
-     * @expectedException \DrdPlus\Races\Exceptions\UnknownPropertyCode
-     * @expectedExceptionMessageRegExp ~soft~
      * @param Race $race
      */
     public function I_can_not_get_property_by_its_invalid_code(Race $race)
     {
+        $this->expectException(\DrdPlus\Races\Exceptions\UnknownPropertyCode::class);
+        $this->expectExceptionMessageRegExp('~soft~');
         $tables = Tables::getIt();
         /** @var GenderCode $genderCode */
         $genderCode = \Mockery::mock(GenderCode::class);

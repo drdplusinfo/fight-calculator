@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DrdPlus\Tests\Health\Afflictions\ElementalPertinence;
 
 use DrdPlus\Health\Afflictions\ElementalPertinence\AirPertinence;
@@ -21,13 +22,13 @@ abstract class ElementalPertinenceTest extends TestCase
         self::assertInstanceOf($pertinenceClass, $minusPertinence);
         self::assertTrue($minusPertinence->isMinus());
         self::assertFalse($minusPertinence->isPlus());
-        self::assertContains($pertinenceClass::getPertinenceCode(), $minusPertinence->getValue());
+        self::assertStringContainsString($pertinenceClass::getPertinenceCode(), $minusPertinence->getValue());
 
         $plusPertinence = $pertinenceClass::getPlus();
         self::assertInstanceOf($pertinenceClass, $plusPertinence);
         self::assertTrue($plusPertinence->isPlus());
         self::assertFalse($plusPertinence->isMinus());
-        self::assertContains($pertinenceClass::getPertinenceCode(), $plusPertinence->getValue());
+        self::assertStringContainsString($pertinenceClass::getPertinenceCode(), $plusPertinence->getValue());
     }
 
     /**
