@@ -22,6 +22,7 @@ use DrdPlus\Tests\CalculatorSkeleton\TestsConfiguration;
  */
 trait CalculatorContentTestTrait
 {
+    use CalculatorClassesTrait;
 
     /**
      * @param Configuration|CalculatorConfiguration|null $configuration
@@ -40,27 +41,6 @@ trait CalculatorContentTestTrait
         );
     }
 
-    protected function getServicesContainerClass(): string
-    {
-        return CalculatorServicesContainer::class;
-    }
-
-    /**
-     * @return string|CalculatorConfiguration
-     */
-    protected function getConfigurationClass(): string
-    {
-        return CalculatorConfiguration::class;
-    }
-
-    /**
-     * @return string|CalculatorApplication
-     */
-    protected function getRulesApplicationClass(): string
-    {
-        return CalculatorApplication::class;
-    }
-
     /**
      * @param string|null $class
      * @return TestsConfiguration|\DrdPlus\Tests\RulesSkeleton\TestsConfiguration
@@ -69,8 +49,7 @@ trait CalculatorContentTestTrait
     {
         static $testsConfiguration;
         if ($testsConfiguration === null) {
-            /** @var TestsConfiguration $class */
-            $class = $class ?? TestsConfiguration::class;
+            $class = $class ?? $this->getTestsConfigurationClass();
             $testsConfiguration = $class::createFromYaml(\DRD_PLUS_TESTS_ROOT . '/tests_configuration.yml');
         }
 

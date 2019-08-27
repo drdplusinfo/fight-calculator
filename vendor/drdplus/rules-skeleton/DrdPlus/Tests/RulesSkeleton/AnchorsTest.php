@@ -387,7 +387,9 @@ class AnchorsTest extends AbstractContentTest
         $allowedCalculationIdConstantLikePrefixesRegexp = $this->toRegexpOr($allowedCalculationIdConstantLikePrefixes);
         foreach ($calculations as $calculation) {
             self::assertNotEmpty($calculation->id, 'Missing ID for calculation: ' . \trim($calculation->innerHTML));
-            self::assertRegExp("~^($allowedCalculationIdPrefixesRegexp) ~u", $calculation->getAttribute('data-original-id'));
+            $originalId = $calculation->getAttribute('data-original-id');
+            self::assertNotEmpty($originalId, 'Missing data-original-id attribute for calculation of ID ' . $calculation->id);
+            self::assertRegExp("~^($allowedCalculationIdPrefixesRegexp) ~u", $originalId);
             self::assertRegExp("~^($allowedCalculationIdConstantLikePrefixesRegexp)_~u", $calculation->id);
         }
     }

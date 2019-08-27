@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Granam\Tools;
+namespace Granam\Tests\Tools;
 
+use Granam\Tools\DirName;
 use PHPUnit\Framework\TestCase;
 
 class DirNameTest extends TestCase
@@ -22,6 +23,7 @@ class DirNameTest extends TestCase
     {
         return [
             ['/foo/bar/baz/qux/../../..', '/foo'],
+            ['/home/jaroslav/projects/docker/drdplus/www/rules.skeleton/DrdPlus/Tests/../..', '/home/jaroslav/projects/docker/drdplus/www/rules.skeleton'],
             ['/foo/bar/../baz/../..', '/'],
             ['/foo/bar/../baz/../.././qux.txt', '/qux.txt'],
         ];
