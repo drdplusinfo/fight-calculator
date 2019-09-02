@@ -192,12 +192,22 @@ class AnchorsTest extends AbstractContentTest
             self::assertCount(
                 0,
                 $externalAnchorsWithHash,
-                'No external anchors expected according to tests config, got ' . implode(',', $externalAnchorsWithHash)
+                sprintf(
+                    "No external anchors expected as tests configuration says by '%s', got %s",
+                    TestsConfiguration::HAS_EXTERNAL_ANCHORS_WITH_HASHES,
+                    implode(',', $externalAnchorsWithHash)
+                )
             );
 
             return;
         }
-        self::assertNotEmpty($externalAnchorsWithHash, 'Some external anchors expected');
+        self::assertNotEmpty(
+            $externalAnchorsWithHash,
+            sprintf(
+                "Some external anchors expected as test configuration says by '%s'",
+                TestsConfiguration::HAS_EXTERNAL_ANCHORS_WITH_HASHES
+            )
+        );
         $skippedExternalUrls = [];
         foreach ($externalAnchorsWithHash as $originalLink) {
             $link = HtmlHelper::turnToLocalLink($originalLink);
@@ -328,7 +338,7 @@ class AnchorsTest extends AbstractContentTest
         self::assertNotEmpty(
             $originalIds,
             sprintf(
-                'Expected some IDs identified by a HTML class %s according to test configuration %s',
+                "Expected some IDs identified by a HTML class '%s' as test configuration says by '%s'",
                 HtmlHelper::CLASS_INVISIBLE,
                 TestsConfiguration::HAS_IDS
             )
@@ -385,27 +395,39 @@ class AnchorsTest extends AbstractContentTest
             self::assertCount(
                 0,
                 $calculations,
-                'No calculations expected according to tests configuration ' . TestsConfiguration::HAS_CALCULATIONS
+                sprintf(
+                    "No calculations expected as test configuration says by '%s'",
+                    TestsConfiguration::HAS_CALCULATIONS
+                )
             );
 
             return;
         }
         self::assertNotEmpty(
             $calculations,
-            'Some calculations expected according to tests config ' . TestsConfiguration::HAS_CALCULATIONS
+            sprintf(
+                "Some calculations expected as test configuration says by '%s'",
+                TestsConfiguration::HAS_CALCULATIONS
+            )
         );
         $allowedCalculationIdPrefixes = $this->getTestsConfiguration()->getAllowedCalculationIdPrefixes();
         $allowedCalculationIdPrefixesRegexp = $this->toRegexpOr($allowedCalculationIdPrefixes);
-        $allowedCalculationIdConstantLikePrefixes = \array_map(function (string $allowedPrefix) {
-            return StringTools::toConstantLikeValue($allowedPrefix);
-        }, $allowedCalculationIdPrefixes);
+        $allowedCalculationIdConstantLikePrefixes = \array_map(
+            function (string $allowedPrefix) {
+                return StringTools::toConstantLikeValue($allowedPrefix);
+            },
+            $allowedCalculationIdPrefixes
+        );
         $allowedCalculationIdConstantLikePrefixesRegexp = $this->toRegexpOr($allowedCalculationIdConstantLikePrefixes);
         foreach ($calculations as $calculation) {
             self::assertNotEmpty($calculation->id, 'Missing ID for calculation: ' . \trim($calculation->innerHTML));
             $originalId = $calculation->getAttribute('data-original-id');
             self::assertNotEmpty(
                 $originalId,
-                sprintf("Missing data-original-id attribute for calculation of ID '%s', maybe si the ID duplicated?", $calculation->id)
+                sprintf(
+                    "Missing data-original-id attribute for calculation of ID '%s', maybe si the ID duplicated?",
+                    $calculation->id
+                )
             );
             self::assertRegExp("~^($allowedCalculationIdPrefixesRegexp) ~u", $originalId);
             self::assertRegExp("~^($allowedCalculationIdConstantLikePrefixesRegexp)_~u", $calculation->id);
@@ -436,7 +458,10 @@ class AnchorsTest extends AbstractContentTest
         $calculations = $document->getElementsByClassName(HtmlHelper::CLASS_CALCULATION);
         self::assertNotEmpty(
             $calculations,
-            'Some calculations expected according to tests configuration ' . TestsConfiguration::HAS_CALCULATIONS
+            sprintf(
+                "Some calculations expected as test configuration says by '%s'",
+                TestsConfiguration::HAS_CALCULATIONS
+            )
         );
         foreach ($calculations as $calculation) {
             foreach ($calculation->children as $child) {
@@ -463,7 +488,14 @@ class AnchorsTest extends AbstractContentTest
             $linksToAltar[] = $link;
         }
         if (!$this->getTestsConfiguration()->hasLinksToAltar()) {
-            self::assertCount(0, $linksToAltar, 'No link to Altar expected according to tests config');
+            self::assertCount(
+                0,
+                $linksToAltar,
+                sprintf(
+                    "No link to Altar expected as test configuration says by '%s'",
+                    TestsConfiguration::HAS_LINKS_TO_ALTAR
+                )
+            );
 
             return;
         }

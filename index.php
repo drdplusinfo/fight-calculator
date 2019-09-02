@@ -2,8 +2,8 @@
 namespace DrdPlus\Fight;
 
 use DrdPlus\AttackSkeleton\HtmlHelper;
+use DrdPlus\CalculatorSkeleton\CalculatorApplication;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
-use DrdPlus\FightCalculator\FightApplication;
 use DrdPlus\FightCalculator\FightServicesContainer;
 use DrdPlus\RulesSkeleton\Dirs;
 use DrdPlus\RulesSkeleton\Environment;
@@ -26,5 +26,5 @@ if (PHP_SAPI !== 'cli') {
 
 $calculatorConfiguration = CalculatorConfiguration::createFromYml($dirs);
 $fightServicesContainer = new FightServicesContainer($calculatorConfiguration, $htmlHelper);
-$fightApplication = $rulesApplication ?? new FightApplication($fightServicesContainer);
+$fightApplication = $rulesApplication ?? new CalculatorApplication($fightServicesContainer);
 $fightApplication->run();

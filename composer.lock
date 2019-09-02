@@ -45,16 +45,16 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-                "reference": "6b3cd545cd3f308abf90d741b0bcbe1f1b258aaa"
+                "reference": "e70fd0e6bb5a6fb9b545947f8a70ae55c7c09691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/6b3cd545cd3f308abf90d741b0bcbe1f1b258aaa",
-                "reference": "6b3cd545cd3f308abf90d741b0bcbe1f1b258aaa",
+                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/e70fd0e6bb5a6fb9b545947f8a70ae55c7c09691",
+                "reference": "e70fd0e6bb5a6fb9b545947f8a70ae55c7c09691",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2019-08-26T06:54:39+00:00"
+            "time": "2019-08-27T06:03:23+00:00"
         },
         {
             "name": "drdplus/background",
@@ -212,16 +212,16 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-                "reference": "6ad0f0bfdc3654291ca511661cb94a1d1d5b54b1"
+                "reference": "cb37959ef08aa2972eefc57c5d4d0eb9a74e5dd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/6ad0f0bfdc3654291ca511661cb94a1d1d5b54b1",
-                "reference": "6ad0f0bfdc3654291ca511661cb94a1d1d5b54b1",
+                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/cb37959ef08aa2972eefc57c5d4d0eb9a74e5dd1",
+                "reference": "cb37959ef08aa2972eefc57c5d4d0eb9a74e5dd1",
                 "shasum": ""
             },
             "require": {
@@ -251,7 +251,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-08-27T06:48:39+00:00"
+            "time": "2019-09-02T14:53:01+00:00"
         },
         {
             "name": "drdplus/codes",
@@ -753,16 +753,16 @@
         },
         {
             "name": "drdplus/rules-skeleton",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-                "reference": "1b4c3fda903574f139df15e959ee44670d72c2eb"
+                "reference": "bf6b7ce59c1cfe661fe296e0ecf55d6ae34b30a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/1b4c3fda903574f139df15e959ee44670d72c2eb",
-                "reference": "1b4c3fda903574f139df15e959ee44670d72c2eb",
+                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/bf6b7ce59c1cfe661fe296e0ecf55d6ae34b30a8",
+                "reference": "bf6b7ce59c1cfe661fe296e0ecf55d6ae34b30a8",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
                 "helper",
                 "rules"
             ],
-            "time": "2019-08-28T06:11:39+00:00"
+            "time": "2019-09-02T11:42:57+00:00"
         },
         {
             "name": "drdplus/skills",

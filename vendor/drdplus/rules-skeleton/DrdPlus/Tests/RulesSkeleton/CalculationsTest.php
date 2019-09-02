@@ -109,9 +109,9 @@ class CalculationsTest extends AbstractContentTest
                     }
                 }
                 $failName = \strtolower(\trim($parts[0] ?? ''));
-                self::assertNotRegExp("~^($tooShortFailureNamesRegexp)$~i", $failName, "Expected more specific name of failure for result\n$result->outerHTML");
+                self::assertNotRegExp("~^($tooShortFailureNamesRegexp)$~iu", $failName, "Expected more specific name of failure for result\n$result->outerHTML");
                 $tooShortSuccessNames = \strtolower(\trim($parts[2] ?? ''));
-                self::assertNotRegExp("~^($tooShortSuccessNamesRegexp)$~i", $tooShortSuccessNames, "Expected more specific name of success for result\n$result->outerHTML");
+                self::assertNotRegExp("~^($tooShortSuccessNamesRegexp)$~iu", $tooShortSuccessNames, "Expected more specific name of success for result\n$result->outerHTML");
             }
         }
     }

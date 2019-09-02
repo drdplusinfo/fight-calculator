@@ -136,7 +136,15 @@ class CurrentWebVersionTest extends AbstractContentTest
         if (!\is_readable($gitHeadFilePath)) {
             throw new Exceptions\CanNotReadGitHead(
                 "Could not read $gitHeadFilePath, in that dir are files "
-                . \implode(',', \scandir(\dirname($gitHeadFilePath), SCANDIR_SORT_NONE))
+                . \implode(
+                    ',',
+                    array_filter(
+                        \scandir(\dirname($gitHeadFilePath), SCANDIR_SORT_NONE),
+                        function (string $dirName) {
+                            return $dirName !== '.' && $dirName !== '..';
+                        }
+                    )
+                )
             );
         }
 
