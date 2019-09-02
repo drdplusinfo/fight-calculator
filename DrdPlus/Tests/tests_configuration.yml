@@ -11,6 +11,7 @@ has_links_to_journals: false
 has_link_to_single_journal: false
 expected_licence: 'MIT'
 has_notes: false
+has_marked_content: false
 has_external_anchors_with_hashes: true
 external_anchors_with_hash:
   - https://pph.drdplus.info/?trial=1#pouzivani_stitu

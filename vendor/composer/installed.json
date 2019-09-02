@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/ca-bundle",
-        "version": "1.2.3",
-        "version_normalized": "1.2.3.0",
+        "version": "1.2.4",
+        "version_normalized": "1.2.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/ca-bundle.git",
-            "reference": "f26a67e397be0e5c00d7c52ec7b5010098e15ce5"
+            "reference": "10bb96592168a0f8e8f6dcde3532d9fa50b0b527"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/f26a67e397be0e5c00d7c52ec7b5010098e15ce5",
-            "reference": "f26a67e397be0e5c00d7c52ec7b5010098e15ce5",
+            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/10bb96592168a0f8e8f6dcde3532d9fa50b0b527",
+            "reference": "10bb96592168a0f8e8f6dcde3532d9fa50b0b527",
             "shasum": ""
         },
         "require": {
@@ -24,7 +24,7 @@
             "psr/log": "^1.0",
             "symfony/process": "^2.5 || ^3.0 || ^4.0"
         },
-        "time": "2019-08-02T09:05:43+00:00",
+        "time": "2019-08-30T08:44:50+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -585,17 +585,17 @@
     },
     {
         "name": "drdplus/calculator-skeleton",
-        "version": "1.1.4",
-        "version_normalized": "1.1.4.0",
+        "version": "1.1.6",
+        "version_normalized": "1.1.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-            "reference": "30e4ac83cf0e40a09801a2a2e537510d791c002a"
+            "reference": "6ad0f0bfdc3654291ca511661cb94a1d1d5b54b1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/30e4ac83cf0e40a09801a2a2e537510d791c002a",
-            "reference": "30e4ac83cf0e40a09801a2a2e537510d791c002a",
+            "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/6ad0f0bfdc3654291ca511661cb94a1d1d5b54b1",
+            "reference": "6ad0f0bfdc3654291ca511661cb94a1d1d5b54b1",
             "shasum": ""
         },
         "require": {
@@ -611,7 +611,7 @@
             "phpunit/phpunit": "~8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-08-27T05:57:32+00:00",
+        "time": "2019-08-27T06:48:39+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "DrdPlus\\CalculatorSkeleton\\CalculatorInjectorComposerPlugin"
@@ -1154,17 +1154,17 @@
     },
     {
         "name": "drdplus/rules-skeleton",
-        "version": "1.5.10",
-        "version_normalized": "1.5.10.0",
+        "version": "1.6.0",
+        "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-            "reference": "40d07ba3feb64cc7d5c6a7a9e5a3fb5de491c33c"
+            "reference": "1b4c3fda903574f139df15e959ee44670d72c2eb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/40d07ba3feb64cc7d5c6a7a9e5a3fb5de491c33c",
-            "reference": "40d07ba3feb64cc7d5c6a7a9e5a3fb5de491c33c",
+            "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/1b4c3fda903574f139df15e959ee44670d72c2eb",
+            "reference": "1b4c3fda903574f139df15e959ee44670d72c2eb",
             "shasum": ""
         },
         "require": {
@@ -1197,7 +1197,7 @@
             "phpunit/phpunit": "^8.3",
             "roave/security-advisories": "dev-master"
         },
-        "time": "2019-08-26T15:51:01+00:00",
+        "time": "2019-08-28T06:11:39+00:00",
         "bin": [
             "bin/fix_web_permissions.sh"
         ],
