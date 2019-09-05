@@ -13,6 +13,7 @@ has_links_to_altar: true
 has_table_of_contents: false
 has_headings: true
 can_be_bought_on_eshop: false
+has_marked_content: false
 expected_web_name: 'HTML kostra pro DrD+ kalkulátory útoku'
 expected_page_title: 'HTML kostra pro DrD+ kalkulátory útoku'
 expected_public_url: 'https://utok.skeleton.drdplus.info'

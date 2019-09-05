@@ -296,7 +296,7 @@ class AnchorsTest extends AbstractContentTest
     /**
      * @test
      */
-    public function Anchor_to_ID_self_is_not_created_if_contains_anchor_element(): void
+    public function Anchor_to_id_self_is_not_created_if_contains_anchor_element(): void
     {
         $document = $this->getHtmlDocument();
         $noAnchorsForMe = $document->getElementById(StringTools::toConstantLikeValue('no-anchor-for-me'));
@@ -382,66 +382,6 @@ class AnchorsTest extends AbstractContentTest
         foreach ($anchor->childNodes as $childNode) {
             self::assertContains($childNode->nodeName, ['#text', 'span', 'b', 'strong', 'i']);
         }
-    }
-
-    /**
-     * @test
-     */
-    public function I_can_navigate_to_every_calculation_as_it_has_its_id_with_anchor(): void
-    {
-        $document = $this->getHtmlDocument();
-        $calculations = $document->getElementsByClassName(HtmlHelper::CLASS_CALCULATION);
-        if (!$this->getTestsConfiguration()->hasCalculations()) {
-            self::assertCount(
-                0,
-                $calculations,
-                sprintf(
-                    "No calculations expected as test configuration says by '%s'",
-                    TestsConfiguration::HAS_CALCULATIONS
-                )
-            );
-
-            return;
-        }
-        self::assertNotEmpty(
-            $calculations,
-            sprintf(
-                "Some calculations expected as test configuration says by '%s'",
-                TestsConfiguration::HAS_CALCULATIONS
-            )
-        );
-        $allowedCalculationIdPrefixes = $this->getTestsConfiguration()->getAllowedCalculationIdPrefixes();
-        $allowedCalculationIdPrefixesRegexp = $this->toRegexpOr($allowedCalculationIdPrefixes);
-        $allowedCalculationIdConstantLikePrefixes = \array_map(
-            function (string $allowedPrefix) {
-                return StringTools::toConstantLikeValue($allowedPrefix);
-            },
-            $allowedCalculationIdPrefixes
-        );
-        $allowedCalculationIdConstantLikePrefixesRegexp = $this->toRegexpOr($allowedCalculationIdConstantLikePrefixes);
-        foreach ($calculations as $calculation) {
-            self::assertNotEmpty($calculation->id, 'Missing ID for calculation: ' . \trim($calculation->innerHTML));
-            $originalId = $calculation->getAttribute('data-original-id');
-            self::assertNotEmpty(
-                $originalId,
-                sprintf(
-                    "Missing data-original-id attribute for calculation of ID '%s', maybe si the ID duplicated?",
-                    $calculation->id
-                )
-            );
-            self::assertRegExp("~^($allowedCalculationIdPrefixesRegexp) ~u", $originalId);
-            self::assertRegExp("~^($allowedCalculationIdConstantLikePrefixesRegexp)_~u", $calculation->id);
-        }
-    }
-
-    private function toRegexpOr(array $values, string $regexpDelimiter = '~'): string
-    {
-        $escaped = [];
-        foreach ($values as $value) {
-            $escaped[] = \preg_quote($value, $regexpDelimiter);
-        }
-
-        return \implode('|', $escaped);
     }
 
     /**

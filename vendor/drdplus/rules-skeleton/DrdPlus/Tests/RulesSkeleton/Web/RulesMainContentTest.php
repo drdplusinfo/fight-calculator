@@ -139,11 +139,17 @@ class RulesMainContentTest extends MainContentTest
     {
         $authorsHeading = $this->getHtmlDocument()->getElementById(HtmlHelper::ID_AUTHORS);
         if (!$this->getTestsConfiguration()->hasAuthors()) {
-            self::assertEmpty($authorsHeading, 'Authors are not expected');
+            self::assertEmpty(
+                $authorsHeading,
+                sprintf("Authors are not expected as test configuration says by '%s'", TestsConfiguration::HAS_AUTHORS)
+            );
 
             return;
         }
-        self::assertNotEmpty($authorsHeading, 'Authors should have h3 heading');
+        self::assertNotEmpty(
+            $authorsHeading,
+            sprintf("Authors should have h3 heading as test configuration says by '%s'", TestsConfiguration::HAS_AUTHORS)
+        );
         self::assertSame(
             'h3',
             $authorsHeading->nodeName,
@@ -170,7 +176,12 @@ class RulesMainContentTest extends MainContentTest
         self::assertCount(
             1,
             $rulesAuthors,
-            "Expected one '" . HtmlHelper::CLASS_RULES_AUTHORS . "' HTML class in rules content, got {$rulesAuthors->count()} of them"
+            sprintf(
+                "Expected one '%s' HTML class in rules content as test configuration says by '%s', got %d of them",
+                HtmlHelper::CLASS_RULES_AUTHORS,
+                TestsConfiguration::HAS_AUTHORS,
+                $rulesAuthors->count()
+            )
         );
         $rulesAuthors = $rulesAuthors->current();
         self::assertNotEmpty(\trim($rulesAuthors->textContent), 'Expected some content of rules authors');

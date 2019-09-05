@@ -45,16 +45,16 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.1.3",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-                "reference": "e70fd0e6bb5a6fb9b545947f8a70ae55c7c09691"
+                "reference": "d19da3af57f003773af90ad3c43ddadec7f933cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/e70fd0e6bb5a6fb9b545947f8a70ae55c7c09691",
-                "reference": "e70fd0e6bb5a6fb9b545947f8a70ae55c7c09691",
+                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/d19da3af57f003773af90ad3c43ddadec7f933cb",
+                "reference": "d19da3af57f003773af90ad3c43ddadec7f933cb",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2019-08-27T06:03:23+00:00"
+            "time": "2019-09-05T10:33:17+00:00"
         },
         {
             "name": "drdplus/background",
@@ -212,16 +212,16 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.1.7",
+            "version": "1.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-                "reference": "cb37959ef08aa2972eefc57c5d4d0eb9a74e5dd1"
+                "reference": "4ffdc3832386d3c7ffd8112f51834b0812a993fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/cb37959ef08aa2972eefc57c5d4d0eb9a74e5dd1",
-                "reference": "cb37959ef08aa2972eefc57c5d4d0eb9a74e5dd1",
+                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/4ffdc3832386d3c7ffd8112f51834b0812a993fb",
+                "reference": "4ffdc3832386d3c7ffd8112f51834b0812a993fb",
                 "shasum": ""
             },
             "require": {
@@ -251,7 +251,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-09-02T14:53:01+00:00"
+            "time": "2019-09-05T08:56:01+00:00"
         },
         {
             "name": "drdplus/codes",
@@ -753,16 +753,16 @@
         },
         {
             "name": "drdplus/rules-skeleton",
-            "version": "1.6.1",
+            "version": "1.6.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-                "reference": "bf6b7ce59c1cfe661fe296e0ecf55d6ae34b30a8"
+                "reference": "45a230e6555a87aca5e4ffa4009805162386e94b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/bf6b7ce59c1cfe661fe296e0ecf55d6ae34b30a8",
-                "reference": "bf6b7ce59c1cfe661fe296e0ecf55d6ae34b30a8",
+                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/45a230e6555a87aca5e4ffa4009805162386e94b",
+                "reference": "45a230e6555a87aca5e4ffa4009805162386e94b",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
                 "helper",
                 "rules"
             ],
-            "time": "2019-09-02T11:42:57+00:00"
+            "time": "2019-09-05T07:50:26+00:00"
         },
         {
             "name": "drdplus/skills",
@@ -863,16 +863,16 @@
         },
         {
             "name": "drdplus/tables",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/tables.git",
-                "reference": "5cea455c2ce12f30e645e2976ef31496b00fef47"
+                "reference": "874048b690acafea7e90219952ee7872a637a148"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/tables/zipball/5cea455c2ce12f30e645e2976ef31496b00fef47",
-                "reference": "5cea455c2ce12f30e645e2976ef31496b00fef47",
+                "url": "https://api.github.com/repos/drdplusinfo/tables/zipball/874048b690acafea7e90219952ee7872a637a148",
+                "reference": "874048b690acafea7e90219952ee7872a637a148",
                 "shasum": ""
             },
             "require": {
@@ -900,7 +900,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2019-08-23T11:11:34+00:00"
+            "time": "2019-09-03T07:45:38+00:00"
         },
         {
             "name": "drdplus/web-versions",
@@ -1226,16 +1226,16 @@
         },
         {
             "name": "granam/git",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/granam/git.git",
-                "reference": "4ab6eb312a0b7cb4ac1c414ccc84f1f80341d796"
+                "reference": "d01c93b17c15996dd7f96092e06b64739a3606bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/granam/git/zipball/4ab6eb312a0b7cb4ac1c414ccc84f1f80341d796",
-                "reference": "4ab6eb312a0b7cb4ac1c414ccc84f1f80341d796",
+                "url": "https://api.github.com/repos/granam/git/zipball/d01c93b17c15996dd7f96092e06b64739a3606bc",
+                "reference": "d01c93b17c15996dd7f96092e06b64739a3606bc",
                 "shasum": ""
             },
             "require": {
@@ -1265,7 +1265,7 @@
                 "tag",
                 "versions"
             ],
-            "time": "2019-08-26T13:33:59+00:00"
+            "time": "2019-09-04T11:51:57+00:00"
         },
         {
             "name": "granam/integer",
@@ -1721,16 +1721,16 @@
         },
         {
             "name": "granam/web-content-builder",
-            "version": "2.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/granam/web-content-builder.git",
-                "reference": "5d7206ffae7d0526b0ba4c1f5fc72b119eca7acd"
+                "reference": "e2f9c54f89852b83897b3f18faf5d59f682d83a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/granam/web-content-builder/zipball/5d7206ffae7d0526b0ba4c1f5fc72b119eca7acd",
-                "reference": "5d7206ffae7d0526b0ba4c1f5fc72b119eca7acd",
+                "url": "https://api.github.com/repos/granam/web-content-builder/zipball/e2f9c54f89852b83897b3f18faf5d59f682d83a4",
+                "reference": "e2f9c54f89852b83897b3f18faf5d59f682d83a4",
                 "shasum": ""
             },
             "require": {
@@ -1773,7 +1773,7 @@
                 "html",
                 "web"
             ],
-            "time": "2019-08-23T06:57:57+00:00"
+            "time": "2019-09-05T07:19:28+00:00"
         },
         {
             "name": "granam/yaml-reader",
