@@ -19,7 +19,7 @@
     "ext-json": "*",
     "php": ">=7.1",
     "drdplus/fight-properties": "^2.0",
-    "drdplus/attack-skeleton": "~2.0"
+    "drdplus/attack-skeleton": "^2.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.3",

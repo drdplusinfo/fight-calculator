@@ -115,9 +115,11 @@ class FightTest extends TestWithMockery
     {
         $currentValues = $this->mockery(CurrentValues::class);
         $currentValues->shouldReceive('getCurrentValue')
-            ->andReturnUsing(function (string $name) use ($namesToValues) {
-                return $namesToValues[$name];
-            });
+            ->andReturnUsing(
+                static function (string $name) use ($namesToValues) {
+                    return $namesToValues[$name];
+                }
+            );
         return $currentValues;
     }
 

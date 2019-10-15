@@ -540,21 +540,21 @@ class Fight extends StrictObject
     {
         $fightWithCategories = [];
         $fightWithPhysical = array_map(
-            function (string $skillName) {
+            static function (string $skillName) {
                 return PhysicalSkillCode::getIt($skillName);
             },
             $this->filterForCategories(PhysicalSkillCode::getPossibleValues(), $weaponCategoryValues)
         );
         $fightWithCategories = array_merge($fightWithCategories, $fightWithPhysical);
         $fightWithPsychical = array_map(
-            function (string $skillName) {
+            static function (string $skillName) {
                 return PsychicalSkillCode::getIt($skillName);
             },
             $this->filterForCategories(PsychicalSkillCode::getPossibleValues(), $weaponCategoryValues)
         );
         $fightWithCategories = array_merge($fightWithCategories, $fightWithPsychical);
         $fightWithCombined = array_map(
-            function (string $skillName) {
+            static function (string $skillName) {
                 return CombinedSkillCode::getIt($skillName);
             },
             $this->filterForCategories(CombinedSkillCode::getPossibleValues(), $weaponCategoryValues)
@@ -568,22 +568,25 @@ class Fight extends StrictObject
     {
         $fightWith = array_filter(
             $skillCodeValues,
-            function (string $skillName) {
+            static function (string $skillName) {
                 return strpos($skillName, 'fight_') === 0;
             }
         );
         $categoryNames = array_map(
-            function (string $categoryName) {
+            static function (string $categoryName) {
                 return StringTools::toConstantLikeValue(WeaponCategoryCode::getIt($categoryName)->translateTo('en', 4));
             },
             $weaponCategoryValues
         );
 
-        return array_filter($fightWith, function (string $skillName) use ($categoryNames) {
-            $categoryFromSkill = str_replace(['fight_with_', 'fight_' /*without weapon */], '', $skillName);
+        return array_filter(
+            $fightWith,
+            static function (string $skillName) use ($categoryNames) {
+                $categoryFromSkill = str_replace(['fight_with_', 'fight_' /*without weapon */], '', $skillName);
 
-            return in_array($categoryFromSkill, $categoryNames, true);
-        });
+                return in_array($categoryFromSkill, $categoryNames, true);
+            }
+        );
     }
 
     public function getCurrentTargetDistance(): Distance

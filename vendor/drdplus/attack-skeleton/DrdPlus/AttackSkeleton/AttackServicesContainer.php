@@ -152,12 +152,12 @@ class AttackServicesContainer extends CalculatorServicesContainer
         return $this->customArmamentsState;
     }
 
-    public function getWebPartsContainer(): WebPartsContainer
+    public function getRoutedWebPartsContainer(): WebPartsContainer
     {
         if ($this->attackWebPartsContainer === null) {
             $this->attackWebPartsContainer = new AttackWebPartsContainer(
                 $this->getPass(),
-                $this->getWebFiles(),
+                $this->getRoutedWebFiles(),
                 $this->getDirs(),
                 $this->getHtmlHelper(),
                 $this->getRequest(),

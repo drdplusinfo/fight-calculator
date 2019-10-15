@@ -101,12 +101,12 @@ class FightServicesContainer extends AttackServicesContainer
         return $this->previousArmamentsWithSkills;
     }
 
-    public function getWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
+    public function getRoutedWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
     {
         if ($this->fightWebPartsContainer === null) {
             $this->fightWebPartsContainer = new FightWebPartsContainer(
                 $this->getPass(),
-                $this->getWebFiles(),
+                $this->getRoutedWebFiles(),
                 $this->getDirs(),
                 $this->getHtmlHelper(),
                 $this->getRequest(),
