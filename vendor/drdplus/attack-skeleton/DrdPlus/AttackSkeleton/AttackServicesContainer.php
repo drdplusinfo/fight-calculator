@@ -7,6 +7,7 @@ use DrdPlus\AttackSkeleton\Web\AttackWebPartsContainer;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
 use DrdPlus\CalculatorSkeleton\CalculatorServicesContainer;
 use DrdPlus\RulesSkeleton\Request;
+use DrdPlus\RulesSkeleton\Web\WebFiles;
 use DrdPlus\RulesSkeleton\Web\WebPartsContainer;
 use DrdPlus\Tables\Tables;
 
@@ -38,7 +39,9 @@ class AttackServicesContainer extends CalculatorServicesContainer
     /** @var CustomArmamentsState */
     private $customArmamentsState;
     /** @var AttackWebPartsContainer */
-    private $attackWebPartsContainer;
+    private $routedAttackWebPartsContainer;
+    /** @var AttackWebPartsContainer */
+    private $rootAttackWebPartsContainer;
 
     public function __construct(CalculatorConfiguration $calculatorConfiguration, HtmlHelper $htmlHelper)
     {
@@ -154,23 +157,36 @@ class AttackServicesContainer extends CalculatorServicesContainer
 
     public function getRoutedWebPartsContainer(): WebPartsContainer
     {
-        if ($this->attackWebPartsContainer === null) {
-            $this->attackWebPartsContainer = new AttackWebPartsContainer(
-                $this->getPass(),
-                $this->getRoutedWebFiles(),
-                $this->getDirs(),
-                $this->getHtmlHelper(),
-                $this->getRequest(),
-                $this->getCurrentProperties(),
-                $this->getCustomArmamentsState(),
-                $this->getCurrentArmamentsValues(),
-                $this->getCurrentArmaments(),
-                $this->getPossibleArmaments(),
-                $this->getArmamentsUsabilityMessages(),
-                $this->getArmourer()
-            );
+        if ($this->routedAttackWebPartsContainer === null) {
+            $this->routedAttackWebPartsContainer = $this->createAttackWebPartsContainer($this->getRoutedWebFiles());
         }
-        return $this->attackWebPartsContainer;
+        return $this->routedAttackWebPartsContainer;
+    }
+
+    private function createAttackWebPartsContainer(WebFiles $webFiles): AttackWebPartsContainer
+    {
+        return new AttackWebPartsContainer(
+            $this->getPass(),
+            $webFiles,
+            $this->getDirs(),
+            $this->getHtmlHelper(),
+            $this->getRequest(),
+            $this->getCurrentProperties(),
+            $this->getCustomArmamentsState(),
+            $this->getCurrentArmamentsValues(),
+            $this->getCurrentArmaments(),
+            $this->getPossibleArmaments(),
+            $this->getArmamentsUsabilityMessages(),
+            $this->getArmourer()
+        );
+    }
+
+    public function getRootWebPartsContainer(): WebPartsContainer
+    {
+        if ($this->rootAttackWebPartsContainer === null) {
+            $this->rootAttackWebPartsContainer = $this->createAttackWebPartsContainer($this->getRootWebFiles());
+        }
+        return $this->rootAttackWebPartsContainer;
     }
 
 }

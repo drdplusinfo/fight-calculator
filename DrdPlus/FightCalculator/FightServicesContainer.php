@@ -5,6 +5,8 @@ namespace DrdPlus\FightCalculator;
 use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\PreviousArmaments;
 use DrdPlus\FightCalculator\Web\FightWebPartsContainer;
+use DrdPlus\RulesSkeleton\Web\WebFiles;
+use DrdPlus\RulesSkeleton\Web\WebPartsContainer;
 
 class FightServicesContainer extends AttackServicesContainer
 {
@@ -22,7 +24,9 @@ class FightServicesContainer extends AttackServicesContainer
     /** @var PreviousProperties */
     private $previousProperties;
     /** @var FightWebPartsContainer */
-    private $fightWebPartsContainer;
+    private $routedFightWebPartsContainer;
+    /** @var FightWebPartsContainer */
+    private $rootFightWebPartsContainer;
 
     public function getPreviousArmaments(): PreviousArmaments
     {
@@ -101,28 +105,41 @@ class FightServicesContainer extends AttackServicesContainer
         return $this->previousArmamentsWithSkills;
     }
 
-    public function getRoutedWebPartsContainer(): \DrdPlus\RulesSkeleton\Web\WebPartsContainer
+    public function getRoutedWebPartsContainer(): WebPartsContainer
     {
-        if ($this->fightWebPartsContainer === null) {
-            $this->fightWebPartsContainer = new FightWebPartsContainer(
-                $this->getPass(),
-                $this->getRoutedWebFiles(),
-                $this->getDirs(),
-                $this->getHtmlHelper(),
-                $this->getRequest(),
-                $this->getCurrentProperties(),
-                $this->getCustomArmamentsState(),
-                $this->getCurrentArmamentsValues(),
-                $this->getPossibleArmaments(),
-                $this->getArmamentsUsabilityMessages(),
-                $this->getArmourer(),
-                $this->getPreviousArmaments(),
-                $this->getCurrentArmamentsWithSkills(),
-                $this->getFight(),
-                $this->getTables()
-            );
+        if ($this->routedFightWebPartsContainer === null) {
+            $this->routedFightWebPartsContainer = $this->createFightWebPartsContainer($this->getRoutedWebFiles());
         }
-        return $this->fightWebPartsContainer;
+        return $this->routedFightWebPartsContainer;
+    }
+
+    private function createFightWebPartsContainer(WebFiles $webFiles): FightWebPartsContainer
+    {
+        return new FightWebPartsContainer(
+            $this->getPass(),
+            $webFiles,
+            $this->getDirs(),
+            $this->getHtmlHelper(),
+            $this->getRequest(),
+            $this->getCurrentProperties(),
+            $this->getCustomArmamentsState(),
+            $this->getCurrentArmamentsValues(),
+            $this->getPossibleArmaments(),
+            $this->getArmamentsUsabilityMessages(),
+            $this->getArmourer(),
+            $this->getPreviousArmaments(),
+            $this->getCurrentArmamentsWithSkills(),
+            $this->getFight(),
+            $this->getTables()
+        );
+    }
+
+    public function getRootWebPartsContainer(): WebPartsContainer
+    {
+        if ($this->rootFightWebPartsContainer === null) {
+            $this->rootFightWebPartsContainer = $this->createFightWebPartsContainer($this->getRootWebFiles());
+        }
+        return $this->rootFightWebPartsContainer;
     }
 
 }

@@ -25,7 +25,7 @@ if (PHP_SAPI !== 'cli') {
     TracyDebugger::enable($htmlHelper->isInProduction());
 }
 
-$calculatorConfiguration = CalculatorConfiguration::createFromYml($dirs);
-$servicesContainer = new AttackServicesContainer($calculatorConfiguration, $htmlHelper);
-$calculatorApplication = $rulesApplication ?? new CalculatorApplication($servicesContainer);
+$configuration = $configuration ?? CalculatorConfiguration::createFromYml($dirs);
+$servicesContainer = $servicesContainer ?? new AttackServicesContainer($configuration, $htmlHelper);
+$calculatorApplication = $rulesApplication ?? $controller ?? new CalculatorApplication($servicesContainer);
 $calculatorApplication->run();

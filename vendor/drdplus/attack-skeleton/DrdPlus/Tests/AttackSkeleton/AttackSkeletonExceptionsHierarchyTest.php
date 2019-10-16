@@ -2,10 +2,13 @@
 
 namespace DrdPlus\Tests\AttackSkeleton;
 
+use DrdPlus\Tests\AttackSkeleton\Partials\AttackCalculatorTestTrait;
 use DrdPlus\Tests\CalculatorSkeleton\CalculatorSkeletonExceptionsHierarchyTest;
 
 class AttackSkeletonExceptionsHierarchyTest extends CalculatorSkeletonExceptionsHierarchyTest
 {
+    use AttackCalculatorTestTrait;
+
     /**
      * @return string
      */
