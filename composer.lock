@@ -212,16 +212,16 @@
         },
         {
             "name": "drdplus/calculator-skeleton",
-            "version": "1.1.13",
+            "version": "1.1.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/calculator-skeleton.git",
-                "reference": "6a7c044ace115e857b8bd82fe2f4862d353a9291"
+                "reference": "ad5a91099ad9bd4564ac112652d93bc454881399"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/6a7c044ace115e857b8bd82fe2f4862d353a9291",
-                "reference": "6a7c044ace115e857b8bd82fe2f4862d353a9291",
+                "url": "https://api.github.com/repos/drdplusinfo/calculator-skeleton/zipball/ad5a91099ad9bd4564ac112652d93bc454881399",
+                "reference": "ad5a91099ad9bd4564ac112652d93bc454881399",
                 "shasum": ""
             },
             "require": {
@@ -251,7 +251,7 @@
                 "MIT"
             ],
             "description": "Style and functionality helper of a DrD+ calculator",
-            "time": "2019-10-16T08:28:21+00:00"
+            "time": "2019-10-18T11:13:37+00:00"
         },
         {
             "name": "drdplus/codes",
@@ -753,16 +753,16 @@
         },
         {
             "name": "drdplus/rules-skeleton",
-            "version": "1.7.11",
+            "version": "1.7.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-                "reference": "118cccca40a4136a0a9def39280f4c56f30e08b0"
+                "reference": "2a1c52bdff9c55c775bfac98a8d15c7856da2ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/118cccca40a4136a0a9def39280f4c56f30e08b0",
-                "reference": "118cccca40a4136a0a9def39280f4c56f30e08b0",
+                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/2a1c52bdff9c55c775bfac98a8d15c7856da2ab1",
+                "reference": "2a1c52bdff9c55c775bfac98a8d15c7856da2ab1",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
                 "helper",
                 "rules"
             ],
-            "time": "2019-10-16T14:35:27+00:00"
+            "time": "2019-10-18T10:38:57+00:00"
         },
         {
             "name": "drdplus/skills",
