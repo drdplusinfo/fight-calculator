@@ -45,16 +45,16 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "2.1.9",
+            "version": "2.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-                "reference": "5368889e6bf6d58359589b21689568107eb96203"
+                "reference": "aeb998ef174153682fdabe0de0fc72fe859b0321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/5368889e6bf6d58359589b21689568107eb96203",
-                "reference": "5368889e6bf6d58359589b21689568107eb96203",
+                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/aeb998ef174153682fdabe0de0fc72fe859b0321",
+                "reference": "aeb998ef174153682fdabe0de0fc72fe859b0321",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
                 "drd plus",
                 "weapons"
             ],
-            "time": "2019-10-16T15:10:28+00:00"
+            "time": "2019-10-18T12:07:12+00:00"
         },
         {
             "name": "drdplus/background",
@@ -753,16 +753,16 @@
         },
         {
             "name": "drdplus/rules-skeleton",
-            "version": "1.7.16",
+            "version": "1.7.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/rules-skeleton.git",
-                "reference": "2a1c52bdff9c55c775bfac98a8d15c7856da2ab1"
+                "reference": "4cc52fbe6dd9783c7801f749b5288961ae5c7d0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/2a1c52bdff9c55c775bfac98a8d15c7856da2ab1",
-                "reference": "2a1c52bdff9c55c775bfac98a8d15c7856da2ab1",
+                "url": "https://api.github.com/repos/drdplusinfo/rules-skeleton/zipball/4cc52fbe6dd9783c7801f749b5288961ae5c7d0a",
+                "reference": "4cc52fbe6dd9783c7801f749b5288961ae5c7d0a",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
                 "helper",
                 "rules"
             ],
-            "time": "2019-10-18T10:38:57+00:00"
+            "time": "2019-10-22T12:06:18+00:00"
         },
         {
             "name": "drdplus/skills",

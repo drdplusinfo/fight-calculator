@@ -187,16 +187,19 @@ class TablesTest extends AbstractContentTest
                 'Seems tables with query has broken routing, try URL /tables?foo=bar'
             );
         } else {
-            $tablesRoute = $this->getTestsConfiguration()->getLocalUrl() . '/tables?foo=bar' . Request::TRIAL . '=1';
+            $tablesRoute = $this->getTestsConfiguration()->getLocalUrl() . '/tables?foo=bar&' . Request::TRIAL . '=1';
             $this->passIn();
             $response = $this->fetchContentFromUrl($tablesRoute, false);
             $this->passOut();
-            $response['content'] = substr($response['content'], 0, 24);
+            $response['content'] = strlen($response['content']) > 123
+                ? (substr($response['content'], 0, 120) . '...')
+                : $response['content'];
             self::assertContains(
                 $response['responseHttpCode'],
                 [200, 201, 202, 203],
                 sprintf(
-                    'Seems tables with query has broken routing, try URL /tables?foo=bar (%s)',
+                    'Seems tables with query has broken routing, try URL %s (%s)',
+                    $tablesRoute,
                     json_encode($response, JSON_PRETTY_PRINT)
                 )
             );
