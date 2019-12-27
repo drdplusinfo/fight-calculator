@@ -14,7 +14,7 @@ class AttackSkeletonExceptionsHierarchyTest extends CalculatorSkeletonExceptions
      */
     protected function getTestedNamespace(): string
     {
-        return \str_replace('\Tests', '', __NAMESPACE__);
+        return str_replace('\Tests', '', __NAMESPACE__);
     }
 
     /**

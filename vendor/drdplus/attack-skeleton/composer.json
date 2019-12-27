@@ -35,6 +35,6 @@
     ]
   },
   "extra": {
-    "class": "DrdPlus\\AttackSkeleton\\AttackInjectorComposerPlugin"
+    "class": "DrdPlus\\AttackSkeleton\\InjectorComposerPlugin\\AttackInjectorComposerPlugin"
   }
 }
