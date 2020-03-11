@@ -636,7 +636,7 @@ class Fight extends StrictObject
     public function getPreviousTargetSize(): Size
     {
         $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_SIZE);
-        if ($distanceValue === null) {
+        if ($distanceValue === null || $distanceValue < 0) {
             return Size::getIt(1);
         }
 
