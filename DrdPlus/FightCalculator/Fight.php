@@ -591,7 +591,7 @@ class Fight extends StrictObject
 
     public function getCurrentTargetDistance(): Distance
     {
-        $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_DISTANCE) ?: null;
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
@@ -610,7 +610,7 @@ class Fight extends StrictObject
 
     public function getCurrentTargetSize(): Size
     {
-        $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_SIZE);
+        $distanceValue = $this->currentValues->getCurrentValue(FightRequest::RANGED_TARGET_SIZE) ?: null;
         if ($distanceValue === null) {
             return Size::getIt(1);
         }
@@ -620,7 +620,7 @@ class Fight extends StrictObject
 
     public function getPreviousTargetDistance(): Distance
     {
-        $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_DISTANCE);
+        $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_DISTANCE) ?: null;
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
@@ -635,8 +635,8 @@ class Fight extends StrictObject
 
     public function getPreviousTargetSize(): Size
     {
-        $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_SIZE);
-        if ($distanceValue === null) {
+        $distanceValue = $this->history->getValue(FightRequest::RANGED_TARGET_SIZE) ?: null;
+        if ($distanceValue === null || $distanceValue < 0) {
             return Size::getIt(1);
         }
 
