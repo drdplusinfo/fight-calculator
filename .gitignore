@@ -1,3 +1,4 @@
 /.idea
 /phpunit_log
 /config.local.yml
+/vendor

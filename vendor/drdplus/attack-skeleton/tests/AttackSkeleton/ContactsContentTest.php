@@ -1,8 +1,0 @@
-<?php declare(strict_types=1);
-
-namespace Tests\DrdPlus\AttackSkeleton;
-
-class ContactsContentTest extends \Tests\DrdPlus\CalculatorSkeleton\ContactsContentTest
-{
-    use Partials\AttackCalculatorTestTrait;
-}

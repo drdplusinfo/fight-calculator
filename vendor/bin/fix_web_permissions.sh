@@ -1,1 +1,0 @@
-../drdplus/rules-skeleton/bin/fix_web_permissions.sh
