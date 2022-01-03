@@ -1,0 +1,27 @@
+{
+  "name": "granam/web-versions",
+  "description": "Reads available minor and patch versions from a Git repository",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Granam\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">= 7.3",
+    "granam/git": "^2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^9.4",
+    "symfony/process": "^5.1"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

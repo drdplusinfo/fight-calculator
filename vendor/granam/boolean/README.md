@@ -4,11 +4,17 @@
 [![Test Coverage](https://codeclimate.com/github/jaroslavtyc/granam-boolean/badges/coverage.svg)](https://codeclimate.com/github/jaroslavtyc/granam-boolean/coverage)
 
 ## Hint
-First of all, make sure you don't need just a [simple  built-in bool validation](http://php.net/manual/en/function.filter-var.php).
+
+First of all, make sure you don't need just
+a [simple  built-in bool validation](http://php.net/manual/en/function.filter-var.php)
+.
 
 Internally behaves same way as (bool)$value, but
-- non-scalar values (arrays, resources, objects without \_\_toString etc.) raises exception
-- objects with \_\_toString magic method are converted to string by that, then to bool
+
+- non-scalar values (arrays, resources, objects without \_\_toString etc.)
+  raises exception
+- objects with \_\_toString magic method are converted to string by that, then
+  to bool
 - null *can* be rejected by raise of an exception, *if* desired
 
 ```php

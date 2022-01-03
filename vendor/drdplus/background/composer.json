@@ -5,17 +5,27 @@
   "description": "Background of a person for Drd+",
   "autoload": {
     "psr-4": {
-      "DrdPlus\\": "DrdPlus/"
+      "DrdPlus\\Background\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy",
+      "DrdPlus\\Tests\\": "tests"
     }
   },
   "require": {
-    "php": ">=7.1",
-    "drdplus/professions": "~2.0"
+    "php": ">=7.4",
+    "drdplus/professions": "~3.0"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "^8.3",
+    "granam/exceptions-hierarchy": "^5.0",
+    "granam/test-with-mockery": "^2.0",
     "mockery/mockery": "^1.2",
-    "granam/exceptions-hierarchy": "^5.0"
+    "phpunit/phpunit": "^9.0",
+    "roave/security-advisories": "dev-latest"
+  },
+  "config": {
+    "sort-packages": true
   }
 }

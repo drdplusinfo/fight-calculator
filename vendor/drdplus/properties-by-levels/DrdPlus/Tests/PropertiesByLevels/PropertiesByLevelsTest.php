@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-declare(strict_types = 1);
-
 namespace DrdPlus\Tests\PropertiesByLevels;
 
 use DrdPlus\Codes\GenderCode;
@@ -44,7 +42,7 @@ use DrdPlus\Races\Humans\CommonHuman;
 use DrdPlus\Races\Race;
 use DrdPlus\Tables\Body\CorrectionByHeightTable;
 use DrdPlus\Tables\Tables;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class PropertiesByLevelsTest extends TestWithMockery
 {

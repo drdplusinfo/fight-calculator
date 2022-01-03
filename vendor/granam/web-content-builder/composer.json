@@ -11,28 +11,37 @@
   ],
   "autoload": {
     "psr-4": {
-      "Granam\\": "Granam/"
+      "Granam\\WebContentBuilder\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\WebContentBuilder\\": "tests/WebContentBuilder",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
     }
   },
   "bin": [
     "bin/assets"
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.3",
     "ext-dom": "*",
     "ext-json": "*",
-    "composer-plugin-api": "^1.1",
+    "composer-plugin-api": "^1.1|^2.0",
     "erusev/parsedown": "^1.7",
+    "granam/assets-version": "^2.0",
+    "granam/strict-object": "^3.1",
     "granam/string": "^4.0",
-    "phpgt/dom": "^2.1",
-    "piwik/device-detector": "^3.12"
+    "matomo/device-detector": "^4.1",
+    "phpgt/dom": "^2.1"
   },
   "require-dev": {
-    "composer/composer": "^1.7",
+    "composer/composer": "^2.0",
     "granam/exceptions-hierarchy": "^5.0",
+    "granam/test-with-mockery": "^2.0",
     "mockery/mockery": "^1.2",
-    "phpunit/phpunit": "^8.3",
-    "roave/security-advisories": "dev-master"
+    "phpunit/phpunit": "^9.3",
+    "roave/security-advisories": "dev-latest"
   },
   "config": {
     "sort-packages": true

@@ -7,24 +7,31 @@
     {
       "name": "Jaroslav Týc",
       "email": "mail@jaroslavtyc.com",
-      "homepage": "https://www.jaroslavtyc.com",
+      "homepage": "https://jaroslavtyc.com",
       "role": "Developer"
     }
   ],
   "autoload": {
     "psr-4": {
-      "Granam\\": "Granam/"
+      "Granam\\IntegerEnum\\": "IntegerEnum"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\IntegerEnum\\": "tests/IntegerEnum",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
     }
   },
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.3",
     "granam/scalar-enum": "^1.1",
     "granam/integer": "^7.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
     "granam/exceptions-hierarchy": "^5.0",
-    "phpunit/phpunit": "^8.3",
-    "mockery/mockery": "^1.2"
+    "phpunit/phpunit": "^9.0",
+    "mockery/mockery": "^1.2",
+    "rector/rector": "^0.10.3"
   }
 }

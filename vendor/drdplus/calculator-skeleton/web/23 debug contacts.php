@@ -1,2 +1,2 @@
-<?= /** @var \DrdPlus\CalculatorSkeleton\Web\CalculatorWebPartsContainer $webPartsContainer */
-$webPartsContainer->getCalculatorDebugContactsBody();
+<?php /** @var \DrdPlus\CalculatorSkeleton\Web\CalculatorWebPartsContainer $webPartsContainer */
+echo $webPartsContainer->getCalculatorDebugContactsBody()->getValue();

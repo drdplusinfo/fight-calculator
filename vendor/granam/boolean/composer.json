@@ -1,5 +1,6 @@
 {
   "name": "granam/boolean",
+  "description": "Lightweight boolean container with stand-alone converter",
   "license": "MIT",
   "authors": [
     {
@@ -9,7 +10,6 @@
     }
   ],
   "type": "project",
-  "description": "Lightweight boolean container with stand-alone converter",
   "keywords": [
     "php",
     "boolean",
@@ -18,16 +18,25 @@
   "homepage": "https://github.com/jaroslavtyc/granam-boolean",
   "autoload": {
     "psr-4": {
-      "Granam\\": "Granam/"
+      "Granam\\Boolean\\": "Boolean"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\": "tests"
     }
   },
   "require": {
-    "php": ">=7.1",
-    "granam/scalar": "^5.0"
+    "php": ">=7.3",
+    "granam/scalar": "~5.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.3",
-    "mockery/mockery": "^1.2",
-    "granam/exceptions-hierarchy": "^5.0"
+    "phpunit/phpunit": "~9.3",
+    "mockery/mockery": "~1.2",
+    "granam/exceptions-hierarchy": "~5.0",
+    "roave/security-advisories": "dev-master"
+  },
+  "config": {
+    "sort-packages": true
   }
 }

@@ -5,17 +5,25 @@
   "description": "Levels of professions for Drd+",
   "autoload": {
     "psr-4": {
-      "DrdPlus\\": "DrdPlus/"
+      "DrdPlus\\Person\\ProfessionLevels\\": "src/ProfessionLevels"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DrdPlus\\Tests\\": "tests",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
     }
   },
   "require": {
-    "php": ">=7.1",
-    "drdplus/professions": "~2.0"
+    "php": ">=7.4",
+    "drdplus/professions": "~3.0"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "^8.3",
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^9.0",
     "mockery/mockery": "^1.2",
-    "granam/exceptions-hierarchy": "^5.0"
+    "granam/exceptions-hierarchy": "^5.0",
+    "granam/test-with-mockery": "^2.0",
+    "rector/rector": "^0.11.53"
   }
 }

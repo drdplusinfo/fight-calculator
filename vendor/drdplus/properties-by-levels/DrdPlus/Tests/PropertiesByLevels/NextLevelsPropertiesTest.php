@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-declare(strict_types = 1);
-
 namespace DrdPlus\Tests\PropertiesByLevels;
 
 use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
@@ -12,7 +10,7 @@ use DrdPlus\BaseProperties\Intelligence;
 use DrdPlus\BaseProperties\Knack;
 use DrdPlus\BaseProperties\Strength;
 use DrdPlus\BaseProperties\Will;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class NextLevelsPropertiesTest extends TestWithMockery
 {

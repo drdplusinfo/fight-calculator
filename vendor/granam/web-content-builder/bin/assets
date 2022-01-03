@@ -58,6 +58,7 @@ if (isset($options['md']) || isset($options['m'])) {
     $scanForMd = true;
 }
 $assetsVersion = new \Granam\WebContentBuilder\AssetsVersion($scanForCss, $scanForHtml, $scanForMd);
+
 $assetsRootDir = $options['root-dir'] ?? $options['r'] ?? null;
 if ((string)$assetsRootDir === '') {
     $assetsRootDir = getcwd();
@@ -83,7 +84,8 @@ if (!empty($options['file'])) {
 if (!empty($options['f'])) {
     $filesToTranspile = array_merge((array)$options['f'], $filesToTranspile);
 }
-$dryRun = !empty($options['dry-run']) || !empty($dryRun['n']);
+$dryRun = isset($options['dry-run']) || isset($options['n']);
+
 $changedFiles = $assetsVersion->addVersionsToAssetLinks($assetsRootDir, array_unique($dirsToScan), array_unique($dirsToExclude), array_unique($filesToTranspile), $dryRun);
 if (count($changedFiles) === 0) {
     echo 'No files changed at all' . PHP_EOL;
@@ -91,7 +93,7 @@ if (count($changedFiles) === 0) {
     echo 'Changed ' . count($changedFiles) . ' files' . PHP_EOL
         . implode(
             array_map(
-                function (string $changedFile) {
+                static function (string $changedFile) {
                     return '- ' . $changedFile . PHP_EOL;
                 },
                 $changedFiles

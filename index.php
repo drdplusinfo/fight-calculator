@@ -1,11 +1,12 @@
 <?php
 namespace DrdPlus\Fight;
 
+use DrdPlus\AttackSkeleton\AttackServicesContainer;
 use DrdPlus\AttackSkeleton\HtmlHelper;
 use DrdPlus\CalculatorSkeleton\CalculatorApplication;
 use DrdPlus\CalculatorSkeleton\CalculatorConfiguration;
 use DrdPlus\FightCalculator\FightServicesContainer;
-use DrdPlus\RulesSkeleton\Dirs;
+use DrdPlus\RulesSkeleton\Configurations\Dirs;
 use DrdPlus\RulesSkeleton\Environment;
 use DrdPlus\RulesSkeleton\TracyDebugger;
 
@@ -16,15 +17,27 @@ if ((!empty($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] === '127.0.0.1')
     ini_set('display_errors', '0');
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+$documentRoot = $documentRoot ?? (PHP_SAPI !== 'cli' ? rtrim(dirname($_SERVER['SCRIPT_FILENAME']), '\/') : getcwd());
 
-$dirs = Dirs::createFromGlobals();
-$htmlHelper = HtmlHelper::createFromGlobals($dirs, Environment::createFromGlobals());
-if (PHP_SAPI !== 'cli') {
-    TracyDebugger::enable($htmlHelper->isInProduction());
+/** @noinspection PhpIncludeInspection */
+require_once $documentRoot . '/vendor/autoload.php';
+
+try {
+    $environment = $environment ?? Environment::createFromGlobals();
+    if (PHP_SAPI !== 'cli') {
+        TracyDebugger::enable($environment->isInProduction());
+    }
+
+    $dirs = $dirs ?? Dirs::createFromGlobals();
+    $configuration = $configuration ?? CalculatorConfiguration::createFromYml($dirs);
+    $htmlHelper = $htmlHelper ?? HtmlHelper::createFromGlobals($dirs, $environment);
+    $servicesContainer = $servicesContainer ?? new FightServicesContainer($configuration, $environment, $htmlHelper);
+    $calculatorApplication = $rulesApplication ?? $controller ?? new CalculatorApplication($servicesContainer);
+
+    $calculatorApplication->run();
+} catch (\Throwable $throwable) {
+    if (!empty($_SERVER['SERVER_PROTOCOL'])) {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+    }
+    throw $throwable;
 }
-
-$calculatorConfiguration = CalculatorConfiguration::createFromYml($dirs);
-$fightServicesContainer = new FightServicesContainer($calculatorConfiguration, $htmlHelper);
-$fightApplication = $rulesApplication ?? new CalculatorApplication($fightServicesContainer);
-$fightApplication->run();

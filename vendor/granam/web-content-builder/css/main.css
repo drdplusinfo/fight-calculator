@@ -1,1 +1,3 @@
-/* just a dummy */
+body {
+    background-image: url("/img/someone.jpeg?version=664a924915e642c7dc89af370114629a");
+}

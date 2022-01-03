@@ -1,0 +1,21 @@
+{
+  "resource": "resource6062e04045f6c0.70234315",
+  "type": "type6062e04045f717.19267663",
+  "prefix": "prefix6062e04045f738.39200386",
+  "path": "path6062e04045f742.49755591",
+  "host": "host6062e04045f751.91160301",
+  "schemes": "schemes6062e04045f761.32098155",
+  "methods": "methods6062e04045f778.10259807",
+  "defaults": "defaults6062e04045f787.79586651",
+  "requirements": "requirements6062e04045f792.80657833",
+  "options": "options6062e04045f7a2.53777605",
+  "condition": "condition6062e04045f7b8.00009777",
+  "controller": "controller6062e04045f7c2.96167069",
+  "name_prefix": "name_prefix6062e04045f7d9.29840288",
+  "trailing_slash_on_root": "trailing_slash_on_root6062e04045f7e8.23364336",
+  "locale": "locale6062e04045f7f3.32243962",
+  "format": "format6062e04045f805.83167913",
+  "utf8": "utf86062e04045f815.22015506",
+  "exclude": "exclude6062e04045f824.41025341",
+  "stateless": "stateless6062e04045f833.91955814"
+}

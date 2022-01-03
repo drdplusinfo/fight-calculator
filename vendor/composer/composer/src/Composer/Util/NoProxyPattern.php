@@ -12,6 +12,7 @@
 
 namespace Composer\Util;
 
+use Composer\Pcre\Preg;
 use stdClass;
 
 /**
@@ -25,7 +26,7 @@ class NoProxyPattern
     protected $hostNames = array();
 
     /**
-     * @var object[]
+     * @var (null|object)[]
      */
     protected $rules = array();
 
@@ -39,7 +40,7 @@ class NoProxyPattern
      */
     public function __construct($pattern)
     {
-        $this->hostNames = preg_split('{[\s,]+}', $pattern, null, PREG_SPLIT_NO_EMPTY);
+        $this->hostNames = Preg::split('{[\s,]+}', $pattern, -1, PREG_SPLIT_NO_EMPTY);
         $this->noproxy = empty($this->hostNames) || '*' === $this->hostNames[0];
     }
 
@@ -74,7 +75,7 @@ class NoProxyPattern
      *
      * @param string $url
      *
-     * @return bool|stdclass
+     * @return bool|stdClass
      */
     protected function getUrlData($url)
     {
@@ -108,9 +109,9 @@ class NoProxyPattern
     /**
      * Returns true if the url is matched by a rule
      *
-     * @param int $index
-     * @param string $hostName
-     * @param string $url
+     * @param int      $index
+     * @param string   $hostName
+     * @param stdClass $url
      *
      * @return bool
      */
@@ -134,7 +135,7 @@ class NoProxyPattern
             $match = $rule->ipdata->ip === $url->ipdata->ip;
         } else {
             // Match host and port
-            $haystack = substr($url->name, - strlen($rule->name));
+            $haystack = substr($url->name, -strlen($rule->name));
             $match = stripos($haystack, $rule->name) === 0;
         }
 
@@ -171,10 +172,10 @@ class NoProxyPattern
     /**
      * Finds or creates rule data for a hostname
      *
-     * @param int $index
+     * @param int    $index
      * @param string $hostName
      *
-     * @return {null|stdClass} Null if the hostname is invalid
+     * @return null|stdClass Null if the hostname is invalid
      */
     private function getRule($index, $hostName)
     {
@@ -197,9 +198,9 @@ class NoProxyPattern
     /**
      * Creates an object containing IP data if the host is an IP address
      *
-     * @param string $host
-     * @param null|stdclass $ipdata Set by method if IP address found
-     * @param bool $allowPrefix Whether a CIDR prefix-length is expected
+     * @param string        $host
+     * @param null|stdClass $ipdata      Set by method if IP address found
+     * @param bool          $allowPrefix Whether a CIDR prefix-length is expected
      *
      * @return bool False if the host contains invalid data
      */
@@ -264,8 +265,8 @@ class NoProxyPattern
     /**
      * Returns the binary network mask mapped to IPv6
      *
-     * @param string $prefix CIDR prefix-length
-     * @param int $size Byte size of in_addr
+     * @param int $prefix CIDR prefix-length
+     * @param int $size   Byte size of in_addr
      *
      * @return string
      */
@@ -274,7 +275,7 @@ class NoProxyPattern
         $mask = '';
 
         if ($ones = floor($prefix / 8)) {
-            $mask = str_repeat(chr(255), $ones);
+            $mask = str_repeat(chr(255), (int) $ones);
         }
 
         if ($remainder = $prefix % 8) {
@@ -290,8 +291,8 @@ class NoProxyPattern
      * Calculates and returns the network and mask
      *
      * @param string $rangeIp IP in_addr
-     * @param int $size Byte size of in_addr
-     * @param string $prefix CIDR prefix-length
+     * @param int    $size    Byte size of in_addr
+     * @param int    $prefix  CIDR prefix-length
      *
      * @return string[] network in_addr, binary mask
      */
@@ -315,7 +316,7 @@ class NoProxyPattern
      * Maps an IPv4 address to IPv6
      *
      * @param string $binary in_addr
-     * @param int $size Byte size of in_addr
+     * @param int    $size   Byte size of in_addr
      *
      * @return string Mapped or existing in_addr
      */
@@ -332,11 +333,11 @@ class NoProxyPattern
     /**
      * Creates a rule data object
      *
-     * @param string $host
-     * @param int $port
-     * @param null|stdclass $ipdata
+     * @param string        $host
+     * @param int           $port
+     * @param null|stdClass $ipdata
      *
-     * @return stdclass
+     * @return stdClass
      */
     private function makeData($host, $port, $ipdata)
     {
@@ -351,11 +352,11 @@ class NoProxyPattern
     /**
      * Creates an ip data object
      *
-     * @param string $ip in_addr
-     * @param int $size Byte size of in_addr
+     * @param string      $ip      in_addr
+     * @param int         $size    Byte size of in_addr
      * @param null|string $netmask Network mask
      *
-     * @return stdclass
+     * @return stdClass
      */
     private function makeIpData($ip, $size, $netmask)
     {
@@ -392,8 +393,7 @@ class NoProxyPattern
             $ip6 = substr($hostName, 1, $index - 1);
             $hostName = substr($hostName, $index + 1);
 
-            if (strpbrk($hostName, '[]') !== false
-                || substr_count($hostName, ':') > 1) {
+            if (strpbrk($hostName, '[]') !== false || substr_count($hostName, ':') > 1) {
                 return $error;
             }
         }
@@ -419,15 +419,18 @@ class NoProxyPattern
      * Wrapper around filter_var FILTER_VALIDATE_INT
      *
      * @param string $int
-     * @param int $min
-     * @param int $max
+     * @param int    $min
+     * @param int    $max
+     *
+     * @return bool
      */
     private function validateInt($int, $min, $max)
     {
         $options = array(
             'options' => array(
                 'min_range' => $min,
-                'max_range' => $max)
+                'max_range' => $max,
+            ),
         );
 
         return false !== filter_var($int, FILTER_VALIDATE_INT, $options);

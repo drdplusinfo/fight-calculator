@@ -8,16 +8,22 @@
       "DrdPlus\\": "DrdPlus/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
+    }
+  },
   "require": {
-    "php": ">=7.1",
-    "drdplus/properties-by-fate": "~2.0",
-    "drdplus/profession-levels": "~2.0",
-    "drdplus/races": "~2.0"
+    "php": ">=7.3",
+    "drdplus/properties-by-fate": "~3.0",
+    "drdplus/profession-levels": "~3.0",
+    "drdplus/races": "~3.0"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "^8.3",
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^9.0",
     "mockery/mockery": "^1.2",
-    "granam/exceptions-hierarchy": "^5.0"
+    "granam/exceptions-hierarchy": "^5.1",
+    "granam/test-with-mockery": "^2.0"
   }
 }

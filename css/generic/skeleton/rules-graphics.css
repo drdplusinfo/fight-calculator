@@ -1,7 +1,26 @@
 body {
-    background: url(/images/generic/skeleton/rules-background.png?version=40fd24846865c459e4f38300e2ae9377) repeat-y #FFEDD5 left fixed;
-    background-size: 100%;
     color: #011126;
+}
+
+.background-wallpaper {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+    z-index: -3;
+    background-color: #FFEDD5;
+    background-repeat: repeat-y;
+    background-size: contain;
+}
+
+.background-wallpaper-left-part {
+    background-image: url(/images/generic/skeleton/rules-background-wallpaper-left-part.png?version=e18c25d192de3e904fc3589c1e67ae91);
+    left: 0;
+}
+
+.background-wallpaper-right-part {
+    background-image: url(/images/generic/skeleton/rules-background-wallpaper-right-part.png?version=7ab9ae3594b54f6ed5c723b2b0fff705);
+    right: 0;
 }
 
 .background-image {

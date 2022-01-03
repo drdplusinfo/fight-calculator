@@ -1,4 +1,4 @@
-.idea/
-vendor/
-composer.lock
-phpunit_log/
+/.idea/
+/vendor/
+/composer.lock
+/phpunit_log/

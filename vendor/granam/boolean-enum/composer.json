@@ -13,7 +13,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Granam\\": "Granam/"
+      "Granam\\BooleanEnum\\": "BooleanEnum"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\": "tests"
     }
   },
   "require": {

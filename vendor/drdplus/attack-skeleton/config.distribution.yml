@@ -1,8 +1,10 @@
 web:
   protected_access: false
   eshop_url: 'https://obchod.altar.cz/draci-doupe-a-jine-rpg-hry-draci-doupe-plus-c-1_7.html'
-  menu_position_fixed: false
-  show_home_button: true
+  menu:
+    position_fixed: false
+    home_button:
+      show: true
   name: 'HTML kostra pro DrD+ kalkulátory útoku'
   title_smiley: ""
   cookies_postfix: 'attack-skeleton'

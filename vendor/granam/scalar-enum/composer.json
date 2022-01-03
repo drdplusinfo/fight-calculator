@@ -17,17 +17,24 @@
   ],
   "autoload": {
     "psr-4": {
-      "Granam\\": "Granam/"
+      "Granam\\ScalarEnum\\": "ScalarEnum"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\ScalarEnum\\": "tests/ScalarEnum",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
     }
   },
   "require": {
-    "php": ">=7.1",
-    "granam/scalar": "^5.0"
+    "php": ">=7.3",
+    "granam/scalar": "^5.1"
   },
   "require-dev": {
     "granam/exceptions-hierarchy": "^5.0",
+    "granam/test-with-mockery": "^2.0",
     "mockery/mockery": "^1.2",
-    "phpunit/phpunit": "^8.3",
+    "phpunit/phpunit": "^9.0",
     "roave/security-advisories": "dev-master"
   },
   "config": {

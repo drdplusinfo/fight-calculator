@@ -12,25 +12,32 @@
   ],
   "autoload": {
     "psr-4": {
-      "DrdPlus\\": "DrdPlus/"
+      "DrdPlus\\FightCalculator\\": "FightCalculator"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\TestWithMockery\\": "vendor/granam/test-with-mockery",
+      "DrdPlus\\FightCalculator\\": "tests/FightCalculator"
     }
   },
   "require": {
     "ext-json": "*",
-    "php": ">=7.1",
-    "drdplus/fight-properties": "^2.0",
-    "drdplus/attack-skeleton": "^2.1"
+    "php": ">=7.3",
+    "drdplus/fight-properties": "^3.0",
+    "drdplus/attack-skeleton": "^3.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.3",
+    "phpunit/phpunit": "^9.0",
     "mockery/mockery": "^1.2",
     "granam/exceptions-hierarchy": "^5.0",
-    "roave/security-advisories": "dev-master",
-    "composer/composer": "^1.9"
+    "roave/security-advisories": "dev-latest",
+    "composer/composer": "^1.9|^2.0",
+    "granam/test-with-mockery": "^2.0"
   },
   "scripts": {
     "pre-autoload-dump": [
-      "rm -f DrdPlus/Tests/AttackSkeleton && ln -s ../../vendor/drdplus/attack-skeleton/DrdPlus/Tests/AttackSkeleton DrdPlus/Tests/"
+      "rm -f tests/AttackSkeleton && ln -s ../../vendor/drdplus/attack-skeleton/DrdPlus/Tests/AttackSkeleton tests/"
     ]
   }
 }

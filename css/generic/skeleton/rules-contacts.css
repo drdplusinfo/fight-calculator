@@ -107,7 +107,7 @@
     color: whitesmoke;
 }
 
-.menu a.internal-url {
+.home-menu a.internal-url {
     border-bottom: none;
 }
 
@@ -140,19 +140,19 @@
     height: 0.5em; /* to match bottom of static contacts even if placeholder is moved by Bootstrap */
 }
 
-.menu {
+.home-menu {
     float: left;
     height: 22px; /* single line and some margin */
     overflow: hidden;
     margin: 1px 0;
 }
 
-.menu .home {
+.home-menu .home {
     position: relative;
     vertical-align: top;
 }
 
-.menu .home:hover {
+.home-menu .home:hover {
     bottom: 22px;
 }
 

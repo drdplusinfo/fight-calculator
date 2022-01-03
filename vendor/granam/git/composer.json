@@ -13,16 +13,23 @@
   ],
   "autoload": {
     "psr-4": {
-      "Granam\\": "Granam/"
+      "Granam\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\Tests\\Git\\": "tests/Git",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
     }
   },
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.3",
     "granam/strict-object": "^3.0"
   },
   "require-dev": {
     "granam/exceptions-hierarchy": "^5.0",
-    "phpunit/phpunit": "^8.3"
+    "phpunit/phpunit": "^9.4",
+    "symfony/process": "^5.1"
   },
   "config": {
     "sort-packages": true
