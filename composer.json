@@ -27,7 +27,7 @@
   },
   "require": {
     "ext-json": "*",
-    "php": ">=7.3",
+    "php": ">=7.4",
     "drdplus/fight-properties": "^3.0",
     "drdplus/attack-skeleton": "^3.0"
   },
