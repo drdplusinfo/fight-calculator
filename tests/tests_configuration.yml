@@ -1,7 +1,10 @@
 expected_public_url: 'https://boj.drdplus.info'
+public_to_local_url_part_regexp: '~https://(boj[.])drdplus[.]info~'
+public_to_local_url_part_replacement: 'http://localhost:9999'
 expected_google_analytics_id: 'UA-121206931-18'
 has_custom_body_content: false
 has_tables: false
+can_have_tables: false
 has_links_to_altar: false
 has_more_versions: false
 has_protected_access: false
@@ -33,3 +36,5 @@ too_short_success_names: []
 too_short_result_names: []
 expected_web_name: 'DrD+ kalkulátor pro boj'
 expected_page_title: 'DrD+ kalkulátor pro boj'
+has_vendor_dir_versioned: false
+expected_home_button_target: '/'

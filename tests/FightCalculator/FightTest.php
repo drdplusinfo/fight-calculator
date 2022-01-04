@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrdPlus\Tests\FightCalculator;
+namespace Tests\DrdPlus\FightCalculator;
 
 use DrdPlus\Armourer\Armourer;
 use DrdPlus\BaseProperties\Strength;

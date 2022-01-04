@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DrdPlus\Tests\Calculators\Fight;
+namespace Tests\DrdPlus\FightCalculator;
 
 use DrdPlus\AttackSkeleton\AttackRequest;
 use Gt\Dom\HTMLDocument;

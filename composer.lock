@@ -600,16 +600,16 @@
         },
         {
             "name": "drdplus/attack-skeleton",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drdplusinfo/attack-skeleton.git",
-                "reference": "6ee2f0bba28338a9bc766862a490a31f3c4a05cf"
+                "reference": "6cac8c484f188791a706aefc6587eb3e9500b340"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/6ee2f0bba28338a9bc766862a490a31f3c4a05cf",
-                "reference": "6ee2f0bba28338a9bc766862a490a31f3c4a05cf",
+                "url": "https://api.github.com/repos/drdplusinfo/attack-skeleton/zipball/6cac8c484f188791a706aefc6587eb3e9500b340",
+                "reference": "6cac8c484f188791a706aefc6587eb3e9500b340",
                 "shasum": ""
             },
             "require": {
@@ -656,9 +656,9 @@
             ],
             "support": {
                 "issues": "https://github.com/drdplusinfo/attack-skeleton/issues",
-                "source": "https://github.com/drdplusinfo/attack-skeleton/tree/3.0.2"
+                "source": "https://github.com/drdplusinfo/attack-skeleton/tree/3.0.3"
             },
-            "time": "2022-01-03T12:40:28+00:00"
+            "time": "2022-01-03T16:43:03+00:00"
         },
         {
             "name": "drdplus/background",

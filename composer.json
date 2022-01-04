@@ -18,7 +18,11 @@
   "autoload-dev": {
     "psr-4": {
       "Granam\\TestWithMockery\\": "vendor/granam/test-with-mockery",
-      "DrdPlus\\FightCalculator\\": "tests/FightCalculator"
+      "Tests\\DrdPlus\\FightCalculator\\": "tests/FightCalculator",
+      "Tests\\DrdPlus\\AttackSkeleton\\": "vendor/drdplus/attack-skeleton/tests/AttackSkeleton",
+      "Tests\\DrdPlus\\CalculatorSkeleton\\": "vendor/drdplus/calculator-skeleton/tests/CalculatorSkeleton",
+      "Tests\\DrdPlus\\RulesSkeleton\\": "vendor/drdplus/rules-skeleton/tests/RulesSkeleton",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
     }
   },
   "require": {
@@ -37,7 +41,7 @@
   },
   "scripts": {
     "pre-autoload-dump": [
-      "rm -f tests/AttackSkeleton && ln -s ../../vendor/drdplus/attack-skeleton/DrdPlus/Tests/AttackSkeleton tests/"
+      "rm -f tests/AttackSkeleton && ln -s ../vendor/drdplus/attack-skeleton/tests/AttackSkeleton tests/"
     ]
   }
 }
