@@ -5,6 +5,14 @@ web:
     position_fixed: false
     home_button:
       show: true
+      target: 'https://www.drdplus.info'
+    items:
+      email: "mailto:info@drdplus.info"
+      rpgforum: "https://rpgforum.cz/forum/viewtopic.php?f=238&t=14870"
+      discord: "https://discord.com/invite/FVz5V3Q"
+      twitter: "https://twitter.com/DrdInfo"
+      facebook: "https://www.facebook.com/drdplus.info"
+      trello: "https://trello.com/b/L64FNYj3/drdplusinfo"
   name: 'DrD+ kalkulátor pro boj'
   title_smiley: ''
   cookies_postfix: 'boj'

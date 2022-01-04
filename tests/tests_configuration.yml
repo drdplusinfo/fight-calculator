@@ -37,4 +37,3 @@ too_short_result_names: []
 expected_web_name: 'DrD+ kalkulátor pro boj'
 expected_page_title: 'DrD+ kalkulátor pro boj'
 has_vendor_dir_versioned: false
-expected_home_button_target: '/'
