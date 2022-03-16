@@ -54,6 +54,8 @@ use DrdPlus\Skills\Psychical\PsychicalSkills;
 use DrdPlus\Skills\Skills;
 use DrdPlus\Tables\Combat\Attacks\AttackNumberByContinuousDistanceTable;
 use DrdPlus\Tables\Measurements\Distance\Distance;
+use DrdPlus\Tables\Measurements\Partials\Exceptions\RequestedDataOutOfTableRange;
+use DrdPlus\Tables\Measurements\Partials\Exceptions\UnknownBonus;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\PositiveIntegerObject;
 use Granam\Strict\Object\StrictObject;
@@ -595,7 +597,12 @@ class Fight extends StrictObject
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
-        $distanceValue = min($distanceValue, $this->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables));
+        try {
+            $currentRangeWeaponMaximalRangeInMeters = $this->getCurrentRangedWeaponMaximalRange()->getInMeters($this->tables);
+        } catch (UnknownBonus | RequestedDataOutOfTableRange $unknownBonus) {
+            $currentRangeWeaponMaximalRangeInMeters = 1;
+        }
+        $distanceValue = min($distanceValue, $currentRangeWeaponMaximalRangeInMeters);
         return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 
@@ -624,7 +631,12 @@ class Fight extends StrictObject
         if ($distanceValue === null) {
             $distanceValue = AttackNumberByContinuousDistanceTable::DISTANCE_WITH_NO_IMPACT_TO_ATTACK_NUMBER;
         }
-        $distanceValue = min($distanceValue, $this->getPreviousRangedWeaponMaximalRange()->getInMeters($this->tables));
+        try {
+            $previousRangeWeaponMaximalRangeInMeters = $this->getPreviousRangedWeaponMaximalRange()->getInMeters($this->tables);
+        } catch (UnknownBonus | RequestedDataOutOfTableRange $unknownBonus) {
+            $previousRangeWeaponMaximalRangeInMeters = 1;
+        }
+        $distanceValue = min($distanceValue, $previousRangeWeaponMaximalRangeInMeters);
         return new Distance($distanceValue, DistanceUnitCode::METER, $this->tables->getDistanceTable());
     }
 

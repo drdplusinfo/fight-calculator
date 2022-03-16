@@ -6,13 +6,20 @@ use DrdPlus\Armourer\Armourer;
 use DrdPlus\BaseProperties\Strength;
 use DrdPlus\CalculatorSkeleton\CurrentValues;
 use DrdPlus\CalculatorSkeleton\History;
+use DrdPlus\Codes\Armaments\BodyArmorCode;
+use DrdPlus\Codes\Armaments\HelmCode;
 use DrdPlus\Codes\Armaments\RangedWeaponCode;
+use DrdPlus\Codes\Armaments\ShieldCode;
+use DrdPlus\Codes\ItemHoldingCode;
+use DrdPlus\Codes\Skills\PhysicalSkillCode;
+use DrdPlus\Codes\Skills\SkillCode;
 use DrdPlus\FightCalculator\CurrentArmamentsWithSkills;
 use DrdPlus\FightCalculator\CurrentProperties;
 use DrdPlus\FightCalculator\Fight;
 use DrdPlus\FightCalculator\FightRequest;
 use DrdPlus\FightCalculator\PreviousArmamentsWithSkills;
 use DrdPlus\FightCalculator\PreviousProperties;
+use DrdPlus\FightProperties\Exceptions\UnknownWeaponHolding;
 use DrdPlus\Properties\Combat\MaximalRange;
 use DrdPlus\Properties\Derived\Speed;
 use DrdPlus\Tables\Combat\Attacks\AttackNumberByContinuousDistanceTable;
@@ -85,11 +92,11 @@ class FightTest extends TestWithMockery
     /**
      * @return CurrentProperties|MockInterface
      */
-    private function createCurrentProperties(): CurrentProperties
+    private function createCurrentProperties(int $strength = 123): CurrentProperties
     {
         $currentProperties = $this->mockery(CurrentProperties::class);
         $currentProperties->shouldReceive('getCurrentStrength')
-            ->andReturn(Strength::getIt(123));
+            ->andReturn(Strength::getIt($strength));
         $currentProperties->shouldReceive('getCurrentSpeed')
             ->andReturn($this->createSpeed(456));
         return $currentProperties;
@@ -126,17 +133,29 @@ class FightTest extends TestWithMockery
     /**
      * @return PreviousArmamentsWithSkills|MockInterface
      */
-    private function createPreviousArmamentsWithSkills(): PreviousArmamentsWithSkills
+    private function createPreviousArmamentsWithSkills(History $history = null, PreviousProperties $previousProperties = null): PreviousArmamentsWithSkills
     {
+        if ($history) {
+            return $this->mockery(PreviousArmamentsWithSkills::class, [$history, $previousProperties, Armourer::getIt(), Tables::getIt()])
+                ->makePartial();
+        }
         return $this->mockery(PreviousArmamentsWithSkills::class);
     }
 
     /**
+     * @param int $strength
      * @return PreviousProperties|MockInterface
      */
-    private function createPreviousProperties(): PreviousProperties
+    private function createPreviousProperties(int $strength = 0): PreviousProperties
     {
-        return $this->mockery(PreviousProperties::class);
+        $history = $this->createHistory();
+        $history->shouldReceive('getValue')
+            ->andReturn(0);
+        $history->getValue('s');
+        $previousProperties = $this->mockery(PreviousProperties::class, [$history, Tables::getIt()]);
+        $previousProperties->shouldReceive('getPreviousStrength')
+            ->andReturn(Strength::getIt($strength));
+        return $previousProperties->makePartial();
     }
 
     /**
@@ -152,5 +171,28 @@ class FightTest extends TestWithMockery
             ->with($this->type(Tables::class))
             ->andReturn($maximalRangeInMeters);
         return $armourer;
+    }
+
+    /**
+     * @test
+     */
+    public function It_will_use_default_maximal_range_if_default_is_out_of_range()
+    {
+        $history = $this->createHistory();
+        $history->shouldReceive('getValue')
+            ->andReturn(null);
+        $previousProperties = $this->createPreviousProperties(-300);
+        $fight = new Fight(
+            $this->createCurrentArmamentsWithSkills(RangedWeaponCode::getIt(RangedWeaponCode::SAND)),
+            $this->createCurrentProperties(-300),
+            $this->createCurrentValues([FightRequest::RANGED_TARGET_DISTANCE => 123]),
+            $this->createPreviousArmamentsWithSkills($history, $previousProperties),
+            $previousProperties,
+            $history,
+            Armourer::getIt(),
+            Tables::getIt()
+        );
+        self::assertSame(1.0, $fight->getPreviousTargetDistance()->getMeters());
+        self::assertSame(1.0, $fight->getCurrentTargetDistance()->getMeters());
     }
 }
